@@ -1,0 +1,72 @@
+// tamaño predeterminado
+@mixin scroll($height) {
+    overflow-y: scroll;
+    height: calc(100vh - $height);
+
+    &::-webkit-scrollbar {
+        background-color: transparent;
+        width: 6px;
+    }
+    
+    &::-webkit-scrollbar-thumb {
+        background-color: transparent;
+        border-radius: 4px;
+        transition-delay: 1s;
+    }
+    
+    &:hover::-webkit-scrollbar-thumb,
+    &::-webkit-scrollbar-thumb:hover {
+        background-color: $color4;
+        transition-delay: 1s;
+    }
+}
+
+// tamaño maximo, de no llegar al tamaño, sera pequeño
+@mixin max-scroll($height) {
+    overflow-y: scroll;
+    max-height: calc(100vh - $height);
+
+    &::-webkit-scrollbar {
+        background-color: transparent;
+        width: 6px;
+    }
+    
+    &::-webkit-scrollbar-thumb {
+        background-color: transparent;
+        border-radius: 4px;
+        transition-delay: 1s;
+    }
+    
+    &:hover::-webkit-scrollbar-thumb,
+    &::-webkit-scrollbar-thumb:hover {
+        background-color: $color4;
+        transition-delay: 1s;
+    }
+    
+}
+
+// tamaño estatico
+@mixin static-scroll($height) {
+    overflow-y: scroll;
+    height: $height;
+    max-height: $height;
+    min-height: $height;
+
+    &::-webkit-scrollbar {
+        background-color: transparent;
+        width: 6px;
+    }
+    
+    &::-webkit-scrollbar-thumb {
+        background-color: transparent;
+        border-radius: 4px;
+        transition-delay: 1s;
+    }
+    
+    &:hover::-webkit-scrollbar-thumb,
+    &::-webkit-scrollbar-thumb:hover {
+        background-color: $color4;
+        transition-delay: 1s;
+    }
+    
+}
