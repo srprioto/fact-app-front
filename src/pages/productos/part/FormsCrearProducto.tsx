@@ -102,19 +102,19 @@ export const FormsCrearProducto = ({ handlerCreateProducto, loading }:FormsCrear
                         /> */}
 
                         <InputMk 
-                            label="Precio venta 1"
+                            label="Precio por unidad"
                             type="number"
                             name="precio_venta_1"
                             error={errors.precio_venta_1}
                         />
                         <InputMk 
-                            label="Precio venta 2"
+                            label="Precio al por menor"
                             type="number"
                             name="precio_venta_2"
                             error={errors.precio_venta_2}
                         />
                         <InputMk 
-                            label="Precio venta 3"
+                            label="Precio al por mayor"
                             type="number"
                             name="precio_venta_3"
                             error={errors.precio_venta_3}

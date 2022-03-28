@@ -579,7 +579,7 @@ select{
     border: 1px solid #32394e;
     -webkit-appearance: none;
     -moz-appearance: none;
-    appearance: none;    
+    appearance: none;
     line-height: 1.5;
     color: $texto;
     background-clip: padding-box;
@@ -594,8 +594,8 @@ select::-ms-expand{
 input:focus,
 select:focus{
     color: #bfc8e2;
-    background-color: #303648;
-    border-color: #363d52;
+    // background-color: $bg-input;
+    // border-color: #363d52;
     outline: 0;
     box-shadow: none;
 }
@@ -606,17 +606,25 @@ select[search]::placeholder{
     opacity: 0.5;
 }
 
+select {
+    *{
+        font-size: 1.1em;
+        // font-weight: 600;
+    }
+}
+
 input[type=number]::-webkit-inner-spin-button, 
 input[type=number]::-webkit-outer-spin-button { 
-  -webkit-appearance: none;
-  appearance: none;
-  margin: 0; 
+    -webkit-appearance: none;
+    appearance: none;
+    margin: 0; 
 }
 
 input[type=number] { 
     -moz-appearance:textfield; 
     appearance:textfield; 
 }
+
 
 
 // listados

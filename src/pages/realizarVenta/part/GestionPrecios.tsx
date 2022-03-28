@@ -39,12 +39,19 @@ export const GestionPrecios = ({ producto, handlerChangePrecio, productoDetalles
     return (
         <div className="bb bb-neutro">
             <h3>Gestion de precios</h3>
-            <div className="grid-2 gap mb-25">
+            <div className="grid-1 gap">
                 
-                <div className="wrap-precios">
+                <div className="wrap-precios mt-15">
+
+                    <div className="grid-3 gap center">
+                        <p className="m-0 info">Precio por unidad</p>
+                        <p className="m-0 info">Precio al por menor</p>
+                        <p className="m-0 info">Precio al por mayor</p>
+                    </div>
+
                     <RadioButton
-                        label="Precios"
-                        // grid="grid-3 gap10"
+                        // label="Precios"
+                        grid="grid-3 gap10"
                         name="precio_venta"
                         values={strRadiobutton()}
                         onChange={handlerChangePrecio}
@@ -52,35 +59,37 @@ export const GestionPrecios = ({ producto, handlerChangePrecio, productoDetalles
                     />
                 </div>
 
-                <div className="center">
+                <div className="grid-2 gap mt-5">
+                    <div className="center">
 
-                    <label htmlFor="descuento">
-                        <p  className="mb-5">Incremento/Descuento</p>
-                        <h5>Selecciona un precio</h5>
-                    </label>
+                        <label htmlFor="descuento">
+                            <p  className="mb-5">Incremento/Descuento</p>
+                            {/* <h5>Selecciona un precio</h5> */}
+                        </label>
 
-                    <Input
-                        // label="Cambiar precio final"
-                        type="number"
-                        name="descuento"
-                        value={productoDetalles.descuento}
-                        color={productoDetalles.descuento < 0 ? "danger-i" : ""}
-                        onChange={handlerChangePrecio}
-                        moneda
-                    />
+                        <Input
+                            // label="Cambiar precio final"
+                            type="number"
+                            name="descuento"
+                            value={productoDetalles.descuento}
+                            color={productoDetalles.descuento < 0 ? "danger-i" : ""}
+                            onChange={handlerChangePrecio}
+                            moneda
+                        />
 
-                    <h5 className="warning mt-5">Haz un descuento añadiendo una cantidad negativa</h5>
+                        <h5 className="warning mt-5">Haz un descuento añadiendo una cantidad negativa</h5>
+
+                    </div>
+
+                    <span className="center">
+                        <p className="info">Precio de venta</p>
+                        <h1 className="info">S/. { productoDetalles.precio_parcial }</h1>
+                    </span>
 
                 </div>
+    
             </div>
-            <div className="grid-3 mt-15">
-                <div></div>
-                <span className="center">
-                    <p className="info">Precio de venta</p>
-                    <h1 className="info">S/. { productoDetalles.precio_parcial }</h1>
-                </span>
-                <div></div>    
-            </div>
+            
         </div>
     )
 }
