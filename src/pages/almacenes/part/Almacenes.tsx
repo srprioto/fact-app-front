@@ -54,98 +54,92 @@ export const Almacenes = () => {
                 </div>
 
             </div>
-
-
-            <div className="grid-12 gap wrap-locales">
-
-                {
-                    loadingLocal
-                    ? <Loading />
-                    : (
-                        <>
-                            <div className="locales">
-                                {
-                                    locales.map((e:any) => {
-                                        return (
-                                            <div 
-                                                className="box wrap-item-local pointer"
-                                                key={e.id} 
-                                                onClick={() => handlerSelectLocal(e)}
-                                            >
-                                                <div className="item-local">
-                                                    <div 
-                                                        className={
-                                                            "item-local-nombre " +
-                                                            (
-                                                                e.id === toggle 
-                                                                ? "btn2-sub-warning"
-                                                                : "btn2-sub-transparent"
-                                                            )
-                                                        }>
-                                                        <BiStore />
-                                                        <h4>{ e.nombre }</h4>
-                                                    </div>
-                                                    {/* <button className="btn btn-primary" onClick={() => handlerLocal(e.id, e.nombre)}>
-                                                        <span>Ingresar</span>
-                                                        <BiRightArrowAlt />
-                                                    </button> */}
+            {
+                loadingLocal
+                ? <Loading />
+                : (
+                    <div className="grid-12 gap wrap-locales">
+                        <div className="locales">
+                            {
+                                locales.map((e:any) => {
+                                    return (
+                                        <div 
+                                            className="box wrap-item-local pointer"
+                                            key={e.id} 
+                                            onClick={() => handlerSelectLocal(e)}
+                                        >
+                                            <div className="item-local">
+                                                <div 
+                                                    className={
+                                                        "item-local-nombre " +
+                                                        (
+                                                            e.id === toggle 
+                                                            ? "btn2-sub-warning"
+                                                            : "btn2-sub-transparent"
+                                                        )
+                                                    }>
+                                                    <BiStore />
+                                                    <h4>{ e.nombre }</h4>
                                                 </div>
-                                                
+                                                {/* <button className="btn btn-primary" onClick={() => handlerLocal(e.id, e.nombre)}>
+                                                    <span>Ingresar</span>
+                                                    <BiRightArrowAlt />
+                                                </button> */}
+                                            </div>
+                                            
+                                        </div>
+                                    )
+                                })
+                            }
+                        </div>
+                        <div className="box m-0">
+                            <div className="local">
+                                <div className="info-local">
+                                    {
+                                        !Object.keys(local).length
+                                        ? <TextoRelleno texto="Selecciona un local"/>
+                                        : (
+                                            <div className="grid-1 gap-h">
+                                                <span className="center iconLocal"><BiMapPin /></span>
+                                                <h3>{ local.nombre }</h3>
+                                                <p><strong>Direccion: </strong>{ local.direccion }</p>
+                                                <p><strong>Telefono: </strong>{ local.telefono }</p>
+                                                <div className="grid-3 gap">
+
+                                                    {/* <Link 
+                                                        to={`/tiendas/vender/${local.id}/${local.nombre}`} className="btn btn-success"
+                                                    >
+                                                        <BiCartAlt />
+                                                        Vender
+                                                    </Link> */}
+
+                                                    {/* <Link 
+                                                        to={`/tiendas/caja/${local.id}/${local.nombre}`} className="btn btn-warning"
+                                                    >
+                                                        <BiDollarCircle />
+                                                        Caja
+                                                    </Link> */}
+
+                                                    <div></div>
+                                                    <Link 
+                                                        to={`/almacenes/almacen/${local.id}/${local.nombre}`} 
+                                                        className="btn btn-info"
+                                                    >
+                                                        <BiListOl />
+                                                        Stock
+                                                    </Link>
+                                                    <div></div>
+
+                                                </div>
                                             </div>
                                         )
-                                    })
-                                }
-                            </div>
-
-                            <div className="box m-0">
-                                <div className="local">
-                                    <div className="info-local">
-                                        {
-                                            !Object.keys(local).length
-                                            ? <TextoRelleno texto="Selecciona un local"/>
-                                            : (
-                                                <div className="grid-1 gap-h">
-                                                    <span className="center iconLocal"><BiMapPin /></span>
-                                                    <h3>{ local.nombre }</h3>
-                                                    <p><strong>Direccion: </strong>{ local.direccion }</p>
-                                                    <p><strong>Telefono: </strong>{ local.telefono }</p>
-                                                    <div className="grid-3 gap">
-
-                                                        {/* <Link 
-                                                            to={`/tiendas/vender/${local.id}/${local.nombre}`} className="btn btn-success"
-                                                        >
-                                                            <BiCartAlt />
-                                                            Vender
-                                                        </Link> */}
-
-                                                        {/* <Link 
-                                                            to={`/tiendas/caja/${local.id}/${local.nombre}`} className="btn btn-warning"
-                                                        >
-                                                            <BiDollarCircle />
-                                                            Caja
-                                                        </Link> */}
-
-                                                        <div></div>
-                                                        <Link 
-                                                            to={`/almacenes/almacen/${local.id}/${local.nombre}`} 
-                                                            className="btn btn-info"
-                                                        >
-                                                            <BiListOl />
-                                                            Stock
-                                                        </Link>
-                                                        <div></div>
-
-                                                    </div>
-                                                </div>
-                                            )
-                                        }
-                                    </div>
+                                    }
                                 </div>
                             </div>
-                        </>
-                    )
-                }
-            </div>
+                        </div>
+                    </div>
+                )
+            }
         </div>
     )
 }
