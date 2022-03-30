@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-import { Loading } from "../../../components/Loading";
+import { Loading } from "../../../components/loads/Loading";
 import { NoRegistros } from "../../../components/NoRegistros";
 import { TitleBox } from "../../../components/TitleBox"
 import { SearchWrap } from "../../../components/SearchWrap";

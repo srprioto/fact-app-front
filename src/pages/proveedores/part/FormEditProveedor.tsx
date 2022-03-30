@@ -4,8 +4,8 @@ import { BiReply } from 'react-icons/bi';
 
 import { InputMk } from '../../../components/forms/InputMk';
 import { SelectMk } from '../../../components/forms/SelectMk';
-import { LoadSwitchBtn } from '../../../components/LoadSwitchBtn';
-import { Loading } from '../../../components/Loading';
+import { LoadSwitchBtn } from '../../../components/btns/LoadSwitchBtn';
+import { Loading } from '../../../components/loads/Loading';
 
 import { ValidCreateProveedores } from '../../../resources/validations/Proveedores';
 import { PROVEEDORES } from '../../../resources/routes';

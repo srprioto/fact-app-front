@@ -3,7 +3,7 @@ import { BiBrush } from 'react-icons/bi';
 
 import { InputMk } from '../../../components/forms/InputMk';
 import { SelectMk } from '../../../components/forms/SelectMk';
-import { LoadSwitchBtn } from '../../../components/LoadSwitchBtn';
+import { LoadSwitchBtn } from '../../../components/btns/LoadSwitchBtn';
 
 import { ValidCreateProveedores } from '../../../resources/validations/Proveedores';
 

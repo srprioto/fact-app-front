@@ -3,8 +3,8 @@ import { useEffect, useState } from "react";
 import { BiReply } from "react-icons/bi";
 
 import { InputMk } from "../../../../components/forms/InputMk";
-import { Loading } from "../../../../components/Loading";
-import { LoadSwitchBtn } from "../../../../components/LoadSwitchBtn";
+import { Loading } from "../../../../components/loads/Loading";
+import { LoadSwitchBtn } from "../../../../components/btns/LoadSwitchBtn";
 
 import { getOne } from "../../../../resources/fetch";
 import { CLIENTES } from "../../../../resources/routes";

@@ -1,7 +1,7 @@
 import { BiAlarmExclamation, BiAlarmSnooze, BiCheck, BiTransfer } from "react-icons/bi"
 
 import { CardUno } from "../../../../components/cards/CardUno"
-import { Loading } from "../../../../components/Loading"
+import { Loading } from "../../../../components/loads/Loading"
 
 export const CardsDatosTransf = ({ resumen, loading }:any) => {
 

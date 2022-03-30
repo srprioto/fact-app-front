@@ -2,7 +2,7 @@ import { useState } from "react"
 
 import { BtnShow } from "../../../../components/forms/BtnShow";
 import { SelectSearch } from "../../../../components/forms/SelectSearch";
-import { Loading } from "../../../../components/Loading";
+import { Loading } from "../../../../components/loads/Loading";
 import { getOne } from "../../../../resources/fetch";
 import { CLIENTES_SEARCH, CLIENTES } from "../../../../resources/routes";
 

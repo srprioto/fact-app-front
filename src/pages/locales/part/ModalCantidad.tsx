@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { BiCheck, BiExit } from "react-icons/bi";
 
-import { Modal } from "../../../components/Modal";
-import { LoadingBtn } from "../../../components/LoadingBtn";
+import { Modal } from "../../../components/modals/Modal";
+import { LoadingBtn } from "../../../components/btns/LoadingBtn";
 
 import { LocalStockDto } from "../../../resources/dtos/LocalStockDto";
 import { LOCAL_STOCK } from "../../../resources/routes";

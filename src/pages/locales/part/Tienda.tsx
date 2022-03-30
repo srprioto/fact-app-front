@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { BiCartAlt, BiTransfer } from 'react-icons/bi';
 import { Link, useParams } from 'react-router-dom';
 
-import { Loading } from '../../../components/Loading';
+import { Loading } from '../../../components/loads/Loading';
 import { Pagination } from '../../../components/Pagination';
 import { Search } from '../../../components/Search';
 import { TitleBox } from '../../../components/TitleBox';

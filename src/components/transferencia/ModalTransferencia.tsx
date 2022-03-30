@@ -1,4 +1,4 @@
-import { Modal } from "../Modal"
+import { Modal } from "../modals/Modal"
 import { TextoRelleno } from "../TextoRelleno"
 import { RecibirTransferencia } from "./RecibirTransferencia"
 

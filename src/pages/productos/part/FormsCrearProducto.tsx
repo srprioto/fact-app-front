@@ -2,7 +2,7 @@ import { Formik, Form, } from 'formik';
 import { BiBrush } from 'react-icons/bi';
 
 import { InputMk } from '../../../components/forms/InputMk';
-import { LoadSwitchBtn } from '../../../components/LoadSwitchBtn';
+import { LoadSwitchBtn } from '../../../components/btns/LoadSwitchBtn';
 import { ValidCreateProduct } from '../../../resources/validations/Productos';
 
 interface FormsCrearProducto {

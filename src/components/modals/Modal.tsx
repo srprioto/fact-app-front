@@ -1,6 +1,6 @@
 import { BiX } from "react-icons/bi";
 
-import { Loading } from "./Loading";
+import { Loading } from "../loads/Loading";
 
 interface modal{
     modal:boolean;

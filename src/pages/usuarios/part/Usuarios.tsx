@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 import { BiPlusCircle } from "react-icons/bi";
 
 import { TitleBox } from "../../../components/TitleBox";
-import { Loading } from "../../../components/Loading";
+import { Loading } from "../../../components/loads/Loading";
 import { Pagination } from "../../../components/Pagination";
-import { ModalEliminar } from "../../../components/ModalEliminar";
+import { ModalEliminar } from "../../../components/modals/ModalEliminar";
 import { Search } from "../../../components/Search";
 import { ModalVer } from "./ModalVer";
 import { Usuario } from "./Usuario";

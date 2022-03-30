@@ -1,6 +1,6 @@
 import { BiCheck, BiReply, BiX } from "react-icons/bi"
-import { LoadSwitchBtn2 } from "../../../../components/LoadSwitchBtn2"
-import { Modal } from "../../../../components/Modal"
+import { LoadSwitchBtn2 } from "../../../../components/btns/LoadSwitchBtn2"
+import { Modal } from "../../../../components/modals/Modal"
 
 export const ModalVentaRechazar = ({ modal, setModal, venta, codigoPago, rechazarVenta, loading }:any) => {
     return (

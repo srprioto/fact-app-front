@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 // import { ModalMostrar } from "./part/ModalMostrar";
 import { ModalCantidad } from "./part/ModalCantidad";
 import { ProductoStock } from "./part/ProductoStock";
-import { Loading } from "../../components/Loading";
+import { Loading } from "../../components/loads/Loading";
 import { TitleBox } from "../../components/TitleBox";
 import { Search } from "../../components/Search";
 

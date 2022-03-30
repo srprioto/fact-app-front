@@ -2,9 +2,9 @@ import { useState } from "react";
 import { BiX } from "react-icons/bi";
 
 import { Modal } from "./Modal";
-import { LoadSwitchBtn } from "./LoadSwitchBtn";
+import { LoadSwitchBtn } from "../btns/LoadSwitchBtn";
 
-import { destroy } from "../resources/fetch";
+import { destroy } from "../../resources/fetch";
 
 interface modalEliminar{
     modal:boolean;

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { BiPlay, BiX } from "react-icons/bi"
-import { BtnOnOff } from "../../../components/forms/BtnOnOff"
+import { BtnOnOff } from "../../../components/btns/BtnOnOff"
 
 import { Input } from "../../../components/forms/Input"
 import { InputDisable } from "../../../components/forms/InputDisable"

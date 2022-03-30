@@ -2,7 +2,7 @@ import { useState } from "react";
 import { FormCrearCliente } from "../../pages/clientes/part/forms/FormCrearCliente"
 import { post } from "../../resources/fetch";
 import { CLIENTES } from "../../resources/routes";
-import { Modal } from "../Modal";
+import { Modal } from "./Modal";
 
 interface ModalNuevoCliente {
     modal:boolean;

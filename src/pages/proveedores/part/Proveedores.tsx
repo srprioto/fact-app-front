@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import { BiPlusCircle } from "react-icons/bi";
 
 import { TitleBox } from "../../../components/TitleBox";
-import { Loading } from "../../../components/Loading";
-import { ModalEliminar } from "../../../components/ModalEliminar";
+import { Loading } from "../../../components/loads/Loading";
+import { ModalEliminar } from "../../../components/modals/ModalEliminar";
 import { Proveedor } from "./Proveedor";
 import { Pagination } from "../../../components/Pagination";
 import { Search } from "../../../components/Search";

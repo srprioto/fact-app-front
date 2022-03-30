@@ -1,5 +1,5 @@
-import { Loading } from "../../../components/Loading";
-import { Modal } from "../../../components/Modal";
+import { Loading } from "../../../components/loads/Loading";
+import { Modal } from "../../../components/modals/Modal";
 import { ClienteDto } from "../../../resources/dtos/Cliente";
 
 interface ModalVer{

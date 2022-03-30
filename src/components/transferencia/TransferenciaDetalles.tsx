@@ -4,8 +4,8 @@ import { put } from "../../resources/fetch";
 import { TRANSACCIONES_CONFIRMAR } from "../../resources/routes";
 import { Checkbox } from "../forms/Checkbox";
 import { Input } from "../forms/Input";
-import { LoadSwitchBtn } from "../LoadSwitchBtn";
-import { LoadSwitchBtn2 } from "../LoadSwitchBtn2";
+import { LoadSwitchBtn } from "../btns/LoadSwitchBtn";
+import { LoadSwitchBtn2 } from "../btns/LoadSwitchBtn2";
 
 export const TransferenciaDetalles = ({ data, getTransacciones, setTransf, actualizarDatos }:any) => {
 

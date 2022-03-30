@@ -1,4 +1,4 @@
-import { Modal } from "../Modal"
+import { Modal } from "../modals/Modal"
 import { SelectSearch } from "../forms/SelectSearch"
 
 import { LOCALES, LOCAL_STOCK_SEARCH, TRANSACCIONES } from "../../resources/routes"
@@ -10,7 +10,7 @@ import { Select } from "../forms/Select"
 import { InputDisable } from "../forms/InputDisable"
 import { get, post } from "../../resources/fetch"
 import { InfoTransferenciaEnvio } from "../../resources/dtos/Transferencias"
-import { LoadSwitchBtn } from "../LoadSwitchBtn"
+import { LoadSwitchBtn } from "../btns/LoadSwitchBtn"
 
 interface ModalTransferencia {
     modal:boolean;

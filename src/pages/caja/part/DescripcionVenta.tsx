@@ -3,7 +3,7 @@ import { BiCheck, BiX } from "react-icons/bi";
 
 import { Input } from "../../../components/forms/Input";
 import { InputDisable } from "../../../components/forms/InputDisable";
-import { LoadSwitchBtn2 } from "../../../components/LoadSwitchBtn2";
+import { LoadSwitchBtn2 } from "../../../components/btns/LoadSwitchBtn2";
 import { ModalNuevoCliente } from "../../../components/modals/ModalNuevoCliente";
 import { FormasPagoBotones } from "./formasPago/FormasPagoBotones";
 import { FormasPagoTabs } from "./formasPago/FormasPagoTabs";
@@ -14,7 +14,7 @@ import { put } from "../../../resources/fetch";
 import { VENTAS } from "../../../resources/routes";
 import { ModalVentaConfirmar } from "./modals/ModalVentaConfirmar";
 import { ModalVentaRechazar } from "./modals/ModalVentaRechazar";
-import { ModalWrap } from "../../../components/ModalWrap";
+import { ModalWrap } from "../../../components/modals/ModalWrap";
 import { Checkbox2 } from "../../../components/forms/Checkbox2";
 
 

@@ -3,10 +3,10 @@ import { BiListPlus } from "react-icons/bi";
 import { useParams } from "react-router-dom";
 
 import { SelectSearch } from "../../../components/forms/SelectSearch";
-import { Loading } from "../../../components/Loading";
+import { Loading } from "../../../components/loads/Loading";
 import { TextoRelleno } from "../../../components/TextoRelleno";
 import { TitleBox } from "../../../components/TitleBox";
-import { BtnOnOff } from "../../../components/forms/BtnOnOff";
+import { BtnOnOff } from "../../../components/btns/BtnOnOff";
 import { ListaVenta } from "./ListaVenta";
 import { ProductoDetallesVenta } from "./ProductoDetallesVenta";
 import { GestionCantidades } from "./GestionCantidades";

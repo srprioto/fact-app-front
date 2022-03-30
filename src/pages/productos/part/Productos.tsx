@@ -2,8 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { BiPlusCircle } from "react-icons/bi"
 import { Link } from "react-router-dom"
 
-import { Loading } from "../../../components/Loading";
-import { ModalEliminar } from "../../../components/ModalEliminar";
+import { Loading } from "../../../components/loads/Loading";
+import { ModalEliminar } from "../../../components/modals/ModalEliminar";
 import { Pagination } from "../../../components/Pagination";
 import { Search } from "../../../components/Search";
 import { TitleBox } from "../../../components/TitleBox"

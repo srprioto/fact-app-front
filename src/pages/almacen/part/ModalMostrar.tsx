@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { BiExit, BiPencil, BiSave, BiX } from "react-icons/bi";
 
-import { LoadingBtn } from "../../../components/LoadingBtn";
-import { Modal } from "../../../components/Modal";
+import { LoadingBtn } from "../../../components/btns/LoadingBtn";
+import { Modal } from "../../../components/modals/Modal";
 
 import { put } from "../../../resources/fetch";
 import { NRO_ALMACEN } from "../../../resources/nroLocal";

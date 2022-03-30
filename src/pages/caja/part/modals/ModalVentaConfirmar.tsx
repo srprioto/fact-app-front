@@ -2,13 +2,14 @@ import { useEffect, useState } from "react";
 import { BiCheck, BiReply } from "react-icons/bi";
 
 import { Checkbox2 } from "../../../../components/forms/Checkbox2";
-import { LoadSwitchBtn2 } from "../../../../components/LoadSwitchBtn2";
-import { Modal } from "../../../../components/Modal"
+import { LoadSwitchBtn2 } from "../../../../components/btns/LoadSwitchBtn2";
+import { Modal } from "../../../../components/modals/Modal"
 import { DatosClienteConf } from "./DatosClienteConf";
 import { TablaProdVenta } from "./TablaProdVenta";
 
 import { copy } from "../../../../resources/func/deepCopy";
 import { redondeo } from "../../../../resources/func/redondeo";
+
 
 export const ModalVentaConfirmar = ({ 
     modal, 

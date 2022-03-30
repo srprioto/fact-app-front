@@ -4,8 +4,8 @@ import { BiBrush } from "react-icons/bi";
 
 import { InputMk } from "../../../components/forms/InputMk";
 import { SelectMk } from "../../../components/forms/SelectMk";
-import { Loading } from "../../../components/Loading";
-import { LoadSwitchBtn } from "../../../components/LoadSwitchBtn";
+import { Loading } from "../../../components/loads/Loading";
+import { LoadSwitchBtn } from "../../../components/btns/LoadSwitchBtn";
 
 import { UsuarioEditDto } from "../../../resources/dtos/UsuariosDto";
 import { get, getOne } from "../../../resources/fetch";

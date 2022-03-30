@@ -2,8 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { BiCheck, BiExit, BiPlusCircle } from "react-icons/bi";
 
-import { Modal } from "../../../components/Modal";
-import { LoadingBtn } from "../../../components/LoadingBtn";
+import { Modal } from "../../../components/modals/Modal";
+import { LoadingBtn } from "../../../components/btns/LoadingBtn";
 
 import { ALMACEN_ID } from "../../../resources/nroLocal";
 import { LOCAL_STOCK } from "../../../resources/routes";

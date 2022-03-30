@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react"
 import { BiAlarmExclamation, BiAlarmSnooze, BiCheck, BiTransfer } from "react-icons/bi"
-import { Loading } from "../../../components/Loading"
+import { Loading } from "../../../components/loads/Loading"
 import { NoRegistros } from "../../../components/NoRegistros"
 import { Pagination } from "../../../components/Pagination"
 import { Search } from "../../../components/Search"

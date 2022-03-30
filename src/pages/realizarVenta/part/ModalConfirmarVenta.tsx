@@ -1,10 +1,10 @@
 import { useState } from "react";
 
-import { Modal } from "../../../components/Modal"
+import { Modal } from "../../../components/modals/Modal"
 import { VENTAS } from "../../../resources/routes";
 
 import { post } from "../../../resources/fetch";
-import { LoadSwitchBtn } from "../../../components/LoadSwitchBtn";
+import { LoadSwitchBtn } from "../../../components/btns/LoadSwitchBtn";
 import { BiReply } from "react-icons/bi";
 
 
