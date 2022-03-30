@@ -558,7 +558,7 @@ a.btn-danger:hover{ color: $danger; }
         left: 13px;
         font-weight: 600;
         font-size: 16px;
-        color: $primary;
+        color: $warning;
     }
 }
 
@@ -577,9 +577,9 @@ select{
     font-weight: 400;
     background-color: $bg-input;
     border: 1px solid #32394e;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
+    // -webkit-appearance: none;
+    // -moz-appearance: none;
+    // appearance: none;
     line-height: 1.5;
     color: $texto;
     background-clip: padding-box;
@@ -744,16 +744,16 @@ table.no-hover{
     display: flex;
     position: relative;
 
-    .arrow-select{
-        position: absolute;
-        right: 37px;
-        height: 100%;
-        color: $info;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 22px;
-    }
+    // .arrow-select{
+    //     position: absolute;
+    //     right: 37px;
+    //     height: 100%;
+    //     color: $info;
+    //     display: flex;
+    //     justify-content: center;
+    //     align-items: center;
+    //     font-size: 22px;
+    // }
 
     input,
     select{

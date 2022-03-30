@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 import { TitleBox } from "../../../components/TitleBox";
 import { FormIngresoProductos } from "./FormIngresoProductos";
@@ -9,42 +9,42 @@ import { MOVIMIENTOS, PRODUCTOS, PRODUCTOS_SEARCH, PROVEEDORES, PROVEEDORES_SEAR
 
 export const IngresoProductos = () => {
 
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     const [loading, setLoading] = useState<boolean>(false);
     
-    const [productos, setProductos] = useState<any>([])
-    const [proveedores, setProveedores] = useState<any>([])
+    // const [productos, setProductos] = useState<any>([])
+    // const [proveedores, setProveedores] = useState<any>([])
 
-    const [loadingProductos, setLoadingProductos] = useState<boolean>(false)
-    const [loadingProveedores, setLoadingProveedores] = useState<boolean>(false)
+    // const [loadingProductos, setLoadingProductos] = useState<boolean>(false)
+    // const [loadingProveedores, setLoadingProveedores] = useState<boolean>(false)
 
 
-    const searchProductos = async (search:string) => { 
-        setLoadingProductos(true);
-        try {
-            const productos = await get(PRODUCTOS_SEARCH + search);
-            setProductos(productos);
-            setLoadingProductos(false);
-        } catch (error) {
-            setLoadingProductos(true);
-            console.log(error);
-        }
+    // const searchProductos = async (search:string) => { 
+    //     setLoadingProductos(true);
+    //     try {
+    //         const productos = await get(PRODUCTOS_SEARCH + search);
+    //         setProductos(productos);
+    //         setLoadingProductos(false);
+    //     } catch (error) {
+    //         setLoadingProductos(true);
+    //         console.log(error);
+    //     }
 
-    }
+    // }
 
-    const searchProveedor = async (search:string) => {
-        setLoadingProveedores(true);
-        try {
-            const productos = await get(PROVEEDORES_SEARCH + search);
-            setProveedores(productos);
-            setLoadingProveedores(false);
-        } catch (error) {
-            setLoadingProveedores(true);
-            console.log(error);
-        }
+    // const searchProveedor = async (search:string) => {
+    //     setLoadingProveedores(true);
+    //     try {
+    //         const productos = await get(PROVEEDORES_SEARCH + search);
+    //         setProveedores(productos);
+    //         setLoadingProveedores(false);
+    //     } catch (error) {
+    //         setLoadingProveedores(true);
+    //         console.log(error);
+    //     }
 
-    }
+    // }
 
 
     const handlerCreate = async (movimiento:any, detalles:any) => { 
@@ -56,8 +56,7 @@ export const IngresoProductos = () => {
             const response = await post(movimiento, MOVIMIENTOS + "/ingreso");
             setLoading(false);
             console.log(response);
-
-            navigate('/almacen')
+            // navigate('/almacen')
         } catch (error) {
             setLoading(true);
             console.log(error);

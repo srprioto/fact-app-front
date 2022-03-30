@@ -34,11 +34,12 @@ export const Menu = () => {
 
                 <BoxMenu titulo="Locales">
                     <ItemMenu url="/tiendas" label="Tiendas" icon={ <BiStore /> } />
+                    <ItemMenu url="/almacenes" label="Almacenes" icon={ <BiLayout /> } />
                 </BoxMenu>
 
-                <BoxMenu titulo="Stock">
-                    <ItemMenu url="/almacen" label="Almacen" icon={ <BiLayout /> } />
-                    <ItemMenu url="/ingreso-productos" label="Ingreso de productos" icon={ <BiPlusCircle /> } />
+                <BoxMenu titulo="Productos">
+                    {/* <ItemMenu url="/almacen" label="Almacen" icon={ <BiLayout /> } /> */}
+                    <ItemMenu url="/ingreso-productos" label="Ingresar productos" icon={ <BiPlusCircle /> } />
                     <ItemMenu url="/productos" label="Inventario" icon={ <BiBox /> } />
                 </BoxMenu>
 

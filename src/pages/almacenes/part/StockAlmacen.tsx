@@ -1,83 +1,43 @@
 import { useEffect, useRef, useState } from "react";
-import { BiPlusCircle, BiTransfer } from "react-icons/bi";
-import { Link } from "react-router-dom";
+import { BiCartAlt, BiPlusCircle, BiTransfer } from "react-icons/bi";
+import { Link, useParams } from "react-router-dom";
+import { Loading } from "../../../components/Loading";
+import { NoRegistros } from "../../../components/NoRegistros";
+import { Pagination } from "../../../components/Pagination";
+import { Search } from "../../../components/Search";
+import { TitleBox } from "../../../components/TitleBox";
+import { AlertaTransferencia } from "../../../components/transferencia/AlertaTransferencia";
+import { ModalTransferencia } from "../../../components/transferencia/EnviarTransferencia";
+import { LocalStockModalDto } from "../../../resources/dtos/LocalStockDto";
+import { get, paginate } from "../../../resources/fetch";
+import { LOCAL_STOCK_SEARCH, LOCAL_STOCK_SOLO } from "../../../resources/routes";
+import { ModalCantidad } from "../../locales/part/ModalCantidad";
+import { ProductoLocal } from "../../locales/part/ProductoLocal";
 
-// import { ModalEliminar } from "../../components/ModalEliminar";
-// import { ModalMostrar } from "./part/ModalMostrar";
-import { ModalCantidad } from "./part/ModalCantidad";
-import { ProductoStock } from "./part/ProductoStock";
-import { Loading } from "../../components/Loading";
-import { TitleBox } from "../../components/TitleBox";
-import { Search } from "../../components/Search";
+export const StockAlmacen = () => {
 
+    const params = useParams(); // params.id, params.nombre
+    const searchFocus = useRef<any>(null)
 
-// import { EditarProductosDto, ProductosDto } from "../../resources/dtos/ProductosDto";
-import { LocalStockModalDto } from "../../resources/dtos/LocalStockDto";
-
-// import { ALMACEN, ALMACEN_SEARCH, PRODUCTOS, PRODUCTOS_SEARCH } from "../../resources/routes";
-import { get, getOne, paginate } from "../../resources/fetch";
-import { Pagination } from "../../components/Pagination";
-import { ModalTransferencia } from "../../components/transferencia/EnviarTransferencia";
-import { AlertaTransferencia } from "../../components/transferencia/AlertaTransferencia";
-import { NoRegistros } from "../../components/NoRegistros";
-
-
-export const Almacen = () => {
-
-    const [loading, setLoading] = useState<boolean>(false); // carga todos los datos - getData
-    // const [loadingSolo, setLoadingSolo] = useState<boolean>(false); // carga solo un dato - getOneData
-
-    // const [modal, setModal] = useState<boolean>(false); // modal eliminar
-    const [modalTransferencia, setModalTransferencia] = useState<boolean>(false); // modal transferencia
+    const [loadingData, setLoading] = useState<boolean>(false);
     const [modalCant, setModalCant] = useState<boolean>(false);
-
+    const [modalTransferencia, setModalTransferencia] = useState<boolean>(false);
+    const [searchTxt, setSearchTxt] = useState<string>("");
+    const [searchState, setSearchState] = useState<boolean>(false);
+    const [data, setData] = useState<any>([]);
+    const [pagination, setPagination] = useState<any>({ meta: {}, links: {} });
     const [localStock, setLocalStock] = useState<LocalStockModalDto>({
         id:0,
         cantidad:0,
         nombreProducto:""
     });
-    
-    const [searchTxt, setSearchTxt] = useState<string>("");
-    const [searchState, setSearchState] = useState<boolean>(false);
-    // const [infoProducto, setInfoProducto] = useState<any>({});
-    const [data, setData] = useState<any>([]);
-    const [pagination, setPagination] = useState<any>({
-        meta: {},
-        links: {}
-    });
-    // const [producto, setProducto] = useState<EditarProductosDto>({
-    //     codigo:"",
-    //     color:"",
-    //     descripcion:"",
-    //     marca:"",
-    //     nombre:"",
-    //     precio_compra:0,
-    //     precio_venta_1:0,
-    //     precio_venta_2:0,
-    //     precio_venta_3:0,
-    //     talla:"",
-    //     created_at:"",
-    //     updated_at:""
-    // });
-    const searchFocus = useRef<any>(null);
-
 
     useEffect(() => {
-        getData();
+        getData();        
     }, []);
 
-    const handlerTransaccion = () => setModalTransferencia(!modalTransferencia) // modaltransacciones
-    const onChangeSearch = (e:any) => setSearchTxt(e.target.value) // manela el estado del search
-
-    // const handlerDeleted = (id:number, nombre:string) => {
-    //     setInfoProducto({ id, nombre });
-    //     setModal(!modal);
-    // }
-
-    // const handlerMostrar = (id:number) => { 
-    //     getOneData(id);
-    //     setModalMostrar(!modalMostrar);
-    // }
+    const onChangeSearch = (e:any) => setSearchTxt(e.target.value);
+    const handlerTransaccion = () => setModalTransferencia(!modalTransferencia)
 
     const handlerCantidad = (id:number, cantidad:number, nombreProducto:string) => { 
         setModalCant(!modalCant)
@@ -90,7 +50,6 @@ export const Almacen = () => {
         getData();
     }
 
-
     const searchData = async () => { 
         if (searchTxt === "" || searchTxt === undefined || searchTxt === null || searchTxt.length === 0) {
             searchFocus.current.focus();
@@ -98,8 +57,7 @@ export const Almacen = () => {
             setLoading(true);
             setSearchState(true);
             try {
-                const data = await get("ALMACEN_SEARCH" + searchTxt);
-                // const data = await get(ALMACEN_SEARCH + searchTxt);
+                const data = await get(LOCAL_STOCK_SEARCH + params.id + "/" + searchTxt);
                 setLoading(false);
                 setData(data);
             } catch (error) {
@@ -116,8 +74,7 @@ export const Almacen = () => {
             if (urlPage) {
                 data = await paginate(urlPage);
             }else{
-                data = await paginate("ALMACEN");
-                // data = await paginate(ALMACEN);
+                data = await paginate(LOCAL_STOCK_SOLO + params.id);
             }
 
             setData(data.items);
@@ -131,25 +88,11 @@ export const Almacen = () => {
             console.log(error);
         }
     }
-    
-    // const getOneData = async (id:number) => { 
-    //     setLoadingSolo(true);
-    //     try {
-    //         const response_productos = await getOne(id, PRODUCTOS);
-    //         setProducto(response_productos);
-    //         setLoadingSolo(false);
-    //     } catch (error) {
-    //         setLoadingSolo(true);
-    //         console.log(error);
-    //     }
-    // }
-    
 
     return (
-        
-        <div className="almacen">
-
-            <TitleBox titulo="Almacen"/>
+        <div className="local-stock">
+            
+            <TitleBox titulo={`Stock del almacen - ${params.nombre}`} link="/almacenes"/>
 
             <div className="box">
 
@@ -167,25 +110,28 @@ export const Almacen = () => {
 
                     <div className="grid-2 gap">
 
-                        <div className="grid-3 gap"></div>
-
+                        <div className="grid-3 gap">
+                            {/* <Link 
+                                to={`/tiendas/vender/${params.id}/${params.nombre}`} 
+                                className="btn btn-success"
+                            >
+                                <BiCartAlt />
+                            </Link>
+                            <div></div>
+                            <div></div> */}
+                        </div>
 
                         <div className="grid-3 gap">
                             <Link to="/ingreso-productos" className="btn btn-info">
                                 <BiPlusCircle/>
                             </Link>
-
                             <button className="btn btn-info" onClick={handlerTransaccion}>
                                 <BiTransfer />
                             </button>
-
-                            <AlertaTransferencia idLocal={1} actualizarDatos={getData} />
-                            
+                            <AlertaTransferencia idLocal={Number(params.id)} actualizarDatos={getData} />
                         </div>
-                        
-                    </div>
 
-                    
+                    </div>                    
                 </div>
 
             </div>
@@ -193,7 +139,7 @@ export const Almacen = () => {
             <div className="box">
 
                 {
-                    loading 
+                    loadingData 
                     ? <Loading />
                     : (
                         data.length <= 0
@@ -217,7 +163,7 @@ export const Almacen = () => {
                                     {
                                         data.map((e:any) => {
                                             return (
-                                                <ProductoStock 
+                                                <ProductoLocal
                                                     key={e.id} 
                                                     elemento={e} 
                                                     // handlerDeleted={handlerDeleted}
@@ -225,11 +171,14 @@ export const Almacen = () => {
                                                     handlerCantidad={handlerCantidad}
                                                 />
                                             )
-                                        })   
+                                        })
                                     }
                                 </tbody>
                             </table>
                         )
+
+
+                        
                         
                     )
                 }
@@ -275,13 +224,12 @@ export const Almacen = () => {
             <ModalTransferencia
                 modal={modalTransferencia}
                 setModal={setModalTransferencia}
-                idLocal={1}
-                nombreLocal="Almacen"
+                idLocal={Number(params.id)}
+                nombreLocal={params.nombre}
                 getData={getData}
             />
 
 
         </div>
-        
     )
-};
+}

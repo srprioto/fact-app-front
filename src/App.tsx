@@ -10,8 +10,10 @@ import { IndexCaja } from "./pages/caja";
 import { IndexLocales } from "./pages/locales";
 import { IndexLocal } from "./pages/locales/Local";
 
+import { IndexAlmacenes } from "./pages/almacenes";
+import { IndexAlmacen } from "./pages/almacenes/Almacen";
 
-import { IndexAlmacen } from "./pages/almacen";
+// import { IndexAlmacen } from "./pages/almacen";
 import { IndexIngresoProductos } from "./pages/IngresoProductos";
 
 import { IndexProductos } from "./pages/productos";
@@ -31,8 +33,9 @@ import { IndexUsuarios } from "./pages/usuarios";
 import { IndexNuevoUser } from "./pages/usuarios/Nuevo";
 import { IndexEditUser } from "./pages/usuarios/Editar";
 
-
 import { Transacciones } from "./pages/reportes/Transacciones";
+
+
 
 
 
@@ -48,15 +51,18 @@ function App() {
                     {/* dashboard */}
                     <Route path="/" element={ <IndexDashboard /> } />
 
-                    {/* punto de venta */}
+                    {/* locales */}
                     <Route path="/tiendas" element={ <IndexLocales /> } />
                     <Route path="/tiendas/local/:id/:nombre" element={ <IndexLocal /> } />
                     <Route path="/tiendas/vender/:id/:nombre" element={ <IndexVenta /> } />
                     <Route path="/tiendas/caja/:id/:nombre" element={ <IndexCaja /> } />
-
+                    
+                    <Route path="/almacenes" element={ <IndexAlmacenes /> } />
+                    <Route path="/almacenes/almacen/:id/:nombre" element={ <IndexAlmacen /> } />
+                    
 
                     {/* stock */}
-                    <Route path="/almacen" element={ <IndexAlmacen /> } />
+                    {/* <Route path="/almacen" element={ <IndexAlmacen /> } /> */}
                     <Route path="/ingreso-productos" element={ <IndexIngresoProductos /> } />
 
                     <Route path="/productos" element={ <IndexProductos /> } />

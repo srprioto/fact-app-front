@@ -10,6 +10,10 @@ import { MovimientosDto, movProd } from "../../../resources/dtos/Movimientos";
 import { detalles, MovimientoDetallesDto } from "../../../resources/dtos/MovimientoDetalles";
 import { redondeo } from "../../../resources/func/redondeo";
 import { PRODUCTOS_SEARCH, PROVEEDORES_SEARCH } from "../../../resources/routes";
+import { Select } from "../../../components/forms/Select";
+import { SelectLocal } from "./SelectLocal";
+import { useNavigate } from "react-router-dom";
+import { BtnOnOff } from "../../../components/forms/BtnOnOff";
 
 
 export const FormIngresoProductos = ({ 
@@ -25,6 +29,8 @@ export const FormIngresoProductos = ({
     // proveedores
 
 }:any) => {
+
+    const navigate = useNavigate();
 
     const [switchProductos, setSwitchProductos] = useState<boolean>(false);
     const [switchProveedores, setSwitchProveedores] = useState<boolean>(false);
@@ -74,7 +80,7 @@ export const FormIngresoProductos = ({
     
     // añade valores a la relacion de productos
     const handlerAddMovimientoDetalles = () => {
-        if (movDetails.producto.id !== 0 && movDetails.producto.id !== 0) { //REVISAR VALIDACION
+        if (movDetails.producto.id !== 0) { //REVISAR VALIDACION
 
             setProductosRepe([ // añade ids a la lista de repetidos
                 ...productosRepe,
@@ -124,7 +130,7 @@ export const FormIngresoProductos = ({
             [e.target.name]: e.target.value 
         })    
     }
-    // apilar datos del estado a la generales 
+    // apilar datos del estado general o informacion del producto
     const handlerChangeMovimiento = (e:any) => { 
         setMovimientos({
             ...movimientos,
@@ -133,20 +139,7 @@ export const FormIngresoProductos = ({
     }
 
 
-    // enviar datos para guardar
-    const handlerEnviar = () => {
-        if (movimientos.total !== 0 || movimientos.movimiento_detalles.length == 0) {
-            handlerCreate(movimientos, movimientoDetalles);
-            setSwitchProductos(false);
-            setSwitchProveedores(false);
-            setMovimientoDetalles([]);
-            setMovDetails(detalles)
-        }else{
-
-        }
-    }
-
-    
+    // quita un elemento de la lista de productos detalles
     const itemPop = (i:number) => {     // i .- indice del elemento que se va a borrar
         let lista:Array<any> = [...movimientoDetalles];    // convetimos el estado en un array
         lista.splice(i,1);              // borramos el elemento en base al indice
@@ -156,21 +149,55 @@ export const FormIngresoProductos = ({
         let prodRepe:Array<number> = [...productosRepe];
         prodRepe.splice(i,1);
         setProductosRepe([...prodRepe]);
-
     }
-
-
+    
+ 
+    // validacion para activar el boton de añadir producto
     const validarEnvio = () => { 
-        
         if (movimientoDetalles.length <= 0 ||
-            movimientos.total === 0
+            movimientos.total === 0 ||
+            movimientos.local_destino === 0
         ) {   
             return false;
         } else {
             return true;
         }    
-
     }
+
+
+    // validar boton de añadir
+    const validarBtnAñadir = () => { 
+        if (
+            movDetails.producto.id !== 0 &&
+            Number(movDetails.cantidad) !== 0 && 
+            Number(movDetails.precio_parcial) !== 0
+        ) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+    // limpiar todos los imputs
+    const handlerClear = () => { 
+        setMovimientos(movProd);
+        setProductosRepe([]);
+        setSwitchProductos(false);
+        setSwitchProveedores(false);
+        setMovimientoDetalles([]);
+        setMovDetails(detalles)
+    }
+
+
+    // enviar datos para guardar
+    const handlerEnviar = () => {
+        if (movimientos.total !== 0 || movimientos.movimiento_detalles.length == 0) {
+            handlerCreate(movimientos, movimientoDetalles);
+        }
+        handlerClear()
+    }
+
 
     return (
 
@@ -187,9 +214,6 @@ export const FormIngresoProductos = ({
                         respuesta={handlerDataProductos}
                         urlData={PRODUCTOS_SEARCH}
                         repetidos={productosRepe}
-                        // data={productos}
-                        // loading={loadingProductos}
-                        // searchData={searchProductos}
                         link="/productos/crear-producto"
                         switchSelect={switchProductos}
                         setSwitchSelect={setSwitchProductos}
@@ -201,23 +225,11 @@ export const FormIngresoProductos = ({
                         type="text"
                         respuesta={handlerDataProveedor}
                         urlData={PROVEEDORES_SEARCH}
-                        // data={proveedores}
-                        // loading={loadingProveedores}
-                        // searchData={searchProveedor}
                         link="/proveedores/nuevo"
                         switchSelect={switchProveedores}
                         setSwitchSelect={setSwitchProveedores}
                         placeholder="Nombre o razon social ..."
                     />
-
-                    {/* <Input
-                        label="Precio por unidad"
-                        type="number"
-                        name="precio_compra"
-                        value={movDetails.precio_unidad}
-                        onChange={handlerChangeMovimientoDetalles}
-                        moneda
-                    /> */}
 
                 </div>
 
@@ -248,6 +260,7 @@ export const FormIngresoProductos = ({
                         name="descripcion"
                         value={movDetails.descripcion}
                         onChange={handlerChangeMovimientoDetalles}
+                        placeholder="Informacion del producto"
                     />
 
                 </div>
@@ -256,14 +269,15 @@ export const FormIngresoProductos = ({
                     <div></div>
                     <div></div>
                     <div></div>
-                    
-                    <button 
-                        className="btn btn-success"
-                        onClick={() => handlerAddMovimientoDetalles()}
-                    >
-                        <BiListPlus />
-                        Añadir
-                    </button>
+                    {
+                        <BtnOnOff
+                            label="Añadir"
+                            estado={validarBtnAñadir()}
+                            onClick={() => handlerAddMovimientoDetalles()}
+                            className="success"
+                            icon={ <BiListPlus /> }
+                        />
+                    }
                 </div>
 
             </div>
@@ -309,7 +323,6 @@ export const FormIngresoProductos = ({
                                 </tbody>
                             </table>
                         </>
-                        
                     )
                 }
 
@@ -324,6 +337,7 @@ export const FormIngresoProductos = ({
                         name="costo_transporte"
                         value={movimientos.costo_transporte}
                         onChange={handlerChangeMovimiento}
+                        moneda
                     />
 
                     <Input
@@ -332,19 +346,26 @@ export const FormIngresoProductos = ({
                         name="costo_otros"
                         value={movimientos.costo_otros}
                         onChange={handlerChangeMovimiento}
+                        moneda
                     />
                     
                     <InputDisable label="Total" value={ movimientos.total } moneda/>
 
                 </div>
 
-                <div className="grid-1 gap">
+                <div className="grid-2 gap">
+
+                    <SelectLocal 
+                        onChange={handlerChangeMovimiento} 
+                    />
+
                     <Input
                         label="Descripcion / observaciones"
                         type="text"
                         name="observaciones"
                         value={movimientos.observaciones}
                         onChange={handlerChangeMovimiento}
+                        placeholder="Informacion general"
                     />
                 </div>
 
@@ -357,11 +378,11 @@ export const FormIngresoProductos = ({
                         ) : (
                             <button className="btn btn-disable">
                                 <BiCheck />
-                                Crear Proveedor
+                                Añadir productos
                             </button>
                         )
                     }
-                    <button className="btn btn-primary" type="reset">
+                    <button className="btn btn-primary" type="reset" onClick={handlerClear}>
                         <BiBrush />
                         Limpiar
                     </button>

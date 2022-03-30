@@ -5,11 +5,10 @@ export const LOCAL_STOCK:string = "/locales-stock";
 export const LOCAL_STOCK_SOLO:string = "/locales-stock/locales/";
 export const LOCAL_STOCK_SEARCH:string = "/locales-stock/locales/search/";
 
-export const ALMACEN:string = "/locales-stock/almacen/productos"; // localstock
-export const ALMACEN_SEARCH:string = "/locales-stock/search/"; // localstock
-
 export const LOCALES:string = "/locales";
 export const LOCALES_SOLO:string = "/locales/locales/solo";
+
+export const ALMACENES_SOLO:string = "/locales/almacenes/solo"
 
 export const CLIENTES:string = "/clientes";
 export const CLIENTES_SEARCH:string = "/clientes/search/";
@@ -34,6 +33,8 @@ export const VENTAS_SEARCH:string  = "/ventas/search/";
 export const VENTAS_PEDIDOS:string = "/ventas/pedidos";
 
 
-
+// almacenes
+// export const ALMACEN:string = "/locales-stock/almacen/productos"; // localstock
+// export const ALMACEN_SEARCH:string = "/locales-stock/search/"; // localstock
 
 // export const LOCALSTOCK = "/locales-stock";

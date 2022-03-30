@@ -1,14 +1,12 @@
-import { useEffect, useState } from "react"
-import { BiCartAlt, BiDollarCircle, BiListOl, BiMapPin, BiRightArrowAlt, BiStore } from "react-icons/bi"
-import { Link } from 'react-router-dom';
-
-import { Loading } from "../../../components/Loading"
+import { useEffect, useState } from "react";
+import { BiListOl, BiMapPin, BiStore } from "react-icons/bi";
+import { Link } from "react-router-dom";
+import { Loading } from "../../../components/Loading";
 import { TextoRelleno } from "../../../components/TextoRelleno";
+import { get } from "../../../resources/fetch";
+import { ALMACENES_SOLO } from "../../../resources/routes";
 
-import { get } from "../../../resources/fetch"
-import { LOCALES_SOLO } from "../../../resources/routes"
-
-export const Locales = () => {
+export const Almacenes = () => {
 
     const [loadingLocal, setLoadingLocal] = useState<boolean>(false)
     const [locales, setLocales] = useState<any>([])
@@ -23,7 +21,7 @@ export const Locales = () => {
     const getData = async () => {
         setLoadingLocal(true);
         try {
-            const data = await get(LOCALES_SOLO);
+            const data = await get(ALMACENES_SOLO);
             setLocales(data);
             
             setLoadingLocal(false);
@@ -37,22 +35,20 @@ export const Locales = () => {
         setLocal(e)
         setToggle(e.id);
     }
-    
 
     return (
-        <div className="clientes">
-
+        <div className="almacenes">
             <div className="box">
                 
                 <div className="grid-3 gap center">
                     <div></div>
                     <div className="middle">
-                        <h2 className="m-0">Nuestros locales</h2>
+                        <h2 className="m-0">Nuestros Almacenes</h2>
                     </div>
                     <div>
                         <button className="btn btn-success">
                             <BiStore />
-                            Crear nuevo local
+                            Crear nuevo almacen
                         </button>
                     </div>
                 </div>
@@ -115,27 +111,29 @@ export const Locales = () => {
                                                     <p><strong>Telefono: </strong>{ local.telefono }</p>
                                                     <div className="grid-3 gap">
 
-                                                        <Link 
+                                                        {/* <Link 
                                                             to={`/tiendas/vender/${local.id}/${local.nombre}`} className="btn btn-success"
                                                         >
                                                             <BiCartAlt />
                                                             Vender
-                                                        </Link>
+                                                        </Link> */}
 
-                                                        <Link 
+                                                        {/* <Link 
                                                             to={`/tiendas/caja/${local.id}/${local.nombre}`} className="btn btn-warning"
                                                         >
                                                             <BiDollarCircle />
                                                             Caja
-                                                        </Link>
+                                                        </Link> */}
 
+                                                        <div></div>
                                                         <Link 
-                                                            to={`/tiendas/local/${local.id}/${local.nombre}`} 
+                                                            to={`/almacenes/almacen/${local.id}/${local.nombre}`} 
                                                             className="btn btn-info"
                                                         >
                                                             <BiListOl />
                                                             Stock
                                                         </Link>
+                                                        <div></div>
 
                                                     </div>
                                                 </div>
@@ -151,3 +149,6 @@ export const Locales = () => {
         </div>
     )
 }
+
+
+

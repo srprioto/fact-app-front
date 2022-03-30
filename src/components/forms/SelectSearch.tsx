@@ -144,9 +144,9 @@ export const SelectSearch = ({
 
                         <form className="select-search">
 
-                            <div className="arrow-select">
+                            {/* <div className="arrow-select">
                                 <BiCaretDown />
-                            </div>
+                            </div> */}
                             <select 
                                 onChange={(e) => { // devuelve respuesta fuera del componente
                                     respuesta(e.target.value)

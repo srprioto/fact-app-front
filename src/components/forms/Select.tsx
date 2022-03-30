@@ -4,10 +4,19 @@ interface Select {
     onChange:any;
     defaultValue:any; // activa el valor por defecto "no"
     loading:boolean;
+    textDefault?:string;
     children:any;
 }
 
-export const Select = ({ label, name, onChange, defaultValue, loading, children }:Select) => {
+export const Select = ({ 
+    label, 
+    name, 
+    onChange, 
+    defaultValue, 
+    loading, 
+    textDefault = "Selecciona una opción", 
+    children 
+}:Select) => {
     return (
         <div className="wrap-form">
             <label htmlFor={name}>{ label }</label><br />
@@ -25,7 +34,7 @@ export const Select = ({ label, name, onChange, defaultValue, loading, children 
                             {
                                 loading
                                 ? "Recuperando datos"
-                                : "Selecciona una opción"
+                                : textDefault
                             }
                         </option>
                     )
@@ -35,3 +44,22 @@ export const Select = ({ label, name, onChange, defaultValue, loading, children 
         </div>
     )
 }
+
+{/* <Select
+    label="Local destino *"
+    name="localDestino"
+    onChange={handlerChangeGenerales}
+    loading={loadingLocales}
+    defaultValue
+>
+    {
+        locales.map((e:any) => {
+            if (e.id !== idLocal) {
+                return (
+                    <option key={e.id} value={Number(e.id)}>{ e.nombre }</option>
+                )    
+            }
+        })
+    }
+    
+</Select> */}
