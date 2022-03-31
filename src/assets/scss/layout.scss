@@ -437,9 +437,15 @@
 }
 
 
+// ingresar productos
+.form-ingreso-productos{
+    .box-lista-productos{
+        min-height: calc(100vh - 504px)
+    }
+}
 
 
-
+// ********
 
 // modal transferir productos
 .lista-transf{
@@ -579,4 +585,31 @@
         font-size: 50px;
     }
     
+}
+
+// btn add
+
+.add-btn{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    .big-icon-add{
+        svg{
+            cursor: pointer;
+            font-size: 60px;
+        }
+    }
+    
+}
+
+// box fixed
+
+.box-fixed{
+    position: fixed;
+    bottom: 30px;
+    right: 20px;
+    margin: 0;
 }

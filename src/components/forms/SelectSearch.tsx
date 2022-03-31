@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { BiCaretDown, BiSearchAlt2, BiX } from "react-icons/bi";
+import { BiSearchAlt2, BiX } from "react-icons/bi";
 
 import { get } from "../../resources/fetch";
 

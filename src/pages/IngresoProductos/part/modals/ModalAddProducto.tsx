@@ -75,7 +75,7 @@ export const ModalAddProducto = ({
             setModal={setModal}
         >
 
-            <div className="box grid-1 gap">
+            <div className="grid-1 gap">
 
                 <h4 className="desc-form">Descripcion de ingreso del producto</h4>
                 <div className="grid-2 gap">
@@ -92,6 +92,10 @@ export const ModalAddProducto = ({
                         placeholder="Nombre o codigo ..."
                     />
 
+                    <div>
+
+                    </div>
+
                     <SelectSearch
                         label="Proveedor"
                         type="text"
@@ -102,6 +106,10 @@ export const ModalAddProducto = ({
                         setSwitchSelect={setSwitchProveedores}
                         placeholder="Nombre o razon social ..."
                     />
+
+                    <div>
+
+                    </div>
 
                 </div>
 
@@ -137,23 +145,33 @@ export const ModalAddProducto = ({
 
                 </div>
 
-                <div className="grid-4 gap">
-                    <div></div>
-                    <div></div>
+                <div className="grid-4 gap mt-15 mb-15">
                     <div></div>
                     {
                         <BtnOnOff
-                            label="Añadir"
+                            label="Añadir y continuar"
                             estado={validarBtnAñadir()}
                             onClick={() => handlerAddMovimientoDetalles()}
                             className="success"
                             icon={ <BiListPlus /> }
                         />
                     }
+
+                    {
+                        <BtnOnOff
+                            label="Añadir y cerrar"
+                            estado={validarBtnAñadir()}
+                            onClick={() => {
+                                handlerAddMovimientoDetalles()
+                                setModal(!modal)
+                            }}
+                            className="info"
+                            icon={ <BiListPlus /> }
+                        />
+                    }
+                    <div></div>
                 </div>
-
             </div>
-
         </Modal>
     )
 }

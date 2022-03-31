@@ -17,6 +17,8 @@ import { BtnOnOff } from "../../../components/btns/BtnOnOff";
 import { ModalAddProducto } from "./modals/ModalAddProducto";
 import { ModalWrap } from "../../../components/modals/ModalWrap";
 import { TextoRelleno } from "../../../components/TextoRelleno";
+import { AddBtn } from "../../../components/btns/AddBtn";
+import { BoxFixed } from "../../../components/cards/BoxFixed";
 
 
 export const FormIngresoProductos = ({ 
@@ -44,17 +46,8 @@ export const FormIngresoProductos = ({
     const [movDetails, setMovDetails] = useState<MovimientoDetallesDto>(detalles); // añadir los datos al objeto
     const [productosRepe, setProductosRepe] = useState<Array<number>>([]); // almacena ids de productos en lista
 
-    const [modalAdd, setModalAdd] = useState<boolean>(true);
+    const [modalAdd, setModalAdd] = useState<boolean>(false);
 
-    // calculo precio parcial
-    // useEffect(() => {
-    //     setMovDetails({
-    //         ...movDetails,
-    //         precio_parcial: redondeo(
-    //             Number(movDetails.precio_unidad) * Number(movDetails.cantidad)
-    //         )// .toString()
-    //     })
-    // }, [movDetails.precio_unidad, movDetails.cantidad])
 
     // calcular precio unidad
     useEffect(() => {
@@ -108,26 +101,6 @@ export const FormIngresoProductos = ({
         }
     }
 
-            // // informacion de productos desde select
-            // const handlerDataProductos = (value:any) => {
-            //     setMovDetails({
-            //         ... movDetails,
-            //         producto: {
-            //             id: (value.split('@'))[0],
-            //             nombre: (value.split('@'))[1]
-            //         }
-            //     })
-            // }
-            // // informacion de proveedor desde select
-            // const handlerDataProveedor = (value:any) => { 
-            //     setMovDetails({
-            //         ... movDetails,
-            //         proveedor: {
-            //             id: (value.split('@'))[0],
-            //             nombre: (value.split('@'))[1]
-            //         }
-            //     })
-            // }
 
     // añadir objetos al estado de los detalles
     const handlerChangeMovimientoDetalles = (e:any) => { 
@@ -160,30 +133,16 @@ export const FormIngresoProductos = ({
     
  
     // validacion para activar el boton de añadir producto
-            const validarEnvio = () => { 
-                if (movimientoDetalles.length <= 0 ||
-                    movimientos.total === 0 ||
-                    movimientos.local_destino === 0
-                ) {   
-                    return false;
-                } else {
-                    return true;
-                }    
-            }
-
-
-            // validar boton de añadir
-            // const validarBtnAñadir = () => { 
-            //     if (
-            //         movDetails.producto.id !== 0 &&
-            //         Number(movDetails.cantidad) !== 0 && 
-            //         Number(movDetails.precio_parcial) !== 0
-            //     ) {
-            //         return true;
-            //     } else {
-            //         return false;
-            //     }
-            // }
+    const validarEnvio = () => { 
+        if (movimientoDetalles.length <= 0 ||
+            movimientos.total === 0 ||
+            movimientos.local_destino === 0
+        ) {   
+            return false;
+        } else {
+            return true;
+        }    
+    }
 
 
     // limpiar todos los imputs
@@ -208,145 +167,72 @@ export const FormIngresoProductos = ({
 
     return (
 
-        <div className="form-ingreso-productos mb-25">
-
-            {/* 
-            <div className="box grid-1 gap">
-
-                <h4 className="desc-form">Descripcion de ingreso del producto</h4>
-                <div className="grid-2 gap">
-                    
-                    <SelectSearch
-                        label="Producto"
-                        type="text"
-                        respuesta={handlerDataProductos}
-                        urlData={PRODUCTOS_SEARCH}
-                        repetidos={productosRepe}
-                        link="/productos/crear-producto"
-                        switchSelect={switchProductos}
-                        setSwitchSelect={setSwitchProductos}
-                        placeholder="Nombre o codigo ..."
-                    />
-
-                    <SelectSearch
-                        label="Proveedor"
-                        type="text"
-                        respuesta={handlerDataProveedor}
-                        urlData={PROVEEDORES_SEARCH}
-                        link="/proveedores/nuevo"
-                        switchSelect={switchProveedores}
-                        setSwitchSelect={setSwitchProveedores}
-                        placeholder="Nombre o razon social ..."
-                    />
-
-                </div>
-
-                <div className="grid-4 gap">
-                    
-                    <Input
-                        label="Cantidad de unidades"
-                        type="number"
-                        name="cantidad"
-                        value={movDetails.cantidad}
-                        onChange={handlerChangeMovimientoDetalles}
-                    />
-                    
-                    <Input
-                        label="Precio de compra del paquete"
-                        type="number"
-                        name="precio_parcial"
-                        value={movDetails.precio_parcial}
-                        onChange={handlerChangeMovimientoDetalles}
-                        moneda
-                    />
-
-                    <InputDisable label="Precio por unidad" value={movDetails.precio_unidad} moneda/>
-
-                    <Input
-                        label="Detalles"
-                        type="text"
-                        name="descripcion"
-                        value={movDetails.descripcion}
-                        onChange={handlerChangeMovimientoDetalles}
-                        placeholder="Informacion del producto"
-                    />
-
-                </div>
-
-                <div className="grid-4 gap">
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    {
-                        <BtnOnOff
-                            label="Añadir"
-                            estado={validarBtnAñadir()}
-                            onClick={() => handlerAddMovimientoDetalles()}
-                            className="success"
-                            icon={ <BiListPlus /> }
-                        />
-                    }
-                </div>
-
-            </div> 
-            */}
+        <div className="form-ingreso-productos">
 
             <div className="grid-1">
 
-                <div className="box">
-
-                {
-                    movimientoDetalles.length > 0
-                    ? (
-                        <>
-                            <h4 className="desc-form">Relacion de productos</h4>
-                            <table className="table mb-25">
-                                <thead>
-                                    <tr>
-                                        <th>Producto</th>
-                                        <th>Proveedor</th>
-                                        <th>Cantidad</th>
-                                        <th>Precio unidad</th>
-                                        <th>Precio acumulado</th>
-                                        <th>Descripcion</th>
-                                        <th className="transparent">...</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {
-                                        movimientoDetalles.map((el:MovimientoDetallesDto, index:number) => { 
-                                            return(
-                                                <tr key={el.producto.nombre + el.proveedor.nombre}>
-                                                    <td>{ el.producto.nombre }</td>
-                                                    <td>{ el.proveedor.nombre }</td>
-                                                    <td>{ el.cantidad }</td>
-                                                    <td>S/. { el.precio_unidad }</td>
-                                                    <td>S/. { el.precio_parcial }</td>
-                                                    <td>{ el.descripcion }</td>
-                                                    <td>
-                                                        <span className="wrap-icons danger center">
-                                                            <BiX className="pointer" onClick={() => { itemPop(index) }} />
-                                                        </span>
-                                                    </td>
-                                                </tr>  
-                                            )
-                                        })
-                                    }
-                                </tbody>
-                            </table>
-                        </>
-                    ) : (
-                        <div>
+                <div className="box box-lista-productos">
+                    <h4 className="desc-form m-0">
+                        {
+                            movimientoDetalles.length > 0
+                            ? "Relacion de productos"
+                            : "Añade un producto a la lista"
+                        }
+                    </h4>
+                    {
+                        movimientoDetalles.length > 0
+                        ? (
+                            <>
+                                
+                                <table className="table mb-25 mt-5">
+                                    <thead>
+                                        <tr>
+                                            <th>Producto</th>
+                                            <th>Proveedor</th>
+                                            <th>Cantidad</th>
+                                            <th>Precio unidad</th>
+                                            <th>Precio acumulado</th>
+                                            <th>Descripcion</th>
+                                            <th className="transparent">...</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {
+                                            movimientoDetalles.map((el:MovimientoDetallesDto, index:number) => { 
+                                                return(
+                                                    <tr key={el.producto.nombre + el.proveedor.nombre}>
+                                                        <td>{ el.producto.nombre }</td>
+                                                        <td>{ el.proveedor.nombre }</td>
+                                                        <td>{ el.cantidad }</td>
+                                                        <td>S/. { el.precio_unidad }</td>
+                                                        <td>S/. { el.precio_parcial }</td>
+                                                        <td>{ el.descripcion }</td>
+                                                        <td>
+                                                            <span className="wrap-icons danger center">
+                                                                <BiX className="pointer" onClick={() => { itemPop(index) }} />
+                                                            </span>
+                                                        </td>
+                                                    </tr>  
+                                                )
+                                            })
+                                        }
+                                    </tbody>
+                                </table>
+                            </>
+                        ) : (
                             
-                        </div>
-                    )
-                }
+                            <AddBtn 
+                                handlerModal={setModalAdd}
+                            />
+                        )
+                    }
 
                 </div>
 
-                <div className="box">
+                <div className="box grid-1 gap m-0">
 
-                    <h4 className="desc-form">Informacion general de ingreso de productos</h4>
+                    <h4 className="desc-form m-0">Informacion general de ingreso de productos</h4>
+
                     <div className="grid-4 gap">
 
                         <InputDisable label="Subtotal" value={ movimientos.subtotal } moneda/>
@@ -389,7 +275,7 @@ export const FormIngresoProductos = ({
                         />
                     </div>
 
-                    <div className="grid-4 gap mt-15">
+                    <div className="grid-4 gap mt-15 mb-15">
                         <div />
                         {
                             validarEnvio()
@@ -428,6 +314,12 @@ export const FormIngresoProductos = ({
                     setSwitchProveedores={setSwitchProveedores}
                 />
             </ModalWrap>
+
+            
+            <BoxFixed condicion={ movimientoDetalles.length >= 1 && !modalAdd }>
+                <AddBtn handlerModal={setModalAdd}/>
+            </BoxFixed>
+            
             
 
         </div>
