@@ -237,6 +237,15 @@ a{
     grid-template-columns: calc(100% - 41px) 41px;
 }
 
+.grid-350-1{
+    display: grid;
+    grid-template-columns: 394px calc(100% - 394px);
+}
+
+.align-center{ // requiere grid
+    align-items: center;
+}
+
 
 .gap{
     gap: 20px;
@@ -251,12 +260,6 @@ a{
     gap: 0 20px;
 }
 
-// grids personalizados
-
-.grid-350-1{
-    display: grid;
-    grid-template-columns: 394px calc(100% - 394px);
-}
 
 
 
@@ -267,6 +270,12 @@ a{
     width: 100%;
     padding: 22px 22px 28px 22px;
     margin-bottom: 20px;
+    border-radius: 6px;
+}
+
+.box2{
+    width: 100%;
+    padding: 15px;
     border-radius: 6px;
 }
 
@@ -901,9 +910,13 @@ table.no-hover{
 .wrap-descripcion{ // puede añadirse a un grid
     span{
         display: grid;
-        grid-template-columns: 2fr 4fr;
+        grid-template-columns: 2.3fr 4fr;
         h4{
             color: $primary;
+            margin-bottom: 10px;
+        }
+        p{
+            margin-bottom: 10px;
         }
     }
 }

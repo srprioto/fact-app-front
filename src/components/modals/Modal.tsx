@@ -9,6 +9,7 @@ interface modal{
     width?:number;
     setModal?:Function;
     getFuncion?:Function;
+    btnClose?:Function;
     loading?:boolean;
     children:any;
 }
@@ -19,7 +20,8 @@ export const Modal = ({
     width, 
     modal, 
     setModal, 
-    getFuncion, 
+    getFuncion,
+    btnClose,
     loading = false, 
     children 
 }:modal) => {
@@ -27,6 +29,7 @@ export const Modal = ({
     const handlerCloseModal = () => { 
         setModal && setModal(!modal)
         getFuncion && getFuncion();
+        btnClose && btnClose();
     }
 
     return (

@@ -1,10 +1,14 @@
+import { useState } from "react"
 import { BiListPlus } from "react-icons/bi"
 import { BtnOnOff } from "../../../../components/btns/BtnOnOff"
 import { Input } from "../../../../components/forms/Input"
 import { InputDisable } from "../../../../components/forms/InputDisable"
 import { SelectSearch } from "../../../../components/forms/SelectSearch"
 import { Modal } from "../../../../components/modals/Modal"
-import { PRODUCTOS_SEARCH, PROVEEDORES_SEARCH } from "../../../../resources/routes"
+import { getOne } from "../../../../resources/fetch"
+import { PRODUCTOS, PRODUCTOS_SEARCH, PROVEEDORES, PROVEEDORES_SEARCH } from "../../../../resources/routes"
+import { BoxProducto } from "../BoxProducto"
+import { BoxProveedor } from "../BoxProveedor"
 
 
 interface ModalAddProducto{
@@ -35,7 +39,13 @@ export const ModalAddProducto = ({
     setSwitchProveedores
 }:ModalAddProducto) => {
 
+    const [loadProducto, setLoadProducto] = useState<boolean>(false);
+    const [productoSolo, setProductoSolo] = useState<any>({});
 
+    const [loadProveedor, setLoadProveedor] = useState<boolean>(false);
+    const [proveedorSolo, setProveedorSolo] = useState<any>({});
+
+    // informacin del cliente desde select
     const handlerDataProductos = (value:any) => {
         setMovDetails({
             ... movDetails,
@@ -44,6 +54,8 @@ export const ModalAddProducto = ({
                 nombre: (value.split('@'))[1]
             }
         })
+        getOneData((value.split('@'))[0], PRODUCTOS, setLoadProducto, setProductoSolo);
+
     }
     // informacion de proveedor desde select
     const handlerDataProveedor = (value:any) => { 
@@ -54,6 +66,7 @@ export const ModalAddProducto = ({
                 nombre: (value.split('@'))[1]
             }
         })
+        getOneData((value.split('@'))[0], PROVEEDORES, setLoadProveedor, setProveedorSolo);
     }
 
 
@@ -69,47 +82,76 @@ export const ModalAddProducto = ({
         }
     }
 
+
+    const getOneData = async (id:number, endpoint:string, loading:Function, setData:Function) => { 
+        loading(true);
+        try {
+            const response_productos = await getOne(id, endpoint);
+            setData(response_productos);
+            loading(false);
+        } catch (error) {
+            loading(true);
+            console.log(error);
+        }
+    }
+
+
+    const reiniciarData = () => { 
+        setProductoSolo({})
+        setProveedorSolo({})
+    }
+    
+
+    const reiniciarSelect = () => { 
+        setSwitchProductos();
+        setSwitchProveedores();        
+    }
+
     return (
         <Modal
             modal={modal}
             setModal={setModal}
+            width={80}
+            btnClose={reiniciarSelect}
         >
 
             <div className="grid-1 gap">
 
                 <h4 className="desc-form">Descripcion de ingreso del producto</h4>
-                <div className="grid-2 gap">
+                <div className="grid-2 gap-v align-center">
                     
-                    <SelectSearch
-                        label="Producto"
-                        type="text"
-                        respuesta={handlerDataProductos}
-                        urlData={PRODUCTOS_SEARCH}
-                        repetidos={productosRepe}
-                        link="/productos/crear-producto"
-                        switchSelect={switchProductos}
-                        setSwitchSelect={setSwitchProductos}
-                        placeholder="Nombre o codigo ..."
-                    />
-
-                    <div>
-
+                    <div className="mb-15">
+                        <SelectSearch
+                            label="Producto"
+                            type="text"
+                            respuesta={handlerDataProductos}
+                            urlData={PRODUCTOS_SEARCH}
+                            repetidos={productosRepe}
+                            link="/productos/crear-producto"
+                            switchSelect={switchProductos}
+                            setSwitchSelect={setSwitchProductos}
+                            placeholder="Nombre o codigo ..."
+                            reinicios={() => setProductoSolo({}) }
+                        />
                     </div>
 
-                    <SelectSearch
-                        label="Proveedor"
-                        type="text"
-                        respuesta={handlerDataProveedor}
-                        urlData={PROVEEDORES_SEARCH}
-                        link="/proveedores/nuevo"
-                        switchSelect={switchProveedores}
-                        setSwitchSelect={setSwitchProveedores}
-                        placeholder="Nombre o razon social ..."
-                    />
+                    <BoxProducto productoSolo={productoSolo} loading={loadProducto} />
+                   
+                    <div className="mb-15">
+                        <SelectSearch
+                            label="Proveedor"
+                            type="text"
+                            respuesta={handlerDataProveedor}
+                            urlData={PROVEEDORES_SEARCH}
+                            link="/proveedores/nuevo"
+                            switchSelect={switchProveedores}
+                            setSwitchSelect={setSwitchProveedores}
+                            placeholder="Nombre o razon social ..."
+                            reinicios={() => setProveedorSolo({})}
+                        />
+                    </div>          
 
-                    <div>
-
-                    </div>
+                    <BoxProveedor proveedorSolo={proveedorSolo} loading={loadProveedor} />
 
                 </div>
 
@@ -145,13 +187,17 @@ export const ModalAddProducto = ({
 
                 </div>
 
-                <div className="grid-4 gap mt-15 mb-15">
+                <div className="grid-4 gap mt-25 mb-15">
                     <div></div>
                     {
                         <BtnOnOff
                             label="Añadir y continuar"
                             estado={validarBtnAñadir()}
-                            onClick={() => handlerAddMovimientoDetalles()}
+                            onClick={() => {
+                                handlerAddMovimientoDetalles()
+                                reiniciarSelect()
+                                reiniciarData()
+                            }}
                             className="success"
                             icon={ <BiListPlus /> }
                         />
@@ -163,6 +209,8 @@ export const ModalAddProducto = ({
                             estado={validarBtnAñadir()}
                             onClick={() => {
                                 handlerAddMovimientoDetalles()
+                                reiniciarSelect()
+                                reiniciarData()
                                 setModal(!modal)
                             }}
                             className="info"
