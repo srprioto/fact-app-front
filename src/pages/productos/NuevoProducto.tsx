@@ -6,25 +6,24 @@ import { CrearCantidad } from "../almacen/part/CrearCantidad";
 import { post } from "../../resources/fetch";
 import { PRODUCTOS } from "../../resources/routes";
 import { TitleBox } from "../../components/TitleBox";
-import { FormsCrearProducto } from "./part/FormsCrearProducto";
+import { FormsCrearProducto } from "./part/forms/FormsCrearProducto";
 import { useNavigate } from "react-router-dom";
+import { WrapCrearProducto } from "./part/forms/WrapCrearProducto";
 
 export const NuevoProducto = () => {
 
     const navigate = useNavigate();
 
     const [loading, setLoading] = useState<boolean>(false);
-    // const [modal, setModal] = useState<boolean>(false);
-    // const [idProducto, setIdProducto] = useState<number>(0);
+    const [producto, setProducto] = useState<any>({});
 
     const handlerCreateProducto = async (data:any) => { 
         setLoading(true);
         try {
-            const response = await post(data, PRODUCTOS);
-            // setIdProducto(response.data.id);
-            setLoading(false);
-            navigate('/productos')
-            // setModal(!modal);
+            const productoListo = await post(data, PRODUCTOS);
+            setProducto(productoListo.data);
+            setLoading(false);                        
+            // navigate('/productos');
         } catch (error) {
             setLoading(true);
             console.log(error);
@@ -37,20 +36,18 @@ export const NuevoProducto = () => {
 
                 <TitleBox titulo="Crear producto" back={true}/>
                 
-                <div className="box">
+                <div className="box m-0 wrap-crear-producto">
 
-                    <h3>Crear un nuevo producto</h3>
-
-                    <FormsCrearProducto 
+                    <WrapCrearProducto
                         handlerCreateProducto={handlerCreateProducto} 
                         loading={loading}
+                        producto={producto}
+                        // setCodigoProd={setCodigoProd}
                     />
 
                 </div>                
 
             </div>
-
-            {/* <CrearCantidad modal={modal} id={idProducto} /> */}
 
         </Layout>
     )

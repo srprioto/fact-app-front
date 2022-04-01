@@ -2,7 +2,7 @@ import * as Yup from 'yup';
 
 export const ValidCreateProduct = Yup.object({
 
-    codigo:Yup.string().required('Requerido'),
+    // codigo:Yup.string().required('Requerido'),
     nombre:Yup.string().required('Requerido'),
     descripcion:Yup.string().required('Requerido'),
     marca:Yup.string().required('Requerido'),

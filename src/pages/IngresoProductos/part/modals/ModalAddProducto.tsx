@@ -7,8 +7,8 @@ import { SelectSearch } from "../../../../components/forms/SelectSearch"
 import { Modal } from "../../../../components/modals/Modal"
 import { getOne } from "../../../../resources/fetch"
 import { PRODUCTOS, PRODUCTOS_SEARCH, PROVEEDORES, PROVEEDORES_SEARCH } from "../../../../resources/routes"
-import { BoxProducto } from "../BoxProducto"
-import { BoxProveedor } from "../BoxProveedor"
+import { BoxProducto } from "./BoxProducto"
+import { BoxProveedor } from "./BoxProveedor"
 
 
 interface ModalAddProducto{

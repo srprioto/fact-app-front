@@ -1,80 +1,48 @@
-import { Form, Formik } from "formik"
-import { useEffect, useState } from "react";
-import { BiReply } from "react-icons/bi";
+import { Formik, Form, } from 'formik';
+import { BiBrush } from 'react-icons/bi';
 
-import { InputMk } from "../../../../components/forms/InputMk";
-import { Loading } from "../../../../components/loads/Loading";
-import { LoadSwitchBtn } from "../../../../components/btns/LoadSwitchBtn";
+import { InputMk } from '../../../../components/forms/InputMk';
+import { LoadSwitchBtn } from '../../../../components/btns/LoadSwitchBtn';
+import { ValidCreateProduct } from '../../../../resources/validations/Productos';
 
-import { getOne } from "../../../../resources/fetch";
-import { PRODUCTOS } from "../../../../resources/routes";
-import { ValidCreateProduct } from "../../../../resources/validations/Productos";
+interface FormsCrearProducto {
+    handlerCreateProducto:Function;
+    loading:boolean;
+}
 
-export const FormEditProducto = ({ id, handlerEdit, loadingUpdate }:any) => {
-
-    const [loadingGetOne, setLoadingGetOne] = useState<boolean>(false);
-    const [producto, setProducto] = useState<any>({
-        // codigo:"",
-        nombre:"",
-        descripcion:"",
-        marca:"",
-        color:"",
-        talla:"",
-        precio_compra:"",
-        precio_venta_1:"",
-        precio_venta_2:"",
-        precio_venta_3:"",
-        usuarioId: 1, 
-        categoriasId: 1
-    });
-
-    useEffect(() => {
-        getDataOne();
-    }, []);
-    
-    const getDataOne = async () => { 
-        setLoadingGetOne(true);
-        try {
-            const response_productos = await getOne(id, PRODUCTOS);
-            setProducto(response_productos);
-            setLoadingGetOne(false);
-        } catch (error) {
-            setLoadingGetOne(true);
-            console.log(error);     
-        }
-    }
-
+export const FormsCrearProducto = ({ handlerCreateProducto, loading }:FormsCrearProducto) => {
 
     return (
-        <Formik
-            enableReinitialize={true}
-            initialValues={producto}
-            validationSchema={ValidCreateProduct}
-            onSubmit={(data, { resetForm }) => { 
-                handlerEdit({
-                    // codigo: data.codigo,
-                    nombre: data.nombre,
-                    descripcion: data.descripcion,
-                    marca: data.marca,
-                    color: data.color,
-                    talla: data.talla,
-                    // precio_compra: data.precio_compra,
-                    precio_venta_1: data.precio_venta_1,
-                    precio_venta_2: data.precio_venta_2,
-                    precio_venta_3: data.precio_venta_3,
-                    usuarioId: data.usuarioId,
-                    categoriasId: data.categoriasId
-                });
-                    
-            }}
-        >
+        <div>
+            <h3>Crear un nuevo producto</h3>
+            <Formik
+                initialValues={{
+                    // codigo:"",
+                    nombre:"",
+                    descripcion:"",
+                    marca:"",
+                    color:"",
+                    talla:"",
+                    // precio_compra:"",
+                    precio_venta_1:"",
+                    precio_venta_2:"",
+                    precio_venta_3:"",
+                    usuarioId: 1, 
+                    categoriasId: 1 
+                }}
 
-            {({ errors }) => (
+                validationSchema={ValidCreateProduct}
 
-                loadingGetOne
-                ? <Loading />
-                : (
+                onSubmit={(data, { resetForm }) => { 
+                    handlerCreateProducto(data)
+                    resetForm();                
+                }}
+            >
+                
+                {({ errors }) => (
+
                     <Form className="grid-1 gap mt-25 mb-25">
+                        
 
                         <div className="grid-2 gap">
 
@@ -90,7 +58,6 @@ export const FormEditProducto = ({ id, handlerEdit, loadingUpdate }:any) => {
                                 name="nombre"
                                 error={errors.nombre}
                             />
-
                             <InputMk 
                                 label="Descripcion"
                                 type="text"
@@ -102,7 +69,7 @@ export const FormEditProducto = ({ id, handlerEdit, loadingUpdate }:any) => {
 
                         {/* <div className="grid-1 gap">
 
-
+                            
                             
                         </div> */}
 
@@ -161,27 +128,26 @@ export const FormEditProducto = ({ id, handlerEdit, loadingUpdate }:any) => {
 
 
 
-                        <div className="grid-4 gap mt-15">
+                        <div className="grid-4 gap mt-25">
                             <div />
 
-                            <LoadSwitchBtn label="Editar cliente" loading={loadingUpdate} />
+                            <LoadSwitchBtn label="Crear producto" loading={loading} />
 
                             <button className="btn btn-primary" type="reset">
-                                <BiReply />
-                                Restablecer valores
+                                <BiBrush />
+                                Limpiar
                             </button>
 
                             <div />
                         </div>
 
                     </Form>
-                )
-
-                
 
 
-            )}
+                )}
 
-        </Formik>
+
+            </Formik>
+        </div>
     )
-}
+};

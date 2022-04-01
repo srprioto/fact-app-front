@@ -116,6 +116,7 @@ label{
 
 .pr-20{ padding-right: 20px; }
 
+.pt-10{ padding-top:10px; }
 .pt-20{ padding-top:20px; }
 .pb-20{ padding-bottom:20px; }
 
@@ -906,7 +907,6 @@ table.no-hover{
 
 
 // descripciones
-
 .wrap-descripcion{ // puede añadirse a un grid
     span{
         display: grid;
@@ -917,6 +917,22 @@ table.no-hover{
         }
         p{
             margin-bottom: 10px;
+            font-weight: 800;
+        }
+    }
+}
+
+.wrap-descripcion2{ // puede añadirse a un grid
+    span{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        h4{
+            color: $primary;
+            margin-bottom: 10px;
+        }
+        p{
+            margin-bottom: 10px;
+            font-weight: 800;
         }
     }
 }

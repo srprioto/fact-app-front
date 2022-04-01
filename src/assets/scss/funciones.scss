@@ -70,3 +70,28 @@
     }
     
 }
+
+
+// forzar tamaño minimo
+// tamaño predeterminado
+@mixin min-scroll($height) {
+    overflow-y: scroll;
+    min-height: calc(100vh - $height);
+
+    &::-webkit-scrollbar {
+        background-color: transparent;
+        width: 6px;
+    }
+    
+    &::-webkit-scrollbar-thumb {
+        background-color: transparent;
+        border-radius: 4px;
+        transition-delay: 1s;
+    }
+    
+    &:hover::-webkit-scrollbar-thumb,
+    &::-webkit-scrollbar-thumb:hover {
+        background-color: $color4;
+        transition-delay: 1s;
+    }
+}

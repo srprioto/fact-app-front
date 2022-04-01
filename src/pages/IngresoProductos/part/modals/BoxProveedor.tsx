@@ -1,4 +1,4 @@
-import { TextoRelleno } from "../../../components/TextoRelleno";
+import { TextoRelleno } from "../../../../components/TextoRelleno";
 
 export const BoxProveedor = ({ proveedorSolo, loading }:any) => {
 

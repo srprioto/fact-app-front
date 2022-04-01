@@ -444,8 +444,28 @@
     }
 }
 
+// crear producto
 
-// ********
+.nuevo-producto{
+    .wrap-crear-producto{
+        // @include min-scroll(144px);
+        min-height: calc(100vh - 144px)
+    }
+}
+
+.wrap-gestion-codigo{
+    .gestion-codigo{
+        width: 60%;
+        margin: 0 auto;
+        .wrap-barcode{
+            background-color: $background
+        }
+    }
+}
+
+
+
+// **** Generales ****
 
 // modal transferir productos
 .lista-transf{
