@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { useBarcode } from 'react-barcodes';
-import { Checkbox2 } from '../forms/Checkbox2';
 
 interface ProductoBarras{
     value:string;
@@ -11,36 +10,18 @@ interface ProductoBarras{
     cambiarColor?:boolean;
 }
 
-export const ProductoBarras = ({ value, nombre, color, talla, marca, cambiarColor }:ProductoBarras) => {
+export const ProductoBarras = ({ value, nombre, color, marca, talla }:ProductoBarras) => {
 
-    const [changeColor, setChangeColor] = useState<boolean>(false)
     const [options, setOptions] = useState<any>({
         background: "transparent",
-        lineColor: "#fff",
+        lineColor: "#cecece",
         marginTop: 5,
         marginBottom: 0,
         marginLeft: 20,
         marginRight: 20,
-        height: 65,
+        height: 40,
         fontSize: 15
     })
-
-    const handlerColor = () => { 
-        if (changeColor) {
-            setOptions({
-                ...options,
-                background: "#222736",
-                lineColor: "#fff",
-            })
-        } else {
-            setOptions({
-                ...options,
-                background: "#fff",
-                lineColor: "#222736",
-            })
-        }
-        setChangeColor(!changeColor)
-    }
 
     const { inputRef } = useBarcode({
         value: value,
@@ -59,19 +40,6 @@ export const ProductoBarras = ({ value, nombre, color, talla, marca, cambiarColo
                 </div>                
                 <svg ref={inputRef} className="mb-5" />
             </div>
-            
-            { 
-                cambiarColor
-                && (
-                    <Checkbox2
-                        label={changeColor ? "Oscurecer" : "Aclarar"}
-                        name="changeColor"
-                        checked={changeColor}
-                        handlerCheck={handlerColor}
-                    />
-                )
-            }
-
         </div>
     )
 }
