@@ -21,7 +21,8 @@ export const FormCrearProveedor = ({ handlerCreateProveedor, loading }:any) => {
                 email: "",
                 nombre_banco: "",
                 nro_cuenta_bancaria: "",
-                nombre_titular: ""
+                nombre_titular: "",
+                tipo_producto: ""
             }}
 
             validationSchema={ValidCreateProveedores}
@@ -37,7 +38,7 @@ export const FormCrearProveedor = ({ handlerCreateProveedor, loading }:any) => {
                 <Form className="grid-1 gap mt-25 mb-25">
 
                     <h4 className="desc-form">Informacion de persona ó empresa</h4>
-                    <div className="grid-2 gap">
+                    <div className="grid-3 gap">
 
                         <InputMk 
                             label="Nombre proveedor"
@@ -50,6 +51,12 @@ export const FormCrearProveedor = ({ handlerCreateProveedor, loading }:any) => {
                             type="text"
                             name="razon_social"
                             error={errors.razon_social}
+                        />
+                        <InputMk 
+                            label="Direccion"
+                            type="text"
+                            name="direccion"
+                            error={errors.direccion}
                         />
 
                     </div>
@@ -71,12 +78,14 @@ export const FormCrearProveedor = ({ handlerCreateProveedor, loading }:any) => {
                             name="documento"
                             error={errors.documento}
                         />
+
                         <InputMk 
-                            label="Direccion"
+                            label="Tipo de producto"
                             type="text"
-                            name="direccion"
-                            error={errors.direccion}
+                            name="tipo_producto"
+                            error={errors.tipo_producto}
                         />
+                        
                     </div>
 
                     <h4 className="desc-form">Informacion de contacto</h4>

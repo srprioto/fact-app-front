@@ -25,6 +25,7 @@ export const ModalVer = ({ data, modal, setModal, loading }:ModalVer) => {
                                 <p>Razon social: </p><p><strong>{ data.razon_social }</strong></p>
                                 <p>Documento - { data.tipo_documento }: </p><p><strong> { data.documento }</strong></p>
                                 <p>Direccion: </p><p><strong>{ data.direccion }</strong></p>
+                                <p>Tipo producto: </p><p><strong>{ data.tipo_producto }</strong></p>
                             </div>
                         </div>
 

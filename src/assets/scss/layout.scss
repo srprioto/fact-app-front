@@ -442,6 +442,19 @@
     .box-lista-productos{
         min-height: calc(100vh - 504px)
     }
+
+    .btn-reset-danger{
+        position: absolute;
+        right: 0;
+        top: 0;
+        padding: 0;
+        margin: 0;
+        background-color: transparent;
+        border: none;
+        color: $danger;
+        font-size: 1.6em;
+        cursor: pointer;
+    }
 }
 
 // crear producto

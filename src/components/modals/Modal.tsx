@@ -7,6 +7,7 @@ interface modal{
     title?:string;
     border?:string;
     width?:number;
+    height?:string|number;
     setModal?:Function;
     getFuncion?:Function;
     btnClose?:Function;
@@ -17,7 +18,8 @@ interface modal{
 export const Modal = ({ 
     title = "", 
     border = "", 
-    width, 
+    width,
+    height,
     modal, 
     setModal, 
     getFuncion,
@@ -32,6 +34,11 @@ export const Modal = ({
         btnClose && btnClose();
     }
 
+    const styles = {
+        width: `${width}%`,
+        height: height && `${height}%`
+    }
+
     return (
         <>
             {
@@ -43,7 +50,7 @@ export const Modal = ({
                             loading 
                             ? <Loading />
                             : (
-                                <div className={"modal " + border} style={{width: `${width}%`}}>
+                                <div className={"modal " + border} style={styles}>
 
                                     {
                                         setModal

@@ -13,6 +13,7 @@ export const Proveedor = ({ proveedor, handlerDeleted, handlerVer }:proveedor) =
             <td>{ proveedor.nombre }</td>
             <td>{ proveedor.razon_social }</td>
             <td>{ proveedor.documento }</td>
+            <td>{ proveedor.tipo_producto }</td>
             <td>
                 <ProvDropdown 
                     id={proveedor.id}

@@ -5,6 +5,9 @@ import { Input } from "../../../../components/forms/Input"
 import { InputDisable } from "../../../../components/forms/InputDisable"
 import { SelectSearch } from "../../../../components/forms/SelectSearch"
 import { Modal } from "../../../../components/modals/Modal"
+import { ModalNuevoProducto } from "../../../../components/modals/ModalNuevoProducto"
+import { ModalNuevoProveedor } from "../../../../components/modals/ModalNuevoProveedor"
+import { detalles } from "../../../../resources/dtos/MovimientoDetalles"
 import { getOne } from "../../../../resources/fetch"
 import { PRODUCTOS, PRODUCTOS_SEARCH, PROVEEDORES, PROVEEDORES_SEARCH } from "../../../../resources/routes"
 import { BoxProducto } from "./BoxProducto"
@@ -45,6 +48,9 @@ export const ModalAddProducto = ({
     const [loadProveedor, setLoadProveedor] = useState<boolean>(false);
     const [proveedorSolo, setProveedorSolo] = useState<any>({});
 
+    const [modalCrearProducto, setModalCrearProducto] = useState<boolean>(false);
+    const [modalCrearProveedor, setModalCrearProveedor] = useState<boolean>(false);
+
     // informacin del cliente desde select
     const handlerDataProductos = (value:any) => {
         setMovDetails({
@@ -73,6 +79,7 @@ export const ModalAddProducto = ({
     const validarBtnAñadir = () => { 
         if (
             movDetails.producto.id !== 0 &&
+            // Number(movDetails.producto.id) !== 0 &&
             Number(movDetails.cantidad) !== 0 && 
             Number(movDetails.precio_parcial) !== 0
         ) {
@@ -95,17 +102,42 @@ export const ModalAddProducto = ({
         }
     }
 
+    // reinicios
+    const reiniciarData = () => { // reinicia toda la data
+        reinicioProducto()
+        reinicioProveedor()
+    }
 
-    const reiniciarData = () => { 
+    const reiniciarSelect = () => { // reinicia ambos select
+        setSwitchProductos(false);
+        setSwitchProveedores(false);
+    }
+
+    const reinicioProducto = () => { // reinicia solo producto
+        setMovDetails({
+            ... movDetails,
+            producto: { id: 0, nombre: "" }
+        })
         setProductoSolo({})
-        setProveedorSolo({})
+        setSwitchProductos(false);
     }
-    
 
-    const reiniciarSelect = () => { 
-        setSwitchProductos();
-        setSwitchProveedores();        
+    const reinicioProveedor = () => { // reinicia solo proveedor
+        setMovDetails({
+            ... movDetails,
+            proveedor: { id: 0, nombre: "" }
+        })
+        setProveedorSolo({})
+        setSwitchProveedores(false);
     }
+
+    const reiniciarTodo = () => { 
+        reiniciarData()
+        reiniciarSelect()
+        
+    }
+
+    console.log(validarBtnAñadir());    
 
     return (
         <Modal
@@ -127,15 +159,20 @@ export const ModalAddProducto = ({
                             respuesta={handlerDataProductos}
                             urlData={PRODUCTOS_SEARCH}
                             repetidos={productosRepe}
-                            link="/productos/crear-producto"
+                            // link="/productos/crear-producto"
+                            modal={setModalCrearProducto}
                             switchSelect={switchProductos}
                             setSwitchSelect={setSwitchProductos}
                             placeholder="Nombre o codigo ..."
-                            reinicios={() => setProductoSolo({}) }
+                            reinicios={reinicioProducto}
                         />
                     </div>
 
-                    <BoxProducto productoSolo={productoSolo} loading={loadProducto} />
+                    <BoxProducto 
+                        productoSolo={productoSolo} 
+                        loading={loadProducto} 
+                        handlerReset={reinicioProducto} 
+                    />
                    
                     <div className="mb-15">
                         <SelectSearch
@@ -143,15 +180,20 @@ export const ModalAddProducto = ({
                             type="text"
                             respuesta={handlerDataProveedor}
                             urlData={PROVEEDORES_SEARCH}
-                            link="/proveedores/nuevo"
+                            // link="/proveedores/nuevo"
+                            modal={setModalCrearProveedor}
                             switchSelect={switchProveedores}
                             setSwitchSelect={setSwitchProveedores}
                             placeholder="Nombre o razon social ..."
-                            reinicios={() => setProveedorSolo({})}
+                            reinicios={reinicioProveedor}
                         />
                     </div>          
 
-                    <BoxProveedor proveedorSolo={proveedorSolo} loading={loadProveedor} />
+                    <BoxProveedor 
+                        proveedorSolo={proveedorSolo} 
+                        loading={loadProveedor} 
+                        handlerReset={reinicioProveedor} 
+                    />
 
                 </div>
 
@@ -195,8 +237,8 @@ export const ModalAddProducto = ({
                             estado={validarBtnAñadir()}
                             onClick={() => {
                                 handlerAddMovimientoDetalles()
-                                reiniciarSelect()
-                                reiniciarData()
+                                reiniciarTodo()
+                                setMovDetails(detalles)
                             }}
                             className="success"
                             icon={ <BiListPlus /> }
@@ -209,8 +251,8 @@ export const ModalAddProducto = ({
                             estado={validarBtnAñadir()}
                             onClick={() => {
                                 handlerAddMovimientoDetalles()
-                                reiniciarSelect()
-                                reiniciarData()
+                                reiniciarTodo()
+                                setMovDetails(detalles)
                                 setModal(!modal)
                             }}
                             className="info"
@@ -220,6 +262,28 @@ export const ModalAddProducto = ({
                     <div></div>
                 </div>
             </div>
+
+            <ModalNuevoProducto
+                modal={modalCrearProducto}
+                setModal={setModalCrearProducto}
+                movDetails={movDetails}
+                setMovDetails={setMovDetails}
+                productoSolo={productoSolo}
+                setProductoSolo={setProductoSolo}
+            />
+
+            <ModalNuevoProveedor
+                modal={modalCrearProveedor}
+                setModal={setModalCrearProveedor}
+                movDetails={movDetails}
+                setMovDetails={setMovDetails}
+                // proveedorSolo={proveedorSolo}
+                setProveedorSolo={setProveedorSolo}
+            />
+
         </Modal>
     )
 }
+
+
+

@@ -14,7 +14,6 @@ export const FormsCrearProducto = ({ handlerCreateProducto, loading }:FormsCrear
 
     return (
         <div>
-            <h3>Crear un nuevo producto</h3>
             <Formik
                 initialValues={{
                     // codigo:"",

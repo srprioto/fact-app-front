@@ -172,6 +172,7 @@ export const Proveedores = () => {
                                         <th>Nombre</th>
                                         <th>Razon social</th>
                                         <th>Documento</th>
+                                        <th>Tipo producto</th>
                                         <th className="transparent inlineblock">...</th>
                                     </tr>
                                 </thead>

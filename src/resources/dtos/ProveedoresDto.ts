@@ -11,6 +11,7 @@ export interface ProveedoresDto {
     nombre_banco:string;
     nro_cuenta_bancaria:string;
     nombre_titular:string;
+    tipo_producto:string;
     created_at:string;
     updated_at:string;
 }
@@ -26,5 +27,6 @@ export interface CreateProveedoresDto{
     email:string;
     nombre_banco:string;
     nro_cuenta_bancaria:string;
+    tipo_producto:string;
     nombre_titular:string;
 }

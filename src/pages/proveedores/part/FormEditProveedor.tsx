@@ -32,7 +32,8 @@ export const FormEditProveedor = ({ id, handlerEditProveedor, loadingUpdate }:an
         email: "",
         nombre_banco: "",
         nro_cuenta_bancaria: "",
-        nombre_titular: ""
+        nombre_titular: "",
+        tipo_producto: ""
     });
 
     useEffect(() => {
@@ -68,7 +69,8 @@ export const FormEditProveedor = ({ id, handlerEditProveedor, loadingUpdate }:an
                     email: data.email,
                     nombre_banco: data.nombre_banco,
                     nro_cuenta_bancaria: data.nro_cuenta_bancaria,
-                    nombre_titular: data.nombre_titular
+                    nombre_titular: data.nombre_titular,
+                    tipo_producto: data.tipo_producto
                 });
                 resetForm();                
             }}
@@ -81,7 +83,7 @@ export const FormEditProveedor = ({ id, handlerEditProveedor, loadingUpdate }:an
                     <Form className="grid-1 gap mt-25 mb-25">
 
                         <h4 className="desc-form">Informacion de persona ó empresa</h4>
-                        <div className="grid-2 gap">
+                        <div className="grid-3 gap">
 
                             <InputMk 
                                 label="Nombre proveedor"
@@ -94,6 +96,12 @@ export const FormEditProveedor = ({ id, handlerEditProveedor, loadingUpdate }:an
                                 type="text"
                                 name="razon_social"
                                 error={errors.razon_social}
+                            />
+                            <InputMk 
+                                label="Direccion"
+                                type="text"
+                                name="direccion"
+                                error={errors.direccion}
                             />
 
                         </div>
@@ -115,11 +123,12 @@ export const FormEditProveedor = ({ id, handlerEditProveedor, loadingUpdate }:an
                                 error={errors.documento}
                             />
                             <InputMk 
-                                label="Direccion"
+                                label="Tipo de producto"
                                 type="text"
-                                name="direccion"
-                                error={errors.direccion}
+                                name="tipo_producto"
+                                error={errors.tipo_producto}
                             />
+                            
                         </div>
 
                         <h4 className="desc-form">Informacion de contacto</h4>

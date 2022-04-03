@@ -20,7 +20,6 @@ export const GestionCodigo = ({ producto }:any) => {
     return (
         <div className="wrap-gestion-codigo grid-1 gap">
             <h2 className="center">Producto registrado correctamente</h2>
-
             <div className="grid-1 gap gestion-codigo">
 
                 <DescProducto producto={producto} />
