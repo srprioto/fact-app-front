@@ -5,7 +5,7 @@ import { ProductoBarras } from "../../../../components/barcode/ProductoBarras";
 import { ProductoBarrasImp } from "../../../../components/barcode/ProductoBarrasImp";
 import { DescProducto } from "./DescProducto";
 
-export const GestionCodigo = ({ producto }:any) => {
+export const GestionCodigo = ({ producto, noCreado }:any) => {
 
     const imprimir = useRef<any>(null);
 
@@ -18,13 +18,12 @@ export const GestionCodigo = ({ producto }:any) => {
     }
         
     return (
-        <div className="wrap-gestion-codigo grid-1 gap">
-            <h2 className="center">Producto registrado correctamente</h2>
+        <div className="wrap-gestion-codigo grid-1 gap mb-25">
+            {
+                !noCreado && <h2 className="center">Producto registrado correctamente</h2> 
+            }
             <div className="grid-1 gap gestion-codigo">
 
-                <DescProducto producto={producto} />
-
-                {/* <h3 className="center">Codigo de barras</h3> */}
                 <div className="grid-2">
                     
                     <ProductoBarras
@@ -45,6 +44,8 @@ export const GestionCodigo = ({ producto }:any) => {
                     </div>
 
                 </div>
+
+                <DescProducto producto={producto} />
             </div>
 
             <div ref={imprimir} className="none">

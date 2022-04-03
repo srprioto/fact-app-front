@@ -12,6 +12,7 @@ import { Producto } from "./Producto";
 import { get, paginate } from "../../../resources/fetch";
 import { PRODUCTOS, PRODUCTOS_SEARCH } from "../../../resources/routes";
 import { NoRegistros } from "../../../components/NoRegistros";
+import { ModalCodigoBarras } from "./ModalCodigoBarras";
 
 export const Productos = () => {
 
@@ -19,25 +20,26 @@ export const Productos = () => {
     // const [loadingOne, setLoadingOne] = useState<boolean>(false);
 
     const [modalEliminar, setModalEliminar] = useState<boolean>(false);
+    const [modalBarcode, setModalBarcode] = useState<boolean>(false);
     // const [modalVer, setModalVer] = useState<boolean>(false);
 
     const [pagination, setPagination] = useState<any>({ meta: {}, links: {} });
 
     const [data, setData] = useState<any>([]);
-    // const [producto, setProducto] = useState<any>({
-    //     codigo:"",
-    //     color:"",
-    //     descripcion:"",
-    //     marca:"",
-    //     nombre:"",
-    //     precio_compra:0,
-    //     precio_venta_1:0,
-    //     precio_venta_2:0,
-    //     precio_venta_3:0,
-    //     talla:"",
-    //     created_at:"",
-    //     updated_at:""
-    // });
+    const [producto, setProducto] = useState<any>({
+        // codigo:"",
+        // color:"",
+        // descripcion:"",
+        // marca:"",
+        // nombre:"",
+        // precio_compra:0,
+        // precio_venta_1:0,
+        // precio_venta_2:0,
+        // precio_venta_3:0,
+        // talla:"",
+        // created_at:"",
+        // updated_at:""
+    });
 
     const [infoProducto, setInfoProducto] = useState<any>({});
 
@@ -90,6 +92,11 @@ export const Productos = () => {
     //     getOneData(id);
     //     setModalVer(!modalVer);
     // }
+
+    const handlerModalBarcode = (prod:any) => { 
+        setProducto(prod);
+        setModalBarcode(!modalBarcode)
+    }
 
 
     // const getOneData = async (id:number) => { 
@@ -172,6 +179,7 @@ export const Productos = () => {
                                                 key={e.id}
                                                 producto={e}
                                                 handlerDeleted={handlerDeleted}
+                                                handlerBarcode={handlerModalBarcode}
                                                 // handlerVer={handlerVer}
                                             />
                                         )
@@ -208,6 +216,12 @@ export const Productos = () => {
                 setModal={setModalVer}
                 loading={loadingOne}
             /> */}
+
+            <ModalCodigoBarras
+                modal={modalBarcode}
+                setModal={setModalBarcode}
+                producto={producto}
+            />
 
 
         </div>

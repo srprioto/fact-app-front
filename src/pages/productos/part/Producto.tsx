@@ -6,10 +6,16 @@ import { ProdDropdown } from "./ProdDropdown";
 interface Producto { 
     producto:ProductosDto;
     handlerDeleted?:Function;
-    handlerVer?:Function;
+    handlerBarcode?:Function;
+    // handlerVer?:Function;
 }
 
-export const Producto = ({ producto, handlerDeleted, handlerVer }:Producto) => {
+export const Producto = ({ 
+    producto, 
+    handlerDeleted, 
+    // handlerVer,
+    handlerBarcode
+}:Producto) => {
 
     return (
 
@@ -23,7 +29,9 @@ export const Producto = ({ producto, handlerDeleted, handlerVer }:Producto) => {
                         <ProdDropdown 
                             id={producto.id}
                             nombre={producto.nombre}
+                            producto={producto}
                             handlerDeleted={handlerDeleted}
+                            handlerBarcode={handlerBarcode}
                             // handlerVer={handlerVer}
                         />
                     </div>

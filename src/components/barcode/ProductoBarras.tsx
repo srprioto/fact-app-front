@@ -12,7 +12,7 @@ interface ProductoBarras{
 
 export const ProductoBarras = ({ value, nombre, color, marca, talla }:ProductoBarras) => {
 
-    const [options, setOptions] = useState<any>({
+    const options = {
         background: "transparent",
         lineColor: "#cecece",
         marginTop: 5,
@@ -21,7 +21,7 @@ export const ProductoBarras = ({ value, nombre, color, marca, talla }:ProductoBa
         marginRight: 20,
         height: 40,
         fontSize: 15
-    })
+    }
 
     const { inputRef } = useBarcode({
         value: value,
