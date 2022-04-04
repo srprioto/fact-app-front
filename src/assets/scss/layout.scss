@@ -1,3 +1,108 @@
+// login
+.index-login{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: rgb(34,39,54);
+    background: linear-gradient(45deg, $box 0%, $background 100%);
+    // background: radial-gradient(circle, rgba(51,58,77,1) 0%, rgba(29,37,57,1) 100%);
+
+    // background: url(../imgs/img-login.png) center right no-repeat fixed;
+    // background-size: 40%;
+
+    // background-image: linear-gradient(245deg, rgba(27, 27, 27, .04), rgba(27, 27, 27, .04) 93%, rgba(92, 92, 92, .04) 0, rgba(92, 92, 92, .04)),
+    // linear-gradient(44deg, rgba(11, 11, 11, .04), rgba(11, 11, 11, .04) 39%, hsla(0, 0%, 72.9%, .04) 0, hsla(0, 0%, 72.9%, .04)),
+    // linear-gradient(134deg, hsla(0, 0%, 69.8%, .04), hsla(0, 0%, 69.8%, .04) 95%, hsla(0, 0%, 92.9%, .04) 0, hsla(0, 0%, 92.9%, .04)),
+    // linear-gradient(322deg, rgba(56, 56, 56, .04), rgba(56, 56, 56, .04) 58%, hsla(0, 0%, 91%, .04) 0, hsla(0, 0%, 91%, .04)),
+    // linear-gradient(139deg, rgba(51, 51, 51, .04), rgba(51, 51, 51, .04) 62%, rgba(35, 35, 35, .04) 0, rgba(35, 35, 35, .04)),
+    // linear-gradient(252deg, rgba(9, 9, 9, .04), rgba(9, 9, 9, .04) 39%, hsla(0, 0%, 68.2%, .04) 0, hsla(0, 0%, 68.2%, .04)),
+    // linear-gradient(229deg, hsla(0, 0%, 94.5%, .04), hsla(0, 0%, 94.5%, .04) 2%, hsla(0, 0%, 54.9%, .04) 0, hsla(0, 0%, 54.9%, .04)),
+    // linear-gradient(223deg, rgba(82, 82, 82, .04), rgba(82, 82, 82, .04) 36%, hsla(0, 0%, 89.8%, .04) 0, hsla(0, 0%, 89.8%, .04)),
+    // linear-gradient(90deg, #060D31, #030611);
+
+    .box-login{
+
+        background: $boxT;
+        padding: 5px 35px 35px 35px;
+        border-radius: 15px;
+
+        h3{
+            font-size: 50px;
+            font-weight: 400;
+            margin: 0;
+        }
+        
+        .content-input{
+            .item-input{
+                height: 100%;
+                display: flex;
+                align-items: center;
+                label{
+
+                    // background-color: #31384d;
+                    margin: 0;
+                    height: 100%;
+                    display: flex;
+                    align-items: center;
+                    padding: 0 8px 0 13px;
+                    border-bottom: 1px solid #645c5b;
+
+                    // background-color: $bg-input;
+                    // height: 100%;
+                    // display: flex;
+                    // align-items: center;
+                    // padding: 0 8px 0 13px;
+                    // border-top-left-radius: 15px;
+                    // border-bottom-left-radius: 15px;
+
+                    svg{
+                        font-size: 25px;
+                        color: #645c5b;
+                    }
+                }
+                input{
+
+                    background-color: transparent;
+                    border: none;
+                    font-size: 19px;
+                    text-align: left;
+                    border-radius: 0;
+                    padding: 12px 12px 12px 5px;
+                    border-bottom: 1px solid #645c5b;
+                    
+
+                    // border: none;
+                    // font-size: 19px;
+                    // text-align: left;
+                    // border-top-left-radius: 0px;
+                    // border-bottom-left-radius: 0px;
+                    // padding: 12px 12px 12px 5px;
+
+                }
+            }
+        }
+    
+        .login-acceder{
+            font-size: 19px;
+            margin-top: 13px;
+            svg{
+                font-size: 25px;
+            }
+            
+            // button{
+            //     color: $texto-red;
+            //     border: 2px solid $texto-red;
+            // }
+        }
+    }    
+}
+
+
+
+
 // layout
 
 .layout {
@@ -649,3 +754,24 @@
     right: 20px;
     margin: 0;
 }
+
+
+
+
+
+// background
+
+    // background: $background;
+    // background: radial-gradient(circle, #25196f 0%, #1d1565 100%);
+    // background: radial-gradient(circle, #2d3447 0%, #222736 100%);
+
+
+    // background-image: linear-gradient(245deg, rgba(27, 27, 27, .04), rgba(27, 27, 27, .04) 93%, rgba(92, 92, 92, .04) 0, rgba(92, 92, 92, .04)),
+    // linear-gradient(44deg, rgba(11, 11, 11, .04), rgba(11, 11, 11, .04) 39%, hsla(0, 0%, 72.9%, .04) 0, hsla(0, 0%, 72.9%, .04)),
+    // linear-gradient(134deg, hsla(0, 0%, 69.8%, .04), hsla(0, 0%, 69.8%, .04) 95%, hsla(0, 0%, 92.9%, .04) 0, hsla(0, 0%, 92.9%, .04)),
+    // linear-gradient(322deg, rgba(56, 56, 56, .04), rgba(56, 56, 56, .04) 58%, hsla(0, 0%, 91%, .04) 0, hsla(0, 0%, 91%, .04)),
+    // linear-gradient(139deg, rgba(51, 51, 51, .04), rgba(51, 51, 51, .04) 62%, rgba(35, 35, 35, .04) 0, rgba(35, 35, 35, .04)),
+    // linear-gradient(252deg, rgba(9, 9, 9, .04), rgba(9, 9, 9, .04) 39%, hsla(0, 0%, 68.2%, .04) 0, hsla(0, 0%, 68.2%, .04)),
+    // linear-gradient(229deg, hsla(0, 0%, 94.5%, .04), hsla(0, 0%, 94.5%, .04) 2%, hsla(0, 0%, 54.9%, .04) 0, hsla(0, 0%, 54.9%, .04)),
+    // linear-gradient(223deg, rgba(82, 82, 82, .04), rgba(82, 82, 82, .04) 36%, hsla(0, 0%, 89.8%, .04) 0, hsla(0, 0%, 89.8%, .04)),
+    // linear-gradient(90deg, #060D31, #030611);

@@ -29,7 +29,7 @@ export const Menu = () => {
             <div className="menu-body">
 
                 <BoxMenu titulo="Menu">
-                    <ItemMenu url="/" label="Dashboard" icon={ <BiBarChart /> } />
+                    <ItemMenu url="/dashboard" label="Dashboard" icon={ <BiBarChart /> } />
                 </BoxMenu>
 
                 <BoxMenu titulo="Locales">

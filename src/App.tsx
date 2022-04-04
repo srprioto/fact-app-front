@@ -1,5 +1,7 @@
 import { BrowserRouter, Routes as Switch, Route } from "react-router-dom";
 
+import { IndexLogin } from "./pages/login";
+
 import { IndexDashboard } from "./pages/dashboard";
 
 
@@ -41,6 +43,7 @@ import { Transacciones } from "./pages/reportes/Transacciones";
 
 
 
+
 function App() {
 
     return (
@@ -48,8 +51,11 @@ function App() {
             <BrowserRouter>
                 <Switch>
 
+                    {/* login */}
+                    <Route path="/" element={ <IndexLogin /> } />
+
                     {/* dashboard */}
-                    <Route path="/" element={ <IndexDashboard /> } />
+                    <Route path="/dashboard" element={ <IndexDashboard /> } />
 
                     {/* locales */}
                     <Route path="/tiendas" element={ <IndexLocales /> } />
