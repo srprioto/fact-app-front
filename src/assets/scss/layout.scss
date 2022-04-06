@@ -72,7 +72,7 @@
                     border-radius: 0;
                     padding: 12px 12px 12px 5px;
                     border-bottom: 1px solid #645c5b;
-                    
+                    color: #a6b0cf!important;
 
                     // border: none;
                     // font-size: 19px;
@@ -82,6 +82,15 @@
                     // padding: 12px 12px 12px 5px;
 
                 }
+
+                input:-webkit-autofill,
+                input:-webkit-autofill:hover, 
+                input:-webkit-autofill:focus, 
+                input:-webkit-autofill:active{
+                    box-shadow: 0 0 0 30px #292f41 inset !important;
+                    -webkit-text-fill-color: $texto!important;;
+                }
+
             }
         }
     
@@ -101,6 +110,11 @@
 }
 
 
+// 404
+
+.page-404{
+    height:100vh;
+}
 
 
 // layout

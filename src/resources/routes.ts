@@ -1,3 +1,5 @@
+export const LOGIN:string = "/login";
+
 export const PRODUCTOS:string = "/productos";
 export const PRODUCTOS_SEARCH:string = "/productos/search/";
 

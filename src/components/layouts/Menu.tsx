@@ -10,13 +10,17 @@ import {
     BiTransfer,
 } from "react-icons/bi";
 
+import { useAuth } from "../../auth/useAuth";
+
 import { BoxMenu } from "./menu/BoxMenu";
 import { ItemMenu } from "./menu/ItemMenu";
 
 export const Menu = () => {
 
-    const isActive = (n:any) => { 
-        return n.isActive ? "activeMenu" : ""
+    const auth = useAuth();
+
+    const handlerSalir = () => { 
+        auth.logout();
     }
 
     return (
@@ -51,6 +55,10 @@ export const Menu = () => {
 
                 <BoxMenu titulo="Reportes">
                     <ItemMenu url="/reporte/transacciones" label="Transferencias" icon={ <BiTransfer /> } />
+                </BoxMenu>
+
+                <BoxMenu titulo="Salir">
+                    <button onClick={handlerSalir}>asdfasdf</button>
                 </BoxMenu>
 
             </div>
