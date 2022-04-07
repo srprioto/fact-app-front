@@ -23,7 +23,8 @@ export const USUARIOS_SEARCH:string = "/usuarios/search/";
 
 export const ROLES:string = "/roles";
 
-export const MOVIMIENTOS:string = "/movimientos"
+export const MOVIMIENTOS:string = "/movimientos";
+export const MOVIMIENTOS_SEARCH:string = "/movimientos/search/";
 
 export const TRANSACCIONES:string = "/transacciones";
 export const TRANSACCIONES_SEARCH:string = "/transacciones/search/";

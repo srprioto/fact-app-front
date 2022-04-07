@@ -22,31 +22,32 @@ export const AuthProvider = ({ children }:any) => {
     
     const login = async (dataAccess:DataLogin) => {
 
-        // let loginState:boolean = false;
+        let loginState:boolean = false;
 
         try {
             const responseLogin = await post(dataAccess, LOGIN);
-            console.log(responseLogin);
+            // console.log(responseLogin);
             if (responseLogin.statusCode !== 401 && responseLogin.statusCode !== 'Unauthorized') {
                 setLoggedUserApp(responseLogin);
+                loginState = true;
             } else {
                 setLoggedUserApp(null);
+                loginState = false;
             }
             
-            // loginState = true;
         } catch (error) {
-            // console.log(error);
-            // loginState = false;
+            console.log(error);
             
         }
 
-        // return loginState
+        return loginState
         
     }
 
     const logout = () => { 
         setLoggedUserApp(null);
         localStorage.removeItem("UserApp");
+        localStorage.clear();
     }
 
     const isLogged = () => { 

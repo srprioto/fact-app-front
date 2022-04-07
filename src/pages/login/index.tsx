@@ -27,20 +27,20 @@ export const IndexLogin = () => {
         })
     }
 
-    const handlerLogin = async () => {
+    const handlerLogin = async (event:any) => {
+        event.preventDefault();        
         setLoading(true);
-        if (await auth.login(dataAccess)) {
+        setErrorMessage(false);
+        const resto:boolean = await auth.login(dataAccess)
+        if (!resto) {
             setErrorMessage(true);
             setLoading(false);
-        } else {
-            setErrorMessage(false);
-            setLoading(false);
-        }
+        } 
     }
 
     return (
         <div className="index-login">
-            <div className="box-login grid-1 gap">
+            <form onSubmit={handlerLogin} className="box-login grid-1 gap">
 
                 <h3 className="">Acceder</h3>
 
@@ -76,7 +76,7 @@ export const IndexLogin = () => {
                     <LoadSwitchBtn2
                         loading={loading}
                         className="btn btn-success"
-                        handler={handlerLogin}
+                        // handler={handlerLogin}
                     >
                         Acceder 
                         <BiSubdirectoryRight />
@@ -90,13 +90,13 @@ export const IndexLogin = () => {
                     </button> */}
                 </div>
 
-                <div>
+                <div className="msg-error-login">
                     {
-                        errorMessage && <h6>Usuario o contraseña incorrecto</h6>
+                        errorMessage && <h5 className="warning center">Correo o contraseña incorrecto</h5>
                     }
                 </div>
 
-            </div>
+            </form>
         </div>
     )
 }

@@ -26,6 +26,7 @@ import { IndexEditUser } from "../pages/usuarios/Editar";
 import { IndexNuevoUser } from "../pages/usuarios/Nuevo";
 import { PublicRouter } from "./PublicRouter";
 import { Page404 } from "../pages/Page404";
+import { IngresoProductos } from "../pages/reportes/IngresoProductos";
 
 
 
@@ -83,6 +84,7 @@ export const AppRoutes = () => {
 
                     {/* reportes */}
                     <Route path="/reporte/transacciones" element={ <Transacciones /> } />
+                    <Route path="/reporte/ingreso-productos" element={ <IngresoProductos /> } />
 
                 </Route>
 

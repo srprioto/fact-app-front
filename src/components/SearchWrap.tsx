@@ -14,12 +14,18 @@ interface SearchWrap {
     setSearchState:Function;
 }
 
-export const SearchWrap = ({ setLoadingData, setData, getData, url, placeholder, searchState, setSearchState }:SearchWrap) => {
-
+export const SearchWrap = ({ 
+    setLoadingData, 
+    setData, 
+    getData, 
+    url, 
+    placeholder, 
+    searchState, 
+    setSearchState 
+}:SearchWrap) => {
     
     const [searchTxt, setSearchTxt] = useState<string>("");
     const searchFocus = useRef<any>(null)
-
     
     const searchData = async () => { 
         if (searchTxt === "" || searchTxt === undefined || searchTxt === null || searchTxt.length === 0) {
