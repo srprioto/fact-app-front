@@ -19,6 +19,7 @@ import { ModalWrap } from "../../../components/modals/ModalWrap";
 import { TextoRelleno } from "../../../components/TextoRelleno";
 import { AddBtn } from "../../../components/btns/AddBtn";
 import { BoxFixed } from "../../../components/cards/BoxFixed";
+import { Loading } from "../../../components/loads/Loading";
 
 
 export const FormIngresoProductos = ({ 
@@ -229,73 +230,85 @@ export const FormIngresoProductos = ({
 
                 </div>
 
-                <div className="box grid-1 gap m-0">
+                {
+                    loading
+                    ? <Loading />
+                    : (
+                        <div className="box grid-1 gap m-0">
 
-                    <h4 className="desc-form m-0">Informacion general de ingreso de productos</h4>
+                            <h4 className="desc-form m-0">Informacion general de ingreso de productos</h4>
 
-                    <div className="grid-4 gap">
+                            <div className="grid-4 gap">
 
-                        <InputDisable label="Subtotal" value={ movimientos.subtotal } moneda/>
+                                <InputDisable label="Subtotal" value={ movimientos.subtotal } moneda/>
 
-                        <Input
-                            label="Costo de transporte"
-                            type="number"
-                            name="costo_transporte"
-                            value={movimientos.costo_transporte}
-                            onChange={handlerChangeMovimiento}
-                            moneda
-                        />
+                                <Input
+                                    label="Costo de transporte"
+                                    type="number"
+                                    name="costo_transporte"
+                                    value={movimientos.costo_transporte}
+                                    onChange={handlerChangeMovimiento}
+                                    moneda
+                                />
 
-                        <Input
-                            label="Otros costos"
-                            type="number"
-                            name="costo_otros"
-                            value={movimientos.costo_otros}
-                            onChange={handlerChangeMovimiento}
-                            moneda
-                        />
-                        
-                        <InputDisable label="Total" value={ movimientos.total } moneda/>
+                                <Input
+                                    label="Otros costos"
+                                    type="number"
+                                    name="costo_otros"
+                                    value={movimientos.costo_otros}
+                                    onChange={handlerChangeMovimiento}
+                                    moneda
+                                />
+                                
+                                <InputDisable label="Total" value={ movimientos.total } moneda/>
 
-                    </div>
+                            </div>
 
-                    <div className="grid-2 gap">
+                            <div className="grid-2 gap">
 
-                        <SelectLocal 
-                            onChange={handlerChangeMovimiento} 
-                        />
+                                <SelectLocal 
+                                    onChange={handlerChangeMovimiento} 
+                                />
 
-                        <Input
-                            label="Descripcion / observaciones"
-                            type="text"
-                            name="observaciones"
-                            value={movimientos.observaciones}
-                            onChange={handlerChangeMovimiento}
-                            placeholder="Informacion general"
-                        />
-                    </div>
+                                <Input
+                                    label="Descripcion / observaciones"
+                                    type="text"
+                                    name="observaciones"
+                                    value={movimientos.observaciones}
+                                    onChange={handlerChangeMovimiento}
+                                    placeholder="Informacion general"
+                                />
+                            </div>
 
-                    <div className="grid-4 gap mt-15 mb-15">
-                        <div />
-                        {
-                            validarEnvio()
-                            ? (
-                                <LoadSwitchBtn label="Crear Proveedor" loading={loading} handler={handlerEnviar} />
-                            ) : (
-                                <button className="btn btn-disable">
-                                    <BiCheck />
-                                    Añadir productos
+                            <div className="grid-4 gap mt-15 mb-15">
+                                <div />
+                                {
+                                    validarEnvio()
+                                    ? (
+                                        <LoadSwitchBtn 
+                                            label="Crear Proveedor" 
+                                            loading={loading} 
+                                            handler={handlerEnviar} 
+                                        />
+                                    ) : (
+                                        <button className="btn btn-disable">
+                                            <BiCheck />
+                                            Añadir productos
+                                        </button>
+                                    )
+                                }
+                                <button className="btn btn-primary" type="reset" onClick={handlerClear}>
+                                    <BiBrush />
+                                    Limpiar
                                 </button>
-                            )
-                        }
-                        <button className="btn btn-primary" type="reset" onClick={handlerClear}>
-                            <BiBrush />
-                            Limpiar
-                        </button>
-                        <div />
-                    </div> 
+                                <div />
+                            </div> 
 
-                </div>
+                        </div>
+                    )
+                }
+
+                
 
             </div>
 
