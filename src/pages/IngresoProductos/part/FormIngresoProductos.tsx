@@ -3,20 +3,21 @@ import { BiBrush, BiCheck, BiListPlus, BiX } from "react-icons/bi";
 
 import { LoadSwitchBtn } from "../../../components/btns/LoadSwitchBtn";
 import { Input } from "../../../components/forms/Input";
-import { SelectSearch } from "../../../components/forms/SelectSearch";
+// import { SelectSearch } from "../../../components/forms/SelectSearch";
 import { InputDisable } from "../../../components/forms/InputDisable";
 
 import { MovimientosDto, movProd } from "../../../resources/dtos/Movimientos";
 import { detalles, MovimientoDetallesDto } from "../../../resources/dtos/MovimientoDetalles";
 import { redondeo } from "../../../resources/func/redondeo";
-        import { PRODUCTOS_SEARCH, PROVEEDORES_SEARCH } from "../../../resources/routes";
-import { Select } from "../../../components/forms/Select";
+
+// import { PRODUCTOS_SEARCH, PROVEEDORES_SEARCH } from "../../../resources/routes";
+// import { Select } from "../../../components/forms/Select";
 import { SelectLocal } from "./SelectLocal";
-import { useNavigate } from "react-router-dom";
-import { BtnOnOff } from "../../../components/btns/BtnOnOff";
+// import { useNavigate } from "react-router-dom";
+// import { BtnOnOff } from "../../../components/btns/BtnOnOff";
 import { ModalAddProducto } from "./modals/ModalAddProducto";
 import { ModalWrap } from "../../../components/modals/ModalWrap";
-import { TextoRelleno } from "../../../components/TextoRelleno";
+// import { TextoRelleno } from "../../../components/TextoRelleno";
 import { AddBtn } from "../../../components/btns/AddBtn";
 import { BoxFixed } from "../../../components/cards/BoxFixed";
 import { Loading } from "../../../components/loads/Loading";
@@ -36,7 +37,7 @@ export const FormIngresoProductos = ({
 
 }:any) => {
 
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     const [switchProductos, setSwitchProductos] = useState<boolean>(false);
     const [switchProveedores, setSwitchProveedores] = useState<boolean>(false);
@@ -307,8 +308,6 @@ export const FormIngresoProductos = ({
                         </div>
                     )
                 }
-
-                
 
             </div>
 

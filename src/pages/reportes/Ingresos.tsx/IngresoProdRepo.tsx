@@ -14,7 +14,7 @@ export const IngresoProdRepo = () => {
 
     const [loadingData, setLoadingData] = useState<boolean>(false);
 
-    const [modalEliminar, setModalEliminar] = useState<boolean>(false);
+    // const [modalEliminar, setModalEliminar] = useState<boolean>(false);
     const [modalVer, setModalVer] = useState<boolean>(false);
     const [idIngreso, setIdIngreso] = useState<number>(0);
 
@@ -125,7 +125,7 @@ export const IngresoProdRepo = () => {
                                                     handlerVer={handlerVer}
                                                 />
                                             )
-                                        })   
+                                        })
                                     }
                                 </tbody>
                             </table>

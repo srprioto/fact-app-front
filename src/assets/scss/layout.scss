@@ -646,7 +646,57 @@
 
         }
     }
+
+    .modal-ver-ingreso{
+        .producto-dropdown-info-ingrso{
+
+            position: relative;
+
+            .producto-ddbox-info-ingrso{
+                top: 0px;
+                left: 0px;
+                position: absolute;
+                transform: scale(0);
+                width: 430px;
+                z-index: 3;
+                background-color: $box2;
+                border-radius: 6px;
+                border: 1px solid $primary;
+                padding: 13px;
+                margin: 0;
+
+                span{
+                    margin-bottom: 5px;
+                    p, h4{
+                        margin: 0;
+                    }
+                }
+
+            }
+
+            svg{
+                margin-right: 4px;
+                font-size: 20px;
+                cursor: pointer;
+            }
+        
+            svg:hover ~ .producto-ddbox-info-ingrso,
+            .producto-ddbox-info-ingrso:hover{
+                transform: scale(1);
+                transition: .3s;
+            }
+            
+        }
+        
+    }
+
+    
+
 }
+
+
+
+
 
 
 // **** Generales ****
