@@ -116,7 +116,7 @@ export const ModalVerIngreso = ({ modal, setModal, idIngreso }:any) => {
                                 <div className="box-wrap-descripcion3">
                                     <span>
                                         <p>Codigo de ingreso: </p>
-                                        <h4>{ zeroFill(Number(movimiento.id), 8)  }</h4>
+                                        <h4>{ zeroFill(Number(movimiento.id), 8) }</h4>
                                     </span>
 
                                     <span>
