@@ -3,7 +3,6 @@ import { BiCheck, BiX } from "react-icons/bi";
 
 import { Input } from "../../../components/forms/Input";
 import { InputDisable } from "../../../components/forms/InputDisable";
-import { LoadSwitchBtn2 } from "../../../components/btns/LoadSwitchBtn2";
 import { ModalNuevoCliente } from "../../../components/modals/ModalNuevoCliente";
 import { FormasPagoBotones } from "./formasPago/FormasPagoBotones";
 import { FormasPagoTabs } from "./formasPago/FormasPagoTabs";
@@ -15,15 +14,15 @@ import { VENTAS } from "../../../resources/routes";
 import { ModalVentaConfirmar } from "./modals/ModalVentaConfirmar";
 import { ModalVentaRechazar } from "./modals/ModalVentaRechazar";
 import { ModalWrap } from "../../../components/modals/ModalWrap";
-import { Checkbox2 } from "../../../components/forms/Checkbox2";
 
 
-interface DescripcionVenta {
+
+interface descripcionVenta {
     data:any
     handlerRefresh:Function;
 }
 
-export const DescripcionVenta = ({ data, handlerRefresh }:DescripcionVenta) => {
+export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
 
     const [tabbs, setTabbs] = useState<number>(1);
 
@@ -42,6 +41,7 @@ export const DescripcionVenta = ({ data, handlerRefresh }:DescripcionVenta) => {
             if (!(listaRechazados.includes(e.id))) {
                 ventaDetails.push(e);
             }
+            return (null)
         })
 
         const sumaSubtotal = venta.ventaDetalles // calcular subtotal
@@ -125,6 +125,7 @@ export const DescripcionVenta = ({ data, handlerRefresh }:DescripcionVenta) => {
                 e.estado_venta_detalle = "rechazado"
                 ventaDet.push(e);
             }
+            return (null)
         })
 
         updateVenta.ventaDetalles = ventaDet;
@@ -259,8 +260,7 @@ export const DescripcionVenta = ({ data, handlerRefresh }:DescripcionVenta) => {
 }
 
 
-
-{/* <div className="desc-formas-pago">
+/* <div className="desc-formas-pago">
                             
     <div className={"nota-venta " + (tabbs === 1 ? "tabb-enable" : "tabb-disable")}>
         <h1>nota de venta</h1>
@@ -274,4 +274,4 @@ export const DescripcionVenta = ({ data, handlerRefresh }:DescripcionVenta) => {
         <h1>factura</h1>
     </div>
 
-</div> */}
+</div> */

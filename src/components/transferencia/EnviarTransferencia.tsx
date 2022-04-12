@@ -12,7 +12,7 @@ import { get, post } from "../../resources/fetch"
 import { InfoTransferenciaEnvio } from "../../resources/dtos/Transferencias"
 import { LoadSwitchBtn } from "../btns/LoadSwitchBtn"
 
-interface ModalTransferencia {
+interface modalTransferencia {
     modal:boolean;
     setModal:Function;
     idLocal:number;
@@ -20,7 +20,7 @@ interface ModalTransferencia {
     getData:any;
 }
 
-export const ModalTransferencia = ({ modal, setModal, idLocal, nombreLocal, getData }:ModalTransferencia) => {
+export const ModalTransferencia = ({ modal, setModal, idLocal, nombreLocal, getData }:modalTransferencia) => {
 
     const detalles:any = {
         productoNombre: "",
@@ -314,6 +314,7 @@ export const ModalTransferencia = ({ modal, setModal, idLocal, nombreLocal, getD
                                             <option key={e.id} value={Number(e.id)}>{ e.nombre }</option>
                                         )    
                                     }
+                                    return (<></>)
                                 })
                             }
                             

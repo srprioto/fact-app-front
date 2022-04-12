@@ -35,12 +35,13 @@ export const ModalVentaConfirmar = ({
     const handlerIGV = () => { 
         let ventaDetallesUpdate:any = [];
         
-        venta.ventaDetalles.map((e:any) => { 
+        venta.ventaDetalles.forEach((e:any) => { 
             const igv:number = redondeo(e.precio_venta * 0.18)
             e.precio_venta = e.precio_venta - igv;
             e.precio_parcial = redondeo(((e.precio_venta + igv) * e.cantidad_venta) + (e.descuento))
             e.igv = igv;
             ventaDetallesUpdate.push(e);
+            // return (null);
         })
 
         setVenta({

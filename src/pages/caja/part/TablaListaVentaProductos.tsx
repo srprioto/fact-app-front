@@ -1,12 +1,12 @@
 import { Checkbox } from "../../../components/forms/Checkbox";
 
-interface TablaListaVentaProductos { 
+interface tablaListaVentaProductos { 
     venta:any;
     listaRechazados:any;
     handlerCheckbox:Function;
 }
 
-export const TablaListaVentaProductos = ({ venta, listaRechazados, handlerCheckbox }:TablaListaVentaProductos) => {
+export const TablaListaVentaProductos = ({ venta, listaRechazados, handlerCheckbox }:tablaListaVentaProductos) => {
     return (
         <div className="lista-productos-pedido bb bb-neutro">
             <h3>Informacion de la venta</h3>

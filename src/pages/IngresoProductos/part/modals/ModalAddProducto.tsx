@@ -14,7 +14,7 @@ import { BoxProducto } from "./BoxProducto"
 import { BoxProveedor } from "./BoxProveedor"
 
 
-interface ModalAddProducto{
+interface modalAddProducto{
     modal:boolean;
     setModal:Function;
     movDetails:any;
@@ -40,7 +40,7 @@ export const ModalAddProducto = ({
     setSwitchProductos,
     switchProveedores,
     setSwitchProveedores
-}:ModalAddProducto) => {
+}:modalAddProducto) => {
 
     const [loadProducto, setLoadProducto] = useState<boolean>(false);
     const [productoSolo, setProductoSolo] = useState<any>({});
@@ -54,7 +54,7 @@ export const ModalAddProducto = ({
     // informacin del cliente desde select
     const handlerDataProductos = (value:any) => {
         setMovDetails({
-            ... movDetails,
+            ...movDetails,
             producto: {
                 id: (value.split('@'))[0],
                 nombre: (value.split('@'))[1]
@@ -66,7 +66,7 @@ export const ModalAddProducto = ({
     // informacion de proveedor desde select
     const handlerDataProveedor = (value:any) => { 
         setMovDetails({
-            ... movDetails,
+            ...movDetails,
             proveedor: {
                 id: (value.split('@'))[0],
                 nombre: (value.split('@'))[1]
@@ -115,7 +115,7 @@ export const ModalAddProducto = ({
 
     const reinicioProducto = () => { // reinicia solo producto
         setMovDetails({
-            ... movDetails,
+            ...movDetails,
             producto: { id: 0, nombre: "" }
         })
         setProductoSolo({})
@@ -124,7 +124,7 @@ export const ModalAddProducto = ({
 
     const reinicioProveedor = () => { // reinicia solo proveedor
         setMovDetails({
-            ... movDetails,
+            ...movDetails,
             proveedor: { id: 0, nombre: "" }
         })
         setProveedorSolo({})

@@ -4,8 +4,8 @@ import { useState } from "react";
 import { TitleBox } from "../../../components/TitleBox";
 import { FormIngresoProductos } from "./FormIngresoProductos";
 
-import { get, post } from "../../../resources/fetch";
-import { MOVIMIENTOS, PRODUCTOS, PRODUCTOS_SEARCH, PROVEEDORES, PROVEEDORES_SEARCH } from "../../../resources/routes";
+import { post } from "../../../resources/fetch";
+import { MOVIMIENTOS } from "../../../resources/routes";
 
 export const IngresoProductos = () => {
 
