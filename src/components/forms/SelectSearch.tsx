@@ -8,7 +8,7 @@ import { get } from "../../resources/fetch";
 // requiere que los registros que se iteraran en las opciones tengan un nombre
 // setSwitchSelect .- sirve para manipular el estado del select desde fuera del switch en caso de que se requiera
 
-interface SelectSearch {
+interface selectSearch {
     label:string; // texto del label
     respuesta:Function; // value de options selecionado generalmente ID almacenado en estado o funcion
     urlData:string; // url para relizar busqueda de forma local
@@ -42,7 +42,7 @@ export const SelectSearch = ({
     switchSelect,
     setSwitchSelect,
     reinicios
-}:SelectSearch) => {
+}:selectSearch) => {
 
     const [input, setInput] = useState<string>("");
     const [selectOn, setSelectOn] = useState<boolean>(false);
@@ -195,7 +195,10 @@ export const SelectSearch = ({
                                                                 { slabOption(e) }
                                                             </option>
                                                         )    
-                                                    }                                                   
+                                                    }
+                                                    
+                                                    return (<></>)
+
                                                 })
                                             }
                                         </>
@@ -221,7 +224,7 @@ export const SelectSearch = ({
 };
 
 
-{/* 
+/* 
 
 <SelectSearch
     label="Producto"
@@ -238,7 +241,7 @@ export const SelectSearch = ({
     reinicios={handlerReinicioProd}
 /> 
 
-*/}
+*/
 
 // ESTRUCTURA FUERA DEL COMPONENTE:
 

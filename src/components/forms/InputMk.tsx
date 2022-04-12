@@ -1,7 +1,7 @@
 import { Field, ErrorMessage } from 'formik';
 import { BiQuestionMark } from 'react-icons/bi';
 
-interface InputMk{
+interface inputMk{
     label:string;
     type:string;
     name:string;
@@ -9,12 +9,12 @@ interface InputMk{
     placeholder?:string;
 }
 
-interface MsgError {
+interface msgError {
     error:any;
 }
 
 // requiere formik
-export const InputMk = ({ label, type, name, error, placeholder }:InputMk) => {
+export const InputMk = ({ label, type, name, error, placeholder }:inputMk) => {
 
     return (
         <div className="wrap-form">
@@ -40,7 +40,7 @@ export const InputMk = ({ label, type, name, error, placeholder }:InputMk) => {
 };
 
 
-const MsgError = ({ error }:MsgError) => { 
+const MsgError = ({ error }:msgError) => { 
     return (
         <div className="msg-error">
             <BiQuestionMark />

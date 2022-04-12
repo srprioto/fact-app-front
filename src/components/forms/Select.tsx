@@ -1,4 +1,4 @@
-interface Select {
+interface select {
     label:string;
     name:string;
     onChange:any;
@@ -16,7 +16,7 @@ export const Select = ({
     loading, 
     textDefault = "Selecciona una opción", 
     children 
-}:Select) => {
+}:select) => {
     return (
         <div className="wrap-form">
             <label htmlFor={name}>{ label }</label><br />
@@ -45,7 +45,7 @@ export const Select = ({
     )
 }
 
-{/* <Select
+/* <Select
     label="Local destino *"
     name="localDestino"
     onChange={handlerChangeGenerales}
@@ -62,4 +62,4 @@ export const Select = ({
         })
     }
     
-</Select> */}
+</Select> */

@@ -1,4 +1,4 @@
-interface InputDisable {
+interface inputDisable {
     label?:string;
     name?:string;
     value:any;
@@ -7,7 +7,7 @@ interface InputDisable {
     font_size?:number; // no se recomienda
 }
 
-export const InputDisable = ({ label, name, value, moneda, color, font_size }:InputDisable) => {
+export const InputDisable = ({ label, name, value, moneda, color, font_size }:inputDisable) => {
 
     const font:any = {'fontSize': `${font_size}px`};
 
