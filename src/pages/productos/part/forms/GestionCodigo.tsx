@@ -53,7 +53,7 @@ export const GestionCodigo = ({ producto, noCreado }:any) => {
                     value={producto.codigo}
                     nombre={producto.nombre}
                     color={producto.color}
-                    marca={producto.marca}
+                    // marca={producto.marca}
                     talla={producto.talla}
                 />
             </div>
