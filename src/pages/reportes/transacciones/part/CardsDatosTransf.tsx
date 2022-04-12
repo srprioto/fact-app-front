@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { BiAlarmExclamation, BiAlarmSnooze, BiCheck, BiTransfer } from "react-icons/bi"
 
 import { CardUno } from "../../../../components/cards/CardUno"
-import { Loading } from "../../../../components/loads/Loading"
+// import { Loading } from "../../../../components/loads/Loading"
 import { get } from "../../../../resources/fetch";
 import { TRANSACCIONES } from "../../../../resources/routes";
 

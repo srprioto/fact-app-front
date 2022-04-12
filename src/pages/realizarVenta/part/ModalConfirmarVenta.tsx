@@ -8,7 +8,7 @@ import { LoadSwitchBtn } from "../../../components/btns/LoadSwitchBtn";
 import { BiReply } from "react-icons/bi";
 
 
-interface ModalConfirmarVenta {
+interface modalConfirmarVenta {
     modal:boolean;
     setModal:Function;
     venta:any
@@ -24,7 +24,7 @@ export const ModalConfirmarVenta = ({
     listaVenta, 
     handlerReinicioProd, 
     setListaVenta 
-}:ModalConfirmarVenta) => {
+}:modalConfirmarVenta) => {
 
     const [loadVenta, setLoadVenta] = useState<boolean>(false);
     const postVenta = async () => {

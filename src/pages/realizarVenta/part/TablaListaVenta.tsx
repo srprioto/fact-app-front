@@ -1,11 +1,11 @@
 import { BiX } from "react-icons/bi";
 
-interface TablaListaVenta {
+interface tablaListaVenta {
     listaVenta:any;
     itemPop:Function;
 }
 
-export const TablaListaVenta = ({ listaVenta, itemPop }:TablaListaVenta) => {
+export const TablaListaVenta = ({ listaVenta, itemPop }:tablaListaVenta) => {
   return (
     <div className="tabla-lista-venta">
         <table className="table2">

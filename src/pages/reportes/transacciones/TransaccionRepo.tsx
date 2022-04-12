@@ -5,7 +5,7 @@ import { NoRegistros } from "../../../components/NoRegistros"
 import { Pagination } from "../../../components/Pagination"
 import { Search } from "../../../components/Search"
 import { TitleBox } from "../../../components/TitleBox"
-import { get, getOne, paginate } from "../../../resources/fetch"
+import { get, paginate } from "../../../resources/fetch"
 import { TRANSACCIONES, TRANSACCIONES_SEARCH } from "../../../resources/routes"
 import { CardsDatosTransf } from "./part/CardsDatosTransf"
 import { Transaccion } from "./part/Transaccion"
@@ -14,18 +14,18 @@ import { Transaccion } from "./part/Transaccion"
 export const TransaccionRepo = () => {
 
     const [loadingData, setLoadingData] = useState<boolean>(false); // carga de array de datos
-    const [loadingOne, setLoadingOne] = useState<boolean>(false); // carga de un solo dato
+    // const [loadingOne, setLoadingOne] = useState<boolean>(false); // carga de un solo dato
 
-    const [modalEliminar, setModalEliminar] = useState<boolean>(false);
-    const [modalVer, setModalVer] = useState<boolean>(false);
+    // const [modalEliminar, setModalEliminar] = useState<boolean>(false);
+    // const [modalVer, setModalVer] = useState<boolean>(false);
 
     const [pagination, setPagination] = useState<any>({ meta: {}, links: {} });
 
     const [data, setData] = useState<any>([]); // array de datos
-    const [transacciones, setTransacciones] = useState<any>({}); // un solo dato
+    // const [transacciones, setTransacciones] = useState<any>({}); // un solo dato
     // const [resumenTransf, setResumenTransf] = useState<any>() // resumen para cards
 
-    const [infoTransaccion, setInfoTransaccion] = useState<any>({}); // para eliminar
+    // const [infoTransaccion, setInfoTransaccion] = useState<any>({}); // para eliminar
 
     const [toggle, setToggle] = useState<number>(1); // tabs para los filtros
 

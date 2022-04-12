@@ -238,7 +238,7 @@ export const PuntoVenta = () => {
 };
 
 
-{/* <span className="center">
+/* <span className="center">
     <h4 className="primary">Cantidad en stock: </h4>
     <p
         className={
@@ -249,9 +249,9 @@ export const PuntoVenta = () => {
             : "success"
         }
     >{cantidad}</p>
-</span> */}
+</span> */
 
-{/* {
+/* {
     validadAnadir()
     ? (
         <button 
@@ -265,4 +265,4 @@ export const PuntoVenta = () => {
             <BiListPlus /> Añadir
         </button>
     )
-} */}
+} */

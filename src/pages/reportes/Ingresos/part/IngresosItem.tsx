@@ -1,4 +1,3 @@
-import { BiCaretDown } from "react-icons/bi";
 import { zeroFill } from "../../../../resources/func/ceroFill"
 import { IngresoDropdown } from "./IngresoDropdown";
 import { ListaDetalleProductos } from "./ListaDetalleProductos";

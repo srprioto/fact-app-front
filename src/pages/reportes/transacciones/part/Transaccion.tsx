@@ -1,10 +1,10 @@
 import { TransDropdown } from "./TransDropdown"
 
-interface Transaccion {
+interface transaccion {
     elemento:any;
 }
 
-export const Transaccion = ({ elemento }:Transaccion) => {
+export const Transaccion = ({ elemento }:transaccion) => {
 
     return (
 

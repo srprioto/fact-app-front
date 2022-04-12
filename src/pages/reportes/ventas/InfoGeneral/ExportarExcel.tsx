@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { BiDownload } from "react-icons/bi";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import { ModalWrap } from "../../../../components/modals/ModalWrap";
 import { url } from "../../../../resources/fetch";
 import { VENTAS } from "../../../../resources/routes";

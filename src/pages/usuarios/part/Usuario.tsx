@@ -1,13 +1,13 @@
 import { ProveedoresDto } from "../../../resources/dtos/ProveedoresDto";
 import { UserDropdown } from "./UserDropdown";
 
-interface Usuario{ 
+interface usuario{ 
     usuario:ProveedoresDto;
     handlerDeleted:Function;
     handlerVer:Function;
 }
 
-export const Usuario = ({ usuario, handlerDeleted, handlerVer }:Usuario) => {
+export const Usuario = ({ usuario, handlerDeleted, handlerVer }:usuario) => {
     return (
         <tr className="proveedor">
             <td>{ usuario.nombre }</td>
