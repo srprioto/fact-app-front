@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { BiShieldAlt2, BiSubdirectoryRight, BiUser } from "react-icons/bi"
+import { BiLock, BiSubdirectoryRight, BiUser } from "react-icons/bi"
 // import { useNavigate } from "react-router-dom";
 
 import { useAuth } from "../../auth/useAuth";
@@ -59,7 +59,7 @@ export const IndexLogin = () => {
                     </div>
                     <div className="content-input">
                         <div className="item-input">
-                            <label htmlFor="password"><BiShieldAlt2 /></label>
+                            <label htmlFor="password"><BiLock /></label>
                             <input 
                                 id="password" 
                                 name="password"

@@ -1,15 +1,19 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect } from "react";
 import { DataLogin } from "../resources/dtos/Login";
 import { post } from "../resources/fetch";
 import { LOGIN } from "../resources/routes";
+import { usePlugIn } from "./usePlugIn";
 
 export const AuthContext = createContext<any>({});
 
-const userStorage:any = localStorage.getItem('UserApp');
+// const userStorage:any = localStorage.getItem('UserApp');
 
 export const AuthProvider = ({ children }:any) => {
 
-    const [loggedUserApp, setLoggedUserApp] = useState<any>(JSON.parse(userStorage) || null);
+    // const [loggedUserApp, setLoggedUserApp] = useState<any>(JSON.parse(userStorage) || null);
+
+    const [loggedUserApp, setLoggedUserApp] = usePlugIn();
+
 
     useEffect(() => {
         try {
@@ -20,6 +24,7 @@ export const AuthProvider = ({ children }:any) => {
         }
     }, [loggedUserApp])
     
+
     const login = async (dataAccess:DataLogin) => {
 
         let loginState:boolean = false;
