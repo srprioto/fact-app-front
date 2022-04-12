@@ -67,13 +67,10 @@ export const SearchWrap = ({
     )
 }
 
-
-{/* 
-<SearchWrap 
-    setLoadingData={setLoadingData}
-    setData={setData}
-    getData={getData}
-    url={VENTAS_SEARCH}
-    placeholder="Nombre cliente o nota adicional"
-/> 
-*/}
+// <SearchWrap 
+//     setLoadingData={setLoadingData}
+//     setData={setData}
+//     getData={getData}
+//     url={VENTAS_SEARCH}
+//     placeholder="Nombre cliente o nota adicional"
+// /> 
