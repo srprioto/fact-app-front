@@ -25,7 +25,7 @@ export const Input = ({ label, type = "text", name, value, placeholder, onChange
                             type={type} 
                             name={name} 
                             id={name} 
-                            value={value === 0 || value === NaN ? "" : value}
+                            value={value === 0 || value === isNaN ? "" : value}
                             onChange={onChange}
                             placeholder={placeholder}
                             autoComplete="off"
@@ -39,11 +39,11 @@ export const Input = ({ label, type = "text", name, value, placeholder, onChange
                                 name={name} 
                                 id={name} 
                                 value={
-                                    value === NaN || 
+                                    value === isNaN || 
                                     value === undefined || 
                                     value === null || 
                                     value === "" || 
-                                    value === NaN ||
+                                    value === isNaN ||
                                     value <= 0
                                     ? 0 
                                     : value
@@ -60,11 +60,11 @@ export const Input = ({ label, type = "text", name, value, placeholder, onChange
                                 name={name} 
                                 id={name} 
                                 value={
-                                    value === NaN || 
+                                    value === isNaN || 
                                     value === undefined || 
                                     value === null || 
                                     value === "" || 
-                                    value === NaN
+                                    value === isNaN
                                     ? 0 
                                     : value
                                 }
@@ -127,10 +127,10 @@ setTransferencia({
     id={name} 
     value={
         type === 'text' 
-        ? (value === 0 || value === NaN ? "" : value)
+        ? (value === 0 || value === isNaN ? "" : value)
         : type === 'number' 
         ? (
-            value === NaN || value === undefined || value === null || value === "" || value == NaN
+            value === isNaN || value === undefined || value === null || value === "" || value == isNaN
             ? 0 
             : value
         ) : value
