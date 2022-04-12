@@ -1,12 +1,12 @@
 import { NavLink } from "react-router-dom"
 
-interface ItemMenu {
+interface itemMenu {
     url:string;
     label:string;
     icon:any;
 }
 
-export const ItemMenu = ({ url, label, icon }:ItemMenu) => {
+export const ItemMenu = ({ url, label, icon }:itemMenu) => {
 
     const isActive = (n:any) => { 
         return n.isActive ? "activeMenu" : ""

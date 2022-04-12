@@ -4,13 +4,13 @@ import { post } from "../../resources/fetch";
 import { CLIENTES } from "../../resources/routes";
 import { Modal } from "./Modal";
 
-interface ModalNuevoCliente {
+interface modalNuevoCliente {
     modal:boolean;
     setModal:Function;
     handlerCliente?:Function; // handlerCliente(data) envia como parametro todos los datos del cliente a fuera
 }
 
-export const ModalNuevoCliente = ({ modal, setModal, handlerCliente }:ModalNuevoCliente) => {
+export const ModalNuevoCliente = ({ modal, setModal, handlerCliente }:modalNuevoCliente) => {
 
     const [loadCrearCliente, setLoadCrearCliente] = useState<boolean>(false);
     

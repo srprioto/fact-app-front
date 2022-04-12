@@ -1,9 +1,9 @@
-interface BoxMenu { 
+interface boxMenu { 
     titulo?:string
     children:any
 }
 
-export const BoxMenu = ({ titulo, children }:BoxMenu) => {
+export const BoxMenu = ({ titulo, children }:boxMenu) => {
     
     return (
         <div className="box-menus">

@@ -6,16 +6,16 @@ import { ModalTransferencia } from "./ModalTransferencia"
 import { get } from "../../resources/fetch"
 import { TRANSACCIONES } from "../../resources/routes"
 
-interface AlertaTransferencia {
+interface alertaTransferencia {
     idLocal:number;
     actualizarDatos:Function;
 }
 
-export const AlertaTransferencia = ({ idLocal, actualizarDatos }:AlertaTransferencia) => {
+export const AlertaTransferencia = ({ idLocal, actualizarDatos }:alertaTransferencia) => {
 
     const [showModal, setShowModal] = useState<boolean>(false);
-    const [loadingTransferencia, setLoadingTransferencia] = useState<boolean>(false);
     const [dataTransf, setDataTransf] = useState<any>([]);
+    // const [loadingTransferencia, setLoadingTransferencia] = useState<boolean>(false);
 
     useEffect(() => {
         getTransaccionesLocal();
@@ -23,13 +23,13 @@ export const AlertaTransferencia = ({ idLocal, actualizarDatos }:AlertaTransfere
     
     const getTransaccionesLocal = async () => { 
 
-        setLoadingTransferencia(true);
+        // setLoadingTransferencia(true);
         try {
             const data = await get(TRANSACCIONES + `/${idLocal}/locales`);
             setDataTransf(data);
-            setLoadingTransferencia(false);
+            // setLoadingTransferencia(false);
         } catch (error) {
-            setLoadingTransferencia(true);
+            // setLoadingTransferencia(true);
             console.log(error);
         }
 

@@ -1,11 +1,11 @@
 import { BiLoaderAlt } from "react-icons/bi";
 
-interface Loading{
+interface loading{
     background?:boolean;
     noLabel?:boolean;
 }
 
-export const Loading = ({ background, noLabel }:Loading) => {
+export const Loading = ({ background, noLabel }:loading) => {
     return (
         <div className={"cargando " + (background && "box-bg")}>
             <div className="rotarIcon">

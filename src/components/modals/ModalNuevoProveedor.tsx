@@ -24,7 +24,7 @@ export const ModalNuevoProveedor = ({
             setLoading(false);
 
             setMovDetails({
-                ... movDetails,
+                ...movDetails,
                 proveedor: {
                     id: proveedorListo.data.id,
                     nombre: proveedorListo.data.nombre

@@ -17,7 +17,7 @@ export const ModalNuevoProducto = ({ modal, setModal, movDetails, setMovDetails,
             setLoading(false);
 
             setMovDetails({
-                ... movDetails,
+                ...movDetails,
                 producto: {
                     id: productoListo.data.id,
                     nombre: productoListo.data.nombre
