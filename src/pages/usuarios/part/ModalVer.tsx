@@ -1,13 +1,13 @@
 import { Loading } from "../../../components/loads/Loading";
 import { Modal } from "../../../components/modals/Modal";
-import { UsuarioDto } from "../../../resources/dtos/UsuariosDto";
+// import { UsuarioDto } from "../../../resources/dtos/UsuariosDto";
 
-interface ModalVer{
-    data:UsuarioDto;
-    modal:boolean;
-    setModal:Function;
-    loading:boolean;
-}
+// interface modalVer{
+//     data:UsuarioDto;
+//     modal:boolean;
+//     setModal:Function;
+//     loading:boolean;
+// }
 
 export const ModalVer = ({ data, modal, setModal, loading }:any) => {
 
