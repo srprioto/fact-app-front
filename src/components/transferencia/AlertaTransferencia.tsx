@@ -19,6 +19,7 @@ export const AlertaTransferencia = ({ idLocal, actualizarDatos }:alertaTransfere
 
     useEffect(() => {
         getTransaccionesLocal();
+        
     }, [])
     
     const getTransaccionesLocal = async () => { 
