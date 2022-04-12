@@ -30,7 +30,7 @@
   },
   "eslintConfig": {
     "rules": {
-        "react-hooks/exhaustive-deps": "false"
+        "react-hooks/exhaustive-deps": "off"
     },
     "extends": [
       "react-app",
