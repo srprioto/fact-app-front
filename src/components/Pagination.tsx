@@ -30,8 +30,8 @@ export const Pagination = ({ getData, previous, currentPage, next, searchState }
                             }
                             
                             {
-                                previous == "" && next == ""
-                                ? <h3></h3>
+                                previous === "" && next === ""
+                                ? <h3>{ "" }</h3>
                                 : <h3 className="middle primary">{ currentPage }</h3>
                             }                            
 

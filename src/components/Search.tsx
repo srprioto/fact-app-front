@@ -1,6 +1,6 @@
 import { BiSearchAlt2, BiX } from "react-icons/bi";
 
-interface Search {
+interface SearchType {
     searchTxt:string;
     searchData:Function;
     searchState:boolean;
@@ -18,7 +18,7 @@ export const Search = ({
     handlerStateSearch,
     searchData,
     placeholder
-}:Search) => {
+}:SearchType) => {
 
     return (
         <form className="search">
