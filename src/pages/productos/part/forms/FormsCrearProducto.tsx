@@ -5,12 +5,12 @@ import { InputMk } from '../../../../components/forms/InputMk';
 import { LoadSwitchBtn } from '../../../../components/btns/LoadSwitchBtn';
 import { ValidCreateProduct } from '../../../../resources/validations/Productos';
 
-interface FormsCrearProducto {
+interface formsCrearProducto {
     handlerCreateProducto:Function;
     loading:boolean;
 }
 
-export const FormsCrearProducto = ({ handlerCreateProducto, loading }:FormsCrearProducto) => {
+export const FormsCrearProducto = ({ handlerCreateProducto, loading }:formsCrearProducto) => {
 
     return (
         <div>

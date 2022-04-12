@@ -1,13 +1,13 @@
 import { Input } from "../../../components/forms/Input"
 import { RadioButton } from "../../../components/forms/RadioButton"
 
-interface GestionPrecios {
+interface gestionPrecios {
     producto:any;
     handlerChangePrecio:Function;
     productoDetalles:any;
 }
 
-export const GestionPrecios = ({ producto, handlerChangePrecio, productoDetalles }:GestionPrecios) => {
+export const GestionPrecios = ({ producto, handlerChangePrecio, productoDetalles }:gestionPrecios) => {
 
     const strRadiobutton = () => { 
 

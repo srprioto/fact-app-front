@@ -1,4 +1,4 @@
-import { BiCheck, BiReply, BiX } from "react-icons/bi"
+import { BiCheck, BiReply } from "react-icons/bi"
 import { LoadSwitchBtn2 } from "../../../../components/btns/LoadSwitchBtn2"
 import { Modal } from "../../../../components/modals/Modal"
 

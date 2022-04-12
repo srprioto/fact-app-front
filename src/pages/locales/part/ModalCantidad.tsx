@@ -103,7 +103,7 @@ export const ModalCantidad = ({ modal, setModal, localStock, getData, setSearchS
                             <input 
                                 type="number"
                                 name="cantidad"
-                                value={data.cantidad == 0 ? "" : data.cantidad}
+                                value={data.cantidad === 0 ? "" : data.cantidad}
                                 onChange={onChangeInput}
                                 placeholder="Ingresa una cantidad"
                             />
@@ -124,7 +124,7 @@ export const ModalCantidad = ({ modal, setModal, localStock, getData, setSearchS
                         ? <LoadingBtn />
                         : (
 
-                            data.cantidad == 0 || 
+                            data.cantidad === 0 || 
                             data.cantidad === undefined || 
                             data.cantidad === null || 
                             data.cantidad === ""

@@ -1,7 +1,7 @@
-import { BiBarcodeReader, BiPencil, BiShowAlt, BiTrash } from "react-icons/bi";
+import { BiBarcodeReader, BiPencil, BiTrash } from "react-icons/bi";
 import { Link } from "react-router-dom";
 
-import { DropDown } from "../../../components/DropDown"
+// import { DropDown } from "../../../components/DropDown"
 
 export const ProdDropdown = ({ id, nombre, producto, handlerDeleted, handlerBarcode }:any) => {
     return (

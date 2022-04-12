@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { BiPrinter } from "react-icons/bi";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import { ProductoBarras } from "../../../../components/barcode/ProductoBarras";
 import { ProductoBarrasImp } from "../../../../components/barcode/ProductoBarrasImp";
 import { DescProducto } from "./DescProducto";

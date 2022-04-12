@@ -2,7 +2,7 @@ import { Checkbox2 } from "../../../components/forms/Checkbox2"
 import { Input } from "../../../components/forms/Input"
 import { InputDisable } from "../../../components/forms/InputDisable"
 
-interface WrapGestionCantidades {
+interface gestionCantidades {
     productoCantidad:number;
     fornzarVenta:boolean;
     handlerForzVenta:Function;
@@ -11,11 +11,12 @@ interface WrapGestionCantidades {
     handlerChangePrecio:Function;
 }
 
-interface GestionCantidades {
+interface boxGestionCantidades {
     cantidad:number;
     cantidad_venta:number;
     handlerChangePrecio:Function;
 }
+
 
 export const GestionCantidades = ({ 
     productoCantidad, 
@@ -24,7 +25,7 @@ export const GestionCantidades = ({
     cantidad,
     cantidad_venta,
     handlerChangePrecio
-}:WrapGestionCantidades) => {
+}:gestionCantidades) => {
 
     return (
         <div className="bb bb-neutro">
@@ -65,7 +66,7 @@ export const GestionCantidades = ({
     )
 }
 
-const BoxGestionCantidades = ({ cantidad, cantidad_venta, handlerChangePrecio }:GestionCantidades) => {
+const BoxGestionCantidades = ({ cantidad, cantidad_venta, handlerChangePrecio }:boxGestionCantidades) => {
 
     return (
         <>

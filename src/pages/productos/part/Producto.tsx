@@ -3,7 +3,7 @@ import { ProductosDto } from "../../../resources/dtos/ProductosDto";
 
 import { ProdDropdown } from "./ProdDropdown";
 
-interface Producto { 
+interface producto { 
     producto:ProductosDto;
     handlerDeleted?:Function;
     handlerBarcode?:Function;
@@ -15,7 +15,7 @@ export const Producto = ({
     handlerDeleted, 
     // handlerVer,
     handlerBarcode
-}:Producto) => {
+}:producto) => {
 
     return (
 

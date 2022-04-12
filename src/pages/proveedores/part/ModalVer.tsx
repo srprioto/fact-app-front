@@ -2,14 +2,14 @@ import { Loading } from "../../../components/loads/Loading";
 import { Modal } from "../../../components/modals/Modal";
 import { ProveedoresDto } from "../../../resources/dtos/ProveedoresDto";
 
-interface ModalVer{
+interface modalVer{
     data:ProveedoresDto;
     modal:boolean;
     setModal:Function;
     loading:boolean;
 }
 
-export const ModalVer = ({ data, modal, setModal, loading }:ModalVer) => {
+export const ModalVer = ({ data, modal, setModal, loading }:modalVer) => {
     return (
         <Modal border="border-primary" title="Informacion del proveedor" modal={modal} setModal={setModal}>
 

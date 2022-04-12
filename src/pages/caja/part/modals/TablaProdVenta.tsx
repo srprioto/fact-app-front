@@ -1,9 +1,9 @@
-interface TablaProdVenta {
+interface tablaProdVenta {
     venta:any;
     igv:boolean;
 }
 
-export const TablaProdVenta = ({ venta, igv }:TablaProdVenta) => {
+export const TablaProdVenta = ({ venta, igv }:tablaProdVenta) => {
 
     return (
         <div className="mb-15">

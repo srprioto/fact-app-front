@@ -267,7 +267,7 @@ export const ModalTransferencia = ({ modal, setModal, idLocal, nombreLocal, getD
                                         {
                                             transferencia.map((e:any, index:number) => {
                                                 return (
-                                                    <tr key={e.productoNombre + e.cantidad}>
+                                                    <tr key={index}>
                                                         <td>{ e.productoNombre }</td>
                                                         <td>{ e.cantidad }</td>
                                                         <td>
@@ -308,13 +308,13 @@ export const ModalTransferencia = ({ modal, setModal, idLocal, nombreLocal, getD
                             defaultValue
                         >
                             {
-                                locales.map((e:any) => {
+                                locales.map((e:any, index:number) => {
                                     if (e.id !== idLocal) {
                                         return (
-                                            <option key={e.id} value={Number(e.id)}>{ e.nombre }</option>
+                                            <option key={index} value={Number(e.id)}>{ e.nombre }</option>
                                         )    
                                     }
-                                    return (<></>)
+                                    return (null);
                                 })
                             }
                             

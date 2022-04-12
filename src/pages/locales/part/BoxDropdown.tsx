@@ -1,4 +1,4 @@
-import { BiPlus, BiShowAlt, BiTrash } from "react-icons/bi";
+import { BiPlus } from "react-icons/bi";
 
 import { DropDown } from "../../../components/DropDown"
 

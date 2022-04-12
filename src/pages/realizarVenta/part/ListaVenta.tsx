@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { BiPlay, BiX } from "react-icons/bi"
+import { BiPlay } from "react-icons/bi"
 import { BtnOnOff } from "../../../components/btns/BtnOnOff"
 
 import { Input } from "../../../components/forms/Input"
@@ -12,7 +12,7 @@ import { ModalConfirmarVenta } from "./ModalConfirmarVenta"
 import { TablaListaVenta } from "./TablaListaVenta"
 
 
-interface ListaVenta {
+interface listaVenta {
     listaVenta:any;
     itemPop:Function;
     handlerReinicioProd:Function;
@@ -20,7 +20,7 @@ interface ListaVenta {
     idLocal:number;
 }
 
-export const ListaVenta = ({ listaVenta, itemPop, handlerReinicioProd, setListaVenta, idLocal }:ListaVenta) => {
+export const ListaVenta = ({ listaVenta, itemPop, handlerReinicioProd, setListaVenta, idLocal }:listaVenta) => {
 
     const [modalConfirmar, setModalConfirmar] = useState<boolean>(false);
 
@@ -59,7 +59,7 @@ export const ListaVenta = ({ listaVenta, itemPop, handlerReinicioProd, setListaV
     
     
     useEffect(() => { // calcular subtotal
-        listaVenta.map((e:any) => { // verficar que existen descuentos activos
+        listaVenta.forEach((e:any) => { // verficar que existen descuentos activos
             if (e.descuento < 0) { setDescuentoOn(true) }
         })
         const sumaSubtotal = listaVenta

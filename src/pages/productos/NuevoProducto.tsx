@@ -1,18 +1,18 @@
 import { useState } from "react";
 
 import { Layout } from "../../components/layouts/Layout"
-import { CrearCantidad } from "../almacen/part/CrearCantidad";
+// import { CrearCantidad } from "../almacen/part/CrearCantidad";
 
 import { post } from "../../resources/fetch";
 import { PRODUCTOS } from "../../resources/routes";
 import { TitleBox } from "../../components/TitleBox";
-import { FormsCrearProducto } from "./part/forms/FormsCrearProducto";
-import { useNavigate } from "react-router-dom";
+// import { FormsCrearProducto } from "./part/forms/FormsCrearProducto";
+// import { useNavigate } from "react-router-dom";
 import { WrapCrearProducto } from "./part/forms/WrapCrearProducto";
 
 export const NuevoProducto = () => {
 
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     const [loading, setLoading] = useState<boolean>(false);
     const [producto, setProducto] = useState<any>({});

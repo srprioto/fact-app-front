@@ -197,7 +197,7 @@ export const SelectSearch = ({
                                                         )    
                                                     }
                                                     
-                                                    return (<></>)
+                                                    return (null)
 
                                                 })
                                             }

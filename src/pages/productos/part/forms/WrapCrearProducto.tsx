@@ -1,13 +1,13 @@
 import { FormsCrearProducto } from "./FormsCrearProducto"
 import { GestionCodigo } from "./GestionCodigo";
 
-interface WrapCrearProducto {
+interface wrapCrearProducto {
     handlerCreateProducto:Function;
     loading:boolean;
     producto:any;
 }
 
-export const WrapCrearProducto = ({ handlerCreateProducto, loading, producto }:WrapCrearProducto) => {
+export const WrapCrearProducto = ({ handlerCreateProducto, loading, producto }:wrapCrearProducto) => {
 
     return (
         <>
