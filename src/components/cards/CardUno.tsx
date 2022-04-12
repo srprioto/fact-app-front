@@ -1,7 +1,7 @@
 import { BiBomb } from "react-icons/bi";
 import { LoadingImg } from "../loads/LoadingImg";
 
-interface CardUno {
+interface cardUno {
     titulo:string;
     label?:string|undefined;
     icon?:any;
@@ -10,7 +10,7 @@ interface CardUno {
     loading?:boolean;
 }
 
-export const CardUno = ({ titulo, label, descripcion, icon, coloricon = "primary", loading }:CardUno) => {
+export const CardUno = ({ titulo, label, descripcion, icon, coloricon = "primary", loading }:cardUno) => {
 
     return (
         loading

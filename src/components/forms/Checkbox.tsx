@@ -1,4 +1,4 @@
-interface Checkbox {
+interface checkbox {
     label?:string;
     name:string;
     value:any;
@@ -8,7 +8,7 @@ interface Checkbox {
     invertir?:boolean;
 }
 
-export const Checkbox = ({ label, name, value, onChange, checked, invertir, children }:Checkbox) => {
+export const Checkbox = ({ label, name, value, onChange, checked, invertir, children }:checkbox) => {
     return (
         <div className={"checkbox " + (invertir && "switch-invertido")}>
             <input 

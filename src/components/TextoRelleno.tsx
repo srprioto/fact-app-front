@@ -1,11 +1,11 @@
 import { BiCubeAlt } from "react-icons/bi";
 
-interface TextoRelleno {
+interface textoRelleno {
     texto?:string;
     heightAuto?:boolean;
 }
 
-export const TextoRelleno = ({ texto, heightAuto }:TextoRelleno) => {
+export const TextoRelleno = ({ texto, heightAuto }:textoRelleno) => {
     return (
         <div className={"vacio " + (heightAuto && "vacio-heightauto")}>
             <div className="rotarIcon">

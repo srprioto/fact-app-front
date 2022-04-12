@@ -1,9 +1,9 @@
-interface BoxFixed {
+interface boxFixed {
     condicion:boolean;
     children:any;
 }
 
-export const BoxFixed = ({ condicion, children }:BoxFixed) => {
+export const BoxFixed = ({ condicion, children }:boxFixed) => {
     return (
         condicion
         ? (

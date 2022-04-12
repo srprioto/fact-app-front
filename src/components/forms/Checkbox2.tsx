@@ -30,12 +30,12 @@ export const Checkbox2 = ({ label, name, checked, handlerCheck }:Checkbox) => {
 
 // estructura:
 
-{/* <Checkbox2
-    label={igv ? "Deshabilitar" : "Habilitar"}
-    name="igv"
-    checked={igv}
-    handlerCheck={ () => setIgv(!igv) }
-/> */}
+// <Checkbox2
+//     label={igv ? "Deshabilitar" : "Habilitar"}
+//     name="igv"
+//     checked={igv}
+//     handlerCheck={ () => setIgv(!igv) }
+// />
 
 
 // <Checkbox

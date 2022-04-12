@@ -1,6 +1,6 @@
 import { BiCheck } from "react-icons/bi";
 
-interface BtnOnOff {
+interface btnOnOff {
     label?:string;
     estado:boolean;
     onClick?:any;
@@ -8,7 +8,7 @@ interface BtnOnOff {
     icon?:any
 }
 
-export const BtnOnOff = ({ label = "Aceptar", estado, onClick, icon, className = "success" }:BtnOnOff) => {
+export const BtnOnOff = ({ label = "Aceptar", estado, onClick, icon, className = "success" }:btnOnOff) => {
     return (
         <>
             {

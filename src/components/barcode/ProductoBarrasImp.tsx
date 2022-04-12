@@ -1,16 +1,15 @@
-import { useState } from "react";
+// import { useState } from "react";
 import { useBarcode } from "react-barcodes";
 
-interface ProductoBarras{
+interface productoBarrasImp{
     value:string;
     nombre?:string;
     color?:string
     talla?:string
-    marca?:string
     cambiarColor?:boolean;
 }
 
-export const ProductoBarrasImp = ({ value, nombre, color, marca, talla }:ProductoBarras) => {
+export const ProductoBarrasImp = ({ value, nombre, color, talla }:productoBarrasImp) => {
 
     const options = {
         background: "transparent",

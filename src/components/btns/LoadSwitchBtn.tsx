@@ -1,13 +1,13 @@
 import { BiCheck } from "react-icons/bi";
 import { LoadingBtn } from "./LoadingBtn";
 
-interface LoadSwitchBtn {
+interface loadSwitchBtn {
     label?:string;
     loading:boolean;
     handler?:any;
 }
 
-export const LoadSwitchBtn = ({ label = "Aceptar", loading, handler }:LoadSwitchBtn) => {
+export const LoadSwitchBtn = ({ label = "Aceptar", loading, handler }:loadSwitchBtn) => {
     return (
         <>
             {

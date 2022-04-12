@@ -1,13 +1,13 @@
 import { BiPlusCircle } from "react-icons/bi";
 
-interface AddBtn{
+interface addBtn{
     label?:string;
     handler?:Function;
     handlerModal?:Function;
     className?:string;
 }
 
-export const AddBtn = ({ label, handler, handlerModal, className = "success" }:AddBtn) => {
+export const AddBtn = ({ label, handler, handlerModal, className = "success" }:addBtn) => {
 
     const handlerBtn = () => { 
         if (handler) {

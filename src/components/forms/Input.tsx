@@ -1,4 +1,4 @@
-interface Input {
+interface input {
     label?:string;
     type?:string;
     name:string;
@@ -10,7 +10,7 @@ interface Input {
     noMenos?:boolean;
 }
 
-export const Input = ({ label, type = "text", name, value, placeholder, onChange, color = "", moneda, noMenos }:Input) => {
+export const Input = ({ label, type = "text", name, value, placeholder, onChange, color = "", moneda, noMenos }:input) => {
     return (
         <div className="wrap-form">
             {
@@ -43,7 +43,7 @@ export const Input = ({ label, type = "text", name, value, placeholder, onChange
                                     value === undefined || 
                                     value === null || 
                                     value === "" || 
-                                    value == NaN ||
+                                    value === NaN ||
                                     value <= 0
                                     ? 0 
                                     : value
@@ -64,7 +64,7 @@ export const Input = ({ label, type = "text", name, value, placeholder, onChange
                                     value === undefined || 
                                     value === null || 
                                     value === "" || 
-                                    value == NaN
+                                    value === NaN
                                     ? 0 
                                     : value
                                 }
@@ -121,7 +121,7 @@ setTransferencia({
 
 // input original
 
-{/* <input 
+/* <input 
     type={type} 
     name={name} 
     id={name} 
@@ -138,4 +138,4 @@ setTransferencia({
     onChange={onChange}
     placeholder={placeholder}
     autoComplete="off"
-/> */}
+/> */
