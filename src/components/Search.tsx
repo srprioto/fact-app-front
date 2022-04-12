@@ -20,6 +20,19 @@ export const Search = ({
     placeholder
 }:SearchType) => {
 
+
+    const reloadSearch = (e:any) => { 
+        e.preventDefault();
+        handlerStateSearch();
+    }
+
+
+    const handlerSearch = (e:any) => { 
+        e.preventDefault();
+        searchData();
+    }
+
+
     return (
         <form className="search">
 
@@ -35,25 +48,15 @@ export const Search = ({
 
             {
                 searchState && (
-                    <div 
-                        className="reload-search" 
-                        onClick={(e:any) => {
-                            e.preventDefault();
-                            handlerStateSearch()
-                        }}
-                    >
+                    <div className="reload-search" onClick={reloadSearch}>
                         <BiX />
                     </div>
                 )
             }
 
-            <button 
-                className="btn btn-info" 
-                onClick={(e:any) => {{
-                    e.preventDefault();
-                    searchData();
-                }}}
-            ><BiSearchAlt2 /></button>
+            <button className="btn btn-info" onClick={handlerSearch}>
+                <BiSearchAlt2 />
+            </button>
 
         </form>
     )

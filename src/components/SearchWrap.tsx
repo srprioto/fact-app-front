@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import { Search } from "./Search";
 import { get } from "../resources/fetch";
 
-interface SearchWrap {
+interface searchWrap {
     setLoadingData:Function; // estado de carga de datos
     setData:Function; // estado que guarda los datos de la busqueda o datos de forma general
     getData:Function; // estado que trae todos los datos para reiniciar busqueda
@@ -22,7 +22,7 @@ export const SearchWrap = ({
     placeholder, 
     searchState, 
     setSearchState 
-}:SearchWrap) => {
+}:searchWrap) => {
     
     const [searchTxt, setSearchTxt] = useState<string>("");
     const searchFocus = useRef<any>(null)
