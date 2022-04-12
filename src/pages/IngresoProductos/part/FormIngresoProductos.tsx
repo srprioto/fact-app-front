@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { BiBrush, BiCheck, BiListPlus, BiX } from "react-icons/bi";
+import { BiBrush, BiCheck, BiX } from "react-icons/bi";
 
 import { LoadSwitchBtn } from "../../../components/btns/LoadSwitchBtn";
 import { Input } from "../../../components/forms/Input";
@@ -51,13 +51,17 @@ export const FormIngresoProductos = ({
     const [modalAdd, setModalAdd] = useState<boolean>(false);
 
 
+    // console.log(movimientoDetalles);
+    // console.log(movimientos);
+    
+
     // calcular precio unidad
     useEffect(() => {
         if (movDetails.precio_parcial !== 0 && movDetails.cantidad !== 0) {
             setMovDetails({
                 ...movDetails,
                 precio_unidad: redondeo(
-                    Number(movDetails.cantidad) == 0
+                    Number(movDetails.cantidad) === 0
                     ? Number(movDetails.precio_parcial) / 1
                     : Number(movDetails.precio_parcial) / Number(movDetails.cantidad)                    
                 )// .toString()
@@ -65,6 +69,7 @@ export const FormIngresoProductos = ({
         } 
     }, [movDetails.precio_parcial, movDetails.cantidad])
     
+
     // calculo precio total
     useEffect(() => {
         setMovimientos({
@@ -77,7 +82,19 @@ export const FormIngresoProductos = ({
         })
     }, [movimientos.subtotal, movimientos.costo_transporte, movimientos.costo_otros])
     
+
+    useEffect(() => {
+        const sumaSubtotal = movimientoDetalles // calcular subtotal
+        .map((e:any) => Number(e.precio_parcial))
+        .reduce((prev:number, curr:number) => prev + curr, 0);
+        
+        setMovimientos({ 
+            ...movimientos, 
+            subtotal: Number(sumaSubtotal)
+        });
+    }, [movimientoDetalles])
     
+
     // añade valores a la relacion de productos
     const handlerAddMovimientoDetalles = () => {
         if (movDetails.producto.id !== 0) { //REVISAR VALIDACION
@@ -87,10 +104,11 @@ export const FormIngresoProductos = ({
                 Number(movDetails.producto.id)
             ]);
 
-            setMovimientos({
-                ...movimientos,
-                subtotal: movimientos.subtotal + Number(movDetails.precio_parcial)
-            })
+            // setMovimientos({
+            //     ...movimientos,
+            //     subtotal: movimientos.subtotal + Number(movDetails.precio_parcial)
+            // })
+            
             setMovimientoDetalles([
                 ...movimientoDetalles,
                 movDetails
@@ -112,6 +130,7 @@ export const FormIngresoProductos = ({
         })    
     }
 
+    
     // apilar datos del estado general o informacion del producto
     const handlerChangeMovimiento = (e:any) => { 
         setMovimientos({
@@ -131,6 +150,7 @@ export const FormIngresoProductos = ({
         let prodRepe:Array<number> = [...productosRepe];
         prodRepe.splice(i,1);
         setProductosRepe([...prodRepe]);
+
     }
     
  
@@ -160,7 +180,7 @@ export const FormIngresoProductos = ({
 
     // enviar datos para guardar
     const handlerEnviar = () => {
-        if (movimientos.total !== 0 || movimientos.movimiento_detalles.length == 0) {
+        if (movimientos.total !== 0 || movimientos.movimiento_detalles.length === 0) {
             handlerCreate(movimientos, movimientoDetalles);
         }
         handlerClear()

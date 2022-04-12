@@ -1,26 +1,40 @@
+import { BiBomb } from "react-icons/bi";
+import { LoadingImg } from "../loads/LoadingImg";
+
 interface CardUno {
     titulo:string;
     label?:string|undefined;
-    icon:any;
+    icon?:any;
     descripcion?:string;
     coloricon?:string;
+    loading?:boolean;
 }
 
-export const CardUno = ({ titulo, label, descripcion, icon, coloricon = "primary" }:CardUno) => {
+export const CardUno = ({ titulo, label, descripcion, icon, coloricon = "primary", loading }:CardUno) => {
+
     return (
-        <div className="wrap-card-uno">
-            <div className="box box-par card-uno grid-31">
-                <div className="info-card-uno">
-                    <h4>{ titulo }</h4>
-                    <h2>{ label !== undefined ? label : "..."}</h2>
-                    {
-                        descripcion && <p>{ descripcion }</p>
-                    }
-                </div>
-                <div className={ "icon-card-uno " + coloricon }>
-                    { icon }
+        loading
+        ? (
+            <LoadingImg />
+        ) : (
+            <div className="wrap-card-uno">
+                <div className="box box-par card-uno grid-31">
+                    <div className="info-card-uno">
+                        <h4 className="mayus">{ titulo }</h4>
+                        <h2>{ label !== undefined ? label : "..."}</h2>
+                        {
+                            descripcion && <p>{ descripcion }</p>
+                        }
+                    </div>
+                    <div className={ "icon-card-uno " + coloricon }>
+                        { icon ? icon : <BiBomb /> }
+                    </div>
                 </div>
             </div>
-        </div>
+        )
+
     )
 }
+
+
+

@@ -286,6 +286,12 @@ a{
     border-radius: 6px;
 }
 
+.box-bg {
+    background-color: $box;
+    width: 100%;
+    border-radius: 6px;
+}
+
 .box-in-shadow{
     box-shadow: inset -2px -3px 5px 2px $background;
 }
@@ -361,8 +367,8 @@ a{
     
     svg{
         font-size: 23px;
-        margin-right: 2px;
         vertical-align: middle;
+        // margin-right: 2px;
     }
 }
 
@@ -511,6 +517,14 @@ a.btn-danger:hover{ color: $danger; }
 .arrow{
     cursor: auto;     
 }
+
+
+// rotar svg botones
+
+.rotate-180{ // se añade al padre
+    transform: rotate(180deg);
+}
+
 
 // forms
 

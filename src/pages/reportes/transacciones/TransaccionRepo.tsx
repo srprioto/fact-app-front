@@ -23,7 +23,7 @@ export const TransaccionRepo = () => {
 
     const [data, setData] = useState<any>([]); // array de datos
     const [transacciones, setTransacciones] = useState<any>({}); // un solo dato
-    const [resumenTransf, setResumenTransf] = useState<any>() // resumen para cards
+    // const [resumenTransf, setResumenTransf] = useState<any>() // resumen para cards
 
     const [infoTransaccion, setInfoTransaccion] = useState<any>({}); // para eliminar
 
@@ -81,17 +81,17 @@ export const TransaccionRepo = () => {
     // }
 
 
-    const getOneData = async (id:number) => { 
-        setLoadingOne(true);
-        try {
-            const response_productos = await getOne(id, TRANSACCIONES); 
-            setTransacciones(response_productos);        
-            setLoadingOne(false);            
-        } catch (error) {
-            setLoadingOne(true);
-            console.log(error);
-        }
-    }
+    // const getOneData = async (id:number) => { 
+    //     setLoadingOne(true);
+    //     try {
+    //         const response_productos = await getOne(id, TRANSACCIONES); 
+    //         setTransacciones(response_productos);        
+    //         setLoadingOne(false);            
+    //     } catch (error) {
+    //         setLoadingOne(true);
+    //         console.log(error);
+    //     }
+    // }
 
     const getData = async (urlPage?:string, value?:string, idToggle?:number) => {
 
@@ -110,10 +110,10 @@ export const TransaccionRepo = () => {
             else 
                 data = await paginate(TRANSACCIONES + `/${value_filtro}/filtro`);
 
-            const resumen = await get(TRANSACCIONES + "/resumen-transacciones");
+            // const resumen = await get(TRANSACCIONES + "/resumen-transacciones");
 
             setData(data.items);            
-            setResumenTransf(resumen);
+            // setResumenTransf(resumen);
             setPagination({
                 meta: data.meta,
                 links: data.links
@@ -132,7 +132,7 @@ export const TransaccionRepo = () => {
         <div className="index-transac">
             <TitleBox titulo="Reporte de transferencias"/>
 
-            <CardsDatosTransf resumen={resumenTransf} loading={loadingData}/>
+            <CardsDatosTransf/>
 
             <div className="box">
 

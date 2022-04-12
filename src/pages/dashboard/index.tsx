@@ -1,5 +1,5 @@
 import { Layout } from "../../components/layouts/Layout";
-import { Dashboard } from "./Dashboard";
+import { Dashboard } from "./part/Dashboard";
 
 export const IndexDashboard = () => {
 

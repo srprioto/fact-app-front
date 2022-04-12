@@ -1,3 +1,4 @@
+// import { ListaDetalleProductos } from "../../Ingresos/part/ListaDetalleProductos"
 import { VentasDropdown } from "./VentasDropdown"
 
 export const VentaItems = ({ ventas, handlerVer }:any) => {
@@ -17,6 +18,8 @@ export const VentaItems = ({ ventas, handlerVer }:any) => {
     return (
         <tr className="venta-items">
             <td>{ ventas.nombre_cliente }</td>
+            {/* <td><ListaDetalleProductos detalles={ventas.movimientoDetalles} /></td> */}
+            <td>{ ventas.total }</td>
             <td className={ classEstado() } >{ ventas.estado_venta }</td>
             <td>{ ventas.locales && ventas.locales.nombre }</td>
             <td>{ ventas.observaciones }</td>

@@ -10,7 +10,7 @@ import {
     BiTransfer,
     BiArchiveIn,
     BiExit,
-    BiDollarCircle,
+    BiCartAlt,
 } from "react-icons/bi";
 
 import { useAuth } from "../../auth/useAuth";
@@ -57,14 +57,14 @@ export const Menu = () => {
                 </BoxMenu>
 
                 <BoxMenu titulo="Reportes">
+                    <ItemMenu url="/reporte/ventas" label="Ventas" icon={ <BiCartAlt /> } />
                     <ItemMenu url="/reporte/transacciones" label="Transferencias" icon={ <BiTransfer /> } />
                     <ItemMenu url="/reporte/ingreso-productos" label="Ingresos de productos" icon={ <BiArchiveIn /> } />
-                    <ItemMenu url="/reporte/ventas" label="Ventas" icon={ <BiDollarCircle /> } />
                 </BoxMenu>
 
                 <BoxMenu>
                     <ul>
-                        <li onClick={handlerSalir} className="pointer"><p><BiExit />Salir</p></li>
+                        <li onClick={handlerSalir} className="pointer"><p><BiExit className="rotate-180" />Salir</p></li>
                     </ul>
                 </BoxMenu>
 

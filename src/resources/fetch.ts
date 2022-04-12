@@ -129,6 +129,10 @@ async function destroy(id:number|null|undefined, endpoint:string) {
 
 }
 
+function url(){
+    return API_URL;
+}
+
 
 export {
     get,
@@ -136,5 +140,6 @@ export {
     getOne,
     post, 
     put, 
-    destroy
+    destroy,
+    url
 }

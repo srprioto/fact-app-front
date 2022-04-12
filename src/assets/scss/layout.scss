@@ -820,13 +820,7 @@
         margin-bottom: 30px;
         color: $info;
     }
-    .rotarIcon{
-        svg{
-            color: $primary;
-            font-size: 50px;
-            animation: rotate 5s infinite;
-        }
-    }
+    
     svg{
         color: $primary;
         font-size: 50px;
@@ -836,6 +830,15 @@
 .vacio-heightauto{
     min-height: auto!important;
 }
+
+.rotarIcon{
+    svg{
+        color: $primary;
+        font-size: 50px;
+        animation: rotate 5s infinite;
+    }
+}
+
 
 // btn add
 

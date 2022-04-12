@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { CustomActiveShapePieChart } from "../../components/charts/CustomActiveShapePieChart";
 import { RadioButton } from "../../components/forms/RadioButton";
 
-export const Dashboard = () => {
+export const Otrosss = () => {
 
     const [checked, setChecked] = useState<any>([]);
 
