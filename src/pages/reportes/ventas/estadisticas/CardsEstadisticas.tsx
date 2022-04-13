@@ -48,7 +48,7 @@ export const CardsEstadisticas = () => {
             />
 
             <CardUno
-                titulo="Total de dinero recaudado hoy"
+                titulo="Total recaudado hoy"
                 label={dataEstadisticas.totalDineroDia ? "S/. " + dataEstadisticas.totalDineroDia : "S/. 0"}
                 icon={<BiDollarCircle />}
                 coloricon="success"
@@ -56,7 +56,7 @@ export const CardsEstadisticas = () => {
             />
 
             <CardUno
-                titulo="Total de dinero recaudado en la semana"
+                titulo="Total recaudado en la semana"
                 label={
                     dataEstadisticas.totalDineroSemana 
                     ? "S/. " + dataEstadisticas.totalDineroSemana 
