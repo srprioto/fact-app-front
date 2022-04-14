@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes as Switch, Route, Navigate } from "react-router-dom";
+import { HashRouter, Routes as Switch, Route, Navigate } from "react-router-dom";
 
 import { PrivateRouter } from "./PrivateRouter";
 
@@ -33,7 +33,7 @@ import { Ventas } from "../pages/reportes/Ventas";
 
 export const AppRoutes = () => {
     return (
-        <BrowserRouter>
+        <HashRouter>
             <Switch>
 
                 <Route path="/" element={ <Navigate to="/login" /> }/>
@@ -94,6 +94,6 @@ export const AppRoutes = () => {
                 
 
             </Switch>
-        </BrowserRouter>
+        </HashRouter>
     )
 }
