@@ -1,97 +1,42 @@
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useState } from "react"
 import { BiAlarmExclamation, BiAlarmSnooze, BiCheck, BiTransfer } from "react-icons/bi"
 import { Loading } from "../../../components/loads/Loading"
+import { ModalWrap } from "../../../components/modals/ModalWrap"
 import { NoRegistros } from "../../../components/NoRegistros"
 import { Pagination } from "../../../components/Pagination"
-import { Search } from "../../../components/Search"
+import { SearchWrap } from "../../../components/SearchWrap"
 import { TitleBox } from "../../../components/TitleBox"
-import { get, paginate } from "../../../resources/fetch"
+import { paginate } from "../../../resources/fetch"
 import { TRANSACCIONES, TRANSACCIONES_SEARCH } from "../../../resources/routes"
 import { CardsDatosTransf } from "./part/CardsDatosTransf"
+import { ModalVerTransac } from "./part/ModalVerTransac"
 import { Transaccion } from "./part/Transaccion"
 
 
 export const TransaccionRepo = () => {
 
-    const [loadingData, setLoadingData] = useState<boolean>(false); // carga de array de datos
-    // const [loadingOne, setLoadingOne] = useState<boolean>(false); // carga de un solo dato
-
-    // const [modalEliminar, setModalEliminar] = useState<boolean>(false);
-    // const [modalVer, setModalVer] = useState<boolean>(false);
-
+    const [loadingData, setLoadingData] = useState<boolean>(false); // carga de array de datos    
+    const [modalVer, setModalVer] = useState<boolean>(false);
     const [pagination, setPagination] = useState<any>({ meta: {}, links: {} });
-
     const [data, setData] = useState<any>([]); // array de datos
-    // const [transacciones, setTransacciones] = useState<any>({}); // un solo dato
-    // const [resumenTransf, setResumenTransf] = useState<any>() // resumen para cards
-
-    // const [infoTransaccion, setInfoTransaccion] = useState<any>({}); // para eliminar
-
+    const [idTransaccion, setIdTransaccion] = useState<any>({});
     const [toggle, setToggle] = useState<number>(1); // tabs para los filtros
 
     // *** search
     const [searchState, setSearchState] = useState<boolean>(false);
-    const [searchTxt, setSearchTxt] = useState<string>("");
-    const searchFocus = useRef<any>(null)
 
-    
-    const searchData = async () => { 
-        if (searchTxt === "" || searchTxt === undefined || searchTxt === null || searchTxt.length === 0) {
-            searchFocus.current.focus();
-        } else {
-            setLoadingData(true);
-            setSearchState(true);
-            try {
-                const data = await get(TRANSACCIONES_SEARCH + searchTxt);
-                setLoadingData(false);
-                setData(data);
-            } catch (error) {
-                setLoadingData(true);
-                console.log(error);
-            }
-        }
-    }
-
-    const handlerStateSearch = () => {
-        setSearchTxt("");
-        setSearchState(false);
-        getData();
-    }
-
-    const onChangeSearch = (e:any) => { 
-        setSearchTxt(e.target.value);
-    }
-
-    // *** end search
 
 
     useEffect(() => {
         getData();
     }, []);
+
+
+    const handlerVer = (idTransac:number) => { 
+        setIdTransaccion(idTransac);
+        setModalVer(!modalVer);
+    }
     
-
-    // const handlerDeleted = (id:number, descripcion?:string) => {
-    //     setInfoTransaccion({ id, descripcion });
-    //     setModalEliminar(!modalEliminar);
-    // }
-
-    // const handlerVer = (id:number) => { 
-    //     getOneData(id);
-    //     setModalVer(!modalVer);
-    // }
-
-
-    // const getOneData = async (id:number) => { 
-    //     setLoadingOne(true);
-    //     try {
-    //         const response_productos = await getOne(id, TRANSACCIONES); 
-    //         setTransacciones(response_productos);        
-    //         setLoadingOne(false);            
-    //     } catch (error) {
-    //         setLoadingOne(true);
-    //         console.log(error);
-    //     }
-    // }
 
     const getData = async (urlPage?:string, value?:string, idToggle?:number) => {
 
@@ -105,15 +50,14 @@ export const TransaccionRepo = () => {
 
             let data:any;
 
-            if (urlPage && urlPage !== "") 
+            if (urlPage && urlPage !== "") {
                 data = await paginate(urlPage);
-            else 
+            }
+            else {
                 data = await paginate(TRANSACCIONES + `/${value_filtro}/filtro`);
+            }
 
-            // const resumen = await get(TRANSACCIONES + "/resumen-transacciones");
-
-            setData(data.items);            
-            // setResumenTransf(resumen);
+            setData(data.items);
             setPagination({
                 meta: data.meta,
                 links: data.links
@@ -125,7 +69,6 @@ export const TransaccionRepo = () => {
             console.log(error);
         }
     }
-    
 
 
     return (
@@ -137,23 +80,18 @@ export const TransaccionRepo = () => {
             <div className="box">
 
                 <div className="grid-2 gap">
-                    
-                    <Search
-                        searchTxt={searchTxt}
-                        searchData={searchData}
+
+                    <SearchWrap 
+                        setLoadingData={setLoadingData}
+                        setData={setData}
+                        getData={getData}
                         searchState={searchState}
-                        onChangeSearch={onChangeSearch}
-                        handlerStateSearch={handlerStateSearch}
-                        searchFocus={searchFocus}
+                        setSearchState={setSearchState}
+                        url={TRANSACCIONES_SEARCH}
                         placeholder="Descripcion ..."
                     />
                     
                     <div className="grid-4 gap">
-
-                        {/* <Link to="/clientes/nuevo" className="btn btn-info" >
-                            <BiPlusCircle />
-                            Nuevo cliente
-                        </Link> */}
 
                     </div>
 
@@ -206,6 +144,7 @@ export const TransaccionRepo = () => {
                                 
                                 <thead>
                                     <tr>
+                                        <th>Codigo envio</th>
                                         <th>Descripcion</th>
                                         <th>Local destino</th>
                                         <th>Estado de envio</th>
@@ -221,8 +160,8 @@ export const TransaccionRepo = () => {
                                                 <Transaccion
                                                     key={e.id}
                                                     elemento={e}
+                                                    handlerVer={handlerVer}
                                                     // handlerDeleted={handlerDeleted}
-                                                    // handlerVer={handlerVer}
                                                 />
                                             )
                                         })
@@ -245,22 +184,14 @@ export const TransaccionRepo = () => {
 
             {/* modals aqui */}
 
-            {/* <ModalEliminar 
-                modal={ modalEliminar } 
-                setModal={ setModalEliminar } 
-                id={infoCliente.id}
-                nombre={infoCliente.nombre}
-                url={CLIENTES} 
-                getData={getData}
-                setSearchState={setSearchState}
-            />
+            <ModalWrap modal={modalVer}>
+                <ModalVerTransac
+                    modal={modalVer}
+                    setModal={setModalVer}
+                    idTransaccion={idTransaccion}
+                />    
+            </ModalWrap>
 
-            <ModalVer
-                data={cliente}
-                modal={modalVer}
-                setModal={setModalVer}
-                loading={loadingOne}
-            /> */}
 
         </div>
     )

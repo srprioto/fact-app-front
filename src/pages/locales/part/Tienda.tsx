@@ -12,8 +12,8 @@ import { ProductoLocal } from './ProductoLocal';
 import { LocalStockModalDto } from '../../../resources/dtos/LocalStockDto';
 import { get, paginate } from '../../../resources/fetch';
 import { LOCAL_STOCK_SEARCH, LOCAL_STOCK_SOLO } from '../../../resources/routes';
-import { ModalTransferencia } from '../../../components/transferencia/EnviarTransferencia';
-import { AlertaTransferencia } from '../../../components/transferencia/AlertaTransferencia';
+import { ModalTransferencia } from '../../../components/transferencia/enviar/EnviarTransferencia';
+import { AlertaTransferencia } from '../../../components/transferencia/recibir/AlertaTransferencia';
 import { NoRegistros } from '../../../components/NoRegistros';
 
 export const Tienda = () => {

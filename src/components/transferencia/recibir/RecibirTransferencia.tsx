@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { BiChevronRight } from "react-icons/bi";
-import { TextoRelleno } from "../TextoRelleno";
+import { zeroFill } from "../../../resources/func/ceroFill";
+import { TextoRelleno } from "../../TextoRelleno";
 import { TransferenciaDetalles } from "./TransferenciaDetalles";
 
 export const RecibirTransferencia = ({ 
@@ -26,6 +27,7 @@ export const RecibirTransferencia = ({
                             
                         <thead>
                             <tr>
+                                <th>Codigo envio</th>
                                 <th>Origen</th>
                                 <th>Nota de envio</th>
                                 <th className="transparent inlineblock">...</th>
@@ -41,6 +43,7 @@ export const RecibirTransferencia = ({
                                             onClick={() => handlerTransferencia(el, el.id)}
                                             className={toggle === el.id ? "tr-active pointer" : "pointer"}
                                         >
+                                            <td>{ zeroFill(el.id, 6) }</td>
                                             <td>{ el.localOrigen.nombre }</td>
                                             <td>{ el.descripcion }</td>
                                             <td>

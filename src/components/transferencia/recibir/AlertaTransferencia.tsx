@@ -3,8 +3,8 @@ import { BiMessageRounded, BiMessageRoundedAdd } from "react-icons/bi"
 
 import { ModalTransferencia } from "./ModalTransferencia"
 
-import { get } from "../../resources/fetch"
-import { TRANSACCIONES } from "../../resources/routes"
+import { get } from "../../../resources/fetch"
+import { TRANSACCIONES } from "../../../resources/routes"
 
 interface alertaTransferencia {
     idLocal:number;

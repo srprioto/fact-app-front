@@ -17,8 +17,8 @@ import { LocalStockModalDto } from "../../resources/dtos/LocalStockDto";
 // import { ALMACEN, ALMACEN_SEARCH, PRODUCTOS, PRODUCTOS_SEARCH } from "../../resources/routes";
 import { get, getOne, paginate } from "../../resources/fetch";
 import { Pagination } from "../../components/Pagination";
-import { ModalTransferencia } from "../../components/transferencia/EnviarTransferencia";
-import { AlertaTransferencia } from "../../components/transferencia/AlertaTransferencia";
+import { ModalTransferencia } from "../../components/transferencia/enviar/EnviarTransferencia";
+import { AlertaTransferencia } from "../../components/transferencia/recibir/AlertaTransferencia";
 import { NoRegistros } from "../../components/NoRegistros";
 
 

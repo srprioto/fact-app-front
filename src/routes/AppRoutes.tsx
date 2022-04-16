@@ -30,7 +30,6 @@ import { IngresoProductos } from "../pages/reportes/IngresoProductos";
 import { Ventas } from "../pages/reportes/Ventas";
 
 
-
 export const AppRoutes = () => {
     return (
         <HashRouter>
@@ -39,7 +38,6 @@ export const AppRoutes = () => {
                 <Route path="/" element={ <Navigate to="/login" /> }/>
 
                 <Route path="/" element={ <PublicRouter /> }>
-                    
                     <Route path="/login" element={ <IndexLogin /> } />
                 </Route>
 

@@ -1,13 +1,13 @@
 import { useState } from "react";
-import { BiErrorAlt } from "react-icons/bi";
-import { put } from "../../resources/fetch";
-import { TRANSACCIONES_CONFIRMAR } from "../../resources/routes";
-import { Checkbox } from "../forms/Checkbox";
-import { Input } from "../forms/Input";
-import { LoadSwitchBtn } from "../btns/LoadSwitchBtn";
-import { LoadSwitchBtn2 } from "../btns/LoadSwitchBtn2";
+// import { BiErrorAlt } from "react-icons/bi";
+import { put } from "../../../resources/fetch";
+import { TRANSACCIONES_CONFIRMAR } from "../../../resources/routes";
+import { Checkbox } from "../../forms/Checkbox";
+import { Input } from "../../forms/Input";
+import { LoadSwitchBtn } from "../../btns/LoadSwitchBtn";
+// import { LoadSwitchBtn2 } from "../../btns/LoadSwitchBtn2";
 
-export const TransferenciaDetalles = ({ data, getTransacciones, setTransf, actualizarDatos }:any) => {
+export const TransferenciaDetalles = ({ data, getTransacciones, setTransf }:any) => {
 
     const transferenciaObj = {
         // id: data.id,
@@ -31,44 +31,44 @@ export const TransferenciaDetalles = ({ data, getTransacciones, setTransf, actua
 
     
     const handlerChangeTransfDetalles = (e:any) => { 
-
         let updatedList = [ ...checked ];
         if (e.target.checked) {
             updatedList = [ ...checked, e.target.value];
         } else {
             updatedList.splice(checked.indexOf(e.target.value), 1);
         }
-
         setChecked(updatedList);
+    }
 
+
+    const handlerEstadoGeneral = ():string => { 
+        if (data.transaccionDetalles.length === checked.length) {
+            return "listo";
+        } else {
+            return "observado";
+        }
     }
     
     
-    const validarEnvio = (transferencia:any, transfDetalles:any, estado_general:string) => { 
-        
+    const validarEnvio = (transferencia:any, transfDetalles:any) => { 
         transferencia.transaccionDetalles = transfDetalles;
-        transferencia.estado_general = estado_general;
-
-        //validacion aqui con if
-        handlerPost(transferencia)
-
+        transferencia.estado_general = handlerEstadoGeneral();
+        handlerPost(transferencia);
     }
+    
 
     const handlerPost = async (transferencia:any) => { 
-        
         setLoadPost(true);
         try {
             await put(data.id, transferencia, TRANSACCIONES_CONFIRMAR);       
             setLoadPost(false);
             getTransacciones();
-            // await actualizarDatos();
+            
             setTransf({})
         } catch (error) {
             setLoadPost(true);
             console.log(error);
         } 
-        
-
     }
 
     return (
@@ -102,7 +102,6 @@ export const TransferenciaDetalles = ({ data, getTransacciones, setTransf, actua
                     <thead>
                         <tr>
                             <th></th>
-                            {/* <th>id</th> */}
                             <th>Cantidad</th>
                             <th>Nombre prod.</th>
                             <th>Codigo</th>
@@ -122,19 +121,15 @@ export const TransferenciaDetalles = ({ data, getTransacciones, setTransf, actua
                                                 onChange={handlerChangeTransfDetalles}
                                             />
                                         </td>
-                                        {/* <td className="info">{ el.id }</td> */}
-                                        <td className="info">{ el.cantidad }</td>
+                                        <td className="info strong">{ el.cantidad }</td>
                                         <td>{ el.productos.nombre }</td>
                                         <td>{ el.productos.codigo }</td>
                                     </tr>
                                 )
                             })
                         }
-
                     </tbody>
-
                 </table>
-
             </div>
 
             <div className="transf-detalles-footer w100">
@@ -151,11 +146,16 @@ export const TransferenciaDetalles = ({ data, getTransacciones, setTransf, actua
                     
                     <LoadSwitchBtn
                         label="Confirmar transaccion"
-                        handler={() => validarEnvio(transferencia, checked, "listo")}
+                        handler={() => validarEnvio(transferencia, checked)}
                         loading={loadPost}
+                        className={
+                            handlerEstadoGeneral() === "listo" 
+                            ? "success" 
+                            : "danger"
+                        }
                     />
 
-                    {
+                    {/* {
                         transferencia.observaciones !== ""
                         ? (
                             <LoadSwitchBtn2
@@ -172,7 +172,7 @@ export const TransferenciaDetalles = ({ data, getTransacciones, setTransf, actua
                                 Observar
                             </button>        
                         )
-                    }
+                    } */}
 
                 </div>
             </div>

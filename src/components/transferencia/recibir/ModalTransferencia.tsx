@@ -1,5 +1,5 @@
-import { Modal } from "../modals/Modal"
-import { TextoRelleno } from "../TextoRelleno"
+import { Modal } from "../../modals/Modal"
+import { TextoRelleno } from "../../TextoRelleno"
 import { RecibirTransferencia } from "./RecibirTransferencia"
 
 

@@ -1,7 +1,7 @@
 import { BiShowAlt } from "react-icons/bi"
 import { DropDown } from "../../../../components/DropDown"
 
-export const TransDropdown = ({ id, nombre, handlerDeleted, handlerVer }:any) => {
+export const TransDropdown = ({ elemento, handlerVer }:any) => {
     return (
         <DropDown>
             {/* <span onClick={ () => handlerDeleted(id, nombre) }>
@@ -10,7 +10,7 @@ export const TransDropdown = ({ id, nombre, handlerDeleted, handlerVer }:any) =>
             {/* <Link to={`/clientes/${id}/edit`} >
                 <BiPencil />Editar cliente
             </Link> */}
-            <span onClick={ () => handlerVer(id) }>
+            <span onClick={ () => handlerVer(elemento.id) }>
                 <BiShowAlt />Ver detalles
             </span>
         </DropDown>

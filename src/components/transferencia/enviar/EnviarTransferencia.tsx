@@ -1,16 +1,16 @@
-import { Modal } from "../modals/Modal"
-import { SelectSearch } from "../forms/SelectSearch"
+import { Modal } from "../../modals/Modal"
+import { SelectSearch } from "../../forms/SelectSearch"
 
-import { LOCALES, LOCAL_STOCK_SEARCH, TRANSACCIONES } from "../../resources/routes"
+import { LOCALES, LOCAL_STOCK_SEARCH, TRANSACCIONES } from "../../../resources/routes"
 import { useEffect, useState } from "react"
-import { Input } from "../forms/Input"
+import { Input } from "../../forms/Input"
 import { BiBrush, BiCheck, BiListPlus, BiX } from "react-icons/bi"
-import { TextoRelleno } from "../TextoRelleno"
-import { Select } from "../forms/Select"
-import { InputDisable } from "../forms/InputDisable"
-import { get, post } from "../../resources/fetch"
-import { InfoTransferenciaEnvio } from "../../resources/dtos/Transferencias"
-import { LoadSwitchBtn } from "../btns/LoadSwitchBtn"
+import { TextoRelleno } from "../../TextoRelleno"
+import { Select } from "../../forms/Select"
+import { InputDisable } from "../../forms/InputDisable"
+import { get, post } from "../../../resources/fetch"
+import { InfoTransferenciaEnvio } from "../../../resources/dtos/Transferencias"
+import { LoadSwitchBtn } from "../../btns/LoadSwitchBtn"
 
 interface modalTransferencia {
     modal:boolean;
