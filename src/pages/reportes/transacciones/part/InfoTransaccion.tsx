@@ -38,7 +38,7 @@ export const InfoTransaccion = ({ transaccion, classEstado }:any) => {
                 <div className="box-wrap-descripcion3">
 
                     <span>
-                        <p>Fecha de origen: </p>
+                        <p>Local de origen: </p>
                         <h4>{ transaccion.localOrigen && transaccion.localOrigen.nombre }</h4>
                     </span>
 
@@ -55,6 +55,11 @@ export const InfoTransaccion = ({ transaccion, classEstado }:any) => {
                     <span>
                         <p>Usuario receptor: </p>
                         <h4>{ transaccion.usuarioRecibe && transaccion.usuarioRecibe.nombre }</h4>
+                    </span>
+
+                    <span>
+                        <p>Fecha de envio: </p>
+                        <h4>{ transaccion.created_at }</h4>
                     </span>
 
                 </div>

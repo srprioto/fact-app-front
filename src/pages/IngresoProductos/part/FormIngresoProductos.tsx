@@ -307,14 +307,14 @@ export const FormIngresoProductos = ({
                                     validarEnvio()
                                     ? (
                                         <LoadSwitchBtn 
-                                            label="Crear Proveedor" 
+                                            label="Confirmar ingreso"
                                             loading={loading} 
                                             handler={handlerEnviar} 
                                         />
                                     ) : (
                                         <button className="btn btn-disable">
                                             <BiCheck />
-                                            Añadir productos
+                                            Confirmar ingreso
                                         </button>
                                     )
                                 }

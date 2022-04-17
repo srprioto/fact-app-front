@@ -8,6 +8,18 @@ interface transaccion {
 
 export const Transaccion = ({ elemento, handlerVer }:transaccion) => {
 
+    const handlerClassEstado = (estado:string) => { 
+        if (estado === "enviado") {
+            return "warning"
+        } else if (estado === "listo") {
+            return "success"
+        } else if (estado === "observado") {
+            return "danger"
+        } else if (estado === "corregido") {
+            return "primary"
+        }
+    }
+
     return (
 
         <tr className="transaccion">
@@ -15,15 +27,7 @@ export const Transaccion = ({ elemento, handlerVer }:transaccion) => {
             <td>{ elemento.descripcion }</td>
             <td>{ elemento.localDestino.nombre }</td>
             <td
-               className={
-                    elemento.estado_general === "enviado"
-                    ? "warning" 
-                    : elemento.estado_general === "listo" 
-                    ? "success"
-                    : elemento.estado_general === "observado" 
-                    ? "danger"
-                    : ""
-               } 
+               className={ handlerClassEstado(elemento.estado_general) } 
             >{ elemento.estado_general }</td>
             <td>{ elemento.created_at }</td>
             <td>

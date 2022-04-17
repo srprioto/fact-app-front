@@ -1,21 +1,29 @@
 import { useEffect, useState } from "react";
 import { Loading } from "../../../../components/loads/Loading";
 import { Modal } from "../../../../components/modals/Modal"
+import { ModalWrap } from "../../../../components/modals/ModalWrap";
 import { getOne } from "../../../../resources/fetch";
 import { TRANSACCIONES } from "../../../../resources/routes";
 import { ProductoInfo } from "../../Ingresos/part/ProductoInfo";
+import { EnvioDropdown } from "./EnvioDropdown";
 import { InfoTransaccion } from "./InfoTransaccion";
+import { ModalConfirmarTrans } from "./ModalConfirmarTrans";
 
 interface modalVerTransac {
     modal:boolean;
     setModal:Function;
     idTransaccion:number;
+    getData:Function;
 }
 
-export const ModalVerTransac = ({ modal, setModal, idTransaccion }:modalVerTransac) => {
+export const ModalVerTransac = ({ modal, setModal, idTransaccion, getData }:modalVerTransac) => {
 
     const [loadingOne, setLoadingOne] = useState<boolean>(false);
     const [transaccion, setTransaccion] = useState<any>({});
+    const [TransaccionDetalles, setTransaccionDetalles] = useState<any>({});
+    const [modalConfirmarEnvio, setModalConfirmarEnvio] = useState<boolean>(false);
+
+
     
     useEffect(() => {
         getDataOne();
@@ -42,9 +50,32 @@ export const ModalVerTransac = ({ modal, setModal, idTransaccion }:modalVerTrans
             return "warning-i"
         } else if (estado === "observado") {
             return "danger-i"
+        } else if (estado === "corregido") {
+            return "primary-i"
         }
     }
-    
+
+
+    const handlerModalConfirmar = (transaccionDetalle:any, estado_envio:string) => { 
+
+        const data:any = {};
+        data.id_transaccion = transaccion.id;
+        data.id_transaccion_detalle = transaccionDetalle.id;
+        data.id_producto = transaccionDetalle.productos.id;
+
+        if (estado_envio === "listo") {
+            data.id_local_destino = transaccion.localDestino.id;    
+        } else if (estado_envio === "regresar"){
+            data.id_local_destino = transaccion.localOrigen.id
+        }
+        
+        data.cantidad = transaccionDetalle.cantidad;
+        data.estado_detalle = estado_envio
+
+        setTransaccionDetalles(data);
+        setModalConfirmarEnvio(true);
+    }
+
 
     return (
         <Modal
@@ -56,7 +87,7 @@ export const ModalVerTransac = ({ modal, setModal, idTransaccion }:modalVerTrans
         >
             {
                 loadingOne
-                ? <Loading />
+                ? <Loading heightModal />
                 : (
                     
                     <div className="grid-1 gap">
@@ -71,6 +102,7 @@ export const ModalVerTransac = ({ modal, setModal, idTransaccion }:modalVerTrans
                                         <th></th>
                                         <th>Cantidad</th>
                                         <th>Estado de envio</th>
+                                        <th className="transparent">...</th>
                                     </tr>
                                 </thead>
 
@@ -87,6 +119,15 @@ export const ModalVerTransac = ({ modal, setModal, idTransaccion }:modalVerTrans
                                                         <td
                                                             className={classEstado(e.estado_detalle)}
                                                         >{ e.estado_detalle }</td>
+                                                        <td>
+                                                            {
+                                                                e.estado_detalle === "observado" && 
+                                                                <EnvioDropdown
+                                                                    el={e}
+                                                                    confirmarEnvio={handlerModalConfirmar}
+                                                                />
+                                                            }
+                                                        </td>
                                                     </tr>
                                                 )
                                             })
@@ -99,32 +140,20 @@ export const ModalVerTransac = ({ modal, setModal, idTransaccion }:modalVerTrans
 
                         <InfoTransaccion transaccion={transaccion} classEstado={classEstado} />
 
-                        {
-                            transaccion.estado_general === "observado"
-                            && (
-                                <div className="box grid-3 gap">
-                                    
-
-
-                                </div>
-                            )
-                        }
-
-                        {
-                            transaccion.estado_general === "enviado"
-                            && (
-                                <div className="box grid-3 gap">
-                                    
-                                    
-
-                                </div>
-                            )
-                        }
-
-
                     </div>
                 )
-            }            
+            }
+
+            <ModalWrap modal={modalConfirmarEnvio}>
+                <ModalConfirmarTrans
+                    modal={modalConfirmarEnvio}
+                    setModal={setModalConfirmarEnvio}
+                    transaccionDetalles={TransaccionDetalles}
+                    setLoading={setLoadingOne}
+                    getDataOne={getDataOne}
+                    getData={getData}
+                />
+            </ModalWrap>
 
         </Modal>
     )

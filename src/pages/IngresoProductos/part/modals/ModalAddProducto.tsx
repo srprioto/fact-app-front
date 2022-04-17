@@ -137,7 +137,6 @@ export const ModalAddProducto = ({
         
     }
 
-    console.log(validarBtnAñadir());    
 
     return (
         <Modal

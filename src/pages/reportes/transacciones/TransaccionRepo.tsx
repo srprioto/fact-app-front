@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { BiAlarmExclamation, BiAlarmSnooze, BiCheck, BiTransfer } from "react-icons/bi"
+import { BiAlarmExclamation, BiAlarmSnooze, BiCapsule, BiCheck, BiTransfer } from "react-icons/bi"
 import { Loading } from "../../../components/loads/Loading"
 import { ModalWrap } from "../../../components/modals/ModalWrap"
 import { NoRegistros } from "../../../components/NoRegistros"
@@ -105,11 +105,11 @@ export const TransaccionRepo = () => {
                 <div className="grid-3 gap mb-25">
 
                     <div></div>
-                    <div className="grid-4 gap">
+                    <div className="grid-5 gap">
 
                         <button 
                             onClick={() => getData("", "_", 1)}
-                            className={`btn2 btn2-primary ${toggle === 1 && "btn2-sub-primary"}`}>
+                            className={`btn2 btn2-info ${toggle === 1 && "btn2-sub-info"}`}>
                             <BiTransfer />Todos
                         </button>
                         <button 
@@ -123,8 +123,13 @@ export const TransaccionRepo = () => {
                             <BiAlarmExclamation />Observ.
                         </button>
                         <button 
-                            onClick={() => getData("", "listo", 4)}
-                            className={`btn2 btn2-success ${toggle === 4 && "btn2-sub-success"}`}>
+                            onClick={() => getData("", "corregido", 4)}
+                            className={`btn2 btn2-primary ${toggle === 4 && "btn2-sub-primary"}`}>
+                            <BiCapsule />Corregidos
+                        </button>
+                        <button 
+                            onClick={() => getData("", "listo", 5)}
+                            className={`btn2 btn2-success ${toggle === 5 && "btn2-sub-success"}`}>
                             <BiCheck />Listos
                         </button>
                         
@@ -189,6 +194,7 @@ export const TransaccionRepo = () => {
                     modal={modalVer}
                     setModal={setModalVer}
                     idTransaccion={idTransaccion}
+                    getData={getData}
                 />    
             </ModalWrap>
 

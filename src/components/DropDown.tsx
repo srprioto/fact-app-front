@@ -12,3 +12,13 @@ export const DropDown = ({ width = 190, children }:any) => {
     )
 };
 
+/* 
+<DropDown>
+    <Link to={`/proveedores/${id}/edit`} >
+        <BiPencil />Editar proveedor
+    </Link>
+    <span onClick={ () => handlerVer(id) }>
+        <BiShowAlt />Ver detalles
+    </span>
+</DropDown> 
+*/
