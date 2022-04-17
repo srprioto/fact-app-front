@@ -7,6 +7,7 @@ import { SearchWrap } from "../../../components/SearchWrap";
 import { paginate } from "../../../resources/fetch";
 import { VENTAS_PAGINATE, VENTAS_SEARCH } from "../../../resources/routes";
 import { ExportarExcel } from "./InfoGeneral/ExportarExcel";
+import { ModalHabilitarVenta } from "./InfoGeneral/ModalHabilitarVenta";
 import { ModalVentaDetalles } from "./InfoGeneral/ModalVentaDetalles";
 import { TabbsFiltroDatos } from "./InfoGeneral/TabbsFiltroDatos";
 import { VentaItems } from "./InfoGeneral/VentaItems";
@@ -15,6 +16,7 @@ export const InfoGeneralVentas = () => {
 
     const [loadingData, setLoadingData] = useState<boolean>(false);
     const [modalVer, setModalVer] = useState<boolean>(false);
+    const [modalHabilitarVenta, setModalHabilitarVenta] = useState<boolean>(false);
     const [idVenta, setIdVenta] = useState<number>(0);
     const [pagination, setPagination] = useState<any>({ meta: {}, links: {} });
     const [data, setData] = useState<any>([]);
@@ -64,7 +66,15 @@ export const InfoGeneralVentas = () => {
             setLoadingData(true);
             console.log(error);
         }
+        setIdVenta(0);
     }
+
+
+    const handlerHabilitarVenta = (idVenta:number) => {
+        setIdVenta(idVenta);
+        setModalHabilitarVenta(true);
+    }
+
 
     return (
         <>
@@ -121,7 +131,7 @@ export const InfoGeneralVentas = () => {
                                                 <VentaItems
                                                     key={e.id}
                                                     ventas={e}
-                                                    // handlerDeleted={handlerDeleted}
+                                                    updateData={handlerHabilitarVenta}
                                                     handlerVer={handlerVer}
                                                 />
                                             )
@@ -151,6 +161,18 @@ export const InfoGeneralVentas = () => {
                     idVenta={idVenta}
                 />
             </ModalWrap>
+
+            
+            <ModalHabilitarVenta 
+                modal={modalHabilitarVenta}
+                setModal={setModalHabilitarVenta}
+                idVenta={idVenta}
+                getData={getData}
+            />
+            
+
+            
+
         </>
     )
 }

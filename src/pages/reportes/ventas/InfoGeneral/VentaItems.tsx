@@ -1,7 +1,7 @@
 // import { ListaDetalleProductos } from "../../Ingresos/part/ListaDetalleProductos"
 import { VentasDropdown } from "./VentasDropdown"
 
-export const VentaItems = ({ ventas, handlerVer }:any) => {
+export const VentaItems = ({ ventas, handlerVer, updateData }:any) => {
 
 
     const classEstado = () => { 
@@ -24,7 +24,7 @@ export const VentaItems = ({ ventas, handlerVer }:any) => {
             <td>{ ventas.locales && ventas.locales.nombre }</td>
             <td>{ ventas.observaciones }</td>
             <td>
-                <VentasDropdown ventas={ventas} handlerVer={handlerVer} />
+                <VentasDropdown ventas={ventas} handlerVer={handlerVer} updateData={updateData} />
             </td>
         </tr>
     )

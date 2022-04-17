@@ -4,13 +4,13 @@ import { SelectSearch } from "../../forms/SelectSearch"
 import { LOCALES, LOCAL_STOCK_SEARCH, TRANSACCIONES } from "../../../resources/routes"
 import { useEffect, useState } from "react"
 import { Input } from "../../forms/Input"
-import { BiBrush, BiCheck, BiListPlus, BiX } from "react-icons/bi"
-import { TextoRelleno } from "../../TextoRelleno"
+import { BiBrush, BiCheck, BiListPlus } from "react-icons/bi"
 import { Select } from "../../forms/Select"
 import { InputDisable } from "../../forms/InputDisable"
 import { get, post } from "../../../resources/fetch"
 import { InfoTransferenciaEnvio } from "../../../resources/dtos/Transferencias"
 import { LoadSwitchBtn } from "../../btns/LoadSwitchBtn"
+import { ListaProductosTransf } from "./ListaProductosTransf"
 
 interface modalTransferencia {
     modal:boolean;
@@ -159,7 +159,20 @@ export const ModalTransferencia = ({ modal, setModal, idLocal, nombreLocal, getD
         prodRepe.splice(i,1);
         setEnvioRepe([...prodRepe]);
     }
-    
+
+
+    const handlerAñadir = () => { 
+        if (
+            (cantidadActual - ElementoTransf.cantidad) < 0 
+            || ElementoTransf.cantidad <= 0
+            || ElementoTransf.productosId === 0
+        ) {
+            return true
+        } else {
+            return false
+        }
+    }
+
 
     return (
         <Modal 
@@ -184,6 +197,7 @@ export const ModalTransferencia = ({ modal, setModal, idLocal, nombreLocal, getD
                             setSwitchSelect={setSwitchSelectProd}
                             // link="/productos/crear-producto"
                             placeholder="Codigo o nombre del producto..."
+                            reinicios={() => setElementoTransf(detalles)}
                         />
 
                         <div className="grid-2">
@@ -194,6 +208,7 @@ export const ModalTransferencia = ({ modal, setModal, idLocal, nombreLocal, getD
                                 name="cantidad"
                                 value={ElementoTransf.cantidad}
                                 onChange={handlerChangeDetalles}
+                                noMenos
                             />
 
                             <div className="middle">
@@ -222,15 +237,13 @@ export const ModalTransferencia = ({ modal, setModal, idLocal, nombreLocal, getD
                                 }
                                 
                             </div>
-
                         </div>
-                        
                     </div><br />
 
                     <div className="grid-2 mt-25">
                         
                         {
-                            (cantidadActual - ElementoTransf.cantidad)  < 0 || ElementoTransf.cantidad === 0
+                            handlerAñadir()
                             ? (
                                 <button className="btn btn-disable">
                                     <BiListPlus />
@@ -249,46 +262,14 @@ export const ModalTransferencia = ({ modal, setModal, idLocal, nombreLocal, getD
 
                 </div>
 
-                <div className="box">
-                    <div className="lista-transf">
-                        {
-                            transferencia.length <= 0
-                            ? <TextoRelleno texto="Añade un elemento" />
-                            : (
-                                <table className="table">
-                                    <thead>
-                                        <tr>
-                                            <th>Producto</th>
-                                            <th>Unidades</th>
-                                            <th className="transparent inlineblock">...</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {
-                                            transferencia.map((e:any, index:number) => {
-                                                return (
-                                                    <tr key={index}>
-                                                        <td>{ e.productoNombre }</td>
-                                                        <td>{ e.cantidad }</td>
-                                                        <td>
-                                                            <span className="wrap-icons danger center">
-                                                                <BiX 
-                                                                    className="pointer" 
-                                                                    onClick={() => { itemPop(index) }} 
-                                                                />
-                                                            </span>
-                                                        </td>
-                                                    </tr>
-                                                )
-                                            })
-                                        }
-                                    </tbody>
-                                </table>
-                            )
-                        }
-                    </div>
-                </div>
+                <ListaProductosTransf
+                    transferencia={transferencia}
+                    itemPop={itemPop}
+                />
+
             </div>
+
+
 
             <div className="grid-1 gap">
                 <div className="box grid-1 gap">
@@ -361,6 +342,8 @@ export const ModalTransferencia = ({ modal, setModal, idLocal, nombreLocal, getD
 
                 </div>
             </div>
+
+
         </Modal>
     )
 }
