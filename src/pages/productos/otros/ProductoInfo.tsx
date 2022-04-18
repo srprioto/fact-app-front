@@ -28,15 +28,15 @@ export const ProductoInfo = ({ producto }:any) => {
                     </span>
                     <span>
                         <p>Precio/unidad: </p>
-                        <h4>{ producto.precio_venta_1 }</h4>
+                        <h4>S/. { producto.precio_venta_1 }</h4>
                     </span>
                     <span>
                         <p>Precio/menor: </p>
-                        <h4>{ producto.precio_venta_2 }</h4>
+                        <h4>S/. { producto.precio_venta_2 }</h4>
                     </span>
                     <span>
                         <p>Precio/mayor: </p>
-                        <h4>{ producto.precio_venta_3 }</h4>
+                        <h4>S/. { producto.precio_venta_3 }</h4>
                     </span>
                     <span>
                         <p>Descripcion: </p>

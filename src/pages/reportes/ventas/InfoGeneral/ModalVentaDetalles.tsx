@@ -3,7 +3,7 @@ import { Loading } from "../../../../components/loads/Loading";
 import { Modal } from "../../../../components/modals/Modal"
 import { getOne } from "../../../../resources/fetch";
 import { VENTAS } from "../../../../resources/routes";
-import { ProductoInfo } from "../../Ingresos/part/ProductoInfo";
+import { ProductoInfo } from "../../../productos/otros/ProductoInfo";
 import { InfoCliente } from "./InfoCliente";
 import { InfoVenta } from "./InfoVenta";
 

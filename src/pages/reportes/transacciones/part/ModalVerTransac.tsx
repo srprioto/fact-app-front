@@ -4,7 +4,7 @@ import { Modal } from "../../../../components/modals/Modal"
 import { ModalWrap } from "../../../../components/modals/ModalWrap";
 import { getOne } from "../../../../resources/fetch";
 import { TRANSACCIONES } from "../../../../resources/routes";
-import { ProductoInfo } from "../../Ingresos/part/ProductoInfo";
+import { ProductoInfo } from "../../../productos/otros/ProductoInfo";
 import { EnvioDropdown } from "./EnvioDropdown";
 import { InfoTransaccion } from "./InfoTransaccion";
 import { ModalConfirmarTrans } from "./ModalConfirmarTrans";
@@ -74,6 +74,11 @@ export const ModalVerTransac = ({ modal, setModal, idTransaccion, getData }:moda
 
         setTransaccionDetalles(data);
         setModalConfirmarEnvio(true);
+    }
+
+    
+    const reinicios = () => { 
+        setTransaccionDetalles({});
     }
 
 
@@ -148,10 +153,12 @@ export const ModalVerTransac = ({ modal, setModal, idTransaccion, getData }:moda
                 <ModalConfirmarTrans
                     modal={modalConfirmarEnvio}
                     setModal={setModalConfirmarEnvio}
+                    transaccion={transaccion}
                     transaccionDetalles={TransaccionDetalles}
                     setLoading={setLoadingOne}
                     getDataOne={getDataOne}
                     getData={getData}
+                    btnClose={reinicios}
                 />
             </ModalWrap>
 

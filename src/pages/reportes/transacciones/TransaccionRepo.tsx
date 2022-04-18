@@ -26,7 +26,6 @@ export const TransaccionRepo = () => {
     const [searchState, setSearchState] = useState<boolean>(false);
 
 
-
     useEffect(() => {
         getData();
     }, []);
