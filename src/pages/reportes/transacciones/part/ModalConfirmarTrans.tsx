@@ -1,4 +1,6 @@
-import { BiCheck, BiX } from "react-icons/bi";
+import { useState } from "react";
+import { BiX } from "react-icons/bi";
+import { LoadSwitchBtn } from "../../../../components/btns/LoadSwitchBtn";
 import { Modal } from "../../../../components/modals/Modal"
 import { post } from "../../../../resources/fetch";
 import { TRANSACCIONES } from "../../../../resources/routes";
@@ -8,7 +10,7 @@ interface modalConfirmarTrans {
     setModal:Function;
     transaccion:any;
     transaccionDetalles:any;
-    setLoading:Function;
+    // setLoading:Function;
     getDataOne:Function;
     getData:Function;
     btnClose:Function;
@@ -20,25 +22,27 @@ export const ModalConfirmarTrans = ({
     setModal,
     transaccion,
     transaccionDetalles, 
-    setLoading, 
+    // setLoading, 
     getDataOne, 
     getData,
     btnClose
 }:modalConfirmarTrans) => {
 
 
+    const [loadingConfirm, setLoadingConfirm] = useState<boolean>(false)
+
     const confirmarEnvio = async () => { 
 
-        setLoading(true);
+        setLoadingConfirm(true);
         try {
             await post(transaccionDetalles, TRANSACCIONES + "/transaccion/corregir");
             await getDataOne();
             await getData();
-            setLoading(false);
+            setLoadingConfirm(false);
         } catch (error) {
-            setLoading(true);
+            setLoadingConfirm(true);
             console.log(error);
-        }
+        } 
 
         setModal(false);
 
@@ -81,9 +85,11 @@ export const ModalConfirmarTrans = ({
 
                         <div></div>
 
-                        <button className="btn btn-success" onClick={confirmarEnvio}>
-                            <BiCheck /> Confirmar
-                        </button>
+                        <LoadSwitchBtn
+                            loading={loadingConfirm}
+                            handler={confirmarEnvio}
+                            label="Confirmar"
+                        />
 
                         <button className="btn btn-warning" onClick={() => handlerClose()}>
                             <BiX /> Cancelar

@@ -14,10 +14,8 @@ export const TablaProdVenta = ({ venta, igv }:tablaProdVenta) => {
                         <th>Producto</th>
                         <th>Cant.</th>
                         <th>Precio U.</th>
+                        { igv && <th>IGV</th> }
                         <th>Inc/Desc</th>
-                        {
-                            igv && <th>IGV</th>
-                        }
                         <th>Precio V.</th>
                     </tr>
                 </thead>
@@ -39,10 +37,8 @@ export const TablaProdVenta = ({ venta, igv }:tablaProdVenta) => {
                                     <td>{ e.productos.nombre }</td>
                                     <td><strong>{ e.cantidad_venta }</strong></td>
                                     <td><strong>S/. { e.precio_venta }</strong></td>
+                                    { igv && <td>S/. { e.igv }</td> }
                                     <td className={cambioPrecio}>S/. { e.descuento }</td>
-                                    {
-                                        igv && <td>S/. { e.igv }</td>
-                                    }
                                     <td className={cambioPrecio}><strong>S/. { e.precio_parcial }</strong></td>
                                 </tr>
                             )
