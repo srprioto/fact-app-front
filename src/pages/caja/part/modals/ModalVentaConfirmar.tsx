@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { BiCheck, BiReply } from "react-icons/bi";
 
-import { Checkbox2 } from "../../../../components/forms/Checkbox2";
 import { LoadSwitchBtn2 } from "../../../../components/btns/LoadSwitchBtn2";
 import { Modal } from "../../../../components/modals/Modal"
 import { DatosClienteConf } from "./DatosClienteConf";
@@ -21,78 +20,62 @@ export const ModalVentaConfirmar = ({
     loading
 }:any) => {
 
-    const [igv, setIgv] = useState<boolean>(true);
+    const ventaAux:any = copy(dataVenta);
     const [venta, setVenta] = useState<any>(copy(dataVenta));
     const [reducirPercent, setReducirPercent] = useState<number>(0)
 
+
+    useEffect(() => { 
+        handlerRecalculoEIGV();
+    }, [reducirPercent])
+
+    
     const onChangeRedPercent = (e:any) => setReducirPercent(Number(e.target.value));
 
-    
-    useEffect(() => { // aplicar igv        
-        if (igv) {
-            handlerIGV();
-        } else {
-            setVenta(copy(dataVenta));
-        }
-    }, [igv])
 
-    // useEffect(() => {
-    //     if (reducirPercent !== 0) {
+    const handlerRecalculoEIGV = () => { 
 
-    //         const ventaDetall2 = copy(venta.ventaDetalles);
-    //         let ventDetalUpdate2:any = [];
-    
-    //         let reduccion:number;
-    
-    //         ventaDetall2.forEach((e:any) => { 
-    
-    //             if (reducirPercent !== 0) {
-    //                 reduccion = redondeo(e.precio_venta * (reducirPercent / 100))
-    //             } else {
-    //                 reduccion = 0;
-    //             }
-    
-    //             e.precio_venta = redondeo(e.precio_venta + reduccion);
-    
-    //             e.precio_parcial = redondeo((e.precio_venta * e.cantidad_venta) + (e.descuento))
-    
-    //             // console.log(e.precio_parcial);
-    
-    //             ventDetalUpdate2.push(copy(e));
-    
-    //         })
-    
-    //         console.log(ventDetalUpdate2);
-    
-    //         // setVenta({
-    //         //     ...venta,
-    //         //     ventaDetalles: ventDetalUpdate2
-    //         // })
-
-    //     } else {
-    //         setVenta(copy(dataVenta));
-    //     }
-    // }, [reducirPercent])
-    
-
-
-    const handlerIGV = () => { 
-        // const ventaDetall = copy(venta.ventaDetalles);
         let ventaDetallesUpdate:any = [];
         
-        venta.ventaDetalles.forEach((e:any) => { 
+        ventaAux.ventaDetalles.forEach((e:any) => { 
+
+            let reduccion:number;
+
+            if (reducirPercent !== 0) {
+                reduccion = redondeo(e.precio_venta * (reducirPercent / 100))
+            } else {
+                reduccion = 0;
+            }
+
+            e.precio_venta = e.precio_venta + reduccion
+
             const igv:number = redondeo(e.precio_venta * 0.18);
-            e.precio_venta = redondeo(e.precio_venta - igv);
-            e.precio_parcial = redondeo(((e.precio_venta + igv) * e.cantidad_venta) + (e.descuento));
+            const precioGravada:number = redondeo((e.precio_venta - igv));
+            const precioVenta:number = redondeo(precioGravada + igv);
+
+            e.precio_gravada = precioGravada;
             e.igv = igv;
+            e.precio_venta = precioVenta
+            e.precio_parcial = redondeo((precioVenta * e.cantidad_venta) + (e.descuento));
+    
             ventaDetallesUpdate.push(e);
-            // return (null);
+
         })
+
+
+        const sumaSubtotal:number = ventaDetallesUpdate // calcular subtotal
+        .map((e:any) => e.precio_parcial)
+        .reduce((prev:number, curr:number) => prev + curr, 0);
+
+        const total:number = (Number(sumaSubtotal) + (Number(venta.descuento_total)))
 
         setVenta({
             ...venta,
-            ventaDetalles: ventaDetallesUpdate
+            ventaDetalles: ventaDetallesUpdate,
+            subtotal: redondeo(sumaSubtotal),
+            total: redondeo(total)
         })
+
     }
 
 
@@ -115,9 +98,9 @@ export const ModalVentaConfirmar = ({
                     </div>
 
                     <DatosClienteConf venta={venta} />
-                    <TablaProdVenta venta={venta} igv={igv} />
+                    <TablaProdVenta venta={venta} />
 
-                    <div className="grid-4 gap center">
+                    <div className="grid-3 gap center">
                         <span>
                             <p>Subtotal:</p>
                             <p className="info"><strong>S/. { venta.subtotal }</strong></p>
@@ -142,19 +125,13 @@ export const ModalVentaConfirmar = ({
                                 name="reducirPercent"
                                 value={reducirPercent}
                                 onChange={onChangeRedPercent}
-                                // moneda
+                                color={
+                                    reducirPercent < 0
+                                    ? "danger-i" : ""
+                                }
                             />
                         </div>
 
-                        <div>
-                            <p className="center">Mostrar IGV:</p>
-                            <Checkbox2
-                                // label={igv ? "Deshabilitar" : "Habilitar"}
-                                name="igv"
-                                checked={igv}
-                                handlerCheck={ () => setIgv(!igv) }
-                            />
-                        </div>
                     </div>
 
                     <div className="grid-1 gap center">

@@ -16,7 +16,6 @@ import { ModalVentaRechazar } from "./modals/ModalVentaRechazar";
 import { ModalWrap } from "../../../components/modals/ModalWrap";
 
 
-
 interface descripcionVenta {
     data:any
     handlerRefresh:Function;

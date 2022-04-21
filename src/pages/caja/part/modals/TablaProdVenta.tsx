@@ -1,9 +1,8 @@
 interface tablaProdVenta {
     venta:any;
-    igv:boolean;
 }
 
-export const TablaProdVenta = ({ venta, igv }:tablaProdVenta) => {
+export const TablaProdVenta = ({ venta }:tablaProdVenta) => {
 
     return (
         <div className="mb-15">
@@ -12,9 +11,10 @@ export const TablaProdVenta = ({ venta, igv }:tablaProdVenta) => {
                 <thead>
                     <tr>
                         <th>Producto</th>
-                        <th>Cant.</th>
+                        <th>Precio G.</th>
+                        <th>IGV</th>
                         <th>Precio U.</th>
-                        { igv && <th>IGV</th> }
+                        <th>Cant.</th>
                         <th>Inc/Desc</th>
                         <th>Precio V.</th>
                     </tr>
@@ -35,9 +35,10 @@ export const TablaProdVenta = ({ venta, igv }:tablaProdVenta) => {
                             return (
                                 <tr key={index}>
                                     <td>{ e.productos.nombre }</td>
-                                    <td><strong>{ e.cantidad_venta }</strong></td>
+                                    <td><strong>S/. { e.precio_gravada }</strong></td>
+                                    <td>S/. { e.igv }</td>
                                     <td><strong>S/. { e.precio_venta }</strong></td>
-                                    { igv && <td>S/. { e.igv }</td> }
+                                    <td><strong>{ e.cantidad_venta }</strong></td>
                                     <td className={cambioPrecio}>S/. { e.descuento }</td>
                                     <td className={cambioPrecio}><strong>S/. { e.precio_parcial }</strong></td>
                                 </tr>
