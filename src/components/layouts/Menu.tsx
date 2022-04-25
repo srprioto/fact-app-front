@@ -47,7 +47,7 @@ export const Menu = () => {
                 <BoxMenu titulo="Productos">
                     {/* <ItemMenu url="/almacen" label="Almacen" icon={ <BiLayout /> } /> */}
                     <ItemMenu url="/ingreso-productos" label="Ingresar productos" icon={ <BiPlusCircle /> } />
-                    <ItemMenu url="/productos" label="Inventario" icon={ <BiBox /> } />
+                    <ItemMenu url="/productos" label="Productos" icon={ <BiBox /> } />
                 </BoxMenu>
 
                 <BoxMenu titulo="Personas">

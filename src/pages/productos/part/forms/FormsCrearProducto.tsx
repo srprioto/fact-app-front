@@ -22,7 +22,7 @@ export const FormsCrearProducto = ({ handlerCreateProducto, loading }:formsCrear
                     marca:"",
                     color:"",
                     talla:"",
-                    // precio_compra:"",
+                    precio_compra:"",
                     precio_venta_1:"",
                     precio_venta_2:"",
                     precio_venta_3:"",
@@ -43,7 +43,7 @@ export const FormsCrearProducto = ({ handlerCreateProducto, loading }:formsCrear
                     <Form className="grid-1 gap mt-25 mb-25">
                         
 
-                        <div className="grid-2 gap">
+                        <div className="grid-3 gap">
 
                             {/* <InputMk 
                                 label="Codigo del producto"
@@ -64,13 +64,15 @@ export const FormsCrearProducto = ({ handlerCreateProducto, loading }:formsCrear
                                 error={errors.descripcion}
                             />
 
+                            <InputMk 
+                                label="Precio de compra"
+                                type="number"
+                                name="precio_compra"
+                                error={errors.precio_compra}
+                                moneda
+                            />
+
                         </div>
-
-                        {/* <div className="grid-1 gap">
-
-                            
-                            
-                        </div> */}
 
                         <div className="grid-3 gap">
 
@@ -97,30 +99,28 @@ export const FormsCrearProducto = ({ handlerCreateProducto, loading }:formsCrear
 
                         <div className="grid-3 gap">
 
-                            {/* <InputMk 
-                                label="Precio de compra"
-                                type="number"
-                                name="precio_compra"
-                                error={errors.precio_compra}
-                            /> */}
+
 
                             <InputMk 
                                 label="Precio por unidad"
                                 type="number"
                                 name="precio_venta_1"
                                 error={errors.precio_venta_1}
+                                moneda
                             />
                             <InputMk 
                                 label="Precio al por menor"
                                 type="number"
                                 name="precio_venta_2"
                                 error={errors.precio_venta_2}
+                                moneda
                             />
                             <InputMk 
                                 label="Precio al por mayor"
                                 type="number"
                                 name="precio_venta_3"
                                 error={errors.precio_venta_3}
+                                moneda
                             />
 
                         </div>

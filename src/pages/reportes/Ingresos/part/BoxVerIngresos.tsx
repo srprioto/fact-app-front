@@ -1,14 +1,23 @@
 import { useEffect, useState } from "react"
 import { Loading } from "../../../../components/loads/Loading";
+import { ModalWrap } from "../../../../components/modals/ModalWrap";
 
 import { getOne } from "../../../../resources/fetch";
-import { zeroFill } from "../../../../resources/func/ceroFill";
 import { MOVIMIENTOS } from "../../../../resources/routes";
 import { ProductoInfo } from "../../../productos/otros/ProductoInfo";
+import { InfoIngresoProductos } from "./InfoIngresoProductos";
+import { IngresoDetalleDropD } from "./IngresoDetalleDropD";
+import { ModalCalcPrecio } from "./ModalCalcPrecio";
 
-export const BoxVerIngresos = ({ idIngreso }:any) => {
+interface boxVerIngresos {
+    idIngreso:number;
+}
+
+export const BoxVerIngresos = ({ idIngreso }:boxVerIngresos) => {
 
     const [loadingOne, setLoadingOne] = useState<boolean>(false);
+    const [modalCalcPrecio, setModalCalcPrecio] = useState<boolean>(false);
+    const [movimientoDetalle, setMovimientoDetalle] = useState<any>({});
     const [movimiento, setMovimiento] = useState<any>({});
     
     useEffect(() => {
@@ -30,6 +39,36 @@ export const BoxVerIngresos = ({ idIngreso }:any) => {
 
     }
 
+
+    const handlerCalcularPrecio = (ingresoDetalle:any) => { 
+        setMovimientoDetalle(ingresoDetalle);
+        setModalCalcPrecio(true);
+    }
+
+
+    const handlerCalcularTotalProductos = () => { 
+
+        let totalProductos:number = 0;
+
+        if (movimiento.movimientoDetalles) {
+            movimiento.movimientoDetalles.forEach((el:any) => {
+                totalProductos = totalProductos + el.cantidad
+            });
+        }
+
+        return totalProductos
+    }
+
+
+    const classNoPrecios = (precio:any) => {
+        let classItem:string = "";
+        if (precio === 0) {
+            classItem = "danger-i"
+        }
+        return classItem
+    }
+    
+
     return (
         loadingOne
         ? <Loading />
@@ -49,6 +88,7 @@ export const BoxVerIngresos = ({ idIngreso }:any) => {
                                 <th>Precio/paquete</th>
                                 <th>Proveedor</th>
                                 <th>Descripcion</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -57,16 +97,24 @@ export const BoxVerIngresos = ({ idIngreso }:any) => {
                                 && (
                                     movimiento.movimientoDetalles.map((e:any) => {
                                         return (
-                                            <tr key={e.id}>
-                                                <td className="info">{ e.productos.nombre }</td>
-                                                <td>
-                                                    <ProductoInfo producto={e.productos} />
-                                                </td>
+                                            <tr key={e.id} className={classNoPrecios(e.productos.precio_venta_1)}>
+                                                <td className={
+                                                    classNoPrecios(e.productos.precio_venta_1) === ""
+                                                    ? "info"
+                                                    : classNoPrecios(e.productos.precio_venta_1)
+                                                }>{ e.productos.nombre }</td>
+                                                <td><ProductoInfo producto={e.productos} /></td>
                                                 <td>{ e.cantidad }</td>
                                                 <td>{ e.precio_unidad }</td>
                                                 <td>{ e.precio_parcial }</td>
                                                 <td>{ e.proveedores && e.proveedores.nombre }</td>
                                                 <td>{ e.descripcion }</td>
+                                                <td>
+                                                    <IngresoDetalleDropD
+                                                        el={e}
+                                                        calcularPrecio={handlerCalcularPrecio}
+                                                    />
+                                                </td>
                                             </tr>
                                         )
                                     })
@@ -77,55 +125,20 @@ export const BoxVerIngresos = ({ idIngreso }:any) => {
 
                 </div>
 
-                <div className="grid-2 gap">
+                <InfoIngresoProductos movimiento={movimiento} />
 
-                    <div className="wrap-descripcion3">
-                        <h3>Costos</h3>
-                        <div className="box-wrap-descripcion3">
-                            <span>
-                                <p>Subtotal</p>
-                                <h4>{ movimiento.subtotal }</h4>
-                            </span>
-                            <span>
-                                <p>Costo de transporte</p>
-                                <h4>{ movimiento.costo_transporte }</h4>
-                            </span>
-                            <span>
-                                <p>Otros costos</p>
-                                <h4>{ movimiento.costo_otros }</h4>
-                            </span>
-                            <span>
-                                <p>Total</p>
-                                <h4>{ movimiento.total }</h4>
-                            </span>
-                        </div>
-                    </div>
+                <ModalWrap modal={modalCalcPrecio}>
+                    <ModalCalcPrecio
+                        modal={modalCalcPrecio}
+                        setModal={setModalCalcPrecio}
+                        movimientoDetalle={movimientoDetalle}
+                        gastosAdicionales={movimiento.costo_transporte + movimiento.costo_otros}
+                        totalProductos={handlerCalcularTotalProductos()}
+                        getDataOne={getDataOne}
+                    />
+                </ModalWrap>
+                
 
-                    <div className="wrap-descripcion3">
-                        <h3>Otros</h3>
-                        <div className="box-wrap-descripcion3">
-                            <span>
-                                <p>Codigo de ingreso: </p>
-                                <h4>{ zeroFill(Number(movimiento.id), 8) }</h4>
-                            </span>
-
-                            <span>
-                                <p>Local destino: </p>
-                                <h4>{ movimiento.locales && movimiento.locales.nombre }</h4>
-                            </span>
-
-                            <span>
-                                <p>Observaciones: </p>
-                                <h4>{ movimiento.observaciones }</h4>
-                            </span>
-
-                            <span>
-                                <p>Fecha de envio: </p>
-                                <h4>{ movimiento.created_at }</h4>
-                            </span>
-                        </div>                    
-                    </div>
-                </div>
             </div>
         )
     )

@@ -44,7 +44,7 @@ export const ModalNuevoProveedor = ({
             title="Registrar un nuevo proveedor"
             modal={modal}
             setModal={setModal}
-            width={100}
+            width={80}
             height={100}
         >
             <div className="nuevo-proveedor box2">

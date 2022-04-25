@@ -27,6 +27,10 @@ export const ProductoInfo = ({ producto }:any) => {
                         <h4>{ producto.talla }</h4>
                     </span>
                     <span>
+                        <p>Precio compra: </p>
+                        <h4>{ producto.precio_compra }</h4>
+                    </span>
+                    <span>
                         <p>Precio/unidad: </p>
                         <h4>S/. { producto.precio_venta_1 }</h4>
                     </span>

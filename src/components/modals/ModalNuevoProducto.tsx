@@ -36,8 +36,9 @@ export const ModalNuevoProducto = ({ modal, setModal, movDetails, setMovDetails,
             title="Registrar un nuevo producto"
             modal={modal}
             setModal={setModal}
-            width={100}
+            width={80}
             height={100}
+            
         >
             <div className="nuevo-producto box2">
                 <WrapCrearProducto

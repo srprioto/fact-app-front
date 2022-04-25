@@ -148,6 +148,10 @@ label{
     width: 75%;
 }
 
+.h100{
+    height: 100%;
+}
+
 
 // links
 
@@ -853,11 +857,20 @@ table.no-hover{
     justify-content: center;
     align-items: center;
 
+    .back-modal{
+        position: absolute;
+        font-size: 34px;
+        top: -20px;
+        left: -12px;
+        cursor: pointer;
+        color: $primary;
+    }
+
     .close-modal {
         position: absolute;
         font-size: 40px;
-        top: 0;
-        right: 10px;
+        top: -25px;
+        right: -23px;
         cursor: pointer;
         color: $info;
     }
@@ -865,7 +878,7 @@ table.no-hover{
     .modal{
         // width: 800px;
         // height: 500px;
-        position: relative;
+        // position: relative;
         background-color: $boxT;
         border-radius: 9px;
         padding: 25px;
@@ -878,6 +891,14 @@ table.no-hover{
         }
 
     }
+
+    .modal-notransparent{
+        background-color: $box!important;
+    }
+
+    // .over-hidden{
+    //     overflow: hidden!important;
+    // }
 
 }
 

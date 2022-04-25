@@ -6,6 +6,7 @@ interface inputMk{
     type:string;
     name:string;
     error:any;
+    moneda?:boolean;
     placeholder?:string;
 }
 
@@ -14,25 +15,32 @@ interface msgError {
 }
 
 // requiere formik
-export const InputMk = ({ label, type, name, error, placeholder }:inputMk) => {
+export const InputMk = ({ label, type, name, error, moneda, placeholder }:inputMk) => {
 
     return (
         <div className="wrap-form">
-            
+
             <label htmlFor={name}>{ label }</label>
+
+            <div className="relative">
             
-            <div className="box-form">
-                <Field 
-                    type={type}
-                    id={name}
-                    name={name} 
-                    placeholder={placeholder}
-                    autoComplete="off"
-                />
-                <ErrorMessage
-                    name={name}
-                    component={ () => <MsgError error={error} /> }
-                />
+                <div className="box-form">
+                    <Field 
+                        type={type}
+                        id={name}
+                        name={name} 
+                        placeholder={placeholder}
+                        autoComplete="off"
+                    />
+                    <ErrorMessage
+                        name={name}
+                        component={ () => <MsgError error={error} /> }
+                    />
+                </div>
+                {
+                    moneda
+                    && <span className="moneda">S/.</span>
+                }
             </div>
 
         </div>
