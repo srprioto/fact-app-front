@@ -47,13 +47,12 @@ export const InfoGeneralVentas = () => {
         setLoadingData(true);
 
         try {
-
             let data:any;
-
-            if (urlPage && urlPage !== "") 
+            if (urlPage && urlPage !== "") {
                 data = await paginate(urlPage);
-            else 
+            } else {
                 data = await paginate(VENTAS_PAGINATE + `/${value_filtro}/filtro`);
+            }
 
             setData(data.items);
             setPagination({

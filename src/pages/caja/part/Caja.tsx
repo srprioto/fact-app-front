@@ -31,7 +31,7 @@ export const Caja = () => {
     const getData = async () => {
         setLoadingData(true);
         try {
-            const data = await get(VENTAS_PEDIDOS);
+            const data = await get(VENTAS_PEDIDOS + "/" + params.id);
             setData(data);
             setLoadingData(false);
         } catch (error) {
