@@ -134,7 +134,6 @@ export const ModalAddProducto = ({
     const reiniciarTodo = () => { 
         reiniciarData()
         reiniciarSelect()
-        
     }
 
 
@@ -204,6 +203,7 @@ export const ModalAddProducto = ({
                         name="cantidad"
                         value={movDetails.cantidad}
                         onChange={handlerChangeMovimientoDetalles}
+                        noMenos
                     />
                     
                     <Input
@@ -213,6 +213,7 @@ export const ModalAddProducto = ({
                         value={movDetails.precio_parcial}
                         onChange={handlerChangeMovimientoDetalles}
                         moneda
+                        noMenos
                     />
 
                     <InputDisable label="Precio por unidad" value={movDetails.precio_unidad} moneda/>

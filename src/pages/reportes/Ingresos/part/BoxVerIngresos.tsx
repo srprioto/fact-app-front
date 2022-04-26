@@ -19,6 +19,7 @@ export const BoxVerIngresos = ({ idIngreso }:boxVerIngresos) => {
     const [modalCalcPrecio, setModalCalcPrecio] = useState<boolean>(false);
     const [movimientoDetalle, setMovimientoDetalle] = useState<any>({});
     const [movimiento, setMovimiento] = useState<any>({});
+
     
     useEffect(() => {
         getDataOne();
@@ -36,7 +37,6 @@ export const BoxVerIngresos = ({ idIngreso }:boxVerIngresos) => {
             setLoadingOne(true);
             console.log(error);
         }
-
     }
 
 
