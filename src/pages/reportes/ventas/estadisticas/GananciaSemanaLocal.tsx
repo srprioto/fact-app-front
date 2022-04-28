@@ -17,7 +17,7 @@ export const GananciaSemanaLocal = ({ idLocal, noTitulo }:gananciaSemanaLocal) =
 
     useEffect(() => {
         getData();
-    }, [])
+    }, [idLocal])
     
 
     const getData = async () => { 

@@ -8,7 +8,6 @@ import { TextoRelleno } from "../../../components/TextoRelleno";
 import { get } from "../../../resources/fetch"
 import { LOCALES_SOLO } from "../../../resources/routes"
 import { GananciaSemanaLocal } from "../../reportes/ventas/estadisticas/GananciaSemanaLocal";
-// import { VentasSemana } from "../../reportes/ventas/estadisticas/VentasSemana";
 
 export const Locales = () => {
 
@@ -39,7 +38,6 @@ export const Locales = () => {
     const handlerSelectLocal = (e:any) => { 
         setLocal(e);
         setToggle(e.id);
-        getData();
     }
     
 
@@ -90,10 +88,6 @@ export const Locales = () => {
                                                     <BiStore />
                                                     <h4>{ e.nombre }</h4>
                                                 </div>
-                                                {/* <button className="btn btn-primary" onClick={() => handlerLocal(e.id, e.nombre)}>
-                                                    <span>Ingresar</span>
-                                                    <BiRightArrowAlt />
-                                                </button> */}
                                             </div>
                                             
                                         </div>
