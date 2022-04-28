@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { BiCartAlt, BiDollarCircle, BiListOl, BiMapPin, BiStore } from "react-icons/bi"
+import { BiCartAlt, BiCoin, BiDollarCircle, BiListOl, BiMapPin, BiStore } from "react-icons/bi";
 import { Link } from 'react-router-dom';
 
 import { Loading } from "../../../components/loads/Loading"
@@ -7,12 +7,16 @@ import { TextoRelleno } from "../../../components/TextoRelleno";
 
 import { get } from "../../../resources/fetch"
 import { LOCALES_SOLO } from "../../../resources/routes"
+import { GananciaSemanaLocal } from "../../reportes/ventas/estadisticas/GananciaSemanaLocal";
+// import { VentasSemana } from "../../reportes/ventas/estadisticas/VentasSemana";
 
 export const Locales = () => {
 
     const [loadingLocal, setLoadingLocal] = useState<boolean>(false)
     const [locales, setLocales] = useState<any>([])
     const [local, setLocal] = useState<any>({})
+
+    const [toggleGeneral, setToggleGeneral] = useState<number>(1);
     
     const [toggle, setToggle] = useState<number>(0); // cambiar select local
 
@@ -25,7 +29,6 @@ export const Locales = () => {
         try {
             const data = await get(LOCALES_SOLO);
             setLocales(data);
-            
             setLoadingLocal(false);
         } catch (error) {
             setLoadingLocal(true);
@@ -34,8 +37,9 @@ export const Locales = () => {
     }
 
     const handlerSelectLocal = (e:any) => { 
-        setLocal(e)
+        setLocal(e);
         setToggle(e.id);
+        getData();
     }
     
 
@@ -104,12 +108,30 @@ export const Locales = () => {
                                         !Object.keys(local).length
                                         ? <TextoRelleno texto="Selecciona un local"/>
                                         : (
-                                            <div className="grid-1 gap-h">
-                                                <span className="center iconLocal"><BiMapPin /></span>
-                                                <h3>{ local.nombre }</h3>
-                                                <p><strong>Direccion: </strong>{ local.direccion }</p>
-                                                <p><strong>Telefono: </strong>{ local.telefono }</p>
-                                                <div className="grid-3 gap">
+                                            <div className="grid-1 gap">
+                                                
+                                                <div className="btn-tabs grid-2 gap">
+                                                    <button 
+                                                        onClick={() => setToggleGeneral(1)}
+                                                        className={`btn2 btn2-info ${toggleGeneral === 1 && "btn2-sub-info"}`}>
+                                                        {/* <BiBarChartAlt2 /> */}
+                                                        Informacion del local
+                                                    </button>
+                                                    <button 
+                                                        onClick={() => setToggleGeneral(2)}
+                                                        className={`btn2 btn2-info ${toggleGeneral === 2 && "btn2-sub-info"}`}>
+                                                        {/* <BiDetail /> */}
+                                                        Ingresos de la semana
+                                                    </button>
+                                                    {/* <div></div> */}
+
+                                                </div>
+
+                                                { toggleGeneral === 1 && <InfoLocal local={local} /> }
+                                                { toggleGeneral === 2 && <GananciaSemanaLocal idLocal={local.id} noTitulo /> }
+                                                
+
+                                                <div className="grid-4 gap btn-links">
 
                                                     <Link 
                                                         to={`/tiendas/vender/${local.id}/${local.nombre}`} className="btn btn-success"
@@ -121,16 +143,24 @@ export const Locales = () => {
                                                     <Link 
                                                         to={`/tiendas/caja/${local.id}/${local.nombre}`} className="btn btn-warning"
                                                     >
-                                                        <BiDollarCircle />
-                                                        Caja
+                                                        <BiCoin />
+                                                        Cobrar
+                                                    </Link>
+
+                                                    <Link 
+                                                        to={`/tiendas/local/${local.id}/${local.nombre}`} 
+                                                        className="btn btn-primary"
+                                                    >
+                                                        <BiListOl />
+                                                        Stock
                                                     </Link>
 
                                                     <Link 
                                                         to={`/tiendas/local/${local.id}/${local.nombre}`} 
                                                         className="btn btn-info"
                                                     >
-                                                        <BiListOl />
-                                                        Stock
+                                                        <BiDollarCircle />
+                                                        Caja
                                                     </Link>
 
                                                 </div>
@@ -144,6 +174,19 @@ export const Locales = () => {
                 )
             }
             
+        </div>
+    )
+}
+
+
+const InfoLocal = ({ local }:any) => { 
+
+    return (
+        <div className="grid-1 gap-h mb-15">
+            <span className="center iconLocal"><BiMapPin /></span>
+            <h3>{ local.nombre }</h3>
+            <p><strong>Direccion: </strong>{ local.direccion }</p>
+            <p><strong>Telefono: </strong>{ local.telefono }</p>
         </div>
     )
 }

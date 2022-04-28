@@ -1,6 +1,14 @@
 import { AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 
-export const StackedAreaChart = ({ data }:any) => {
+interface stackedAreaChart {
+    data:any;
+    color?:string;
+    dataKey?:string;
+}
+
+export const StackedAreaChart = ({ data, color = "#556ee6", dataKey = "Cantidad" }:stackedAreaChart) => {
+
+
 
     return (
         <div className="stacked-area-chart">
@@ -21,7 +29,7 @@ export const StackedAreaChart = ({ data }:any) => {
                 <XAxis dataKey="Dia" />
                 <YAxis />
                 <Tooltip />
-                <Area type="monotone" dataKey="Cantidad" stackId="1" stroke="#556ee6" fill="#556ee6" />
+                <Area type="monotone" dataKey={dataKey} stackId="1" stroke={color} fill={color} />
                 {/* <Area type="monotone" dataKey="pv" stackId="1" stroke="#82ca9d" fill="#82ca9d" /> */}
                 {/* <Area type="monotone" dataKey="amt" stackId="1" stroke="#ffc658" fill="#ffc658" /> */}
             </AreaChart>

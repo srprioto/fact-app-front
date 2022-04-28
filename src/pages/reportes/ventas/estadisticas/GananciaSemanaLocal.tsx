@@ -1,10 +1,15 @@
 import { useEffect, useState } from "react";
-import { StackedAreaChart } from "../../../../components/charts/StackedAreaChart";
+import { StackedAreaChart } from "../../../../components/charts/StackedAreaChart"
 import { Loading } from "../../../../components/loads/Loading";
 import { get } from "../../../../resources/fetch";
 import { VENTAS } from "../../../../resources/routes";
 
-export const VentasSemana = () => {
+interface gananciaSemanaLocal {
+    idLocal:number;
+    noTitulo?:boolean;
+}
+
+export const GananciaSemanaLocal = ({ idLocal, noTitulo }:gananciaSemanaLocal) => {
 
     const [data, setData] = useState<any>([]);
     const [LoadingVentas, setLoadingVentas] = useState<boolean>(false);
@@ -18,7 +23,7 @@ export const VentasSemana = () => {
     const getData = async () => { 
         setLoadingVentas(true);
         try {
-            const data = await get(VENTAS + "/reporte/ventas-semana");
+            const data = await get(VENTAS + "/reporte/ingresos-semana/" + idLocal);
             setData(data);
             setLoadingVentas(false);
         } catch (error) {
@@ -28,19 +33,19 @@ export const VentasSemana = () => {
     }
 
     return (
-        
         <div className="grid-1 gap box m-0">
 
-            <h3>Ventas de la semana</h3>
+            {!noTitulo && <h3>Ventas de la semana</h3>}
             {
                 LoadingVentas
                 ? <Loading />
                 : (
-                    <StackedAreaChart data={data.totalVentasSemana} />
+                    <StackedAreaChart data={data.totalVentasSemana} color="#34c38f" dataKey="Ingresos" />
                 )
             }
 
         </div>
-        
     )
 }
+
+/* <StackedAreaChart /> */
