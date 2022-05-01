@@ -168,9 +168,6 @@ export const InfoGeneralVentas = () => {
                 idVenta={idVenta}
                 getData={getData}
             />
-            
-
-            
 
         </>
     )

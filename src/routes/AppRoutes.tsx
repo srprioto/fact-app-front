@@ -28,6 +28,7 @@ import { PublicRouter } from "./PublicRouter";
 import { Page404 } from "../pages/Page404";
 import { IngresoProductos } from "../pages/reportes/IngresoProductos";
 import { Ventas } from "../pages/reportes/Ventas";
+import { IndexCajaChica } from "../pages/cajaChica";
 
 
 export const AppRoutes = () => {
@@ -53,6 +54,7 @@ export const AppRoutes = () => {
                     <Route path="/tiendas/local/:id/:nombre" element={ <IndexLocal /> } />
                     <Route path="/tiendas/vender/:id/:nombre" element={ <IndexVenta /> } />
                     <Route path="/tiendas/caja/:id/:nombre" element={ <IndexCaja /> } />
+                    <Route path="/tiendas/caja-chica/:id/:nombre" element={ <IndexCajaChica /> } />
                     
                     <Route path="/almacenes" element={ <IndexAlmacenes /> } />
                     <Route path="/almacenes/almacen/:id/:nombre" element={ <IndexAlmacen /> } />

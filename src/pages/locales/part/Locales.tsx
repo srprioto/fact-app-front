@@ -77,7 +77,7 @@ export const Locales = () => {
     const handlerCaja = () => { 
         if (stateCaja) {
             // mostrar caja
-            navigate("/");
+            navigate(`/tiendas/caja-chica/${local.id}/${local.nombre}`);
         } else {
             // abrir caja
             setModalAbrirCaja(true);
