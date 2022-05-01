@@ -3,7 +3,7 @@ import { LoadingBtn } from "./LoadingBtn";
 interface loadSwitchBtn2 {
     loading:boolean;
     className:string;
-    handler?:any;
+    handler?:any; // requiere arrow function por fuera
     children?:any
 }
 

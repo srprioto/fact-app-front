@@ -36,6 +36,10 @@ export const VENTAS_PAGINATE:string = "/ventas/paginate";
 export const VENTAS_SEARCH:string  = "/ventas/search/";
 export const VENTAS_PEDIDOS:string = "/ventas/pedidos";
 
+export const CAJA_ABRIR:string = "/caja/abrir-caja"
+export const CAJA_VERIFICAR:string = "/caja/verificar-caja" // requiere id
+export const CAJA_CERRAR:string = "/caja/cerrar-caja" // requiere id
+
 
 // almacenes
 // export const ALMACEN:string = "/locales-stock/almacen/productos"; // localstock

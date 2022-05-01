@@ -1,27 +1,46 @@
 import { useEffect, useState } from "react"
+import { useNavigate } from 'react-router-dom';
 import { BiCartAlt, BiCoin, BiDollarCircle, BiListOl, BiMapPin, BiStore } from "react-icons/bi";
 import { Link } from 'react-router-dom';
+import { LoadSwitchBtn2 } from "../../../components/btns/LoadSwitchBtn2";
 
 import { Loading } from "../../../components/loads/Loading"
 import { TextoRelleno } from "../../../components/TextoRelleno";
 
-import { get } from "../../../resources/fetch"
-import { LOCALES_SOLO } from "../../../resources/routes"
+import { get, getOne } from "../../../resources/fetch"
+import { CAJA_VERIFICAR, LOCALES_SOLO } from "../../../resources/routes"
 import { GananciaSemanaLocal } from "../../reportes/ventas/estadisticas/GananciaSemanaLocal";
+import { ModalWrap } from "../../../components/modals/ModalWrap";
+import { ModalAbrirCaja } from "./ModalAbrirCaja";
+import { BtnOnOff2 } from "../../../components/btns/BtnOnOff2";
+
 
 export const Locales = () => {
+
+    const navigate = useNavigate();
 
     const [loadingLocal, setLoadingLocal] = useState<boolean>(false)
     const [locales, setLocales] = useState<any>([])
     const [local, setLocal] = useState<any>({})
-
     const [toggleGeneral, setToggleGeneral] = useState<number>(1);
-    
     const [toggle, setToggle] = useState<number>(0); // cambiar select local
+
+    const [stateCaja, setStateCaja] = useState<boolean>(false);
+    const [LoadStateCaja, setLoadStateCaja] = useState<boolean>(false);
+    const [modalAbrirCaja, setModalAbrirCaja] = useState<boolean>(false);
+
 
     useEffect(() => {
         getData();
     }, [])
+
+
+    useEffect(() => {
+        if (Object.keys(local).length) {
+            handlerEstadoCaja();    
+        }
+    }, [local])
+
 
     const getData = async () => {
         setLoadingLocal(true);
@@ -35,9 +54,34 @@ export const Locales = () => {
         }
     }
 
+
+    const handlerEstadoCaja = async () => { 
+        setLoadStateCaja(true);
+        try {
+            const estadoCaja = await getOne(local.id, CAJA_VERIFICAR);
+            setStateCaja(estadoCaja);
+            setLoadStateCaja(false);            
+        } catch (error) {
+            setLoadStateCaja(true);
+            console.log(error);
+        }
+    }
+
+    
     const handlerSelectLocal = (e:any) => { 
         setLocal(e);
         setToggle(e.id);
+    }
+
+
+    const handlerCaja = () => { 
+        if (stateCaja) {
+            // mostrar caja
+            navigate("/");
+        } else {
+            // abrir caja
+            setModalAbrirCaja(true);
+        }
     }
     
 
@@ -95,6 +139,7 @@ export const Locales = () => {
                                 })
                             }
                         </div>
+
                         <div className="box m-0">
                             <div className="local">
                                 <div className="info-local">
@@ -127,34 +172,45 @@ export const Locales = () => {
 
                                                 <div className="grid-4 gap btn-links">
 
-                                                    <Link 
-                                                        to={`/tiendas/vender/${local.id}/${local.nombre}`} className="btn btn-success"
+                                                    <BtnOnOff2
+                                                        label="Vender"
+                                                        estado={stateCaja}
+                                                        icon={<BiCartAlt />}
                                                     >
-                                                        <BiCartAlt />
-                                                        Vender
-                                                    </Link>
+                                                        <Link 
+                                                            to={`/tiendas/vender/${local.id}/${local.nombre}`} className="btn btn-success"
+                                                        >
+                                                            <BiCartAlt /> Vender
+                                                        </Link>
+                                                    </BtnOnOff2>
 
-                                                    <Link 
-                                                        to={`/tiendas/caja/${local.id}/${local.nombre}`} className="btn btn-warning"
+                                                    <BtnOnOff2
+                                                        label="Cobrar"
+                                                        estado={stateCaja}
+                                                        icon={<BiCoin />}
                                                     >
-                                                        <BiCoin />
-                                                        Cobrar
-                                                    </Link>
+                                                        <Link 
+                                                            to={`/tiendas/caja/${local.id}/${local.nombre}`} className="btn btn-warning"
+                                                        >
+                                                            <BiCoin />
+                                                            Cobrar
+                                                        </Link>
+                                                    </BtnOnOff2>
+
+                                                    <LoadSwitchBtn2
+                                                        loading={LoadStateCaja}
+                                                        className={"btn btn-" + (stateCaja ? "info" : "danger")}
+                                                        handler={() => { handlerCaja() }}
+                                                    >
+                                                        <BiDollarCircle /> Caja
+                                                    </LoadSwitchBtn2>
+                                                    {/* stateCaja */}
 
                                                     <Link 
                                                         to={`/tiendas/local/${local.id}/${local.nombre}`} 
                                                         className="btn btn-primary"
                                                     >
-                                                        <BiListOl />
-                                                        Stock
-                                                    </Link>
-
-                                                    <Link 
-                                                        to={`/tiendas/local/${local.id}/${local.nombre}`} 
-                                                        className="btn btn-info"
-                                                    >
-                                                        <BiDollarCircle />
-                                                        Caja
+                                                        <BiListOl /> Stock
                                                     </Link>
 
                                                 </div>
@@ -167,6 +223,16 @@ export const Locales = () => {
                     </div>
                 )
             }
+
+            <ModalWrap modal={modalAbrirCaja}>
+                <ModalAbrirCaja
+                    modal={modalAbrirCaja}
+                    setModal={setModalAbrirCaja}
+                    idLocal={local.id}
+                    nombreLocal={local.nombre}
+                    setStateCaja={setStateCaja}
+                />
+            </ModalWrap>
             
         </div>
     )
@@ -176,11 +242,21 @@ export const Locales = () => {
 const InfoLocal = ({ local }:any) => { 
 
     return (
-        <div className="grid-1 gap-h mb-15">
-            <span className="center iconLocal"><BiMapPin /></span>
-            <h3>{ local.nombre }</h3>
-            <p><strong>Direccion: </strong>{ local.direccion }</p>
-            <p><strong>Telefono: </strong>{ local.telefono }</p>
+        <div className="middle">
+            <div className="grid-1 gap">
+                <span className="center iconLocal"><BiMapPin /></span>
+                <h3>{ local.nombre }</h3>
+                <p><strong>Direccion: </strong>{ local.direccion }</p>
+                <p><strong>Telefono: </strong>{ local.telefono }</p>
+            </div>
         </div>
     )
 }
+
+/* <button
+    className="btn btn-info"
+    onClick={() => handlerCaja()}
+>
+    <BiDollarCircle />
+    Caja
+</button> */
