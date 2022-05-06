@@ -4,7 +4,7 @@ import { PrivateRouter } from "./PrivateRouter";
 
 import { IndexAlmacenes } from "../pages/almacenes";
 import { IndexAlmacen } from "../pages/almacenes/Almacen";
-import { IndexCaja } from "../pages/caja";
+import { IndexCobrar } from "../pages/cobrar";
 import { IndexClientes } from "../pages/clientes";
 import { IndexEditarCliente } from "../pages/clientes/Editar";
 import { IndexNuevoCliente } from "../pages/clientes/Nuevo";
@@ -53,7 +53,7 @@ export const AppRoutes = () => {
                     <Route path="/tiendas" element={ <IndexLocales /> } />
                     <Route path="/tiendas/local/:id/:nombre" element={ <IndexLocal /> } />
                     <Route path="/tiendas/vender/:id/:nombre" element={ <IndexVenta /> } />
-                    <Route path="/tiendas/caja/:id/:nombre" element={ <IndexCaja /> } />
+                    <Route path="/tiendas/caja/:id/:nombre" element={ <IndexCobrar /> } />
                     <Route path="/tiendas/caja-chica/:id/:nombre" element={ <IndexCajaChica /> } />
                     
                     <Route path="/almacenes" element={ <IndexAlmacenes /> } />

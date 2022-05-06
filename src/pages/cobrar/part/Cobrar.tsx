@@ -13,7 +13,7 @@ import { VENTAS, VENTAS_PEDIDOS, VENTAS_SEARCH } from "../../../resources/routes
 import { BiRefresh } from "react-icons/bi";
 import { TextoRelleno } from "../../../components/TextoRelleno";
 
-export const Caja = () => {
+export const Cobrar = () => {
     const params = useParams(); // params.id, params.nombre
 
     const [searchState, setSearchState] = useState<boolean>(false); // estado de busqueda

@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { BiReply } from "react-icons/bi";
+import { BtnOnOff2 } from "../../../components/btns/BtnOnOff2";
 import { LoadSwitchBtn } from "../../../components/btns/LoadSwitchBtn";
 import { Input } from "../../../components/forms/Input"
 import { Modal } from "../../../components/modals/Modal"
@@ -48,6 +49,15 @@ export const ModalAbrirCaja = ({ modal, setModal, idLocal, nombreLocal, setState
     }
 
 
+    const validarAbrirCaja = () => {
+        if (aperturaCaja.monto_apertura <= 0) {
+            return false
+        } else {
+            return true
+        }
+    }
+
+
     return (
         <Modal
             title={"Apertura de caja en " + nombreLocal}
@@ -73,12 +83,18 @@ export const ModalAbrirCaja = ({ modal, setModal, idLocal, nombreLocal, setState
                 </div>
                 <div className="grid-4 gap">
                     <div></div>
-                    <LoadSwitchBtn
+                    <BtnOnOff2
                         label="Confirmar"
-                        loading={loadAbrirCaja}
-                        className="success"
-                        handler={handlerAbrirCaja}
-                    />
+                        estado={validarAbrirCaja()}
+                    >
+                        <LoadSwitchBtn
+                            label="Confirmar"
+                            loading={loadAbrirCaja}
+                            className="success"
+                            handler={handlerAbrirCaja}
+                        />    
+                    </BtnOnOff2>
+                    
                     <button className="btn btn-warning" onClick={() => setModal(false)}>
                         <BiReply /> Regresar
                     </button>

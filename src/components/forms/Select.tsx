@@ -1,9 +1,9 @@
 interface select {
-    label:string;
+    label?:string;
     name:string;
     onChange:any;
     defaultValue:any; // activa el valor por defecto "no"
-    loading:boolean;
+    loading:boolean|undefined;
     textDefault?:string;
     children:any;
 }
@@ -18,8 +18,8 @@ export const Select = ({
     children 
 }:select) => {
     return (
-        <div className="wrap-form">
-            <label htmlFor={name}>{ label }</label><br />
+        <div className="wrap-form w100">
+            { label && <><label htmlFor={name}>{ label }</label><br /></> }
             <select 
                 name={name}
                 id={name}

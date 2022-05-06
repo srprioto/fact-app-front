@@ -69,6 +69,7 @@ export const Locales = () => {
 
     
     const handlerSelectLocal = (e:any) => { 
+        setStateCaja(false);
         setLocal(e);
         setToggle(e.id);
     }
@@ -197,13 +198,15 @@ export const Locales = () => {
                                                         </Link>
                                                     </BtnOnOff2>
 
-                                                    <LoadSwitchBtn2
-                                                        loading={LoadStateCaja}
-                                                        className={"btn btn-" + (stateCaja ? "info" : "danger")}
-                                                        handler={() => { handlerCaja() }}
-                                                    >
-                                                        <BiDollarCircle /> Caja
-                                                    </LoadSwitchBtn2>
+                                                    <div className="w150px">
+                                                        <LoadSwitchBtn2
+                                                            loading={LoadStateCaja}
+                                                            className={"btn btn-" + (stateCaja ? "info" : "danger")}
+                                                            handler={() => { handlerCaja() }}
+                                                        >
+                                                            <BiDollarCircle /> Caja
+                                                        </LoadSwitchBtn2>
+                                                    </div>
                                                     {/* stateCaja */}
 
                                                     <Link 

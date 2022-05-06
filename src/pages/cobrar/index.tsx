@@ -1,10 +1,10 @@
 import { Layout } from "../../components/layouts/Layout"
-import { Caja } from "./part/Caja"
+import { Cobrar } from "./part/Cobrar"
 
-export const IndexCaja = () => {
+export const IndexCobrar = () => {
     return (
         <Layout>
-            <Caja />
+            <Cobrar />
         </Layout>
     )
 }

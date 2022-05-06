@@ -1,6 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BiBarChartAlt2, BiDetail } from "react-icons/bi";
 import { TitleBox } from "../../../components/TitleBox"
+import { get } from "../../../resources/fetch";
+import { LOCALES_SOLO } from "../../../resources/routes";
 import { EstadisticasVentas } from "./EstadisticasVentas";
 import { InfoGeneralVentas } from "./InfoGeneralVentas";
 
@@ -8,6 +10,27 @@ import { InfoGeneralVentas } from "./InfoGeneralVentas";
 export const VentasRepo = () => {
 
     const [toggleGeneral, setToggleGeneral] = useState<number>(1); // tabs para los filtros general
+    const [selectLocal, setSelectLocal] = useState<string>("_");
+    const [loadingLocal, setLoadingLocal] = useState<boolean>(false);
+    const [locales, setLocales] = useState([]);
+
+    useEffect(() => {
+        getData()
+    }, [])
+    
+
+    const getData = async () => {
+        setLoadingLocal(true);
+        try {
+            const data = await get(LOCALES_SOLO);
+            setLocales(data);
+            setLoadingLocal(false);
+        } catch (error) {
+            setLoadingLocal(true);
+            console.log(error);
+        }
+    }
+    
 
     return (
         <div className="ventas-repo">
@@ -32,8 +55,15 @@ export const VentasRepo = () => {
             </div>
 
             { toggleGeneral === 1 && <EstadisticasVentas /> }
-            { toggleGeneral === 2 && <InfoGeneralVentas /> }
-            
+            { 
+                toggleGeneral === 2 
+                && <InfoGeneralVentas 
+                    idLocal={selectLocal} 
+                    selectLocal={setSelectLocal}
+                    loadingLocal={loadingLocal}
+                    locales={locales}
+                /> 
+            }
 
         </div>
     )

@@ -148,9 +148,14 @@ label{
     width: 75%;
 }
 
+.w150px{
+    width: 150px;
+}
+
 .h100{
     height: 100%;
 }
+
 
 
 // links
@@ -304,6 +309,10 @@ a{
     padding: 22px!important;
 }
 
+.box-p0{
+    padding-bottom: 0px!important;
+}
+
 .scroll-box-no-margin{ // box scroll dentro de "grid-... gap"
     margin: 0;
     @include scroll(144px);
@@ -323,6 +332,10 @@ a{
 
 .left{
     text-align: left;
+}
+
+.right{
+    text-align: right;
 }
 
 .flex-space{
@@ -408,6 +421,10 @@ a.btn{
 .btn-danger{
     border: 2px solid $danger;
     color: $danger;
+}
+
+.btn-height{
+    height: 39px;
 }
 
 .btn-disable{
@@ -1032,6 +1049,30 @@ table.no-hover{
                 font-weight: bolder;
                 font-size: 1em;
             }
+            h3, h2{
+                margin: 0;
+                // color: $texto;
+            }
+
         }
+    }
+}
+
+.box-descripcion{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 18px;
+    p{
+        margin: 0;
+    }
+    h4{
+        margin: 0;
+        color: $texto;
+        font-weight: bolder;
+        font-size: 1em;
+    }
+    h3, h2{
+        margin: 0;
     }
 }
