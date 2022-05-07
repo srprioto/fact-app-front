@@ -24,13 +24,12 @@ export const PuntoVenta = () => {
     const [switchSelectProd, setSwitchSelectProd] = useState<boolean>(false); // estado manejo select
     const [loadingOne, setLoadingOne] = useState<boolean>(false);
     const [producto, setProducto] = useState<any>({}); // producto en grudo original
-    const [productoDetalles, setProductoDetalles] = useState<ProductoDetalles>(productDetail); // producto para vender
+    const [productoDetalles, setProductoDetalles] = useState<ProductoDetalles>(productDetail); // producto
     const [listaVenta, setListaVenta] = useState<any>([]) // lista de productos
-    
     const [fornzarVenta, setFornzarVenta] = useState<boolean>(false); // forzar venta
-
     const [LocalStockId, setLocalStockId] = useState<number>(0);
     const [productosRepe, setProductosRepe] = useState<Array<number>>([]);
+
     
     const handlerForzVenta = () => setFornzarVenta(!fornzarVenta); // fornzar ventas
     

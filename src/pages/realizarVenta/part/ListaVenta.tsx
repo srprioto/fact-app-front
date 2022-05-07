@@ -154,15 +154,7 @@ export const ListaVenta = ({ listaVenta, itemPop, handlerReinicioProd, setListaV
                                     : <h5 className="warning m-0">Haz un descuento añadiendo una cantidad negativa</h5>
                                 }
                             </div>
-
-                            {/* <div className="mt-18">
-                                <Checkbox2
-                                    label="Habilitar IGV"
-                                    name="igv"
-                                    checked={checkIGV}
-                                    handlerCheck={handlerIGV}
-                                />
-                            </div> */}
+                                                
                         </div>
 
                     </div>
