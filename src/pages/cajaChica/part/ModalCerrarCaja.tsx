@@ -34,7 +34,7 @@ export const ModalCerrarCaja = ({ modal, setModal, caja, idCaja }:any) => {
             width={50}
         >
             <div className="grid-1 gap">
-                <h4 className="danger center">Si cierras caja no podrás vender o cobrar por productos hasta que vuelvas a abrirla.</h4>
+                <h4 className="danger center">Si cierras caja no podrás vender o cobrar hasta que vuelvas a abrirla.</h4>
 
                 <div className="grid-4 gap">
                     <div></div>
@@ -44,8 +44,8 @@ export const ModalCerrarCaja = ({ modal, setModal, caja, idCaja }:any) => {
                         handler={handlerUpdateCaja}
                     >
                         <BiCheck /> Si, Seguro
-                    </LoadSwitchBtn2>                    
-                    <button onClick={() => setModal(false) }className="btn btn-warning">
+                    </LoadSwitchBtn2>
+                    <button onClick={() => setModal(false)} className="btn btn-warning">
                         <BiReply /> Regresar
                     </button>
                 </div>
