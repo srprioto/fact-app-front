@@ -69,7 +69,7 @@ export const Locales = () => {
 
     
     const handlerSelectLocal = (e:any) => { 
-        if (e.id != toggle) {
+        if (e.id !== toggle) {
             setLocal(e);
             setToggle(e.id);
             setStateCaja(false)
