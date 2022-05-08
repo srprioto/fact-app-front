@@ -1,4 +1,4 @@
-import { Checkbox } from "../../../components/forms/Checkbox";
+// import { Checkbox } from "../../../components/forms/Checkbox";
 
 interface tablaListaVentaProductos { 
     venta:any;

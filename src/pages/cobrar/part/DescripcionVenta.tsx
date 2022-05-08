@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { BiCheck, BiX } from "react-icons/bi";
 
-import { Input } from "../../../components/forms/Input";
-import { InputDisable } from "../../../components/forms/InputDisable";
+// import { Input } from "../../../components/forms/Input";
+// import { InputDisable } from "../../../components/forms/InputDisable";
 import { ModalNuevoCliente } from "../../../components/modals/ModalNuevoCliente";
 import { FormasPagoBotones } from "./formasPago/FormasPagoBotones";
 import { FormasPagoTabs } from "./formasPago/FormasPagoTabs";
@@ -64,12 +64,12 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
     }, [venta.subtotal, venta.descuento_total])
 
 
-    const handlerChangeVenta = (e:any) => {
-        setVenta({
-            ...venta,
-            [e.target.name]: e.target.value
-        })
-    }
+    // const handlerChangeVenta = (e:any) => {
+    //     setVenta({
+    //         ...venta,
+    //         [e.target.name]: e.target.value
+    //     })
+    // }
 
     
     const handlerCheckbox = (e:any) => {
