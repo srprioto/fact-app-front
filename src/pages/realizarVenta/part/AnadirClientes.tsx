@@ -1,14 +1,37 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { BiGroup } from "react-icons/bi"
+import { Checkbox2 } from "../../../components/forms/Checkbox2"
 import { Input } from "../../../components/forms/Input"
+import { InputDisable } from "../../../components/forms/InputDisable"
 import { SelectSearch } from "../../../components/forms/SelectSearch"
+import { generateRandomString } from "../../../resources/func/generarString"
 import { CLIENTES_SEARCH } from "../../../resources/routes"
 
 export const AnadirClientes = ({ handlerCliente, venta, setVenta, handlerChangeVenta }:any) => {
 
     const [switchSelectClientes, setSwitchSelectClientes] = useState<boolean>(false); // handler select
-
     const [tabState, setTabState] = useState<number>(1);
+    const [codigoVenta, setCodigoVenta] = useState<boolean>(false);
+
+    useEffect(() => {
+        setCodigoVenta(true);
+    }, [])
+    
+
+    useEffect(() => {
+        if (codigoVenta) {
+            setVenta({ 
+                ...venta,
+                nombre_cliente: generateRandomString()
+            })
+        } else {
+            setVenta({ 
+                ...venta,
+                nombre_cliente: ""
+            })    
+        }
+    }, [codigoVenta])
+        
 
     const handlerTab = (index:number) => { 
         setTabState(index);
@@ -18,6 +41,11 @@ export const AnadirClientes = ({ handlerCliente, venta, setVenta, handlerChangeV
             clienteId: 0
         })
         setSwitchSelectClientes(false);
+        setVenta({ 
+            ...venta,
+            nombre_cliente: generateRandomString()
+        })
+        setCodigoVenta(true);
     }
 
 
@@ -47,15 +75,34 @@ export const AnadirClientes = ({ handlerCliente, venta, setVenta, handlerChangeV
                 {
                     tabState === 1 
                     && (
-                        <div className="item-tabbs">
-                            <Input 
-                                label="Nombre del cliente rapido *"
-                                type="text"
-                                name="nombre_cliente"
-                                value={venta.nombre_cliente}
-                                onChange={handlerChangeVenta}
-                                placeholder="Añade el nombre del cliente"
-                            />
+                        <div className="item-tabbs grid-41">
+                            {
+                                codigoVenta
+                                ? (
+                                    <InputDisable 
+                                        label="Codigo de venta"
+                                        name="nombre_cliente"
+                                        value={venta.nombre_cliente}
+                                    />
+                                ) : (
+                                    <Input 
+                                        label="Nombre del cliente rapido *"
+                                        type="text"
+                                        name="nombre_cliente"
+                                        value={venta.nombre_cliente}
+                                        onChange={handlerChangeVenta}
+                                        placeholder="Añade el nombre del cliente"
+                                    />
+                                )
+                            }
+
+                            <div className="middle">
+                                <Checkbox2
+                                    name="codigoVenta"
+                                    checked={codigoVenta}
+                                    handlerCheck={ () => setCodigoVenta(!codigoVenta) }
+                                />
+                            </div>
                         </div>
                     )
                 }

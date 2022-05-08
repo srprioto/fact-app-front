@@ -7,7 +7,7 @@ import { DatosClienteConf } from "./DatosClienteConf";
 import { TablaProdVenta } from "./TablaProdVenta";
 
 import { copy } from "../../../../resources/func/deepCopy";
-import { redondeo } from "../../../../resources/func/redondeo";
+import { fixRedondeo, redondeo } from "../../../../resources/func/redondeo";
 import { Input } from "../../../../components/forms/Input";
 
 
@@ -26,20 +26,24 @@ export const ModalVentaConfirmar = ({
 
 
     useEffect(() => { 
-        handlerRecalculoEIGV();
+        handlerRecalculoIGV();
     }, [reducirPercent])
 
     
     const onChangeRedPercent = (e:any) => setReducirPercent(Number(e.target.value));
 
 
-    const handlerRecalculoEIGV = () => { 
+    const handlerRecalculoIGV = () => { 
 
         let ventaDetallesUpdate:any = [];
         
         ventaAux.ventaDetalles.forEach((e:any) => { 
 
+            const disolvDesc:number = (e.descuento / e.cantidad_venta);
+            // const fixDisolvDesc:number = Number(disolvDesc.toFixed());
             let reduccion:number;
+
+            e.precio_venta = e.precio_venta + disolvDesc
 
             if (reducirPercent !== 0) {
                 reduccion = redondeo(e.precio_venta * (reducirPercent / 100))
@@ -56,7 +60,9 @@ export const ModalVentaConfirmar = ({
             e.precio_gravada = precioGravada;
             e.igv = igv;
             e.precio_venta = precioVenta
-            e.precio_parcial = redondeo((precioVenta * e.cantidad_venta) + (e.descuento));
+            
+            // doble redondeo
+            e.precio_parcial = fixRedondeo(redondeo((precioVenta * e.cantidad_venta))); /*  + (e.descuento) */
     
             ventaDetallesUpdate.push(e);
 

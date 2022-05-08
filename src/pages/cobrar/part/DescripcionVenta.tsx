@@ -163,12 +163,35 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
                 <div className="descripcion-venta grid-1 gap bb bb-neutro">
 
                     <div className="grid-2 gap">
-                        <InputDisable
+
+                        <div className="center">
+                            <p className="info">Subtotal</p>
+                            <h3 className="success">S/. {venta.subtotal}</h3>
+                        </div>
+
+                        <div className="center">
+                            <p
+                                className="info"
+                            >{
+                                venta.descuento_total >= 0
+                                ? "Incremento total"    
+                                : "Descuento total"
+                            }</p>
+                            <h3 className={
+                                venta.descuento_total < 0
+                                ? "danger"
+                                : venta.descuento_total === 0
+                                ? "secundary"
+                                : "success"
+                            }>S/. {venta.descuento_total}</h3>
+                        </div>
+
+                        {/* <InputDisable
                             label="Subtotal"
                             value={venta.subtotal}
                             moneda
-                        />
-                        <div className="grid-1">
+                        /> */}
+                        {/* <div className="grid-1">
                             <Input
                                 label="Inc/Desc total"
                                 type="number"
@@ -179,7 +202,7 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
                                 moneda
                             />
                             <h5 className="warning m-0 center">Haz un descuento añadiendo una cantidad negativa</h5>
-                        </div>
+                        </div> */}
                         
                         
                     </div>
@@ -207,7 +230,7 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
                     <div></div>
                     <span className="center">
                         <p className="info">Total de la venta</p>
-                        <h1 className="success">S/. { venta.total }</h1>
+                        <h1 className="success strong">S/. { venta.total }</h1>
                     </span>
                     <div></div>    
                 </div>
@@ -225,7 +248,7 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
                     <div></div>
                 </div>
 
-            </div> 
+            </div>
 
             <ModalNuevoCliente
                 modal={ModalCliente}

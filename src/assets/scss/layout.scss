@@ -501,8 +501,8 @@
             .producto-detalles{
                 span{
                     display: grid;
-                    grid-template-columns: 105px calc(100% - 105px);
-
+                    grid-template-columns: 1fr 1fr;
+                    gap: 4px;
                     p{
                         margin: 0 0 10px 0;
                     }

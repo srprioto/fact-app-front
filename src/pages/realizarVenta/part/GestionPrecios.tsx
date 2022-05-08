@@ -1,3 +1,4 @@
+import { Checkbox2 } from "../../../components/forms/Checkbox2";
 import { Input } from "../../../components/forms/Input"
 import { RadioButton } from "../../../components/forms/RadioButton"
 
@@ -5,9 +6,11 @@ interface gestionPrecios {
     producto:any;
     handlerChangePrecio:Function;
     productoDetalles:any;
+    descUnid:boolean;
+    setDescUnid:Function;
 }
 
-export const GestionPrecios = ({ producto, handlerChangePrecio, productoDetalles }:gestionPrecios) => {
+export const GestionPrecios = ({ producto, handlerChangePrecio, productoDetalles, descUnid, setDescUnid }:gestionPrecios) => {
 
     const strRadiobutton = () => { 
 
@@ -60,26 +63,44 @@ export const GestionPrecios = ({ producto, handlerChangePrecio, productoDetalles
                 </div>
 
                 <div className="grid-2 gap mt-5">
-                    <div className="center">
 
-                        <label htmlFor="descuento">
-                            <p  className="mb-5">Incremento/Descuento</p>
-                            {/* <h5>Selecciona un precio</h5> */}
-                        </label>
+                    <div className="grid-2 gap">
 
-                        <Input
-                            // label="Cambiar precio final"
-                            type="number"
-                            name="descuento"
-                            value={productoDetalles.descuento}
-                            color={productoDetalles.descuento < 0 ? "danger-i" : ""}
-                            onChange={handlerChangePrecio}
-                            moneda
-                        />
+                        <div className="center">
 
-                        <h5 className="warning mt-5">Haz un descuento añadiendo una cantidad negativa</h5>
+                            <label htmlFor="descuento">
+                                <p  className="mb-5">Incremento/Descuento</p>
+                                {/* <h5>Selecciona un precio</h5> */}
+                            </label>
 
-                    </div>
+                            <Input
+                                // label="Cambiar precio final"
+                                type="number"
+                                name="descuento"
+                                value={productoDetalles.descuento}
+                                color={productoDetalles.descuento < 0 ? "danger-i" : ""}
+                                onChange={handlerChangePrecio}
+                                moneda
+                            />
+
+                            <h5 className="warning mt-5">Haz un descuento añadiendo una cantidad negativa</h5>
+
+                        </div>
+
+                        <div>
+                            <p className="center info">{
+                                descUnid
+                                ? "Por unidad"
+                                : "En bloque"
+                            }</p>
+                            <Checkbox2
+                                name="por_unidad"
+                                checked={descUnid}
+                                handlerCheck={ () => setDescUnid(!descUnid) }
+                            />
+                        </div>
+
+                    </div>                    
 
                     <span className="center">
                         <p className="info">Precio de venta</p>

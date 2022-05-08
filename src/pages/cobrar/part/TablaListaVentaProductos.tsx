@@ -18,7 +18,7 @@ export const TablaListaVentaProductos = ({ venta, listaRechazados, handlerCheckb
                         <th>Precio U.</th>
                         <th>Inc/Desc</th>
                         <th>Precio V.</th>
-                        <th className="transparent inlineblock">...</th>
+                        {/* <th className="transparent inlineblock">...</th> */}
                     </tr>
                 </thead>
                 
@@ -49,14 +49,14 @@ export const TablaListaVentaProductos = ({ venta, listaRechazados, handlerCheckb
                                     <td className={cambioPrecio}>
                                         <strong>S/. { e.precio_parcial }</strong>
                                     </td>
-                                    <td>
+                                    {/* <td>
                                         <Checkbox
                                             name={`estado_detalle`}
                                             value={e.id}
                                             onChange={handlerCheckbox}
                                             invertir
                                         />
-                                    </td>
+                                    </td> */}
                                 </tr>
                             )
                         })   

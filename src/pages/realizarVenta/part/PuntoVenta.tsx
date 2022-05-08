@@ -30,6 +30,7 @@ export const PuntoVenta = () => {
     const [LocalStockId, setLocalStockId] = useState<number>(0);
     const [productosRepe, setProductosRepe] = useState<Array<number>>([]);
 
+    const [descUnid, setDescUnid] = useState<boolean>(false);
     
     const handlerForzVenta = () => setFornzarVenta(!fornzarVenta); // fornzar ventas
     
@@ -48,7 +49,7 @@ export const PuntoVenta = () => {
 
     
     useEffect(() => { 
-        // añade una cantidad negativo al estado de venta_negativa
+        // añade una cantidad negativa al estado de venta_negativa
         const cantidadNeg:number = producto.cantidad - productoDetalles.cantidad_venta 
         let precioParcial:number = 0;
 
@@ -56,10 +57,20 @@ export const PuntoVenta = () => {
             const precioVenta:number = productoDetalles.precio_venta ? Number(productoDetalles.precio_venta) : 0
             const cantidadVenta:number = productoDetalles.cantidad_venta ? Number(productoDetalles.cantidad_venta) : 0
             const descuentoVenta:number = productoDetalles.descuento ? Number(productoDetalles.descuento) : 0
-            precioParcial = (
-                (Number(precioVenta) * 
-                Number(cantidadVenta)) + Number(descuentoVenta)
-            )
+            
+            if (descUnid) {
+                // descuento a cada producto
+                precioParcial = (
+                    (Number(precioVenta) + Number(descuentoVenta)) * Number(cantidadVenta)
+                )    
+            } else {
+                // descuento a bloque de venta
+                precioParcial = ( 
+                    (Number(precioVenta) * 
+                    Number(cantidadVenta)) + Number(descuentoVenta)
+                )
+            }
+
         }
         setProductoDetalles({
             ...productoDetalles,
@@ -67,7 +78,12 @@ export const PuntoVenta = () => {
             venta_negativa: cantidadNeg < 0 ? cantidadNeg : 0
         })
 
-    }, [productoDetalles.precio_venta, productoDetalles.cantidad_venta, productoDetalles.descuento])
+    }, [
+        productoDetalles.precio_venta, 
+        productoDetalles.cantidad_venta,
+        productoDetalles.descuento,
+        descUnid
+    ])
 
 
     useEffect(() => { // habilitar boolean de forzar venta
@@ -87,7 +103,21 @@ export const PuntoVenta = () => {
     
     const handlerListaVentas = () => { // añade productos a la lista
         setProductosRepe([ ...productosRepe, LocalStockId ]); // evitar producto repetido
-        setListaVenta([ ...listaVenta, productoDetalles ]) // añade productos a la lista
+
+        // añade productos a la lista
+        if (descUnid) { // descuento unidad activo
+            productoDetalles.descuento = productoDetalles.descuento * productoDetalles.cantidad_venta
+            setListaVenta([ 
+                ...listaVenta, 
+                productoDetalles
+            ])     
+        } else { // descuento unidad inactivo
+            setListaVenta([ 
+                ...listaVenta, 
+                productoDetalles 
+            ])
+        }
+
         handlerReinicioProd() // reinicios
     }
 
@@ -97,6 +127,7 @@ export const PuntoVenta = () => {
         setSwitchSelectProd(false);
         setProductoDetalles(productDetail);
         setProducto({});
+        setDescUnid(false);
     }
 
 
@@ -162,7 +193,7 @@ export const PuntoVenta = () => {
                             repetidos={productosRepe}
                             switchSelect={switchSelectProd}
                             setSwitchSelect={setSwitchSelectProd}
-                            placeholder="Codigo o nombre del producto..."
+                            placeholder="Codigo, nombre, marca o color del prod..."
                             link={`/tiendas/local/${params.id}/${params.nombre}`}
                             textoLink="Ver stock"
                             reinicios={handlerReinicioProd}
@@ -197,6 +228,8 @@ export const PuntoVenta = () => {
                                         producto={producto}
                                         handlerChangePrecio={handlerChangePrecio}
                                         productoDetalles={productoDetalles}
+                                        descUnid={descUnid}
+                                        setDescUnid={setDescUnid}
                                     />
 
                                     <div className="grid-2 gap mt-5">
