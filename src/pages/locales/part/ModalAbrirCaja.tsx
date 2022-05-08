@@ -1,5 +1,6 @@
 import { useState } from "react"
-import { BiReply } from "react-icons/bi";
+import { BiRename, BiReply } from "react-icons/bi";
+import { Link } from "react-router-dom";
 import { BtnOnOff2 } from "../../../components/btns/BtnOnOff2";
 import { LoadSwitchBtn } from "../../../components/btns/LoadSwitchBtn";
 import { Input } from "../../../components/forms/Input"
@@ -12,10 +13,12 @@ interface modalAbrirCaja{
     setModal:Function;
     idLocal:number;
     nombreLocal?:string;
+    // stateCaja?:boolean;
     setStateCaja?:Function;
+    getDataOne?:Function;
 }
 
-export const ModalAbrirCaja = ({ modal, setModal, idLocal, nombreLocal, setStateCaja }:modalAbrirCaja) => {
+export const ModalAbrirCaja = ({ modal, setModal, idLocal, nombreLocal, setStateCaja, getDataOne }:modalAbrirCaja) => {
 
     const [loadAbrirCaja, setLoadAbrirCaja] = useState<boolean>(false);
     const [aperturaCaja, setAperturaCaja] = useState({
@@ -39,6 +42,7 @@ export const ModalAbrirCaja = ({ modal, setModal, idLocal, nombreLocal, setState
             await post(aperturaCaja, CAJA_ABRIR);
             setLoadAbrirCaja(false);
             setStateCaja && setStateCaja(true);
+            getDataOne && getDataOne();
         } catch (error) {
             setLoadAbrirCaja(true);
             console.log(error);
@@ -81,8 +85,8 @@ export const ModalAbrirCaja = ({ modal, setModal, idLocal, nombreLocal, setState
                     />
                     <div></div>
                 </div>
-                <div className="grid-4 gap">
-                    <div></div>
+                <div className={"gap " + (!getDataOne ? "grid-3" : "grid-4")}>
+                    { getDataOne && <div></div> }
                     <BtnOnOff2
                         label="Confirmar"
                         estado={validarAbrirCaja()}
@@ -98,6 +102,15 @@ export const ModalAbrirCaja = ({ modal, setModal, idLocal, nombreLocal, setState
                     <button className="btn btn-warning" onClick={() => setModal(false)}>
                         <BiReply /> Regresar
                     </button>
+                    {
+                        !getDataOne
+                        && (
+                            <Link className="btn btn-info" to={`/tiendas/caja-chica/${idLocal}/${nombreLocal}`}>
+                                <BiRename /> Ver caja
+                            </Link>
+                        )
+                    }
+                    
                 </div>
             </div>
         </Modal>

@@ -120,7 +120,8 @@ export const ModalCalcPrecio = ({
     return (
         <Modal
             modal={modal}
-            back={setModal}
+            // back={setModal}
+            setModal={setModal}
             width={70}
             border="border-primary"
             notransparent

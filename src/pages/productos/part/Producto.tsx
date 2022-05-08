@@ -76,7 +76,7 @@ export const Producto = ({
             <div className="prod-border"></div>
 
             <div className="prod-prec">
-                {/* <h4 className="primary">P. compra: </h4><h4 className="primary"><strong>S/. { producto.precio_compra }</strong></h4> */}
+                <h4 className="primary">P. compra: </h4><h4 className="primary"><strong>S/. { producto.precio_compra }</strong></h4>
                 <h4 className="primary">P. unidad: </h4><h4 className="primary"><strong>S/. { producto.precio_venta_1 }</strong></h4>
                 <h4 className="primary">P. por mayor: </h4><h4 className="primary"><strong>S/. { producto.precio_venta_2 }</strong></h4>
                 <h4 className="primary">P. por menor: </h4><h4 className="primary"><strong>S/. { producto.precio_venta_3 }</strong></h4>

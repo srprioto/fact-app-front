@@ -106,7 +106,6 @@ export const Locales = () => {
                         </button>
                     </div>
                 </div>
-
             </div>
 
             {

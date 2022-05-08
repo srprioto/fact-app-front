@@ -7,7 +7,7 @@ export interface ProductosDto {
     marca:string;
     color:string;
     talla:string;
-    // precio_compra:number;
+    precio_compra:number;
     precio_venta_1:number;
     precio_venta_2:number;
     precio_venta_3:number;
@@ -25,7 +25,7 @@ export interface CreateProductosDto {
     marca?:string;
     color?:string;
     talla?:string;
-    // precio_compra?:number;
+    precio_compra?:number;
     precio_venta_1?:number;
     precio_venta_2?:number;
     precio_venta_3?:number;
@@ -40,7 +40,7 @@ export interface EditarProductosDto{
     descripcion:string;
     marca:string;
     nombre:string;
-    // precio_compra:number;
+    precio_compra:number;
     precio_venta_1:number;
     precio_venta_2:number;
     precio_venta_3:number;
