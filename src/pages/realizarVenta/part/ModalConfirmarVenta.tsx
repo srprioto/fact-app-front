@@ -33,8 +33,7 @@ export const ModalConfirmarVenta = ({
 
         setLoadVenta(true);
         try {
-            const response = await post(venta, VENTAS);
-            console.log(response);
+            await post(venta, VENTAS);
             setLoadVenta(false);
         } catch (error) {
             setLoadVenta(true);

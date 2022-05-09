@@ -50,16 +50,16 @@ export const Menu = () => {
                     <ItemMenu url="/productos" label="Productos" icon={ <BiBox /> } />
                 </BoxMenu>
 
-                <BoxMenu titulo="Personas">
-                    <ItemMenu url="/clientes" label="Clientes" icon={ <BiGroup /> } />
-                    <ItemMenu url="/proveedores" label="Proveedores" icon={ <BiWalk /> } />
-                    <ItemMenu url="/usuarios" label="Usuarios" icon={ <BiUser /> } />
-                </BoxMenu>
-
                 <BoxMenu titulo="Reportes">
                     <ItemMenu url="/reporte/ventas" label="Ventas" icon={ <BiCartAlt /> } />
                     <ItemMenu url="/reporte/transacciones" label="Transferencias" icon={ <BiTransfer /> } />
                     <ItemMenu url="/reporte/ingreso-productos" label="Ingresos de productos" icon={ <BiArchiveIn /> } />
+                </BoxMenu>
+
+                <BoxMenu titulo="Personas">
+                    <ItemMenu url="/clientes" label="Clientes" icon={ <BiGroup /> } />
+                    <ItemMenu url="/proveedores" label="Proveedores" icon={ <BiWalk /> } />
+                    <ItemMenu url="/usuarios" label="Usuarios" icon={ <BiUser /> } />
                 </BoxMenu>
 
                 <BoxMenu>

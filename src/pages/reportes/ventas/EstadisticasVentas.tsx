@@ -7,8 +7,7 @@ export const EstadisticasVentas = () => {
     return (
         <>
             <CardsEstadisticas />
-            <VentasSemana />
-            
+            <VentasSemana />           
 
         </>
 

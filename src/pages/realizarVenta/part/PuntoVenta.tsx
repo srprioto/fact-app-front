@@ -128,6 +128,7 @@ export const PuntoVenta = () => {
         setProductoDetalles(productDetail);
         setProducto({});
         setDescUnid(false);
+        setProductosRepe([]);
     }
 
 

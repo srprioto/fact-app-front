@@ -1,4 +1,4 @@
-export function zeroFill( number:number, width:number ){
+export function zeroFill( number:number, width:number = 5 ){
 
     let nro:number = Number(number);
 

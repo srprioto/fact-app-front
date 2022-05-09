@@ -1,31 +1,27 @@
-import { useEffect, useState } from "react";
-import { Select } from "../../../components/forms/Select";
-import { Loading } from "../../../components/loads/Loading";
-import { ModalWrap } from "../../../components/modals/ModalWrap";
-import { NoRegistros } from "../../../components/NoRegistros";
-import { Pagination } from "../../../components/Pagination";
-import { SearchWrap } from "../../../components/SearchWrap";
-import { paginate } from "../../../resources/fetch";
-import { VENTAS_PAGINATE, VENTAS_SEARCH } from "../../../resources/routes";
-import { ExportarExcel } from "./InfoGeneral/ExportarExcel";
-import { ModalHabilitarVenta } from "./InfoGeneral/ModalHabilitarVenta";
-import { ModalVentaDetalles } from "./InfoGeneral/ModalVentaDetalles";
-import { TabbsFiltroDatos } from "./InfoGeneral/TabbsFiltroDatos";
-import { VentaItems } from "./InfoGeneral/VentaItems";
+import { useEffect, useState } from "react"
+import { Loading } from "../../../components/loads/Loading"
+import { ModalWrap } from "../../../components/modals/ModalWrap"
+import { NoRegistros } from "../../../components/NoRegistros"
+import { Pagination } from "../../../components/Pagination"
+import { SearchWrap } from "../../../components/SearchWrap"
+import { paginate } from "../../../resources/fetch"
+import { CAJA } from "../../../resources/routes"
+import { ItemCaja } from "./infoIngresos/ItemCaja"
+import { ModalCajaDetalles } from "./infoIngresos/ModalCajaDetalles"
 
-interface infoGeneralVentas {
-    idLocal?:string; // el id local es obligatorio
+interface informacionIngresos {
+    idLocal?:string // este es obligatorio
     selectLocal?:Function;
     loadingLocal?:boolean;
     locales?:any;
 }
 
-export const InfoGeneralVentas = ({ idLocal, selectLocal, loadingLocal, locales }:infoGeneralVentas) => {
+export const InformacionIngresos = ({ idLocal, selectLocal, loadingLocal, locales }:informacionIngresos) => {
 
     const [loadingData, setLoadingData] = useState<boolean>(false);
     const [modalVer, setModalVer] = useState<boolean>(false);
     const [modalHabilitarVenta, setModalHabilitarVenta] = useState<boolean>(false);
-    const [idVenta, setIdVenta] = useState<number>(0);
+    const [itemCaja, setItemCaja] = useState<any>({});
     const [pagination, setPagination] = useState<any>({ meta: {}, links: {} });
     const [data, setData] = useState<any>([]);
     const [toggle, setToggle] = useState<number>(1); // tabs para los filtros
@@ -40,17 +36,17 @@ export const InfoGeneralVentas = ({ idLocal, selectLocal, loadingLocal, locales 
     }, [idLocal]);
     
 
-    const handlerVer = (id:number) => { 
-        setIdVenta(id);
-        setModalVer(!modalVer);        
+    const handlerVer = (e:any) => { 
+        setItemCaja(e);
+        setModalVer(!modalVer);
     }
 
 
-    const getData = async (urlPage?:string, value?:string, idToggle?:number) => {
+    const getData = async (urlPage?:string, idToggle?:number) => {
 
         // const idLocal:any = "_"; // añadir un select solo de tiendas
         const toggle = idToggle ? idToggle : 1
-        const value_filtro = value ? value : "_";
+        // const value_filtro = value ? value : "_";
 
         setToggle(toggle);
         setLoadingData(true);
@@ -60,7 +56,7 @@ export const InfoGeneralVentas = ({ idLocal, selectLocal, loadingLocal, locales 
             if (urlPage && urlPage !== "") {
                 data = await paginate(urlPage);
             } else {
-                data = await paginate(VENTAS_PAGINATE + `/${value_filtro}/${idLocal}/filtro`);
+                data = await paginate(CAJA + `/${idLocal}/filtro`);
             }
 
             setData(data.items);
@@ -74,14 +70,14 @@ export const InfoGeneralVentas = ({ idLocal, selectLocal, loadingLocal, locales 
             setLoadingData(true);
             console.log(error);
         }
-        setIdVenta(0);
+        setItemCaja({});
     }
 
 
-    const handlerHabilitarVenta = (idVenta:number) => {
-        setIdVenta(idVenta);
-        setModalHabilitarVenta(true);
-    }
+    // const handlerHabilitarVenta = (itemCaja:number) => {
+    //     setItemCaja(itemCaja);
+    //     setModalHabilitarVenta(true);
+    // }
 
 
     const handlerLocal = (e:any) => { 
@@ -92,8 +88,9 @@ export const InfoGeneralVentas = ({ idLocal, selectLocal, loadingLocal, locales 
 
 
     return (
-        <>
-            <div className="box">
+        <div className="informacion-ingresos">
+
+            {/* <div className="box">
 
                 <div className="grid-2 gap">
                     <SearchWrap 
@@ -139,14 +136,14 @@ export const InfoGeneralVentas = ({ idLocal, selectLocal, loadingLocal, locales 
                     </div>
                 </div>
 
-            </div>
+            </div> */}
 
             <div className="box">
 
-                <TabbsFiltroDatos 
+                {/* <TabbsFiltroDatos 
                     getData={getData}
                     toggle={toggle}
-                />
+                /> */}
 
                 {
                     loadingData 
@@ -159,12 +156,12 @@ export const InfoGeneralVentas = ({ idLocal, selectLocal, loadingLocal, locales 
                                 
                                 <thead>
                                     <tr>
-                                        <th>Nombre cliente</th>
-                                        {/* <th>Productos vendidos</th> */}
-                                        <th>Costo total</th>
-                                        <th>Estado de venta</th>
-                                        <th>Local</th>
+                                        <th>Codigo caja</th>
+                                        <th>Estado caja</th>
+                                        <th>Monto apertura</th>
+                                        <th>Monto cierre</th>
                                         <th>Observaciones</th>
+                                        <th>Fecha</th>
                                         <th className="transparent inlineblock">...</th>
                                     </tr>
                                 </thead>
@@ -172,12 +169,12 @@ export const InfoGeneralVentas = ({ idLocal, selectLocal, loadingLocal, locales 
                                     {
                                         data.map((e:any) => {
                                             return (
-                                                <VentaItems
-                                                    key={e.id}
-                                                    ventas={e}
-                                                    updateData={handlerHabilitarVenta}
+                                                <ItemCaja 
+                                                    key={e.id} 
+                                                    item={e} 
                                                     handlerVer={handlerVer}
                                                 />
+
                                             )
                                         })
                                     }
@@ -197,23 +194,23 @@ export const InfoGeneralVentas = ({ idLocal, selectLocal, loadingLocal, locales 
 
             </div>
 
-            {/* modals aqui */}
             <ModalWrap modal={modalVer}>
-                <ModalVentaDetalles
+                <ModalCajaDetalles
                     modal={modalVer}
                     setModal={setModalVer}
-                    idVenta={idVenta}
+                    itemCaja={itemCaja}
                 />
             </ModalWrap>
 
-            
+            {/* 
             <ModalHabilitarVenta 
                 modal={modalHabilitarVenta}
                 setModal={setModalHabilitarVenta}
-                idVenta={idVenta}
+                itemCaja={itemCaja}
                 getData={getData}
-            />
+            /> 
+            */}
 
-        </>
+        </div>
     )
 }
