@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react"
+import { Select } from "../../../components/forms/Select"
 import { Loading } from "../../../components/loads/Loading"
 import { ModalWrap } from "../../../components/modals/ModalWrap"
 import { NoRegistros } from "../../../components/NoRegistros"
 import { Pagination } from "../../../components/Pagination"
-import { SearchWrap } from "../../../components/SearchWrap"
+// import { SearchWrap } from "../../../components/SearchWrap"
 import { paginate } from "../../../resources/fetch"
 import { CAJA } from "../../../resources/routes"
 import { ItemCaja } from "./infoIngresos/ItemCaja"
@@ -20,14 +21,14 @@ export const InformacionIngresos = ({ idLocal, selectLocal, loadingLocal, locale
 
     const [loadingData, setLoadingData] = useState<boolean>(false);
     const [modalVer, setModalVer] = useState<boolean>(false);
-    const [modalHabilitarVenta, setModalHabilitarVenta] = useState<boolean>(false);
+    // const [modalHabilitarVenta, setModalHabilitarVenta] = useState<boolean>(false);
     const [itemCaja, setItemCaja] = useState<any>({});
     const [pagination, setPagination] = useState<any>({ meta: {}, links: {} });
     const [data, setData] = useState<any>([]);
-    const [toggle, setToggle] = useState<number>(1); // tabs para los filtros
+    // const [toggle, setToggle] = useState<number>(1); // tabs para los filtros
     
     // *** search
-    const [searchState, setSearchState] = useState<boolean>(false); // estado de busqueda
+    // const [searchState, setSearchState] = useState<boolean>(false); // estado de busqueda
     // *** end search
 
     
@@ -45,10 +46,10 @@ export const InformacionIngresos = ({ idLocal, selectLocal, loadingLocal, locale
     const getData = async (urlPage?:string, idToggle?:number) => {
 
         // const idLocal:any = "_"; // añadir un select solo de tiendas
-        const toggle = idToggle ? idToggle : 1
+        // const toggle = idToggle ? idToggle : 1
         // const value_filtro = value ? value : "_";
 
-        setToggle(toggle);
+        // setToggle(toggle);
         setLoadingData(true);
 
         try {
@@ -74,12 +75,6 @@ export const InformacionIngresos = ({ idLocal, selectLocal, loadingLocal, locale
     }
 
 
-    // const handlerHabilitarVenta = (itemCaja:number) => {
-    //     setItemCaja(itemCaja);
-    //     setModalHabilitarVenta(true);
-    // }
-
-
     const handlerLocal = (e:any) => { 
         selectLocal && selectLocal(
             e.target.value
@@ -93,6 +88,7 @@ export const InformacionIngresos = ({ idLocal, selectLocal, loadingLocal, locale
             {/* <div className="box">
 
                 <div className="grid-2 gap">
+                    
                     <SearchWrap 
                         setLoadingData={setLoadingData}
                         setData={setData}
@@ -102,12 +98,19 @@ export const InformacionIngresos = ({ idLocal, selectLocal, loadingLocal, locale
                         url={VENTAS_SEARCH}
                         placeholder="Nombre del cliente ..."
                     />
-                    <div className="grid-2 gap">
-                        
-                        <div className="grid-3">
-                            <ExportarExcel />
-                        </div>
 
+
+                    
+                </div>
+
+            </div> */}
+
+            <div className="box">
+
+                <div className="grid-2 gap">
+                    <div></div>
+                    <div className="grid-2 gap">
+                        <div></div>
                         <div className="grid-1 middle">
                             {
                                 selectLocal
@@ -132,18 +135,8 @@ export const InformacionIngresos = ({ idLocal, selectLocal, loadingLocal, locale
                             }
                             
                         </div>
-
                     </div>
-                </div>
-
-            </div> */}
-
-            <div className="box">
-
-                {/* <TabbsFiltroDatos 
-                    getData={getData}
-                    toggle={toggle}
-                /> */}
+                </div>                
 
                 {
                     loadingData 
@@ -189,7 +182,7 @@ export const InformacionIngresos = ({ idLocal, selectLocal, loadingLocal, locale
                     previous={pagination.links.previous} 
                     currentPage={pagination.meta.currentPage} 
                     next={pagination.links.next} 
-                    searchState={searchState}
+                    // searchState={searchState}
                 />
 
             </div>
@@ -201,15 +194,6 @@ export const InformacionIngresos = ({ idLocal, selectLocal, loadingLocal, locale
                     itemCaja={itemCaja}
                 />
             </ModalWrap>
-
-            {/* 
-            <ModalHabilitarVenta 
-                modal={modalHabilitarVenta}
-                setModal={setModalHabilitarVenta}
-                itemCaja={itemCaja}
-                getData={getData}
-            /> 
-            */}
 
         </div>
     )
