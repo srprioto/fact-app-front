@@ -55,6 +55,7 @@ export const Caja = () => {
         setLoadCaja(true);
         try {
             const data = await getOne(Number(params.id), CAJA + "/local-caja-ingresos");
+            
             setData(data);
             setLoadCaja(false);            
         } catch (error) {

@@ -63,7 +63,7 @@ export const Cobrar = () => {
     return (
         <div className="caja">
 
-            <TitleBox titulo={`Caja - ${params.nombre}`} link="/tiendas"/>
+            <TitleBox titulo={`Cobrar - ${params.nombre}`} link="/tiendas"/>
             
             <div className="grid-12 gap">
                 <div className="box scroll-box-no-margin">
@@ -92,7 +92,7 @@ export const Cobrar = () => {
                         ? <div style={{height: 'calc(100% - 122px)', margin: "0 0 58px 0"}}><Loading /></div>
                         : (
                             data.length <= 0
-                            ? <NoRegistros />
+                            ? <div className="no-venta"><NoRegistros /></div>                            
                             : (
                                 <TablaVentas
                                     data={data}

@@ -105,8 +105,8 @@ export const BoxVerIngresos = ({ idIngreso }:boxVerIngresos) => {
                                                 }>{ e.productos.nombre }</td>
                                                 <td><ProductoInfo producto={e.productos} /></td>
                                                 <td>{ e.cantidad }</td>
-                                                <td>{ e.precio_unidad }</td>
-                                                <td>{ e.precio_parcial }</td>
+                                                <td>S/. { e.precio_unidad }</td>
+                                                <td className="info strong">S/. { e.precio_parcial }</td>
                                                 <td>{ e.proveedores && e.proveedores.nombre }</td>
                                                 <td>{ e.descripcion }</td>
                                                 <td>

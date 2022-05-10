@@ -131,8 +131,8 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
 
         setLoadConfirmarVenta(true);
         try {
-            const response = await put(data.id, updateVenta, VENTAS);
-            console.log(response);
+            await put(data.id, updateVenta, VENTAS);
+            // console.log(response);
             setLoadConfirmarVenta(false);
         } catch (error) {
             setLoadConfirmarVenta(true);

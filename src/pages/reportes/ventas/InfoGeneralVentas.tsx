@@ -159,7 +159,7 @@ export const InfoGeneralVentas = ({ idLocal, selectLocal, loadingLocal, locales 
                                 
                                 <thead>
                                     <tr>
-                                        <th>Nombre cliente</th>
+                                        <th>Codigo o nombre</th>
                                         {/* <th>Productos vendidos</th> */}
                                         <th>Costo total</th>
                                         <th>Estado de venta</th>

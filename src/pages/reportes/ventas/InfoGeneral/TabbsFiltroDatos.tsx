@@ -14,16 +14,16 @@ export const TabbsFiltroDatos = ({ getData, toggle }:any) => {
                     Todos
                 </button>
                 <button 
-                    onClick={() => getData("", "enviado", 2)}
-                    className={`btn2 btn2-warning ${toggle === 2 && "btn2-sub-warning"}`}>
-                    <BiCartAlt />
-                    Enviados
-                </button>
-                <button 
                     onClick={() => getData("", "listo", 4)}
                     className={`btn2 btn2-success ${toggle === 4 && "btn2-sub-success"}`}>
                     <BiCheck />
                     Listos
+                </button>
+                <button 
+                    onClick={() => getData("", "enviado", 2)}
+                    className={`btn2 btn2-warning ${toggle === 2 && "btn2-sub-warning"}`}>
+                    <BiCartAlt />
+                    Enviados
                 </button>
                 <button 
                     onClick={() => getData("", "rechazado", 3)}
@@ -31,6 +31,8 @@ export const TabbsFiltroDatos = ({ getData, toggle }:any) => {
                     <BiX />
                     Rechazado
                 </button>
+                
+                
                 
             </div>
             <div></div>

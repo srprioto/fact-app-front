@@ -17,7 +17,7 @@ export const CajaChica = () => {
 
             <TitleBox titulo={"Caja chica - " + params.nombre} back/>
             
-            <div className="box btn-tabs grid-3 gap">
+            <div className="box btn-tabs grid-4 gap">
                 <button 
                     onClick={() => setToggle(1)}
                     className={`btn2 btn2-info ${toggle === 1 && "btn2-sub-info"}`}>
