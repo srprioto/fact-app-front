@@ -83,7 +83,7 @@ export const GestionPrecios = ({ producto, handlerChangePrecio, productoDetalles
                                 moneda
                             />
 
-                            <h5 className="warning mt-5">Haz un descuento añadiendo una cantidad negativa</h5>
+                            <h5 className="warning mt-5">Haz descuentos con una cantidad negativa</h5>
 
                         </div>
 

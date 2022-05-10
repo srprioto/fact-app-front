@@ -51,10 +51,6 @@ export const FormIngresoProductos = ({
     const [modalAdd, setModalAdd] = useState<boolean>(false);
 
 
-    // console.log(movimientoDetalles);
-    // console.log(movimientos);
-    
-
     // calcular precio unidad
     useEffect(() => {
         if (movDetails.precio_parcial !== 0 && movDetails.cantidad !== 0) {

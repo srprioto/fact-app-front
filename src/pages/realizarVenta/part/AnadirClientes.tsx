@@ -52,7 +52,7 @@ export const AnadirClientes = ({ handlerCliente, venta, setVenta, handlerChangeV
     return (
         <div className="wrap-cliente">
 
-            <div className="tabbs grid-2 gap mb-25">
+            <div className="tabbs grid-3 gap mb-25">
 
                 <button 
                     className={"btn2 btn2-warning " + (tabState === 1 && "btn2-sub-warning")}

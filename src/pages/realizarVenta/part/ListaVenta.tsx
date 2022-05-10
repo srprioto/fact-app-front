@@ -150,8 +150,8 @@ export const ListaVenta = ({ listaVenta, itemPop, handlerReinicioProd, setListaV
                             <div className="center mt-5">
                                 {
                                     alertaDescuento()
-                                    ? <h5 className="danger mb-18">¡CUIDADO! Ya existe un descuento</h5>
-                                    : <h5 className="warning m-0">Haz un descuento añadiendo una cantidad negativa</h5>
+                                    ? <h5 className="danger m-0">¡CUIDADO! Ya existe un descuento</h5>
+                                    : <h5 className="warning m-0">Haz descuentos con una cantidad negativa</h5>
                                 }
                             </div>
                                                 
