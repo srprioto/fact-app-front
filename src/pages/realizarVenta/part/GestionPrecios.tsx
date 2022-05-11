@@ -10,7 +10,13 @@ interface gestionPrecios {
     setDescUnid:Function;
 }
 
-export const GestionPrecios = ({ producto, handlerChangePrecio, productoDetalles, descUnid, setDescUnid }:gestionPrecios) => {
+export const GestionPrecios = ({ 
+    producto, 
+    handlerChangePrecio, 
+    productoDetalles, 
+    descUnid, 
+    setDescUnid 
+}:gestionPrecios) => {
 
     const strRadiobutton = () => { 
 
@@ -108,9 +114,7 @@ export const GestionPrecios = ({ producto, handlerChangePrecio, productoDetalles
                     </span>
 
                 </div>
-    
             </div>
-            
         </div>
     )
 }

@@ -22,12 +22,12 @@ export const AnadirClientes = ({ handlerCliente, venta, setVenta, handlerChangeV
         if (codigoVenta) {
             setVenta({ 
                 ...venta,
-                nombre_cliente: generateRandomString()
+                codigo_venta: generateRandomString()
             })
         } else {
             setVenta({ 
                 ...venta,
-                nombre_cliente: ""
+                codigo_venta: ""
             })    
         }
     }, [codigoVenta])
@@ -37,13 +37,13 @@ export const AnadirClientes = ({ handlerCliente, venta, setVenta, handlerChangeV
         setTabState(index);
         setVenta({
             ...venta,
-            nombre_cliente: "",
+            codigo_venta: "",
             clienteId: 0
         })
         setSwitchSelectClientes(false);
         setVenta({ 
             ...venta,
-            nombre_cliente: generateRandomString()
+            codigo_venta: generateRandomString()
         })
         setCodigoVenta(true);
     }
@@ -81,15 +81,15 @@ export const AnadirClientes = ({ handlerCliente, venta, setVenta, handlerChangeV
                                 ? (
                                     <InputDisable 
                                         label="Codigo de venta"
-                                        name="nombre_cliente"
-                                        value={venta.nombre_cliente}
+                                        name="codigo_venta"
+                                        value={venta.codigo_venta}
                                     />
                                 ) : (
                                     <Input 
                                         label="Nombre del cliente rapido *"
                                         type="text"
-                                        name="nombre_cliente"
-                                        value={venta.nombre_cliente}
+                                        name="codigo_venta"
+                                        value={venta.codigo_venta}
                                         onChange={handlerChangeVenta}
                                         placeholder="Añade el nombre del cliente"
                                     />

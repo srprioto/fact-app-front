@@ -51,7 +51,7 @@ export const ModalConfirmarVenta = ({
                 <div className="box lista-productos">
 
                     <div className="grid-12 mb-25">
-                        <p className="primary">Nombre del cliente: </p><h2>{ venta.nombre_cliente }</h2>
+                        <p className="primary">Codigo de venta: </p><h2>{ venta.codigo_venta }</h2>
                     </div>
 
                     <table className="table2">

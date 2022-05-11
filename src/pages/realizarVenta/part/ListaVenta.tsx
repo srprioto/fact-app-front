@@ -33,7 +33,7 @@ export const ListaVenta = ({ listaVenta, itemPop, handlerReinicioProd, setListaV
         total: 0,
         observaciones:"",
         estado_venta:"enviado",
-        nombre_cliente: "",
+        codigo_venta: "",
         clienteId: 0,
         usuarioId: 1,
         localId: idLocal,
@@ -51,7 +51,7 @@ export const ListaVenta = ({ listaVenta, itemPop, handlerReinicioProd, setListaV
         setVenta({
             ...venta,
             clienteId: Number((cliente.split('@'))[0]),
-            nombre_cliente: (cliente.split('@'))[1]
+            codigo_venta: (cliente.split('@'))[1]
         })        
     }
 
@@ -94,7 +94,7 @@ export const ListaVenta = ({ listaVenta, itemPop, handlerReinicioProd, setListaV
     const handlerHacerPedido = () => setModalConfirmar(!modalConfirmar)
 
     const habilitarHacerPedido = () => { 
-        if (venta.nombre_cliente !== "") {
+        if (venta.codigo_venta !== "") {
             return true
         } else {
             return false;
@@ -111,7 +111,7 @@ export const ListaVenta = ({ listaVenta, itemPop, handlerReinicioProd, setListaV
                     listaVenta={listaVenta}
                     itemPop={itemPop}
                 />
-                                     
+
             </div>
 
             <div className="wrap-informacion-lista-venta mt-25 grid-1 gap">

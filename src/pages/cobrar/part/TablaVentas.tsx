@@ -14,7 +14,7 @@ export const TablaVentas = ({ data, handlerGetFacturaVenta }:any) => {
         <table className="table">
             <thead>
                 <tr>
-                    <th>Nombre del comprador</th>
+                    <th>Codigo de venta</th>
                     <th className="transparent inlineblock">...</th>
                 </tr>
             </thead>
@@ -29,7 +29,7 @@ export const TablaVentas = ({ data, handlerGetFacturaVenta }:any) => {
                                 className={tabb === e.id ? "tr-active pointer" : "pointer"}
                             >
                                 <td className="mayus secundary">
-                                    <strong>{ e.nombre_cliente }</strong>
+                                    <strong>{ e.codigo_venta }</strong>
                                 </td>
                                 
                                 <td className={"arrow-icon-select " + (

@@ -42,8 +42,8 @@ export const InfoVenta = ({ venta, classEstado }:any) => {
                     <div className="box-wrap-descripcion3">
                         
                         <span>
-                            <p>Nombre del cliente: </p>
-                            <h4>{ venta.nombre_cliente }</h4>
+                            <p>Codigo de venta: </p>
+                            <h4>{ venta.codigo_venta }</h4>
                         </span>
 
                         <span>

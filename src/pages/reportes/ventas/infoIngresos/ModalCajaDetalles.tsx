@@ -2,8 +2,6 @@ import { Modal } from "../../../../components/modals/Modal"
 import { zeroFill } from "../../../../resources/func/ceroFill";
 
 export const ModalCajaDetalles = ({ modal, setModal, itemCaja }:any) => {
-
-    console.log(itemCaja.cajaDetalles);
     
     const mostrarCajaDetalles = () => { 
         const mostrarDetalles:number = itemCaja.cajaDetalles && itemCaja.cajaDetalles.length;

@@ -106,7 +106,7 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
         
         updateVenta.estado_venta = estado;
         updateVenta.descuento_total = venta.descuento_total;
-        updateVenta.nombre_cliente = venta.nombre_cliente;
+        updateVenta.codigo_venta = venta.codigo_venta;
         updateVenta.observaciones = venta.observaciones;
         updateVenta.subtotal = venta.subtotal;
         updateVenta.total = venta.total;
@@ -218,7 +218,7 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
 
                     <FormasPagoTabs
                         clientesExistente={venta.clientes}
-                        clienteRapido={venta.nombre_cliente}
+                        clienteRapido={venta.codigo_venta}
                         tabbs={tabbs}
                         updateCliente={updateClienteExistente}
                         modalCliente={setModalCliente}

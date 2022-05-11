@@ -15,7 +15,7 @@ export interface Venta {
     descuento_total:number;
     subtotal:number;
     total:number;
-    nombre_cliente:string;
+    codigo_venta:string;
     observaciones:string;
     ventaDetalles:Array<any>;
     estado_venta:string;

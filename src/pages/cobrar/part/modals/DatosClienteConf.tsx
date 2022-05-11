@@ -53,8 +53,8 @@ const ClienteRapido = ({ venta }:any) => {
     return (
         <div className="wrap-descripcion">
             <span>
-                <h4>Nombre de cliente rapido: </h4>
-                <p><strong>{ venta.nombre_cliente }</strong></p>
+                <h4>Codigo de venta: </h4>
+                <p><strong>{ venta.codigo_venta }</strong></p>
             </span>
         </div>
     )
