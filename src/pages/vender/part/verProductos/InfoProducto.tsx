@@ -1,8 +1,9 @@
-export const ProductoDetallesVenta = ({ producto }:any) => {
+export const InfoProducto = ({ producto }:any) => {
+
     return (
-        <div className="bb bb-neutro">
+        <div className="wrap-info-producto">
             <h3>Informacion del producto</h3>
-            <div className="wrap-descripcion">
+            <div className="wrap-descripcion grid-2 gap">
                 <div>
                     <span>
                         <h4>Codigo: </h4>
@@ -18,7 +19,9 @@ export const ProductoDetallesVenta = ({ producto }:any) => {
                         <h4>Descripcion: </h4>
                         <p>{producto.descripcion}</p>
                     </span>
+                </div>
 
+                <div>
                     <span>
                         <h4>Marca: </h4>
                         <p>{producto.marca}</p>
@@ -33,7 +36,6 @@ export const ProductoDetallesVenta = ({ producto }:any) => {
                         <h4>Talla: </h4>
                         <p>{producto.talla}</p>
                     </span>
-
                 </div>
 
             </div>

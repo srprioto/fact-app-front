@@ -2,12 +2,15 @@ interface radioButton {
     label?:string;
     name:string;
     values:Array<any>;
+    checkValue?:any;
     moneda?:boolean;
     grid?:string;
     onChange:any;
 }
 
-export const RadioButton = ({ label, name, values, moneda, grid, onChange }:radioButton) => {
+export const RadioButton = ({ label, name, values, moneda, checkValue, grid, onChange }:radioButton) => {
+
+    // console.log(values[0].value);
 
     return (
         <div className="radio-button">
@@ -20,16 +23,18 @@ export const RadioButton = ({ label, name, values, moneda, grid, onChange }:radi
                 <div className={grid}>
                     {
                         values.map((r:any, index:number) => { 
+
                             return(
                                 <span key={index}>
                                     <input 
                                         id={name + index}
                                         name={name}
-                                        value={r.value}
+                                        value={index}
                                         type="radio"
                                         onChange={onChange}
+                                        checked={Number(index) === Number(checkValue)}
                                     />
-                                    <label htmlFor={name + index}>
+                                    <label className="strong" htmlFor={name + index}>
                                         { moneda && "S/. " }
                                         { r.label }
                                     </label>

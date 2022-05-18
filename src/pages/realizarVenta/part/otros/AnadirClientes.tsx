@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react"
 import { BiGroup } from "react-icons/bi"
-import { Checkbox2 } from "../../../components/forms/Checkbox2"
-import { Input } from "../../../components/forms/Input"
-import { InputDisable } from "../../../components/forms/InputDisable"
-import { SelectSearch } from "../../../components/forms/SelectSearch"
-import { generateRandomString } from "../../../resources/func/generarString"
-import { CLIENTES_SEARCH } from "../../../resources/routes"
+import { Checkbox2 } from "../../../../components/forms/Checkbox2"
+import { Input } from "../../../../components/forms/Input"
+import { InputDisable } from "../../../../components/forms/InputDisable"
+import { SelectSearch } from "../../../../components/forms/SelectSearch"
+import { generateRandomString } from "../../../../resources/func/generarString"
+import { CLIENTES_SEARCH } from "../../../../resources/routes"
 
 export const AnadirClientes = ({ handlerCliente, venta, setVenta, handlerChangeVenta }:any) => {
 
@@ -13,6 +13,7 @@ export const AnadirClientes = ({ handlerCliente, venta, setVenta, handlerChangeV
     const [tabState, setTabState] = useState<number>(1);
     const [codigoVenta, setCodigoVenta] = useState<boolean>(false);
 
+    
     useEffect(() => {
         setCodigoVenta(true);
     }, [])

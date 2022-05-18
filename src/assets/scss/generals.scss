@@ -363,7 +363,9 @@ a{
     position: absolute;
 }
 
-
+.over-hidden{
+    overflow: hidden;
+}
 
 .border-primary{ border: 1px solid $primary; }
 .border-secundary{ border: 1px solid $secundary; }
@@ -371,6 +373,17 @@ a{
 .border-info{ border: 1px solid $info; }
 .border-warning{ border: 1px solid $warning; }
 .border-danger{ border: 1px solid $danger; }
+
+
+// efectos
+
+.show-left{
+    animation: showleft .5s;
+}
+
+.show-right{
+    animation: showright .5s;
+}
 
 
 // buttons
@@ -781,6 +794,42 @@ table.table2{
     
 }
 
+// tabla3
+table.table3{
+    width: 100%;
+    border-collapse: collapse;
+    thead tr{
+        border-bottom: 1px solid $success;
+    }
+    th, td {
+        padding: 6px 5px;
+    }
+    tbody tr{
+        cursor: pointer;
+    }
+    tbody tr:hover td{
+        background-color: $bg-input;
+    }
+    tbody tr.active-row {
+        background-color: $box2;
+        color: $warning!important;
+    }
+
+    tbody td{
+        position: relative;
+        svg{
+            font-size: 19px
+        }
+        .wrap-dropdown {
+            .dropdown {
+                bottom: 0px;
+                padding: 0px 13px;
+            }
+        }
+    }
+    
+}
+
 table.no-hover{
     tbody tr:hover {
         background-color: transparent!important;
@@ -907,6 +956,7 @@ table.no-hover{
         background-color: $boxT;
         border-radius: 9px;
         padding: 25px;
+        
 
         @include max-scroll(120px);
 
@@ -920,10 +970,6 @@ table.no-hover{
     .modal-notransparent{
         background-color: $box!important;
     }
-
-    // .over-hidden{
-    //     overflow: hidden!important;
-    // }
 
 }
 

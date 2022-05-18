@@ -6,7 +6,7 @@ import { SelectSearch } from "../../../components/forms/SelectSearch";
 import { Loading } from "../../../components/loads/Loading";
 import { TextoRelleno } from "../../../components/TextoRelleno";
 import { TitleBox } from "../../../components/TitleBox";
-import { BtnOnOff } from "../../../components/btns/BtnOnOff";
+// import { BtnOnOff } from "../../../components/btns/BtnOnOff";
 import { ListaVenta } from "./ListaVenta";
 import { ProductoDetallesVenta } from "./ProductoDetallesVenta";
 import { GestionCantidades } from "./GestionCantidades";
@@ -46,6 +46,14 @@ export const PuntoVenta = () => {
             console.log(error);
         }
     }
+
+
+    // useEffect(() => {
+    //     setProductoDetalles({
+    //         ...productoDetalles,
+    //         precio_parcial: producto.productos ? producto.productos.precio_venta_1 : 0
+    //     })
+    // }, [producto])
 
     
     useEffect(() => { 
@@ -100,27 +108,6 @@ export const PuntoVenta = () => {
         })
     }
 
-    
-    const handlerListaVentas = () => { // añade productos a la lista
-        setProductosRepe([ ...productosRepe, LocalStockId ]); // evitar producto repetido
-
-        // añade productos a la lista
-        if (descUnid) { // descuento unidad activo
-            productoDetalles.descuento = productoDetalles.descuento * productoDetalles.cantidad_venta
-            setListaVenta([ 
-                ...listaVenta, 
-                productoDetalles
-            ])     
-        } else { // descuento unidad inactivo
-            setListaVenta([ 
-                ...listaVenta, 
-                productoDetalles 
-            ])
-        }
-
-        handlerReinicioProd() // reinicios
-    }
-
 
     const handlerReinicioProd = () => { // reinicios punto de venta
         setLocalStockId(0);
@@ -128,7 +115,7 @@ export const PuntoVenta = () => {
         setProductoDetalles(productDetail);
         setProducto({});
         setDescUnid(false);
-        setProductosRepe([]);
+        // setProductosRepe([]);
     }
 
 
@@ -178,11 +165,37 @@ export const PuntoVenta = () => {
     }
 
 
+    const handlerListaVentas = () => { // añade productos a la lista
+        setProductosRepe([ ...productosRepe, LocalStockId ]); // evitar producto repetido
+
+        let updateProdDetalles:any = productoDetalles;
+
+        updateProdDetalles.nombre_producto = producto.productos.nombre
+        updateProdDetalles.codigo_producto = producto.productos.codigo
+
+        // añade productos a la lista
+        if (descUnid) { // descuento unidad activo
+            updateProdDetalles.descuento = productoDetalles.descuento * productoDetalles.cantidad_venta   
+        } 
+
+        setListaVenta([ 
+            ...listaVenta, 
+            productoDetalles 
+        ])
+
+        handlerReinicioProd() // reinicios
+    }
+
+
+    console.log(producto);
+
+
     return (
         <div className="punto-de-venta">
             <TitleBox titulo={`Punto de venta - ${params.nombre}`} link="/tiendas"/>
             
             <div className="grid-2 gap">
+
                 <div className="box m-0 wrap-scroll-ventas">
                     
                     <div className="grid-1">
@@ -231,17 +244,21 @@ export const PuntoVenta = () => {
                                         productoDetalles={productoDetalles}
                                         descUnid={descUnid}
                                         setDescUnid={setDescUnid}
+                                        checkValue={productoDetalles.precio_parcial}
                                     />
 
                                     <div className="grid-2 gap mt-5">
                                         <div></div>
-                                        <BtnOnOff
+                                        <button className="btn btn-info" onClick={() => handlerListaVentas()}>
+                                            <BiListPlus /> Añadir
+                                        </button>
+                                        {/* <BtnOnOff
                                             label="Añadir"
                                             estado={validadAnadir()}
                                             onClick={handlerListaVentas}
                                             icon={ <BiListPlus /> }
                                             className="info"
-                                        />
+                                        /> */}
                                     </div>
 
                                 </div>                                
@@ -261,6 +278,7 @@ export const PuntoVenta = () => {
                                 handlerReinicioProd={handlerReinicioProd}
                                 setListaVenta={setListaVenta}
                                 idLocal={Number(params.id)}
+                                setProductosRepe={setProductosRepe}
                             />
                         )
                     }

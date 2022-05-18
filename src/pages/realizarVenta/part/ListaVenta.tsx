@@ -6,7 +6,9 @@ import { Input } from "../../../components/forms/Input"
 import { InputDisable } from "../../../components/forms/InputDisable"
 
 import { Venta } from "../../../resources/dtos/VentasDto"
-import { AnadirClientes } from "./AnadirClientes"
+// import { AnadirClientes } from "./otros/AnadirClientes";
+import { CodigoVenta } from "./CodigoVenta"
+import { FormasPago } from "./FormasPago/FormasPago"
 
 import { ModalConfirmarVenta } from "./ModalConfirmarVenta"
 import { TablaListaVenta } from "./TablaListaVenta"
@@ -18,9 +20,17 @@ interface listaVenta {
     handlerReinicioProd:Function;
     setListaVenta:Function;
     idLocal:number;
+    setProductosRepe:Function;
 }
 
-export const ListaVenta = ({ listaVenta, itemPop, handlerReinicioProd, setListaVenta, idLocal }:listaVenta) => {
+export const ListaVenta = ({ 
+    listaVenta, 
+    itemPop, 
+    handlerReinicioProd, 
+    setListaVenta, 
+    idLocal, 
+    setProductosRepe 
+}:listaVenta) => {
 
     const [modalConfirmar, setModalConfirmar] = useState<boolean>(false);
 
@@ -47,13 +57,13 @@ export const ListaVenta = ({ listaVenta, itemPop, handlerReinicioProd, setListaV
         })
     }
 
-    const handlerCliente = (cliente:any) => { 
-        setVenta({
-            ...venta,
-            clienteId: Number((cliente.split('@'))[0]),
-            codigo_venta: (cliente.split('@'))[1]
-        })        
-    }
+    // const handlerCliente = (cliente:any) => { 
+    //     setVenta({
+    //         ...venta,
+    //         clienteId: Number((cliente.split('@'))[0]),
+    //         codigo_venta: (cliente.split('@'))[1]
+    //     })        
+    // }
 
     // const handlerIGV = () => setCheckIGV(!checkIGV)
     
@@ -117,13 +127,21 @@ export const ListaVenta = ({ listaVenta, itemPop, handlerReinicioProd, setListaV
             <div className="wrap-informacion-lista-venta mt-25 grid-1 gap">
 
                 <div className="informacion-lista-venta grid-1 gap bb bb-neutro">
-                    
-                    <AnadirClientes
-                        handlerCliente={handlerCliente}
+
+                    <CodigoVenta
                         venta={venta}
                         setVenta={setVenta}
                         handlerChangeVenta={handlerChangeVenta}
                     />
+                    
+                    {/* <AnadirClientes
+                        handlerCliente={handlerCliente}
+                        venta={venta}
+                        setVenta={setVenta}
+                        handlerChangeVenta={handlerChangeVenta}
+                    /> */}
+
+                    <FormasPago />
 
                     <div className="grid-2 gap">
                     
@@ -195,7 +213,6 @@ export const ListaVenta = ({ listaVenta, itemPop, handlerReinicioProd, setListaV
                 </div>
             </div>
 
-
             <ModalConfirmarVenta
                 modal={modalConfirmar}
                 setModal={setModalConfirmar}
@@ -203,9 +220,9 @@ export const ListaVenta = ({ listaVenta, itemPop, handlerReinicioProd, setListaV
                 listaVenta={listaVenta}
                 handlerReinicioProd={handlerReinicioProd}
                 setListaVenta={setListaVenta}
+                setProductosRepe={setProductosRepe}
             />
             
-
         </div>        
     )
 }

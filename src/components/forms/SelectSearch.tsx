@@ -109,6 +109,22 @@ export const SelectSearch = ({
         )
     }
 
+    // const check = (e:any) => { 
+    //     const tecla:any = (document.all) ? e.keyCode : e.which;
+    
+    //     //Tecla de retroceso para borrar, siempre la permite
+    //     if (tecla === 8) {
+    //         return true;
+    //     }
+    
+    //     // Patrón de entrada, en este caso solo acepta numeros y letras
+    //     const patron:any = /[A-Za-z0-9]/;
+    //     const tecla_final:any = String.fromCharCode(tecla);
+    //     return patron.test(tecla_final);
+    // }
+
+
+
     return (
         <div className="wrap-form">
             <label className="flex-space">
@@ -131,6 +147,8 @@ export const SelectSearch = ({
                             onChange={(e) => setInput(e.target.value)}
                             placeholder={placeholder}
                             autoComplete="off"
+                            pattern="[A-Za-z0-9_-]{1,15}"
+                            // onKeyPress={check}
                         />
                         <button 
                             className="btn btn-search info" 

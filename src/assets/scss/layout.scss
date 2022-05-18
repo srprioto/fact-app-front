@@ -559,6 +559,142 @@
 }
 
 
+// nuevo punto de venta
+
+.vender{
+    .ver-producto,
+    .ver-lista{
+        @include min-scroll(144px);
+    }
+    .ver-producto{
+        
+        .buscar-producto{
+            position: relative;
+            height: 85.5px;
+            .box-buscar-producto{
+                position: relative;
+            }
+            .loading-lista-prod{
+                padding-top: 0!important;
+                top: 80px;
+                width: 100%;
+                position: absolute;
+                background-color: $box;
+                box-shadow: 0px 6px 10px 2px #222736;
+                z-index: 3;
+            }
+            .lista-productos{
+                padding-top: 0!important;
+                top: 80px;
+                width: 100%;
+                position: absolute;
+                display: none;
+                // @include static-scroll(200px);
+                background-color: $box;
+                box-shadow: 0px 6px 10px 2px #222736;
+                z-index: 3;
+            }
+            &:hover .lista-productos{
+                display: block;
+                @include static-scroll(200px);
+            }
+        }
+        .info-producto{
+            @include scroll(250px);
+
+            .stock-general-locales{
+                position: relative;
+                span {
+                    color: $texto-red;
+                    display: flex;
+                    margin-bottom: 5px;
+                    align-items: center;
+                    svg{
+                        font-size: 23px!important;
+                    }
+                    p {
+                        margin: 0 6px 0 0;
+                    }
+                }
+                h5{
+                    color: $warning;
+                }
+                .box-stock-general{
+                    @include static-scroll(104px);
+                    width: 95%;
+                    box-shadow: 4px 5px 8px 1px #0000002f;
+                    border: 1px solid #595d67;
+                    padding: 7px 13px;
+                    border-radius: 6px;
+                    box-sizing: border-box;
+                    position: absolute;
+                    background-color: #222736;
+                    z-index: 2;
+                    top: 0px;
+                    left: 0px;
+                    transform: scale(0);
+                    transition: 0.3s;
+
+                    span{                        
+                        display: grid;
+                        grid-template-columns: 2fr 1fr;
+                        gap: 10;
+                        margin: 0 0 3px 0!important;
+                        h4{
+                            color: $texto;
+                            margin: 0!important;
+                        }
+                        p{
+                            margin: 0!important;
+                            color: $texto;
+                            // font-weight: bold;
+                        }
+                    }
+                }
+            }
+
+            .stock-general-locales:hover .box-stock-general{
+                transform: scale(1);
+                transition: .3s;
+            }
+
+            
+
+            // .stock-general-locales:hover ~ .box-stock-general,
+            // .box-stock-general:hover{
+            //     transform: scale(1);
+            //     transition: .3s;
+            // }
+            
+
+        }
+
+        .ver-lista-short{
+            @include scroll(144px);
+
+            .tabla-lista-venta{
+                @include scroll(510px);
+            }
+
+        }
+    }
+    
+    .btn-float-left{
+        position: fixed;
+        bottom: 20px;
+        // left: 20px;
+    }
+
+
+    
+}
+
+// .tabla-lista-venta{
+//     @include scroll(100px);
+    
+// }
+
+
 // caja
 
 .caja{
@@ -855,6 +991,11 @@
         font-size: 50px;
         animation: rotate 5s infinite;
     }
+}
+
+.rotate-icon-solo{
+    animation: rotate 5s infinite;
+    margin: 0;
 }
 
 

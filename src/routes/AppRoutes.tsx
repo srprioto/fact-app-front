@@ -19,7 +19,6 @@ import { NuevoProducto } from "../pages/productos/NuevoProducto";
 import { IndexProveedores } from "../pages/proveedores";
 import { IndexEditProv } from "../pages/proveedores/Editar";
 import { IndexNuevoProv } from "../pages/proveedores/Nuevo";
-import { IndexVenta } from "../pages/realizarVenta";
 import { Transacciones } from "../pages/reportes/Transacciones";
 import { IndexUsuarios } from "../pages/usuarios";
 import { IndexEditUser } from "../pages/usuarios/Editar";
@@ -29,7 +28,9 @@ import { Page404 } from "../pages/Page404";
 import { IngresoProductos } from "../pages/reportes/IngresoProductos";
 import { Ventas } from "../pages/reportes/Ventas";
 import { IndexCajaChica } from "../pages/cajaChica";
+import { IndexVender } from "../pages/vender";
 
+// import { IndexVenta } from "../pages/realizarVenta";
 
 export const AppRoutes = () => {
     return (
@@ -52,7 +53,7 @@ export const AppRoutes = () => {
                     {/* locales */}
                     <Route path="/tiendas" element={ <IndexLocales /> } />
                     <Route path="/tiendas/local/:id/:nombre" element={ <IndexLocal /> } />
-                    <Route path="/tiendas/vender/:id/:nombre" element={ <IndexVenta /> } />
+                    <Route path="/tiendas/vender/:id/:nombre" element={ <IndexVender /> } />
                     <Route path="/tiendas/caja/:id/:nombre" element={ <IndexCobrar /> } />
                     <Route path="/tiendas/caja-chica/:id/:nombre" element={ <IndexCajaChica /> } />
                     

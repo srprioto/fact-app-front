@@ -202,7 +202,7 @@ export const FormIngresoProductos = ({
                         ? (
                             <>
                                 
-                                <table className="table mb-25 mt-5">
+                                <table className="table2 mb-25 mt-5">
                                     <thead>
                                         <tr>
                                             <th>Producto</th>

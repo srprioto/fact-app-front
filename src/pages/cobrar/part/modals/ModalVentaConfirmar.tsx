@@ -3,7 +3,7 @@ import { BiCheck, BiReply } from "react-icons/bi";
 
 import { LoadSwitchBtn2 } from "../../../../components/btns/LoadSwitchBtn2";
 import { Modal } from "../../../../components/modals/Modal"
-import { DatosClienteConf } from "./DatosClienteConf";
+// import { DatosClienteConf } from "./DatosClienteConf";
 import { TablaProdVenta } from "./TablaProdVenta";
 
 import { copy } from "../../../../resources/func/deepCopy";
@@ -15,7 +15,7 @@ export const ModalVentaConfirmar = ({
     modal,
     setModal,
     dataVenta,
-    codigoPago,
+    // codigoPago,
     confirmarVenta,
     loading
 }:any) => {
@@ -98,12 +98,12 @@ export const ModalVentaConfirmar = ({
 
                     <div className="grid-1 gap wrap-descripcion">
                         <span>
-                            <h2 className="primary">Nro factura: </h2>
-                            <h2><strong>{ codigoPago() + "-" + venta.id }</strong></h2>
+                            <h3 className="primary">Codigo de venta: </h3>
+                            <h2><strong>{ venta.codigo_venta }</strong></h2>
                         </span>
                     </div>
 
-                    <DatosClienteConf venta={venta} />
+                    {/* <DatosClienteConf venta={venta} /> */}
                     <TablaProdVenta venta={venta} />
 
                     <div className="grid-3 gap center">
@@ -168,6 +168,7 @@ export const ModalVentaConfirmar = ({
                         className="btn btn-warning"
                         onClick={() => setModal(!modal)}
                     ><BiReply /> Regresar</button>
+                    
                 </div>
 
 

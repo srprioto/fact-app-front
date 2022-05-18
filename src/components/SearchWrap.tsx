@@ -5,13 +5,15 @@ import { get } from "../resources/fetch";
 interface searchWrap {
     setLoadingData:Function; // estado de carga de datos
     setData:Function; // estado que guarda los datos de la busqueda o datos de forma general
-    getData:Function; // estado que trae todos los datos para reiniciar busqueda
+    getData?:Function; // estado que trae todos los datos para reiniciar busqueda
     url:string; // url de la busqueda
     placeholder:string; // texto del input de busqueda
     
     // estados de busqueda, estos van por fuera
     searchState:boolean;
     setSearchState:Function;
+    reiniciar?:Function;
+    // reSearch?:any;
 }
 
 export const SearchWrap = ({ 
@@ -21,11 +23,18 @@ export const SearchWrap = ({
     url, 
     placeholder, 
     searchState, 
-    setSearchState 
+    setSearchState,
+    reiniciar,
+    // reSearch
 }:searchWrap) => {
     
     const [searchTxt, setSearchTxt] = useState<string>("");
     const searchFocus = useRef<any>(null)
+
+    // useEffect(() => {
+    //     searchData();
+    // }, [reSearch])
+    
     
     const searchData = async () => { 
         if (searchTxt === "" || searchTxt === undefined || searchTxt === null || searchTxt.length === 0) {
@@ -47,7 +56,7 @@ export const SearchWrap = ({
     const handlerStateSearch = () => {
         setSearchTxt("");
         setSearchState(false);
-        getData();
+        getData && getData();
     }
 
     const onChangeSearch = (e:any) => { 
@@ -63,14 +72,22 @@ export const SearchWrap = ({
             handlerStateSearch={handlerStateSearch}
             searchFocus={searchFocus}
             placeholder={placeholder}
+            reiniciar={reiniciar}
         />
     )
 }
 
-// <SearchWrap 
-//     setLoadingData={setLoadingData}
-//     setData={setData}
-//     getData={getData}
-//     url={VENTAS_SEARCH}
-//     placeholder="Nombre cliente o nota adicional"
-// /> 
+/* 
+
+const [searchState, setSearchState] = useState<boolean>(false);
+
+<SearchWrap 
+    setLoadingData={setLoadingData}
+    setData={setData}
+    getData={getData}
+    searchState={searchState}
+    setSearchState={setSearchState}
+    url={VENTAS_SEARCH}
+    placeholder="Nombre del cliente ..."
+/> 
+*/

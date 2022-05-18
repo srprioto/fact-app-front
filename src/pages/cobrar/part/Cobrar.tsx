@@ -77,7 +77,7 @@ export const Cobrar = () => {
                                 searchState={searchState}
                                 setSearchState={setSearchState}
                                 url={VENTAS_SEARCH}
-                                placeholder="Nombre del cliente"
+                                placeholder="Codigo de venta"
                             />
                             <button 
                                 className="btn2 btn2-success pr-0"

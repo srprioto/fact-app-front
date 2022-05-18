@@ -78,7 +78,8 @@ export const ModalCalcPrecio = ({
         setLoadingData(true);
         try {
             const totalStockproducto = await get(LOCAL_STOCK + "/stock/producto/" + idProducto);
-            setStockTotalProducto(totalStockproducto);
+            console.log(totalStockproducto);
+            setStockTotalProducto(totalStockproducto.stockGeneral);
             setLoadingData(false);            
         } catch (error) {
             setLoadingData(true);

@@ -94,9 +94,9 @@ export const ModalVentaDetalles = ({ modal, setModal, idVenta }:any) => {
                                                             <ProductoInfo producto={e.productos} />
                                                         </td>
                                                         <td>{ e.cantidad_venta }</td>
-                                                        <td>{ e.descuento }</td>
-                                                        <td>{ e.precio_parcial }</td>
-                                                        <td>{ e.precio_venta }</td>
+                                                        <td>S/. { e.descuento }</td>
+                                                        <td>S/. { e.precio_parcial }</td>
+                                                        <td>S/. { e.precio_venta }</td>
                                                         <td
                                                             className={
                                                                 classVentaForzada(e.venta_negativa, e.forzar_venta)

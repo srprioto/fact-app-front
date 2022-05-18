@@ -10,7 +10,7 @@ export const InfoVenta = ({ venta, classEstado }:any) => {
                     <div className="box-wrap-descripcion3">
 
                         <span>
-                            <p>Codigo de venta: </p>
+                            <p>Nro de comprobante: </p>
                             <h4 className="info-i">{ zeroFill(Number(venta.id), 5) }</h4>
                         </span>
                         
@@ -21,17 +21,17 @@ export const InfoVenta = ({ venta, classEstado }:any) => {
 
                         <span>
                             <p>Subtotal</p>
-                            <h4>{ venta.subtotal }</h4>
+                            <h4>S/. { venta.subtotal }</h4>
                         </span>
 
                         <span>
                             <p>Descuento general</p>
-                            <h4>{ venta.descuento_total }</h4>
+                            <h4>S/. { venta.descuento_total }</h4>
                         </span>
 
                         <span>
                             <p>Total</p>
-                            <h4 className="success-i">{ venta.total }</h4>
+                            <h4 className="success-i">S/. { venta.total }</h4>
                         </span>
                         
                     </div>

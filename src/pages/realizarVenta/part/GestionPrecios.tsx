@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Checkbox2 } from "../../../components/forms/Checkbox2";
 import { Input } from "../../../components/forms/Input"
 import { RadioButton } from "../../../components/forms/RadioButton"
@@ -8,6 +9,7 @@ interface gestionPrecios {
     productoDetalles:any;
     descUnid:boolean;
     setDescUnid:Function;
+    checkValue:any;
 }
 
 export const GestionPrecios = ({ 
@@ -15,28 +17,54 @@ export const GestionPrecios = ({
     handlerChangePrecio, 
     productoDetalles, 
     descUnid, 
+    checkValue,
     setDescUnid 
 }:gestionPrecios) => {
+
+    // const [precios, setPrecios] = useState<Array<any>>([
+    //     {
+    //         label: producto.productos.precio_venta_1,
+    //         value: producto.productos.precio_venta_1,
+    //         // checked: true
+    //     },
+    //     {
+    //         label: producto.productos.precio_venta_2,
+    //         value: producto.productos.precio_venta_2,
+    //     },
+    //     {
+    //         label: producto.productos.precio_venta_3,
+    //         value: producto.productos.precio_venta_3,
+    //     }
+    // ])
+
+    
+
+    // precios.map((e:any) => { 
+    //     console.log(e);            
+    //     // return (
+
+    //     // )
+    // })
+    
 
     const strRadiobutton = () => { 
 
         let estructura_radiobutton:Array<any> = [];
-        const prod:any = producto.productos;
 
         if (!(Object.keys(producto).length <= 0)) {
 
             estructura_radiobutton = [
                 {
-                    label: prod.precio_venta_1,
-                    value: prod.precio_venta_1,
+                    label: producto.productos.precio_venta_1,
+                    value: producto.productos.precio_venta_1
                 },
                 {
-                    label: prod.precio_venta_2,
-                    value: prod.precio_venta_2,
+                    label: producto.productos.precio_venta_2,
+                    value: producto.productos.precio_venta_2
                 },
                 {
-                    label: prod.precio_venta_3,
-                    value: prod.precio_venta_3,
+                    label: producto.productos.precio_venta_3,
+                    value: producto.productos.precio_venta_3
                 }
             ]  
 
@@ -64,49 +92,41 @@ export const GestionPrecios = ({
                         name="precio_venta"
                         values={strRadiobutton()}
                         onChange={handlerChangePrecio}
+                        checkValue={checkValue}
                         moneda
                     />
                 </div>
 
-                <div className="grid-2 gap mt-5">
+                <div className="grid-3 gap mt-5">
 
-                    <div className="grid-2 gap">
+                    <div className="center">
 
-                        <div className="center">
+                        <Input
+                            label="Incremento/Descuento"
+                            type="number"
+                            name="descuento"
+                            value={productoDetalles.descuento}
+                            color={productoDetalles.descuento < 0 ? "danger-i" : ""}
+                            onChange={handlerChangePrecio}
+                            moneda
+                        />
 
-                            <label htmlFor="descuento">
-                                <p  className="mb-5">Incremento/Descuento</p>
-                                {/* <h5>Selecciona un precio</h5> */}
-                            </label>
+                        <h5 className="warning mt-5">Haz descuentos con una cantidad negativa</h5>
 
-                            <Input
-                                // label="Cambiar precio final"
-                                type="number"
-                                name="descuento"
-                                value={productoDetalles.descuento}
-                                color={productoDetalles.descuento < 0 ? "danger-i" : ""}
-                                onChange={handlerChangePrecio}
-                                moneda
-                            />
+                    </div>
 
-                            <h5 className="warning mt-5">Haz descuentos con una cantidad negativa</h5>
-
-                        </div>
-
-                        <div>
-                            <p className="center info">{
-                                descUnid
-                                ? "Por unidad"
-                                : "En bloque"
-                            }</p>
-                            <Checkbox2
-                                name="por_unidad"
-                                checked={descUnid}
-                                handlerCheck={ () => setDescUnid(!descUnid) }
-                            />
-                        </div>
-
-                    </div>                    
+                    <div>
+                        <p className="center info">{
+                            descUnid
+                            ? "Inc/desc por unidad"
+                            : "Inc/desc en bloque"
+                        }</p>
+                        <Checkbox2
+                            name="por_unidad"
+                            checked={descUnid}
+                            handlerCheck={ () => setDescUnid(!descUnid) }
+                        />
+                    </div>                  
 
                     <span className="center">
                         <p className="info">Precio de venta</p>

@@ -4,8 +4,8 @@ import { BiCheck, BiX } from "react-icons/bi";
 // import { Input } from "../../../components/forms/Input";
 // import { InputDisable } from "../../../components/forms/InputDisable";
 import { ModalNuevoCliente } from "../../../components/modals/ModalNuevoCliente";
-import { FormasPagoBotones } from "./formasPago/FormasPagoBotones";
-import { FormasPagoTabs } from "./formasPago/FormasPagoTabs";
+// import { FormasPagoBotones } from "./formasPago/FormasPagoBotones";
+// import { FormasPagoTabs } from "./formasPago/FormasPagoTabs";
 import { ObservacionesVenta } from "./ObservacionesVenta";
 import { TablaListaVentaProductos } from "./TablaListaVentaProductos";
 
@@ -23,7 +23,7 @@ interface descripcionVenta {
 
 export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
 
-    const [tabbs, setTabbs] = useState<number>(1);
+    // const [tabbs, setTabbs] = useState<number>(1);
 
     const [venta, setVenta] = useState<any>(data);
     const [listaRechazados, setListaRechazados] = useState<any>([]);
@@ -84,19 +84,19 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
 
     
     const handlerCliente = (cliente:any) => setVenta({ ...venta, clientes: cliente}) // cliente nuevo
-    const updateClienteExistente = (cliente:any) => setVenta({ ...venta, clientes: cliente }) // cliente existente
+    // const updateClienteExistente = (cliente:any) => setVenta({ ...venta, clientes: cliente }) // cliente existente
 
     
-    const codigoPago = ():string => { 
-        if (tabbs === 1) {
-            return "001";
-        } else if (tabbs === 2){
-            return "002"
-        } else if (tabbs === 3){
-            return "003"
-        }
-        return ""
-    }
+    // const codigoPago = ():string => { 
+    //     if (tabbs === 1) {
+    //         return "001";
+    //     } else if (tabbs === 2){
+    //         return "002"
+    //     } else if (tabbs === 3){
+    //         return "003"
+    //     }
+    //     return ""
+    // }
 
 
     const handlerConfirmarVenta = async (estado:string) => {
@@ -148,8 +148,8 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
             <div className="grid-1 gap">
 
                 <div className="middle bb bb-neutro">
-                    <p className="m-0 pr-20">Nro de comprobante: </p>
-                    <h1 className="info m-0">{ codigoPago() + "-" +  venta.id}</h1>
+                    <p className="m-0 pr-20">Codigo de venta: </p>
+                    <h1 className="info m-0">{ venta.codigo_venta }</h1>
                 </div>
                 
                 <TablaListaVentaProductos
@@ -162,7 +162,7 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
 
                 <div className="descripcion-venta grid-1 gap bb bb-neutro">
 
-                    <div className="grid-2 gap">
+                    <div className="grid-3 gap">
 
                         <div className="center">
                             <p className="info">Subtotal</p>
@@ -185,6 +185,11 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
                                 : "success"
                             }>S/. {venta.descuento_total}</h3>
                         </div>
+
+                        <span className="center">
+                            <p className="info">Total de la venta</p>
+                            <h1 className="success strong">S/. { venta.total }</h1>
+                        </span>
 
                         {/* <InputDisable
                             label="Subtotal"
@@ -209,7 +214,7 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
 
                 </div>
 
-                <div className="wrap-formas-pago grid-1 gap">
+                {/* <div className="wrap-formas-pago grid-1 gap">
                     
                     <FormasPagoBotones
                         tabbs={tabbs}
@@ -224,16 +229,7 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
                         modalCliente={setModalCliente}
                     />
 
-                </div>
-
-                <div className="grid-3 mt-15 bb bb-neutro">
-                    <div></div>
-                    <span className="center">
-                        <p className="info">Total de la venta</p>
-                        <h1 className="success strong">S/. { venta.total }</h1>
-                    </span>
-                    <div></div>    
-                </div>
+                </div> */}
 
                 <div className="wrap-confirmar-venta grid-4 gap mb-25">
                     <div></div>
@@ -261,7 +257,7 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
                     modal={modalConfVenta}
                     setModal={setModalConfVenta}
                     dataVenta={venta}
-                    codigoPago={codigoPago}
+                    // codigoPago={codigoPago}
                     confirmarVenta={handlerConfirmarVenta}
                     loading={loadConfirmarVenta}
                 />
@@ -272,7 +268,7 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
                 modal={modalRechazVenta}
                 setModal={setModalRechazVenta}
                 venta={venta}
-                codigoPago={codigoPago}
+                // codigoPago={codigoPago}
                 rechazarVenta={handlerConfirmarVenta}
                 loading={loadConfirmarVenta}
             />

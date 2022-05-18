@@ -8,6 +8,7 @@ interface SearchType {
     handlerStateSearch:Function;
     searchFocus:React.MutableRefObject<any>;
     placeholder:string;
+    reiniciar?:Function;
 }
 
 export const Search = ({ 
@@ -17,13 +18,15 @@ export const Search = ({
     searchFocus, 
     handlerStateSearch,
     searchData,
-    placeholder
+    placeholder,
+    reiniciar
 }:SearchType) => {
 
 
     const reloadSearch = (e:any) => { 
         e.preventDefault();
         handlerStateSearch();
+        reiniciar && reiniciar();
     }
 
 

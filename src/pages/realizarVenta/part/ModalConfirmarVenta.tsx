@@ -15,6 +15,7 @@ interface modalConfirmarVenta {
     listaVenta:Array<any>;
     handlerReinicioProd:Function;
     setListaVenta:Function;
+    setProductosRepe:Function;
 }
 
 export const ModalConfirmarVenta = ({ 
@@ -23,7 +24,8 @@ export const ModalConfirmarVenta = ({
     venta, 
     listaVenta, 
     handlerReinicioProd, 
-    setListaVenta 
+    setListaVenta,
+    setProductosRepe
 }:modalConfirmarVenta) => {
 
     const [loadVenta, setLoadVenta] = useState<boolean>(false);
@@ -40,6 +42,7 @@ export const ModalConfirmarVenta = ({
             console.log(error);
         } finally{
             handlerReinicioProd();
+            setProductosRepe([]);
             setListaVenta([]);
         }
     }

@@ -22,7 +22,7 @@ export const Input = ({ label, type = "text", name, value, placeholder, onChange
                     type === "text"
                     ? (
                         <input 
-                            type={type} 
+                            type={type}
                             name={name} 
                             id={name} 
                             value={value === 0 || value === isNaN ? "" : value}
@@ -37,7 +37,8 @@ export const Input = ({ label, type = "text", name, value, placeholder, onChange
                             <input 
                                 type={type} 
                                 name={name} 
-                                id={name} 
+                                id={name}
+                                // step="0.01"
                                 value={
                                     value === isNaN || 
                                     value === undefined || 
@@ -45,7 +46,7 @@ export const Input = ({ label, type = "text", name, value, placeholder, onChange
                                     value === "" || 
                                     value === isNaN ||
                                     value <= 0
-                                    ? 0 
+                                    ? "" 
                                     : value
                                 }
                                 onChange={onChange}
@@ -57,6 +58,7 @@ export const Input = ({ label, type = "text", name, value, placeholder, onChange
                             <input 
                                 className={color}
                                 type={type} 
+                                // step="0.01"
                                 name={name} 
                                 id={name} 
                                 value={
@@ -65,7 +67,7 @@ export const Input = ({ label, type = "text", name, value, placeholder, onChange
                                     value === null || 
                                     value === "" || 
                                     value === isNaN
-                                    ? 0 
+                                    ? "" 
                                     : value
                                 }
                                 onChange={onChange}
