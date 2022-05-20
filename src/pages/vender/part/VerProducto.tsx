@@ -3,7 +3,7 @@ import { BiListPlus } from "react-icons/bi";
 import { BtnOnOff2 } from "../../../components/btns/BtnOnOff2";
 import { TextoRelleno } from "../../../components/TextoRelleno";
 import { ventaDet, ventaDetalles } from "../../../resources/dtos/VentasDto";
-import { VerListaShort } from "./verLista/VerListaShort";
+import { VerListaShort } from "./verLista/short/VerListaShort";
 import { BuscarProducto } from "./verProductos/BuscarProducto";
 import { GestionCantidades } from "./verProductos/GestionCantidades";
 import { GestionPrecios } from "./verProductos/GestionPrecios";
@@ -26,6 +26,13 @@ interface verProducto {
     setListaRepetidos:Function;
     itemPop:Function;
     postVenta:Function;
+    alertaDescuento:Function;
+    ventaDetalle:any
+    setVentaDetalle:Function;
+    tipoDescuento:boolean;
+    setTipoDescuento:Function;
+    reinicios2:Function;
+    reinicios:Function;
 }
 
 export const VerProducto = ({ 
@@ -43,11 +50,15 @@ export const VerProducto = ({
     listaRepetidos,
     setListaRepetidos,
     itemPop,
-    postVenta
+    postVenta,
+    alertaDescuento,
+    setVentaDetalle,
+    ventaDetalle,
+    tipoDescuento,
+    setTipoDescuento,
+    reinicios2,
+    reinicios
 }:verProducto) => {
-
-    const [ventaDetalle, setVentaDetalle] = useState<ventaDetalles>(ventaDet); // reinicio
-    const [tipoDescuento, setTipoDescuento] = useState<boolean>(false);
 
     const producto:any = elemento.productos ? elemento.productos : {};
 
@@ -70,13 +81,6 @@ export const VerProducto = ({
     }
 
 
-    const reinicios = () => { 
-        setElemento({});
-        setTipoDescuento(false);
-        setVentaDetalle(ventaDet);
-    }
-
-
     const handlerAddListaVenta = () => { 
         setListaRepetidos([ ...listaRepetidos, ventaDetalle.productosId ]); // trabaja con id del producto
 
@@ -90,8 +94,7 @@ export const VerProducto = ({
             ...updateListaDet
         ])
 
-        reinicios()
-
+        reinicios();
     }
 
 
@@ -143,17 +146,23 @@ export const VerProducto = ({
                                 />
 
                                 <div className="grid-4 gap mt-25">
-                                    <BtnOnOff2
-                                        estado={validarAñadir()}
-                                        label="Venta rapida"
-                                        // icon={<BiListPlus />}
-                                    >
-                                        <button className="btn btn-warning">
-                                            Venta rapida
-                                        </button>
-                                    </BtnOnOff2>
-                                    
-                                    
+
+                                    {
+                                        listaVenta.length <= 0
+                                        ? (
+                                            <BtnOnOff2
+                                                estado={validarAñadir()}
+                                                label="Venta rapida"
+                                                // icon={<BiListPlus />}
+                                            >
+                                                <button className="btn btn-warning">
+                                                    Venta rapida
+                                                </button>
+                                            </BtnOnOff2>
+                                        ) : (
+                                            <div></div>
+                                        )
+                                    }
                                     <div></div>
                                     <div></div>
                                     <BtnOnOff2
@@ -173,16 +182,17 @@ export const VerProducto = ({
                         )
                     }
                     </div>
-
                 </div>
 
                 <VerListaShort
-                    venta={venta}
                     setVenta={setVenta}
+                    venta={venta}
                     itemPop={itemPop}
                     listaVenta={listaVenta}
                     handlerShowWindow={handlerShowWindow}
                     postVenta={postVenta}
+                    reinicios2={reinicios2}
+                    alertaDescuento={alertaDescuento}
                 />
                 
             </div>

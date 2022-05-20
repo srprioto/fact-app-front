@@ -1,54 +1,64 @@
-import { useEffect, useState } from "react";
-import { BiCheck, BiRightArrowAlt } from "react-icons/bi";
-import { Input } from "../../../../components/forms/Input";
-import { TextoRelleno } from "../../../../components/TextoRelleno";
-import { TablaListaShort } from "./short/TablaListaShort";
+import { useState } from "react";
+import { BiCaretRight, BiCheck, BiRightArrowAlt } from "react-icons/bi";
+import { LoadSwitchBtn2 } from "../../../../../components/btns/LoadSwitchBtn2";
+import { Input } from "../../../../../components/forms/Input";
+import { ModalWrap } from "../../../../../components/modals/ModalWrap";
+import { TextoRelleno } from "../../../../../components/TextoRelleno";
+import { ModalCodigoVenta } from "./ModalCodigoVenta";
+import { TablaListaShort } from "./TablaListaShort";
 
+interface verListaShort {
+    setVenta:Function;
+    venta:any;
+    itemPop:Function;
+    listaVenta:Array<any>;
+    handlerShowWindow:any;
+    postVenta:Function;
+    reinicios2:Function;
+    alertaDescuento:Function;
+}
 
 export const VerListaShort = ({ 
+    setVenta,
     venta, 
-    setVenta, 
     itemPop, 
     listaVenta, 
     handlerShowWindow, 
-    postVenta 
-}:any) => {
+    postVenta,
+    reinicios2,
+    alertaDescuento
+}:verListaShort) => {
 
-    const [descuentoOn, setDescuentoOn] = useState<boolean>(false);
-
-    useEffect(() => {
-        listaVenta.forEach((e:any) => { // verficar que existen descuentos activos
-            if (e.descuento < 0) { setDescuentoOn(true) }
-        })
-        const sumaSubtotal = listaVenta
-            .map((item:any) => item.precio_parcial)
-            .reduce((prev:number, curr:number) => prev + curr, 0);
-        setVenta({ ...venta, subtotal: sumaSubtotal });
-    }, [listaVenta])
     
+    const [loadVenta, setLoadVenta] = useState<boolean>(false);
 
-    useEffect(() => { // calcular total
-        setVenta({
-            ...venta,
-            total: (Number(venta.subtotal) + (Number(venta.descuento_total)))
-        })
-    }, [venta.subtotal, venta.descuento_total])
-
-
-    const alertaDescuento = () => { 
-        if (venta.descuento_total < 0 && descuentoOn) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
+    const [ventaRespuesta, setVentaRespuesta] = useState<any>({});
+    const [modalConfirm, setModalConfirm] = useState<boolean>(false);
+  
 
     const handlerOnChange = (e:any) => { 
         setVenta({
             ...venta,
             [e.target.name]: e.target.value
         })
+    }
+
+
+    const handlerVenta = async () => { 
+        setLoadVenta(true);
+        try {
+            const ventaResp:any = await postVenta();
+            if (ventaResp.data) {
+                setVentaRespuesta(ventaResp.data);
+                setModalConfirm(true);
+            }            
+            setLoadVenta(false);
+        } catch (error) {
+            setLoadVenta(true);
+            console.log(error);
+        } finally{
+            reinicios2();
+        }
     }
 
 
@@ -105,16 +115,32 @@ export const VerListaShort = ({
                         </div>
                         
                         <div className="grid-31 gap10 acciones-venta">
-                            <button className="btn btn-success" onClick={() => postVenta()}>
-                                <BiCheck /> Confirmar
-                            </button>
+                        
+                            <LoadSwitchBtn2
+                                loading={loadVenta}
+                                className="btn btn-success"
+                                handler={() => handlerVenta()}
+                            >
+                                <BiCaretRight /> Confirmar
+                            </LoadSwitchBtn2>
+                            
                             <button className="btn btn-primary" onClick={handlerShowWindow}>
                                 <BiRightArrowAlt />
                             </button>
                         </div>
                     </div>
                 ) : <TextoRelleno texto="Sin productos" />
-            }           
+            }
+
+            <ModalWrap modal={modalConfirm} >
+                <ModalCodigoVenta 
+                    modal={modalConfirm}
+                    setModal={setModalConfirm}
+                    ventaRes={ventaRespuesta}
+                />
+            </ModalWrap>
+
+
         </div>
     )
 }

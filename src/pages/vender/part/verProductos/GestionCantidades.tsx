@@ -11,7 +11,6 @@ interface gestionCantidades{
 
 export const GestionCantidades = ({ calcularStock, producto, ventaDetalle, handlerOnChange }:gestionCantidades) => {
 
-
     return (
         <div className="gestion-cantidades">
             <h3>Gestion de cantidades</h3>

@@ -621,7 +621,7 @@
                 }
                 .box-stock-general{
                     @include static-scroll(104px);
-                    width: 95%;
+                    width: 320px;
                     box-shadow: 4px 5px 8px 1px #0000002f;
                     border: 1px solid #595d67;
                     padding: 7px 13px;
@@ -678,15 +678,15 @@
 
         }
     }
-    
-    .btn-float-left{
-        position: fixed;
-        bottom: 20px;
-        // left: 20px;
+    .ver-lista{
+        .box-venta-large{
+            @include scroll(253px);
+            .tabla-lista-large{
+                // @include static-scroll(233px);
+                min-height: 225px;
+            }
+        }
     }
-
-
-    
 }
 
 // .tabla-lista-venta{
