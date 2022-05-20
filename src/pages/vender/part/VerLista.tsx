@@ -96,7 +96,6 @@ export const VerLista = ({
                         { tabbs === 3 && <div className="factura"><h2>Factura</h2></div> }
                     </div>
 
-
                 </div>
 
                 <div className="pt-20 m-0 grid-3 gap acciones-venta">
