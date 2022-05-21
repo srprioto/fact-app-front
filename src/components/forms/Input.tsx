@@ -17,7 +17,6 @@ export const Input = ({ label, type = "text", name, value, placeholder, onChange
                 label && (<><label htmlFor={name}>{ label }</label><br /></>)
             }
             <div className="relative">
-
                 {
                     type === "text"
                     ? (
@@ -26,6 +25,7 @@ export const Input = ({ label, type = "text", name, value, placeholder, onChange
                             name={name} 
                             id={name} 
                             value={value === 0 || value === isNaN ? "" : value}
+                            onWheel={ event => event.currentTarget.blur() }
                             onChange={onChange}
                             placeholder={placeholder}
                             autoComplete="off"
@@ -38,7 +38,6 @@ export const Input = ({ label, type = "text", name, value, placeholder, onChange
                                 type={type} 
                                 name={name} 
                                 id={name}
-                                // step="0.01"
                                 value={
                                     value === isNaN || 
                                     value === undefined || 
@@ -49,6 +48,7 @@ export const Input = ({ label, type = "text", name, value, placeholder, onChange
                                     ? "" 
                                     : value
                                 }
+                                onWheel={ event => event.currentTarget.blur() }
                                 onChange={onChange}
                                 placeholder={placeholder}
                                 autoComplete="off"
@@ -58,7 +58,6 @@ export const Input = ({ label, type = "text", name, value, placeholder, onChange
                             <input 
                                 className={color}
                                 type={type} 
-                                // step="0.01"
                                 name={name} 
                                 id={name} 
                                 value={
@@ -70,6 +69,7 @@ export const Input = ({ label, type = "text", name, value, placeholder, onChange
                                     ? "" 
                                     : value
                                 }
+                                onWheel={ event => event.currentTarget.blur() }
                                 onChange={onChange}
                                 placeholder={placeholder}
                                 autoComplete="off"
@@ -82,6 +82,7 @@ export const Input = ({ label, type = "text", name, value, placeholder, onChange
                         name={name} 
                         id={name} 
                         value={value}
+                        onWheel={ event => event.currentTarget.blur() }
                         onChange={onChange}
                         placeholder={placeholder}
                         autoComplete="off"
