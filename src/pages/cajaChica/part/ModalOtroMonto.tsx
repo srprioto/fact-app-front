@@ -71,7 +71,13 @@ export const ModalOtroMonto = ({ modal, setModal, getDataOne, idCaja }:any) => {
 
                 <div className="grid-2 gap">
                     <Input
-                        label="Ingreso o retiro *"
+                        label={
+                            cajaDetalles.monto_movimiento > 0
+                            ? "Realizando ingreso"
+                            : cajaDetalles.monto_movimiento < 0
+                            ? "Realizando retiro"
+                            : "Ingreso o retiro *"                            
+                        }
                         type="number"
                         name="monto_movimiento"
                         value={cajaDetalles.monto_movimiento}

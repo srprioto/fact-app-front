@@ -9,7 +9,7 @@ export const ItemCaja = ({ item, handlerVer }:any) => {
             <td className={
                 item.estado_caja
                 ? "success-i"
-                : "warning-i"
+                : "danger-i"
             }>{
                 item.estado_caja
                 ? "Abierto"
@@ -21,7 +21,7 @@ export const ItemCaja = ({ item, handlerVer }:any) => {
                 (item.cantidad_diferencia > 0
                 ? "danger"
                 : "success")
-            }>S/. { item.monto_cierre }</td>
+            }>S/. { item.monto_efectivo + item.monto_apertura + item.otros_montos }</td>
             <td>{ item.nota_observacion }</td>
             <td>{ item.created_at }</td>
             <td>

@@ -2,18 +2,21 @@ import { useState } from "react";
 import { BiChevronDown, BiChevronUp, BiLock, BiPlus } from "react-icons/bi"
 import { Input } from "../../../components/forms/Input";
 
-export const CajaAbierta = ({ data, caja, setCaja, setModalCerrarCaja, setModalAddMonto, montoApertura }:any) => {
+export const CajaAbierta = ({ data, caja, setCaja, setModalCerrarCaja, setModalAddMonto }:any) => {
 
     const [showObserv, setShowObserv] = useState<boolean>(false);
+
+    const infoCaja:any = data.caja && data.caja;
     
-    const otrosIngresos:any = data.caja ? data.caja.otros_montos : null;
-    const totalIngresos:number = data.totalIngresos ? data.totalIngresos : 0;
+    // const totalIngresos:number = data.totalIngresos ? data.totalIngresos : 0;
+    
+    const totalEfectivo:number = infoCaja.monto_apertura + infoCaja.monto_efectivo + infoCaja.otros_montos;
     
     const handlerCerrarCaja = () => { 
         setCaja({
             ...caja,
             estado_caja: false,
-            monto_cierre: totalIngresos
+            // monto_efectivo: totalIngresos
         })        
         setModalCerrarCaja(true);
     }
@@ -24,6 +27,8 @@ export const CajaAbierta = ({ data, caja, setCaja, setModalCerrarCaja, setModalA
             [e.target.name]: e.target.value
         })
     }
+
+    // console.log(infoCaja);
 
     return (
         <div className="box">
@@ -38,26 +43,45 @@ export const CajaAbierta = ({ data, caja, setCaja, setModalCerrarCaja, setModalA
     
                     <div className="center">
                         <p>Monto de apertura: </p>
-                        <h2 className="strong">S/.{montoApertura}</h2>
-                    </div>
-    
+                        <h2 className="">S/. {infoCaja.monto_apertura}</h2>
+                    </div>                   
+
                     <div className="center">
-                        <p>Ingresos del día: </p>
-                        <h2 className="strong info-i">S/.{data.totalIngresos}</h2>
+                        <p>Otros movimientos: </p>
+                        <h2 className="warning-i">S/. {infoCaja.otros_montos}</h2>
                     </div>
-    
+
                     <div className="center">
-                        <p>Otros ingresos: </p>
-                        <h2 className="strong warning-i">S/.{otrosIngresos}</h2>
+                        <p>Ingresos en efectivo: </p>
+                        <h2 className="info-i">S/. {infoCaja.monto_efectivo}</h2>
                     </div>
-    
+
                     <div className="center">
-                        <p>Monto total: </p>
+                        <p>Monto total en caja: </p>
                         <h2 className="strong success-i">
-                            S/.{montoApertura + totalIngresos + otrosIngresos}
+                            S/. {totalEfectivo}
                         </h2>
                     </div>
     
+                </div>
+
+                <div className="grid-4 gap">
+
+                    <div></div>
+                    <div></div>
+
+                    <div className="center">
+                        <p>Ingresos otros medios: </p>
+                        <h2 className="primary-i">S/. {infoCaja.monto_otros_medios}</h2>
+                    </div>
+    
+                    <div className="center">
+                        <p>Ingresos totales: </p>
+                        <h1 className="strong success-i">
+                            S/. {totalEfectivo + infoCaja.monto_otros_medios}
+                        </h1>
+                    </div>
+
                 </div>
     
                 <div className="grid-3 gap mt-15">

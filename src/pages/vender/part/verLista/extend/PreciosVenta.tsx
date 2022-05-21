@@ -1,8 +1,9 @@
 import { Input } from "../../../../../components/forms/Input"
+import { Select2 } from "../../../../../components/forms/Select2"
 
 export const PreciosVenta = ({ venta, alertaDescuento, handlerOnChange }:any) => {
     return (
-        <div className="info-venta grid-4 gap mb-25">
+        <div className="info-venta grid-5 gap mb-25">
 
             <span className="center">
                 <p className="mb-5 info">Subtotal</p>
@@ -38,6 +39,17 @@ export const PreciosVenta = ({ venta, alertaDescuento, handlerOnChange }:any) =>
                 <p className="mb-5 info">Total</p>
                 <h1 className="success strong">S/. {venta.total}</h1>
             </span>
+
+            <Select2
+                label="Forma de pago"
+                name="forma_pago"
+                onChange={handlerOnChange}
+                value={venta.forma_pago}
+            >
+                <option value="efectivo">Efectivo</option>
+                <option value="tarjeta">Tarjeta</option>
+                <option value="yape">Yape</option>
+            </Select2>
 
             <Input 
                 label="Observaciones"

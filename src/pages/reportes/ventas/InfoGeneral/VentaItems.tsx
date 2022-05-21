@@ -3,7 +3,6 @@ import { VentasDropdown } from "./VentasDropdown"
 
 export const VentaItems = ({ ventas, handlerVer, updateData }:any) => {
 
-
     const classEstado = () => { 
         if (ventas.estado_venta === "listo") {
             return "success"

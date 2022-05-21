@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { BiCheck, BiReply } from "react-icons/bi";
+import { BiBookmarkAltMinus, BiCaretRight, BiImport, BiMailSend } from "react-icons/bi";
+import { FaWhatsapp } from "react-icons/fa";
 
 import { LoadSwitchBtn2 } from "../../../../components/btns/LoadSwitchBtn2";
 import { Modal } from "../../../../components/modals/Modal"
@@ -148,26 +149,62 @@ export const ModalVentaConfirmar = ({
 
                 </div>
 
-                <div className="box grid-3 gap">
-                    
-                    <LoadSwitchBtn2
-                        loading={loading}
-                        className="btn btn-success"
-                        handler={() => confirmarVenta("listo")}
-                    ><BiCheck /> Confirmar e imprimir
-                    </LoadSwitchBtn2>
+                <div className="box">
 
-                    <LoadSwitchBtn2
-                        loading={loading}
-                        className="btn btn-info"
-                        handler={() => confirmarVenta("listo")}   
-                    ><BiCheck /> Confirmar
-                    </LoadSwitchBtn2>
+                    <h3 className="mb-25">Confirmar venta</h3>
+                    <div className="grid-2 gap">
 
-                    <button 
+                        <div className="grid-2 gap">
+                            
+                            <LoadSwitchBtn2
+                                loading={loading}
+                                className="btn btn-success"
+                                handler={() => confirmarVenta("listo")}
+                            ><BiBookmarkAltMinus /> Imprimir
+                            </LoadSwitchBtn2>
+
+                            <LoadSwitchBtn2
+                                loading={loading}
+                                className="btn btn-warning"
+                                handler={() => confirmarVenta("listo")}   
+                            ><BiCaretRight /> Solo
+                            </LoadSwitchBtn2>
+
+                        </div>
+
+                        <div className="grid-5 gap">
+                            <div></div>
+                            <div></div>
+
+                            <LoadSwitchBtn2
+                                loading={loading}
+                                className="btn btn-success"
+                                handler={() => confirmarVenta("listo")}
+                            ><FaWhatsapp />
+                            </LoadSwitchBtn2>
+
+                            <LoadSwitchBtn2
+                                loading={loading}
+                                className="btn btn-secundary"
+                                handler={() => confirmarVenta("listo")}   
+                            ><BiMailSend />
+                            </LoadSwitchBtn2>
+
+                            <LoadSwitchBtn2
+                                loading={loading}
+                                className="btn btn-primary"
+                                handler={() => confirmarVenta("listo")}   
+                            ><BiImport />
+                            </LoadSwitchBtn2>
+                                
+                        </div>
+
+                    </div>
+
+                    {/* <button 
                         className="btn btn-warning"
                         onClick={() => setModal(!modal)}
-                    ><BiReply /> Regresar</button>
+                    ><BiReply /> Regresar</button> */}
                     
                 </div>
 

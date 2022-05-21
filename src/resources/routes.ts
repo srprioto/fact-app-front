@@ -34,6 +34,7 @@ export const TRANSACCIONES_RESUMEN:string = "/transacciones/resumen-transaccione
 export const VENTAS:string = "/ventas";
 export const VENTAS_PAGINATE:string = "/ventas/paginate";
 export const VENTAS_SEARCH:string  = "/ventas/search/";
+export const VENTAS_SEARCH_LOCAL:string  = "/ventas/search/local/";
 export const VENTAS_PEDIDOS:string = "/ventas/pedidos";
 
 export const CAJA:string = "/caja"

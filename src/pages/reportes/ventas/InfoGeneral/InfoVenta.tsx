@@ -1,6 +1,7 @@
 import { zeroFill } from "../../../../resources/func/ceroFill"
 
 export const InfoVenta = ({ venta, classEstado }:any) => {
+
     return (
         <>
             <div className="grid-2 gap">
@@ -12,11 +13,6 @@ export const InfoVenta = ({ venta, classEstado }:any) => {
                         <span>
                             <p>Nro de comprobante: </p>
                             <h4 className="info-i">{ zeroFill(Number(venta.id), 5) }</h4>
-                        </span>
-                        
-                        <span>
-                            <p>Estado de venta</p>
-                            <h4 className={classEstado(venta.estado_venta)}>{ venta.estado_venta }</h4>
                         </span>
 
                         <span>
@@ -33,6 +29,11 @@ export const InfoVenta = ({ venta, classEstado }:any) => {
                             <p>Total</p>
                             <h4 className="success-i">S/. { venta.total }</h4>
                         </span>
+
+                        <span>
+                            <p>Forma de pago</p>
+                            <h4>{ venta.forma_pago }</h4>
+                        </span>
                         
                     </div>
                 </div>
@@ -44,6 +45,11 @@ export const InfoVenta = ({ venta, classEstado }:any) => {
                         <span>
                             <p>Codigo de venta: </p>
                             <h4>{ venta.codigo_venta }</h4>
+                        </span>
+
+                        <span>
+                            <p>Estado de venta</p>
+                            <h4 className={classEstado(venta.estado_venta)}>{ venta.estado_venta }</h4>
                         </span>
 
                         <span>

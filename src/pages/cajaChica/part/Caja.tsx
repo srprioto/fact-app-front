@@ -24,7 +24,7 @@ export const Caja = () => {
     const [caja, setCaja] = useState<any>({
         estado_caja: true,
         // monto_apertura: 150,
-        monto_cierre: 0,
+        // monto_efectivo: 0,
         cantidad_diferencia: 0,
         nota_observacion: "",
         localId: Number(params.id),
@@ -55,7 +55,6 @@ export const Caja = () => {
         setLoadCaja(true);
         try {
             const data = await getOne(Number(params.id), CAJA + "/local-caja-ingresos");
-            
             setData(data);
             setLoadCaja(false);            
         } catch (error) {
@@ -69,7 +68,7 @@ export const Caja = () => {
     //     setCaja({
     //         ...caja,
     //         estado_caja: false,
-    //         monto_cierre: totalIngresos
+    //         monto_efectivo: totalIngresos
     //     })        
     //     setModalCerrarCaja(true);
     // }
@@ -105,7 +104,6 @@ export const Caja = () => {
                                     data={data}
                                     caja={caja}
                                     setCaja={setCaja}
-                                    montoApertura={montoApertura}
                                     setModalCerrarCaja={setModalCerrarCaja}
                                     setModalAddMonto={setModalAddMonto}
                                 />

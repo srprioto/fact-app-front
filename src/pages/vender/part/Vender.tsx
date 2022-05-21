@@ -20,8 +20,9 @@ export const Vender = () => {
         localId: params.id,
         clienteId: 0,
         usuarioId: 1,
+        forma_pago: "efectivo",
+        codigo_venta: "",
         ventaDetalles: [],
-        codigo_venta: ""
     }
 
     const [data, setData] = useState<any>([]); // reinicio

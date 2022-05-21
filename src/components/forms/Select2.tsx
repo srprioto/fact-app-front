@@ -1,22 +1,18 @@
+// establece valor por defecto manualmente
+
 interface select {
     label?:string;
     name:string;
     onChange:any;
-    defaultValue:any; // activa el valor por defecto "no"
-    value?:any; // requiere activar defaultValue
-    loading?:boolean|undefined;
-    textDefault?:string;
+    value:any;
     children:any;
 }
 
-export const Select = ({ 
+export const Select2 = ({ 
     label, 
     name, 
     onChange, 
-    defaultValue, 
     value,
-    loading, 
-    textDefault = "Selecciona una opción", 
     children 
 }:select) => {
     return (
@@ -27,20 +23,8 @@ export const Select = ({
                 id={name}
                 onChange={onChange}
                 autoComplete="off"
-                defaultValue={value ? value : "0"}
+                defaultValue={value}
             >
-                {
-                    defaultValue 
-                    && (
-                        <option value={value ? value : "0"} disabled>
-                            {
-                                loading
-                                ? "Recuperando datos"
-                                : textDefault
-                            }
-                        </option>
-                    )
-                }
                 { children }
             </select>
         </div>

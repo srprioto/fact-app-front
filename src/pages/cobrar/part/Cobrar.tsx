@@ -9,12 +9,14 @@ import { TablaVentas } from "./TablaVentas";
 import { DescripcionVenta } from "./DescripcionVenta";
 
 import { get, getOne } from "../../../resources/fetch";
-import { VENTAS, VENTAS_PEDIDOS, VENTAS_SEARCH } from "../../../resources/routes";
+import { VENTAS, VENTAS_PEDIDOS, VENTAS_SEARCH_LOCAL } from "../../../resources/routes";
 import { BiRefresh } from "react-icons/bi";
 import { TextoRelleno } from "../../../components/TextoRelleno";
 
+
 export const Cobrar = () => {
     const params = useParams(); // params.id, params.nombre
+    const localId:string = params.id ? params.id : "";
 
     const [searchState, setSearchState] = useState<boolean>(false); // estado de busqueda
 
@@ -76,8 +78,9 @@ export const Cobrar = () => {
                                 getData={getData}
                                 searchState={searchState}
                                 setSearchState={setSearchState}
-                                url={VENTAS_SEARCH}
+                                url={VENTAS_SEARCH_LOCAL}
                                 placeholder="Codigo de venta"
+                                localId={localId}
                             />
                             <button 
                                 className="btn2 btn2-success pr-0"

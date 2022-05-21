@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { BiArrowBack, BiCaretRight, BiCartAlt, BiCheck, BiRightArrowAlt, BiSpreadsheet, BiTask } from "react-icons/bi";
+import { BiArrowBack, BiCaretRight, BiCartAlt, BiSpreadsheet, BiTask } from "react-icons/bi";
 import { LoadSwitchBtn2 } from "../../../components/btns/LoadSwitchBtn2";
 import { ModalWrap } from "../../../components/modals/ModalWrap";
 import { PreciosVenta } from "./verLista/extend/PreciosVenta";
@@ -60,7 +60,7 @@ export const VerLista = ({
                         itemPop={itemPop}
                     />
 
-                    <div className="tabbs-buttons tabbs grid-4 gap mb-25">
+                    <div className="tabbs-buttons tabbs grid-5 gap mb-25">
                         <button 
                             className={"btn2 btn2-success " + (tabbs === 1 && "btn2-sub-success")}
                             onClick={() => setTabbs(1)}
@@ -111,7 +111,7 @@ export const VerLista = ({
                         className="btn btn-success"
                         handler={() => handlerVenta()}
                     >
-                        <BiCaretRight /> Confirmar Pre-venta
+                        <BiCaretRight /> Confirmar
                     </LoadSwitchBtn2>                  
                     
                 </div>

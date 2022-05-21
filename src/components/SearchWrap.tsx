@@ -13,6 +13,7 @@ interface searchWrap {
     searchState:boolean;
     setSearchState:Function;
     reiniciar?:Function;
+    localId?:string;
     // reSearch?:any;
 }
 
@@ -25,16 +26,14 @@ export const SearchWrap = ({
     searchState, 
     setSearchState,
     reiniciar,
+    localId
     // reSearch
 }:searchWrap) => {
     
     const [searchTxt, setSearchTxt] = useState<string>("");
     const searchFocus = useRef<any>(null)
 
-    // useEffect(() => {
-    //     searchData();
-    // }, [reSearch])
-    
+    const idLocal:string = localId ? `/${localId}` : ""
     
     const searchData = async () => { 
         if (searchTxt === "" || searchTxt === undefined || searchTxt === null || searchTxt.length === 0) {
@@ -43,7 +42,7 @@ export const SearchWrap = ({
             setLoadingData(true);
             setSearchState(true);
             try {
-                const data = await get(url + searchTxt);
+                const data = await get(url + searchTxt + idLocal);
                 setLoadingData(false);
                 setData(data);
             } catch (error) {

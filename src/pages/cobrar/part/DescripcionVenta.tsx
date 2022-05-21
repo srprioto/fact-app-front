@@ -1,11 +1,7 @@
 import { useEffect, useState } from "react";
-import { BiCheck, BiX } from "react-icons/bi";
+import { BiCaretRight, BiCartAlt, BiSpreadsheet, BiTask, BiX } from "react-icons/bi";
 
-// import { Input } from "../../../components/forms/Input";
-// import { InputDisable } from "../../../components/forms/InputDisable";
 import { ModalNuevoCliente } from "../../../components/modals/ModalNuevoCliente";
-// import { FormasPagoBotones } from "./formasPago/FormasPagoBotones";
-// import { FormasPagoTabs } from "./formasPago/FormasPagoTabs";
 import { ObservacionesVenta } from "./ObservacionesVenta";
 import { TablaListaVentaProductos } from "./TablaListaVentaProductos";
 
@@ -14,6 +10,7 @@ import { VENTAS } from "../../../resources/routes";
 import { ModalVentaConfirmar } from "./modals/ModalVentaConfirmar";
 import { ModalVentaRechazar } from "./modals/ModalVentaRechazar";
 import { ModalWrap } from "../../../components/modals/ModalWrap";
+import { Select2 } from "../../../components/forms/Select2";
 
 
 interface descripcionVenta {
@@ -23,8 +20,6 @@ interface descripcionVenta {
 
 export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
 
-    // const [tabbs, setTabbs] = useState<number>(1);
-
     const [venta, setVenta] = useState<any>(data);
     const [listaRechazados, setListaRechazados] = useState<any>([]);
 
@@ -33,6 +28,8 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
     const [ModalCliente, setModalCliente] = useState<boolean>(false);
     const [modalConfVenta, setModalConfVenta] = useState<boolean>(false);
     const [modalRechazVenta, setModalRechazVenta] = useState<boolean>(false);
+
+    const [tabbs, setTabbs] = useState<number>(1);
 
     useEffect(() => { 
         let ventaDetails:any = []; // añadir lista detalles
@@ -64,12 +61,12 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
     }, [venta.subtotal, venta.descuento_total])
 
 
-    // const handlerChangeVenta = (e:any) => {
-    //     setVenta({
-    //         ...venta,
-    //         [e.target.name]: e.target.value
-    //     })
-    // }
+    const handlerChangeVenta = (e:any) => {
+        setVenta({
+            ...venta,
+            [e.target.name]: e.target.value
+        })
+    }
 
     
     const handlerCheckbox = (e:any) => {
@@ -110,6 +107,7 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
         updateVenta.observaciones = venta.observaciones;
         updateVenta.subtotal = venta.subtotal;
         updateVenta.total = venta.total;
+        updateVenta.forma_pago = venta.forma_pago;
 
         updateVenta.cliente = venta.clientes;
         updateVenta.clienteId = venta.clientes && venta.clientes.id;
@@ -158,7 +156,29 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
                     handlerCheckbox={handlerCheckbox}
                 />
 
-                <ObservacionesVenta observaciones={venta.observaciones} />
+                <div className="tabbs-buttons tabbs grid-3 gap mb-25">
+                    <button 
+                        className={"btn2 btn2-success " + (tabbs === 1 && "btn2-sub-success")}
+                        onClick={() => setTabbs(1)}
+                    >
+                        <BiCartAlt
+                        /> Venta rapida
+                    </button>
+
+                    <button 
+                        className={"btn2 btn2-info " + (tabbs === 2 && "btn2-sub-info")}
+                        onClick={() => setTabbs(2)}
+                    >
+                        <BiSpreadsheet /> Boleta
+                    </button>
+
+                    <button 
+                        className={"btn2 btn2-info " + (tabbs === 3 && "btn2-sub-info")}
+                        onClick={() => setTabbs(3)}
+                    >
+                        <BiTask /> Factura
+                    </button>
+                </div>
 
                 <div className="descripcion-venta grid-1 gap bb bb-neutro">
 
@@ -173,8 +193,10 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
                             <p
                                 className="info"
                             >{
-                                venta.descuento_total >= 0
+                                venta.descuento_total > 0
                                 ? "Incremento total"    
+                                : venta.descuento_total === 0
+                                ? "Inc/Desc total"
                                 : "Descuento total"
                             }</p>
                             <h3 className={
@@ -191,57 +213,55 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
                             <h1 className="success strong">S/. { venta.total }</h1>
                         </span>
 
-                        {/* <InputDisable
-                            label="Subtotal"
-                            value={venta.subtotal}
-                            moneda
-                        /> */}
-                        {/* <div className="grid-1">
-                            <Input
-                                label="Inc/Desc total"
-                                type="number"
-                                name="descuento_total"
-                                value={venta.descuento_total}
-                                onChange={handlerChangeVenta}
-                                color={(venta.descuento_total < 0) ? "danger-i" : ""}
-                                moneda
-                            />
-                            <h5 className="warning m-0 center">Haz un descuento añadiendo una cantidad negativa</h5>
-                        </div> */}
-                        
-                        
+                    </div>
+
+                    <div className="grid-3 gap mb-15">
+
+                        <Select2
+                            label="Forma de pago"
+                            name="forma_pago"
+                            onChange={handlerChangeVenta}
+                            value={venta.forma_pago}
+                        >
+                            <option value="efectivo">Efectivo</option>
+                            <option value="tarjeta">Tarjeta</option>
+                            <option value="yape">Yape</option>                                
+                        </Select2>
+
+                        <ObservacionesVenta observaciones={venta.observaciones} />
+
+                        <div className="center">
+                            <p className="mb-10 info">Vendedor: </p>
+                            <p className="mb-10">{ venta.usuarios ? venta.usuarios.nombre : "" }</p>
+                        </div>
+                       
+
                     </div>
 
                 </div>
 
-                {/* <div className="wrap-formas-pago grid-1 gap">
-                    
-                    <FormasPagoBotones
-                        tabbs={tabbs}
-                        setTabbs={setTabbs}
-                    />
+                
+                {/* formas de pago aqui */}
 
-                    <FormasPagoTabs
-                        clientesExistente={venta.clientes}
-                        clienteRapido={venta.codigo_venta}
-                        tabbs={tabbs}
-                        updateCliente={updateClienteExistente}
-                        modalCliente={setModalCliente}
-                    />
+                <div className="tabbs-box m-0">
+                    { tabbs === 1 && <></> }
+                    { tabbs === 2 && <div className="boleta"><h2>Boleta</h2></div> }
+                    { tabbs === 3 && <div className="factura"><h2>Factura</h2></div> }
+                </div>
 
-                </div> */}
+                {/* fin formas de pago */}
 
-                <div className="wrap-confirmar-venta grid-4 gap mb-25">
-                    <div></div>
+
+                <div className="wrap-confirmar-venta grid-3 gap mb-25">
                     <button 
                         className="btn btn-success"
                         onClick={() => setModalConfVenta(!modalConfVenta)}    
-                    ><BiCheck /> Realizar venta</button>
+                    ><BiCaretRight /> Realizar venta</button>
+                    <div></div>
                     <button 
                         className="btn btn-danger"
                         onClick={() => setModalRechazVenta(!modalRechazVenta)}
                     ><BiX /> Rechazar venta</button>
-                    <div></div>
                 </div>
 
             </div>
@@ -263,7 +283,6 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
                 />
             </ModalWrap>
             
-
             <ModalVentaRechazar
                 modal={modalRechazVenta}
                 setModal={setModalRechazVenta}

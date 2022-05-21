@@ -34,7 +34,12 @@ export const ModalCerrarCaja = ({ modal, setModal, caja, idCaja }:any) => {
             width={50}
         >
             <div className="grid-1 gap">
-                <h4 className="danger center">Si cierras caja no podrás vender o cobrar hasta que vuelvas a abrirla.</h4>
+                <h4 className="warning center m-0">
+                    Si cierras caja no podrás vender o cobrar hasta que vuelvas a abrirla.
+                </h4>
+                <h4 className="warning center">
+                    Esta acción también eliminara todas las ventas pendientes o rechazadas.
+                </h4>
 
                 <div className="grid-4 gap">
                     <div></div>
