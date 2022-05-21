@@ -1,8 +1,6 @@
-import { useState } from "react";
 import { BiListPlus } from "react-icons/bi";
 import { BtnOnOff2 } from "../../../components/btns/BtnOnOff2";
 import { TextoRelleno } from "../../../components/TextoRelleno";
-import { ventaDet, ventaDetalles } from "../../../resources/dtos/VentasDto";
 import { VerListaShort } from "./verLista/short/VerListaShort";
 import { BuscarProducto } from "./verProductos/BuscarProducto";
 import { GestionCantidades } from "./verProductos/GestionCantidades";

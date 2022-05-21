@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { BiCaretRight, BiCheck, BiRightArrowAlt } from "react-icons/bi";
+import { BiCaretRight, BiRightArrowAlt } from "react-icons/bi";
 import { LoadSwitchBtn2 } from "../../../../../components/btns/LoadSwitchBtn2";
 import { Input } from "../../../../../components/forms/Input";
 import { ModalWrap } from "../../../../../components/modals/ModalWrap";
