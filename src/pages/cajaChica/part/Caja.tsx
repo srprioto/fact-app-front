@@ -84,6 +84,9 @@ export const Caja = () => {
     }
 
 
+    console.log(data);
+
+
     return (
         <>
             {
