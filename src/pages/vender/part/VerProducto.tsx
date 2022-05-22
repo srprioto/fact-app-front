@@ -1,6 +1,13 @@
-import { BiListPlus } from "react-icons/bi";
+import { useState } from "react";
+import { BiFastForward, BiListPlus } from "react-icons/bi";
+import { useParams } from "react-router-dom";
 import { BtnOnOff2 } from "../../../components/btns/BtnOnOff2";
+import { LoadSwitchBtn2 } from "../../../components/btns/LoadSwitchBtn2";
+import { ModalWrap } from "../../../components/modals/ModalWrap";
 import { TextoRelleno } from "../../../components/TextoRelleno";
+import { post } from "../../../resources/fetch";
+import { VENTAS } from "../../../resources/routes";
+import { ModalCodigoVenta } from "./verLista/short/ModalCodigoVenta";
 import { VerListaShort } from "./verLista/short/VerListaShort";
 import { BuscarProducto } from "./verProductos/BuscarProducto";
 import { GestionCantidades } from "./verProductos/GestionCantidades";
@@ -58,7 +65,13 @@ export const VerProducto = ({
     reinicios
 }:verProducto) => {
 
-    const producto:any = elemento.productos ? elemento.productos : {};
+    const params = useParams(); // params.id, params.nombre
+
+    const [loadVentaRapida, setloadVentaRapida] = useState<boolean>(false);
+    const [ventaRespuesta, setVentaRespuesta] = useState<any>({});
+    const [modalConfirm, setModalConfirm] = useState<boolean>(false);
+
+    const producto:any = elemento.productos ? elemento.productos : {};    
 
     const handlerShowWindow = () => { 
         setClassStart(true);
@@ -80,7 +93,8 @@ export const VerProducto = ({
 
 
     const handlerAddListaVenta = () => { 
-        setListaRepetidos([ ...listaRepetidos, ventaDetalle.productosId ]); // trabaja con id del producto
+        // añade con id del producto a lista repes
+        setListaRepetidos([ ...listaRepetidos, ventaDetalle.productosId ]); 
 
         let updateListaDet = listaVenta; // lista de productos
         const updateVentaDetalle:any = ventaDetalle;
@@ -102,6 +116,49 @@ export const VerProducto = ({
         } else {
             return true
         }
+    }
+
+
+    const handlerPedidoRapido = async () => { 
+
+        setloadVentaRapida(true);
+
+        let updateListaVenta:Array<any> = [];
+        let updateVentaDetalle:any = ventaDetalle;
+        if (tipoDescuento) {
+            updateVentaDetalle.descuento = ventaDetalle.descuento * ventaDetalle.cantidad_venta;        
+        }
+
+        updateListaVenta.push(updateVentaDetalle);
+
+        const updateVenta:any = {
+            descuento_total: 0,
+            subtotal: ventaDetalle.precio_parcial,
+            total: ventaDetalle.precio_parcial,
+            observaciones: "",
+            estado_venta: "enviado",
+            localId: params.id,
+            clienteId: 0,
+            usuarioId: 1,
+            forma_pago: "efectivo",
+            codigo_venta: "",
+            ventaDetalles: updateListaVenta,
+        };
+        
+        try {
+            const ventaResp = await post(updateVenta, VENTAS);
+            if (ventaResp.data) {
+                setVentaRespuesta(ventaResp.data);
+                setModalConfirm(true);
+            }            
+            setloadVentaRapida(false);
+        } catch (error) {
+            setloadVentaRapida(true);
+            console.log(error);
+        } finally{
+            reinicios2();
+        }
+
     }
 
 
@@ -153,9 +210,14 @@ export const VerProducto = ({
                                                 label="Venta rapida"
                                                 // icon={<BiListPlus />}
                                             >
-                                                <button className="btn btn-warning">
-                                                    Venta rapida
-                                                </button>
+                                                <LoadSwitchBtn2
+                                                    loading={loadVentaRapida}
+                                                    className="btn btn-warning"
+                                                    handler={() => handlerPedidoRapido()}
+                                                >
+                                                    <BiFastForward /> Venta rapida
+                                                </LoadSwitchBtn2>
+
                                             </BtnOnOff2>
                                         ) : (
                                             <div></div>
@@ -194,6 +256,14 @@ export const VerProducto = ({
                 />
                 
             </div>
+
+            <ModalWrap modal={modalConfirm} >
+                <ModalCodigoVenta 
+                    modal={modalConfirm}
+                    setModal={setModalConfirm}
+                    ventaRes={ventaRespuesta}
+                />
+            </ModalWrap>
             
         </div>
     )

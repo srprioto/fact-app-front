@@ -256,7 +256,7 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
                     <button 
                         className="btn btn-success"
                         onClick={() => setModalConfVenta(!modalConfVenta)}    
-                    ><BiCaretRight /> Realizar venta</button>
+                    ><BiCaretRight /> Confirmar venta</button>
                     <div></div>
                     <button 
                         className="btn btn-danger"

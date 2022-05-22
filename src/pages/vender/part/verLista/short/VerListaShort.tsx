@@ -121,7 +121,7 @@ export const VerListaShort = ({
                                 className="btn btn-success"
                                 handler={() => handlerVenta()}
                             >
-                                <BiCaretRight /> Confirmar
+                                <BiCaretRight /> Vender
                             </LoadSwitchBtn2>
                             
                             <button className="btn btn-primary" onClick={handlerShowWindow}>
