@@ -342,14 +342,11 @@ export const FormIngresoProductos = ({
                     setSwitchProveedores={setSwitchProveedores}
                 />
             </ModalWrap>
-
             
             <BoxFixed condicion={ movimientoDetalles.length >= 1 && !modalAdd }>
                 <AddBtn handlerModal={setModalAdd}/>
             </BoxFixed>
             
-            
-
         </div>
 
     )

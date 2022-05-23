@@ -5,6 +5,7 @@ export interface MovimientosDto {
     total:number;
     observaciones:string;
     local_destino:number;
+    usuarioId:number;
     movimiento_detalles:any;
 }
 
@@ -15,5 +16,6 @@ export const movProd = {
     total: 0,
     observaciones: "",
     local_destino: 0,
+    usuarioId: 1,
     movimiento_detalles: []
 }

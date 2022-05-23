@@ -79,7 +79,7 @@ export const TransferenciaDetalles = ({ data, getTransacciones, setTransf }:any)
             <div className="grid-1 w100 transf-detalles-head">
                 <span>
                     <h4>Desde: </h4>
-                    <p className="mayus">{ data.localOrigen.nombre }</p>
+                    <p className="mayus">{ data.localOrigen ? data.localOrigen.nombre : "EXTERNO" }</p>
                 </span>
                 <span>
                     <h4>Por: </h4>

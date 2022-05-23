@@ -44,7 +44,7 @@ export const RecibirTransferencia = ({
                                             className={toggle === el.id ? "tr-active pointer" : "pointer"}
                                         >
                                             <td>{ zeroFill(el.id, 6) }</td>
-                                            <td>{ el.localOrigen.nombre }</td>
+                                            <td>{ el.localOrigen ? el.localOrigen.nombre : "Externo" }</td>
                                             <td>{ el.descripcion }</td>
                                             <td>
                                                 <span 
