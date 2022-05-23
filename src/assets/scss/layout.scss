@@ -137,10 +137,23 @@
 
 .header {
     height: 80px;
-    display: flex;
-    align-items: center;
+    min-height: 80px;
+    max-height: 80px;
+    // display: flex;
+    // align-items: center;
     background-color: $box2;
-    padding: 0 25px;
+    padding: 10px 25px 0 25px;
+    // padding: 0 25px;
+
+    .icons-header{
+        align-items: center;
+    }
+
+    svg{
+        font-size: 25px;
+        color: $secundary;
+        cursor: pointer;
+    }
 
     h1{
         margin: 0;

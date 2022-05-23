@@ -6,7 +6,7 @@ export const Layout = ({ children }:any) => {
         <div className="layout">
             <Menu />
             <div className="wrap-main">
-                <Header />
+                <Header/>
                 <div className="main">
                     {
                         // paginas aqui
