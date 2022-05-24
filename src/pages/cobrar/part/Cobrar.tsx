@@ -82,7 +82,7 @@ export const Cobrar = () => {
                                 placeholder="Codigo de venta"
                                 localId={localId}
                             />
-                            <button 
+                            <button
                                 className="btn2 btn2-success pr-0"
                                 onClick={() => handlerRefresh()}
                             >

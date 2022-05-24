@@ -111,7 +111,7 @@ export const Almacenes = () => {
                                                     <span>
                                                         <Link 
                                                             to={`/almacenes/almacen/${local.id}/${local.nombre}`} 
-                                                            className="btn btn-info"
+                                                            className="btn btn-primary"
                                                         >
                                                             <BiListOl />
                                                             Stock

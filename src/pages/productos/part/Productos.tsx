@@ -9,7 +9,7 @@ import { Search } from "../../../components/Search";
 import { TitleBox } from "../../../components/TitleBox"
 import { Producto } from "./Producto";
 
-import { get, paginate } from "../../../resources/fetch";
+import { paginate, post } from "../../../resources/fetch";
 import { PRODUCTOS, PRODUCTOS_SEARCH } from "../../../resources/routes";
 import { NoRegistros } from "../../../components/NoRegistros";
 import { ModalCodigoBarras } from "./ModalCodigoBarras";
@@ -56,7 +56,8 @@ export const Productos = () => {
             setLoadingData(true);
             setSearchState(true);
             try {
-                const data = await get(PRODUCTOS_SEARCH + searchTxt);
+                // const data = await get(PRODUCTOS_SEARCH + searchTxt);
+                const data = await post({value: searchTxt}, PRODUCTOS_SEARCH);
                 setLoadingData(false);
                 setData(data);
             } catch (error) {

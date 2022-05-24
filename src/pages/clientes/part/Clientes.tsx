@@ -8,7 +8,7 @@ import { Pagination } from "../../../components/Pagination"
 import { TitleBox } from "../../../components/TitleBox"
 import { ModalVer } from "./ModalVer"
 
-import { get, getOne, paginate } from "../../../resources/fetch"
+import { getOne, paginate, post } from "../../../resources/fetch"
 import { CLIENTES, CLIENTES_SEARCH } from "../../../resources/routes"
 import { Cliente } from "./Cliente"
 import { Search } from "../../../components/Search"
@@ -52,7 +52,7 @@ export const Clientes = () => {
             setLoadingData(true);
             setSearchState(true);
             try {
-                const data = await get(CLIENTES_SEARCH + searchTxt);
+                const data = await post({value: searchTxt}, CLIENTES_SEARCH);
                 setLoadingData(false);
                 setData(data);
             } catch (error) {

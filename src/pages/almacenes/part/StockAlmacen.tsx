@@ -9,7 +9,7 @@ import { TitleBox } from "../../../components/TitleBox";
 import { AlertaTransferencia } from "../../../components/transferencia/recibir/AlertaTransferencia";
 import { ModalTransferencia } from "../../../components/transferencia/enviar/EnviarTransferencia";
 import { LocalStockModalDto } from "../../../resources/dtos/LocalStockDto";
-import { get, paginate } from "../../../resources/fetch";
+import { paginate, post } from "../../../resources/fetch";
 import { LOCAL_STOCK_SEARCH, LOCAL_STOCK_SOLO } from "../../../resources/routes";
 import { ModalCantidad } from "../../locales/part/ModalCantidad";
 import { ProductoLocal } from "../../locales/part/ProductoLocal";
@@ -17,7 +17,7 @@ import { ProductoLocal } from "../../locales/part/ProductoLocal";
 export const StockAlmacen = () => {
 
     const params = useParams(); // params.id, params.nombre
-    const searchFocus = useRef<any>(null)
+    const searchFocus = useRef<any>(null);
 
     const [loadingData, setLoading] = useState<boolean>(false);
     const [modalCant, setModalCant] = useState<boolean>(false);
@@ -57,7 +57,7 @@ export const StockAlmacen = () => {
             setLoading(true);
             setSearchState(true);
             try {
-                const data = await get(LOCAL_STOCK_SEARCH + params.id + "/" + searchTxt);
+                const data = await post({value: searchTxt}, LOCAL_STOCK_SEARCH + params.id);
                 setLoading(false);
                 setData(data);
             } catch (error) {
@@ -76,7 +76,6 @@ export const StockAlmacen = () => {
             }else{
                 data = await paginate(LOCAL_STOCK_SOLO + params.id);
             }
-
             setData(data.items);
             setPagination({
                 meta: data.meta,
@@ -175,11 +174,7 @@ export const StockAlmacen = () => {
                                     }
                                 </tbody>
                             </table>
-                        )
-
-
-                        
-                        
+                        )                        
                     )
                 }
 

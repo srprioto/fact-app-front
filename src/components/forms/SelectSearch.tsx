@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { BiSearchAlt2, BiX } from "react-icons/bi";
 
-import { get } from "../../resources/fetch";
+import { post } from "../../resources/fetch";
 
 // IMPORTANTE
 // requiere que los registros que se iteraran en las opciones tengan un nombre
@@ -88,8 +88,9 @@ export const SelectSearch = ({
     const handlerGetData = async (search:string) => { 
         setLoading(true);
         try {
-            const productos = await get(urlData + search);
-            setData(productos);
+            // const data = await get(urlData + search);
+            const data = await post({value: search}, urlData);
+            setData(data);
             setLoading(false);
         } catch (error) {
             setLoading(true);

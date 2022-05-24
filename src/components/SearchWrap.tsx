@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { Search } from "./Search";
-import { get } from "../resources/fetch";
+import { post } from "../resources/fetch";
 
 interface searchWrap {
     setLoadingData:Function; // estado de carga de datos
@@ -33,7 +33,7 @@ export const SearchWrap = ({
     const [searchTxt, setSearchTxt] = useState<string>("");
     const searchFocus = useRef<any>(null)
 
-    const idLocal:string = localId ? `/${localId}` : ""
+    const idLocal:string = localId ? `${localId}` : ""
     
     const searchData = async () => { 
         if (searchTxt === "" || searchTxt === undefined || searchTxt === null || searchTxt.length === 0) {
@@ -42,7 +42,8 @@ export const SearchWrap = ({
             setLoadingData(true);
             setSearchState(true);
             try {
-                const data = await get(url + searchTxt + idLocal);
+                // const data = await get(url + searchTxt + idLocal);
+                const data = await post({value: searchTxt}, url + idLocal);
                 setLoadingData(false);
                 setData(data);
             } catch (error) {

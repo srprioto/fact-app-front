@@ -11,7 +11,7 @@ import { Search } from "../../../components/Search";
 
 import { PROVEEDORES, PROVEEDORES_SEARCH } from "../../../resources/routes";
 import { ProveedoresDto } from "../../../resources/dtos/ProveedoresDto";
-import { get, getOne, paginate } from "../../../resources/fetch";
+import { getOne, paginate, post } from "../../../resources/fetch";
 import { ModalVer } from "./ModalVer";
 import { NoRegistros } from "../../../components/NoRegistros";
 
@@ -57,7 +57,7 @@ export const Proveedores = () => {
             setLoadingData(true);
             setSearchState(true);
             try {
-                const data = await get(PROVEEDORES_SEARCH + searchTxt);
+                const data = await post({value: searchTxt}, PROVEEDORES_SEARCH);
                 setLoadingData(false);
                 setData(data);
             } catch (error) {

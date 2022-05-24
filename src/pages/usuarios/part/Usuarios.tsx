@@ -12,7 +12,7 @@ import { Usuario } from "./Usuario";
 
 import { UsuarioDto } from "../../../resources/dtos/UsuariosDto";
 import { USUARIOS, USUARIOS_SEARCH } from "../../../resources/routes";
-import { get, getOne, paginate } from "../../../resources/fetch";
+import { getOne, paginate, post } from "../../../resources/fetch";
 import { NoRegistros } from "../../../components/NoRegistros";
 
 export const Usuarios = () => {
@@ -66,7 +66,6 @@ export const Usuarios = () => {
 
 
     // *** search
-
     const searchData = async () => { 
         if (searchTxt === "" || searchTxt === undefined || searchTxt === null || searchTxt.length === 0) {
             searchFocus.current.focus();
@@ -74,7 +73,7 @@ export const Usuarios = () => {
             setLoadingData(true);
             setSearchState(true);
             try {
-                const data = await get(USUARIOS_SEARCH + searchTxt);
+                const data = await post({value: searchTxt}, USUARIOS_SEARCH);
                 setLoadingData(false);
                 setData(data);
             } catch (error) {
@@ -148,7 +147,6 @@ export const Usuarios = () => {
                         searchFocus={searchFocus}
                         placeholder="Nombre o documento ..."
                     />
-
                     <div></div>
                     <Link to="/usuarios/nuevo" className="btn btn-info" >
                         <BiPlusCircle />
@@ -207,8 +205,6 @@ export const Usuarios = () => {
 
             </div>
 
-            {/* modals aqui */}
-
             <ModalEliminar 
                 modal={ modalEliminar } 
                 setModal={ setModalEliminar } 
@@ -225,7 +221,6 @@ export const Usuarios = () => {
                 setModal={setModalVer}
                 loading={loadingOne}
             />
-
 
         </div>
     )
