@@ -9,29 +9,18 @@ import {
     BiStore,
     BiTransfer,
     BiArchiveIn,
-    BiExit,
     BiCartAlt,
 } from "react-icons/bi";
-
-import { useAuth } from "../../auth/useAuth";
-
 import { BoxMenu } from "./menu/BoxMenu";
 import { ItemMenu } from "./menu/ItemMenu";
+import { MenuTop } from "./menu/MenuTop";
 
 export const Menu = () => {
-
-    const auth = useAuth();
-
-    const handlerSalir = () => { 
-        auth.logout();
-    }
 
     return (
         <div className="menu">
 
-            <div className="menu-top">
-                <h1>Addid Sport</h1>
-            </div>
+            <MenuTop />
 
             <div className="menu-body">
 
@@ -62,11 +51,11 @@ export const Menu = () => {
                     <ItemMenu url="/usuarios" label="Usuarios" icon={ <BiUser /> } />
                 </BoxMenu>
 
-                <BoxMenu>
+                {/* <BoxMenu>
                     <ul>
                         <li onClick={handlerSalir} className="pointer"><p><BiExit className="rotate-180" />Salir</p></li>
                     </ul>
-                </BoxMenu>
+                </BoxMenu> */}
 
             </div>
 

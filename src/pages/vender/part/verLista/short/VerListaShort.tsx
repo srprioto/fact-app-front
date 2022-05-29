@@ -4,6 +4,7 @@ import { LoadSwitchBtn2 } from "../../../../../components/btns/LoadSwitchBtn2";
 import { Input } from "../../../../../components/forms/Input";
 import { ModalWrap } from "../../../../../components/modals/ModalWrap";
 import { TextoRelleno } from "../../../../../components/TextoRelleno";
+import { useCaja } from "../../../../../hooks/useContext/caja.ts/useCaja";
 import { ModalCodigoVenta } from "./ModalCodigoVenta";
 import { TablaListaShort } from "./TablaListaShort";
 
@@ -29,6 +30,7 @@ export const VerListaShort = ({
     alertaDescuento
 }:verListaShort) => {
 
+    const caja = useCaja();
     
     const [loadVenta, setLoadVenta] = useState<boolean>(false);
 
@@ -43,6 +45,10 @@ export const VerListaShort = ({
         })
     }
 
+    const verificarCaja = (func:Function) => { 
+        caja.handlerEstadoCaja()
+        func()
+    }
 
     const handlerVenta = async () => { 
         setLoadVenta(true);
@@ -119,7 +125,7 @@ export const VerListaShort = ({
                             <LoadSwitchBtn2
                                 loading={loadVenta}
                                 className="btn btn-success"
-                                handler={() => handlerVenta()}
+                                handler={() => verificarCaja(handlerVenta)}
                             >
                                 <BiCaretRight /> Vender
                             </LoadSwitchBtn2>

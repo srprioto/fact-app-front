@@ -5,3 +5,13 @@ export interface RolDto {
     created_at?:string;
     updated_at?:string;
 }
+
+export enum Roles {
+    ADMIN = 'admin',
+    SUPERVISOR = 'supervisor',
+    SALLER = 'seller',
+    
+    
+    OUT = "out"
+    // ...
+}

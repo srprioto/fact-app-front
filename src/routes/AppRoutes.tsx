@@ -2,6 +2,10 @@ import { HashRouter, Routes as Switch, Route, Navigate } from "react-router-dom"
 
 import { PrivateRouter } from "./PrivateRouter";
 
+import { useAuth } from "../auth/useAuth";
+import { Roles } from "../resources/dtos/RolesDto";
+
+// admin
 import { IndexAlmacenes } from "../pages/almacenes";
 import { IndexAlmacen } from "../pages/almacenes/Almacen";
 import { IndexCobrar } from "../pages/cobrar";
@@ -30,9 +34,20 @@ import { Ventas } from "../pages/reportes/Ventas";
 import { IndexCajaChica } from "../pages/cajaChica";
 import { IndexVender } from "../pages/vender";
 
-// import { IndexVenta } from "../pages/realizarVenta";
+// supervisor
+import { DashboardSup } from "../roles/supervisor/pages/DashboardSup";
+import { VenderSup } from "../roles/supervisor/pages/VenderSup";
+
+// vendedor
+import { Seller } from "../roles/vendedor/Seller";
+import { CobrarSup } from "../roles/supervisor/pages/CobrarSup";
+import { StockSup } from "../roles/supervisor/pages/StockSup";
+
 
 export const AppRoutes = () => {
+
+    const auth = useAuth();
+    
     return (
         <HashRouter>
             <Switch>
@@ -43,57 +58,79 @@ export const AppRoutes = () => {
                     <Route path="/login" element={ <IndexLogin /> } />
                 </Route>
 
-                {/* <Route path="/" element={ <IndexLogin /> } /> */}
-
                 <Route path="/" element={ <PrivateRouter /> }>
 
-                    {/* dashboard */}
-                    <Route path="/dashboard" element={ <IndexDashboard /> } />
+                    {
+                        auth.rol === Roles.ADMIN
+                        && (
+                            <>
+                            {/* dashboard */}
+                            <Route path="/dashboard" element={ <IndexDashboard /> } />
 
-                    {/* locales */}
-                    <Route path="/tiendas" element={ <IndexLocales /> } />
-                    <Route path="/tiendas/local/:id/:nombre" element={ <IndexLocal /> } />
-                    <Route path="/tiendas/vender/:id/:nombre" element={ <IndexVender /> } />
-                    <Route path="/tiendas/caja/:id/:nombre" element={ <IndexCobrar /> } />
-                    <Route path="/tiendas/caja-chica/:id/:nombre" element={ <IndexCajaChica /> } />
+                            {/* locales */}
+                            <Route path="/tiendas" element={ <IndexLocales /> } />
+                            <Route path="/tiendas/local/:id/:nombre" element={ <IndexLocal /> } />
+                            <Route path="/tiendas/vender/:id/:nombre" element={ <IndexVender /> } />
+                            <Route path="/tiendas/caja/:id/:nombre" element={ <IndexCobrar /> } />
+                            <Route path="/tiendas/caja-chica/:id/:nombre" element={ <IndexCajaChica /> } />
+
+                            <Route path="/almacenes" element={ <IndexAlmacenes /> } />
+                            <Route path="/almacenes/almacen/:id/:nombre" element={ <IndexAlmacen /> } />
+
+                            {/* Productos */}
+                            <Route path="/ingreso-productos" element={ <IndexIngresoProductos /> } />
+
+                            <Route path="/productos" element={ <IndexProductos /> } />
+                            <Route path="/productos/crear-producto" element={ <NuevoProducto /> } />
+                            <Route path="/productos/:id/edit" element={ <IndexEditarProducto /> } />
+
+                            {/* personas */}
+                            <Route path="/clientes" element={ <IndexClientes /> } />
+                            <Route path="/clientes/nuevo" element={ <IndexNuevoCliente /> } />
+                            <Route path="/clientes/:id/edit" element={ <IndexEditarCliente /> } />
+
+                            <Route path="/proveedores" element={ <IndexProveedores /> } />
+                            <Route path="/proveedores/nuevo" element={ <IndexNuevoProv /> } />
+                            <Route path="/proveedores/:id/edit" element={ <IndexEditProv /> } />
+
+                            <Route path="/usuarios" element={ <IndexUsuarios /> } />
+                            <Route path="/usuarios/nuevo" element={ <IndexNuevoUser /> } />
+                            <Route path="/usuarios/:id/edit" element={ <IndexEditUser /> } />
+
+                            {/* reportes */}
+                            <Route path="/reporte/transacciones" element={ <Transacciones /> } />
+                            <Route path="/reporte/ingreso-productos" element={ <IngresoProductos /> } />
+                            <Route path="/reporte/ventas" element={ <Ventas /> } />
+                            </>
+                        )
+                    }
+
+                    {
+                        auth.rol === Roles.SUPERVISOR
+                        && (
+                            <>
+                            <Route path="/local" element={ <DashboardSup /> } />
+                            <Route path="/local/vender" element={ <VenderSup /> } />
+                            <Route path="/local/cobrar" element={ <CobrarSup /> } />
+                            <Route path="/local/stock" element={ <StockSup /> } />
+                            </>
+                        )
+                    }
+
+                    {
+                        auth.rol === Roles.SALLER
+                        && (
+                            <Route path="/punto-venta" element={ <Seller /> } />
+                        )
+                    }
                     
-                    <Route path="/almacenes" element={ <IndexAlmacenes /> } />
-                    <Route path="/almacenes/almacen/:id/:nombre" element={ <IndexAlmacen /> } />
-                    
-                    
-                    {/* Productos */}
-                    {/* <Route path="/almacen" element={ <IndexAlmacen /> } /> */}
-                    <Route path="/ingreso-productos" element={ <IndexIngresoProductos /> } />
-
-                    <Route path="/productos" element={ <IndexProductos /> } />
-                    <Route path="/productos/crear-producto" element={ <NuevoProducto /> } />
-                    <Route path="/productos/:id/edit" element={ <IndexEditarProducto /> } />
-
-
-                    {/* personas */}
-                    <Route path="/clientes" element={ <IndexClientes /> } />
-                    <Route path="/clientes/nuevo" element={ <IndexNuevoCliente /> } />
-                    <Route path="/clientes/:id/edit" element={ <IndexEditarCliente /> } />
-
-                    <Route path="/proveedores" element={ <IndexProveedores /> } />
-                    <Route path="/proveedores/nuevo" element={ <IndexNuevoProv /> } />
-                    <Route path="/proveedores/:id/edit" element={ <IndexEditProv /> } />
-
-                    <Route path="/usuarios" element={ <IndexUsuarios /> } />
-                    <Route path="/usuarios/nuevo" element={ <IndexNuevoUser /> } />
-                    <Route path="/usuarios/:id/edit" element={ <IndexEditUser /> } />
-
-
-                    {/* reportes */}
-                    <Route path="/reporte/transacciones" element={ <Transacciones /> } />
-                    <Route path="/reporte/ingreso-productos" element={ <IngresoProductos /> } />
-                    <Route path="/reporte/ventas" element={ <Ventas /> } />
 
                 </Route>
 
-                <Route path='*' element={<Page404 />} />
                 
 
+                <Route path='*' element={<Page404 />} />
+                
             </Switch>
         </HashRouter>
     )

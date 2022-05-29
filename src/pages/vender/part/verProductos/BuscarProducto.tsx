@@ -1,12 +1,9 @@
 import { useState } from "react";
-import { useParams } from "react-router-dom";
 import { Loading } from "../../../../components/loads/Loading";
 import { SearchWrap } from "../../../../components/SearchWrap";
 import { LOCAL_STOCK_SEARCH } from "../../../../resources/routes";
 
-export const BuscarProducto = ({ setElemento, elemento, data, setData, listaRepetidos }:any) => {
-
-    const params = useParams();
+export const BuscarProducto = ({ setElemento, elemento, data, setData, listaRepetidos, idLocal }:any) => {
 
     const [loadingData, setLoadingData] = useState<boolean>(false);
     const [searchState, setSearchState] = useState<boolean>(false);
@@ -15,7 +12,7 @@ export const BuscarProducto = ({ setElemento, elemento, data, setData, listaRepe
         <div className="buscar-producto box box-par m-0 grid-1 gap">
             <div className="box-buscar-producto">
                 <SearchWrap 
-                    url={LOCAL_STOCK_SEARCH + `${params.id}/`}
+                    url={LOCAL_STOCK_SEARCH + `${idLocal}/`}
                     setLoadingData={setLoadingData}
                     setData={setData}
                     // getData={getData}

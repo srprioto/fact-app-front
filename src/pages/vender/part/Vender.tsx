@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import { TitleBox } from "../../../components/TitleBox"
 import { ventaDet, ventaDetalles } from "../../../resources/dtos/VentasDto";
 import { post } from "../../../resources/fetch";
@@ -7,9 +6,13 @@ import { VENTAS } from "../../../resources/routes";
 import { VerLista } from "./VerLista";
 import { VerProducto } from "./VerProducto";
 
-export const Vender = () => {
+interface vender{
+    idLocal:string;
+    nombreLocal?:string;
+    user?:boolean;
+}
 
-    const params = useParams(); // params.id, params.nombre
+export const Vender = ({ idLocal, nombreLocal, user }:vender) => {
 
     const ventaItem = {
         descuento_total: 0,
@@ -17,7 +20,7 @@ export const Vender = () => {
         total: 0,
         observaciones: "",
         estado_venta: "enviado",
-        localId: params.id,
+        localId: idLocal,
         clienteId: 0,
         usuarioId: 1,
         forma_pago: "efectivo",
@@ -112,11 +115,14 @@ export const Vender = () => {
         return ventaResp
     }
 
-
     return (
         <div className="vender">
 
-            <TitleBox titulo={`Punto de venta - ${params.nombre}`} link="/tiendas"/>
+            {
+                !user
+                ? <TitleBox titulo={`Punto de venta - ${nombreLocal}`} link="/tiendas"/>
+                : <TitleBox titulo={`Punto de venta`}/>
+            }
 
             { 
                 showWindow === 1 
@@ -143,6 +149,7 @@ export const Vender = () => {
                     setTipoDescuento={setTipoDescuento}
                     reinicios2={reinicios2}
                     reinicios={reinicios}
+                    idLocal={idLocal}
                 /> 
             }
             { 

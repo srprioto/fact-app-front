@@ -6,7 +6,7 @@ export const PrivateRouter = () => {
     const auth = useAuth();
     
     return (
-        auth.isLogged()
+        auth.isLogged
         ? <Outlet />
         : <Navigate to="/" />
     )

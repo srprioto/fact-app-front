@@ -816,7 +816,7 @@ table.table3{
     }
     tbody tr.active-row {
         background-color: $box2;
-        color: $success!important;
+        color: $info!important;
     }
 
     tbody td{
@@ -1028,6 +1028,49 @@ table.no-hover{
     }
 
 }
+
+.wrap-dropdown2{
+    position: relative;
+    .dropdown2{
+        padding: 8px 26px;
+        position: absolute;
+        background-color: $background;
+        z-index: 2;
+        transform: scale(0);
+        transition: 0.3s;
+        border-radius: 6px;
+        top: 20px;
+        right: 0px;
+        box-shadow: 4px 5px 8px 1px #0000002f;
+        border: 1px solid $color4;
+        min-width: 190px;
+        span, a{
+            display: flex;
+            width: 100%;
+            margin: 6px 0;
+            justify-content: left;
+            align-items: center;
+            font-size: $font-size;
+            cursor: pointer;
+            color: $texto;
+        }
+
+        svg{
+            font-size: 19px;
+            display: inline-block;
+            margin-right: 7px;
+        }
+    }
+
+    svg:hover ~ .dropdown2,
+    .dropdown2:hover{
+        transform: scale(1);
+        transition: .3s;
+    }
+
+}
+
+
 
 
 // tabs

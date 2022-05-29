@@ -5,6 +5,7 @@ import { BtnOnOff2 } from "../../../components/btns/BtnOnOff2";
 import { LoadSwitchBtn } from "../../../components/btns/LoadSwitchBtn";
 import { Input } from "../../../components/forms/Input"
 import { Modal } from "../../../components/modals/Modal"
+import { useCaja } from "../../../hooks/useContext/caja.ts/useCaja";
 import { post } from "../../../resources/fetch";
 import { CAJA_ABRIR } from "../../../resources/routes";
 
@@ -13,12 +14,14 @@ interface modalAbrirCaja{
     setModal:Function;
     idLocal:number;
     nombreLocal?:string;
-    // stateCaja?:boolean;
     setStateCaja?:Function;
     getDataOne?:Function;
+    user?:boolean;
 }
 
-export const ModalAbrirCaja = ({ modal, setModal, idLocal, nombreLocal, setStateCaja, getDataOne }:modalAbrirCaja) => {
+export const ModalAbrirCaja = ({ modal, setModal, idLocal, nombreLocal, setStateCaja, getDataOne, user }:modalAbrirCaja) => {
+
+    const caja = useCaja();
 
     const [loadAbrirCaja, setLoadAbrirCaja] = useState<boolean>(false);
     const [aperturaCaja, setAperturaCaja] = useState({
@@ -40,16 +43,17 @@ export const ModalAbrirCaja = ({ modal, setModal, idLocal, nombreLocal, setState
         setLoadAbrirCaja(true);
         try {
             await post(aperturaCaja, CAJA_ABRIR);
-            setLoadAbrirCaja(false);
             setStateCaja && setStateCaja(true);
             getDataOne && getDataOne();
+            user && caja.handlerEstadoCaja();
+            setLoadAbrirCaja(false);
         } catch (error) {
-            setLoadAbrirCaja(true);
+            setLoadAbrirCaja(false);
             console.log(error);
         } finally {
-            setModal(false);
+            
         }
-
+        setModal(false);
     }
 
 

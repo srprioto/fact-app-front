@@ -9,6 +9,7 @@ export const LOCAL_STOCK_SEARCH:string = "/locales-stock/locales/search/";
 
 export const LOCALES:string = "/locales";
 export const LOCALES_SOLO:string = "/locales/locales/solo";
+export const LOCAL:string = "/locales/local";
 
 export const ALMACENES_SOLO:string = "/locales/almacenes/solo"
 

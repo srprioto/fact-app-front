@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { BiFastForward, BiListPlus } from "react-icons/bi";
-import { useParams } from "react-router-dom";
 import { BtnOnOff2 } from "../../../components/btns/BtnOnOff2";
 import { LoadSwitchBtn2 } from "../../../components/btns/LoadSwitchBtn2";
 import { ModalWrap } from "../../../components/modals/ModalWrap";
 import { TextoRelleno } from "../../../components/TextoRelleno";
+import { useCaja } from "../../../hooks/useContext/caja.ts/useCaja";
 import { post } from "../../../resources/fetch";
 import { VENTAS } from "../../../resources/routes";
 import { ModalCodigoVenta } from "./verLista/short/ModalCodigoVenta";
@@ -38,6 +38,7 @@ interface verProducto {
     setTipoDescuento:Function;
     reinicios2:Function;
     reinicios:Function;
+    idLocal:string;
 }
 
 export const VerProducto = ({ 
@@ -62,10 +63,11 @@ export const VerProducto = ({
     tipoDescuento,
     setTipoDescuento,
     reinicios2,
-    reinicios
+    reinicios,
+    idLocal
 }:verProducto) => {
 
-    const params = useParams(); // params.id, params.nombre
+    const caja = useCaja();
 
     const [loadVentaRapida, setloadVentaRapida] = useState<boolean>(false);
     const [ventaRespuesta, setVentaRespuesta] = useState<any>({});
@@ -119,6 +121,12 @@ export const VerProducto = ({
     }
 
 
+    const verificarCaja = (func:Function) => { 
+        caja.handlerEstadoCaja()
+        func()
+    }
+
+
     const handlerPedidoRapido = async () => { 
 
         setloadVentaRapida(true);
@@ -137,7 +145,7 @@ export const VerProducto = ({
             total: ventaDetalle.precio_parcial,
             observaciones: "",
             estado_venta: "enviado",
-            localId: params.id,
+            localId: idLocal,
             clienteId: 0,
             usuarioId: 1,
             forma_pago: "efectivo",
@@ -174,6 +182,7 @@ export const VerProducto = ({
                         setData={setData}
                         data={data}
                         listaRepetidos={listaRepetidos}
+                        idLocal={idLocal}
                     />
 
                     <div className="box box-par m-0 info-producto">
@@ -189,6 +198,7 @@ export const VerProducto = ({
                                     calcularStock={calcularStock}
                                     ventaDetalle={ventaDetalle}
                                     handlerOnChange={handlerOnChange} 
+                                    idLocal={idLocal}
                                 />
                                 <GestionPrecios
                                     producto={producto}
@@ -213,7 +223,9 @@ export const VerProducto = ({
                                                 <LoadSwitchBtn2
                                                     loading={loadVentaRapida}
                                                     className="btn btn-warning"
-                                                    handler={() => handlerPedidoRapido()}
+                                                    handler={() => {
+                                                        verificarCaja(handlerPedidoRapido)
+                                                    }}
                                                 >
                                                     <BiFastForward /> Venta rapida
                                                 </LoadSwitchBtn2>

@@ -158,6 +158,27 @@
     h1{
         margin: 0;
     }
+
+    .user{
+        display: flex;
+        justify-content: flex-end;
+        .box-user{
+            display: flex;
+            align-items: center;
+            svg{
+                margin: 0 5px 0 0;
+            }
+            span{
+                display: flex;
+                p{
+                    margin: 0;
+                    font-weight: 500;
+                }
+            }
+            
+        }
+    }
+    
 }
 
 // menu
@@ -1039,6 +1060,25 @@
     margin: 0;
 }
 
+
+// roles
+.seller{
+    .box-seller{
+        padding: 11px 22px;
+    }
+    .no-caja{
+        height: calc(100vh - 110px);
+    }
+}
+
+.supervisor{
+    .items-menu-supervisor{
+        height: 135px;
+        .load-items-menu{ 
+            height: 100%;
+        }
+    }
+}
 
 
 

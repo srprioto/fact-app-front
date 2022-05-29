@@ -1,53 +1,53 @@
-import { createContext, useEffect } from "react";
+import { createContext } from "react";
+import { decodeToken } from "react-jwt";
+// import { Loading } from "../components/loads/Loading";
 import { DataLogin } from "../resources/dtos/Login";
+import { Roles } from "../resources/dtos/RolesDto";
 import { post } from "../resources/fetch";
 import { LOGIN } from "../resources/routes";
 import { usePlugIn } from "./usePlugIn";
 
 export const AuthContext = createContext<any>({});
 
-// const userStorage:any = localStorage.getItem('UserApp');
-
 export const AuthProvider = ({ children }:any) => {
-
-    // const [loggedUserApp, setLoggedUserApp] = useState<any>(JSON.parse(userStorage) || null);
 
     const [loggedUserApp, setLoggedUserApp] = usePlugIn();
 
+    // useEffect(() => {
+    //     try {
+    //         localStorage.setItem("UserApp", JSON.stringify(loggedUserApp));
+    //     } catch (error) {
+    //         localStorage.removeItem("UserApp");
+    //         console.log(error);
+    //     }
+    // }, [loggedUserApp])
 
-    useEffect(() => {
-        try {
-            localStorage.setItem("UserApp", JSON.stringify(loggedUserApp));
-        } catch (error) {
-            localStorage.removeItem("UserApp");
-            console.log(error);
-        }
-    }, [loggedUserApp])
-    
 
     const login = async (dataAccess:DataLogin) => {
 
+        // setLoading(true);
         let loginState:boolean = false;
 
         try {
             const responseLogin = await post(dataAccess, LOGIN);
-            // console.log(responseLogin);
             if (responseLogin.statusCode !== 401 && responseLogin.statusCode !== 'Unauthorized') {
+                localStorage.setItem("UserApp", JSON.stringify(responseLogin));
                 setLoggedUserApp(responseLogin);
                 loginState = true;
             } else {
                 setLoggedUserApp(null);
                 loginState = false;
             }
-            
+            // setLoading(false);
         } catch (error) {
+            localStorage.removeItem("UserApp");
             console.log(error);
-            
+            // setLoading(false);            
         }
 
         return loginState
-        
     }
+
 
     const logout = () => { 
         setLoggedUserApp(null);
@@ -55,15 +55,33 @@ export const AuthProvider = ({ children }:any) => {
         localStorage.clear();
     }
 
-    const isLogged = () => { 
+
+    const isLogged = ():boolean => { 
         return !!loggedUserApp
     }
 
+
+    const userInfo = ():any => { 
+        const userApp:any = localStorage.getItem('UserApp');
+        const tokenAccess:string = JSON.parse(userApp) ? JSON.parse(userApp).access_token : "";
+        const token:string = isLogged() ? loggedUserApp.access_token : tokenAccess;
+        return decodeToken(token);
+    }
+
+
+    const rol = ():string => { 
+        return isLogged() ? userInfo().role : Roles.OUT;
+    }
+
+
     const contextValue = {
-        loggedUserApp,
+        // loggedUserApp,
         login,
         logout,
-        isLogged
+        isLogged: isLogged(),
+        userInfo: userInfo(),
+        rol: rol()        
+        // loadLogin: loading
     }
 
 
@@ -71,5 +89,12 @@ export const AuthProvider = ({ children }:any) => {
         <AuthContext.Provider value={contextValue}>
             { children }
         </AuthContext.Provider>
+        // loading
+        // ? <Loading />
+        // : (
+        //     <AuthContext.Provider value={contextValue}>
+        //         { children }
+        //     </AuthContext.Provider>
+        // )
     )
 }

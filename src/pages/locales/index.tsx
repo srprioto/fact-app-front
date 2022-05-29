@@ -1,5 +1,5 @@
 import { Layout } from "../../components/layouts/Layout"
-import { Locales } from "./part/Locales"
+import { Locales } from "./local/Locales"
 
 export const IndexLocales = () => {
     return (

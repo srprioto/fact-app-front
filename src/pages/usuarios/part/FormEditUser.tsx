@@ -55,7 +55,6 @@ export const FormEditUser = ({ id, handlerEdit, loadUpdate }:any) => {
             });
             const data = await get(ROLES);
             setRoles(data);
-            console.log(data);            
             setLoadingGetOne(false);
         } catch (error) {
             setLoadingGetOne(true);

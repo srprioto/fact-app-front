@@ -1,25 +1,40 @@
 import { useState } from "react";
 import { BiDetail, BiDollarCircle, BiRename } from "react-icons/bi";
-import { useParams } from "react-router-dom";
 import { TitleBox } from "../../../components/TitleBox"
+import { useCaja } from "../../../hooks/useContext/caja.ts/useCaja";
 import { InfoGeneralVentas } from "../../reportes/ventas/InfoGeneralVentas"
 import { InformacionIngresos } from "../../reportes/ventas/InformacionIngresos";
 import { Caja } from "./Caja";
 
-export const CajaChica = () => {
+interface cajaChica {
+    idLocal:string;
+    nombreLocal:string;
+    user?:boolean
+}
 
-    const params = useParams(); // params.id, params.nombre
+export const CajaChica = ({ idLocal, nombreLocal, user }:cajaChica) => {
+
+    const cajaCtx = useCaja();
 
     const [toggle, setToggle] = useState<number>(1);
+
+    const handlerToggle = (i:number) => { 
+        user && cajaCtx.handlerEstadoCaja();
+        setToggle(i);
+    }
 
     return (
         <div className="caja-chica">
 
-            <TitleBox titulo={"Caja chica - " + params.nombre} back/>
-            
+            {
+                user
+                ? <TitleBox titulo={"Caja chica"}/>
+                : <TitleBox titulo={"Caja chica - " + nombreLocal} back/>
+            }
+
             <div className="box btn-tabs grid-4 gap">
                 <button 
-                    onClick={() => setToggle(1)}
+                    onClick={() => handlerToggle(1)}
                     className={`btn2 btn2-info ${toggle === 1 && "btn2-sub-info"}`}>
                     <BiRename />
                     Estado de caja
@@ -38,9 +53,9 @@ export const CajaChica = () => {
                 </button>
             </div>
 
-            { toggle === 1 && <Caja /> }
-            { toggle === 2 && <InfoGeneralVentas idLocal={params.id} /> }
-            { toggle === 3 && <InformacionIngresos idLocal={params.id} /> }            
+            { toggle === 1 && <Caja idLocal={idLocal} nombreLocal={nombreLocal} user={user} /> }
+            { toggle === 2 && <InfoGeneralVentas idLocal={idLocal} /> }
+            { toggle === 3 && <InformacionIngresos idLocal={idLocal} /> }            
 
         </div>
     )

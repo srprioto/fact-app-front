@@ -16,9 +16,14 @@ import { ModalTransferencia } from '../../../components/transferencia/enviar/Env
 import { AlertaTransferencia } from '../../../components/transferencia/recibir/AlertaTransferencia';
 import { NoRegistros } from '../../../components/NoRegistros';
 
-export const Tienda = () => {
+interface tienda{
+    idLocal:string;
+    nombreLocal:string;
+    user?:boolean;
+}
 
-    const params = useParams(); // params.id, params.nombre
+export const Tienda = ({ idLocal, nombreLocal, user }:tienda) => {
+
     const searchFocus = useRef<any>(null)
 
     const [loadingData, setLoading] = useState<boolean>(false);
@@ -59,7 +64,7 @@ export const Tienda = () => {
             setLoading(true);
             setSearchState(true);
             try {
-                const data = await get(LOCAL_STOCK_SEARCH + params.id + "/" + searchTxt);
+                const data = await get(LOCAL_STOCK_SEARCH + idLocal + "/" + searchTxt);
                 setLoading(false);
                 setData(data);
             } catch (error) {
@@ -76,7 +81,7 @@ export const Tienda = () => {
             if (urlPage) {
                 data = await paginate(urlPage);
             }else{
-                data = await paginate(LOCAL_STOCK_SOLO + params.id);
+                data = await paginate(LOCAL_STOCK_SOLO + idLocal);
             }
 
             setData(data.items);
@@ -95,7 +100,12 @@ export const Tienda = () => {
     return (
         <div className="local-stock">
             
-            <TitleBox titulo={`Stock de la tienda - ${params.nombre}`} link="/tiendas"/>
+            {
+                user
+                ? <TitleBox titulo={`Stock de la tienda`}/>
+                : <TitleBox titulo={`Stock de la tienda - ${nombreLocal}`} link="/tiendas"/>
+            }
+            
 
             <div className="box">
 
@@ -114,12 +124,18 @@ export const Tienda = () => {
                     <div className="grid-2 gap">
 
                         <div className="grid-3 gap">
-                            <Link 
-                                to={`/tiendas/vender/${params.id}/${params.nombre}`} 
-                                className="btn btn-success"
-                            >
-                                <BiCartAlt />
-                            </Link>
+                            {
+                                user
+                                ? <div></div>
+                                : (
+                                    <Link 
+                                        to={`/tiendas/vender/${idLocal}/${nombreLocal}`} 
+                                        className="btn btn-success"
+                                    >
+                                        <BiCartAlt />
+                                    </Link>
+                                )
+                            }
                             <div></div>
                             <div></div>
                         </div>
@@ -129,7 +145,7 @@ export const Tienda = () => {
                             <button className="btn btn-info" onClick={handlerTransaccion}>
                                 <BiTransfer />
                             </button>
-                            <AlertaTransferencia idLocal={Number(params.id)} actualizarDatos={getData} />
+                            <AlertaTransferencia idLocal={Number(idLocal)} actualizarDatos={getData} />
                         </div>
 
                     </div>                    
@@ -225,8 +241,8 @@ export const Tienda = () => {
             <ModalTransferencia
                 modal={modalTransferencia}
                 setModal={setModalTransferencia}
-                idLocal={Number(params.id)}
-                nombreLocal={params.nombre}
+                idLocal={Number(idLocal)}
+                nombreLocal={nombreLocal}
                 getData={getData}
             />
 

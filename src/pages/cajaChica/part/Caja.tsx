@@ -6,16 +6,18 @@ import { Loading } from "../../../components/loads/Loading";
 import { ModalWrap } from "../../../components/modals/ModalWrap";
 import { getOne } from "../../../resources/fetch";
 import { CAJA } from "../../../resources/routes";
+import { ModalAbrirCaja } from "../../locales/local/ModalAbrirCaja";
 import { CajaAbierta } from "./CajaAbierta";
 import { CajaCerrada } from "./CajaCerrada";
 import { ModalCerrarCaja } from "./ModalCerrarCaja";
 import { ModalOtroMonto } from "./ModalOtroMonto";
 
-export const Caja = () => {
+export const Caja = ({ idLocal, nombreLocal, user }:any) => {
 
-    const params = useParams(); // params.id, params.nombre
+    // const params = useParams(); // idLocal, nombreLocal
 
     const [modalCerrarCaja, setModalCerrarCaja] = useState<boolean>(false);
+    const [modalAbrirCaja, setModalAbrirCaja] = useState<boolean>(false);
     const [modalAddMonto, setModalAddMonto] = useState<boolean>(false);
 
     const [loadCaja, setLoadCaja] = useState<boolean>(false);
@@ -27,7 +29,7 @@ export const Caja = () => {
         // monto_efectivo: 0,
         cantidad_diferencia: 0,
         nota_observacion: "",
-        localId: Number(params.id),
+        localId: Number(idLocal),
         usuarioCierraId: 1
     });
 
@@ -54,7 +56,7 @@ export const Caja = () => {
     const getDataOne = async () => { 
         setLoadCaja(true);
         try {
-            const data = await getOne(Number(params.id), CAJA + "/local-caja-ingresos");
+            const data = await getOne(Number(idLocal), CAJA + "/local-caja-ingresos");
             setData(data);
             setLoadCaja(false);            
         } catch (error) {
@@ -95,9 +97,7 @@ export const Caja = () => {
                             montoApertura === 0
                             ? (
                                 <CajaCerrada 
-                                    idLocal={params.id} 
-                                    nombreLocal={params.nombre}
-                                    getDataOne={getDataOne}
+                                    setModalAbrirCaja={setModalAbrirCaja}
                                 />
                             ) : (
                                 <CajaAbierta
@@ -155,12 +155,25 @@ export const Caja = () => {
                 )
             }
 
+            <ModalWrap modal={modalAbrirCaja}>
+                <ModalAbrirCaja
+                    modal={modalAbrirCaja}
+                    setModal={setModalAbrirCaja}
+                    idLocal={idLocal}
+                    nombreLocal={nombreLocal}
+                    getDataOne={getDataOne}
+                    user={user}
+                />
+            </ModalWrap>
+
             <ModalWrap modal={modalCerrarCaja}>
                 <ModalCerrarCaja
                     modal={modalCerrarCaja}
                     setModal={setModalCerrarCaja}
                     caja={caja}
                     idCaja={idCaja}
+                    user={user}
+                    getDataOne={getDataOne}
                 />
             </ModalWrap>
 

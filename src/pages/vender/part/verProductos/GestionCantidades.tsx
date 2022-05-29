@@ -7,16 +7,17 @@ interface gestionCantidades{
     producto:any;
     ventaDetalle:any;
     handlerOnChange:Function;
+    idLocal:string;
 }
 
-export const GestionCantidades = ({ calcularStock, producto, ventaDetalle, handlerOnChange }:gestionCantidades) => {
+export const GestionCantidades = ({ calcularStock, producto, ventaDetalle, handlerOnChange, idLocal }:gestionCantidades) => {
 
     return (
         <div className="gestion-cantidades">
             <h3>Gestion de cantidades</h3>
             <div className="grid-3 gap">
 
-                <StockGeneral idProducto={producto.id} />
+                <StockGeneral idProducto={producto.id} idLocal={idLocal} />
 
                 <InputDisable
                     label="Stock del producto en local"

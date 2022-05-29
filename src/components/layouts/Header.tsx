@@ -1,4 +1,5 @@
 import { BiFullscreen } from "react-icons/bi";
+import { User } from "./header/User";
 
 export const Header = () => {
 
@@ -20,18 +21,17 @@ export const Header = () => {
                     <BiFullscreen />
                 </span>
 
-                
-
             </div>
-            <div></div>
-            <div></div>
-            <div></div>
+
             <div></div>
 
-            
-            
-            
+            <div></div>
+
+            <div></div>
+
+            <User />
 
         </div>
     )
 };
+

@@ -13,10 +13,15 @@ import { VENTAS, VENTAS_PEDIDOS, VENTAS_SEARCH_LOCAL } from "../../../resources/
 import { BiRefresh } from "react-icons/bi";
 import { TextoRelleno } from "../../../components/TextoRelleno";
 
+interface cobrar{
+    idLocal:string;
+    nombreLocal?:string;
+    user?:boolean;
+}
 
-export const Cobrar = () => {
-    const params = useParams(); // params.id, params.nombre
-    const localId:string = params.id ? params.id : "";
+export const Cobrar = ({ idLocal, nombreLocal, user }:cobrar) => {
+    // const params = useParams(); // params.id, params.nombre
+    // const localId:string = idLocal ? idLocal : "";
 
     const [searchState, setSearchState] = useState<boolean>(false); // estado de busqueda
 
@@ -33,7 +38,7 @@ export const Cobrar = () => {
     const getData = async () => {
         setLoadingData(true);
         try {
-            const data = await get(VENTAS_PEDIDOS + "/" + params.id);
+            const data = await get(VENTAS_PEDIDOS + "/" + idLocal);
             setData(data);
             setLoadingData(false);
         } catch (error) {
@@ -65,7 +70,12 @@ export const Cobrar = () => {
     return (
         <div className="caja">
 
-            <TitleBox titulo={`Cobrar - ${params.nombre}`} link="/tiendas"/>
+            {
+                user
+                ? <TitleBox titulo={`Cobrar`}/>
+                : <TitleBox titulo={`Cobrar - ${nombreLocal}`} link="/tiendas"/>
+            }
+            
             
             <div className="grid-12 gap">
                 <div className="box scroll-box-no-margin">
@@ -80,7 +90,7 @@ export const Cobrar = () => {
                                 setSearchState={setSearchState}
                                 url={VENTAS_SEARCH_LOCAL}
                                 placeholder="Codigo de venta"
-                                localId={localId}
+                                localId={idLocal}
                             />
                             <button
                                 className="btn2 btn2-success pr-0"

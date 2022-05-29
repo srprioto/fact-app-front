@@ -2,6 +2,7 @@ import { useState } from "react";
 import { BiArrowBack, BiCaretRight, BiCartAlt, BiSpreadsheet, BiTask } from "react-icons/bi";
 import { LoadSwitchBtn2 } from "../../../components/btns/LoadSwitchBtn2";
 import { ModalWrap } from "../../../components/modals/ModalWrap";
+import { useCaja } from "../../../hooks/useContext/caja.ts/useCaja";
 import { PreciosVenta } from "./verLista/extend/PreciosVenta";
 import { TablaLista } from "./verLista/extend/TablaLista";
 import { ModalCodigoVenta } from "./verLista/short/ModalCodigoVenta";
@@ -17,6 +18,8 @@ export const VerLista = ({
     reinicios2
 }:any) => {
 
+    const caja = useCaja();
+
     const [loadVenta, setLoadVenta] = useState<boolean>(false);
 
     const [ventaRespuesta, setVentaRespuesta] = useState<any>({});
@@ -29,6 +32,11 @@ export const VerLista = ({
             ...venta,
             [e.target.name]: e.target.value
         })
+    }
+
+    const verificarCaja = (func:Function) => { 
+        caja.handlerEstadoCaja()
+        func()
     }
 
     const handlerVenta = async () => { 
@@ -109,7 +117,7 @@ export const VerLista = ({
                     <LoadSwitchBtn2
                         loading={loadVenta}
                         className="btn btn-success"
-                        handler={() => handlerVenta()}
+                        handler={() => verificarCaja(handlerVenta)}
                     >
                         <BiCaretRight /> Vender
                     </LoadSwitchBtn2>                  

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { BiChevronDown, BiChevronUp, BiLock, BiPlus } from "react-icons/bi"
 import { Input } from "../../../components/forms/Input";
 
-export const CajaAbierta = ({ data, caja, setCaja, setModalCerrarCaja, setModalAddMonto }:any) => {
+export const CajaAbierta = ({ data, caja, setCaja, setModalCerrarCaja, setModalAddMonto, user }:any) => {
 
     const [showObserv, setShowObserv] = useState<boolean>(false);
 
@@ -17,7 +17,7 @@ export const CajaAbierta = ({ data, caja, setCaja, setModalCerrarCaja, setModalA
             ...caja,
             estado_caja: false,
             // monto_efectivo: totalIngresos
-        })        
+        })
         setModalCerrarCaja(true);
     }
 

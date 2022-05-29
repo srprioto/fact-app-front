@@ -1,12 +1,9 @@
 import { useEffect, useState } from "react";
 import { BiCaretDown, BiLoaderAlt } from "react-icons/bi";
-import { useParams } from "react-router-dom";
 import { get } from "../../../../resources/fetch";
 import { LOCAL_STOCK } from "../../../../resources/routes";
 
-export const StockGeneral = ({ idProducto }:any) => {
-
-    const params = useParams(); // params.id, params.nombre
+export const StockGeneral = ({ idProducto, idLocal }:any) => {
 
     const [loading, setLoading] = useState<boolean>(false);
     const [stockLocales, setStockLocales] = useState<any>([]);
@@ -47,7 +44,7 @@ export const StockGeneral = ({ idProducto }:any) => {
                                 const localId:any = e.locales ? e.locales.id : 0;
                                 let classItem:string = "";
 
-                                if (Number(params.id) === localId) {
+                                if (Number(idLocal) === localId) {
                                     classItem = "warning-i";
                                 } else {
                                     classItem = "";
