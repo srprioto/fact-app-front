@@ -24,7 +24,7 @@ export const FormEditProducto = ({ id, handlerEdit, loadingUpdate }:any) => {
         precio_venta_1:"",
         precio_venta_2:"",
         precio_venta_3:"",
-        usuarioId: 1, 
+        // usuarioId: 1, 
         categoriasId: 1
     });
 
@@ -106,12 +106,6 @@ export const FormEditProducto = ({ id, handlerEdit, loadingUpdate }:any) => {
                             />
 
                         </div>
-
-                        {/* <div className="grid-1 gap">
-
-
-                            
-                        </div> */}
 
                         <div className="grid-3 gap">
 

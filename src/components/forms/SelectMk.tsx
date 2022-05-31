@@ -6,14 +6,15 @@ interface InputMk{
     type?:string;
     name:string;
     error:any;
-    placeholder?:string;
+    // placeholder?:string;
     loading?:boolean;
+    value?:any;
     defaultValue?:boolean;
     children:any;
 }
 
 // requiere formik
-export const SelectMk = ({ label, name, type, error, placeholder, loading, defaultValue = true, children }:InputMk) => {
+export const SelectMk = ({ label, name, type, error, loading, defaultValue, value = 2, children }:InputMk) => {
 
     return (
         <div className="wrap-form">
@@ -25,9 +26,10 @@ export const SelectMk = ({ label, name, type, error, placeholder, loading, defau
                     name={name}
                     type={type}
                     id={name}
-                    placeholder={placeholder}
-                    autoComplete="off" 
+                    // placeholder={placeholder}
+                    // autoComplete="off" 
                     as="select"
+                    initialvalues={value ? value : ""}
                 >
                     {
                         defaultValue 

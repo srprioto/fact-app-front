@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 // import { BiChevronDown, BiChevronUp, BiLock, BiPlus } from "react-icons/bi";
-import { useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
 // import { Input } from "../../../components/forms/Input";
 import { Loading } from "../../../components/loads/Loading";
 import { ModalWrap } from "../../../components/modals/ModalWrap";
@@ -15,7 +15,7 @@ import { ModalOtroMonto } from "./ModalOtroMonto";
 export const Caja = ({ idLocal, nombreLocal, user }:any) => {
 
     // const params = useParams(); // idLocal, nombreLocal
-
+    
     const [modalCerrarCaja, setModalCerrarCaja] = useState<boolean>(false);
     const [modalAbrirCaja, setModalAbrirCaja] = useState<boolean>(false);
     const [modalAddMonto, setModalAddMonto] = useState<boolean>(false);

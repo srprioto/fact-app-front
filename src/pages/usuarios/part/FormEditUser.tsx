@@ -7,9 +7,10 @@ import { SelectMk } from "../../../components/forms/SelectMk";
 import { Loading } from "../../../components/loads/Loading";
 import { LoadSwitchBtn } from "../../../components/btns/LoadSwitchBtn";
 
-import { UsuarioEditDto } from "../../../resources/dtos/UsuariosDto";
+// import { UsuarioEditDto } from "../../../resources/dtos/UsuariosDto";
 import { get, getOne } from "../../../resources/fetch";
-import { ROLES, USUARIOS } from "../../../resources/routes";
+import { LOCALES_SOLO, ROLES, USUARIOS } from "../../../resources/routes";
+import { Roles } from "../../../resources/dtos/RolesDto";
 
 // import { ValidCreateUsuario, ValidEditUsuario } from "../../../resources/validations/Usuarios";
 
@@ -22,27 +23,21 @@ import { ROLES, USUARIOS } from "../../../resources/routes";
 export const FormEditUser = ({ id, handlerEdit, loadUpdate }:any) => {
 
     const [loadingGetOne, setLoadingGetOne] = useState<boolean>(false);
-    // const [loadRoles, setLoadRoles] = useState<boolean>(false);
+    const [locales, setLocales] = useState<any>([]);
     const [roles, setRoles] = useState<any>([]);
-    const [usuario, setUsuario] = useState<UsuarioEditDto>({
-        nombre: "",
-        documento: "",
-        direccion: "",
-        edad: "",
-        telefono: "",
-        email: "",
-        password: "",
-        rolesId: ""
-    });
+    const [usuario, setUsuario] = useState<any>({});
+
 
     useEffect(() => {
         getDataOne();    
     }, []);
-    
+
+
     const getDataOne = async () => { 
         setLoadingGetOne(true);
         try {
             const response_productos = await getOne(id, USUARIOS);
+            console.log(response_productos);            
             setUsuario({
                 nombre: response_productos.nombre,
                 documento: response_productos.documento,
@@ -51,16 +46,35 @@ export const FormEditUser = ({ id, handlerEdit, loadUpdate }:any) => {
                 telefono: response_productos.telefono,
                 email: response_productos.email,
                 password: "",
-                rolesId: response_productos.rolesId
+                rolesId: response_productos.roles ? response_productos.roles.id : "",
+                localesId: response_productos.locales ? response_productos.locales.id : ""
             });
             const data = await get(ROLES);
+            const locales = await get(LOCALES_SOLO);
+            setLocales(locales);
             setRoles(data);
             setLoadingGetOne(false);
         } catch (error) {
             setLoadingGetOne(true);
-            console.log(error);     
+            console.log(error);
         }
     }
+
+
+    const checkRolUser = (rolId:any) => {
+        if (rolId) {
+            const rol:any = roles.find((e:any) => e.id === Number(rolId));
+            if (rol) {
+                if (rol.rol === Roles.ADMIN) {
+                    return false;
+                } else {
+                    return true;
+                }    
+            }
+        }
+        return null
+    }
+
 
     return (
         <Formik
@@ -69,6 +83,14 @@ export const FormEditUser = ({ id, handlerEdit, loadUpdate }:any) => {
             // validationSchema={ValidEditUsuario}
             onSubmit={(data, { resetForm }) => { 
 
+                let local:number|null = null
+
+                if (checkRolUser(data.rolesId)) {
+                    local = data.localesId ? data.localesId : null;
+                } else {
+                    local = null;
+                }
+                
                 if (data.password !== "") {
                     handlerEdit({
                         nombre: data.nombre,
@@ -78,7 +100,8 @@ export const FormEditUser = ({ id, handlerEdit, loadUpdate }:any) => {
                         telefono: data.telefono,
                         email: data.email,
                         password: data.password,
-                        rolesId: data.rolesId
+                        rolesId: data.rolesId,
+                        localesId: local
                     });    
                 } else{
                     handlerEdit({
@@ -88,13 +111,14 @@ export const FormEditUser = ({ id, handlerEdit, loadUpdate }:any) => {
                         edad: data.edad,
                         telefono: data.telefono,
                         email: data.email,
-                        rolesId: data.rolesId
+                        rolesId: data.rolesId,
+                        localesId: local
                     });
                 }
 
             }}
         >
-            {({ errors }) => (
+            {({ values, errors }) => (
 
                 loadingGetOne
                 ? <Loading />
@@ -150,23 +174,41 @@ export const FormEditUser = ({ id, handlerEdit, loadUpdate }:any) => {
                                 error={errors.password}
                             />
                         </div>
-                        <div className="grid-3 gap mb-25">
-                            <div></div>
+                        <div className="grid-4 gap">
                             <SelectMk
                                 label="Rol del usuario"
                                 name="rolesId"
                                 error={errors.rolesId}
                                 defaultValue={false}
-                                // loading={loadRoles}
                             >
                                 {
                                     roles.map((rol:any) => {
                                         return (
                                             <option key={rol.id} value={rol.id}>{ rol.descripcion }</option>
                                         )
-                                    })                                 
+                                    })
                                 }
                             </SelectMk>
+
+                            {
+                                checkRolUser(values.rolesId)
+                                && (
+                                    <SelectMk
+                                        label="Local ligado"
+                                        name="localesId"
+                                        error={errors.localesId}
+                                    >
+                                        {
+                                            locales.map((e:any) => {
+                                                return (
+                                                    <option key={e.id} value={e.id}>{ e.nombre }</option>
+                                                )
+                                            })
+                                        }
+                                    </SelectMk>
+                                )
+                            }
+
                             <div></div>
                         </div>
 

@@ -11,7 +11,7 @@ export interface ProductosDto {
     precio_venta_1:number;
     precio_venta_2:number;
     precio_venta_3:number;
-    usuarioId:number;
+    // usuarioId:number;
     created_at:string;
     updated_at:string;
 
@@ -29,7 +29,7 @@ export interface CreateProductosDto {
     precio_venta_1?:number;
     precio_venta_2?:number;
     precio_venta_3?:number;
-    usuarioId?:number|null;
+    // usuarioId?:number|null;
     categoriasId?:number|null;
 
 }

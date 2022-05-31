@@ -26,7 +26,7 @@ export const FormsCrearProducto = ({ handlerCreateProducto, loading }:formsCrear
                     precio_venta_1:"",
                     precio_venta_2:"",
                     precio_venta_3:"",
-                    usuarioId: 1, 
+                    // usuarioId: 1, 
                     categoriasId: 1 
                 }}
 

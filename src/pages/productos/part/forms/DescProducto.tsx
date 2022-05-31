@@ -33,17 +33,17 @@ export const DescProducto = ({ producto }:any) => {
 
                     <span>
                         <h4>P / unidad: </h4>
-                        <p>{ producto.precio_venta_1 }</p>
+                        <p>S/. { producto.precio_venta_1 }</p>
                     </span>
 
                     <span>
                         <h4>P / menor: </h4>
-                        <p>{ producto.precio_venta_2 }</p>
+                        <p>S/. { producto.precio_venta_2 }</p>
                     </span>
 
                     <span>
                         <h4>P / mayor: </h4>
-                        <p>{ producto.precio_venta_3 }</p>
+                        <p>S/. { producto.precio_venta_3 }</p>
                     </span>
                 </div> 
             </div>
