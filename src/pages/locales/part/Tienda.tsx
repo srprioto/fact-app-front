@@ -10,7 +10,7 @@ import { ModalCantidad } from './ModalCantidad';
 import { ProductoLocal } from './ProductoLocal';
 
 import { LocalStockModalDto } from '../../../resources/dtos/LocalStockDto';
-import { get, paginate } from '../../../resources/fetch';
+import { get, paginate, post } from '../../../resources/fetch';
 import { LOCAL_STOCK_SEARCH, LOCAL_STOCK_SOLO } from '../../../resources/routes';
 import { ModalTransferencia } from '../../../components/transferencia/enviar/EnviarTransferencia';
 import { AlertaTransferencia } from '../../../components/transferencia/recibir/AlertaTransferencia';
@@ -64,7 +64,8 @@ export const Tienda = ({ idLocal, nombreLocal, user }:tienda) => {
             setLoading(true);
             setSearchState(true);
             try {
-                const data = await get(LOCAL_STOCK_SEARCH + idLocal + "/" + searchTxt);
+                // const data = await get(LOCAL_STOCK_SEARCH + idLocal + "/" + searchTxt);
+                const data = await post({value: searchTxt}, LOCAL_STOCK_SEARCH + idLocal);
                 setLoading(false);
                 setData(data);
             } catch (error) {
@@ -96,6 +97,7 @@ export const Tienda = ({ idLocal, nombreLocal, user }:tienda) => {
         }
     }
 
+    // console.log(data);    
 
     return (
         <div className="local-stock">

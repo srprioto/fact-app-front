@@ -7,13 +7,13 @@ import { Modal } from "../../../components/modals/Modal"
 import { post } from "../../../resources/fetch";
 import { CAJA_DETALLES } from "../../../resources/routes";
 
-export const ModalOtroMonto = ({ modal, setModal, getDataOne, idCaja }:any) => {
+export const ModalOtroMonto = ({ modal, setModal, getDataOne, idCaja, usuarioId }:any) => {
 
     const cajaDet = {
         monto_movimiento: 0,
         descripcion: "",
         cajaId: idCaja,
-        usuarioId: 1
+        usuarioId: usuarioId
     }
 
     const [loading, setLoading] = useState<boolean>(false);

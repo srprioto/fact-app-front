@@ -11,6 +11,7 @@ import { get, post } from "../../../resources/fetch"
 import { InfoTransferenciaEnvio } from "../../../resources/dtos/Transferencias"
 import { LoadSwitchBtn } from "../../btns/LoadSwitchBtn"
 import { ListaProductosTransf } from "./ListaProductosTransf"
+import { useAuth } from "../../../auth/useAuth"
 
 interface modalTransferencia {
     modal:boolean;
@@ -21,6 +22,8 @@ interface modalTransferencia {
 }
 
 export const ModalTransferencia = ({ modal, setModal, idLocal, nombreLocal, getData }:modalTransferencia) => {
+
+    const auth = useAuth();
 
     const detalles:any = {
         productoNombre: "",
@@ -33,7 +36,7 @@ export const ModalTransferencia = ({ modal, setModal, idLocal, nombreLocal, getD
         descripcion: "",
         localOrigen: idLocal,
         localDestino: 0,
-        usuarioEnvia: 1, // actualizar por el del usuario registrado
+        usuarioEnvia: auth.userInfo.sub, // actualizar por el del usuario registrado
         // observaciones: "",
         // usuarioRecibe: 0
     }

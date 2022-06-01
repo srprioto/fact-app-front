@@ -17,7 +17,7 @@ export const ProductoLocal = ({
     return (
         <tr>
             <td>{ elemento.productos.codigo }</td>
-            <td>{ elemento.productos.nombre }</td>            
+            <td>{ elemento.productos.nombre }</td>
             <td className={
                     elemento.cantidad <= 10
                     ? elemento.cantidad === 0 || elemento.cantidad === null

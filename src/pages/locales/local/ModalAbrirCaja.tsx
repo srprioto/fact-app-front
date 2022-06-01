@@ -16,10 +16,20 @@ interface modalAbrirCaja{
     nombreLocal?:string;
     setStateCaja?:Function;
     getDataOne?:Function;
+    usuarioId:number;
     user?:boolean;
 }
 
-export const ModalAbrirCaja = ({ modal, setModal, idLocal, nombreLocal, setStateCaja, getDataOne, user }:modalAbrirCaja) => {
+export const ModalAbrirCaja = ({ 
+    modal, 
+    setModal, 
+    idLocal, 
+    nombreLocal, 
+    setStateCaja, 
+    getDataOne, 
+    usuarioId,
+    user 
+}:modalAbrirCaja) => {
 
     const caja = useCaja();
 
@@ -27,7 +37,7 @@ export const ModalAbrirCaja = ({ modal, setModal, idLocal, nombreLocal, setState
     const [aperturaCaja, setAperturaCaja] = useState({
         monto_apertura: 0,
         localId: idLocal,
-        usuarioAbreId: 1
+        usuarioAbreId: usuarioId
     })
 
 

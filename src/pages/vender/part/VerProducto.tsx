@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { BiFastForward, BiListPlus } from "react-icons/bi";
+import { useAuth } from "../../../auth/useAuth";
 import { BtnOnOff2 } from "../../../components/btns/BtnOnOff2";
 import { LoadSwitchBtn2 } from "../../../components/btns/LoadSwitchBtn2";
 import { ModalWrap } from "../../../components/modals/ModalWrap";
@@ -68,7 +69,8 @@ export const VerProducto = ({
 }:verProducto) => {
 
     const caja = useCaja();
-
+    const auth = useAuth();
+    
     const [loadVentaRapida, setloadVentaRapida] = useState<boolean>(false);
     const [ventaRespuesta, setVentaRespuesta] = useState<any>({});
     const [modalConfirm, setModalConfirm] = useState<boolean>(false);
@@ -147,7 +149,7 @@ export const VerProducto = ({
             estado_venta: "enviado",
             localId: idLocal,
             clienteId: 0,
-            usuarioId: 1,
+            usuarioId: auth.userInfo.sub,
             forma_pago: "efectivo",
             codigo_venta: "",
             ventaDetalles: updateListaVenta,

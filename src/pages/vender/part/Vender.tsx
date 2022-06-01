@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useAuth } from "../../../auth/useAuth";
 import { TitleBox } from "../../../components/TitleBox"
 import { ventaDet, ventaDetalles } from "../../../resources/dtos/VentasDto";
 import { post } from "../../../resources/fetch";
@@ -14,6 +15,8 @@ interface vender{
 
 export const Vender = ({ idLocal, nombreLocal, user }:vender) => {
 
+    const auth = useAuth();
+
     const ventaItem = {
         descuento_total: 0,
         subtotal: 0,
@@ -22,7 +25,7 @@ export const Vender = ({ idLocal, nombreLocal, user }:vender) => {
         estado_venta: "enviado",
         localId: idLocal,
         clienteId: 0,
-        usuarioId: 1,
+        usuarioId: auth.userInfo.sub,
         forma_pago: "efectivo",
         codigo_venta: "",
         ventaDetalles: [],

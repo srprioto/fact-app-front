@@ -18,7 +18,7 @@ export const VentaItems = ({ ventas, handlerVer, updateData }:any) => {
         <tr className="venta-items">
             <td>{ ventas.codigo_venta }</td>
             {/* <td><ListaDetalleProductos detalles={ventas.movimientoDetalles} /></td> */}
-            <td>{ ventas.total }</td>
+            <td>S/. { ventas.total }</td>
             <td className={ classEstado() } >{ ventas.estado_venta }</td>
             <td>{ ventas.locales && ventas.locales.nombre }</td>
             <td>{ ventas.observaciones }</td>

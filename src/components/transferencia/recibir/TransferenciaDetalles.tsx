@@ -5,15 +5,18 @@ import { TRANSACCIONES_CONFIRMAR } from "../../../resources/routes";
 import { Checkbox } from "../../forms/Checkbox";
 import { Input } from "../../forms/Input";
 import { LoadSwitchBtn } from "../../btns/LoadSwitchBtn";
+import { useAuth } from "../../../auth/useAuth";
 // import { LoadSwitchBtn2 } from "../../btns/LoadSwitchBtn2";
 
 export const TransferenciaDetalles = ({ data, getTransacciones, setTransf }:any) => {
+
+    const auth = useAuth();
 
     const transferenciaObj = {
         // id: data.id,
         observaciones: "",
         estado_general: "enviado",
-        usuarioRecibe: 1, // actualizar
+        usuarioRecibe: auth.userInfo.sub, // actualizar
         transaccionDetalles: []
     }
 

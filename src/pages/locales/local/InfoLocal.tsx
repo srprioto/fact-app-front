@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { BiCartAlt, BiCoin, BiDollarCircle, BiListOl, BiMapPin } from "react-icons/bi";
 import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../../../auth/useAuth";
 import { BtnOnOff2 } from "../../../components/btns/BtnOnOff2";
 import { LoadSwitchBtn2 } from "../../../components/btns/LoadSwitchBtn2";
 import { ModalWrap } from "../../../components/modals/ModalWrap";
@@ -17,6 +18,7 @@ interface infoLocal {
 
 export const InfoLocal = ({ local, handlerSelectLocal }:infoLocal) => {
 
+    const auth = useAuth();
     const navigate = useNavigate();
 
     const [toggleGeneral, setToggleGeneral] = useState<number>(1);
@@ -150,6 +152,7 @@ export const InfoLocal = ({ local, handlerSelectLocal }:infoLocal) => {
                     setModal={setModalAbrirCaja}
                     idLocal={local.id}
                     nombreLocal={local.nombre}
+                    usuarioId={auth.userInfo.sub}
                     setStateCaja={setStateCaja}
                 />
             </ModalWrap>

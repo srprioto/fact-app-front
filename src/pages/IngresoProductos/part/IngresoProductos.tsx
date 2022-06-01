@@ -37,10 +37,20 @@ export const IngresoProductos = () => {
     }
 
 
+    const handlerRegresar = () => { 
+        setIdIngreso(0);
+    }
+
+
     return (
         <div className="ingreso-productos">
 
-            <TitleBox titulo="Ingreso de productos"/>
+            {
+                handlerVerIngresos()
+                ? <TitleBox titulo="Ingreso de productos"/>
+                : <TitleBox titulo="Ingreso de productos" accion={handlerRegresar}/>
+            }
+            
 
             {
                 loading

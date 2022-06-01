@@ -6,7 +6,7 @@ import { Input } from "../../../components/forms/Input";
 // import { SelectSearch } from "../../../components/forms/SelectSearch";
 import { InputDisable } from "../../../components/forms/InputDisable";
 
-import { MovimientosDto, movProd } from "../../../resources/dtos/Movimientos";
+import { MovimientosDto, movProductos } from "../../../resources/dtos/Movimientos";
 import { detalles, MovimientoDetallesDto } from "../../../resources/dtos/MovimientoDetalles";
 import { redondeo } from "../../../resources/func/redondeo";
 
@@ -21,6 +21,7 @@ import { ModalWrap } from "../../../components/modals/ModalWrap";
 import { AddBtn } from "../../../components/btns/AddBtn";
 import { BoxFixed } from "../../../components/cards/BoxFixed";
 import { Loading } from "../../../components/loads/Loading";
+import { useAuth } from "../../../auth/useAuth";
 
 
 export const FormIngresoProductos = ({ 
@@ -38,6 +39,8 @@ export const FormIngresoProductos = ({
 }:any) => {
 
     // const navigate = useNavigate();
+    const auth = useAuth();
+    const movProd = movProductos(auth.userInfo.sub);
 
     const [switchProductos, setSwitchProductos] = useState<boolean>(false);
     const [switchProveedores, setSwitchProveedores] = useState<boolean>(false);

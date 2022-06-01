@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useAuth } from "../../../auth/useAuth";
 // import { BiChevronDown, BiChevronUp, BiLock, BiPlus } from "react-icons/bi";
 // import { useParams } from "react-router-dom";
 // import { Input } from "../../../components/forms/Input";
@@ -15,6 +16,7 @@ import { ModalOtroMonto } from "./ModalOtroMonto";
 export const Caja = ({ idLocal, nombreLocal, user }:any) => {
 
     // const params = useParams(); // idLocal, nombreLocal
+    const auth = useAuth();
     
     const [modalCerrarCaja, setModalCerrarCaja] = useState<boolean>(false);
     const [modalAbrirCaja, setModalAbrirCaja] = useState<boolean>(false);
@@ -30,7 +32,7 @@ export const Caja = ({ idLocal, nombreLocal, user }:any) => {
         cantidad_diferencia: 0,
         nota_observacion: "",
         localId: Number(idLocal),
-        usuarioCierraId: 1
+        usuarioCierraId: auth.userInfo.sub
     });
 
     // const montoApertura:any = data.caja ? data.caja.monto_apertura : 0;
@@ -162,6 +164,7 @@ export const Caja = ({ idLocal, nombreLocal, user }:any) => {
                     idLocal={idLocal}
                     nombreLocal={nombreLocal}
                     getDataOne={getDataOne}
+                    usuarioId={auth.userInfo.sub}
                     user={user}
                 />
             </ModalWrap>
@@ -182,6 +185,7 @@ export const Caja = ({ idLocal, nombreLocal, user }:any) => {
                     modal={modalAddMonto}
                     setModal={setModalAddMonto}
                     getDataOne={getDataOne}
+                    usuarioId={auth.userInfo.sub}
                     idCaja={idCaja}
                 />
             </ModalWrap>

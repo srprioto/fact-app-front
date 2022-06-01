@@ -5,11 +5,16 @@ interface tituloBox {
     titulo:string;
     link?:string;
     back?:boolean;
+    accion?:Function;
 }
 
-export const TitleBox = ({ titulo, link, back = false }:tituloBox) => {
+export const TitleBox = ({ titulo, link, back = false, accion }:tituloBox) => {
 
     const navigate = useNavigate();
+
+    const handlerAccion = () => { 
+        accion && accion();
+    }
     
     return (
         <div className="titulo-box">
@@ -21,6 +26,11 @@ export const TitleBox = ({ titulo, link, back = false }:tituloBox) => {
                 back
                 && <button onClick={() => navigate(-1)} className="button-icon"><BiArrowBack /></button>
             }
+            {
+                accion
+                && <button onClick={() => handlerAccion()} className="button-icon"><BiArrowBack /></button>
+            }
+            
             {/* { 
                 back
                 && (
