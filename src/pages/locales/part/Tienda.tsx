@@ -10,7 +10,7 @@ import { ModalCantidad } from './ModalCantidad';
 import { ProductoLocal } from './ProductoLocal';
 
 import { LocalStockModalDto } from '../../../resources/dtos/LocalStockDto';
-import { get, paginate, post } from '../../../resources/fetch';
+import { paginate, post } from '../../../resources/fetch';
 import { LOCAL_STOCK_SEARCH, LOCAL_STOCK_SOLO } from '../../../resources/routes';
 import { ModalTransferencia } from '../../../components/transferencia/enviar/EnviarTransferencia';
 import { AlertaTransferencia } from '../../../components/transferencia/recibir/AlertaTransferencia';
