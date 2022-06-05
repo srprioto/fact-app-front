@@ -44,6 +44,7 @@ export const CAJA_VERIFICAR:string = "/caja/verificar-caja" // requiere id
 export const CAJA_CERRAR:string = "/caja/cerrar-caja" // requiere id
 export const CAJA_DETALLES:string = "/caja-detalles";
 
+export const FACTURA:string = "/facturas"
 
 // almacenes
 // export const ALMACEN:string = "/locales-stock/almacen/productos"; // localstock

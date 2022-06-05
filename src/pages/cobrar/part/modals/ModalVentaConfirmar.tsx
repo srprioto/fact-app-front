@@ -1,6 +1,11 @@
 import { useEffect, useState } from "react";
-import { BiBookmarkAltMinus, BiCaretRight, BiImport, BiMailSend } from "react-icons/bi";
-import { FaWhatsapp } from "react-icons/fa";
+import { 
+    BiBookmarkAltMinus, 
+    BiCaretRight, 
+    BiMailSend 
+    // BiImport, 
+} from "react-icons/bi";
+// import { FaWhatsapp } from "react-icons/fa";
 
 import { LoadSwitchBtn2 } from "../../../../components/btns/LoadSwitchBtn2";
 import { Modal } from "../../../../components/modals/Modal"
@@ -10,6 +15,8 @@ import { TablaProdVenta } from "./TablaProdVenta";
 import { copy } from "../../../../resources/func/deepCopy";
 import { fixRedondeo, redondeo } from "../../../../resources/func/redondeo";
 import { Input } from "../../../../components/forms/Input";
+import { ModalWrap } from "../../../../components/modals/ModalWrap";
+import { ModalCorreo } from "./ModalCorreo";
 
 
 export const ModalVentaConfirmar = ({ 
@@ -24,6 +31,7 @@ export const ModalVentaConfirmar = ({
     const ventaAux:any = copy(dataVenta);
     const [venta, setVenta] = useState<any>(copy(dataVenta));
     const [reducirPercent, setReducirPercent] = useState<number>(0)
+    const [modalCorreo, setModalCorreo] = useState<boolean>(false);
 
 
     useEffect(() => { 
@@ -175,41 +183,46 @@ export const ModalVentaConfirmar = ({
                         <div className="grid-5 gap">
                             <div></div>
                             <div></div>
+                            <div></div>
+                            <div></div>
 
-                            <LoadSwitchBtn2
+                            {/* <LoadSwitchBtn2
                                 loading={loading}
                                 className="btn btn-success"
                                 handler={() => confirmarVenta("listo")}
                             ><FaWhatsapp />
-                            </LoadSwitchBtn2>
+                            </LoadSwitchBtn2> */}
 
-                            <LoadSwitchBtn2
-                                loading={loading}
-                                className="btn btn-secundary"
-                                handler={() => confirmarVenta("listo")}   
-                            ><BiMailSend />
-                            </LoadSwitchBtn2>
-
-                            <LoadSwitchBtn2
+                            {/* <LoadSwitchBtn2
                                 loading={loading}
                                 className="btn btn-primary"
                                 handler={() => confirmarVenta("listo")}   
                             ><BiImport />
+                            </LoadSwitchBtn2> */}
+
+                            <LoadSwitchBtn2
+                                loading={loading}
+                                className="btn btn-secundary"
+                                handler={() => setModalCorreo(true)}
+                            ><BiMailSend />
                             </LoadSwitchBtn2>
                                 
                         </div>
 
                     </div>
-
-                    {/* <button 
-                        className="btn btn-warning"
-                        onClick={() => setModal(!modal)}
-                    ><BiReply /> Regresar</button> */}
                     
                 </div>
-
-
             </div>
+
+            <ModalWrap modal={modalCorreo}>
+                <ModalCorreo
+                    modal={modalCorreo}
+                    setModal={setModalCorreo}
+                    venta={venta}
+                    confirmarVenta={confirmarVenta}
+                />
+            </ModalWrap>
+
         </Modal>
     )
 }

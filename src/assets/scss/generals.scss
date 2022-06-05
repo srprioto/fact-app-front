@@ -617,8 +617,8 @@ a.btn-danger:hover{ color: $danger; }
                 width: 300px;
                 transform: scale(0);
                 position: absolute;
-                right: 0;
-                text-align: right;
+                left: 0;
+                text-align: left;
             }
             
             svg:hover ~ .error-message,
@@ -626,7 +626,7 @@ a.btn-danger:hover{ color: $danger; }
                 transform: scale(1);
                 color: $warning;
                 width: 300px;
-                text-align: right;
+                text-align: left;
             }    
 
         }

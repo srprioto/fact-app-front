@@ -98,6 +98,8 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
 
     const handlerConfirmarVenta = async (estado:string) => {
 
+        setLoadConfirmarVenta(true);
+
         let updateVenta:any = {}
         const ventaDet:Array<any> = [];
         
@@ -127,13 +129,12 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
 
         updateVenta.ventaDetalles = ventaDet;
 
-        setLoadConfirmarVenta(true);
         try {
             await put(data.id, updateVenta, VENTAS);
             // console.log(response);
             setLoadConfirmarVenta(false);
         } catch (error) {
-            setLoadConfirmarVenta(true);
+            setLoadConfirmarVenta(false);
             console.log(error);
         } finally {
             handlerRefresh();

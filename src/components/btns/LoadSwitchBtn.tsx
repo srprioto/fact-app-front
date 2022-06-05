@@ -6,9 +6,10 @@ interface loadSwitchBtn {
     loading:boolean;
     handler?:any;
     className?:string;
+    icon?:any;
 }
 
-export const LoadSwitchBtn = ({ label = "Aceptar", loading, handler, className = "success" }:loadSwitchBtn) => {
+export const LoadSwitchBtn = ({ label = "Aceptar", loading, handler, className = "success", icon }:loadSwitchBtn) => {
     return (
         <>
             {
@@ -18,11 +19,13 @@ export const LoadSwitchBtn = ({ label = "Aceptar", loading, handler, className =
                     handler
                     ? (
                         <button className={"btn btn-" + className} type="submit" onClick={() => handler()}>
-                            <BiCheck />{ label ? label : "Aceptar" }
+                            { icon ? icon : <BiCheck /> }
+                            { label ? label : "Aceptar" }
                         </button>
                     ) : (
                         <button className={"btn btn-" + className} type="submit">
-                            <BiCheck />{ label ? label : "Aceptar" }
+                            { icon ? icon : <BiCheck /> }
+                            { label ? label : "Aceptar" }
                         </button>
                     )
                     

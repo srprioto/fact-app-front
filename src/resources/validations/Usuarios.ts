@@ -6,7 +6,7 @@ export const ValidCreateUsuario = Yup.object({
     direccion: Yup.string().required('Requerido'),
     edad: Yup.string().required('Requerido'),
     telefono: Yup.string().required('Requerido'),
-    email: Yup.string().required('Requerido'),
+    email: Yup.string().email('Formato de Email invaido').required('Requerido'),
     password: Yup.string().required('Requerido'),
     rolesId: Yup.string().required('Requerido'),
     localesId: Yup.string().required('Requerido'),

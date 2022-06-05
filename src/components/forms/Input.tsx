@@ -74,8 +74,7 @@ export const Input = ({ label, type = "text", name, value, placeholder, onChange
                                 placeholder={placeholder}
                                 autoComplete="off"
                             />  
-                        )
-                              
+                        )  
                     ) : (
                         <input 
                         type={type} 
