@@ -2,7 +2,6 @@ import { Form, Formik } from "formik";
 import { useState } from "react"
 import { BiMailSend } from "react-icons/bi";
 import { LoadSwitchBtn } from "../../../../components/btns/LoadSwitchBtn";
-import { Input } from "../../../../components/forms/Input"
 import { InputMk } from "../../../../components/forms/InputMk";
 import { Modal } from "../../../../components/modals/Modal"
 import { post } from "../../../../resources/fetch";
