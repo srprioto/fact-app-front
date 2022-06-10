@@ -1,13 +1,14 @@
 interface parrafoForm {
     label:string;
     value:any;
+    className?:string;
 }
 
-export const ParrafoForm = ({ label, value }:parrafoForm) => {
+export const ParrafoForm = ({ label, value, className }:parrafoForm) => {
     return (
         <div className="wrap-form">
             <label htmlFor="">{ label }</label><br />
-            <p>{ value === NaN ? "" : value }</p>
+            <p className={className ? className : ""}>{ value === NaN ? "" : value }</p>
         </div>
     ) 
 }

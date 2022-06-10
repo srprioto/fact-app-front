@@ -3,7 +3,7 @@ import { BiX } from "react-icons/bi";
 export const TablaLista = ({ listaVenta, itemPop }:any) => {
     return (
         <div className="tabla-lista-large mb-25">
-            <table className="table3">
+            <table className="table3 no-cursor">
                 <thead>
                     <tr>
                         <th>Codigo</th>

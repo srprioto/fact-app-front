@@ -41,7 +41,7 @@ export const ModalCorreo = ({ modal, setModal, venta, confirmarVenta }:any) => {
             // setModal(false);
             await confirmarVenta("listo");    
         }        
-
+        
     }
 
     return (
@@ -87,16 +87,6 @@ export const ModalCorreo = ({ modal, setModal, venta, confirmarVenta }:any) => {
 
 
             </Formik>
-
-            {/* <Input
-                label="E-mail del cliente"
-                type="text"
-                name="correo"
-                value={correo}
-                onChange={(e:any) => setCorreo(e.target.value)}
-            /> */}
-
-            
 
         </Modal>
     )

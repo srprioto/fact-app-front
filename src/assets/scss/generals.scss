@@ -113,11 +113,13 @@ label{
 .mt-25{ margin-top:25px; }
 
 .mb-5{ margin-bottom:5px; }
+.mb-8{ margin-bottom:8px; } // sirve como el margen de un label, para una <p>
 .mb-15{ margin-bottom:15px; }
 .mb-10{ margin-bottom:10px; }
 .mb-18{ margin-bottom:18px; }
 .mb-20{ margin-bottom:20px; }
 .mb-25{ margin-bottom:25px; }
+.mb-30{ margin-bottom:30px; }
 .mb-36{ margin-bottom:36px; }
 
 .pr-20{ padding-right: 20px; }
@@ -840,6 +842,12 @@ table.no-hover{
     }
 }
 
+table.no-cursor{
+    tbody tr {
+        cursor: auto!important;
+    }
+}
+
 .opacity-line-table{
     opacity: .4;
 }
@@ -859,6 +867,40 @@ table.no-hover{
         border-radius: 0 15px 15px 0;
         border: 1px solid $color4;
     }
+
+    .reload-search{
+        position: absolute;
+        right: 65px;
+        height: 100%;
+        color: $danger;
+        font-size: 24px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        svg {
+            cursor: pointer;
+            
+        }
+
+    }
+}
+
+.search-general{
+    display: flex;
+    // position: relative;
+
+    input,
+    select{
+        border-radius: 15px 0 0 15px;
+    }
+    button{
+        border-radius: 0 15px 15px 0;
+        border: 1px solid $color4;
+    }
+
+    .wrap-form{
+        width: 100%;
+    }    
 
     .reload-search{
         position: absolute;
@@ -1154,6 +1196,10 @@ table.no-hover{
 
         }
     }
+}
+
+.wrap-descripcion4{
+    width: 100%;
 }
 
 .box-descripcion{

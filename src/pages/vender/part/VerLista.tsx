@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { BiArrowBack, BiCaretRight, BiCartAlt, BiSpreadsheet, BiTask } from "react-icons/bi";
 import { LoadSwitchBtn2 } from "../../../components/btns/LoadSwitchBtn2";
+import { Boleta } from "../../../components/factura/Boleta";
+import { Factura } from "../../../components/factura/Factura";
 import { ModalWrap } from "../../../components/modals/ModalWrap";
 import { useCaja } from "../../../hooks/useContext/caja.ts/useCaja";
 import { PreciosVenta } from "./verLista/extend/PreciosVenta";
@@ -100,8 +102,8 @@ export const VerLista = ({
 
                     <div className="tabbs-box box box-par m-0">
                         { tabbs === 1 && <div className="venta-rapida"></div> }
-                        { tabbs === 2 && <div className="boleta"><h2>Boleta</h2></div> }
-                        { tabbs === 3 && <div className="factura"><h2>Factura</h2></div> }
+                        { tabbs === 2 && <Boleta /> }
+                        { tabbs === 3 && <Factura /> }
                     </div>
 
                 </div>

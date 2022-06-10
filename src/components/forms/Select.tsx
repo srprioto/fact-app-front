@@ -2,7 +2,7 @@ interface select {
     label?:string;
     name:string;
     onChange:any;
-    defaultValue:any; // activa el valor por defecto "no"
+    defaultValue?:any; // activa el valor por defecto "no"
     value?:any; // requiere activar defaultValue
     loading?:boolean|undefined;
     textDefault?:string;

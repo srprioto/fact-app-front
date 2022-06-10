@@ -2,14 +2,23 @@ import { BiLoaderAlt } from "react-icons/bi"
 
 interface loadingImg {
     height?:number;
+    size?:string;
 }
 
-export const LoadingImg = ({ height = 132 }:loadingImg) => {
+export const LoadingImg = ({ height = 132, size }:loadingImg) => {
     return (
         <div className="mb-20">
             <div className="box box-par rotarIcon middle" style={{ height: `${height}px` }}>
-                <BiLoaderAlt />
+                <BiLoaderAlt size={size} />
             </div>
         </div>
+    )
+}
+
+export const LoadingImg2 = ({ size }:loadingImg) => {
+    return (
+            <div className="rotarIcon">
+                <BiLoaderAlt size={size} />
+            </div>
     )
 }

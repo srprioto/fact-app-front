@@ -140,7 +140,7 @@ export const Caja = ({ idLocal, nombreLocal, user }:any) => {
                                                                     ? "danger"
                                                                     : "success")
                                                                 }
-                                                            >{ e.monto_movimiento }</td>
+                                                            >S/. { e.monto_movimiento }</td>
                                                             <td>{ e.usuario && e.usuario.nombre }</td>
                                                             <td>{ e.created_at }</td>
                                                         </tr>
