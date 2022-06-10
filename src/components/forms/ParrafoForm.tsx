@@ -8,7 +8,7 @@ export const ParrafoForm = ({ label, value, className }:parrafoForm) => {
     return (
         <div className="wrap-form">
             <label htmlFor="">{ label }</label><br />
-            <p className={className ? className : ""}>{ value === NaN ? "" : value }</p>
+            <p className={className ? className : ""}>{ value === isNaN ? "" : value }</p>
         </div>
     ) 
 }
