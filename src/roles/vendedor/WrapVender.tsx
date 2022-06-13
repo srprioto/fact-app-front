@@ -16,6 +16,13 @@ export const WrapVender = () => {
 
     return (
         <div className="box-seller">
+
+            <Vender
+                idLocal={idLocal}
+                user
+            />
+
+{/* 
             {
                 !loadingCaja
                 ? (
@@ -51,7 +58,7 @@ export const WrapVender = () => {
                 ) : (
                     <Loading />
                 )
-            }
+            } */}
         </div>
     )
 }

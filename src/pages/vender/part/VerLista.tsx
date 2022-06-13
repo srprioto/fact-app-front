@@ -5,6 +5,7 @@ import { Boleta } from "../../../components/factura/Boleta";
 import { Factura } from "../../../components/factura/Factura";
 import { ModalWrap } from "../../../components/modals/ModalWrap";
 import { useCaja } from "../../../hooks/useContext/caja.ts/useCaja";
+import { clienteInfo } from "../../../resources/dtos/Cliente";
 import { PreciosVenta } from "./verLista/extend/PreciosVenta";
 import { TablaLista } from "./verLista/extend/TablaLista";
 import { ModalCodigoVenta } from "./verLista/short/ModalCodigoVenta";
@@ -23,11 +24,12 @@ export const VerLista = ({
     const caja = useCaja();
 
     const [loadVenta, setLoadVenta] = useState<boolean>(false);
-
     const [ventaRespuesta, setVentaRespuesta] = useState<any>({});
     const [modalConfirm, setModalConfirm] = useState<boolean>(false);
-
     const [tabbs, setTabbs] = useState<number>(1);
+
+    const [cliente, setCliente] = useState<any>(clienteInfo(""));
+
 
     const handlerOnChange = (e:any) => { 
         setVenta({
@@ -37,14 +39,14 @@ export const VerLista = ({
     }
 
     const verificarCaja = (func:Function) => { 
-        caja.handlerEstadoCaja()
-        func()
+        caja.handlerEstadoCaja();
+        func();
     }
 
     const handlerVenta = async () => { 
         setLoadVenta(true);
         try {
-            const ventaResp:any = await postVenta();
+            const ventaResp:any = await postVenta(cliente);
             if (ventaResp.data) {
                 setVentaRespuesta(ventaResp.data);
                 setModalConfirm(true);
@@ -56,12 +58,11 @@ export const VerLista = ({
         } finally{
             reinicios2();
         }
-
     }
 
     return (
         <div className="over-hidden">
-            <div className="box m-0 ver-lista show-right">
+            <div className="box m-0 box-par ver-lista show-right">
 
                 <div className="box-venta-large">
             
@@ -102,8 +103,8 @@ export const VerLista = ({
 
                     <div className="tabbs-box box box-par m-0">
                         { tabbs === 1 && <div className="venta-rapida"></div> }
-                        { tabbs === 2 && <Boleta /> }
-                        { tabbs === 3 && <Factura /> }
+                        { tabbs === 2 && <Boleta cliente={cliente} setCliente={setCliente} /> }
+                        { tabbs === 3 && <Factura cliente={cliente} setCliente={setCliente} /> }
                     </div>
 
                 </div>
@@ -122,10 +123,8 @@ export const VerLista = ({
                         handler={() => verificarCaja(handlerVenta)}
                     >
                         <BiCaretRight /> Vender
-                    </LoadSwitchBtn2>                  
-                    
+                    </LoadSwitchBtn2>
                 </div>
-                
             </div>
 
             <ModalWrap modal={modalConfirm} >

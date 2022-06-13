@@ -17,14 +17,6 @@ export const GestionCantidades = ({ calcularStock, producto, ventaDetalle, handl
             <h3>Gestion de cantidades</h3>
             <div className="grid-3 gap">
 
-                <StockGeneral idProducto={producto.id} idLocal={idLocal} />
-
-                <InputDisable
-                    label="Stock del producto en local"
-                    value={calcularStock()}
-                    color={(calcularStock() <= 0 ? "danger" : "")}
-                />
-                
                 <Input
                     label="Cantidad para venta"
                     type="number"
@@ -32,7 +24,15 @@ export const GestionCantidades = ({ calcularStock, producto, ventaDetalle, handl
                     value={ventaDetalle.cantidad_venta}
                     onChange={handlerOnChange}
                     noMenos
+                />                
+
+                <InputDisable
+                    label="Stock del producto en local"
+                    value={calcularStock()}
+                    color={(calcularStock() <= 0 ? "danger" : "")}
                 />
+               
+                <StockGeneral idProducto={producto.id} idLocal={idLocal} />
             </div>
         </div>
     )

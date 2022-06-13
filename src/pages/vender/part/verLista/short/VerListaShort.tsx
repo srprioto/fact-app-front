@@ -5,6 +5,7 @@ import { Input } from "../../../../../components/forms/Input";
 import { ModalWrap } from "../../../../../components/modals/ModalWrap";
 import { TextoRelleno } from "../../../../../components/TextoRelleno";
 import { useCaja } from "../../../../../hooks/useContext/caja.ts/useCaja";
+import { clienteInfo } from "../../../../../resources/dtos/Cliente";
 import { ModalCodigoVenta } from "./ModalCodigoVenta";
 import { TablaListaShort } from "./TablaListaShort";
 
@@ -52,8 +53,9 @@ export const VerListaShort = ({
 
     const handlerVenta = async () => { 
         setLoadVenta(true);
+        const cliente:any = clienteInfo("")
         try {
-            const ventaResp:any = await postVenta();
+            const ventaResp:any = await postVenta(cliente);
             if (ventaResp.data) {
                 setVentaRespuesta(ventaResp.data);
                 setModalConfirm(true);

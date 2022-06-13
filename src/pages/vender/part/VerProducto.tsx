@@ -6,6 +6,7 @@ import { LoadSwitchBtn2 } from "../../../components/btns/LoadSwitchBtn2";
 import { ModalWrap } from "../../../components/modals/ModalWrap";
 import { TextoRelleno } from "../../../components/TextoRelleno";
 import { useCaja } from "../../../hooks/useContext/caja.ts/useCaja";
+import { clienteInfo } from "../../../resources/dtos/Cliente";
 import { post } from "../../../resources/fetch";
 import { VENTAS } from "../../../resources/routes";
 import { ModalCodigoVenta } from "./verLista/short/ModalCodigoVenta";
@@ -75,7 +76,7 @@ export const VerProducto = ({
     const [ventaRespuesta, setVentaRespuesta] = useState<any>({});
     const [modalConfirm, setModalConfirm] = useState<boolean>(false);
 
-    const producto:any = elemento.productos ? elemento.productos : {};    
+    const producto:any = elemento.productos ? elemento.productos : {};
 
     const handlerShowWindow = () => { 
         setClassStart(true);
@@ -133,6 +134,8 @@ export const VerProducto = ({
 
         setloadVentaRapida(true);
 
+        const cliente:any = clienteInfo("")
+
         let updateListaVenta:Array<any> = [];
         let updateVentaDetalle:any = ventaDetalle;
         if (tipoDescuento) {
@@ -153,6 +156,7 @@ export const VerProducto = ({
             forma_pago: "efectivo",
             codigo_venta: "",
             ventaDetalles: updateListaVenta,
+            cliente: cliente
         };
         
         try {

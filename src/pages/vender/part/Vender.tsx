@@ -93,7 +93,7 @@ export const Vender = ({ idLocal, nombreLocal, user }:vender) => {
     }
 
 
-    const reinicios2 = () => { 
+    const reinicios2 = () => {
         setListaRepetidos([]);
         setVenta(ventaItem);
         setlistaVenta([])
@@ -107,9 +107,10 @@ export const Vender = ({ idLocal, nombreLocal, user }:vender) => {
     }
 
     
-    const postVenta = async () => {
+    const postVenta = async (cliente:any) => {
         let ventaResp:any;
         venta.ventaDetalles = listaVenta;
+        venta.cliente = cliente;
         try {
             ventaResp = await post(venta, VENTAS);
         } catch (error) {
@@ -157,7 +158,7 @@ export const Vender = ({ idLocal, nombreLocal, user }:vender) => {
             }
             { 
                 showWindow === 2 
-                && <VerLista 
+                && <VerLista
                     setShowWindow={setShowWindow} 
                     listaVenta={listaVenta}
                     itemPop={itemPop}

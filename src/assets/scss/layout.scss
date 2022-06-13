@@ -665,7 +665,7 @@
                     background-color: #222736;
                     z-index: 2;
                     top: 0px;
-                    left: 0px;
+                    right: 0px;
                     transform: scale(0);
                     transition: 0.3s;
 
@@ -714,7 +714,7 @@
     }
     .ver-lista{
         .box-venta-large{
-            @include scroll(253px);
+            @include scroll(247px);
             .tabla-lista-large{
                 // @include static-scroll(233px);
                 min-height: 135px;
