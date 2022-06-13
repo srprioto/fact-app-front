@@ -1,16 +1,16 @@
-import { BiCoffee } from "react-icons/bi";
+// import { BiCoffee } from "react-icons/bi";
 import { useAuth } from "../../auth/useAuth";
-import { Loading } from "../../components/loads/Loading";
-import { useCaja } from "../../hooks/useContext/caja.ts/useCaja";
+// import { Loading } from "../../components/loads/Loading";
+// import { useCaja } from "../../hooks/useContext/caja.ts/useCaja";
 import { Vender } from "../../pages/vender/part/Vender";
 
 export const WrapVender = () => {
 
-    const caja = useCaja();
+    // const caja = useCaja();
     const auth = useAuth();
     
-    const cajaState = caja.cajaState;
-    const loadingCaja = caja.loadingCaja;
+    // const cajaState = caja.cajaState;
+    // const loadingCaja = caja.loadingCaja;
 
     const idLocal:string = auth.userInfo.local.id;
 
