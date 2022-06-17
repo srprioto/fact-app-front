@@ -56,3 +56,13 @@ const MsgError = ({ error }:msgError) => {
         </div>
     )
 }
+
+
+/* 
+<InputMk 
+    label="Nombre"
+    type="text"
+    name="nombre"
+    error={errors.nombre}
+/> 
+*/

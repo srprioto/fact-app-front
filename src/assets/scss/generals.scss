@@ -505,7 +505,7 @@ a.btn-danger:hover{ color: $danger; }
 }
 
 
-// boton2
+// boton2 - tabbs
 .btn2{
     padding: 6px 15px;
     border: none;
@@ -547,6 +547,10 @@ a.btn-danger:hover{ color: $danger; }
 .btn2-danger{
     border-bottom: 2px solid transparent;
     color: $danger;
+}
+.btn2-disable{
+    opacity: 0.5;
+    cursor: default;
 }
 
 .btn2-sub-primary{ border-bottom: 2px solid $primary; }

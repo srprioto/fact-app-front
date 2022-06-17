@@ -18,16 +18,14 @@ interface cobrar{
 }
 
 export const Cobrar = ({ idLocal, nombreLocal, user }:cobrar) => {
-    // const params = useParams(); // params.id, params.nombre
-    // const localId:string = idLocal ? idLocal : "";
-
+    
     const [searchState, setSearchState] = useState<boolean>(false); // estado de busqueda
 
     const [loadingData, setLoadingData] = useState<boolean>(false);
     const [loadingOne, setLoadingOne] = useState<boolean>(false);
 
     const [data, setData] = useState<any>([]);
-    const [getVenta, setGetVenta] = useState<any>({})
+    const [getVenta, setGetVenta] = useState<any>({});
 
     useEffect(() => {
         getData();
@@ -63,7 +61,6 @@ export const Cobrar = ({ idLocal, nombreLocal, user }:cobrar) => {
         setSearchState(false);
         setGetVenta({});
     }
-    
 
     return (
         <div className="caja">
@@ -75,7 +72,7 @@ export const Cobrar = ({ idLocal, nombreLocal, user }:cobrar) => {
             }
             
             
-            <div className="grid-12 gap">
+            <div className="grid-13 gap">
                 <div className="box scroll-box-no-margin">
 
                     <div className="grid-1 gap mb-25">
@@ -87,7 +84,7 @@ export const Cobrar = ({ idLocal, nombreLocal, user }:cobrar) => {
                                 searchState={searchState}
                                 setSearchState={setSearchState}
                                 url={VENTAS_SEARCH_LOCAL}
-                                placeholder="Codigo de venta"
+                                placeholder="Codigo venta"
                                 localId={idLocal}
                             />
                             <button

@@ -1,23 +1,40 @@
 import { useEffect, useState } from "react";
 import { BiSearchAlt2 } from "react-icons/bi";
-import { clienteInfo } from "../../resources/dtos/Cliente";
-import { post } from "../../resources/fetch";
-import { CLIENTES } from "../../resources/routes";
-import { Input } from "../forms/Input";
-import { ParrafoForm } from "../forms/ParrafoForm";
-import { Select } from "../forms/Select";
-import { Loading } from "../loads/Loading";
-import { LoadingImg2 } from "../loads/LoadingImg";
-import { ClienteDni } from "./cliente/ClienteDni";
-import { ClienteRuc } from "./cliente/ClienteRuc";
+import { clienteInfo } from "../../../../resources/dtos/Cliente";
+import { post } from "../../../../resources/fetch";
+import { CLIENTES } from "../../../../resources/routes";
+import { Input } from "../../../../components/forms/Input";
+import { ParrafoForm } from "../../../../components/forms/ParrafoForm";
+import { Select } from "../../../../components/forms/Select";
+import { Loading } from "../../../../components/loads/Loading";
+import { LoadingImg2 } from "../../../../components/loads/LoadingImg";
+import { VenderClienteDni } from "./VenderClienteDni";
+import { VenderClienteRuc } from "./VenderClienteRuc";
+import { AccionesVenta } from "./AccionesVenta";
+// import { CobrarClienteDni } from "../cliente/CobrarClienteDni";
+// import { CobrarClienteRuc } from "../cliente/CobrarClienteRuc";
 
 
-export const Factura = ({ cliente, setCliente }:any) => {
+interface boleta {
+    cliente:any;
+    setCliente:Function;
+    loadVenta:boolean;
+    setShowWindow:Function;
+    verificarCaja:Function;
+    handlerVenta:Function;
+}
 
-    const serie:string = "F001";
+export const BoletaVenta = ({ 
+    cliente, 
+    setCliente,
+
+    loadVenta, setShowWindow, verificarCaja, handlerVenta
+}:boleta) => {
+
+    const serie:string = "B001";
     const clienteI = clienteInfo(serie);
     const [loadCliente, setLoadCliente] = useState<boolean>(false);
-    const [getCliente, setGetCliente] = useState<any>({ documento: "", tipoDocumento: "RUC", });
+    const [getCliente, setGetCliente] = useState<any>({ documento: "", tipoDocumento: "DNI", });
 
     useEffect(() => {
         setCliente(clienteI);
@@ -35,13 +52,7 @@ export const Factura = ({ cliente, setCliente }:any) => {
         })
     }
 
-    const handlerOnChangeCliente = (e:any) => { 
-        setCliente({
-            ...cliente,
-            [e.target.name]: e.target.value
-        })
-    }
-
+    // traer data
     const handlerGetCliente = async () => { 
         setLoadCliente(true);
 
@@ -60,29 +71,19 @@ export const Factura = ({ cliente, setCliente }:any) => {
             console.log(error);
         }
     }
-
+    
     return (
-        <div className="factura">
-            <h3>Informacion del general</h3>
+        <div className="boleta">
 
-            <div className="boleta-info-general mb-30">
+            <h3>Informacion general</h3>
 
-                <div className="wrap-info-producto">
-                    <div className="wrap-descripcion grid-2 gap">
-                        <div>
-                            <span>
-                                <h4>Serie: </h4>
-                                <p>{serie}</p>
-                            </span>
-                        </div>
-                    </div>
-                </div>
+            <div className="boleta-info-cliente grid-4 gap mb-20">
 
-            </div>
-
-            <h3>Informacion del cliente</h3>
-
-            <div className="boleta-info-cliente grid-3 gap mb-20">
+                <ParrafoForm
+                    label="Serie"
+                    value={ serie }
+                    className="info strong"
+                />
 
                 <Select
                     label="Tipo de Documento"
@@ -115,7 +116,7 @@ export const Factura = ({ cliente, setCliente }:any) => {
                 <ParrafoForm
                     label="Estado del cliente"
                     value={cliente.estadoCliente ? cliente.estadoCliente : "---"}
-                    className={cliente.estadoCliente === "Nuevo" ? "success" : "info"}
+                    className={cliente.estadoCliente === "Registrado" ? "primary" : "success"}
                 />
 
             </div>
@@ -127,15 +128,25 @@ export const Factura = ({ cliente, setCliente }:any) => {
                     <>
                         {
                             getCliente.tipoDocumento === "DNI"
-                            && <ClienteDni cliente={cliente} handlerOnChangeCliente={handlerOnChangeCliente} />
+                            && <VenderClienteDni cliente={cliente} setCliente={setCliente} />
                         }
                         {
                             getCliente.tipoDocumento === "RUC"
-                            && <ClienteRuc cliente={cliente} handlerOnChangeCliente={handlerOnChangeCliente} />
+                            && <VenderClienteRuc cliente={cliente} setCliente={setCliente} />
                         }
                     </>
                 )
             }
+
+            <div style={{height: "90px"}} />
+
+            <AccionesVenta
+                loadVenta={loadVenta}
+                setShowWindow={setShowWindow}
+                verificarCaja={verificarCaja}
+                handlerVenta={handlerVenta}
+            />
+
         </div>
     )
-  }
+}

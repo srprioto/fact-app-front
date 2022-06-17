@@ -1,14 +1,14 @@
-import { useState } from "react";
-import { BiArrowBack, BiCaretRight, BiCartAlt, BiSpreadsheet, BiTask } from "react-icons/bi";
-import { LoadSwitchBtn2 } from "../../../components/btns/LoadSwitchBtn2";
-import { Boleta } from "../../../components/factura/Boleta";
-import { Factura } from "../../../components/factura/Factura";
+import { useEffect, useState } from "react";
+import { BiCartAlt, BiSpreadsheet, BiTask } from "react-icons/bi";
+import { BoletaVenta } from "./factura/BoletaVenta";
+import { FacturaVenta } from "./factura/FacturaVenta";
 import { ModalWrap } from "../../../components/modals/ModalWrap";
 import { useCaja } from "../../../hooks/useContext/caja.ts/useCaja";
 import { clienteInfo } from "../../../resources/dtos/Cliente";
 import { PreciosVenta } from "./verLista/extend/PreciosVenta";
 import { TablaLista } from "./verLista/extend/TablaLista";
 import { ModalCodigoVenta } from "./verLista/short/ModalCodigoVenta";
+import { RapidaVenta } from "./factura/RapidaVenta";
 
 export const VerLista = ({ 
     setShowWindow, 
@@ -29,6 +29,15 @@ export const VerLista = ({
     const [tabbs, setTabbs] = useState<number>(1);
 
     const [cliente, setCliente] = useState<any>(clienteInfo(""));
+
+
+    useEffect(() => {
+        if (listaVenta.length <= 0) {
+            setShowWindow(1);
+        }
+    }, [listaVenta])
+    
+
 
 
     const handlerOnChange = (e:any) => { 
@@ -59,6 +68,8 @@ export const VerLista = ({
             reinicios2();
         }
     }
+
+    
 
     return (
         <div className="over-hidden">
@@ -100,31 +111,50 @@ export const VerLista = ({
                         alertaDescuento={alertaDescuento}
                         handlerOnChange={handlerOnChange}
                     />
+                    
+                    { 
+                        tabbs === 1 
+                        && (
+                            <RapidaVenta
+                                loadVenta={loadVenta}
+                                setShowWindow={setShowWindow}
+                                verificarCaja={verificarCaja}
+                                handlerVenta={handlerVenta}
+                            />
+                        ) 
+                    }
+                    {
+                        tabbs === 2 
+                        && (
+                            <BoletaVenta 
+                                cliente={cliente} 
+                                setCliente={setCliente} 
 
-                    <div className="tabbs-box box box-par m-0">
-                        { tabbs === 1 && <div className="venta-rapida"></div> }
-                        { tabbs === 2 && <Boleta cliente={cliente} setCliente={setCliente} /> }
-                        { tabbs === 3 && <Factura cliente={cliente} setCliente={setCliente} /> }
-                    </div>
+                                loadVenta={loadVenta}
+                                setShowWindow={setShowWindow}
+                                verificarCaja={verificarCaja}
+                                handlerVenta={handlerVenta}
+                            />
+                        ) 
+                    }
+                    { 
+                        tabbs === 3 
+                        && (
+                            <FacturaVenta 
+                                cliente={cliente} 
+                                setCliente={setCliente} 
+                                loadVenta={loadVenta}
+                                setShowWindow={setShowWindow}
+                                verificarCaja={verificarCaja}
+                                handlerVenta={handlerVenta}
+                            />
+                        ) 
+                    }
+                    
 
                 </div>
 
-                <div className="pt-20 m-0 grid-3 gap acciones-venta">
 
-                    <div className="grid-6">
-                        <button className="btn btn-primary" onClick={() => setShowWindow(1)}>
-                            {/* <BiRightArrowAlt /> */}
-                            <BiArrowBack />
-                        </button>
-                    </div>
-                    <LoadSwitchBtn2
-                        loading={loadVenta}
-                        className="btn btn-success"
-                        handler={() => verificarCaja(handlerVenta)}
-                    >
-                        <BiCaretRight /> Vender
-                    </LoadSwitchBtn2>
-                </div>
             </div>
 
             <ModalWrap modal={modalConfirm} >

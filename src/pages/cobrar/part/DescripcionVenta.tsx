@@ -11,6 +11,10 @@ import { ModalVentaConfirmar } from "./modals/ModalVentaConfirmar";
 import { ModalVentaRechazar } from "./modals/ModalVentaRechazar";
 import { ModalWrap } from "../../../components/modals/ModalWrap";
 import { Select2 } from "../../../components/forms/Select2";
+import { clienteInfo } from "../../../resources/dtos/Cliente";
+import { BoletaCobrar } from "./factura/BoletaCobrar";
+import { FacturaCobrar } from "./factura/FacturaCobrar";
+import { Checkbox2 } from "../../../components/forms/Checkbox2";
 
 
 interface descripcionVenta {
@@ -20,7 +24,24 @@ interface descripcionVenta {
 
 export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
 
+    const clienteOk:boolean = !!data.clientes;
+
+    const tipoSerie = ():number => { 
+        if (clienteOk) {
+            if (data.clientes.serie_documento === "B001") {
+                return 2
+            } else if (data.clientes.serie_documento === "F001") {
+                return 3
+            } else {
+                return 1
+            }
+        } else {
+            return 1
+        }
+    }
+    
     const [venta, setVenta] = useState<any>(data);
+    const [cliente, setCliente] = useState<any>(clienteOk ? data.clientes : clienteInfo(""));
     const [listaRechazados, setListaRechazados] = useState<any>([]);
 
     const [loadConfirmarVenta, setLoadConfirmarVenta] = useState<boolean>(false);
@@ -29,7 +50,8 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
     const [modalConfVenta, setModalConfVenta] = useState<boolean>(false);
     const [modalRechazVenta, setModalRechazVenta] = useState<boolean>(false);
 
-    const [tabbs, setTabbs] = useState<number>(1);
+    const [switchChangeFact, setSwitchChangeFact] = useState<boolean>(clienteOk ? false : true);
+    const [tabbs, setTabbs] = useState<number>(tipoSerie());
 
     useEffect(() => { 
         let ventaDetails:any = []; // añadir lista detalles
@@ -61,6 +83,17 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
     }, [venta.subtotal, venta.descuento_total])
 
 
+    useEffect(() => {
+        if (!switchChangeFact) {
+            setTabbs(tipoSerie())
+            setCliente(data.clientes)
+        } else {
+            setCliente(clienteInfo(""))
+        }
+        
+    }, [switchChangeFact])
+
+
     const handlerChangeVenta = (e:any) => {
         setVenta({
             ...venta,
@@ -81,19 +114,6 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
 
     
     const handlerCliente = (cliente:any) => setVenta({ ...venta, clientes: cliente}) // cliente nuevo
-    // const updateClienteExistente = (cliente:any) => setVenta({ ...venta, clientes: cliente }) // cliente existente
-
-    
-    // const codigoPago = ():string => { 
-    //     if (tabbs === 1) {
-    //         return "001";
-    //     } else if (tabbs === 2){
-    //         return "002"
-    //     } else if (tabbs === 3){
-    //         return "003"
-    //     }
-    //     return ""
-    // }
 
 
     const handlerConfirmarVenta = async (estado:string) => {
@@ -110,11 +130,11 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
         updateVenta.subtotal = venta.subtotal;
         updateVenta.total = venta.total;
         updateVenta.forma_pago = venta.forma_pago;
-
-        updateVenta.cliente = venta.clientes;
-        updateVenta.clienteId = venta.clientes && venta.clientes.id;
         updateVenta.usuarioId = venta.usuarios.id;
         updateVenta.localId = venta.locales.id;
+        updateVenta.cliente = cliente;
+        // updateVenta.cliente = venta.clientes;
+        // updateVenta.clienteId = venta.clientes && venta.clientes.id;
 
         data.ventaDetalles.map((e:any) => { // añade listo o rechazado a ventaDetalles
             if (!(listaRechazados.includes(e.id))) {
@@ -131,7 +151,6 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
 
         try {
             await put(data.id, updateVenta, VENTAS);
-            // console.log(response);
             setLoadConfirmarVenta(false);
         } catch (error) {
             setLoadConfirmarVenta(false);
@@ -157,27 +176,36 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
                     handlerCheckbox={handlerCheckbox}
                 />
 
-                <div className="tabbs-buttons tabbs grid-3 gap mb-25">
+                <div className="tabbs-buttons tabbs grid-4 gap mb-25">
                     <button 
-                        className={"btn2 btn2-success " + (tabbs === 1 && "btn2-sub-success")}
-                        onClick={() => setTabbs(1)}
-                    >
-                        <BiCartAlt
-                        /> Venta rapida
+                        className={
+                            "btn2 btn2-success " + 
+                            (!switchChangeFact ? ( tipoSerie() === 1 ? "" : "btn2-disable " ) : "") +
+                            (tabbs === 1 && "btn2-sub-success")
+                        }
+                        
+                        onClick={() => {switchChangeFact && setTabbs(1)}}
+                    ><BiCartAlt/> Venta rapida
+                    </button>
+
+                    <button
+                        className={
+                            "btn2 btn2-info " + 
+                            (!switchChangeFact ? ( tipoSerie() === 2 ? "" : "btn2-disable " ) : "") +
+                            (tabbs === 2 && "btn2-sub-info")
+                        }
+                        onClick={() => {switchChangeFact && setTabbs(2)}}
+                    ><BiSpreadsheet /> Boleta
                     </button>
 
                     <button 
-                        className={"btn2 btn2-info " + (tabbs === 2 && "btn2-sub-info")}
-                        onClick={() => setTabbs(2)}
-                    >
-                        <BiSpreadsheet /> Boleta
-                    </button>
-
-                    <button 
-                        className={"btn2 btn2-info " + (tabbs === 3 && "btn2-sub-info")}
-                        onClick={() => setTabbs(3)}
-                    >
-                        <BiTask /> Factura
+                        className={
+                            "btn2 btn2-info " + 
+                            (!switchChangeFact ? ( tipoSerie() === 3 ? "" : "btn2-disable " ) : "") +
+                            (tabbs === 3 && "btn2-sub-info")
+                        }
+                        onClick={() => {switchChangeFact && setTabbs(3)}}
+                    ><BiTask /> Factura
                     </button>
                 </div>
 
@@ -229,32 +257,51 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
                             <option value="yape">Yape</option>                                
                         </Select2>
 
-                        <ObservacionesVenta observaciones={venta.observaciones} />
+                        <ObservacionesVenta observaciones={venta.observaciones} />                       
 
                         <div className="center">
                             <p className="mb-10 info">Vendedor: </p>
                             <p className="mb-10">{ venta.usuarios ? venta.usuarios.nombre : "" }</p>
                         </div>
                        
-
                     </div>
 
                 </div>
-
                 
                 {/* formas de pago aqui */}
 
                 <div className="tabbs-box m-0">
+                    {
+                        clienteOk
+                        ? <Checkbox2
+                            label={switchChangeFact ? "Restablecer tipo comprobante" : "Modificar tipo comprobante"}
+                            name="igv"
+                            checked={switchChangeFact}
+                            handlerCheck={ () => setSwitchChangeFact(!switchChangeFact) }
+                        /> : <></>
+                    }
                     { tabbs === 1 && <></> }
-                    { tabbs === 2 && <div className="boleta"><h2>Boleta</h2></div> }
-                    { tabbs === 3 && <div className="factura"><h2>Factura</h2></div> }
+                    { 
+                        tabbs === 2 
+                        && <BoletaCobrar
+                            switchChange={switchChangeFact}
+                            cliente={cliente}
+                            setCliente={setCliente}
+                        /> 
+                    }
+                    { 
+                        tabbs === 3 
+                        && <FacturaCobrar
+                            switchChange={switchChangeFact}
+                            cliente={cliente}
+                            setCliente={setCliente}
+                        />
+                    }
                 </div>
 
                 {/* fin formas de pago */}
-
-
                 <div className="wrap-confirmar-venta grid-3 gap mb-25">
-                    <button 
+                    <button
                         className="btn btn-success"
                         onClick={() => setModalConfVenta(!modalConfVenta)}    
                     ><BiCaretRight /> Confirmar venta</button>

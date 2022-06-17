@@ -10,3 +10,14 @@ export const ValidCreateCliente = Yup.object({
 
 })
                 
+
+
+export const ValidClienteDni = Yup.object({
+
+    nombre: Yup.string().required('Requerido'),
+    telefono: Yup.string().required('Requerido'),
+    direccion: Yup.string().required('Requerido'),
+    email: Yup.string().required('Requerido'),
+    
+
+})
