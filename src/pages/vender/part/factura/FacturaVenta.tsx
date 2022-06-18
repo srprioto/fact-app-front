@@ -11,6 +11,8 @@ import { LoadingImg2 } from "../../../../components/loads/LoadingImg";
 import { CobrarClienteDni } from "../../../cobrar/part/factura/CobrarClienteDni";
 import { CobrarClienteRuc } from "../../../cobrar/part/factura/CobrarClienteRuc";
 import { AccionesVenta } from "./AccionesVenta";
+import { FormGestionDocum } from "./FormGestionDocum";
+import { FormInfoGeneral } from "./FormInfoGeneral";
 
 
 interface factura {
@@ -54,6 +56,12 @@ export const FacturaVenta = ({
         })
     }
     
+    const handlerOnChangeCliente = (e:any) => { 
+        setCliente({
+            ...cliente,
+            [e.target.name]: e.target.value
+        })
+    }
 
     const handlerGetCliente = async () => { 
         setLoadCliente(true);
@@ -76,74 +84,23 @@ export const FacturaVenta = ({
 
 
     return (
-        <div className="factura">
+        <>
+            
+            <FormGestionDocum
+                serie={serie} 
+                handlerOnChangeGetCli={handlerOnChangeGetCli} 
+                getCliente={getCliente} 
+                handlerGetCliente={handlerGetCliente} 
+                loadCliente={loadCliente} 
+                cliente={cliente} 
+            />
 
-            <h3>Informacion general</h3>
-
-            <div className="boleta-info-cliente grid-4 gap mb-20">
-
-                <ParrafoForm
-                    label="Serie"
-                    value={ serie }
-                    className="info strong"
-                />
-
-                <Select
-                    label="Tipo de Documento"
-                    name="tipoDocumento"
-                    onChange={handlerOnChangeGetCli}
-                    value={getCliente.tipoDocumento}
-                >
-                    <option value="DNI">DNI</option>
-                    <option value="RUC">RUC</option>
-                </Select>
-
-                <div>
-                    <p className="info center mb-8">Nro de documento</p>
-                    <div className="search-general">
-
-                        <Input
-                            // label="Nro de documento"
-                            type="text"
-                            name="documento"
-                            value={getCliente.documento}
-                            onChange={handlerOnChangeGetCli}
-                        />
-
-                        <button className="btn btn-info" onClick={() => handlerGetCliente()}>
-                            { loadCliente ? <LoadingImg2 size="23px" /> : <BiSearchAlt2 /> }
-                        </button>
-                    </div>
-                </div>
-
-                <ParrafoForm
-                    label="Estado del cliente"
-                    value={cliente.estadoCliente ? cliente.estadoCliente : "---"}
-                    className={cliente.estadoCliente === "Registrado" ? "primary" : "success"}
-                />
-
-            </div>
-
-            {
-                loadCliente
-                ? <Loading />
-                : (
-                    <>
-                        {
-                            getCliente.tipoDocumento === "DNI"
-                            && <CobrarClienteDni cliente={cliente} setCliente={setCliente} />
-                        }
-                        {
-                            getCliente.tipoDocumento === "RUC"
-                            && <CobrarClienteRuc cliente={cliente} setCliente={setCliente} />
-                        }
-                    </>
-                )
-            }
-
-            <div style={{height: "90px"}} />
-
-            <AccionesVenta
+            <FormInfoGeneral
+                cliente={cliente}
+                loadCliente={loadCliente}
+                getCliente={getCliente}
+                setCliente={setCliente}
+                handlerOnChangeCliente={handlerOnChangeCliente}
                 loadVenta={loadVenta}
                 setShowWindow={setShowWindow}
                 verificarCaja={verificarCaja}
@@ -151,6 +108,6 @@ export const FacturaVenta = ({
                 verificarVender={verificarVender}
             />
 
-        </div>
+        </>
     )
   }

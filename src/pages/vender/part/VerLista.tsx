@@ -137,7 +137,6 @@ export const VerLista = ({
                             <BoletaVenta 
                                 cliente={cliente} 
                                 setCliente={setCliente} 
-
                                 loadVenta={loadVenta}
                                 setShowWindow={setShowWindow}
                                 verificarCaja={verificarCaja}
@@ -160,11 +159,7 @@ export const VerLista = ({
                             />
                         ) 
                     }
-                    
-
                 </div>
-
-
             </div>
 
             <ModalWrap modal={modalConfirm} >

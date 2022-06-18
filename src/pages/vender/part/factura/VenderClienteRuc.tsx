@@ -6,19 +6,10 @@ import { ParrafoForm } from "../../../../components/forms/ParrafoForm"
 interface clienteRuc {
     errors:any
     cliente:any;
-    // setCliente:Function;
 }
 
 export const VenderClienteRuc = ({ errors, cliente }:clienteRuc) => {
     
-    // const handlerOnChangeCliente = (e:any) => { 
-    //     setCliente({
-    //         ...cliente,
-    //         [e.target.name]: e.target.value
-    //     })
-    // }
-
-
     return (
         <div className="grid-1 gap">
             <div className="grid-2 gap">

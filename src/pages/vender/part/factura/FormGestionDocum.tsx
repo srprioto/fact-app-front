@@ -47,16 +47,9 @@ export const FormGestionDocum = ({
                         </Select>
 
                         <div>
-                            <p className="info center mb-8">Nro de documento</p>
+                            <p className="info center mb-8">Nro de documento *</p>
                             <div className="search-general">
 
-                                {/* <Input
-                                    // label="Nro de documento"
-                                    type="text"
-                                    name="documento"
-                                    value={getCliente.documento}
-                                    onChange={handlerOnChangeGetCli}
-                                /> */}
                                 <InputMk 
                                     // label="Nombre"
                                     type="text"
