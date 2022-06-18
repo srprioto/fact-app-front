@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { BiCartAlt, BiSpreadsheet, BiTask } from "react-icons/bi";
 import { BoletaVenta } from "./factura/BoletaVenta";
 import { FacturaVenta } from "./factura/FacturaVenta";
@@ -31,15 +31,12 @@ export const VerLista = ({
     const [cliente, setCliente] = useState<any>(clienteInfo(""));
 
 
-    useEffect(() => {
-        if (listaVenta.length <= 0) {
-            setShowWindow(1);
-        }
-    }, [listaVenta])
+    // useEffect(() => {
+    //     if (listaVenta.length <= 0) {
+    //         setShowWindow(1);
+    //     }
+    // }, [listaVenta])
     
-
-
-
     const handlerOnChange = (e:any) => { 
         setVenta({
             ...venta,
@@ -51,6 +48,16 @@ export const VerLista = ({
         caja.handlerEstadoCaja();
         func();
     }
+
+
+    const verificarVender = ():boolean => { 
+        if (listaVenta.length <= 0) {
+            return false
+        } else {
+            return true
+        }
+    }
+
 
     const handlerVenta = async () => { 
         setLoadVenta(true);
@@ -120,6 +127,7 @@ export const VerLista = ({
                                 setShowWindow={setShowWindow}
                                 verificarCaja={verificarCaja}
                                 handlerVenta={handlerVenta}
+                                verificarVender={verificarVender}
                             />
                         ) 
                     }
@@ -134,6 +142,7 @@ export const VerLista = ({
                                 setShowWindow={setShowWindow}
                                 verificarCaja={verificarCaja}
                                 handlerVenta={handlerVenta}
+                                verificarVender={verificarVender}
                             />
                         ) 
                     }
@@ -147,6 +156,7 @@ export const VerLista = ({
                                 setShowWindow={setShowWindow}
                                 verificarCaja={verificarCaja}
                                 handlerVenta={handlerVenta}
+                                verificarVender={verificarVender}
                             />
                         ) 
                     }

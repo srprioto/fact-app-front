@@ -1,18 +1,9 @@
 import { useEffect, useState } from "react";
-import { BiSearchAlt2 } from "react-icons/bi";
 import { clienteInfo } from "../../../../resources/dtos/Cliente";
 import { post } from "../../../../resources/fetch";
 import { CLIENTES } from "../../../../resources/routes";
-import { Input } from "../../../../components/forms/Input";
-import { ParrafoForm } from "../../../../components/forms/ParrafoForm";
-import { Select } from "../../../../components/forms/Select";
-import { Loading } from "../../../../components/loads/Loading";
-import { LoadingImg2 } from "../../../../components/loads/LoadingImg";
-import { VenderClienteDni } from "./VenderClienteDni";
-import { VenderClienteRuc } from "./VenderClienteRuc";
-import { AccionesVenta } from "./AccionesVenta";
-// import { CobrarClienteDni } from "../cliente/CobrarClienteDni";
-// import { CobrarClienteRuc } from "../cliente/CobrarClienteRuc";
+import { FormInfoGeneral } from "./FormInfoGeneral";
+import { FormGestionDocum } from "./FormGestionDocum";
 
 
 interface boleta {
@@ -22,13 +13,18 @@ interface boleta {
     setShowWindow:Function;
     verificarCaja:Function;
     handlerVenta:Function;
+    verificarVender:Function;
 }
 
 export const BoletaVenta = ({ 
     cliente, 
     setCliente,
 
-    loadVenta, setShowWindow, verificarCaja, handlerVenta
+    loadVenta, 
+    setShowWindow, 
+    verificarCaja, 
+    handlerVenta,
+    verificarVender
 }:boleta) => {
 
     const serie:string = "B001";
@@ -52,6 +48,15 @@ export const BoletaVenta = ({
         })
     }
 
+
+    const handlerOnChangeCliente = (e:any) => { 
+        setCliente({
+            ...cliente,
+            [e.target.name]: e.target.value
+        })
+    }
+
+
     // traer data
     const handlerGetCliente = async () => { 
         setLoadCliente(true);
@@ -71,82 +76,34 @@ export const BoletaVenta = ({
             console.log(error);
         }
     }
-    
+
+    // console.log(cliente);
+
     return (
-        <div className="boleta">
+        <>
+            
+            <FormGestionDocum
+                serie={serie} 
+                handlerOnChangeGetCli={handlerOnChangeGetCli} 
+                getCliente={getCliente} 
+                handlerGetCliente={handlerGetCliente} 
+                loadCliente={loadCliente} 
+                cliente={cliente} 
+            />
 
-            <h3>Informacion general</h3>
-
-            <div className="boleta-info-cliente grid-4 gap mb-20">
-
-                <ParrafoForm
-                    label="Serie"
-                    value={ serie }
-                    className="info strong"
-                />
-
-                <Select
-                    label="Tipo de Documento"
-                    name="tipoDocumento"
-                    onChange={handlerOnChangeGetCli}
-                    value={getCliente.tipoDocumento}
-                >
-                    <option value="DNI">DNI</option>
-                    <option value="RUC">RUC</option>
-                </Select>
-
-                <div>
-                    <p className="info center mb-8">Nro de documento</p>
-                    <div className="search-general">
-
-                        <Input
-                            // label="Nro de documento"
-                            type="text"
-                            name="documento"
-                            value={getCliente.documento}
-                            onChange={handlerOnChangeGetCli}
-                        />
-
-                        <button className="btn btn-info" onClick={() => handlerGetCliente()}>
-                            { loadCliente ? <LoadingImg2 size="23px" /> : <BiSearchAlt2 /> }
-                        </button>
-                    </div>
-                </div>
-
-                <ParrafoForm
-                    label="Estado del cliente"
-                    value={cliente.estadoCliente ? cliente.estadoCliente : "---"}
-                    className={cliente.estadoCliente === "Registrado" ? "primary" : "success"}
-                />
-
-            </div>
-
-            {
-                loadCliente
-                ? <Loading />
-                : (
-                    <>
-                        {
-                            getCliente.tipoDocumento === "DNI"
-                            && <VenderClienteDni cliente={cliente} setCliente={setCliente} />
-                        }
-                        {
-                            getCliente.tipoDocumento === "RUC"
-                            && <VenderClienteRuc cliente={cliente} setCliente={setCliente} />
-                        }
-                    </>
-                )
-            }
-
-            <div style={{height: "90px"}} />
-
-            <AccionesVenta
+            <FormInfoGeneral
+                cliente={cliente}
+                loadCliente={loadCliente}
+                getCliente={getCliente}
+                setCliente={setCliente}
+                handlerOnChangeCliente={handlerOnChangeCliente}
                 loadVenta={loadVenta}
                 setShowWindow={setShowWindow}
                 verificarCaja={verificarCaja}
                 handlerVenta={handlerVenta}
+                verificarVender={verificarVender}
             />
 
-        </div>
+        </>
     )
 }

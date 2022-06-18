@@ -2,7 +2,7 @@ import { Field, ErrorMessage } from 'formik';
 import { BiQuestionMark } from 'react-icons/bi';
 
 interface inputMk{
-    label:string;
+    label?:string;
     type:string;
     name:string;
     error:any;
@@ -20,7 +20,9 @@ export const InputMk = ({ label, type, name, error, moneda, placeholder }:inputM
     return (
         <div className="wrap-form">
 
-            <label htmlFor={name}>{ label }</label>
+            {
+                label && (<><label htmlFor={name}>{ label }</label><br /></>)
+            }
 
             <div className="relative">
             

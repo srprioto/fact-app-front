@@ -11,7 +11,6 @@ import { LoadingImg2 } from "../../../../components/loads/LoadingImg";
 import { CobrarClienteDni } from "../../../cobrar/part/factura/CobrarClienteDni";
 import { CobrarClienteRuc } from "../../../cobrar/part/factura/CobrarClienteRuc";
 import { AccionesVenta } from "./AccionesVenta";
-// import { CobrarClienteRuc } from "../../../../components/factura/cliente/CobrarClienteRuc";
 
 
 interface factura {
@@ -21,9 +20,18 @@ interface factura {
     setShowWindow:Function;
     verificarCaja:Function;
     handlerVenta:Function;
+    verificarVender:Function;
 }
 
-export const FacturaVenta = ({ cliente, setCliente, loadVenta, setShowWindow, verificarCaja, handlerVenta }:factura) => {
+export const FacturaVenta = ({ 
+    cliente, 
+    setCliente, 
+    loadVenta, 
+    setShowWindow, 
+    verificarCaja, 
+    handlerVenta,
+    verificarVender
+}:factura) => {
 
     const serie:string = "F001";
     const clienteI = clienteInfo(serie);
@@ -140,6 +148,7 @@ export const FacturaVenta = ({ cliente, setCliente, loadVenta, setShowWindow, ve
                 setShowWindow={setShowWindow}
                 verificarCaja={verificarCaja}
                 handlerVenta={handlerVenta}
+                verificarVender={verificarVender}
             />
 
         </div>

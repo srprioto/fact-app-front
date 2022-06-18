@@ -1,88 +1,81 @@
 import { Input } from "../../../../components/forms/Input"
+import { InputMk } from "../../../../components/forms/InputMk";
 import { ParrafoForm } from "../../../../components/forms/ParrafoForm"
 // import { InputDisable } from "../../forms/InputDisable";
 
 interface clienteRuc {
+    errors:any
     cliente:any;
-    setCliente:Function;
+    // setCliente:Function;
 }
 
-export const VenderClienteRuc = ({ cliente, setCliente }:clienteRuc) => {
+export const VenderClienteRuc = ({ errors, cliente }:clienteRuc) => {
     
-    const handlerOnChangeCliente = (e:any) => { 
-        setCliente({
-            ...cliente,
-            [e.target.name]: e.target.value
-        })
-    }
+    // const handlerOnChangeCliente = (e:any) => { 
+    //     setCliente({
+    //         ...cliente,
+    //         [e.target.name]: e.target.value
+    //     })
+    // }
 
 
     return (
         <div className="grid-1 gap">
             <div className="grid-2 gap">
-                <Input
+                <InputMk 
                     label="Razon social"
                     type="text"
                     name="razonSocial"
-                    value={cliente.razonSocial}
-                    onChange={handlerOnChangeCliente}
-                />
-                <Input
+                    error={errors.razonSocial}
+                /> 
+                <InputMk 
                     label="Nombre comercial"
                     type="text"
                     name="nombreComercial"
-                    value={cliente.nombreComercial}
-                    onChange={handlerOnChangeCliente}
+                    error={errors.nombreComercial}
                 />
-                
             </div>
 
             {/* aqu direccion */}
             <div className="grid-3 gap">
-                <Input
+                <InputMk 
                     label="Departamento"
                     type="text"
                     name="departamento"
-                    value={cliente.departamento}
-                    onChange={handlerOnChangeCliente}
+                    error={errors.departamento}
                 />
-                <Input
+                <InputMk 
                     label="Provincia"
                     type="text"
                     name="provincia"
-                    value={cliente.provincia}
-                    onChange={handlerOnChangeCliente}
+                    error={errors.provincia}
                 />
-                <Input
+                <InputMk 
                     label="Distrito"
                     type="text"
                     name="distrito"
-                    value={cliente.distrito}
-                    onChange={handlerOnChangeCliente}
+                    error={errors.distrito}
                 />
             </div>
 
             <div className="grid-3 gap">
-                <Input
+                <InputMk 
                     label="Direccion"
                     type="text"
                     name="direccion"
-                    value={cliente.direccion}
-                    onChange={handlerOnChangeCliente}
+                    error={errors.direccion}
                 />
-                <Input
+                <InputMk 
                     label="E-mail"
                     type="text"
                     name="email"
-                    value={cliente.email}
-                    onChange={handlerOnChangeCliente}
+                    error={errors.email}
                 />
-                <Input
+                <InputMk 
                     label="Telefono"
                     type="text"
                     name="telefono"
-                    value={cliente.telefono}
-                    onChange={handlerOnChangeCliente}
+                    error={errors.telefono}
                 />
             </div>
 

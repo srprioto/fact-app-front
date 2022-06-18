@@ -5,9 +5,10 @@ interface rapidaVenta {
     setShowWindow:Function;
     verificarCaja:Function;
     handlerVenta:Function;
+    verificarVender:Function;
 }
 
-export const RapidaVenta = ({ loadVenta, setShowWindow, verificarCaja, handlerVenta }:rapidaVenta) => {
+export const RapidaVenta = ({ loadVenta, setShowWindow, verificarCaja, handlerVenta, verificarVender }:rapidaVenta) => {
     return (
         <div className="venta-rapida">
             <div style={{height: "90px"}} />
@@ -16,6 +17,7 @@ export const RapidaVenta = ({ loadVenta, setShowWindow, verificarCaja, handlerVe
                 setShowWindow={setShowWindow}
                 verificarCaja={verificarCaja}
                 handlerVenta={handlerVenta}
+                verificarVender={verificarVender}
             />
         </div> 
     )
