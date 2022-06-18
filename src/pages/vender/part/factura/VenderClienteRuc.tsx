@@ -1,12 +1,11 @@
-import { Input } from "../../../../components/forms/Input"
 import { InputMk } from "../../../../components/forms/InputMk";
 import { ParrafoForm } from "../../../../components/forms/ParrafoForm"
-// import { InputDisable } from "../../forms/InputDisable";
 
 interface clienteRuc {
     errors:any
     cliente:any;
 }
+
 
 export const VenderClienteRuc = ({ errors, cliente }:clienteRuc) => {
     
