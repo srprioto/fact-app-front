@@ -1,16 +1,7 @@
 import { useEffect, useState } from "react";
-import { BiSearchAlt2 } from "react-icons/bi";
 import { clienteInfo } from "../../../../resources/dtos/Cliente";
 import { post } from "../../../../resources/fetch";
 import { CLIENTES } from "../../../../resources/routes";
-import { Input } from "../../../../components/forms/Input";
-import { ParrafoForm } from "../../../../components/forms/ParrafoForm";
-import { Select } from "../../../../components/forms/Select";
-import { Loading } from "../../../../components/loads/Loading";
-import { LoadingImg2 } from "../../../../components/loads/LoadingImg";
-import { CobrarClienteDni } from "../../../cobrar/part/factura/CobrarClienteDni";
-import { CobrarClienteRuc } from "../../../cobrar/part/factura/CobrarClienteRuc";
-import { AccionesVenta } from "./AccionesVenta";
 import { FormGestionDocum } from "./FormGestionDocum";
 import { FormInfoGeneral } from "./FormInfoGeneral";
 
