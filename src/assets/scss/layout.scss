@@ -727,6 +727,16 @@
                 background-color: $box;
                 border-radius: 6px 6px 0px 6px;
             }
+            .acciones-venta-vendedor{
+                box-sizing: border-box;
+                padding: 13px;
+                position: fixed;
+                width: calc(100% - 51px);
+                bottom: 12px;
+                right: 27px;
+                background-color: $box;
+                border-radius: 6px 6px 0px 6px;
+            }
         }
     }
 }
