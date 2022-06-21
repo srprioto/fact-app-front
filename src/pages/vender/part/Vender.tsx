@@ -100,6 +100,7 @@ export const Vender = ({ idLocal, nombreLocal, user }:vender) => {
         reinicios();
     }
 
+
     const reinicios = () => { 
         setElemento({});
         setTipoDescuento(false);
@@ -118,6 +119,7 @@ export const Vender = ({ idLocal, nombreLocal, user }:vender) => {
         }
         return ventaResp
     }
+    
 
     return (
         <div className="vender">
@@ -139,14 +141,14 @@ export const Vender = ({ idLocal, nombreLocal, user }:vender) => {
                     setElemento={setElemento}
                     elemento={elemento}
                     venta={venta}
-                    setVenta={setVenta}
+                    // setVenta={setVenta}
                     listaVenta={listaVenta}
                     setlistaVenta={setlistaVenta}
                     listaRepetidos={listaRepetidos}
                     setListaRepetidos={setListaRepetidos}
                     itemPop={itemPop}
                     postVenta={postVenta}
-                    alertaDescuento={alertaDescuento}
+                    // alertaDescuento={alertaDescuento}
                     ventaDetalle={ventaDetalle}
                     setVentaDetalle={setVentaDetalle}
                     tipoDescuento={tipoDescuento}

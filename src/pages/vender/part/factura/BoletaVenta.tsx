@@ -19,7 +19,6 @@ interface boleta {
 export const BoletaVenta = ({ 
     cliente, 
     setCliente,
-
     loadVenta, 
     setShowWindow, 
     verificarCaja, 
@@ -77,7 +76,6 @@ export const BoletaVenta = ({
         }
     }
 
-    // console.log(cliente);
 
     return (
         <>
@@ -95,7 +93,7 @@ export const BoletaVenta = ({
                 cliente={cliente}
                 loadCliente={loadCliente}
                 getCliente={getCliente}
-                setCliente={setCliente}
+                // setCliente={setCliente}
                 handlerOnChangeCliente={handlerOnChangeCliente}
                 loadVenta={loadVenta}
                 setShowWindow={setShowWindow}

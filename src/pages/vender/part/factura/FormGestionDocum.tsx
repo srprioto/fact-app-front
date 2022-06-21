@@ -1,10 +1,20 @@
+import { FormEventHandler } from "react"
 import { Form, Formik } from "formik"
 import { BiSearchAlt2 } from "react-icons/bi"
 import { InputMk } from "../../../../components/forms/InputMk"
 import { ParrafoForm } from "../../../../components/forms/ParrafoForm"
-import { Select } from "../../../../components/forms/Select"
 import { LoadingImg2 } from "../../../../components/loads/LoadingImg"
 import { ValidDocumento } from "../../../../resources/validations/Clientes"
+
+
+interface formGestionDocum {
+    serie:string;
+    handlerOnChangeGetCli:FormEventHandler<HTMLFormElement>;
+    getCliente:any;
+    handlerGetCliente:Function;
+    loadCliente:boolean;
+    cliente:any;
+}
 
 export const FormGestionDocum = ({ 
     serie, 
@@ -12,13 +22,16 @@ export const FormGestionDocum = ({
     getCliente, 
     handlerGetCliente, 
     loadCliente, 
-    cliente 
-}:any) => {
+    cliente,
+}:formGestionDocum) => {
+
+    
     return (
 
         <Formik
             initialValues={getCliente}
-            validationSchema={ValidDocumento}
+            validationSchema={ValidDocumento(getCliente.tipoDocumento)}
+            enableReinitialize={true}
             onSubmit={(data, { resetForm }) => { 
                 handlerGetCliente()
             }}
@@ -36,7 +49,13 @@ export const FormGestionDocum = ({
                             className="info strong"
                         />
 
-                        <Select
+                        <ParrafoForm
+                            label="Tipo de documento"
+                            value={ getCliente.tipoDocumento }
+                            className="info strong"
+                        />
+
+                        {/* <Select
                             label="Tipo de Documento"
                             name="tipoDocumento"
                             onChange={handlerOnChangeGetCli}
@@ -44,7 +63,7 @@ export const FormGestionDocum = ({
                         >
                             <option value="DNI">DNI</option>
                             <option value="RUC">RUC</option>
-                        </Select>
+                        </Select> */}
 
                         <div>
                             <p className="info center mb-8">Nro de documento *</p>
@@ -54,7 +73,7 @@ export const FormGestionDocum = ({
                                     // label="Nombre"
                                     type="text"
                                     name="documento"
-                                    error={errors.nombre}
+                                    error={errors.documento}
                                 />
 
                                 <button className="btn btn-info" type="submit">
@@ -66,7 +85,13 @@ export const FormGestionDocum = ({
                         <ParrafoForm
                             label="Estado del cliente"
                             value={cliente.estadoCliente ? cliente.estadoCliente : "---"}
-                            className={cliente.estadoCliente === "Registrado" ? "primary" : "success"}
+                            className={
+                                cliente.estadoCliente === "Registrado" 
+                                ? "primary" 
+                                : cliente.estadoCliente === "Inexistente"
+                                ? "danger"
+                                : "success"
+                            }
                         />
 
                     </div>

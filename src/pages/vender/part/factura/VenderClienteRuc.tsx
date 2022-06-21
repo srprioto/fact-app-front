@@ -1,3 +1,4 @@
+import { InputDisable } from "../../../../components/forms/InputDisable";
 import { InputMk } from "../../../../components/forms/InputMk";
 import { ParrafoForm } from "../../../../components/forms/ParrafoForm"
 
@@ -26,7 +27,27 @@ export const VenderClienteRuc = ({ errors, cliente }:clienteRuc) => {
                 />
             </div>
 
-            {/* aqu direccion */}
+            <div className="grid-3 gap">
+                <InputMk 
+                    label="Direccion"
+                    type="text"
+                    name="direccion"
+                    error={errors.direccion}
+                />
+                <InputMk 
+                    label="Telefono"
+                    type="text"
+                    name="telefono"
+                    error={errors.telefono}
+                />
+                <InputMk 
+                    label="E-mail"
+                    type="text"
+                    name="email"
+                    error={errors.email}
+                />
+            </div>
+
             <div className="grid-3 gap">
                 <InputMk 
                     label="Departamento"
@@ -49,58 +70,22 @@ export const VenderClienteRuc = ({ errors, cliente }:clienteRuc) => {
             </div>
 
             <div className="grid-3 gap">
-                <InputMk 
-                    label="Direccion"
-                    type="text"
-                    name="direccion"
-                    error={errors.direccion}
-                />
-                <InputMk 
-                    label="E-mail"
-                    type="text"
-                    name="email"
-                    error={errors.email}
-                />
-                <InputMk 
-                    label="Telefono"
-                    type="text"
-                    name="telefono"
-                    error={errors.telefono}
-                />
-            </div>
 
-            <div className="grid-3 gap">
-
-                {
-                    cliente.estado
-                    && (
-                        <ParrafoForm
-                            label="Estado del Contribuyente"
-                            value={cliente.estado ? cliente.estado : "---"}
-                            className={cliente.estado === "ACTIVO" ? "success" : ""}
-                        />
-                    )
-                }
-                {
-                    cliente.condom
-                    && (
-                        <ParrafoForm
-                            label="Condición del Contribuyente"
-                            value={cliente.condom ? cliente.condom : "---"}
-                            className={cliente.condom === "HABIDO" ? "success" : ""}
-                        />
-                    )
-                }
-                {
-                    cliente.ubigeo !== 0
-                    && (
-                        <ParrafoForm
-                            label="Ubigeo"
-                            value={cliente.ubigeo}
-                        />
-                    )
-                }              
-
+                <InputDisable
+                    label="Estado del Contribuyente"
+                    value={cliente.estado ? cliente.estado : "---"}
+                    color={cliente.estado === "ACTIVO" ? "success" : ""}
+                />
+                <InputDisable
+                    label="Condición del Contribuyente"
+                    value={cliente.condom ? cliente.condom : "---"}
+                    color={cliente.condom === "HABIDO" ? "success" : ""}
+                />
+                <InputDisable
+                    label="Ubigeo"
+                    value={cliente.ubigeo}
+                />
+                
             </div>
 
         </div>

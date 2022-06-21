@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { BiCaretRight, BiRightArrowAlt } from "react-icons/bi";
 import { LoadSwitchBtn2 } from "../../../../../components/btns/LoadSwitchBtn2";
-import { Input } from "../../../../../components/forms/Input";
+// import { Input } from "../../../../../components/forms/Input";
 import { ModalWrap } from "../../../../../components/modals/ModalWrap";
 import { TextoRelleno } from "../../../../../components/TextoRelleno";
 import { useCaja } from "../../../../../hooks/useContext/caja.ts/useCaja";
@@ -10,25 +10,25 @@ import { ModalCodigoVenta } from "./ModalCodigoVenta";
 import { TablaListaShort } from "./TablaListaShort";
 
 interface verListaShort {
-    setVenta:Function;
+    // setVenta:Function;
     venta:any;
     itemPop:Function;
     listaVenta:Array<any>;
     handlerShowWindow:any;
     postVenta:Function;
     reinicios2:Function;
-    alertaDescuento:Function;
+    // alertaDescuento:Function;
 }
 
 export const VerListaShort = ({ 
-    setVenta,
+    // setVenta,
     venta, 
     itemPop, 
     listaVenta, 
     handlerShowWindow, 
     postVenta,
     reinicios2,
-    alertaDescuento
+    // alertaDescuento
 }:verListaShort) => {
 
     const caja = useCaja();
@@ -39,12 +39,12 @@ export const VerListaShort = ({
     const [modalConfirm, setModalConfirm] = useState<boolean>(false);
   
 
-    const handlerOnChange = (e:any) => { 
-        setVenta({
-            ...venta,
-            [e.target.name]: e.target.value
-        })
-    }
+    // const handlerOnChange = (e:any) => { 
+    //     setVenta({
+    //         ...venta,
+    //         [e.target.name]: e.target.value
+    //     })
+    // }
 
     const verificarCaja = (func:Function) => { 
         caja.handlerEstadoCaja()
@@ -85,7 +85,7 @@ export const VerListaShort = ({
 
                         <div className="info-venta grid-1 gap mb-25">
                             
-                            <span className="center">
+                            {/* <span className="center">
                                 <p className="mb-5 info">Subtotal</p>
                                 <h3 className="secundary m-0">S/. {venta.subtotal}</h3>
                             </span>
@@ -113,7 +113,7 @@ export const VerListaShort = ({
                                     moneda
                                     color={(venta.descuento_total < 0) ? "danger-i" : ""}
                                 />
-                            </span>
+                            </span> */}
                         
                             <span className="center">
                                 <p className="mb-5 info">Total</p>

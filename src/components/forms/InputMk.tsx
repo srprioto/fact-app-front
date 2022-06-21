@@ -3,11 +3,13 @@ import { BiQuestionMark } from 'react-icons/bi';
 
 interface inputMk{
     label?:string;
+    value?:any;
     type:string;
     name:string;
     error:any;
     moneda?:boolean;
     placeholder?:string;
+    noError?:boolean;
 }
 
 interface msgError {
@@ -15,7 +17,7 @@ interface msgError {
 }
 
 // requiere formik
-export const InputMk = ({ label, type, name, error, moneda, placeholder }:inputMk) => {
+export const InputMk = ({ label, value, type, name, error, moneda, placeholder, noError }:inputMk) => {
 
     return (
         <div className="wrap-form">
@@ -27,17 +29,34 @@ export const InputMk = ({ label, type, name, error, moneda, placeholder }:inputM
             <div className="relative">
             
                 <div className="box-form">
-                    <Field 
-                        type={type}
-                        id={name}
-                        name={name} 
-                        placeholder={placeholder}
-                        autoComplete="off"
-                    />
-                    <ErrorMessage
-                        name={name}
-                        component={ () => <MsgError error={error} /> }
-                    />
+                    {
+                        value
+                        ? (
+                        <Field 
+                            type={type}
+                            value={value}
+                            id={name}
+                            name={name} 
+                            placeholder={placeholder}
+                            autoComplete="off"
+                        /> ) : (
+                            <Field 
+                                type={type}
+                                id={name}
+                                name={name} 
+                                placeholder={placeholder}
+                                autoComplete="off"
+                            />
+                        )
+                    }
+                    
+                    {
+                        !noError
+                        && <ErrorMessage
+                            name={name}
+                            component={ () => <MsgError error={error} /> }
+                        />
+                    }
                 </div>
                 {
                     moneda

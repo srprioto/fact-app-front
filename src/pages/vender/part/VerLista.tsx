@@ -36,6 +36,11 @@ export const VerLista = ({
     //         setShowWindow(1);
     //     }
     // }, [listaVenta])
+
+    const handlerTabb = (tab:number) => { 
+        // setCliente("");
+        setTabbs(tab);
+    }
     
     const handlerOnChange = (e:any) => { 
         setVenta({
@@ -92,7 +97,7 @@ export const VerLista = ({
                     <div className="tabbs-buttons tabbs grid-5 gap mb-25">
                         <button 
                             className={"btn2 btn2-success " + (tabbs === 1 && "btn2-sub-success")}
-                            onClick={() => setTabbs(1)}
+                            onClick={() => handlerTabb(1)}
                         >
                             <BiCartAlt
                             /> Venta rapida
@@ -100,14 +105,14 @@ export const VerLista = ({
 
                         <button 
                             className={"btn2 btn2-info " + (tabbs === 2 && "btn2-sub-info")}
-                            onClick={() => setTabbs(2)}
+                            onClick={() => handlerTabb(2)}
                         >
                             <BiSpreadsheet /> Boleta
                         </button>
 
                         <button 
                             className={"btn2 btn2-info " + (tabbs === 3 && "btn2-sub-info")}
-                            onClick={() => setTabbs(3)}
+                            onClick={() => handlerTabb(3)}
                         >
                             <BiTask /> Factura
                         </button>

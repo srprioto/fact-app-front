@@ -7,22 +7,26 @@ import { Roles } from "../../../../resources/dtos/RolesDto";
 interface rapidaVenta {
     loadVenta:boolean;
     setShowWindow:Function;
-    verificarCaja:Function;
-    handlerVenta:Function;
     verificarVender:Function;
+    estadoCliente:boolean;
 }
 
 export const AccionesVenta = ({ 
     loadVenta, 
     setShowWindow, 
-    verificarCaja, 
-    handlerVenta, 
-    verificarVender 
+    verificarVender,
+    estadoCliente
 }:rapidaVenta) => {
 
-    const verCaja:boolean = verificarVender();
     const auth = useAuth();
     
+    const verVender = () => { 
+        if (verificarVender() && estadoCliente) {
+            return true
+        } else {
+            return false
+        }
+    }
 
     return (
         <div className={
@@ -42,32 +46,16 @@ export const AccionesVenta = ({
             
             <BtnOnOff2
                 label="Vender"
-                estado={verCaja}
+                estado={verVender()}
                 icon={<BiCaretRight />}
             >
-                {
-                    verificarCaja
-                    ? (
-                        <LoadSwitchBtn2
-                            loading={loadVenta}
-                            className="btn btn-success"
-                            handler={() => verificarCaja(handlerVenta)}
-                        >
-                            <BiCaretRight /> Vender
-                        </LoadSwitchBtn2>
-                    ) : (
-                        <LoadSwitchBtn2
-                            loading={loadVenta}
-                            className="btn btn-success"
-                        >
-                            <BiCaretRight /> Vender
-                        </LoadSwitchBtn2>
-                    )
-                }            
-            </BtnOnOff2>
-
-
-            
+                <LoadSwitchBtn2
+                    loading={loadVenta}
+                    className="btn btn-success"
+                >
+                    <BiCaretRight /> Vender
+                </LoadSwitchBtn2>
+            </BtnOnOff2>            
         </div>
     )
 }

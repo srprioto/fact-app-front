@@ -73,7 +73,7 @@ export const FacturaVenta = ({
         }
     }
 
-
+    
     return (
         <>
             
@@ -90,7 +90,7 @@ export const FacturaVenta = ({
                 cliente={cliente}
                 loadCliente={loadCliente}
                 getCliente={getCliente}
-                setCliente={setCliente}
+                // setCliente={setCliente}
                 handlerOnChangeCliente={handlerOnChangeCliente}
                 loadVenta={loadVenta}
                 setShowWindow={setShowWindow}

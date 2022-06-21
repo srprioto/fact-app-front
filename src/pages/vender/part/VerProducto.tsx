@@ -26,14 +26,14 @@ interface verProducto {
     setElemento:Function;
     elemento:any;
     venta:any
-    setVenta:Function;
+    // setVenta:Function;
     listaVenta:any;
     setlistaVenta:Function;
     listaRepetidos:any;
     setListaRepetidos:Function;
     itemPop:Function;
     postVenta:Function;
-    alertaDescuento:Function;
+    // alertaDescuento:Function;
     ventaDetalle:any
     setVentaDetalle:Function;
     tipoDescuento:boolean;
@@ -52,14 +52,14 @@ export const VerProducto = ({
     elemento, 
     setElemento,
     venta,
-    setVenta,
+    // setVenta,
     listaVenta,
     setlistaVenta,
     listaRepetidos,
     setListaRepetidos,
     itemPop,
     postVenta,
-    alertaDescuento,
+    // alertaDescuento,
     setVentaDetalle,
     ventaDetalle,
     tipoDescuento,
@@ -263,14 +263,14 @@ export const VerProducto = ({
                 </div>
 
                 <VerListaShort
-                    setVenta={setVenta}
+                    // setVenta={setVenta}
                     venta={venta}
                     itemPop={itemPop}
                     listaVenta={listaVenta}
                     handlerShowWindow={handlerShowWindow}
                     postVenta={postVenta}
                     reinicios2={reinicios2}
-                    alertaDescuento={alertaDescuento}
+                    // alertaDescuento={alertaDescuento}
                 />
                 
             </div>
