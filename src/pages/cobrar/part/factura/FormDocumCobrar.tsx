@@ -1,10 +1,11 @@
 import { Form, Formik } from "formik"
+import { useEffect } from "react"
 import { BiSearchAlt2 } from "react-icons/bi"
-import { Input } from "../../../../components/forms/Input"
 import { InputDisable } from "../../../../components/forms/InputDisable"
 import { InputMk } from "../../../../components/forms/InputMk"
 import { ParrafoForm } from "../../../../components/forms/ParrafoForm"
 import { LoadingImg2 } from "../../../../components/loads/LoadingImg"
+import { clienteInfo } from "../../../../resources/dtos/Cliente"
 import { ValidDocumento } from "../../../../resources/validations/Clientes"
 
 interface formDocumCobrar{
@@ -15,6 +16,14 @@ interface formDocumCobrar{
     handlerOnChangeGetCli:any;
     handlerGetCliente:Function;
     loadCliente:boolean;
+
+    switchChangeFact:boolean;
+    setTabbs:Function;
+    tipoSerie:Function;
+    data:any
+    tabbs:number;
+    setCliente:Function;
+    setGetCliente:Function;
 }
 
 export const FormDocumCobrar = ({ 
@@ -24,12 +33,25 @@ export const FormDocumCobrar = ({
     switchChange, 
     handlerOnChangeGetCli, 
     handlerGetCliente,
-    loadCliente
-}:formDocumCobrar) => {
-    
+    loadCliente,
 
-    console.log("> " + cliente.numero_documento);
-    console.log("* " + getCliente.documento);
+    switchChangeFact, setTabbs, data, tipoSerie, tabbs, setCliente, setGetCliente
+}:formDocumCobrar) => {
+
+    const tipDocument = data.clientes && data.clientes.tipoDocumento
+    const documento = data.clientes && data.clientes.numero_documento
+
+    useEffect(() => {
+        if (!switchChangeFact) {
+            setTabbs(tipoSerie())
+            setCliente(data.clientes)
+            setGetCliente({
+                documento: documento, tipoDocumento: tipDocument
+            })
+        } else {
+            setCliente(clienteInfo(""))
+        }
+    }, [switchChangeFact, tabbs])
 
 
     return (

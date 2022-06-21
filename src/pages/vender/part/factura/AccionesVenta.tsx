@@ -55,7 +55,7 @@ export const AccionesVenta = ({
                 >
                     <BiCaretRight /> Vender
                 </LoadSwitchBtn2>
-            </BtnOnOff2>            
+            </BtnOnOff2>
         </div>
     )
 }

@@ -1,16 +1,6 @@
 import { useEffect, useState } from "react";
-import { BiSearchAlt2 } from "react-icons/bi";
 import { post } from "../../../../resources/fetch";
 import { CLIENTES } from "../../../../resources/routes";
-import { Input } from "../../../../components/forms/Input";
-import { InputDisable } from "../../../../components/forms/InputDisable";
-import { ParrafoForm } from "../../../../components/forms/ParrafoForm";
-import { Select } from "../../../../components/forms/Select";
-import { Loading } from "../../../../components/loads/Loading";
-import { LoadingImg2 } from "../../../../components/loads/LoadingImg";
-import { CobrarClienteDni } from "./CobrarClienteDni";
-import { CobrarClienteRuc } from "./CobrarClienteRuc";
-import { ConfirmarVenta } from "./ConfirmarVenta";
 import { FormDocumCobrar } from "./FormDocumCobrar";
 import { FormGeneralCobrar } from "./FormGeneralCobrar";
 // import { CobrarClienteRuc } from "../../../../components/factura/cliente/CobrarClienteRuc";
@@ -25,11 +15,18 @@ interface factura {
     modalConfVenta:any;
     setModalRechazVenta:Function;
     modalRechazVenta:any;
+
+    switchChangeFact:boolean;
+    setTabbs:Function;
+    tipoSerie:Function;
+    data:any
+    tabbs:number;
 }
 
 export const FacturaCobrar = ({ 
     cliente, setCliente, switchChange,
-    setModalConfVenta, modalConfVenta, setModalRechazVenta, modalRechazVenta
+    setModalConfVenta, modalConfVenta, setModalRechazVenta, modalRechazVenta,
+    switchChangeFact, setTabbs, data, tipoSerie, tabbs
 }:factura) => {
 
     const serie:string = "F001";
@@ -37,7 +34,7 @@ export const FacturaCobrar = ({
     const [loadCliente, setLoadCliente] = useState<boolean>(false);
     const [getCliente, setGetCliente] = useState<any>({ documento: "", tipoDocumento: "RUC", });
 
-    
+
     useEffect(() => {
         // setCliente(clienteI);
         setGetCliente({
@@ -45,7 +42,7 @@ export const FacturaCobrar = ({
             documento: cliente.numero_documento
         })
     }, [getCliente.tipoDocumento])
-    
+
 
     const handlerOnChangeGetCli = (e:any) => { 
         setGetCliente({
@@ -88,6 +85,14 @@ export const FacturaCobrar = ({
                 handlerOnChangeGetCli={handlerOnChangeGetCli}
                 handlerGetCliente={handlerGetCliente}
                 loadCliente={loadCliente}
+
+                switchChangeFact={switchChangeFact}
+                tabbs={tabbs}
+                setTabbs={setTabbs}
+                tipoSerie={tipoSerie}
+                data={data}
+                setCliente={setCliente}
+                setGetCliente={setGetCliente}
             />
 
             <FormGeneralCobrar

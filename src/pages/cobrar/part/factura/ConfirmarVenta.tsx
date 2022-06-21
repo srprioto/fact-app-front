@@ -1,30 +1,42 @@
 import { BiCaretRight, BiX } from "react-icons/bi"
+import { BtnOnOff2 } from "../../../../components/btns/BtnOnOff2";
 
 interface confirmarVenta {
     // setModalConfVenta?:Function;
     // modalConfVenta?:any;
     setModalRechazVenta:Function;
     modalRechazVenta:any;
+    clienteExist:boolean;
 }
 
 export const ConfirmarVenta = ({ 
     // setModalConfVenta, 
     // modalConfVenta, 
     setModalRechazVenta, 
-    modalRechazVenta 
+    modalRechazVenta,
+    clienteExist
 }:confirmarVenta) => {
     return (
         <div className="wrap-confirmar-venta grid-3 gap mb-10 mt-25">
-            <button
-                className="btn btn-success" 
-                type="submit"
-                // onClick={() => setModalConfVenta(!modalConfVenta)}
-            ><BiCaretRight /> Confirmar venta</button>
+            <BtnOnOff2
+                label="Confirmar venta"
+                estado={clienteExist}
+                icon={<BiCaretRight />}
+            >
+                <button
+                    className="btn btn-success" 
+                    type="submit"
+                ><BiCaretRight /> Confirmar venta</button>
+            </BtnOnOff2>
+            
             <div></div>
-            <button 
+            <button
                 className="btn btn-danger"
+                type="button"
                 onClick={() => setModalRechazVenta(!modalRechazVenta)}
             ><BiX /> Rechazar venta</button>
         </div>
     )
 }
+
+// onClick={() => setModalConfVenta(!modalConfVenta)}

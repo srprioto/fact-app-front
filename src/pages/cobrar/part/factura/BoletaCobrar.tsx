@@ -1,16 +1,6 @@
 import { useEffect, useState } from "react";
-import { BiSearchAlt2 } from "react-icons/bi";
 import { post } from "../../../../resources/fetch";
 import { CLIENTES } from "../../../../resources/routes";
-import { Input } from "../../../../components/forms/Input";
-import { InputDisable } from "../../../../components/forms/InputDisable";
-import { ParrafoForm } from "../../../../components/forms/ParrafoForm";
-import { Select } from "../../../../components/forms/Select";
-import { Loading } from "../../../../components/loads/Loading";
-import { LoadingImg2 } from "../../../../components/loads/LoadingImg";
-import { CobrarClienteDni } from "./CobrarClienteDni";
-import { CobrarClienteRuc } from "./CobrarClienteRuc";
-import { ConfirmarVenta } from "./ConfirmarVenta";
 import { FormDocumCobrar } from "./FormDocumCobrar";
 import { FormGeneralCobrar } from "./FormGeneralCobrar";
 
@@ -24,11 +14,18 @@ interface boleta {
     modalConfVenta:any;
     setModalRechazVenta:Function;
     modalRechazVenta:any;
+
+    switchChangeFact:boolean;
+    setTabbs:Function;
+    tipoSerie:Function;
+    data:any
+    tabbs:number;
 }
 
 export const BoletaCobrar = ({ 
     cliente, setCliente, switchChange,
-    setModalConfVenta, modalConfVenta, setModalRechazVenta, modalRechazVenta
+    setModalConfVenta, modalConfVenta, setModalRechazVenta, modalRechazVenta,
+    switchChangeFact, setTabbs, data, tipoSerie, tabbs
 }:boleta) => {
 
     const serie:string = "B001";
@@ -90,6 +87,14 @@ export const BoletaCobrar = ({
                 handlerOnChangeGetCli={handlerOnChangeGetCli}
                 handlerGetCliente={handlerGetCliente}
                 loadCliente={loadCliente}
+
+                switchChangeFact={switchChangeFact}
+                tabbs={tabbs}
+                setTabbs={setTabbs}
+                tipoSerie={tipoSerie}
+                data={data}
+                setCliente={setCliente}
+                setGetCliente={setGetCliente}
             />
 
             <FormGeneralCobrar
@@ -107,6 +112,7 @@ export const BoletaCobrar = ({
         </div>
     )
 }
+
 
 
 // <div className="box-boleta">

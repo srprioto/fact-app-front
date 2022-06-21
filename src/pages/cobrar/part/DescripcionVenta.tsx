@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { BiCaretRight, BiCartAlt, BiSpreadsheet, BiTask, BiX } from "react-icons/bi";
+import { BiCartAlt, BiSpreadsheet, BiTask } from "react-icons/bi";
 
 import { ModalNuevoCliente } from "../../../components/modals/ModalNuevoCliente";
 import { ObservacionesVenta } from "./ObservacionesVenta";
@@ -84,14 +84,14 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
     }, [venta.subtotal, venta.descuento_total])
 
 
-    useEffect(() => {
-        if (!switchChangeFact) {
-            setTabbs(tipoSerie())
-            setCliente(data.clientes)
-        } else {
-            setCliente(clienteInfo(""))
-        }
-    }, [switchChangeFact, tabbs])
+    // useEffect(() => {
+    //     if (!switchChangeFact) {
+    //         setTabbs(tipoSerie())
+    //         setCliente(data.clientes)
+    //     } else {
+    //         setCliente(clienteInfo(""))
+    //     }
+    // }, [switchChangeFact, tabbs])
 
 
     const handlerChangeVenta = (e:any) => {
@@ -299,11 +299,11 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
                             setModalRechazVenta={setModalRechazVenta}
                             modalRechazVenta={modalRechazVenta}
 
-                            // switchChangeFact={switchChangeFact}
-                            // tabbs={tabbs}
-                            // setTabbs={setTabbs}
-                            // tipoSerie={tipoSerie}
-                            // data={data}
+                            switchChangeFact={switchChangeFact}
+                            tabbs={tabbs}
+                            setTabbs={setTabbs}
+                            tipoSerie={tipoSerie}
+                            data={data}
                         /> 
                     }
                     {
@@ -318,11 +318,11 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
                             setModalRechazVenta={setModalRechazVenta}
                             modalRechazVenta={modalRechazVenta}
 
-                            // switchChangeFact={switchChangeFact}
-                            // tabbs={tabbs}
-                            // setTabbs={setTabbs}
-                            // tipoSerie={tipoSerie}
-                            // data={data}
+                            switchChangeFact={switchChangeFact}
+                            tabbs={tabbs}
+                            setTabbs={setTabbs}
+                            tipoSerie={tipoSerie}
+                            data={data}
                         />
                     }
                 </div>

@@ -31,6 +31,8 @@ export const FormGeneralCobrar = ({
         })
     }
 
+    const clienteExist:boolean = !!cliente.estadoCliente;
+
     return (
         <div className="">
 
@@ -52,39 +54,47 @@ export const FormGeneralCobrar = ({
                         className="boleta" 
                         onChange={handlerOnChangeCliente}
                     >
-
                         {
-                            loadCliente
-                            ? <Loading />
-                            : (
+                            clienteExist
+                            && (
                                 <>
                                     {
-                                        getCliente.tipoDocumento === "DNI"
-                                        && <CobrarClienteDni
-                                            errors={errors}
-                                            switchChange={switchChange}
-                                            cliente={cliente}
-                                        />
+                                        loadCliente
+                                        ? <Loading />
+                                        : (
+                                            <>
+                                                {
+                                                    getCliente.tipoDocumento === "DNI"
+                                                    && <CobrarClienteDni
+                                                        errors={errors}
+                                                        switchChange={switchChange}
+                                                        cliente={cliente}
+                                                    />
+                                                }
+                                                {
+                                                    getCliente.tipoDocumento === "RUC"
+                                                    && <CobrarClienteRuc 
+                                                        errors={errors}
+                                                        switchChange={switchChange}
+                                                        cliente={cliente}
+                                                        setCliente={setCliente} 
+                                                    />
+                                                }
+                                            </>
+                                        )
                                     }
-                                    {
-                                        getCliente.tipoDocumento === "RUC"
-                                        && <CobrarClienteRuc 
-                                            errors={errors}
-                                            switchChange={switchChange}
-                                            cliente={cliente}
-                                            setCliente={setCliente} 
-                                        />
-                                    }
+
+                                    <div className="mt-15 bb bb-neutro" />
+                                    <br />
                                 </>
                             )
                         }
-
-                        <div className="mt-15 bb bb-neutro" />
-                        <br />
+                        
 
                         <ConfirmarVenta
                             // setModalConfVenta={setModalConfVenta}
                             // modalConfVenta={modalConfVenta}
+                            clienteExist={clienteExist}
                             setModalRechazVenta={setModalRechazVenta}
                             modalRechazVenta={modalRechazVenta}
                         />
