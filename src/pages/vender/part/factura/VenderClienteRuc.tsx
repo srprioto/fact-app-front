@@ -1,6 +1,5 @@
 import { InputDisable } from "../../../../components/forms/InputDisable";
 import { InputMk } from "../../../../components/forms/InputMk";
-import { ParrafoForm } from "../../../../components/forms/ParrafoForm"
 
 interface clienteRuc {
     errors:any

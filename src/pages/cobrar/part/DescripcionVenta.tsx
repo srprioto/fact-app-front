@@ -15,6 +15,7 @@ import { clienteInfo } from "../../../resources/dtos/Cliente";
 import { BoletaCobrar } from "./factura/BoletaCobrar";
 import { FacturaCobrar } from "./factura/FacturaCobrar";
 import { Checkbox2 } from "../../../components/forms/Checkbox2";
+import { RapidaCobrar } from "./factura/RapidaCobrar";
 
 
 interface descripcionVenta {
@@ -90,8 +91,7 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
         } else {
             setCliente(clienteInfo(""))
         }
-        
-    }, [switchChangeFact])
+    }, [switchChangeFact, tabbs])
 
 
     const handlerChangeVenta = (e:any) => {
@@ -219,11 +219,9 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
                         </div>
 
                         <div className="center">
-                            <p
-                                className="info"
-                            >{
+                            <p className="info">{
                                 venta.descuento_total > 0
-                                ? "Incremento total"    
+                                ? "Incremento total"
                                 : venta.descuento_total === 0
                                 ? "Inc/Desc total"
                                 : "Descuento total"
@@ -280,27 +278,57 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
                             handlerCheck={ () => setSwitchChangeFact(!switchChangeFact) }
                         /> : <></>
                     }
-                    { tabbs === 1 && <></> }
+                    { 
+                        tabbs === 1 
+                        && <RapidaCobrar
+                            setModalConfVenta={setModalConfVenta}
+                            modalConfVenta={modalConfVenta}
+                            setModalRechazVenta={setModalRechazVenta}
+                            modalRechazVenta={modalRechazVenta}
+                        />
+                    }
                     { 
                         tabbs === 2 
                         && <BoletaCobrar
                             switchChange={switchChangeFact}
                             cliente={cliente}
                             setCliente={setCliente}
+
+                            setModalConfVenta={setModalConfVenta}
+                            modalConfVenta={modalConfVenta}
+                            setModalRechazVenta={setModalRechazVenta}
+                            modalRechazVenta={modalRechazVenta}
+
+                            // switchChangeFact={switchChangeFact}
+                            // tabbs={tabbs}
+                            // setTabbs={setTabbs}
+                            // tipoSerie={tipoSerie}
+                            // data={data}
                         /> 
                     }
-                    { 
+                    {
                         tabbs === 3 
                         && <FacturaCobrar
                             switchChange={switchChangeFact}
                             cliente={cliente}
                             setCliente={setCliente}
+
+                            setModalConfVenta={setModalConfVenta}
+                            modalConfVenta={modalConfVenta}
+                            setModalRechazVenta={setModalRechazVenta}
+                            modalRechazVenta={modalRechazVenta}
+
+                            // switchChangeFact={switchChangeFact}
+                            // tabbs={tabbs}
+                            // setTabbs={setTabbs}
+                            // tipoSerie={tipoSerie}
+                            // data={data}
                         />
                     }
                 </div>
 
                 {/* fin formas de pago */}
-                <div className="wrap-confirmar-venta grid-3 gap mb-25">
+                {/* <div className="wrap-confirmar-venta grid-3 gap mb-25">
                     <button
                         className="btn btn-success"
                         onClick={() => setModalConfVenta(!modalConfVenta)}    
@@ -310,7 +338,7 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
                         className="btn btn-danger"
                         onClick={() => setModalRechazVenta(!modalRechazVenta)}
                     ><BiX /> Rechazar venta</button>
-                </div>
+                </div> */}
 
             </div>
 

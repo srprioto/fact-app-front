@@ -43,7 +43,8 @@ export const FormInfoGeneral = ({
     return (
         <div>
 
-            { cliente.estadoCliente === "Inexistente" && <ClienteInexistente tipoDocumento={getCliente.tipoDocumento} /> }
+            { cliente.estadoCliente === "Inexistente"
+            && <ClienteInexistente tipoDocumento={getCliente.tipoDocumento} /> }
             
             <Formik
                 initialValues={cliente}

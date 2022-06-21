@@ -10,6 +10,9 @@ import { Loading } from "../../../../components/loads/Loading";
 import { LoadingImg2 } from "../../../../components/loads/LoadingImg";
 import { CobrarClienteDni } from "./CobrarClienteDni";
 import { CobrarClienteRuc } from "./CobrarClienteRuc";
+import { ConfirmarVenta } from "./ConfirmarVenta";
+import { FormDocumCobrar } from "./FormDocumCobrar";
+import { FormGeneralCobrar } from "./FormGeneralCobrar";
 // import { CobrarClienteRuc } from "../../../../components/factura/cliente/CobrarClienteRuc";
 
 
@@ -17,15 +20,24 @@ interface factura {
     cliente:any;
     setCliente:Function;
     switchChange:boolean;
+
+    setModalConfVenta:Function;
+    modalConfVenta:any;
+    setModalRechazVenta:Function;
+    modalRechazVenta:any;
 }
 
-export const FacturaCobrar = ({ cliente, setCliente, switchChange }:factura) => {
+export const FacturaCobrar = ({ 
+    cliente, setCliente, switchChange,
+    setModalConfVenta, modalConfVenta, setModalRechazVenta, modalRechazVenta
+}:factura) => {
 
     const serie:string = "F001";
     // const clienteI = clienteInfo(serie);
     const [loadCliente, setLoadCliente] = useState<boolean>(false);
     const [getCliente, setGetCliente] = useState<any>({ documento: "", tipoDocumento: "RUC", });
 
+    
     useEffect(() => {
         // setCliente(clienteI);
         setGetCliente({
@@ -33,14 +45,6 @@ export const FacturaCobrar = ({ cliente, setCliente, switchChange }:factura) => 
             documento: cliente.numero_documento
         })
     }, [getCliente.tipoDocumento])
-    
-
-    // useEffect(() => {
-    //     setGetCliente({
-    //         ...getCliente,
-    //         documento: cliente.numero_documento
-    //     })
-    // }, [])
     
 
     const handlerOnChangeGetCli = (e:any) => { 
@@ -76,93 +80,28 @@ export const FacturaCobrar = ({ cliente, setCliente, switchChange }:factura) => 
 
             <h3>Informacion general</h3>
 
-            <div className="boleta-info-cliente grid-2 gap mb-20">
+            <FormDocumCobrar
+                serie={serie}
+                cliente={cliente}
+                getCliente={getCliente}
+                switchChange={switchChange}
+                handlerOnChangeGetCli={handlerOnChangeGetCli}
+                handlerGetCliente={handlerGetCliente}
+                loadCliente={loadCliente}
+            />
 
-                <ParrafoForm
-                    label="Serie"
-                    value={ serie }
-                    className="info strong"
-                />
+            <FormGeneralCobrar
+                loadCliente={loadCliente}
+                getCliente={getCliente}
+                switchChange={switchChange}
+                cliente={cliente}
+                setCliente={setCliente}
+                setModalConfVenta={setModalConfVenta}
+                modalConfVenta={modalConfVenta}
+                setModalRechazVenta={setModalRechazVenta}
+                modalRechazVenta={modalRechazVenta}
+            />
 
-                <ParrafoForm
-                    label="Estado del cliente"
-                    value={cliente.estadoCliente ? cliente.estadoCliente : "---"}
-                    className={cliente.estadoCliente === "Registrado" ? "primary" : "success"}
-                />
-
-                {
-                    switchChange
-                    ? (
-                        <Select
-                            label="Tipo de Documento"
-                            name="tipoDocumento"
-                            onChange={handlerOnChangeGetCli}
-                            value={getCliente.tipoDocumento}
-                        >
-                            <option value="DNI">DNI</option>
-                            <option value="RUC">RUC</option>
-                        </Select>
-                    ) : (
-                        <InputDisable
-                            label="Tipo de Documento"
-                            value={getCliente.tipoDocumento}
-                        />
-                    )
-                }
-                {
-                    switchChange
-                    ? (
-                        <div>
-                            <p className="info center mb-8">Nro de documento</p>
-                            <div className="search-general">
-
-                                <Input
-                                    // label="Nro de documento"
-                                    type="text"
-                                    name="documento"
-                                    value={cliente.documento}
-                                    onChange={handlerOnChangeGetCli}
-                                />
-
-                                <button className="btn btn-info" onClick={() => handlerGetCliente()}>
-                                    { loadCliente ? <LoadingImg2 size="23px" /> : <BiSearchAlt2 /> }
-                                </button>
-                            </div>
-                        </div>
-                    ) : (
-                        <InputDisable
-                            label="Nro de documento"
-                            value={getCliente.documento}
-                        />
-                    )
-                }
-
-            </div>
-
-            {
-                loadCliente
-                ? <Loading />
-                : (
-                    <>
-                        {
-                            getCliente.tipoDocumento === "DNI"
-                            && <CobrarClienteDni 
-                                switchChange={switchChange}
-                                cliente={cliente}
-                                setCliente={setCliente} 
-                            />
-                        }
-                        {
-                            getCliente.tipoDocumento === "RUC"
-                            && <CobrarClienteRuc 
-                                switchChange={switchChange}
-                                cliente={cliente} 
-                                setCliente={setCliente} 
-                            />
-                        }
-                    </>
-                )
-            }
         </div>
     )
 }

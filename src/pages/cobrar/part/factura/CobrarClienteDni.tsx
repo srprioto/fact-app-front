@@ -1,20 +1,20 @@
-import { Input } from "../../../../components/forms/Input"
 import { InputDisable } from "../../../../components/forms/InputDisable";
+import { InputMk } from "../../../../components/forms/InputMk";
 
 interface clienteDni {
+    errors:any;
     cliente:any;
-    setCliente:Function;
     switchChange?:boolean;
 }
 
-export const CobrarClienteDni = ({ cliente, setCliente, switchChange = true }:clienteDni) => {
+export const CobrarClienteDni = ({ errors, cliente, switchChange = true }:clienteDni) => {
 
-    const handlerOnChangeCliente = (e:any) => { 
-        setCliente({
-            ...cliente,
-            [e.target.name]: e.target.value
-        })
-    }
+    // const handlerOnChangeCliente = (e:any) => { 
+    //     setCliente({
+    //         ...cliente,
+    //         [e.target.name]: e.target.value
+    //     })
+    // }
 
     return (
         <div className="grid-1 gap">
@@ -22,13 +22,12 @@ export const CobrarClienteDni = ({ cliente, setCliente, switchChange = true }:cl
                 {
                     switchChange
                     ? (
-                        <Input
+                        <InputMk 
                             label="Nombre del cliente"
                             type="text"
                             name="nombre"
-                            value={cliente.nombre}
-                            onChange={handlerOnChangeCliente}
-                        />
+                            error={errors.nombre}
+                        /> 
                     ) : (
                         <InputDisable
                             label="Nombre del cliente"
@@ -39,13 +38,12 @@ export const CobrarClienteDni = ({ cliente, setCliente, switchChange = true }:cl
                 {
                     switchChange
                     ? (
-                        <Input
+                        <InputMk 
                             label="Telefono"
                             type="text"
                             name="telefono"
-                            value={cliente.telefono}
-                            onChange={handlerOnChangeCliente}
-                        />
+                            error={errors.telefono}
+                        /> 
                     ) : (
                         <InputDisable
                             label="Telefono"
@@ -56,13 +54,12 @@ export const CobrarClienteDni = ({ cliente, setCliente, switchChange = true }:cl
                 {
                     switchChange
                     ? (
-                        <Input
+                        <InputMk 
                             label="Direccion"
                             type="text"
                             name="direccion"
-                            value={cliente.direccion}
-                            onChange={handlerOnChangeCliente}
-                        />
+                            error={errors.direccion}
+                        /> 
                     ) : (
                         <InputDisable
                             label="Direccion"
@@ -73,13 +70,12 @@ export const CobrarClienteDni = ({ cliente, setCliente, switchChange = true }:cl
                 {
                     switchChange
                     ? (
-                        <Input
+                        <InputMk 
                             label="E-mail"
                             type="text"
                             name="email"
-                            value={cliente.email}
-                            onChange={handlerOnChangeCliente}
-                        />
+                            error={errors.email}
+                        /> 
                     ) : (
                         <InputDisable
                             label="E-mail"

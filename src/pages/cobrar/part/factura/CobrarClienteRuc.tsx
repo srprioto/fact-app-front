@@ -1,25 +1,26 @@
 // import { Input } from "../../forms/Input"
 // import { InputDisable } from "../../forms/InputDisable";
 // import { ParrafoForm } from "../../forms/ParrafoForm"
-
-import { Input } from "../../../../components/forms/Input";
+// import { Input } from "../../../../components/forms/Input";
 import { InputDisable } from "../../../../components/forms/InputDisable";
-import { ParrafoForm } from "../../../../components/forms/ParrafoForm";
+import { InputMk } from "../../../../components/forms/InputMk";
+// import { ParrafoForm } from "../../../../components/forms/ParrafoForm";
 
 interface clienteRuc {
+    errors:any;
     cliente:any;
     setCliente:Function;
     switchChange?:boolean;
 }
 
-export const CobrarClienteRuc = ({ cliente, setCliente, switchChange = true }:clienteRuc) => {
+export const CobrarClienteRuc = ({ errors, cliente, setCliente, switchChange = true }:clienteRuc) => {
 
-    const handlerOnChangeCliente = (e:any) => { 
-        setCliente({
-            ...cliente,
-            [e.target.name]: e.target.value
-        })
-    }
+    // const handlerOnChangeCliente = (e:any) => { 
+    //     setCliente({
+    //         ...cliente,
+    //         [e.target.name]: e.target.value
+    //     })
+    // }
 
 
     return (
@@ -28,13 +29,12 @@ export const CobrarClienteRuc = ({ cliente, setCliente, switchChange = true }:cl
                 {
                     switchChange
                     ? (
-                        <Input
+                        <InputMk 
                             label="Razon social"
                             type="text"
                             name="razonSocial"
-                            value={cliente.razonSocial}
-                            onChange={handlerOnChangeCliente}
-                        />
+                            error={errors.razonSocial}
+                        /> 
                     ) : (
                         <InputDisable
                             label="Razon social"
@@ -45,12 +45,11 @@ export const CobrarClienteRuc = ({ cliente, setCliente, switchChange = true }:cl
                 {
                     switchChange
                     ? (
-                        <Input
+                        <InputMk 
                             label="Nombre comercial"
                             type="text"
                             name="nombreComercial"
-                            value={cliente.nombreComercial}
-                            onChange={handlerOnChangeCliente}
+                            error={errors.nombreComercial}
                         />
                     ) : (
                         <InputDisable
@@ -58,78 +57,18 @@ export const CobrarClienteRuc = ({ cliente, setCliente, switchChange = true }:cl
                             value={cliente.nombreComercial}
                         />
                     )
-                }
-                
-                
-            </div>
-
-            {/* aqu direccion */}
-            
-
-            <div className="grid-3 gap">
-                {
-                    switchChange
-                    ? (
-                        <Input
-                            label="Departamento"
-                            type="text"
-                            name="departamento"
-                            value={cliente.departamento}
-                            onChange={handlerOnChangeCliente}
-                        />
-                    ) : (
-                        <InputDisable
-                            label="Departamento"
-                            value={cliente.departamento}
-                        />
-                    )
-                }
-                {
-                    switchChange
-                    ? (
-                        <Input
-                            label="Provincia"
-                            type="text"
-                            name="provincia"
-                            value={cliente.provincia}
-                            onChange={handlerOnChangeCliente}
-                        />
-                    ) : (
-                        <InputDisable
-                            label="Provincia"
-                            value={cliente.provincia}
-                        />
-                    )
-                }
-                {
-                    switchChange
-                    ? (
-                        <Input
-                            label="Distrito"
-                            type="text"
-                            name="distrito"
-                            value={cliente.distrito}
-                            onChange={handlerOnChangeCliente}
-                        />
-                    ) : (
-                        <InputDisable
-                            label="Distrito"
-                            value={cliente.distrito}
-                        />
-                    )
-                }
+                }                
             </div>
 
             <div className="grid-3 gap">
                 {
                     switchChange
                     ? (
-                        <Input
+                        <InputMk 
                             label="Direccion"
                             type="text"
                             name="direccion"
-                            value={cliente.direccion}
-                            onChange={handlerOnChangeCliente}
+                            error={errors.direccion}
                         />
                     ) : (
                         <InputDisable
@@ -141,12 +80,27 @@ export const CobrarClienteRuc = ({ cliente, setCliente, switchChange = true }:cl
                 {
                     switchChange
                     ? (
-                        <Input
+                        <InputMk 
+                            label="Telefono"
+                            type="text"
+                            name="telefono"
+                            error={errors.telefono}
+                        />
+                    ) : (
+                        <InputDisable
+                            label="Telefono"
+                            value={cliente.telefono}
+                        />
+                    )
+                }
+                {
+                    switchChange
+                    ? (
+                        <InputMk 
                             label="E-mail"
                             type="text"
                             name="email"
-                            value={cliente.email}
-                            onChange={handlerOnChangeCliente}
+                            error={errors.email}
                         />
                     ) : (
                         <InputDisable
@@ -155,20 +109,54 @@ export const CobrarClienteRuc = ({ cliente, setCliente, switchChange = true }:cl
                         />
                     )
                 }
+            </div>
+
+            <div className="grid-3 gap">
                 {
                     switchChange
                     ? (
-                        <Input
-                            label="Telefono"
+                        <InputMk 
+                            label="Departamento"
                             type="text"
-                            name="telefono"
-                            value={cliente.telefono}
-                            onChange={handlerOnChangeCliente}
+                            name="departamento"
+                            error={errors.departamento}
                         />
                     ) : (
                         <InputDisable
-                            label="Telefono"
-                            value={cliente.telefono}
+                            label="Departamento"
+                            value={cliente.departamento}
+                        />
+                    )
+                }
+                {
+                    switchChange
+                    ? (
+                        <InputMk 
+                            label="Provincia"
+                            type="text"
+                            name="provincia"
+                            error={errors.provincia}
+                        />
+                    ) : (
+                        <InputDisable
+                            label="Provincia"
+                            value={cliente.provincia}
+                        />
+                    )
+                }
+                {
+                    switchChange
+                    ? (
+                        <InputMk 
+                            label="Distrito"
+                            type="text"
+                            name="distrito"
+                            error={errors.distrito}
+                        />
+                    ) : (
+                        <InputDisable
+                            label="Distrito"
+                            value={cliente.distrito}
                         />
                     )
                 }
@@ -176,35 +164,20 @@ export const CobrarClienteRuc = ({ cliente, setCliente, switchChange = true }:cl
 
             <div className="grid-3 gap">
 
-                {
-                    cliente.estado
-                    && (
-                        <ParrafoForm
-                            label="Estado del Contribuyente"
-                            value={cliente.estado ? cliente.estado : "---"}
-                            className={cliente.estado === "ACTIVO" ? "success" : ""}
-                        />
-                    )
-                }
-                {
-                    cliente.condom
-                    && (
-                        <ParrafoForm
-                            label="Condición del Contribuyente"
-                            value={cliente.condom ? cliente.condom : "---"}
-                            className={cliente.condom === "HABIDO" ? "success" : ""}
-                        />
-                    )
-                }
-                {
-                    cliente.ubigeo !== 0
-                    && (
-                        <ParrafoForm
-                            label="Ubigeo"
-                            value={cliente.ubigeo}
-                        />
-                    )
-                }              
+                <InputDisable
+                    label="Estado del Contribuyente"
+                    value={cliente.estado ? cliente.estado : "---"}
+                    color={cliente.estado === "ACTIVO" ? "success" : ""}
+                />
+                <InputDisable
+                    label="Condición del Contribuyente"
+                    value={cliente.condom ? cliente.condom : "---"}
+                    color={cliente.condom === "HABIDO" ? "success" : ""}
+                />
+                <InputDisable
+                    label="Ubigeo"
+                    value={cliente.ubigeo}
+                />        
 
             </div>
 
