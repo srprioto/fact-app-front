@@ -46,6 +46,10 @@ export const ModalVentaConfirmar = ({
 
         let ventaDetallesUpdate:any = [];
         
+        const descuItems:number = ventaAux.descuento_total / ventaAux.ventaDetalles.length;
+
+        console.log(descuItems);        
+        
         ventaAux.ventaDetalles.forEach((e:any) => { 
 
             const disolvDesc:number = (e.descuento / e.cantidad_venta);
@@ -70,8 +74,8 @@ export const ModalVentaConfirmar = ({
             e.igv = igv;
             e.precio_venta = precioVenta
             
-            // doble redondeo
-            e.precio_parcial = fixRedondeo(redondeo((precioVenta * e.cantidad_venta))); /*  + (e.descuento) */
+            // doble redondeo (descuItems es el descuento general)
+            e.precio_parcial = fixRedondeo(redondeo((precioVenta * e.cantidad_venta) + descuItems));
     
             ventaDetallesUpdate.push(e);
 
@@ -82,7 +86,10 @@ export const ModalVentaConfirmar = ({
         .map((e:any) => e.precio_parcial)
         .reduce((prev:number, curr:number) => prev + curr, 0);
 
-        const total:number = (Number(sumaSubtotal) + (Number(venta.descuento_total)))
+        const total:number = (
+            Number(sumaSubtotal) 
+            // + (Number(venta.descuento_total))
+        )
 
         setVenta({
             ...venta,
@@ -116,11 +123,16 @@ export const ModalVentaConfirmar = ({
                     <TablaProdVenta venta={venta} />
 
                     <div className="grid-3 gap center">
-                        <span>
+                        {/* <span>
                             <p>Subtotal:</p>
                             <p className="info"><strong>S/. { venta.subtotal }</strong></p>
-                        </span>
+                        </span> */}
+
                         <span>
+                            <p>TOTAL:</p><h1 className="success"><strong>S/. { venta.total }</strong></h1>
+                        </span>
+                        <div></div>
+                        {/* <span>
                             <p>Incr/Desc total:</p>
                             <p className={(
                                 venta.descuento_total < 0 
@@ -131,7 +143,7 @@ export const ModalVentaConfirmar = ({
                             )}>
                                 <strong>S/. { venta.descuento_total }</strong>
                             </p>
-                        </span>
+                        </span> */}
 
                         <div>
                             <p>Reducir por porcentaje (%):</p>
@@ -149,15 +161,9 @@ export const ModalVentaConfirmar = ({
 
                     </div>
 
-                    <div className="grid-1 gap center">
-                        <span>
-                            <p>TOTAL:</p><h1 className="success"><strong>S/. { venta.total }</strong></h1>
-                        </span>
-                    </div>
-
                 </div>
 
-                <div className="box">
+                <div className="box box-par m-0">
 
                     <h3 className="mb-25">Confirmar venta</h3>
                     <div className="grid-2 gap">
@@ -205,12 +211,9 @@ export const ModalVentaConfirmar = ({
                                 className="btn btn-secundary"
                                 handler={() => setModalCorreo(true)}
                             ><BiMailSend />
-                            </LoadSwitchBtn2>
-                                
+                            </LoadSwitchBtn2>  
                         </div>
-
                     </div>
-                    
                 </div>
             </div>
 

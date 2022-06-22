@@ -6,7 +6,7 @@ import { CobrarClienteDni } from "./CobrarClienteDni"
 import { CobrarClienteRuc } from "./CobrarClienteRuc"
 import { ConfirmarVenta } from "./ConfirmarVenta"
 
-interface FormGeneralCobrar{
+interface formGeneralCobrar{
     loadCliente:boolean;
     getCliente:any
     switchChange:boolean;
@@ -22,7 +22,7 @@ interface FormGeneralCobrar{
 export const FormGeneralCobrar = ({ 
     loadCliente, getCliente, switchChange, cliente, setCliente,
     setModalConfVenta, modalConfVenta, setModalRechazVenta, modalRechazVenta 
-}:FormGeneralCobrar) => {
+}:formGeneralCobrar) => {
 
     const handlerOnChangeCliente = (e:any) => { 
         setCliente({
