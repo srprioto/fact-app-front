@@ -14,17 +14,9 @@ export const PreciosVenta = ({ venta, alertaDescuento, handlerOnChange }:any) =>
             <span>
                 {
                     alertaDescuento()
-                    ? (
-                        <p className="mb-10 danger center strong">
-                            ¡Descuentos activos!
-                        </p>
-                    )
-                    : (
-                        <p className="mb-10 info center">
-                            Incr/Desc. total
-                        </p>
-                    )
-                }                                
+                    ? <p className="mb-10 danger center strong">¡Descuentos activos!</p>
+                    : <p className="mb-10 info center">Incr/Desc. total</p>
+                }
                 <Input 
                     // label="Incr/Desc. total"
                     type="number"
