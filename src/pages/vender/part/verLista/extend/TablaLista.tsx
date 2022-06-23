@@ -1,4 +1,5 @@
 import { BiX } from "react-icons/bi";
+import { moneda } from "../../../../../resources/func/moneda";
 
 export const TablaLista = ({ listaVenta, itemPop }:any) => {
     return (
@@ -29,9 +30,9 @@ export const TablaLista = ({ listaVenta, itemPop }:any) => {
                                     <td className="strong">{ e.codigo_producto }</td>
                                     <td>{ e.nombre_producto }</td>
                                     <td className="strong">{ e.cantidad_venta }</td>
-                                    <td className="strong primary">S/. { e.precio_venta }</td>
-                                    <td className={"strong " + cambioPrecio}>S/. { e.descuento }</td>
-                                    <td className={"strong " + cambioPrecio}>S/. { e.precio_parcial }</td>
+                                    <td className="strong primary">S/. { moneda(e.precio_venta) }</td>
+                                    <td className={"strong " + cambioPrecio}>S/. { moneda(e.descuento) }</td>
+                                    <td className={"strong " + cambioPrecio}>S/. { moneda(e.precio_parcial) }</td>
 
                                     <td>
                                         <span className="wrap-icons danger center">

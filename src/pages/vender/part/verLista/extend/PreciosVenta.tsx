@@ -1,5 +1,6 @@
 import { Input } from "../../../../../components/forms/Input"
 import { Select2 } from "../../../../../components/forms/Select2"
+import { moneda } from "../../../../../resources/func/moneda"
 
 export const PreciosVenta = ({ venta, alertaDescuento, handlerOnChange }:any) => {
     return (
@@ -7,7 +8,7 @@ export const PreciosVenta = ({ venta, alertaDescuento, handlerOnChange }:any) =>
 
             <span className="center">
                 <p className="mb-5 info">Subtotal</p>
-                <h3 className="secundary m-0">S/. {venta.subtotal}</h3>
+                <h3 className="secundary m-0">S/. { moneda(venta.subtotal) }</h3>
             </span>
 
             <span>
@@ -37,7 +38,7 @@ export const PreciosVenta = ({ venta, alertaDescuento, handlerOnChange }:any) =>
         
             <span className="center">
                 <p className="mb-5 info">Total</p>
-                <h1 className="success strong">S/. {venta.total}</h1>
+                <h1 className="success strong">S/. { moneda(venta.total) }</h1>
             </span>
 
             <Select2

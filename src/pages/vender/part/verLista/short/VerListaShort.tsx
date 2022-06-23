@@ -6,6 +6,7 @@ import { ModalWrap } from "../../../../../components/modals/ModalWrap";
 import { TextoRelleno } from "../../../../../components/TextoRelleno";
 import { useCaja } from "../../../../../hooks/useContext/caja.ts/useCaja";
 import { clienteInfo } from "../../../../../resources/dtos/Cliente";
+import { moneda } from "../../../../../resources/func/moneda";
 import { ModalCodigoVenta } from "./ModalCodigoVenta";
 import { TablaListaShort } from "./TablaListaShort";
 
@@ -117,7 +118,7 @@ export const VerListaShort = ({
                         
                             <span className="center">
                                 <p className="mb-5 info">Total</p>
-                                <h1 className="success strong">S/. {venta.total}</h1>
+                                <h1 className="success strong">S/. { moneda(venta.total) }</h1>
                             </span>
                             
                         </div>

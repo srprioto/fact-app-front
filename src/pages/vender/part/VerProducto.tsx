@@ -8,6 +8,7 @@ import { TextoRelleno } from "../../../components/TextoRelleno";
 import { useCaja } from "../../../hooks/useContext/caja.ts/useCaja";
 import { clienteInfo } from "../../../resources/dtos/Cliente";
 import { post } from "../../../resources/fetch";
+import { redondeo } from "../../../resources/func/redondeo";
 import { VENTAS } from "../../../resources/routes";
 import { ModalCodigoVenta } from "./verLista/short/ModalCodigoVenta";
 import { VerListaShort } from "./verLista/short/VerListaShort";
@@ -174,7 +175,6 @@ export const VerProducto = ({
         }
 
     }
-
 
     return (
         <div className={"over-hidden ver-producto" + (classStart ? " show-left" : "")}>

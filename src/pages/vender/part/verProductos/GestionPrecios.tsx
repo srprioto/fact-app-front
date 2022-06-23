@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { Checkbox2 } from "../../../../components/forms/Checkbox2";
 import { Input } from "../../../../components/forms/Input";
 import { RadioButton } from "../../../../components/forms/RadioButton"
+import { moneda } from "../../../../resources/func/moneda";
+import { redondeo } from "../../../../resources/func/redondeo";
 
 export const GestionPrecios = ({ 
     producto, 
@@ -53,7 +55,7 @@ export const GestionPrecios = ({
             codigo_producto: producto.codigo,
             nombre_producto: producto.nombre,
             precio_venta: precioVenta,
-            precio_parcial: precioSubventa,
+            precio_parcial: redondeo(precioSubventa),
             venta_negativa: cantidadStock <= 0 ? Number(cantidadStock) : 0
         })
 
@@ -73,14 +75,14 @@ export const GestionPrecios = ({
         let estructura_radiobutton:Array<any> = [];
         if (!(Object.keys(producto).length <= 0)) {
             estructura_radiobutton = [
-                { label: precios[0], value: precios[0] },
-                { label: precios[1], value: precios[1] },
-                { label: precios[2], value: precios[2] }
+                { label: moneda(precios[0]), value: redondeo(precios[0]) },
+                { label: moneda(precios[1]), value: redondeo(precios[1]) },
+                { label: moneda(precios[2]), value: redondeo(precios[2]) }
             ]
         }
         return estructura_radiobutton;
     }
-
+   
 
     return (
         <div className="gestion-precios">
@@ -129,7 +131,7 @@ export const GestionPrecios = ({
 
                     <div className="center">
                         <p className="mb-10 info">Total Subventa</p>
-                        <h2 className="m-0 success strong">S/. { ventaDetalle.precio_parcial }</h2>
+                        <h2 className="m-0 success strong">S/. { moneda(ventaDetalle.precio_parcial) }</h2>
                     </div>
 
                 </div>
