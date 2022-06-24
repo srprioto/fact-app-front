@@ -1,4 +1,5 @@
 // import { ListaDetalleProductos } from "../../Ingresos/part/ListaDetalleProductos"
+import { moneda } from "../../../../resources/func/moneda"
 import { VentasDropdown } from "./VentasDropdown"
 
 export const VentaItems = ({ ventas, handlerVer, updateData }:any) => {
@@ -13,12 +14,12 @@ export const VentaItems = ({ ventas, handlerVer, updateData }:any) => {
         }
     }
 
-
+    
     return (
         <tr className="venta-items">
-            <td>{ ventas.codigo_venta }</td>
+            <td className="secundary">{ ventas.id + "-" + ventas.codigo_venta }</td>
             {/* <td><ListaDetalleProductos detalles={ventas.movimientoDetalles} /></td> */}
-            <td>S/. { ventas.total }</td>
+            <td className="success strong">S/. { moneda(ventas.total) }</td>
             <td className={ classEstado() } >{ ventas.estado_venta }</td>
             <td>{ ventas.locales && ventas.locales.nombre }</td>
             <td>{ ventas.observaciones }</td>

@@ -86,9 +86,7 @@ export const InformacionIngresos = ({ idLocal, selectLocal, loadingLocal, locale
         <div className="informacion-ingresos">
 
             {/* <div className="box">
-
                 <div className="grid-2 gap">
-                    
                     <SearchWrap 
                         setLoadingData={setLoadingData}
                         setData={setData}
@@ -98,11 +96,7 @@ export const InformacionIngresos = ({ idLocal, selectLocal, loadingLocal, locale
                         url={VENTAS_SEARCH}
                         placeholder="Nombre del cliente ..."
                     />
-
-
-                    
                 </div>
-
             </div> */}
 
             <div className="box">
@@ -153,7 +147,7 @@ export const InformacionIngresos = ({ idLocal, selectLocal, loadingLocal, locale
                                         <th>Estado caja</th>
                                         <th>Monto apertura</th>
                                         <th>Monto cierre</th>
-                                        <th>Observaciones</th>
+                                        <th>Monto recaudado</th>
                                         <th>Fecha</th>
                                         <th className="transparent inlineblock">...</th>
                                     </tr>
@@ -167,7 +161,6 @@ export const InformacionIngresos = ({ idLocal, selectLocal, loadingLocal, locale
                                                     item={e} 
                                                     handlerVer={handlerVer}
                                                 />
-
                                             )
                                         })
                                     }

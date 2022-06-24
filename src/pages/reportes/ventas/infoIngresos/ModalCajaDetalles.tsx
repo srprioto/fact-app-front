@@ -1,9 +1,9 @@
 import { Modal } from "../../../../components/modals/Modal"
 import { zeroFill } from "../../../../resources/func/ceroFill";
+import { moneda } from "../../../../resources/func/moneda";
 
 export const ModalCajaDetalles = ({ modal, setModal, itemCaja }:any) => {
     
-    console.log(itemCaja);
     const totalCaja:number = itemCaja.monto_efectivo + itemCaja.monto_apertura + itemCaja.otros_montos
 
     const mostrarCajaDetalles = () => { 
@@ -15,8 +15,7 @@ export const ModalCajaDetalles = ({ modal, setModal, itemCaja }:any) => {
         }
     }
 
-
-
+    
     return (
         <Modal
             title="Detalles de caja"
@@ -34,12 +33,12 @@ export const ModalCajaDetalles = ({ modal, setModal, itemCaja }:any) => {
 
                             <span>
                                 <p>Monto apertura:</p>
-                                <h4 className="secundary-i">S/. { itemCaja.monto_apertura }</h4>
+                                <h4 className="secundary-i">S/. { moneda(itemCaja.monto_apertura) }</h4>
                             </span>
 
                             <span>
                                 <p>Otros movimientos:</p>
-                                <h4 className="warning-i">S/. { itemCaja.otros_montos }</h4>
+                                <h4 className="warning-i">S/. { moneda(itemCaja.otros_montos) }</h4>
                             </span>
 
                             <span>
@@ -48,12 +47,12 @@ export const ModalCajaDetalles = ({ modal, setModal, itemCaja }:any) => {
                                     (itemCaja.cantidad_diferencia > 0
                                     ? "danger-i"
                                     : "info-i")
-                                }>S/. { itemCaja.monto_efectivo }</h4>
+                                }>S/. { moneda(itemCaja.monto_efectivo) }</h4>
                             </span>
 
                             <span>
                                 <p>Monto total en caja:</p>
-                                <h3 className="success-i strong">S/. { totalCaja }</h3>
+                                <h3 className="success-i strong">S/. { moneda(totalCaja) }</h3>
                             </span>
                             
                         </div>
@@ -62,7 +61,7 @@ export const ModalCajaDetalles = ({ modal, setModal, itemCaja }:any) => {
 
                             <span>
                                 <p>Ingresos otros medios:</p>
-                                <h4 className="primary-i">S/. { itemCaja.monto_otros_medios }</h4>
+                                <h4 className="primary-i">S/. { moneda(itemCaja.monto_otros_medios) }</h4>
                             </span>
 
                             <span>
@@ -71,7 +70,7 @@ export const ModalCajaDetalles = ({ modal, setModal, itemCaja }:any) => {
                                     (itemCaja.cantidad_diferencia !== 0
                                     ? "danger-i"
                                     : "secundary-i")
-                                }>S/. { itemCaja.cantidad_diferencia }</h4>
+                                }>S/. { moneda(itemCaja.cantidad_diferencia) }</h4>
                             </span>
 
                             <span>
@@ -81,7 +80,9 @@ export const ModalCajaDetalles = ({ modal, setModal, itemCaja }:any) => {
                             
                             <span>
                                 <p className="strong">Ingresos totales:</p>
-                                <h2 className="success-i strong">S/. { itemCaja.monto_otros_medios + totalCaja }</h2>
+                                <h2 className="success-i strong">
+                                    S/. { moneda(itemCaja.monto_otros_medios + totalCaja) }
+                                </h2>
                             </span>
 
                         </div>
