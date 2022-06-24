@@ -1,3 +1,5 @@
+import { moneda } from "../../../../resources/func/moneda";
+
 interface tablaProdVenta {
     venta:any;
 }
@@ -35,12 +37,12 @@ export const TablaProdVenta = ({ venta }:tablaProdVenta) => {
                             return (
                                 <tr key={index}>
                                     <td>{ e.productos.nombre }</td>
-                                    <td><strong>S/. { e.precio_gravada }</strong></td>
-                                    <td>S/. { e.igv }</td>
-                                    <td><strong>S/. { e.precio_venta }</strong></td>
+                                    <td><strong>S/. { moneda(e.precio_gravada) }</strong></td>
+                                    <td>S/. { moneda(e.igv) }</td>
+                                    <td><strong>S/. { moneda(e.precio_venta) }</strong></td>
                                     <td><strong>{ e.cantidad_venta }</strong></td>
                                     {/* <td className={cambioPrecio}>S/. { e.descuento }</td> */}
-                                    <td className={cambioPrecio}><strong>S/. { e.precio_parcial }</strong></td>
+                                    <td className={cambioPrecio}><strong>S/. { moneda(e.precio_parcial) }</strong></td>
                                 </tr>
                             )
                         })

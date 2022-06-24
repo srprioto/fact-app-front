@@ -5,7 +5,6 @@ import { TitleBox } from "../../../components/TitleBox"
 import { SearchWrap } from "../../../components/SearchWrap";
 import { TablaVentas } from "./TablaVentas";
 import { DescripcionVenta } from "./DescripcionVenta";
-
 import { get, getOne } from "../../../resources/fetch";
 import { VENTAS, VENTAS_PEDIDOS, VENTAS_SEARCH_LOCAL } from "../../../resources/routes";
 import { BiRefresh } from "react-icons/bi";

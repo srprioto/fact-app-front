@@ -13,10 +13,11 @@ import { Modal } from "../../../../components/modals/Modal"
 import { TablaProdVenta } from "./TablaProdVenta";
 
 import { copy } from "../../../../resources/func/deepCopy";
-import { fixRedondeo, redondeo } from "../../../../resources/func/redondeo";
+import { redondeo } from "../../../../resources/func/redondeo";
 import { Input } from "../../../../components/forms/Input";
 import { ModalWrap } from "../../../../components/modals/ModalWrap";
 import { ModalCorreo } from "./ModalCorreo";
+import { moneda } from "../../../../resources/func/moneda";
 
 
 export const ModalVentaConfirmar = ({ 
@@ -30,9 +31,8 @@ export const ModalVentaConfirmar = ({
 
     const ventaAux:any = copy(dataVenta);
     const [venta, setVenta] = useState<any>(copy(dataVenta));
-    const [reducirPercent, setReducirPercent] = useState<number>(0)
+    const [reducirPercent, setReducirPercent] = useState<number>(0);
     const [modalCorreo, setModalCorreo] = useState<boolean>(false);
-
 
     useEffect(() => { 
         handlerRecalculoIGV();
@@ -46,36 +46,37 @@ export const ModalVentaConfirmar = ({
 
         let ventaDetallesUpdate:any = [];
         
-        const descuItems:number = ventaAux.descuento_total / ventaAux.ventaDetalles.length;
-
-        console.log(descuItems);        
+        const descuentoXItems:number = Number(ventaAux.descuento_total) / ventaAux.ventaDetalles.length;
+        let igvGen:number = 0;
         
         ventaAux.ventaDetalles.forEach((e:any) => { 
 
-            const disolvDesc:number = (e.descuento / e.cantidad_venta);
-            // const fixDisolvDesc:number = Number(disolvDesc.toFixed());
+            const cantidadVenta:number = Number(e.cantidad_venta);
+            const descuenXUnid:number = Number(descuentoXItems / cantidadVenta);
+            const disolvDesc:number = Number((e.descuento / cantidadVenta) + descuenXUnid);
+
             let reduccion:number;
 
-            e.precio_venta = e.precio_venta + disolvDesc
+            e.precio_venta = Number(e.precio_venta) + disolvDesc
 
             if (reducirPercent !== 0) {
-                reduccion = redondeo(e.precio_venta * (reducirPercent / 100))
+                reduccion = e.precio_venta * (reducirPercent / 100)
             } else {
                 reduccion = 0;
             }
 
-            e.precio_venta = e.precio_venta + reduccion
+            e.precio_venta = Number(e.precio_venta) + reduccion
 
-            const igv:number = redondeo(e.precio_venta * 0.18);
-            const precioGravada:number = redondeo((e.precio_venta - igv));
-            const precioVenta:number = redondeo(precioGravada + igv);
+            // const precioVenta:number = Number(e.precio_venta);
+            const precioGravada:number = Number(e.precio_venta / 1.18);
+            const igv:number = Number(e.precio_venta) - Number(precioGravada);
 
-            e.precio_gravada = precioGravada;
-            e.igv = igv;
-            e.precio_venta = precioVenta
-            
-            // doble redondeo (descuItems es el descuento general)
-            e.precio_parcial = fixRedondeo(redondeo((precioVenta * e.cantidad_venta) + descuItems));
+            e.precio_gravada = Number(precioGravada);
+            e.igv = Number(igv);
+            // e.precio_venta = Number(precioVenta)
+            e.precio_parcial = Number(e.precio_venta) * Number(cantidadVenta);
+
+            igvGen = igvGen + (igv * cantidadVenta);
     
             ventaDetallesUpdate.push(e);
 
@@ -94,12 +95,14 @@ export const ModalVentaConfirmar = ({
         setVenta({
             ...venta,
             ventaDetalles: ventaDetallesUpdate,
-            subtotal: redondeo(sumaSubtotal),
-            total: redondeo(total)
+            subtotal: total - igvGen,
+            total: redondeo(total),
+            igvGeneral: igvGen
         })
 
     }
 
+    
 
     return (
         <Modal
@@ -119,31 +122,22 @@ export const ModalVentaConfirmar = ({
                         </span>
                     </div>
 
-                    {/* <DatosClienteConf venta={venta} /> */}
                     <TablaProdVenta venta={venta} />
 
-                    <div className="grid-3 gap center">
-                        {/* <span>
+                    <div className="grid-4 gap center">
+                        <span>
                             <p>Subtotal:</p>
-                            <p className="info"><strong>S/. { venta.subtotal }</strong></p>
-                        </span> */}
+                            <p className="info"><strong>S/. { moneda(venta.subtotal) }</strong></p>
+                        </span>
 
                         <span>
-                            <p>TOTAL:</p><h1 className="success"><strong>S/. { venta.total }</strong></h1>
+                            <p>IGV general:</p>
+                            <p className="info"><strong>S/. { moneda(venta.igvGeneral) }</strong></p>
                         </span>
-                        <div></div>
-                        {/* <span>
-                            <p>Incr/Desc total:</p>
-                            <p className={(
-                                venta.descuento_total < 0 
-                                ? "danger" 
-                                : venta.descuento_total > 0
-                                ? "success" 
-                                : "info"
-                            )}>
-                                <strong>S/. { venta.descuento_total }</strong>
-                            </p>
-                        </span> */}
+
+                        <span>
+                            <p>TOTAL:</p><h1 className="success"><strong>S/. { moneda(venta.total) }</strong></h1>
+                        </span>
 
                         <div>
                             <p>Reducir por porcentaje (%):</p>
@@ -229,3 +223,16 @@ export const ModalVentaConfirmar = ({
         </Modal>
     )
 }
+
+/* <span>
+    <p>Incr/Desc total:</p>
+    <p className={(
+        venta.descuento_total < 0 
+        ? "danger" 
+        : venta.descuento_total > 0
+        ? "success" 
+        : "info"
+    )}>
+        <strong>S/. { venta.descuento_total }</strong>
+    </p>
+</span> */

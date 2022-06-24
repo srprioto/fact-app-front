@@ -1,12 +1,12 @@
-// import { Checkbox } from "../../../components/forms/Checkbox";
+import { moneda } from "../../../resources/func/moneda";
 
 interface tablaListaVentaProductos { 
     venta:any;
-    listaRechazados:any;
-    handlerCheckbox:Function;
+    // listaRechazados:any;
+    // handlerCheckbox:Function;
 }
 
-export const TablaListaVentaProductos = ({ venta, listaRechazados, handlerCheckbox }:tablaListaVentaProductos) => {
+export const TablaListaVentaProductos = ({ venta }:tablaListaVentaProductos) => {
     return (
         <div className="lista-productos-pedido bb bb-neutro">
             <h3>Informacion de la venta</h3>
@@ -17,8 +17,7 @@ export const TablaListaVentaProductos = ({ venta, listaRechazados, handlerCheckb
                         <th>Cant.</th>
                         <th>Precio U.</th>
                         <th>Inc/Desc</th>
-                        <th>Precio V.</th>
-                        {/* <th className="transparent inlineblock">...</th> */}
+                        <th>Precio Sv.</th>
                     </tr>
                 </thead>
                 
@@ -33,30 +32,21 @@ export const TablaListaVentaProductos = ({ venta, listaRechazados, handlerCheckb
                                 cambioPrecio = "success";
                             }
 
-                            let opacity:string = ""
-                            if (listaRechazados.includes(e.id)) {
-                                opacity = "opacity-line-table"
-                            } else {
-                                opacity = ""
-                            }
-
                             return (
-                                <tr key={index} className={opacity}>
+                                <tr key={index}>
                                     <td>{ e.productos.nombre }</td>
                                     <td><strong>{ e.cantidad_venta }</strong></td>
-                                    <td>S/. { e.precio_venta }</td>
-                                    <td className={cambioPrecio}>S/. { e.descuento }</td>
+                                    <td className="info">S/. { moneda(e.precio_venta) }</td>
+                                    <td className={
+                                        Number(venta.descuento_total) < 0
+                                        ? "danger"
+                                        : Number(venta.descuento_total) === 0
+                                        ? "secundary"
+                                        : "success"
+                                    }>S/. { moneda(e.descuento) }</td>
                                     <td className={cambioPrecio}>
-                                        <strong>S/. { e.precio_parcial }</strong>
+                                        <strong>S/. { moneda(e.precio_parcial) }</strong>
                                     </td>
-                                    {/* <td>
-                                        <Checkbox
-                                            name={`estado_detalle`}
-                                            value={e.id}
-                                            onChange={handlerCheckbox}
-                                            invertir
-                                        />
-                                    </td> */}
                                 </tr>
                             )
                         })   

@@ -1,7 +1,5 @@
-import { useEffect, useState } from "react";
-import { BiCartAlt, BiSpreadsheet, BiTask } from "react-icons/bi";
+import { useState } from "react";
 
-import { ModalNuevoCliente } from "../../../components/modals/ModalNuevoCliente";
 import { ObservacionesVenta } from "./ObservacionesVenta";
 import { TablaListaVentaProductos } from "./TablaListaVentaProductos";
 
@@ -16,6 +14,9 @@ import { BoletaCobrar } from "./factura/BoletaCobrar";
 import { FacturaCobrar } from "./factura/FacturaCobrar";
 import { Checkbox2 } from "../../../components/forms/Checkbox2";
 import { RapidaCobrar } from "./factura/RapidaCobrar";
+import { TabsVenta } from "./otros/TabsVenta";
+import { moneda } from "../../../resources/func/moneda";
+import { CodigoVenta } from "./otros/CodigoVenta";
 
 
 interface descripcionVenta {
@@ -29,13 +30,9 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
 
     const tipoSerie = ():number => { 
         if (clienteOk) {
-            if (data.clientes.serie_documento === "B001") {
-                return 2
-            } else if (data.clientes.serie_documento === "F001") {
-                return 3
-            } else {
-                return 1
-            }
+            if (data.clientes.serie_documento === "B001") return 2 
+            else if (data.clientes.serie_documento === "F001") return 3 
+            else return 1
         } else {
             return 1
         }
@@ -43,45 +40,45 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
     
     const [venta, setVenta] = useState<any>(data);
     const [cliente, setCliente] = useState<any>(clienteOk ? data.clientes : clienteInfo(""));
-    const [listaRechazados, setListaRechazados] = useState<any>([]);
+    // const [listaRechazados, setListaRechazados] = useState<any>([]);
 
     const [loadConfirmarVenta, setLoadConfirmarVenta] = useState<boolean>(false);
 
-    const [ModalCliente, setModalCliente] = useState<boolean>(false);
+    // const [ModalCliente, setModalCliente] = useState<boolean>(false);
     const [modalConfVenta, setModalConfVenta] = useState<boolean>(false);
     const [modalRechazVenta, setModalRechazVenta] = useState<boolean>(false);
 
     const [switchChangeFact, setSwitchChangeFact] = useState<boolean>(clienteOk ? false : true);
     const [tabbs, setTabbs] = useState<number>(tipoSerie());
 
-    useEffect(() => { 
-        let ventaDetails:any = []; // añadir lista detalles
-        data.ventaDetalles.map((e:any) => { 
-            if (!(listaRechazados.includes(e.id))) {
-                ventaDetails.push(e);
-            }
-            return (null)
-        })
+    // useEffect(() => { 
+    //     let ventaDetails:any = []; // añadir lista detalles
+    //     data.ventaDetalles.map((e:any) => { 
+    //         if (!(listaRechazados.includes(e.id))) {
+    //             ventaDetails.push(e);
+    //         }
+    //         return (null)
+    //     })
 
-        const sumaSubtotal = venta.ventaDetalles // calcular subtotal
-        .map((e:any) => e.precio_parcial)
-        .reduce((prev:number, curr:number) => prev + curr, 0);
+    //     const sumaSubtotal = venta.ventaDetalles // calcular subtotal
+    //     .map((e:any) => e.precio_parcial)
+    //     .reduce((prev:number, curr:number) => prev + curr, 0);
         
-        setVenta({ 
-            ...venta, 
-            subtotal: sumaSubtotal,
-            ventaDetalles: ventaDetails
-        });
+    //     setVenta({ 
+    //         ...venta, 
+    //         subtotal: sumaSubtotal,
+    //         ventaDetalles: ventaDetails
+    //     });
 
-    }, [venta.ventaDetalles, listaRechazados])
+    // }, [venta.ventaDetalles, listaRechazados])
 
 
-    useEffect(() => { // calcular total
-        setVenta({
-            ...venta,
-            total: (venta.subtotal + (Number(venta.descuento_total)))
-        })
-    }, [venta.subtotal, venta.descuento_total])
+    // useEffect(() => { // calcular total
+    //     setVenta({
+    //         ...venta,
+    //         total: (venta.subtotal + (Number(venta.descuento_total)))
+    //     })
+    // }, [venta.subtotal, venta.descuento_total])
 
 
     // useEffect(() => {
@@ -102,18 +99,18 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
     }
 
     
-    const handlerCheckbox = (e:any) => {
-        let updatedList = [ ...listaRechazados ];
-        if (e.target.checked) {
-            updatedList = [ ...listaRechazados, Number(e.target.value)];
-        } else {
-            updatedList.splice(listaRechazados.indexOf(e.target.value), 1);
-        }
-        setListaRechazados(updatedList);
-    }
+    // const handlerCheckbox = (e:any) => {
+    //     let updatedList = [ ...listaRechazados ];
+    //     if (e.target.checked) {
+    //         updatedList = [ ...listaRechazados, Number(e.target.value)];
+    //     } else {
+    //         updatedList.splice(listaRechazados.indexOf(e.target.value), 1);
+    //     }
+    //     setListaRechazados(updatedList);
+    // }
 
     
-    const handlerCliente = (cliente:any) => setVenta({ ...venta, clientes: cliente}) // cliente nuevo
+    // const handlerCliente = (cliente:any) => setVenta({ ...venta, clientes: cliente}) // cliente nuevo
 
 
     const handlerConfirmarVenta = async (estado:string) => {
@@ -136,15 +133,17 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
         // updateVenta.cliente = venta.clientes;
         // updateVenta.clienteId = venta.clientes && venta.clientes.id;
 
-        data.ventaDetalles.map((e:any) => { // añade listo o rechazado a ventaDetalles
-            if (!(listaRechazados.includes(e.id))) {
-                e.estado_venta_detalle = "listo"
-                ventaDet.push(e);
-            } else {
-                e.estado_venta_detalle = "rechazado"
-                ventaDet.push(e);
-            }
-            return (null)
+        data.ventaDetalles.forEach((e:any) => { // añade listo o rechazado a ventaDetalles
+            e.estado_venta_detalle = "listo";
+            ventaDet.push(e);
+            // if (!(listaRechazados.includes(e.id))) {
+            //     e.estado_venta_detalle = "listo"
+            //     ventaDet.push(e);
+            // } else {
+            //     e.estado_venta_detalle = "rechazado"
+            //     ventaDet.push(e);
+            // }
+            // return (null)
         })
 
         updateVenta.ventaDetalles = ventaDet;
@@ -165,84 +164,47 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
         <div className="descripcion-venta">
             <div className="grid-1 gap">
 
-                <div className="middle bb bb-neutro">
-                    <p className="m-0 pr-20">Codigo de venta: </p>
-                    <h1 className="info m-0">{ venta.codigo_venta }</h1>
-                </div>
+                <CodigoVenta codigVenta={venta.codigo_venta} />
                 
-                <TablaListaVentaProductos
-                    venta={data}
-                    listaRechazados={listaRechazados}
-                    handlerCheckbox={handlerCheckbox}
+                <TablaListaVentaProductos venta={data} />
+
+                <TabsVenta
+                    switchChangeFact={switchChangeFact}
+                    tipoSerie={tipoSerie}
+                    tabbs={tabbs}
+                    setTabbs={setTabbs}
                 />
-
-                <div className="tabbs-buttons tabbs grid-4 gap mb-25">
-                    <button 
-                        className={
-                            "btn2 btn2-success " + 
-                            (!switchChangeFact ? ( tipoSerie() === 1 ? "" : "btn2-disable " ) : "") +
-                            (tabbs === 1 && "btn2-sub-success")
-                        }
-                        
-                        onClick={() => {switchChangeFact && setTabbs(1)}}
-                    ><BiCartAlt/> Venta rapida
-                    </button>
-
-                    <button
-                        className={
-                            "btn2 btn2-info " + 
-                            (!switchChangeFact ? ( tipoSerie() === 2 ? "" : "btn2-disable " ) : "") +
-                            (tabbs === 2 && "btn2-sub-info")
-                        }
-                        onClick={() => {switchChangeFact && setTabbs(2)}}
-                    ><BiSpreadsheet /> Boleta
-                    </button>
-
-                    <button 
-                        className={
-                            "btn2 btn2-info " + 
-                            (!switchChangeFact ? ( tipoSerie() === 3 ? "" : "btn2-disable " ) : "") +
-                            (tabbs === 3 && "btn2-sub-info")
-                        }
-                        onClick={() => {switchChangeFact && setTabbs(3)}}
-                    ><BiTask /> Factura
-                    </button>
-                </div>
 
                 <div className="descripcion-venta grid-1 gap bb bb-neutro">
 
-                    <div className="grid-3 gap">
+                    <div className="grid-4 gap">
 
                         <div className="center">
                             <p className="info">Subtotal</p>
-                            <h3 className="success">S/. {venta.subtotal}</h3>
+                            <h3 className="success">S/. { moneda(venta.subtotal) }</h3>
                         </div>
 
                         <div className="center">
                             <p className="info">{
-                                venta.descuento_total > 0
+                                Number(venta.descuento_total) > 0
                                 ? "Incremento total"
-                                : venta.descuento_total === 0
+                                : Number(venta.descuento_total) === 0
                                 ? "Inc/Desc total"
                                 : "Descuento total"
                             }</p>
                             <h3 className={
-                                venta.descuento_total < 0
+                                Number(venta.descuento_total) < 0
                                 ? "danger"
-                                : venta.descuento_total === 0
+                                : Number(venta.descuento_total) === 0
                                 ? "secundary"
                                 : "success"
-                            }>S/. {venta.descuento_total}</h3>
+                            }>S/. {moneda(venta.descuento_total)}</h3>
                         </div>
 
                         <span className="center">
-                            <p className="info">Total de la venta</p>
-                            <h1 className="success strong">S/. { venta.total }</h1>
+                            <p className="info">Total</p>
+                            <h1 className="success strong">S/. { moneda(venta.total) }</h1>
                         </span>
-
-                    </div>
-
-                    <div className="grid-3 gap mb-15">
 
                         <Select2
                             label="Forma de pago"
@@ -255,14 +217,9 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
                             <option value="yape">Yape</option>                                
                         </Select2>
 
-                        <ObservacionesVenta observaciones={venta.observaciones} />                       
-
-                        <div className="center">
-                            <p className="mb-10 info">Vendedor: </p>
-                            <p className="mb-10">{ venta.usuarios ? venta.usuarios.nombre : "" }</p>
-                        </div>
-                       
                     </div>
+
+                    <ObservacionesVenta observaciones={venta.observaciones} />
 
                 </div>
                 
@@ -326,28 +283,8 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
                         />
                     }
                 </div>
-
-                {/* fin formas de pago */}
-                {/* <div className="wrap-confirmar-venta grid-3 gap mb-25">
-                    <button
-                        className="btn btn-success"
-                        onClick={() => setModalConfVenta(!modalConfVenta)}    
-                    ><BiCaretRight /> Confirmar venta</button>
-                    <div></div>
-                    <button 
-                        className="btn btn-danger"
-                        onClick={() => setModalRechazVenta(!modalRechazVenta)}
-                    ><BiX /> Rechazar venta</button>
-                </div> */}
-
             </div>
 
-            <ModalNuevoCliente
-                modal={ModalCliente}
-                setModal={setModalCliente}
-                handlerCliente={handlerCliente}
-            />
-            
             <ModalWrap modal={modalConfVenta} >
                 <ModalVentaConfirmar
                     modal={modalConfVenta}
@@ -359,14 +296,16 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
                 />
             </ModalWrap>
             
-            <ModalVentaRechazar
-                modal={modalRechazVenta}
-                setModal={setModalRechazVenta}
-                venta={venta}
-                // codigoPago={codigoPago}
-                rechazarVenta={handlerConfirmarVenta}
-                loading={loadConfirmarVenta}
-            />
+            <ModalWrap modal={modalRechazVenta} >
+                <ModalVentaRechazar
+                    modal={modalRechazVenta}
+                    setModal={setModalRechazVenta}
+                    venta={venta}
+                    // codigoPago={codigoPago}
+                    rechazarVenta={handlerConfirmarVenta}
+                    loading={loadConfirmarVenta}
+                />
+            </ModalWrap>
 
         </div>
     )

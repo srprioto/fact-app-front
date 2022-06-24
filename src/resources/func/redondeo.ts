@@ -1,5 +1,5 @@
 export function redondeo (nro:number):number {
-    return Math.round((nro + Number.EPSILON) * 100) / 100;
+    return Number(Math.round((nro + Number.EPSILON) * 100) / 100);
 }
 
 export const fixRedondeo = (nro:number) => { // revisar formula
