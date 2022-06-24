@@ -4,6 +4,7 @@ import { BiCalendarWeek, BiCartAlt, BiDollarCircle, BiSend } from "react-icons/b
 import { CardUno } from "../../../../components/cards/CardUno"
 // import { Loading } from "../../../../components/loads/Loading";
 import { get } from "../../../../resources/fetch";
+import { moneda } from "../../../../resources/func/moneda";
 import { VENTAS } from "../../../../resources/routes";
 
 export const CardsEstadisticas = () => {
@@ -49,7 +50,7 @@ export const CardsEstadisticas = () => {
 
             <CardUno
                 titulo="Total recaudado hoy"
-                label={dataEstadisticas.totalDineroDia ? "S/. " + dataEstadisticas.totalDineroDia : "S/. 0"}
+                label={dataEstadisticas.totalDineroDia ? "S/. " + moneda(dataEstadisticas.totalDineroDia) : "S/. 0"}
                 icon={<BiDollarCircle />}
                 coloricon="success"
                 loading={loading}
@@ -59,7 +60,7 @@ export const CardsEstadisticas = () => {
                 titulo="Total recaudado en la semana"
                 label={
                     dataEstadisticas.totalDineroSemana 
-                    ? "S/. " + dataEstadisticas.totalDineroSemana 
+                    ? "S/. " + moneda(dataEstadisticas.totalDineroSemana) 
                     : "S/. 0"
                 }
                 icon={<BiCalendarWeek />}

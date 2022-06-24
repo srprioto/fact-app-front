@@ -5,7 +5,7 @@ import { Input } from "../../../../components/forms/Input";
 import { Loading } from "../../../../components/loads/Loading";
 import { Modal } from "../../../../components/modals/Modal"
 import { get, put } from "../../../../resources/fetch";
-import { redondeo } from "../../../../resources/func/redondeo";
+import { moneda } from "../../../../resources/func/moneda";
 import { LOCAL_STOCK, PRODUCTOS } from "../../../../resources/routes";
 
 export const ModalCalcPrecio = ({ 
@@ -17,37 +17,45 @@ export const ModalCalcPrecio = ({
     getDataOne
 }:any) => {
 
+    const compra:number = Number(movimientoDetalle.productos.precio_compra);
+    const venta1:number = Number(movimientoDetalle.productos.precio_venta_1);
+    const venta2:number = Number(movimientoDetalle.productos.precio_venta_2);
+    const venta3:number = Number(movimientoDetalle.productos.precio_venta_3);
+    const precioUnidad:number = Number(movimientoDetalle.precio_unidad);
+
+    const multiploDePrecio:number = 1; // multiplo para calcular el precio de venta en base al precio del costo
+
     const idProducto:number = movimientoDetalle.productos.id;
-    const adicionalesXUnidad:number = redondeo(gastosAdicionales / totalProductos);
-    const costoRealProd:number = redondeo(movimientoDetalle.precio_unidad + adicionalesXUnidad);
-    const difePrecioCompra:number = redondeo(costoRealProd - movimientoDetalle.productos.precio_compra);
+    const adicionalesXUnidad:number = gastosAdicionales / totalProductos;
+    const costoRealProd:number = precioUnidad + adicionalesXUnidad;
+    const difePrecioCompra:number = costoRealProd - compra;
 
     // calcula el promedio de diferencia
     // añadir aqui el calculo en caso de que se requiera algo mas especifico
-    const acumAddPrecio:number = redondeo(difePrecioCompra / 2); 
+    const acumAddPrecio:number = (difePrecioCompra / 2);
 
-    const precioVenta1:number = redondeo(
-        movimientoDetalle.productos.precio_venta_1 <= 0
-        ? (costoRealProd + (costoRealProd * 0.4))
-        : movimientoDetalle.productos.precio_compra === 0
-        ? movimientoDetalle.productos.precio_venta_1
-        : movimientoDetalle.productos.precio_venta_1 + acumAddPrecio
+    const precioVenta1:number = (
+        venta1 <= 0
+        ? (costoRealProd + (costoRealProd * multiploDePrecio))
+        : compra === 0
+        ? venta1
+        : venta1 + acumAddPrecio
     );
 
-    const precioVenta2:number = redondeo(
-        movimientoDetalle.productos.precio_venta_2 <= 0
-        ? (costoRealProd + (costoRealProd * 0.4))
-        : movimientoDetalle.productos.precio_compra === 0
-        ? movimientoDetalle.productos.precio_venta_2
-        : movimientoDetalle.productos.precio_venta_2 + acumAddPrecio
+    const precioVenta2:number = (
+        venta2 <= 0
+        ? (costoRealProd + (costoRealProd * multiploDePrecio))
+        : compra === 0
+        ? venta2
+        : venta2 + acumAddPrecio
     );
 
-    const precioVenta3:number = redondeo(
-        movimientoDetalle.productos.precio_venta_3 <= 0
-        ? (costoRealProd + (costoRealProd * 0.4))
-        : movimientoDetalle.productos.precio_compra === 0
-        ? movimientoDetalle.productos.precio_venta_3
-        : movimientoDetalle.productos.precio_venta_3 + acumAddPrecio
+    const precioVenta3:number = (
+        venta3 <= 0
+        ? (costoRealProd + (costoRealProd * multiploDePrecio))
+        : compra === 0
+        ? venta3
+        : venta3 + acumAddPrecio
     );
 
 
@@ -78,7 +86,6 @@ export const ModalCalcPrecio = ({
         setLoadingData(true);
         try {
             const totalStockproducto = await get(LOCAL_STOCK + "/stock/producto/" + idProducto);
-            console.log(totalStockproducto);
             setStockTotalProducto(totalStockproducto.stockGeneral);
             setLoadingData(false);            
         } catch (error) {
@@ -144,7 +151,7 @@ export const ModalCalcPrecio = ({
                                 <div className="box-wrap-descripcion3">
                                     <span>
                                         <p>T. de gastos adicionales: </p>
-                                        <h4>S/. { gastosAdicionales }</h4>
+                                        <h4>S/. { moneda(gastosAdicionales) }</h4>
                                     </span>
 
                                     <span>
@@ -154,27 +161,25 @@ export const ModalCalcPrecio = ({
 
                                     <span>
                                         <p>Gastos adicionales por unidad: </p>
-                                        <h4>S/. { adicionalesXUnidad }</h4>
+                                        <h4>S/. { moneda(adicionalesXUnidad) }</h4>
                                     </span>
 
                                     <span>
                                         <p>Nuevo costo del producto: </p>
-                                        <h4 className="success-i">S/. { costoRealProd }</h4>
+                                        <h4 className="success-i">S/. { moneda(costoRealProd) }</h4>
                                     </span>
 
                                     {
-                                        movimientoDetalle.productos.precio_compra > 0
+                                        compra > 0
                                         && (
                                             <span>
                                                 <p>Diferencia precios de compra: </p>
                                                 <h4 className={classDiferenciaPreciosComrpa()}>
-                                                    S/. { difePrecioCompra }
+                                                    S/. { moneda(difePrecioCompra) }
                                                 </h4>
                                             </span>
                                         )
                                     }
-
-                                    
 
                                 </div>                    
                             </div>
@@ -195,12 +200,11 @@ export const ModalCalcPrecio = ({
                                     <span>
                                         <p>Precio de compra registrado: </p>
                                         <h4>
-                                            { movimientoDetalle.productos.precio_compra === 0 
+                                            { compra === 0 
                                             ? "No registrado" 
-                                            : "S/. " + movimientoDetalle.productos.precio_compra }
+                                            : "S/. " + moneda(compra) }
                                         </h4>
                                     </span>
-
                                 </div>
                             </div>
                         </div>
@@ -213,9 +217,9 @@ export const ModalCalcPrecio = ({
                                         <p>Precio por unidad actual</p>
                                         <h3>
                                             {
-                                                movimientoDetalle.productos.precio_venta_1 === 0
+                                                venta1 === 0
                                                 ? "No registrado"
-                                                : "S/. " + movimientoDetalle.productos.precio_venta_1
+                                                : "S/. " + moneda(venta1)
                                             }
                                         </h3>
                                     </span>
@@ -223,9 +227,9 @@ export const ModalCalcPrecio = ({
                                         <p>Precio por menor actual</p>
                                         <h3>
                                             {
-                                                movimientoDetalle.productos.precio_venta_2 === 0
+                                                venta2 === 0
                                                 ? "No registrado"
-                                                : "S/. " + movimientoDetalle.productos.precio_venta_2
+                                                : "S/. " + moneda(venta2)
                                             }
                                         </h3>
                                     </span>
@@ -233,9 +237,9 @@ export const ModalCalcPrecio = ({
                                         <p>Precio por mayor actual</p>
                                         <h3>
                                             {
-                                                movimientoDetalle.productos.precio_venta_3 === 0
+                                                venta3 === 0
                                                 ? "No registrado"
-                                                : "S/. " + movimientoDetalle.productos.precio_venta_3
+                                                : "S/. " + moneda(venta3)
                                             }
                                         </h3>
                                     </span>

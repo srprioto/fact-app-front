@@ -3,6 +3,7 @@ import { Loading } from "../../../../components/loads/Loading";
 import { ModalWrap } from "../../../../components/modals/ModalWrap";
 
 import { getOne } from "../../../../resources/fetch";
+import { moneda } from "../../../../resources/func/moneda";
 import { MOVIMIENTOS } from "../../../../resources/routes";
 import { ProductoInfo } from "../../../productos/otros/ProductoInfo";
 import { InfoIngresoProductos } from "./InfoIngresoProductos";
@@ -60,9 +61,9 @@ export const BoxVerIngresos = ({ idIngreso }:boxVerIngresos) => {
     }
 
 
-    const classNoPrecios = (precio:any) => {
+    const classNoPrecios = (precioVenta1:number|string, precioCompra:number|string) => {
         let classItem:string = "";
-        if (precio === 0) {
+        if (precioVenta1 === 0 || precioCompra === 0) {
             classItem = "danger-i"
         }
         return classItem
@@ -96,17 +97,29 @@ export const BoxVerIngresos = ({ idIngreso }:boxVerIngresos) => {
                                 movimiento.movimientoDetalles
                                 && (
                                     movimiento.movimientoDetalles.map((e:any) => {
+
+                                        const precioVenta1:number = Number(e.productos.precio_venta_1)
+                                        const precioCompra:number = Number(e.productos.precio_compra)
+
                                         return (
-                                            <tr key={e.id} className={classNoPrecios(e.productos.precio_venta_1)}>
+                                            <tr 
+                                                key={e.id} 
+                                                className={classNoPrecios(precioVenta1, precioCompra)}
+                                            >
                                                 <td className={
-                                                    classNoPrecios(e.productos.precio_venta_1) === ""
+                                                    classNoPrecios(precioVenta1, precioCompra) === ""
                                                     ? "info"
-                                                    : classNoPrecios(e.productos.precio_venta_1)
+                                                    : classNoPrecios(precioVenta1, precioCompra)
                                                 }>{ e.productos.nombre }</td>
                                                 <td><ProductoInfo producto={e.productos} /></td>
                                                 <td>{ e.cantidad }</td>
-                                                <td>S/. { e.precio_unidad }</td>
-                                                <td className="info strong">S/. { e.precio_parcial }</td>
+                                                <td>S/. { moneda(e.precio_unidad) }</td>
+                                                <td className={
+                                                    "strong " +
+                                                    (classNoPrecios(precioVenta1, precioCompra) === ""
+                                                    ? "info"
+                                                    : classNoPrecios(precioVenta1, precioCompra))
+                                                }>S/. { moneda(e.precio_parcial) }</td>
                                                 <td>{ e.proveedores && e.proveedores.nombre }</td>
                                                 <td>{ e.descripcion }</td>
                                                 <td>
@@ -122,7 +135,6 @@ export const BoxVerIngresos = ({ idIngreso }:boxVerIngresos) => {
                             }
                         </tbody>
                     </table>
-
                 </div>
 
                 <InfoIngresoProductos movimiento={movimiento} />
@@ -138,7 +150,6 @@ export const BoxVerIngresos = ({ idIngreso }:boxVerIngresos) => {
                     />
                 </ModalWrap>
                 
-
             </div>
         )
     )

@@ -1,4 +1,5 @@
 import { zeroFill } from "../../../../resources/func/ceroFill"
+import { moneda } from "../../../../resources/func/moneda"
 
 export const InfoIngresoProductos = ({ movimiento }:any) => {
     return (
@@ -9,19 +10,19 @@ export const InfoIngresoProductos = ({ movimiento }:any) => {
                 <div className="box-wrap-descripcion3">
                     <span>
                         <p>Subtotal</p>
-                        <h4>S/. { movimiento.subtotal }</h4>
+                        <h4>S/. { moneda(movimiento.subtotal) }</h4>
                     </span>
                     <span>
                         <p>Costo de transporte</p>
-                        <h4>S/. { movimiento.costo_transporte }</h4>
+                        <h4>S/. { moneda(movimiento.costo_transporte) }</h4>
                     </span>
                     <span>
                         <p>Otros costos</p>
-                        <h4>S/. { movimiento.costo_otros }</h4>
+                        <h4>S/. { moneda(movimiento.costo_otros) }</h4>
                     </span>
                     <span>
                         <p>Total</p>
-                        <h4>S/. { movimiento.total }</h4>
+                        <h4>S/. { moneda(movimiento.total) }</h4>
                     </span>
                 </div>
             </div>
