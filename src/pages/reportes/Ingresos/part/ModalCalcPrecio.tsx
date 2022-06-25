@@ -6,7 +6,17 @@ import { Loading } from "../../../../components/loads/Loading";
 import { Modal } from "../../../../components/modals/Modal"
 import { get, put } from "../../../../resources/fetch";
 import { moneda } from "../../../../resources/func/moneda";
+import { redondeo } from "../../../../resources/func/redondeo";
 import { LOCAL_STOCK, PRODUCTOS } from "../../../../resources/routes";
+
+interface modalCalcPrecio {
+    modal:boolean;
+    setModal:Function;
+    movimientoDetalle:any; 
+    gastosAdicionales:number;
+    totalProductos:number;
+    getDataOne:Function;
+}
 
 export const ModalCalcPrecio = ({ 
     modal, 
@@ -15,18 +25,20 @@ export const ModalCalcPrecio = ({
     gastosAdicionales, 
     totalProductos,
     getDataOne
-}:any) => {
+}:modalCalcPrecio) => {
 
     const compra:number = Number(movimientoDetalle.productos.precio_compra);
     const venta1:number = Number(movimientoDetalle.productos.precio_venta_1);
     const venta2:number = Number(movimientoDetalle.productos.precio_venta_2);
     const venta3:number = Number(movimientoDetalle.productos.precio_venta_3);
     const precioUnidad:number = Number(movimientoDetalle.precio_unidad);
+    const descuentoPrecio2:number = 0;
+    const descuentoPrecio3:number = 0;
 
     const multiploDePrecio:number = 1; // multiplo para calcular el precio de venta en base al precio del costo
 
-    const idProducto:number = movimientoDetalle.productos.id;
-    const adicionalesXUnidad:number = gastosAdicionales / totalProductos;
+    const idProducto:number = Number(movimientoDetalle.productos.id);
+    const adicionalesXUnidad:number = Number(gastosAdicionales / totalProductos);
     const costoRealProd:number = precioUnidad + adicionalesXUnidad;
     const difePrecioCompra:number = costoRealProd - compra;
 
@@ -34,29 +46,29 @@ export const ModalCalcPrecio = ({
     // añadir aqui el calculo en caso de que se requiera algo mas especifico
     const acumAddPrecio:number = (difePrecioCompra / 2);
 
-    const precioVenta1:number = (
+    const precioVenta1:number = Number((
         venta1 <= 0
         ? (costoRealProd + (costoRealProd * multiploDePrecio))
         : compra === 0
         ? venta1
         : venta1 + acumAddPrecio
-    );
+    ).toFixed());
 
-    const precioVenta2:number = (
+    const precioVenta2:number = Number((
         venta2 <= 0
         ? (costoRealProd + (costoRealProd * multiploDePrecio))
         : compra === 0
         ? venta2
         : venta2 + acumAddPrecio
-    );
+    ).toFixed());
 
-    const precioVenta3:number = (
+    const precioVenta3:number = Number((
         venta3 <= 0
         ? (costoRealProd + (costoRealProd * multiploDePrecio))
         : compra === 0
         ? venta3
         : venta3 + acumAddPrecio
-    );
+    ).toFixed());
 
 
     const [loadingData, setLoadingData] = useState<boolean>(false); // loading general
@@ -64,8 +76,8 @@ export const ModalCalcPrecio = ({
     const [producto, setProducto] = useState({
         precio_compra: costoRealProd,
         precio_venta_1: Number(precioVenta1),
-        precio_venta_2: Number(precioVenta2),
-        precio_venta_3: Number(precioVenta3)
+        precio_venta_2: Number(precioVenta2 - descuentoPrecio2),
+        precio_venta_3: Number(precioVenta3 - descuentoPrecio3)
     });
 
 
@@ -290,8 +302,6 @@ export const ModalCalcPrecio = ({
                                 <BiReply /> Regresar
                             </button>
                         </div>
-
-
                     </div>
                 )
             }

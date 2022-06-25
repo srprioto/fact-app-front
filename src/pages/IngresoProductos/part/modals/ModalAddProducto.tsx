@@ -109,7 +109,7 @@ export const ModalAddProducto = ({
     }
 
     const reiniciarSelect = () => { // reinicia ambos select
-        setSwitchProductos(false);
+        // setSwitchProductos(false);
         setSwitchProveedores(false);
     }
 
@@ -119,7 +119,7 @@ export const ModalAddProducto = ({
             producto: { id: 0, nombre: "" }
         })
         setProductoSolo({})
-        setSwitchProductos(false);
+        // setSwitchProductos(false);
     }
 
     const reinicioProveedor = () => { // reinicia solo proveedor
@@ -160,7 +160,7 @@ export const ModalAddProducto = ({
                             // link="/productos/crear-producto"
                             modal={setModalCrearProducto}
                             switchSelect={switchProductos}
-                            setSwitchSelect={setSwitchProductos}
+                            // setSwitchSelect={setSwitchProductos}
                             placeholder="Nombre o codigo ..."
                             reinicios={reinicioProducto}
                         />

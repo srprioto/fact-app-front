@@ -47,7 +47,7 @@ export const BoxVerIngresos = ({ idIngreso }:boxVerIngresos) => {
     }
 
 
-    const handlerCalcularTotalProductos = () => { 
+    const handlerCalcularTotalProductos = ():number => { 
 
         let totalProductos:number = 0;
 
@@ -68,7 +68,7 @@ export const BoxVerIngresos = ({ idIngreso }:boxVerIngresos) => {
         }
         return classItem
     }
-    
+       
 
     return (
         loadingOne
@@ -144,7 +144,7 @@ export const BoxVerIngresos = ({ idIngreso }:boxVerIngresos) => {
                         modal={modalCalcPrecio}
                         setModal={setModalCalcPrecio}
                         movimientoDetalle={movimientoDetalle}
-                        gastosAdicionales={movimiento.costo_transporte + movimiento.costo_otros}
+                        gastosAdicionales={Number(movimiento.costo_transporte) + Number(movimiento.costo_otros)}
                         totalProductos={handlerCalcularTotalProductos()}
                         getDataOne={getDataOne}
                     />

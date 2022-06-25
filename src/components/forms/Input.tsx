@@ -10,7 +10,33 @@ interface input {
     noMenos?:boolean;
 }
 
-export const Input = ({ label, type = "text", name, value, placeholder, onChange, color = "", moneda, noMenos }:input) => {
+export const Input = ({ 
+    label, 
+    type = "text", 
+    name, 
+    value, 
+    placeholder, 
+    onChange, 
+    color = "", 
+    moneda, 
+    noMenos
+}:input) => {
+
+    // const checkValue = () => { 
+    //     if (
+    //         // value === isNaN ||
+    //         // value === "" || 
+    //         value === isNaN || 
+    //         value === undefined || 
+    //         value === null || 
+    //         value <= 0
+    //     ) {
+    //         return true
+    //     } else {
+    //         return false
+    //     }
+    // }
+
     return (
         <div className="wrap-form">
             {
@@ -39,13 +65,11 @@ export const Input = ({ label, type = "text", name, value, placeholder, onChange
                                 name={name} 
                                 id={name}
                                 value={
-                                    value === isNaN || 
-                                    value === undefined || 
-                                    value === null || 
-                                    value === "" || 
                                     value === isNaN ||
+                                    value === undefined ||
+                                    value === null ||
                                     value <= 0
-                                    ? "" 
+                                    ? ""
                                     : value
                                 }
                                 onWheel={ event => event.currentTarget.blur() }
@@ -61,11 +85,10 @@ export const Input = ({ label, type = "text", name, value, placeholder, onChange
                                 name={name} 
                                 id={name} 
                                 value={
-                                    value === isNaN || 
-                                    value === undefined || 
-                                    value === null || 
-                                    value === "" || 
-                                    value === isNaN
+                                    value === isNaN ||
+                                    value === undefined ||
+                                    value === null ||
+                                    value === 0
                                     ? "" 
                                     : value
                                 }
@@ -77,15 +100,15 @@ export const Input = ({ label, type = "text", name, value, placeholder, onChange
                         )  
                     ) : (
                         <input 
-                        type={type} 
-                        name={name} 
-                        id={name} 
-                        value={value}
-                        onWheel={ event => event.currentTarget.blur() }
-                        onChange={onChange}
-                        placeholder={placeholder}
-                        autoComplete="off"
-                    /> 
+                            type={type} 
+                            name={name} 
+                            id={name} 
+                            value={value}
+                            onWheel={ event => event.currentTarget.blur() }
+                            onChange={onChange}
+                            placeholder={placeholder}
+                            autoComplete="off"
+                        /> 
                     )
                 }
                 {

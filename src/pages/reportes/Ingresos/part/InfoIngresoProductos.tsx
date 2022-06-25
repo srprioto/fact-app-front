@@ -10,7 +10,7 @@ export const InfoIngresoProductos = ({ movimiento }:any) => {
                 <div className="box-wrap-descripcion3">
                     <span>
                         <p>Subtotal</p>
-                        <h4>S/. { moneda(movimiento.subtotal) }</h4>
+                        <h4 className="info-i">S/. { moneda(movimiento.subtotal) }</h4>
                     </span>
                     <span>
                         <p>Costo de transporte</p>
@@ -22,7 +22,9 @@ export const InfoIngresoProductos = ({ movimiento }:any) => {
                     </span>
                     <span>
                         <p>Total</p>
-                        <h4>S/. { moneda(movimiento.total) }</h4>
+                        <h3 className="success-i">
+                            <strong>S/. { moneda(movimiento.total) }</strong>
+                        </h3>
                     </span>
                 </div>
             </div>
