@@ -8,19 +8,16 @@ import { LoadSwitchBtn } from "../../../../components/btns/LoadSwitchBtn";
 
 import { getOne } from "../../../../resources/fetch";
 import { CLIENTES } from "../../../../resources/routes";
-import { ValidCreateCliente } from "../../../../resources/validations/Clientes";
+import { ValidCreateCliente, ValidRegistroClienteDni, ValidRegistroClienteRuc } from "../../../../resources/validations/Clientes";
+import { SelectMk } from "../../../../components/forms/SelectMk";
+import { InputDisable } from "../../../../components/forms/InputDisable";
+import { initialCrearCliente } from "../../../../resources/dtos/Cliente";
 
 
 export const FormEditarCliente = ({ id, handlerEdit, loadingUpdate }:any) => {
 
     const [loadingGetOne, setLoadingGetOne] = useState<boolean>(false);
-    const [cliente, setCliente] = useState<any>({
-        nombre: "",
-        documento: "",
-        direccion: "",
-        telefono: "",
-        email: ""
-    });
+    const [cliente, setCliente] = useState<any>(initialCrearCliente);
 
     useEffect(() => {
         getDataOne();
@@ -38,24 +35,33 @@ export const FormEditarCliente = ({ id, handlerEdit, loadingUpdate }:any) => {
         }
     }
 
+
     return (
         <Formik
             enableReinitialize={true}
             initialValues={cliente}
-            validationSchema={ValidCreateCliente}
-            onSubmit={(data, { resetForm }) => { 
+            validationSchema={cliente.tipoDocumento === "DNI" ? ValidRegistroClienteDni : ValidRegistroClienteRuc}
+            onSubmit={(data) => { 
                 handlerEdit({
+                    tipoDocumento: data.tipoDocumento,
+                    numero_documento: data.numero_documento,
+                    razonSocial: data.razonSocial,
+                    nombreComercial: data.nombreComercial,
+                    codigo_pais: data.codigo_pais,
+                    departamento: data.departamento,
+                    provincia: data.provincia,
+                    distrito: data.distrito,
                     nombre: data.nombre,
-                    documento: data.documento,
                     direccion: data.direccion,
                     telefono: data.telefono,
                     email: data.email,
+                    ubigeo: data.ubigeo
                 });
                      
             }}
         >
             
-            {({ errors }) => (
+            {({ errors, values }) => (
 
                 loadingGetOne
                 ? <Loading />
@@ -63,24 +69,85 @@ export const FormEditarCliente = ({ id, handlerEdit, loadingUpdate }:any) => {
 
                     <Form className="grid-1 gap mt-25 mb-25">
 
-                        <h4 className="desc-form">Informacion personal</h4>
+                        <h4 className="desc-form">Informacion de registro</h4>
                         <div className="grid-2 gap">
 
-                            <InputMk 
-                                label="Nombre del cliente"
+                            {/* <SelectMk
+                                label="Tipo de documento"
                                 type="text"
-                                name="nombre"
-                                error={errors.nombre}
+                                name="tipoDocumento"
+                                error={errors.tipoDocumento}
+                            >
+                                <option value="DNI">DNI</option>
+                                <option value="RUC">RUC</option>
+                            </SelectMk> */}
+
+                            <InputDisable
+                                label="Tipo de documento"
+                                value={values.tipoDocumento}
                             />
-                            <InputMk 
+
+                            {/* <div>
+                                <InputMk 
+                                    // label="Documento"
+                                    type="text"
+                                    name="numero_documento"
+                                    error={errors.numero_documento}
+                                />
+                            </div> */}
+
+                            <InputDisable
                                 label="Documento"
-                                type="text"
-                                name="documento"
-                                error={errors.documento}
+                                value={values.numero_documento}
                             />
 
                         </div>
 
+                        <h4 className="desc-form">Informacion del cliente</h4>
+                        <div className="grid-1 gap">
+
+                            <div className="grid-2 gap">
+
+                                <InputMk 
+                                    label="Razon social"
+                                    type="text"
+                                    name="razonSocial"
+                                    error={errors.razonSocial}
+                                />
+                                
+                                <InputMk 
+                                    label="Nombre comercial"
+                                    type="text"
+                                    name="nombreComercial"
+                                    error={errors.nombreComercial}
+                                />
+
+                            </div>
+
+                            <div className="grid-3 gap">
+                                <InputMk 
+                                    label="Nombre del cliente"
+                                    type="text"
+                                    name="nombre"
+                                    error={errors.nombre}
+                                />
+                                <InputMk 
+                                    label="Telefono"
+                                    type="text"
+                                    name="telefono"
+                                    error={errors.telefono}
+                                />
+                                <InputMk 
+                                    label="Email"
+                                    type="text"
+                                    name="email"
+                                    error={errors.email}
+                                />
+                            </div>
+
+                        </div>
+
+                        <h4 className="desc-form">Ubicacion</h4>
                         <div className="grid-3 gap">
 
                             <InputMk 
@@ -89,18 +156,41 @@ export const FormEditarCliente = ({ id, handlerEdit, loadingUpdate }:any) => {
                                 name="direccion"
                                 error={errors.direccion}
                             />
-                            <InputMk 
-                                label="Telefono"
+
+                            <SelectMk
+                                label="Codigo del país"
                                 type="text"
-                                name="telefono"
-                                error={errors.telefono}
+                                name="codigo_pais"
+                                error={errors.codigo_pais}
+                            >
+                                <option value="PE">Perú</option>
+                            </SelectMk>
+
+                            <InputMk 
+                                label="Ubigeo"
+                                type="text"
+                                name="ubigeo"
+                                error={errors.ubigeo}
                             />
                             <InputMk 
-                                label="Email"
+                                label="Departamento"
                                 type="text"
-                                name="email"
-                                error={errors.email}
+                                name="departamento"
+                                error={errors.departamento}
                             />
+                            <InputMk 
+                                label="Provincia"
+                                type="text"
+                                name="provincia"
+                                error={errors.provincia}
+                            />
+                            <InputMk 
+                                label="Distrito"
+                                type="text"
+                                name="distrito"
+                                error={errors.distrito}
+                            />
+
                         </div>
 
                         <div className="grid-4 gap mt-15">

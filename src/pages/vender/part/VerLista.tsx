@@ -176,7 +176,6 @@ export const VerLista = ({
                     setShowWindow={setShowWindow}
                 />
             </ModalWrap>
-
         </div>
     )
 }
