@@ -140,7 +140,7 @@ export const Clientes = () => {
                         onChangeSearch={onChangeSearch}
                         handlerStateSearch={handlerStateSearch}
                         searchFocus={searchFocus}
-                        placeholder="Nombre o documento ..."
+                        placeholder="Nombre, razon social o documento ..."
                     />
                     {/* <div></div> */}
                     
@@ -166,8 +166,10 @@ export const Clientes = () => {
                                 
                                 <thead>
                                     <tr>
-                                        <th>Nombre</th>
+                                        <th>Nombre / Razon social</th>
+                                        <th>Tipo Doc.</th>
                                         <th>Documento</th>
+                                        <th>Telefono</th>
                                         <th>Email</th>
                                         <th className="transparent inlineblock">...</th>
                                     </tr>
@@ -191,7 +193,7 @@ export const Clientes = () => {
                         )
                     )
                 }
-
+                
                 <Pagination 
                     getData={getData}
                     previous={pagination.links.previous} 
@@ -203,7 +205,6 @@ export const Clientes = () => {
             </div>
 
             {/* modals aqui */}
-
             <ModalEliminar 
                 modal={ modalEliminar } 
                 setModal={ setModalEliminar } 

@@ -807,6 +807,20 @@
     }
 }
 
+// crear cliente
+.nuevo-cliente{
+    .label-documento{
+        label{
+            vertical-align: middle;
+        }
+        svg{
+            vertical-align: middle;
+            color: $success;
+        }
+    }
+}
+
+
 
 // reportes
 // ingreso de productos

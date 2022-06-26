@@ -22,3 +22,11 @@ export const LoadingImg2 = ({ size }:loadingImg) => {
             </div>
     )
 }
+
+export const LoadingImg3 = ({ size }:any) => {
+    return (
+            <span className="rotarIcon">
+                <BiLoaderAlt size={size} />
+            </span>
+    )
+}

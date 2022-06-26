@@ -72,3 +72,14 @@ const MsgError = ({ error }:any) => {
         </div>
     )
 }
+
+
+/* <SelectMk
+    label="Tipo de documento"
+    type="text"
+    name="tipo_documento"
+    error={errors.tipo_documento}
+>
+    <option value="DNI">DNI</option>
+    <option value="Pasaporte">Pasaporte</option>
+</SelectMk> */

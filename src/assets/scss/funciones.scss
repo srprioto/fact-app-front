@@ -96,5 +96,32 @@
     }
 }
 
+@mixin resume($width) {
+    width: $width;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin: 0;
+}
+
+@mixin box-resume($width) {
+    width: $width;
+    p{
+        width: $width;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        margin: 0;
+    }
+    /* display: inline-block; */
+    /* margin: 0; */
+    /* height: 18px; */
+    /* padding: 0; */
+    /* position: relative; */
+    /* text-align: center; */
+    /* text-decoration: none; */
+    /* color: #000; */
+}
+
 // forma de uso
 // @include min-scroll(144px);

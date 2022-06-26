@@ -10,10 +10,11 @@ export const ValidCreateCliente = Yup.object({
 
 })
 
+// validacion desde vender o cobrar
 export const ValidClienteDni = Yup.object({
     // numero_documento: Yup.string().required('Requerido'),
     nombre: Yup.string().required('Requerido'),
-    telefono: Yup.string().required('Requerido')
+    telefono: Yup.string().required('Requerido').matches(/^[0-9]+$/, "Requiere solo numeros")
     // direccion: Yup.string().required('Requerido'),
     // email: Yup.string().required('Requerido'),
 })
@@ -22,7 +23,7 @@ export const ValidClienteRuc = Yup.object({
     // numero_documento: Yup.string().required('Requerido'),
     razonSocial: Yup.string().required('Requerido'),
     direccion: Yup.string().required('Requerido'),
-    telefono: Yup.string().required('Requerido')
+    telefono: Yup.string().required('Requerido').matches(/^[0-9]+$/, "Requiere solo numeros")
 })
 
 export const ValidDocumento = (tipoDoc:string) => { 
@@ -41,6 +42,38 @@ export const ValidDocumento = (tipoDoc:string) => {
             .max(totalDigitos, `Necesita ${totalDigitos} digitos exactamente`)
     })
 }
+
+
+// validacion desde registro
+export const ValidRegistroClienteDni = Yup.object({
+    numero_documento: Yup
+        .string()
+        .required('Requerido')
+        .matches(/^[0-9]+$/, "Requiere solo numeros")
+        .min(8, `Necesita 8 digitos exactamente`)
+        .max(8, `Necesita 8 digitos exactamente`),
+    nombre: Yup.string().required('Requerido'),
+    telefono: Yup.string().required('Requerido').matches(/^[0-9]+$/, "Requiere solo numeros"),
+    direccion: Yup.string().required('Requerido'),
+    email: Yup.string().email('Formato de Email invaido').required('Requerido'),
+    ubigeo: Yup.string().matches(/^[0-9]+$/, "Requiere solo numeros")
+})
+
+export const ValidRegistroClienteRuc = Yup.object({
+    numero_documento: Yup
+        .string()
+        .required('Requerido')
+        .matches(/^[0-9]+$/, "Requiere solo numeros")
+        .min(11, `Necesita 11 digitos exactamente`)
+        .max(11, `Necesita 11 digitos exactamente`),
+    razonSocial: Yup.string().required('Requerido'),
+    direccion: Yup.string().required('Requerido'),
+    telefono: Yup.string().required('Requerido').matches(/^[0-9]+$/, "Requiere solo numeros"),
+    email: Yup.string().email('Formato de Email invaido').required('Requerido'),
+    ubigeo: Yup.number(),
+})
+
+
 
 
 

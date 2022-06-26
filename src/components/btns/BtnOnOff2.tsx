@@ -15,7 +15,7 @@ export const BtnOnOff2 = ({ label = "Aceptar", estado, icon, children }:btnOnOff
                 ? (
                     children
                 ) : (
-                    <button className="btn btn-disable">
+                    <button className="btn btn-disable" type="button">
                         { icon ? icon : <BiCheck /> } { " " + label }
                     </button>
                 )

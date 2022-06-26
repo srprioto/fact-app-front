@@ -9,6 +9,21 @@ export interface ClienteDto {
     updated_at:string;
 }
 
+export const initialCrearCliente = {
+    tipoDocumento: "DNI",
+    numero_documento: "",
+    razonSocial: "",
+    nombreComercial: "",
+    codigo_pais: "",
+    departamento: "",
+    provincia: "",
+    distrito: "",
+    nombre: "",
+    direccion: "",
+    telefono: "",
+    email: "",
+    ubigeo: 0
+}
 
 // export const clienteInfo = {
 //     estadoCliente: "",
