@@ -103,7 +103,6 @@ export const ModalVentaConfirmar = ({
     }
 
     
-
     return (
         <Modal
             modal={modal}

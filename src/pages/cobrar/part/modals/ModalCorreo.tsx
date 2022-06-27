@@ -44,6 +44,7 @@ export const ModalCorreo = ({ modal, setModal, venta, confirmarVenta }:any) => {
         
     }
 
+    
     return (
         <Modal
             title="Ingresa e-mail destino"
@@ -53,7 +54,7 @@ export const ModalCorreo = ({ modal, setModal, venta, confirmarVenta }:any) => {
         >
             <Formik
                 initialValues={{
-                    email: ""
+                    email: venta.clientes.email ? venta.clientes.email : ""
                 }}
 
                 validationSchema={ValidVentaEmail}

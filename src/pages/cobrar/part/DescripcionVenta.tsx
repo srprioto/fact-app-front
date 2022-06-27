@@ -319,20 +319,3 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
         </div>
     )
 }
-
-
-/* <div className="desc-formas-pago">
-                            
-    <div className={"nota-venta " + (tabbs === 1 ? "tabb-enable" : "tabb-disable")}>
-        <h1>nota de venta</h1>
-    </div>
-
-    <div className={"boleta " + (tabbs === 2 ? "tabb-enable" : "tabb-disable")}>
-        <h1>boleta</h1>
-    </div>
-
-    <div className={"factura " + (tabbs === 3 ? "tabb-enable" : "tabb-disable")}>
-        <h1>factura</h1>
-    </div>
-
-</div> */
