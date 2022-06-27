@@ -40,11 +40,11 @@ export const ModalCorreo = ({ modal, setModal, venta, confirmarVenta }:any) => {
         } finally {
             // setModal(false);
             await confirmarVenta("listo");    
-        }        
+        }
         
     }
 
-    
+
     return (
         <Modal
             title="Ingresa e-mail destino"

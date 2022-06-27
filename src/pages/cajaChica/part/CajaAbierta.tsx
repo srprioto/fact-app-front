@@ -8,7 +8,10 @@ export const CajaAbierta = ({ data, caja, setCaja, setModalCerrarCaja, setModalA
     const [showObserv, setShowObserv] = useState<boolean>(false);
 
     const infoCaja:any = data.caja && data.caja;
-    const totalEfectivo:number = infoCaja.monto_apertura + infoCaja.monto_efectivo + infoCaja.otros_montos;
+    const totalEfectivo:number = 
+        Number(infoCaja.monto_apertura) + 
+        Number(infoCaja.monto_efectivo) + 
+        Number(infoCaja.otros_montos);
     
     const handlerCerrarCaja = () => { 
         setCaja({
