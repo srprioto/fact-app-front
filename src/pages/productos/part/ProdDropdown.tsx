@@ -1,11 +1,10 @@
-import { BiBarcodeReader, BiPencil, BiTrash } from "react-icons/bi";
+import { BiBarcodeReader, BiPencil, BiShowAlt, BiTrash } from "react-icons/bi";
 import { Link } from "react-router-dom";
+import { DropDown } from "../../../components/DropDown";
 
-// import { DropDown } from "../../../components/DropDown"
-
-export const ProdDropdown = ({ id, nombre, producto, handlerDeleted, handlerBarcode }:any) => {
+export const ProdDropdown = ({ id, nombre, producto, handlerDeleted, handlerBarcode, handlerVer }:any) => {
     return (
-        <div className="dd-prod-int">
+        <DropDown>
             <span onClick={ () => handlerDeleted(id, nombre) }>
                 <BiTrash /> Eliminar
             </span>
@@ -15,6 +14,9 @@ export const ProdDropdown = ({ id, nombre, producto, handlerDeleted, handlerBarc
             <span onClick={ () => handlerBarcode(producto) }>
                 <BiBarcodeReader /> Codigo de barras
             </span>
-        </div>
+            <span onClick={ () => handlerVer(producto) }>
+                <BiShowAlt /> Ver Producto
+            </span>
+        </DropDown>
     )
 };

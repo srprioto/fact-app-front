@@ -4,6 +4,10 @@ import { CajaDropDown } from "./CajaDropDown";
 
 export const ItemCaja = ({ item, handlerVer }:any) => {
 
+    const montoEfectivo:number = Number(item.monto_efectivo);
+    const montoApertura:number = Number(item.monto_apertura);
+    const montoOtros:number = Number(item.otros_montos);
+
     return (
         <tr className="items-caja">
 
@@ -15,16 +19,16 @@ export const ItemCaja = ({ item, handlerVer }:any) => {
                 }
             </td>
 
-            <td className="info">S/. { moneda(item.monto_apertura) }</td>
+            <td className="info">S/. { moneda(montoApertura) }</td>
 
             <td className={
                 "strong " +
-                (item.cantidad_diferencia > 0
+                (Number(item.cantidad_diferencia) > 0
                 ? "danger"
                 : "primary")
-            }>S/. { moneda(item.monto_efectivo + item.monto_apertura + item.otros_montos) }</td>
+            }>S/. { moneda(montoEfectivo + montoApertura + montoOtros) }</td>
 
-            <td className="success strong">S/. { moneda(item.monto_efectivo + item.otros_montos) }</td>
+            <td className="success strong">S/. { moneda(montoEfectivo + montoOtros) }</td>
 
             <td>{ item.created_at }</td>
 

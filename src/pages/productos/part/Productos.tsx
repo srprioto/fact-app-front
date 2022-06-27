@@ -13,6 +13,8 @@ import { paginate, post } from "../../../resources/fetch";
 import { PRODUCTOS, PRODUCTOS_SEARCH } from "../../../resources/routes";
 import { NoRegistros } from "../../../components/NoRegistros";
 import { ModalCodigoBarras } from "./ModalCodigoBarras";
+import { ModalWrap } from "../../../components/modals/ModalWrap";
+import { ModalVerProducto } from "./ModalVerProducto";
 
 export const Productos = () => {
 
@@ -21,7 +23,7 @@ export const Productos = () => {
 
     const [modalEliminar, setModalEliminar] = useState<boolean>(false);
     const [modalBarcode, setModalBarcode] = useState<boolean>(false);
-    // const [modalVer, setModalVer] = useState<boolean>(false);
+    const [modalVer, setModalVer] = useState<boolean>(false);
 
     const [pagination, setPagination] = useState<any>({ meta: {}, links: {} });
 
@@ -89,10 +91,10 @@ export const Productos = () => {
         setModalEliminar(!modalEliminar);
     }
 
-    // const handlerVer = (id:number) => { 
-    //     getOneData(id);
-    //     setModalVer(!modalVer);
-    // }
+    const handlerVer = (prod:any) => { 
+        setProducto(prod);
+        setModalVer(!modalVer);
+    }
 
     const handlerModalBarcode = (prod:any) => { 
         setProducto(prod);
@@ -173,21 +175,39 @@ export const Productos = () => {
                         data.length <= 0
                         ? <NoRegistros />
                         : (
-                            <div className="grid-4 gap">
-                                {
-                                    data.map((e:any) => {
-                                        return (
-                                            <Producto
-                                                key={e.id}
-                                                producto={e}
-                                                handlerDeleted={handlerDeleted}
-                                                handlerBarcode={handlerModalBarcode}
-                                                // handlerVer={handlerVer}
-                                            />
-                                        )
-                                    })   
-                                }
-                            </div>
+                            <table className="table">
+                                
+                                <thead>
+                                    <tr>
+                                        <th>Codigo</th>
+                                        <th>Nombre del prod.</th>
+                                        <th>Marca</th>
+                                        <th>Talla</th>
+                                        <th>Color</th>
+                                        <th>P/u</th>
+                                        <th>P/men</th>
+                                        <th>P/may</th>
+                                        <th className="transparent inlineblock">...</th>
+                                    </tr>
+                                </thead>
+                                
+                                <tbody>
+                                    {
+                                        data.map((e:any) => {
+                                            return (
+                                                <Producto
+                                                    key={e.id}
+                                                    producto={e}
+                                                    handlerDeleted={handlerDeleted}
+                                                    handlerBarcode={handlerModalBarcode}
+                                                    handlerVer={handlerVer}
+                                                />
+                                            )
+                                        })   
+                                    }
+                                </tbody>
+                            </table>
+                            
                         )
                     )
                 }
@@ -212,12 +232,15 @@ export const Productos = () => {
                 setSearchState={setSearchState}
             />
 
-            {/* <ModalVer
-                data={cliente}
-                modal={modalVer}
-                setModal={setModalVer}
-                loading={loadingOne}
-            /> */}
+            <ModalWrap modal={modalVer}>
+                <ModalVerProducto
+                    producto={producto}
+                    modal={modalVer}
+                    setModal={setModalVer}
+                    // loading={loadingOne}
+                />
+            </ModalWrap>
+            
 
             <ModalCodigoBarras
                 modal={modalBarcode}
@@ -229,3 +252,20 @@ export const Productos = () => {
         </div>
     )
 }
+
+
+/* <div className="grid-4 gap">
+{
+    data.map((e:any) => {
+        return (
+            <Producto
+                key={e.id}
+                producto={e}
+                handlerDeleted={handlerDeleted}
+                handlerBarcode={handlerModalBarcode}
+                // handlerVer={handlerVer}
+            />
+        )
+    })   
+}
+</div> */

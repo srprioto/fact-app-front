@@ -47,7 +47,7 @@ export const RapidaVenta = ({ loadVenta, setShowWindow, verificarCaja, handlerVe
                         className="btn btn-success"
                         handler={() => verificarCaja(handlerVenta, serie)}
                     >
-                        <BiCaretRight /> Vender
+                        <BiCaretRight /> Venta rapida
                     </LoadSwitchBtn2>
                 </BtnOnOff2>            
             </div>

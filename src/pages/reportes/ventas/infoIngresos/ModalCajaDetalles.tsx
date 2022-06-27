@@ -4,7 +4,12 @@ import { moneda } from "../../../../resources/func/moneda";
 
 export const ModalCajaDetalles = ({ modal, setModal, itemCaja }:any) => {
     
-    const totalCaja:number = itemCaja.monto_efectivo + itemCaja.monto_apertura + itemCaja.otros_montos
+    const totalCaja:number = 
+        Number(itemCaja.monto_efectivo) + 
+        Number(itemCaja.monto_apertura) + 
+        Number(itemCaja.otros_montos);
+        
+    const montoOtrosMedios:number = Number(itemCaja.monto_otros_medios);
 
     const mostrarCajaDetalles = () => { 
         const mostrarDetalles:number = itemCaja.cajaDetalles && itemCaja.cajaDetalles.length;
@@ -61,7 +66,7 @@ export const ModalCajaDetalles = ({ modal, setModal, itemCaja }:any) => {
 
                             <span>
                                 <p>Ingresos otros medios:</p>
-                                <h4 className="primary-i">S/. { moneda(itemCaja.monto_otros_medios) }</h4>
+                                <h4 className="primary-i">S/. { moneda(montoOtrosMedios) }</h4>
                             </span>
 
                             <span>
@@ -73,15 +78,25 @@ export const ModalCajaDetalles = ({ modal, setModal, itemCaja }:any) => {
                                 }>S/. { moneda(itemCaja.cantidad_diferencia) }</h4>
                             </span>
 
-                            <span>
-                                <p>Observaciones:</p>
-                                <h4>{ itemCaja.nota_observacion }</h4>
-                            </span>
+                            {
+                                itemCaja.nota_observacion
+                                ? (
+                                    <span>
+                                        <p>Observaciones:</p>
+                                        <h4 className="danger-i">{ itemCaja.nota_observacion }</h4>
+                                    </span>
+                                ) : (
+                                    <span>
+                                        <p className="transparent">...</p>
+                                        <h4 className="transparent">...</h4>
+                                    </span>
+                                )
+                            }
                             
                             <span>
                                 <p className="strong">Ingresos totales:</p>
                                 <h2 className="success-i strong">
-                                    S/. { moneda(itemCaja.monto_otros_medios + totalCaja) }
+                                    S/. { moneda(montoOtrosMedios + totalCaja) }
                                 </h2>
                             </span>
 

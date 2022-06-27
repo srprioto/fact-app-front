@@ -9,13 +9,15 @@ interface rapidaVenta {
     setShowWindow:Function;
     verificarVender:Function;
     estadoCliente:boolean;
+    labelBtn:string;
 }
 
 export const AccionesVenta = ({ 
     loadVenta, 
     setShowWindow, 
     verificarVender,
-    estadoCliente
+    estadoCliente,
+    labelBtn
 }:rapidaVenta) => {
 
     const auth = useAuth();
@@ -38,14 +40,14 @@ export const AccionesVenta = ({
             )
         }>
             <div className="grid-6">
-                <button className="btn btn-primary" onClick={() => setShowWindow(1)}>
+                <button className="btn btn-primary" type="button" onClick={() => setShowWindow(1)}>
                     {/* <BiRightArrowAlt /> */}
                     <BiArrowBack />
                 </button>
             </div>
             
             <BtnOnOff2
-                label="Vender"
+                label={labelBtn}
                 estado={verVender()}
                 icon={<BiCaretRight />}
             >
@@ -53,7 +55,7 @@ export const AccionesVenta = ({
                     loading={loadVenta}
                     className="btn btn-success"
                 >
-                    <BiCaretRight /> Vender
+                    <BiCaretRight /> { labelBtn }
                 </LoadSwitchBtn2>
             </BtnOnOff2>
         </div>

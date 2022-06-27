@@ -100,6 +100,7 @@ export const FacturaVenta = ({
                 handlerVenta={handlerVenta}
                 verificarVender={verificarVender}
                 serie={serie}
+                labelBtn="Venta con factura"
             />
 
         </>

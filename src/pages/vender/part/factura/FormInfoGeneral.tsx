@@ -19,6 +19,7 @@ interface formInfoGeneral {
     verificarVender:Function;
     handlerOnChangeCliente:FormEventHandler<HTMLFormElement>
     serie:string;
+    labelBtn:string;
 }
 
 export const FormInfoGeneral = ({ 
@@ -32,7 +33,8 @@ export const FormInfoGeneral = ({
     handlerVenta,
     verificarVender,
     handlerOnChangeCliente,
-    serie
+    serie,
+    labelBtn
 }:formInfoGeneral) => {
 
     // useEffect(() => {
@@ -94,6 +96,7 @@ export const FormInfoGeneral = ({
                             setShowWindow={setShowWindow}
                             verificarVender={verificarVender}
                             estadoCliente={!!cliente.estadoCliente}
+                            labelBtn={labelBtn}
                         />
 
                     </Form>

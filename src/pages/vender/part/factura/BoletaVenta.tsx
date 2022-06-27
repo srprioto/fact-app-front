@@ -100,6 +100,7 @@ export const BoletaVenta = ({
                 handlerVenta={handlerVenta}
                 verificarVender={verificarVender}
                 serie={serie}
+                labelBtn="Venta con boleta"
             />
 
         </>
