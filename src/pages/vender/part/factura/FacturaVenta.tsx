@@ -27,7 +27,7 @@ export const FacturaVenta = ({
 }:factura) => {
 
     const serie:string = "F001";
-    const clienteI = clienteInfo(serie);
+    const clienteI = clienteInfo;
     const [loadCliente, setLoadCliente] = useState<boolean>(false);
     const [getCliente, setGetCliente] = useState<any>({ documento: "", tipoDocumento: "RUC", });
 
@@ -47,12 +47,14 @@ export const FacturaVenta = ({
         })
     }
     
+
     const handlerOnChangeCliente = (e:any) => { 
         setCliente({
             ...cliente,
             [e.target.name]: e.target.value
         })
     }
+
 
     const handlerGetCliente = async () => { 
         setLoadCliente(true);
@@ -64,7 +66,7 @@ export const FacturaVenta = ({
 
         try {
             const response = await post(updateData, CLIENTES + "/padron/search");
-            response.serie_documento = serie;
+            // response.serie_documento = serie;
             setCliente(response);
             setLoadCliente(false);
         } catch (error) {
@@ -97,6 +99,7 @@ export const FacturaVenta = ({
                 verificarCaja={verificarCaja}
                 handlerVenta={handlerVenta}
                 verificarVender={verificarVender}
+                serie={serie}
             />
 
         </>

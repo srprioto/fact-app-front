@@ -48,15 +48,15 @@ export const VerListaShort = ({
     // }
 
     const verificarCaja = (func:Function) => { 
-        caja.handlerEstadoCaja()
-        func()
+        caja.handlerEstadoCaja();
+        func();
     }
 
     const handlerVenta = async () => { 
         setLoadVenta(true);
-        const cliente:any = clienteInfo("")
+        const cliente:any = clienteInfo
         try {
-            const ventaResp:any = await postVenta(cliente);
+            const ventaResp:any = await postVenta(cliente, "V001");
             if (ventaResp.data) {
                 setVentaRespuesta(ventaResp.data);
                 setModalConfirm(true);
@@ -148,7 +148,6 @@ export const VerListaShort = ({
                     ventaRes={ventaRespuesta}
                 />
             </ModalWrap>
-
 
         </div>
     )

@@ -14,6 +14,7 @@ interface rapidaVenta {
 
 export const RapidaVenta = ({ loadVenta, setShowWindow, verificarCaja, handlerVenta, verificarVender }:rapidaVenta) => {
 
+    const serie:string = "V001";
     const verCaja:boolean = verificarVender();
     const auth = useAuth();
 
@@ -44,7 +45,7 @@ export const RapidaVenta = ({ loadVenta, setShowWindow, verificarCaja, handlerVe
                     <LoadSwitchBtn2
                         loading={loadVenta}
                         className="btn btn-success"
-                        handler={() => verificarCaja(handlerVenta)}
+                        handler={() => verificarCaja(handlerVenta, serie)}
                     >
                         <BiCaretRight /> Vender
                     </LoadSwitchBtn2>

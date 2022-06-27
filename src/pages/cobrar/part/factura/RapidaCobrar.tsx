@@ -1,8 +1,27 @@
 // import { BiCaretRight, BiX } from "react-icons/bi"
-import { BiCaretRight, BiX } from "react-icons/bi"
-import { ConfirmarVenta } from "./ConfirmarVenta"
+import { useEffect } from "react";
+import { BiCaretRight, BiX } from "react-icons/bi";
+// import { ConfirmarVenta } from "./ConfirmarVenta"
 
-export const RapidaCobrar = ({ setModalConfVenta, modalConfVenta, setModalRechazVenta, modalRechazVenta }:any) => {
+export const RapidaCobrar = ({ 
+    setModalConfVenta, 
+    modalConfVenta, 
+    setModalRechazVenta, 
+    modalRechazVenta,
+    venta,
+    setVenta,
+}:any) => {
+
+    const serie:string = "V001";
+
+    useEffect(() => {
+        setVenta({
+            ...venta,
+            serie: serie
+        })
+    }, [])
+    
+
     return (
         <div className="">
 

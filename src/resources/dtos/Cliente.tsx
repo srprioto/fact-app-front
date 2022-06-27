@@ -45,24 +45,22 @@ export const initialCrearCliente = {
 //     condom: "",
 // }
 
-export const clienteInfo = (serie:string) => { 
-    return {
-        estadoCliente: "",
-        tipoDocumento: "",
-        serie_documento: serie,
-        numero_documento: "",
-        nombre: "",
-        razonSocial: "",
-        nombreComercial: "",
-        ubigeo: 0,
-        direccion: "",
-        email: "",
-        telefono: "",
-        codigo_pais: "",
-        departamento: "",
-        provincia: "",
-        distrito: "",
-        estado: "",
-        condom: "",
-    }
+export const clienteInfo = {
+    estadoCliente: "",
+    tipoDocumento: "",
+    // serie_documento: serie,
+    numero_documento: "",
+    nombre: "",
+    razonSocial: "",
+    nombreComercial: "",
+    ubigeo: 0,
+    direccion: "",
+    email: "",
+    telefono: "",
+    codigo_pais: "",
+    departamento: "",
+    provincia: "",
+    distrito: "",
+    estado: "",
+    condom: "",
 }

@@ -21,12 +21,16 @@ interface factura {
     tipoSerie:Function;
     data:any
     tabbs:number;
+
+    venta:any;
+    setVenta:Function;
 }
 
 export const FacturaCobrar = ({ 
     cliente, setCliente, switchChange,
     setModalConfVenta, modalConfVenta, setModalRechazVenta, modalRechazVenta,
-    switchChangeFact, setTabbs, data, tipoSerie, tabbs
+    switchChangeFact, setTabbs, data, tipoSerie, tabbs,
+    venta, setVenta
 }:factura) => {
 
     const serie:string = "F001";
@@ -34,6 +38,12 @@ export const FacturaCobrar = ({
     const [loadCliente, setLoadCliente] = useState<boolean>(false);
     const [getCliente, setGetCliente] = useState<any>({ documento: "", tipoDocumento: "RUC", });
 
+    useEffect(() => {
+        setVenta({
+            ...venta,
+            serie: serie
+        })
+    }, [])
 
     useEffect(() => {
         // setCliente(clienteI);

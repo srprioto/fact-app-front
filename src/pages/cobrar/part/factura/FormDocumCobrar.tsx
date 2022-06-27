@@ -49,7 +49,7 @@ export const FormDocumCobrar = ({
                 documento: documento, tipoDocumento: tipDocument
             })
         } else {
-            setCliente(clienteInfo(""))
+            setCliente(clienteInfo)
         }
     }, [switchChangeFact, tabbs])
 

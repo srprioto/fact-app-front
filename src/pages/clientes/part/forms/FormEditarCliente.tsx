@@ -8,7 +8,7 @@ import { LoadSwitchBtn } from "../../../../components/btns/LoadSwitchBtn";
 
 import { getOne } from "../../../../resources/fetch";
 import { CLIENTES } from "../../../../resources/routes";
-import { ValidCreateCliente, ValidRegistroClienteDni, ValidRegistroClienteRuc } from "../../../../resources/validations/Clientes";
+import { ValidRegistroClienteDni, ValidRegistroClienteRuc } from "../../../../resources/validations/Clientes";
 import { SelectMk } from "../../../../components/forms/SelectMk";
 import { InputDisable } from "../../../../components/forms/InputDisable";
 import { initialCrearCliente } from "../../../../resources/dtos/Cliente";

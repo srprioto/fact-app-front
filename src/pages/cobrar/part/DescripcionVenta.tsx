@@ -30,8 +30,8 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
 
     const tipoSerie = ():number => { 
         if (clienteOk) {
-            if (data.clientes.serie_documento === "B001") return 2 
-            else if (data.clientes.serie_documento === "F001") return 3 
+            if (data.serie === "B001") return 2 
+            else if (data.serie === "F001") return 3 
             else return 1
         } else {
             return 1
@@ -39,7 +39,7 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
     }
     
     const [venta, setVenta] = useState<any>(data);
-    const [cliente, setCliente] = useState<any>(clienteOk ? data.clientes : clienteInfo(""));
+    const [cliente, setCliente] = useState<any>(clienteOk ? data.clientes : clienteInfo);
     // const [listaRechazados, setListaRechazados] = useState<any>([]);
 
     const [loadConfirmarVenta, setLoadConfirmarVenta] = useState<boolean>(false);
@@ -130,6 +130,7 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
         updateVenta.usuarioId = venta.usuarios.id;
         updateVenta.localId = venta.locales.id;
         updateVenta.cliente = cliente;
+        updateVenta.serie = venta.serie;
         // updateVenta.cliente = venta.clientes;
         // updateVenta.clienteId = venta.clientes && venta.clientes.id;
 
@@ -242,6 +243,8 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
                             modalConfVenta={modalConfVenta}
                             setModalRechazVenta={setModalRechazVenta}
                             modalRechazVenta={modalRechazVenta}
+                            venta={venta}
+                            setVenta={setVenta}
                         />
                     }
                     { 
@@ -261,6 +264,9 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
                             setTabbs={setTabbs}
                             tipoSerie={tipoSerie}
                             data={data}
+
+                            venta={venta}
+                            setVenta={setVenta}
                         /> 
                     }
                     {
@@ -280,6 +286,9 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
                             setTabbs={setTabbs}
                             tipoSerie={tipoSerie}
                             data={data}
+
+                            venta={venta}
+                            setVenta={setVenta}
                         />
                     }
                 </div>

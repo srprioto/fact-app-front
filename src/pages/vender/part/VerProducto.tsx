@@ -134,7 +134,7 @@ export const VerProducto = ({
 
         setloadVentaRapida(true);
 
-        const cliente:any = clienteInfo("")
+        const cliente:any = clienteInfo
 
         let updateListaVenta:Array<any> = [];
         let updateVentaDetalle:any = ventaDetalle;
@@ -145,6 +145,7 @@ export const VerProducto = ({
         updateListaVenta.push(updateVentaDetalle);
 
         const updateVenta:any = {
+            serie: "V001",
             descuento_total: 0,
             subtotal: ventaDetalle.precio_parcial,
             total: ventaDetalle.precio_parcial,

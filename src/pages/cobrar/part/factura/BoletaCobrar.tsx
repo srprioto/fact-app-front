@@ -18,14 +18,18 @@ interface boleta {
     switchChangeFact:boolean;
     setTabbs:Function;
     tipoSerie:Function;
-    data:any
+    data:any;
     tabbs:number;
+
+    venta:any;
+    setVenta:Function;
 }
 
 export const BoletaCobrar = ({ 
     cliente, setCliente, switchChange,
     setModalConfVenta, modalConfVenta, setModalRechazVenta, modalRechazVenta,
-    switchChangeFact, setTabbs, data, tipoSerie, tabbs
+    switchChangeFact, setTabbs, data, tipoSerie, tabbs,
+    venta, setVenta
 }:boleta) => {
 
     const serie:string = "B001";
@@ -33,6 +37,13 @@ export const BoletaCobrar = ({
     const [loadCliente, setLoadCliente] = useState<boolean>(false);
     const [getCliente, setGetCliente] = useState<any>({ documento: "", tipoDocumento: "DNI", });
     
+
+    useEffect(() => {
+        setVenta({
+            ...venta,
+            serie: serie
+        })
+    }, [])
 
     useEffect(() => {
         // setCliente(clienteI);

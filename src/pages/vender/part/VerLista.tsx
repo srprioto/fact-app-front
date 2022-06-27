@@ -10,6 +10,7 @@ import { TablaLista } from "./verLista/extend/TablaLista";
 import { ModalCodigoVenta } from "./verLista/short/ModalCodigoVenta";
 import { RapidaVenta } from "./factura/RapidaVenta";
 
+
 export const VerLista = ({ 
     setShowWindow, 
     listaVenta, 
@@ -28,7 +29,7 @@ export const VerLista = ({
     const [modalConfirm, setModalConfirm] = useState<boolean>(false);
     const [tabbs, setTabbs] = useState<number>(1);
 
-    const [cliente, setCliente] = useState<any>(clienteInfo(""));
+    const [cliente, setCliente] = useState<any>(clienteInfo);
 
 
     // useEffect(() => {
@@ -49,9 +50,9 @@ export const VerLista = ({
         })
     }
 
-    const verificarCaja = (func:Function) => { 
+    const verificarCaja = (handlerVenta:Function, serie:string) => { 
         caja.handlerEstadoCaja();
-        func();
+        handlerVenta(serie);
     }
 
 
@@ -64,10 +65,10 @@ export const VerLista = ({
     }
 
 
-    const handlerVenta = async () => { 
+    const handlerVenta = async (serie:string) => { 
         setLoadVenta(true);
         try {
-            const ventaResp:any = await postVenta(cliente);
+            const ventaResp:any = await postVenta(cliente, serie);
             if (ventaResp.data) {
                 setVentaRespuesta(ventaResp.data);
                 setModalConfirm(true);

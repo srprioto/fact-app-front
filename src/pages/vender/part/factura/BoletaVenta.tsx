@@ -27,7 +27,7 @@ export const BoletaVenta = ({
 }:boleta) => {
 
     const serie:string = "B001";
-    const clienteI = clienteInfo(serie);
+    const clienteI = clienteInfo;
     const [loadCliente, setLoadCliente] = useState<boolean>(false);
     const [getCliente, setGetCliente] = useState<any>({ documento: "", tipoDocumento: "DNI", });
 
@@ -56,7 +56,6 @@ export const BoletaVenta = ({
     }
 
 
-    // traer data
     const handlerGetCliente = async () => { 
         setLoadCliente(true);
 
@@ -67,7 +66,7 @@ export const BoletaVenta = ({
 
         try {
             const response = await post(updateData, CLIENTES + "/padron/search");
-            response.serie_documento = serie;
+            // response.serie_documento = serie;
             setCliente(response);
             setLoadCliente(false);
         } catch (error) {
@@ -100,6 +99,7 @@ export const BoletaVenta = ({
                 verificarCaja={verificarCaja}
                 handlerVenta={handlerVenta}
                 verificarVender={verificarVender}
+                serie={serie}
             />
 
         </>

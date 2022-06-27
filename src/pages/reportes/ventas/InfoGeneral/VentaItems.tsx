@@ -17,7 +17,7 @@ export const VentaItems = ({ ventas, handlerVer, updateData }:any) => {
     
     return (
         <tr className="venta-items">
-            <td className="secundary">{ ventas.id + "-" + ventas.codigo_venta }</td>
+            <td className="secundary">{ ventas.serie + "-" + ventas.id + "-" + ventas.codigo_venta }</td>
             {/* <td><ListaDetalleProductos detalles={ventas.movimientoDetalles} /></td> */}
             <td className="success strong">S/. { moneda(ventas.total) }</td>
             <td className={ classEstado() } >{ ventas.estado_venta }</td>
