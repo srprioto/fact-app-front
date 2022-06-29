@@ -23,13 +23,16 @@ interface boleta {
 
     venta:any;
     setVenta:Function;
+
+    activarConfirmarVenta:Function;
 }
 
 export const BoletaCobrar = ({ 
     cliente, setCliente, switchChange,
     setModalConfVenta, modalConfVenta, setModalRechazVenta, modalRechazVenta,
     switchChangeFact, setTabbs, data, tipoSerie, tabbs,
-    venta, setVenta
+    venta, setVenta,
+    activarConfirmarVenta
 }:boleta) => {
 
     const serie:string = "B001";
@@ -118,6 +121,7 @@ export const BoletaCobrar = ({
                 modalConfVenta={modalConfVenta}
                 setModalRechazVenta={setModalRechazVenta}
                 modalRechazVenta={modalRechazVenta}
+                activarConfirmarVenta={activarConfirmarVenta}
             />
 
         </div>

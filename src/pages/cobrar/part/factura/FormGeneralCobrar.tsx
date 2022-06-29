@@ -17,11 +17,14 @@ interface formGeneralCobrar{
     modalConfVenta:any;
     setModalRechazVenta:Function;
     modalRechazVenta:any;
+
+    activarConfirmarVenta:Function;
 }
 
 export const FormGeneralCobrar = ({ 
     loadCliente, getCliente, switchChange, cliente, setCliente,
-    setModalConfVenta, modalConfVenta, setModalRechazVenta, modalRechazVenta 
+    setModalConfVenta, modalConfVenta, setModalRechazVenta, modalRechazVenta,
+    activarConfirmarVenta
 }:formGeneralCobrar) => {
 
     const handlerOnChangeCliente = (e:any) => { 
@@ -97,6 +100,7 @@ export const FormGeneralCobrar = ({
                             clienteExist={clienteExist}
                             setModalRechazVenta={setModalRechazVenta}
                             modalRechazVenta={modalRechazVenta}
+                            activarConfirmarVenta={activarConfirmarVenta}
                         />
 
                     </Form>

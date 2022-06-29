@@ -17,6 +17,7 @@ import { RapidaCobrar } from "./factura/RapidaCobrar";
 import { TabsVenta } from "./otros/TabsVenta";
 import { moneda } from "../../../resources/func/moneda";
 import { CodigoVenta } from "./otros/CodigoVenta";
+import { FormasPago } from "./FormasPago";
 
 
 interface descripcionVenta {
@@ -40,56 +41,17 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
     
     const [venta, setVenta] = useState<any>(data);
     const [cliente, setCliente] = useState<any>(clienteOk ? data.clientes : clienteInfo);
-    // const [listaRechazados, setListaRechazados] = useState<any>([]);
 
     const [loadConfirmarVenta, setLoadConfirmarVenta] = useState<boolean>(false);
-
-    // const [ModalCliente, setModalCliente] = useState<boolean>(false);
     const [modalConfVenta, setModalConfVenta] = useState<boolean>(false);
     const [modalRechazVenta, setModalRechazVenta] = useState<boolean>(false);
-
+    
     const [switchChangeFact, setSwitchChangeFact] = useState<boolean>(clienteOk ? false : true);
     const [tabbs, setTabbs] = useState<number>(tipoSerie());
 
-    // useEffect(() => { 
-    //     let ventaDetails:any = []; // añadir lista detalles
-    //     data.ventaDetalles.map((e:any) => { 
-    //         if (!(listaRechazados.includes(e.id))) {
-    //             ventaDetails.push(e);
-    //         }
-    //         return (null)
-    //     })
-
-    //     const sumaSubtotal = venta.ventaDetalles // calcular subtotal
-    //     .map((e:any) => e.precio_parcial)
-    //     .reduce((prev:number, curr:number) => prev + curr, 0);
-        
-    //     setVenta({ 
-    //         ...venta, 
-    //         subtotal: sumaSubtotal,
-    //         ventaDetalles: ventaDetails
-    //     });
-
-    // }, [venta.ventaDetalles, listaRechazados])
-
-
-    // useEffect(() => { // calcular total
-    //     setVenta({
-    //         ...venta,
-    //         total: (venta.subtotal + (Number(venta.descuento_total)))
-    //     })
-    // }, [venta.subtotal, venta.descuento_total])
-
-
-    // useEffect(() => {
-    //     if (!switchChangeFact) {
-    //         setTabbs(tipoSerie())
-    //         setCliente(data.clientes)
-    //     } else {
-    //         setCliente(clienteInfo(""))
-    //     }
-    // }, [switchChangeFact, tabbs])
-
+    const [listaPrecios, setListaPrecios] = useState<Array<any>>([]);
+    const [confirmarVenta, setConfirmarVenta] = useState<boolean>(false);
+    const [showFormasPago, setShowFormasPago] = useState<boolean>(false);
 
     const handlerChangeVenta = (e:any) => {
         setVenta({
@@ -97,20 +59,6 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
             [e.target.name]: e.target.value
         })
     }
-
-    
-    // const handlerCheckbox = (e:any) => {
-    //     let updatedList = [ ...listaRechazados ];
-    //     if (e.target.checked) {
-    //         updatedList = [ ...listaRechazados, Number(e.target.value)];
-    //     } else {
-    //         updatedList.splice(listaRechazados.indexOf(e.target.value), 1);
-    //     }
-    //     setListaRechazados(updatedList);
-    // }
-
-    
-    // const handlerCliente = (cliente:any) => setVenta({ ...venta, clientes: cliente}) // cliente nuevo
 
 
     const handlerConfirmarVenta = async (estado:string) => {
@@ -148,6 +96,7 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
         })
 
         updateVenta.ventaDetalles = ventaDet;
+        // updateVenta.formasPago = listaPrecios;
 
         try {
             await put(data.id, updateVenta, VENTAS);
@@ -160,6 +109,17 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
         }
     }
 
+
+    const activarConfirmarVenta = () => { 
+        if (confirmarVenta || !showFormasPago) {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    // console.log(activarConfirmarVenta());
+    
 
     return (
         <div className="descripcion-venta">
@@ -203,25 +163,43 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
                         </div>
 
                         <span className="center">
-                            <p className="info">Total</p>
-                            <h1 className="success strong">S/. { moneda(venta.total) }</h1>
+                            <p className="info mb-10">Total</p>
+                            <h1 className="success strong m-0">S/. { moneda(venta.total) }</h1>
                         </span>
+                        
+                        {
+                            !showFormasPago
+                            && (
+                                <Select2
+                                    label="Forma de pago"
+                                    name="forma_pago"
+                                    onChange={handlerChangeVenta}
+                                    value={venta.forma_pago}
+                                >
+                                    <option value="efectivo">Efectivo</option>
+                                    <option value="tarjeta">Tarjeta</option>
+                                    <option value="yape">Yape</option>                                
+                                </Select2>
+                            )
+                        }
 
-                        <Select2
-                            label="Forma de pago"
-                            name="forma_pago"
-                            onChange={handlerChangeVenta}
-                            value={venta.forma_pago}
-                        >
-                            <option value="efectivo">Efectivo</option>
-                            <option value="tarjeta">Tarjeta</option>
-                            <option value="yape">Yape</option>                                
-                        </Select2>
 
                     </div>
 
-                    <ObservacionesVenta observaciones={venta.observaciones} />
+                    <FormasPago 
+                        showFormasPago={showFormasPago}
+                        setShowFormasPago={setShowFormasPago}
+                        venta={venta}
+                        setConfirmarVenta={setConfirmarVenta}
+                        listaPrecios={listaPrecios}
+                        setListaPrecios={setListaPrecios}
+                    />
 
+                    {
+                        !showFormasPago
+                        && <ObservacionesVenta observaciones={venta.observaciones} />
+                    }
+                    
                 </div>
                 
                 {/* formas de pago aqui */}
@@ -245,6 +223,8 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
                             modalRechazVenta={modalRechazVenta}
                             venta={venta}
                             setVenta={setVenta}
+
+                            activarConfirmarVenta={activarConfirmarVenta}
                         />
                     }
                     { 
@@ -267,6 +247,8 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
 
                             venta={venta}
                             setVenta={setVenta}
+
+                            activarConfirmarVenta={activarConfirmarVenta}
                         /> 
                     }
                     {
@@ -289,6 +271,8 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
 
                             venta={venta}
                             setVenta={setVenta}
+
+                            activarConfirmarVenta={activarConfirmarVenta}
                         />
                     }
                 </div>
@@ -319,3 +303,60 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
         </div>
     )
 }
+
+// const [listaRechazados, setListaRechazados] = useState<any>([]);
+// const [ModalCliente, setModalCliente] = useState<boolean>(false);
+
+
+// useEffect(() => { 
+//     let ventaDetails:any = []; // añadir lista detalles
+//     data.ventaDetalles.map((e:any) => { 
+//         if (!(listaRechazados.includes(e.id))) {
+//             ventaDetails.push(e);
+//         }
+//         return (null)
+//     })
+
+//     const sumaSubtotal = venta.ventaDetalles // calcular subtotal
+//     .map((e:any) => e.precio_parcial)
+//     .reduce((prev:number, curr:number) => prev + curr, 0);
+    
+//     setVenta({ 
+//         ...venta, 
+//         subtotal: sumaSubtotal,
+//         ventaDetalles: ventaDetails
+//     });
+
+// }, [venta.ventaDetalles, listaRechazados])
+
+
+// useEffect(() => { // calcular total
+//     setVenta({
+//         ...venta,
+//         total: (venta.subtotal + (Number(venta.descuento_total)))
+//     })
+// }, [venta.subtotal, venta.descuento_total])
+
+
+// useEffect(() => {
+//     if (!switchChangeFact) {
+//         setTabbs(tipoSerie())
+//         setCliente(data.clientes)
+//     } else {
+//         setCliente(clienteInfo(""))
+//     }
+// }, [switchChangeFact, tabbs])
+
+
+// const handlerCheckbox = (e:any) => {
+//     let updatedList = [ ...listaRechazados ];
+//     if (e.target.checked) {
+//         updatedList = [ ...listaRechazados, Number(e.target.value)];
+//     } else {
+//         updatedList.splice(listaRechazados.indexOf(e.target.value), 1);
+//     }
+//     setListaRechazados(updatedList);
+// }
+
+
+// const handlerCliente = (cliente:any) => setVenta({ ...venta, clientes: cliente}) // cliente nuevo

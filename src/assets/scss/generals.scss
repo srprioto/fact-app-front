@@ -685,6 +685,10 @@ select{
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
+select{
+    padding: 9px 18px;
+}
+
 select::-ms-expand{
     display: block;
 }

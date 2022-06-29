@@ -749,10 +749,34 @@
 
 // caja
 
-.caja{
+.cobrar{
     .descripcion-venta{
         .lista-productos-pedido{
             min-height: 220px;
+        }
+        
+        .formas-pago{
+            .box-dividir-precios{
+                display: grid;
+                grid-template-columns: 1fr 2fr 1fr;
+                
+                .delete-forma-pago{
+                    display: flex;
+                    align-items: center;
+                    font-size: 22px;
+                }
+            }
+            .add-precio{
+                .box-add-precio{
+                    height: 48.5px;
+                    svg{
+                        font-size: 23px;
+                    }
+                }
+            }
+            
+            
+            
         }
 
         // .wrap-formas-pago{

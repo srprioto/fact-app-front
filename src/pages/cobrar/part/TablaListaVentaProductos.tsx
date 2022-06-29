@@ -15,9 +15,9 @@ export const TablaListaVentaProductos = ({ venta }:tablaListaVentaProductos) => 
                     <tr>
                         <th>Producto</th>
                         <th>Cant.</th>
-                        <th>Precio U.</th>
+                        <th>Precio Unidad</th>
                         <th>Inc/Desc</th>
-                        <th>Precio Sv.</th>
+                        <th>Precio Subventa</th>
                     </tr>
                 </thead>
                 
@@ -38,9 +38,9 @@ export const TablaListaVentaProductos = ({ venta }:tablaListaVentaProductos) => 
                                     <td><strong>{ e.cantidad_venta }</strong></td>
                                     <td className="info">S/. { moneda(e.precio_venta) }</td>
                                     <td className={
-                                        Number(venta.descuento_total) < 0
+                                        Number(e.descuento) < 0
                                         ? "danger"
-                                        : Number(venta.descuento_total) === 0
+                                        : Number(e.descuento) === 0
                                         ? "secundary"
                                         : "success"
                                     }>S/. { moneda(e.descuento) }</td>

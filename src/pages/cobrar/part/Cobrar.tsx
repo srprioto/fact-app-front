@@ -62,7 +62,7 @@ export const Cobrar = ({ idLocal, nombreLocal, user }:cobrar) => {
     }
 
     return (
-        <div className="caja">
+        <div className="cobrar">
 
             {
                 user

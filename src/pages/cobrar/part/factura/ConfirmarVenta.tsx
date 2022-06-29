@@ -7,6 +7,7 @@ interface confirmarVenta {
     setModalRechazVenta:Function;
     modalRechazVenta:any;
     clienteExist:boolean;
+    activarConfirmarVenta:Function;
 }
 
 export const ConfirmarVenta = ({ 
@@ -14,13 +15,23 @@ export const ConfirmarVenta = ({
     // modalConfVenta, 
     setModalRechazVenta, 
     modalRechazVenta,
-    clienteExist
+    clienteExist,
+    activarConfirmarVenta
 }:confirmarVenta) => {
+
+    const validarVenta = () => { 
+        if (activarConfirmarVenta() && clienteExist) {
+            return true
+        } else {
+            return false
+        }
+    }
+
     return (
         <div className="wrap-confirmar-venta grid-3 gap mb-10 mt-25">
             <BtnOnOff2
                 label="Confirmar venta"
-                estado={clienteExist}
+                estado={validarVenta()}
                 icon={<BiCaretRight />}
             >
                 <button

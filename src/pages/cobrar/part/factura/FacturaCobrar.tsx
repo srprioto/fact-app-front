@@ -24,13 +24,16 @@ interface factura {
 
     venta:any;
     setVenta:Function;
+
+    activarConfirmarVenta:Function;
 }
 
 export const FacturaCobrar = ({ 
     cliente, setCliente, switchChange,
     setModalConfVenta, modalConfVenta, setModalRechazVenta, modalRechazVenta,
     switchChangeFact, setTabbs, data, tipoSerie, tabbs,
-    venta, setVenta
+    venta, setVenta,
+    activarConfirmarVenta
 }:factura) => {
 
     const serie:string = "F001";
@@ -115,6 +118,7 @@ export const FacturaCobrar = ({
                 modalConfVenta={modalConfVenta}
                 setModalRechazVenta={setModalRechazVenta}
                 modalRechazVenta={modalRechazVenta}
+                activarConfirmarVenta={activarConfirmarVenta}
             />
 
         </div>
