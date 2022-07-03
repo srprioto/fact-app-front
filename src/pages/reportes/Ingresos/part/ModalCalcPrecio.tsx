@@ -6,7 +6,6 @@ import { Loading } from "../../../../components/loads/Loading";
 import { Modal } from "../../../../components/modals/Modal"
 import { get, put } from "../../../../resources/fetch";
 import { moneda } from "../../../../resources/func/moneda";
-import { redondeo } from "../../../../resources/func/redondeo";
 import { LOCAL_STOCK, PRODUCTOS } from "../../../../resources/routes";
 
 interface modalCalcPrecio {

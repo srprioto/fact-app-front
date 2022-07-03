@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { BiBrush, BiCheck, BiX } from "react-icons/bi";
+import { BiBrush, BiCheck } from "react-icons/bi";
 
 import { LoadSwitchBtn } from "../../../components/btns/LoadSwitchBtn";
 import { Input } from "../../../components/forms/Input";
