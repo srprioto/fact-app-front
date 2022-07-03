@@ -273,6 +273,7 @@ export const ModalTransferencia = ({ modal, setModal, idLocal, nombreLocal, getD
             </div>
 
 
+
             <div className="grid-1 gap">
                 <div className="box grid-1 gap">
                     <h4 className="desc-form">Informacion general de envio</h4>

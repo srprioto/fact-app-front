@@ -9,8 +9,13 @@ export const InfoCliente = ({ cliente }:any) => {
                 </span>
 
                 <span>
+                    <p>Razon social: </p>
+                    <h4>{ cliente.razonSocial }</h4>
+                </span>
+
+                <span>
                     <p>Documento: </p>
-                    <h4>{ cliente.documento }</h4>
+                    <h4>{ cliente.numero_documento }</h4>
                 </span>
 
                 <span>
@@ -23,15 +28,10 @@ export const InfoCliente = ({ cliente }:any) => {
                     <h4>{ cliente.email }</h4>
                 </span>
 
-                {
-                    cliente.direccion
-                    && (
-                        <span>
-                            <p>Direccion: </p>
-                            <h4>{ cliente.direccion }</h4>
-                        </span>
-                    )
-                }
+                <span>
+                    <p>Direccion: </p>
+                    <h4>{ cliente.direccion }</h4>
+                </span>
 
             </div>                    
         </div>

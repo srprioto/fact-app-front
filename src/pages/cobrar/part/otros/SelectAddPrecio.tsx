@@ -27,6 +27,7 @@ export const SelectAddPrecio = ({ pushPrecioToPrecios, handlerOnChange, nuevoPre
                     value={nuevoPrecio.precio_parcial}
                     onChange={handlerOnChange}
                     moneda
+                    noMenos
                 />
             </div>
 

@@ -46,7 +46,11 @@ export const FormasPago = ({
     
 
     useEffect(() => {
-        dividirPreciosProd();
+        if (showFormasPago) {
+            dividirPreciosProd();    
+        } else {
+            setListaPrecios([]);
+        }
     }, [showFormasPago])
 
 
@@ -168,6 +172,7 @@ export const FormasPago = ({
                                                 value={e.precio_parcial}
                                                 onChange={(e:any) => handlerOnChangeArray(e, index)}
                                                 moneda
+                                                noMenos
                                             />
                                         </div>
                                         <div className="delete-forma-pago">

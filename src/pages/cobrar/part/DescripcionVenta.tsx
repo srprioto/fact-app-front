@@ -74,7 +74,7 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
         updateVenta.observaciones = venta.observaciones;
         updateVenta.subtotal = venta.subtotal;
         updateVenta.total = venta.total;
-        updateVenta.forma_pago = venta.forma_pago;
+        updateVenta.forma_pago = listaPrecios.length <= 0 ? venta.forma_pago : "dividido";
         updateVenta.usuarioId = venta.usuarios.id;
         updateVenta.localId = venta.locales.id;
         updateVenta.cliente = cliente;
@@ -96,7 +96,7 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
         })
 
         updateVenta.ventaDetalles = ventaDet;
-        // updateVenta.formasPago = listaPrecios;
+        updateVenta.formasPago = listaPrecios;
 
         try {
             await put(data.id, updateVenta, VENTAS);
@@ -117,8 +117,6 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
             return false
         }
     }
-    
-    // console.log(activarConfirmarVenta());
     
 
     return (

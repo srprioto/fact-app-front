@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { Loading } from "../../../components/loads/Loading";
-import { NoRegistros } from "../../../components/NoRegistros";
 import { TitleBox } from "../../../components/TitleBox"
 import { SearchWrap } from "../../../components/SearchWrap";
 import { TablaVentas } from "./TablaVentas";
@@ -99,7 +98,9 @@ export const Cobrar = ({ idLocal, nombreLocal, user }:cobrar) => {
                         ? <div style={{height: 'calc(100% - 122px)', margin: "0 0 58px 0"}}><Loading /></div>
                         : (
                             data.length <= 0
-                            ? <div className="no-venta"><NoRegistros /></div>                            
+                            ? <div className="no-venta">
+                                <TextoRelleno texto="Aun no hay ventas" />
+                            </div>
                             : (
                                 <TablaVentas
                                     data={data}
@@ -113,7 +114,22 @@ export const Cobrar = ({ idLocal, nombreLocal, user }:cobrar) => {
                 </div>
 
                 <div className="box scroll-box-no-margin">
+
                     {
+                        loadingOne
+                        ? <Loading />
+                        : (
+                            !(Object.keys(getVenta).length <= 0 )
+                            ? (
+                                <DescripcionVenta
+                                    data={getVenta}
+                                    handlerRefresh={handlerRefresh}
+                                />
+                            ) : <TextoRelleno texto="Selecciona un pedido" />
+                        )
+                    }
+
+                    {/* {
                         !(Object.keys(getVenta).length <= 0 )
                         ? (
                             loadingOne
@@ -127,7 +143,8 @@ export const Cobrar = ({ idLocal, nombreLocal, user }:cobrar) => {
                         ) : (
                             <TextoRelleno texto="Selecciona un pedido" />
                         )
-                    }
+                    } */}
+
                 </div>
             </div>
         </div>

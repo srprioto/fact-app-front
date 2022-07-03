@@ -4,6 +4,7 @@ import { Modal } from "../../../../components/modals/Modal"
 import { getOne } from "../../../../resources/fetch";
 import { VENTAS } from "../../../../resources/routes";
 import { ProductoInfo } from "../../../productos/otros/ProductoInfo";
+import { FormasPago } from "./FormasPago";
 import { InfoCliente } from "./InfoCliente";
 import { InfoVenta } from "./InfoVenta";
 
@@ -11,6 +12,7 @@ export const ModalVentaDetalles = ({ modal, setModal, idVenta }:any) => {
 
     const [loadingOne, setLoadingOne] = useState<boolean>(false);
     const [venta, setVenta] = useState<any>({});
+    const formasPago:any = venta.formasPago;
     
     useEffect(() => {
         getDataOne();
@@ -51,6 +53,15 @@ export const ModalVentaDetalles = ({ modal, setModal, idVenta }:any) => {
         }
     }
     
+    const verFormasPago = () => { 
+        if (!!formasPago) {
+            if (formasPago.length > 0) {
+                return true
+            } else {
+                return false
+            }
+        }
+    }
 
     return (
         <Modal
@@ -118,6 +129,10 @@ export const ModalVentaDetalles = ({ modal, setModal, idVenta }:any) => {
 
                         <InfoVenta venta={venta} classEstado={classEstado} />
 
+                        {
+                            verFormasPago()
+                            && <FormasPago formasDePago={venta.formasPago} />
+                        }
                         {
                             venta.clientes
                             && (
