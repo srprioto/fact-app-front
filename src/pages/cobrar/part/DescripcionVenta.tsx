@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { ObservacionesVenta } from "./ObservacionesVenta";
 import { TablaListaVentaProductos } from "./TablaListaVentaProductos";
@@ -53,6 +53,13 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
     const [confirmarVenta, setConfirmarVenta] = useState<boolean>(false);
     const [showFormasPago, setShowFormasPago] = useState<boolean>(false);
 
+    useEffect(() => {
+        setVenta({
+            ...venta,
+            clientes: cliente
+        })
+    }, [cliente])
+
     const handlerChangeVenta = (e:any) => {
         setVenta({
             ...venta,
@@ -61,7 +68,7 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
     }
 
 
-    const handlerConfirmarVenta = async (estado:string) => {
+    const handlerConfirmarVenta = async (estado:string, comprobante:any, envioComprobante:any) => {
 
         setLoadConfirmarVenta(true);
 
@@ -98,6 +105,9 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
         updateVenta.ventaDetalles = ventaDet;
         updateVenta.formasPago = listaPrecios;
 
+        updateVenta.comprobante = comprobante;
+        updateVenta.envioComprobante = envioComprobante;
+
         try {
             await put(data.id, updateVenta, VENTAS);
             setLoadConfirmarVenta(false);
@@ -117,6 +127,9 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
             return false
         }
     }
+
+
+    // console.log(venta);
     
 
     return (
@@ -199,7 +212,7 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
                     }
                     
                 </div>
-                
+
                 {/* formas de pago aqui */}
 
                 <div className="tabbs-box m-0">

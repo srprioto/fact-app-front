@@ -9,7 +9,6 @@ import {
 
 import { LoadSwitchBtn2 } from "../../../../components/btns/LoadSwitchBtn2";
 import { Modal } from "../../../../components/modals/Modal"
-// import { DatosClienteConf } from "./DatosClienteConf";
 import { TablaProdVenta } from "./TablaProdVenta";
 
 import { copy } from "../../../../resources/func/deepCopy";
@@ -35,15 +34,6 @@ export const ModalVentaConfirmar = ({
     const [modalCorreo, setModalCorreo] = useState<boolean>(false);
 
     useEffect(() => { 
-        handlerRecalculoIGV();
-    }, [reducirPercent])
-
-    
-    const onChangeRedPercent = (e:any) => setReducirPercent(Number(e.target.value));
-
-
-    const handlerRecalculoIGV = () => { 
-
         let ventaDetallesUpdate:any = [];
         
         const descuentoXItems:number = Number(ventaAux.descuento_total) / ventaAux.ventaDetalles.length;
@@ -99,6 +89,20 @@ export const ModalVentaConfirmar = ({
             total: redondeo(total),
             igvGeneral: igvGen
         })
+
+    }, [reducirPercent])
+
+    
+    const onChangeRedPercent = (e:any) => setReducirPercent(Number(e.target.value));
+
+
+    const registroFinal = async (estado:string, sendEmail?:string) => { 
+
+        const updateVenta = venta.serie !== "V001" || sendEmail ? venta : false;
+        const sendComprobante = sendEmail ? sendEmail : false;
+
+        await confirmarVenta(estado, updateVenta, sendComprobante); // confirma la venta y la guarda en nuetro registro
+        // await registrarSunat();
 
     }
 
@@ -166,14 +170,14 @@ export const ModalVentaConfirmar = ({
                             <LoadSwitchBtn2
                                 loading={loading}
                                 className="btn btn-success"
-                                handler={() => confirmarVenta("listo")}
+                                handler={() => registroFinal("listo")}
                             ><BiBookmarkAltMinus /> Imprimir
                             </LoadSwitchBtn2>
 
                             <LoadSwitchBtn2
                                 loading={loading}
                                 className="btn btn-warning"
-                                handler={() => confirmarVenta("listo")}   
+                                handler={() => registroFinal("listo")}
                             ><BiCaretRight /> Solo
                             </LoadSwitchBtn2>
 
@@ -184,20 +188,6 @@ export const ModalVentaConfirmar = ({
                             <div></div>
                             <div></div>
                             <div></div>
-
-                            {/* <LoadSwitchBtn2
-                                loading={loading}
-                                className="btn btn-success"
-                                handler={() => confirmarVenta("listo")}
-                            ><FaWhatsapp />
-                            </LoadSwitchBtn2> */}
-
-                            {/* <LoadSwitchBtn2
-                                loading={loading}
-                                className="btn btn-primary"
-                                handler={() => confirmarVenta("listo")}   
-                            ><BiImport />
-                            </LoadSwitchBtn2> */}
 
                             <LoadSwitchBtn2
                                 loading={loading}
@@ -215,7 +205,8 @@ export const ModalVentaConfirmar = ({
                     modal={modalCorreo}
                     setModal={setModalCorreo}
                     venta={venta}
-                    confirmarVenta={confirmarVenta}
+                    registroFinal={registroFinal}
+                    loading={loading}
                 />
             </ModalWrap>
 
@@ -223,15 +214,17 @@ export const ModalVentaConfirmar = ({
     )
 }
 
-/* <span>
-    <p>Incr/Desc total:</p>
-    <p className={(
-        venta.descuento_total < 0 
-        ? "danger" 
-        : venta.descuento_total > 0
-        ? "success" 
-        : "info"
-    )}>
-        <strong>S/. { venta.descuento_total }</strong>
-    </p>
-</span> */
+
+/* <LoadSwitchBtn2
+    loading={loading}
+    className="btn btn-success"
+    handler={() => registroFinal("listo")}
+><FaWhatsapp />
+</LoadSwitchBtn2> */
+
+/* <LoadSwitchBtn2
+    loading={loading}
+    className="btn btn-primary"
+    handler={() => registroFinal("listo")}   
+><BiImport />
+</LoadSwitchBtn2> */

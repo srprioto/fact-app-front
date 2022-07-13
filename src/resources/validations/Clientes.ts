@@ -14,7 +14,7 @@ export const ValidCreateCliente = Yup.object({
 export const ValidClienteDni = Yup.object({
     // numero_documento: Yup.string().required('Requerido'),
     nombre: Yup.string().required('Requerido'),
-    telefono: Yup.string().required('Requerido').matches(/^[0-9]+$/, "Requiere solo numeros")
+    telefono: Yup.string().matches(/^[0-9]+$/, "Requiere solo numeros")
     // direccion: Yup.string().required('Requerido'),
     // email: Yup.string().required('Requerido'),
 })
@@ -23,7 +23,7 @@ export const ValidClienteRuc = Yup.object({
     // numero_documento: Yup.string().required('Requerido'),
     razonSocial: Yup.string().required('Requerido'),
     direccion: Yup.string().required('Requerido'),
-    telefono: Yup.string().required('Requerido').matches(/^[0-9]+$/, "Requiere solo numeros")
+    telefono: Yup.string().matches(/^[0-9]+$/, "Requiere solo numeros")
 })
 
 export const ValidDocumento = (tipoDoc:string) => { 

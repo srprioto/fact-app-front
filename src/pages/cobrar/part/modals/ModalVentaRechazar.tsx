@@ -23,7 +23,7 @@ export const ModalVentaRechazar = ({ modal, setModal, venta, rechazarVenta, load
                     <LoadSwitchBtn2
                         loading={loading}
                         className="btn btn-danger"
-                        handler={() => rechazarVenta("rechazado")}
+                        handler={() => rechazarVenta("rechazado", false, false)}
                     >
                         <BiCheck /> Rechazar venta
                     </LoadSwitchBtn2>
