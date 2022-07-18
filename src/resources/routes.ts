@@ -45,6 +45,8 @@ export const CAJA_CERRAR:string = "/caja/cerrar-caja" // requiere id
 export const CAJA_DETALLES:string = "/caja-detalles";
 
 export const COMPROBANTE:string = "/comprobante"
+export const COMPROBANTE_SEARCH:string  = "/comprobante/search/";
+export const COMPROBANTE_PAGINATE:string = "/comprobante/paginate";
 
 // almacenes
 // export const ALMACEN:string = "/locales-stock/almacen/productos"; // localstock

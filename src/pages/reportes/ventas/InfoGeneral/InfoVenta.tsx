@@ -11,8 +11,9 @@ export const InfoVenta = ({ venta, classEstado }:any) => {
                 <div className="box-wrap-descripcion3">
 
                     <span>
-                        <p>Nro de comprobante: </p>
-                        <h4 className="info-i">{ zeroFill(Number(venta.id), 5) }</h4>
+                        <p>Codigo de venta: </p>
+                        {/* <h4 className="info-i">{ zeroFill(Number(venta.id), 5) }</h4> */}
+                        <h4 className="info-i">{ venta.serie + "-" + venta.id + "-" + venta.codigo_venta }</h4>
                     </span>
 
                     <span>

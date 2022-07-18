@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import { BiBarChartAlt2, BiDetail, BiDollarCircle } from "react-icons/bi";
+import { BiBarChartAlt2, BiDetail, BiDollarCircle, BiTask } from "react-icons/bi";
 import { TitleBox } from "../../../components/TitleBox"
 import { get } from "../../../resources/fetch";
 import { LOCALES_SOLO } from "../../../resources/routes";
+import { Comprobantes } from "./Comprobantes";
 import { EstadisticasVentas } from "./EstadisticasVentas";
 import { InfoGeneralVentas } from "./InfoGeneralVentas";
 import { InformacionIngresos } from "./InformacionIngresos";
@@ -59,13 +60,19 @@ export const VentasRepo = () => {
                     onClick={() => handlerToggle(2)}
                     className={`btn2 btn2-info ${toggleGeneral === 2 && "btn2-sub-info"}`}>
                     <BiDetail />
-                    Informacion de ventas
+                    Registro de ventas
                 </button>
-                <button 
+                <button
                     onClick={() => handlerToggle(3)}
                     className={`btn2 btn2-info ${toggleGeneral === 3 && "btn2-sub-info"}`}>
+                    <BiTask />
+                    Registro de comprobantes
+                </button>
+                <button 
+                    onClick={() => handlerToggle(4)}
+                    className={`btn2 btn2-info ${toggleGeneral === 4 && "btn2-sub-info"}`}>
                     <BiDollarCircle />
-                    Informacion de ingresos
+                    Registro de caja
                 </button>
                 
 
@@ -84,6 +91,18 @@ export const VentasRepo = () => {
             {
                 toggleGeneral === 3 
                 && (
+                    <Comprobantes 
+                        idLocal={selectLocal} 
+                        selectLocal={setSelectLocal}
+                        loadingLocal={loadingLocal}
+                        locales={locales}
+                    />
+                )
+            }
+            {
+                toggleGeneral === 4
+                && (
+                    
                     <InformacionIngresos 
                         idLocal={selectLocal} 
                         selectLocal={setSelectLocal}
