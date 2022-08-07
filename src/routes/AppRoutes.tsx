@@ -126,10 +126,9 @@ export const AppRoutes = () => {
                     
 
                 </Route>
-
                 
-
-                <Route path='*' element={<Page404 />} />
+                <Route path='*' element={ <Navigate to="/404" /> } />
+                <Route path="/404" element={ <Page404 /> } />
                 
             </Switch>
         </HashRouter>
