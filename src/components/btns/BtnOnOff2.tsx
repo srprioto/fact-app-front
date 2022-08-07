@@ -24,3 +24,12 @@ export const BtnOnOff2 = ({ label = "Aceptar", estado, icon, children }:btnOnOff
         </>
     )
 }
+
+
+/* <BtnOnOff2
+    estado={validMsg()}
+    icon={<BiCheck />}
+    label="Anular"
+>
+    // ...
+</BtnOnOff2> */

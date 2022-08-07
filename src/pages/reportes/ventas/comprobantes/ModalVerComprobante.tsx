@@ -23,6 +23,7 @@ export const ModalVerComprobante = ({ modal, setModal, idComprobante }:any) => {
         setLoadingOne(true);
         try {
             const dataOne = await getOne(idComprobante, COMPROBANTE);
+            // console.log(dataOne);
             setComprobante(dataOne);
             setLoadingOne(false);            
         } catch (error) {
@@ -97,7 +98,10 @@ export const ModalVerComprobante = ({ modal, setModal, idComprobante }:any) => {
 
                         {
                             !!comprobante.respuesta_sunat
-                            && <InfoRespuestaSunat respuesta_sunat={comprobante.respuesta_sunat} />
+                            && <InfoRespuestaSunat 
+                                respuesta_sunat={comprobante.respuesta_sunat} 
+                                estado_sunat={comprobante.estado_sunat} 
+                            />
                         }
 
                     </div>        

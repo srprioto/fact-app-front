@@ -8,6 +8,7 @@ import { SearchWrap } from "../../../components/SearchWrap";
 import { paginate } from "../../../resources/fetch";
 import { VENTAS_PAGINATE, VENTAS_SEARCH } from "../../../resources/routes";
 import { ExportarExcel } from "./InfoGeneral/ExportarExcel";
+import { ModalAnularVenta } from "./InfoGeneral/ModalAnularVenta";
 import { ModalHabilitarVenta } from "./InfoGeneral/ModalHabilitarVenta";
 import { ModalVentaDetalles } from "./InfoGeneral/ModalVentaDetalles";
 import { TabbsFiltroDatos } from "./InfoGeneral/TabbsFiltroDatos";
@@ -25,6 +26,7 @@ export const InfoGeneralVentas = ({ idLocal, selectLocal, loadingLocal, locales 
     const [loadingData, setLoadingData] = useState<boolean>(false);
     const [modalVer, setModalVer] = useState<boolean>(false);
     const [modalHabilitarVenta, setModalHabilitarVenta] = useState<boolean>(false);
+    const [modalAnular, setModalAnular] = useState<boolean>(false);
     const [idVenta, setIdVenta] = useState<number>(0);
     const [pagination, setPagination] = useState<any>({ meta: {}, links: {} });
     const [data, setData] = useState<any>([]);
@@ -43,6 +45,16 @@ export const InfoGeneralVentas = ({ idLocal, selectLocal, loadingLocal, locales 
     const handlerVer = (id:number) => { 
         setIdVenta(id);
         setModalVer(!modalVer);        
+    }
+
+    const handlerHabilitarVenta = (idVenta:number) => {
+        setIdVenta(idVenta);
+        setModalHabilitarVenta(true);
+    }
+
+    const handlerAnular = (idVenta:number) => { 
+        setIdVenta(idVenta);
+        setModalAnular(true);
     }
 
 
@@ -75,12 +87,6 @@ export const InfoGeneralVentas = ({ idLocal, selectLocal, loadingLocal, locales 
             console.log(error);
         }
         setIdVenta(0);
-    }
-
-
-    const handlerHabilitarVenta = (idVenta:number) => {
-        setIdVenta(idVenta);
-        setModalHabilitarVenta(true);
     }
 
 
@@ -157,15 +163,14 @@ export const InfoGeneralVentas = ({ idLocal, selectLocal, loadingLocal, locales 
                         ? <NoRegistros />
                         : (
                             <table className="table">
-                                
                                 <thead>
                                     <tr>
-                                        <th>Codigo venta</th>
+                                        <th>Codigo general</th>
                                         {/* <th>Productos vendidos</th> */}
                                         <th>Costo total</th>
                                         <th>Estado de venta</th>
                                         <th>Local</th>
-                                        <th>Observaciones</th>
+                                        {/* <th>Estado de venta</th> */}
                                         <th className="transparent inlineblock">...</th>
                                     </tr>
                                 </thead>
@@ -178,6 +183,7 @@ export const InfoGeneralVentas = ({ idLocal, selectLocal, loadingLocal, locales 
                                                     ventas={e}
                                                     updateData={handlerHabilitarVenta}
                                                     handlerVer={handlerVer}
+                                                    handlerAnular={handlerAnular}
                                                 />
                                             )
                                         })
@@ -207,6 +213,14 @@ export const InfoGeneralVentas = ({ idLocal, selectLocal, loadingLocal, locales 
                 />
             </ModalWrap>
 
+            <ModalWrap modal={modalAnular}>
+                <ModalAnularVenta
+                    modal={modalAnular}
+                    setModal={setModalAnular}
+                    idVenta={idVenta}
+                    getData={getData}
+                />
+            </ModalWrap>
             
             <ModalHabilitarVenta 
                 modal={modalHabilitarVenta}

@@ -17,6 +17,8 @@ import { Input } from "../../../../components/forms/Input";
 import { ModalWrap } from "../../../../components/modals/ModalWrap";
 import { ModalCorreo } from "./ModalCorreo";
 import { moneda } from "../../../../resources/func/moneda";
+import { ImpComprobante } from "./ImpComprobante";
+import { BtnImpComprobante } from "./BtnImpComprobante";
 
 
 export const ModalVentaConfirmar = ({ 
@@ -96,13 +98,15 @@ export const ModalVentaConfirmar = ({
     const onChangeRedPercent = (e:any) => setReducirPercent(Number(e.target.value));
 
 
-    const registroFinal = async (estado:string, sendEmail?:string) => { 
+    const registroFinal = async (estado:string, sendEmail?:string, imprimir?:boolean) => { 
 
         const updateVenta = venta.serie !== "V001" || sendEmail ? venta : false;
         const sendComprobante = sendEmail ? sendEmail : false;
 
         await confirmarVenta(estado, updateVenta, sendComprobante); // confirma la venta y la guarda en nuetro registro
         // await registrarSunat();
+
+
 
     }
 
@@ -167,12 +171,17 @@ export const ModalVentaConfirmar = ({
 
                         <div className="grid-2 gap">
                             
-                            <LoadSwitchBtn2
+                            <BtnImpComprobante
+                                loading={loading}
+                                registroFinal={registroFinal}
+                                venta={venta}
+                            />
+                            {/* <LoadSwitchBtn2
                                 loading={loading}
                                 className="btn btn-success"
                                 handler={() => registroFinal("listo")}
                             ><BiBookmarkAltMinus /> Imprimir
-                            </LoadSwitchBtn2>
+                            </LoadSwitchBtn2> */}
 
                             <LoadSwitchBtn2
                                 loading={loading}
@@ -209,6 +218,8 @@ export const ModalVentaConfirmar = ({
                     loading={loading}
                 />
             </ModalWrap>
+
+            {/* <ImpComprobante venta={venta} /> */}
 
         </Modal>
     )

@@ -5,7 +5,7 @@ import { Loading } from "../loads/Loading";
 interface modal{
     modal:boolean;
     title?:string;
-    border?:string;
+    border?:string; // border="border-danger"
     width?:number;
     height?:string|number;
     setModal?:Function; // habilita el boton de cerrar

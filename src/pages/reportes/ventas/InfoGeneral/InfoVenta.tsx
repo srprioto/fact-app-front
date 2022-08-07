@@ -1,4 +1,4 @@
-import { zeroFill } from "../../../../resources/func/ceroFill"
+// import { zeroFill } from "../../../../resources/func/ceroFill"
 
 export const InfoVenta = ({ venta, classEstado }:any) => {
 
@@ -11,7 +11,7 @@ export const InfoVenta = ({ venta, classEstado }:any) => {
                 <div className="box-wrap-descripcion3">
 
                     <span>
-                        <p>Codigo de venta: </p>
+                        <p>Codigo general: </p>
                         {/* <h4 className="info-i">{ zeroFill(Number(venta.id), 5) }</h4> */}
                         <h4 className="info-i">{ venta.serie + "-" + venta.id + "-" + venta.codigo_venta }</h4>
                     </span>
@@ -54,11 +54,6 @@ export const InfoVenta = ({ venta, classEstado }:any) => {
                     </span>
 
                     <span>
-                        <p>Observaciones: </p>
-                        <h4>{ venta.observaciones }</h4>
-                    </span>
-
-                    <span>
                         <p>Local: </p>
                         <h4>{ venta.locales && venta.locales.nombre }</h4>
                     </span>
@@ -66,6 +61,17 @@ export const InfoVenta = ({ venta, classEstado }:any) => {
                     <span>
                         <p>Encargado de la venta: </p>
                         <h4>{ venta.usuarios && venta.usuarios.nombre }</h4>
+                    </span>
+
+                    <span>
+                        <p>
+                            {
+                                venta.estado_venta !== "anulado"
+                                ? "Observaciones:"
+                                : "Nota anulacion"
+                            }
+                        </p>
+                        <h4>{ venta.observaciones }</h4>
                     </span>
 
                     <span>

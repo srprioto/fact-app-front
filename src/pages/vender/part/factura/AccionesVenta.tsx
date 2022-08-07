@@ -31,33 +31,36 @@ export const AccionesVenta = ({
     }
 
     return (
-        <div className={
-            "grid-3 gap " + 
-            (
-                auth.rol === Roles.SALLER 
-                ? "acciones-venta-vendedor"
-                : "acciones-venta"
-            )
-        }>
-            <div className="grid-6">
-                <button className="btn btn-primary" type="button" onClick={() => setShowWindow(1)}>
-                    {/* <BiRightArrowAlt /> */}
-                    <BiArrowBack />
-                </button>
-            </div>
-            
-            <BtnOnOff2
-                label={labelBtn}
-                estado={verVender()}
-                icon={<BiCaretRight />}
-            >
-                <LoadSwitchBtn2
-                    loading={loadVenta}
-                    className="btn btn-success"
+        <>
+            <div style={{height: "90px"}} />
+            <div className={
+                "grid-3 gap " + 
+                (
+                    auth.rol === Roles.SALLER 
+                    ? "acciones-venta-vendedor"
+                    : "acciones-venta"
+                )
+            }>
+                <div className="grid-6">
+                    <button className="btn btn-primary" type="button" onClick={() => setShowWindow(1)}>
+                        {/* <BiRightArrowAlt /> */}
+                        <BiArrowBack />
+                    </button>
+                </div>
+                
+                <BtnOnOff2
+                    label={labelBtn}
+                    estado={verVender()}
+                    icon={<BiCaretRight />}
                 >
-                    <BiCaretRight /> { labelBtn }
-                </LoadSwitchBtn2>
-            </BtnOnOff2>
-        </div>
+                    <LoadSwitchBtn2
+                        loading={loadVenta}
+                        className="btn btn-success"
+                    >
+                        <BiCaretRight /> { labelBtn }
+                    </LoadSwitchBtn2>
+                </BtnOnOff2>
+            </div>
+        </>
     )
 }

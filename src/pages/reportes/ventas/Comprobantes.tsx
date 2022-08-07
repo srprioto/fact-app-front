@@ -8,6 +8,8 @@ import { SearchWrap } from "../../../components/SearchWrap";
 import { paginate } from "../../../resources/fetch";
 import { COMPROBANTE_PAGINATE, COMPROBANTE_SEARCH } from "../../../resources/routes";
 import { ComprobanteItem } from "./comprobantes/ComprobanteItem";
+import { ModalAnularComp } from "./comprobantes/ModalAnularComp";
+import { ModalReenviarComp } from "./comprobantes/ModalReenviarComp";
 import { ModalVerComprobante } from "./comprobantes/ModalVerComprobante";
 import { TablaFiltro } from "./comprobantes/TablaFiltro";
 
@@ -22,8 +24,11 @@ export const Comprobantes = ({ idLocal, selectLocal, loadingLocal, locales }:inf
     
     const [loadingData, setLoadingData] = useState<boolean>(false);
     const [modalVer, setModalVer] = useState<boolean>(false);
+    const [modalReenviar, setModalReenviar] = useState<boolean>(false);
+    const [modalAnular, setModalAnular] = useState<boolean>(false);
     // const [modalHabilitarVenta, setModalHabilitarVenta] = useState<boolean>(false);
-    const [idComprobante, setIdComprobante] = useState<number>(0);
+    // const [idComprobante, setIdComprobante] = useState<number>(0);
+    const [comprobante, setComprobante] = useState<any>({});
     const [pagination, setPagination] = useState<any>({ meta: {}, links: {} });
     const [data, setData] = useState<any>([]);
     const [toggle, setToggle] = useState<number>(1); // tabs para los filtros
@@ -66,20 +71,24 @@ export const Comprobantes = ({ idLocal, selectLocal, loadingLocal, locales }:inf
             setLoadingData(true);
             console.log(error);
         }
-        setIdComprobante(0);
+        setComprobante({});
     }
 
 
-    const handlerVer = (id:number) => { 
-        setIdComprobante(id);
+    const handlerVer = (comp:any) => { 
+        setComprobante(comp);
         setModalVer(!modalVer);        
     }
 
+    const reenviarComprobante = (comp:any) => { 
+        setComprobante(comp);
+        setModalReenviar(!modalReenviar);
+    }
 
-    // const handlerHabilitarVenta = (idComprobante:number) => {
-    //     setIdComprobante(idComprobante);
-    //     setModalHabilitarVenta(true);
-    // }
+    const anularComprobante = (comp:any) => { 
+        setComprobante(comp);
+        setModalAnular(!modalAnular);
+    }
 
 
     const handlerLocal = (e:any) => { 
@@ -87,6 +96,7 @@ export const Comprobantes = ({ idLocal, selectLocal, loadingLocal, locales }:inf
             e.target.value
         )
     }
+    
     
     return (
         <>
@@ -174,6 +184,8 @@ export const Comprobantes = ({ idLocal, selectLocal, loadingLocal, locales }:inf
                                                     key={e.id}
                                                     comprobante={e}
                                                     handlerVer={handlerVer}
+                                                    reenviarComprobante={reenviarComprobante}
+                                                    anularComprobante={anularComprobante}
                                                 />
                                             )
                                         })
@@ -199,11 +211,31 @@ export const Comprobantes = ({ idLocal, selectLocal, loadingLocal, locales }:inf
                 <ModalVerComprobante
                     modal={modalVer}
                     setModal={setModalVer}
-                    idComprobante={idComprobante}
+                    idComprobante={comprobante.id}
+                />
+            </ModalWrap>
+
+            <ModalWrap modal={modalReenviar}>
+                <ModalReenviarComp
+                    modal={modalReenviar}
+                    setModal={setModalReenviar}
+                    idComprobante={comprobante.id}
+                    getData={getData}
+                />
+            </ModalWrap>
+
+            <ModalWrap modal={modalAnular}>
+                <ModalAnularComp
+                    modal={modalAnular}
+                    setModal={setModalAnular}
+                    comprobante={comprobante}
+                    getData={getData}
                 />
             </ModalWrap>
 
             
+            
+
             {/* <ModalHabilitarVenta 
                 modal={modalHabilitarVenta}
                 setModal={setModalHabilitarVenta}

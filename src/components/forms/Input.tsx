@@ -46,69 +46,42 @@ export const Input = ({
                 {
                     type === "text"
                     ? (
-                        <input 
-                            type={type}
-                            name={name} 
-                            id={name} 
-                            value={value === 0 || value === isNaN ? "" : value}
-                            onWheel={ event => event.currentTarget.blur() }
-                            onChange={onChange}
+                        <TextEstandar
+                            name={name}
+                            value={value}
                             placeholder={placeholder}
-                            autoComplete="off"
+                            onChange={onChange}
                         />
+                        
                     ) : type === "number" 
                     ? (
+                        // numbers
                         noMenos
                         ? (
-                            <input 
-                                type={type} 
-                                name={name} 
-                                id={name}
-                                value={
-                                    value === isNaN ||
-                                    value === undefined ||
-                                    value === null ||
-                                    value <= 0
-                                    ? ""
-                                    : value
-                                }
-                                onWheel={ event => event.currentTarget.blur() }
-                                onChange={onChange}
+                            <NumberNoMenor
+                                name={name}
+                                value={value}
                                 placeholder={placeholder}
-                                autoComplete="off"
-                                min="0"
-                            />  
+                                onChange={onChange}
+                            />
                         ) : (
-                            <input 
-                                className={color}
-                                type={type} 
-                                name={name} 
-                                id={name} 
-                                value={
-                                    value === isNaN ||
-                                    value === undefined ||
-                                    value === null ||
-                                    value === 0
-                                    ? "" 
-                                    : value
-                                }
-                                onWheel={ event => event.currentTarget.blur() }
-                                onChange={onChange}
+                            <NumberEstandar
+                                name={name}
+                                value={value}
                                 placeholder={placeholder}
-                                autoComplete="off"
-                            />  
+                                onChange={onChange}
+                                color={color}
+                            />
                         )  
                     ) : (
-                        <input 
-                            type={type} 
-                            name={name} 
-                            id={name} 
+                        // otros
+                        <InputOtros
+                            type={type}
+                            name={name}
                             value={value}
-                            onWheel={ event => event.currentTarget.blur() }
-                            onChange={onChange}
                             placeholder={placeholder}
-                            autoComplete="off"
-                        /> 
+                            onChange={onChange}
+                        />
                     )
                 }
                 {
@@ -119,6 +92,107 @@ export const Input = ({
         </div>
     )
 };
+
+
+const TextEstandar = ({ 
+    name, 
+    value, 
+    placeholder, 
+    onChange, 
+}:input) => { 
+    return (
+        <input 
+            type="text"
+            name={name} 
+            id={name} 
+            value={value === 0 || value === isNaN ? "" : value}
+            onWheel={ event => event.currentTarget.blur() }
+            onChange={onChange}
+            placeholder={placeholder}
+            autoComplete="off"
+        />
+    );
+}
+
+const NumberNoMenor = ({ 
+    name, 
+    value, 
+    placeholder, 
+    onChange, 
+}:input) => { 
+    return (
+        <input 
+            type="number" 
+            name={name} 
+            id={name}
+            value={
+                value === isNaN ||
+                value === undefined ||
+                value === null ||
+                value <= 0
+                ? ""
+                : value
+            }
+            onWheel={ event => event.currentTarget.blur() }
+            onChange={onChange}
+            placeholder={placeholder}
+            autoComplete="off"
+            min="0"
+        />
+    );
+}
+
+const NumberEstandar = ({ 
+    name, 
+    value, 
+    placeholder, 
+    onChange, 
+    color = ""
+}:input) => { 
+    return (
+        <input 
+            className={color}
+            type="number" 
+            name={name} 
+            id={name} 
+            value={
+                value === isNaN ||
+                value === undefined ||
+                value === null ||
+                value === 0
+                ? "" 
+                : value
+            }
+            onWheel={ event => event.currentTarget.blur() }
+            onChange={onChange}
+            placeholder={placeholder}
+            autoComplete="off"
+        />  
+    );
+}
+
+const InputOtros = ({ 
+    type, 
+    name, 
+    value, 
+    placeholder, 
+    onChange, 
+}:any) => { 
+    return (
+        <input 
+            type={type} 
+            name={name} 
+            id={name} 
+            value={value}
+            onWheel={ event => event.currentTarget.blur() }
+            onChange={onChange}
+            placeholder={placeholder}
+            autoComplete="off"
+        /> 
+    );
+}
+
+
 
 
 /*

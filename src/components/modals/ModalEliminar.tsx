@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { BiX } from "react-icons/bi";
+import { BiReply } from "react-icons/bi";
 
 import { Modal } from "./Modal";
 import { LoadSwitchBtn } from "../btns/LoadSwitchBtn";
@@ -54,7 +54,7 @@ export const ModalEliminar = ({ modal, setModal, id, nombre, url, getData, setSe
                     <LoadSwitchBtn label="Aceptar" loading={loading}  handler={handlerDestoroy}/>
                     
                     <button className="btn btn-danger" onClick={ () => { setModal(false) } }>
-                        <BiX />Cancelar
+                        <BiReply /> Regresar
                     </button>
 
                     <div />

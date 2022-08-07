@@ -85,11 +85,9 @@ export const FormInfoGeneral = ({
                                             </>
                                         )
                                     }
-                                    <div style={{height: "90px"}} />
                                 </>
                             )
                         }
-
 
                         <AccionesVenta
                             loadVenta={loadVenta}

@@ -8,6 +8,7 @@ import { TextoRelleno } from "../../../components/TextoRelleno";
 import { useCaja } from "../../../hooks/useContext/caja.ts/useCaja";
 import { clienteInfo } from "../../../resources/dtos/Cliente";
 import { post } from "../../../resources/fetch";
+import { noDecimal } from "../../../resources/func/noDecimal";
 import { VENTAS } from "../../../resources/routes";
 import { ModalCodigoVenta } from "./verLista/short/ModalCodigoVenta";
 import { VerListaShort } from "./verLista/short/VerListaShort";
@@ -83,11 +84,17 @@ export const VerProducto = ({
         setShowWindow(2)
     }
 
-
     const handlerOnChange = (e:any) => { 
         setVentaDetalle({ 
             ...ventaDetalle,
             [e.target.name]: e.target.value
+        })
+    }
+
+    const handlerOnChangeCantidad = (e:any) => {
+        setVentaDetalle({
+            ...ventaDetalle,
+            [e.target.name]: noDecimal(e.target.value)
         })
     }
 
@@ -139,7 +146,7 @@ export const VerProducto = ({
         let updateListaVenta:Array<any> = [];
         let updateVentaDetalle:any = ventaDetalle;
         if (tipoDescuento) {
-            updateVentaDetalle.descuento = ventaDetalle.descuento * ventaDetalle.cantidad_venta;        
+            updateVentaDetalle.descuento = Number(Number(ventaDetalle.descuento) * Number(ventaDetalle.cantidad_venta));
         }
 
         updateListaVenta.push(updateVentaDetalle);
@@ -173,7 +180,6 @@ export const VerProducto = ({
         } finally{
             reinicios2();
         }
-
     }
 
     return (
@@ -203,7 +209,7 @@ export const VerProducto = ({
                                     producto={producto} 
                                     calcularStock={calcularStock}
                                     ventaDetalle={ventaDetalle}
-                                    handlerOnChange={handlerOnChange} 
+                                    handlerOnChange={handlerOnChangeCantidad} 
                                     idLocal={idLocal}
                                 />
                                 <GestionPrecios

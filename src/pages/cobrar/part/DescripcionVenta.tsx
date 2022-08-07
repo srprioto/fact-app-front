@@ -109,6 +109,8 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
         updateVenta.envioComprobante = envioComprobante;
 
         try {
+            // const response = await put(data.id, updateVenta, VENTAS);
+            // console.log(response);
             await put(data.id, updateVenta, VENTAS);
             setLoadConfirmarVenta(false);
         } catch (error) {

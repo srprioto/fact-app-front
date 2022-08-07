@@ -37,7 +37,7 @@ export const ModalVentaDetalles = ({ modal, setModal, idVenta }:any) => {
             return "success-i"
         } else if (estado === "enviado") {
             return "warning-i"
-        } else if (estado === "rechazado") {
+        } else if (estado === "rechazado" || estado === "anulado") {
             return "danger-i"
         }
     }

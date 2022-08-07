@@ -37,7 +37,8 @@ export const InfoComprobante = ({ comprobante }:any) => {
 
                     <span>
                         <p>Codigo venta: </p>
-                        <h4 className="info-i">{ comprobante.serie + "-" + comprobante.correlativo }</h4>
+                        {/* <h4 className="info-i">{ comprobante.serie + "-" + comprobante.correlativo }</h4> */}
+                        <h4 className="info-i">{ comprobante.serie + "-" + comprobante.id }</h4>
                     </span>
 
                     <span>

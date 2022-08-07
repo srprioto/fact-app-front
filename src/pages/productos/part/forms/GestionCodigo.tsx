@@ -48,7 +48,10 @@ export const GestionCodigo = ({ producto, noCreado }:any) => {
                 <DescProducto producto={producto} />
             </div>
 
-            <div ref={imprimir} className="none">
+            <div 
+                ref={imprimir} 
+                className="none"
+            >
                 <ProductoBarrasImp
                     value={producto.codigo}
                     nombre={producto.nombre}
