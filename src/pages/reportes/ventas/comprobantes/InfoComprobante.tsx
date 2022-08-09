@@ -1,3 +1,4 @@
+import { fecha } from "../../../../resources/func/fechas"
 import { moneda } from "../../../../resources/func/moneda"
 
 export const InfoComprobante = ({ comprobante }:any) => {
@@ -86,7 +87,7 @@ export const InfoComprobante = ({ comprobante }:any) => {
 
                     <span>
                         <p>Fecha de emisión: </p>
-                        <h4>{ comprobante.fecha_emision }</h4>
+                        <h4>{ fecha(comprobante.fecha_emision) }</h4>
                     </span>
 
                 </div>

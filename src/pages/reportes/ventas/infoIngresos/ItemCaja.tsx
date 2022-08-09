@@ -1,5 +1,5 @@
 import { zeroFill } from "../../../../resources/func/ceroFill";
-import { fecha } from "../../../../resources/func/fechas";
+import { fechaNoHora } from "../../../../resources/func/fechas";
 import { moneda } from "../../../../resources/func/moneda";
 import { CajaDropDown } from "./CajaDropDown";
 
@@ -31,7 +31,7 @@ export const ItemCaja = ({ item, handlerVer }:any) => {
 
             <td className="success strong">S/. { moneda(montoEfectivo + montoOtros) }</td>
 
-            <td>{ fecha(item.created_at) }</td>
+            <td>{ fechaNoHora(item.created_at) }</td>
 
             <td><CajaDropDown item={item} handlerVer={handlerVer}/></td>
         </tr>

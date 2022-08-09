@@ -1,4 +1,5 @@
 import { classEstado } from "../../../../resources/dtos/ComprobantesDto"
+import { fecha } from "../../../../resources/func/fechas"
 import { ComprobanteDropdown } from "./ComprobanteDropdown"
 
 export const ComprobanteItem = ({ comprobante, handlerVer, reenviarComprobante, anularComprobante }:any) => {
@@ -64,7 +65,7 @@ export const ComprobanteItem = ({ comprobante, handlerVer, reenviarComprobante, 
             <td>{ tipoOperacion() }</td>
             <td className="strong info">{ tipoDocm() }</td>
             <td>{ comprobante.locales ? comprobante.locales.nombre : "" }</td>
-            <td>{ comprobante.fecha_emision }</td>
+            <td>{ fecha(comprobante.fecha_emision) }</td>
             <td className={classEstado(comprobante.estado_sunat) + " strong"}>{ comprobante.estado_sunat }</td>
 
             <td>
