@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { fecha } from "../../../../resources/func/fechas";
 import { moneda } from "../../../../resources/func/moneda";
 
 interface impComprobante {
@@ -102,7 +103,7 @@ export const ImpComprobante = ({ venta }:impComprobante) => {
                 <div style={center}>
                     <h3 style={m0}>{ titulo() }</h3>
                     <span style={headerInfo}>{ venta.serie + "-" + venta.id + "-" + venta.codigo_venta }</span>
-                    <span style={headerInfo}>{ venta.updated_at }</span>
+                    <span style={headerInfo}>{ fecha(venta.updated_at) }</span>
                 </div>
                 <div style={center}>
                     <h2 style={m0}>AddidSport</h2> {/*  actualizar por nombre de empresa desde DB */}

@@ -1,4 +1,5 @@
 import { zeroFill } from "../../../../resources/func/ceroFill"
+import { fecha } from "../../../../resources/func/fechas"
 
 export const InfoTransaccion = ({ transaccion, classEstado }:any) => {
     return (
@@ -59,7 +60,7 @@ export const InfoTransaccion = ({ transaccion, classEstado }:any) => {
 
                     <span>
                         <p>Fecha de envio: </p>
-                        <h4>{ transaccion.created_at }</h4>
+                        <h4>{ fecha(transaccion.created_at) }</h4>
                     </span>
 
                 </div>

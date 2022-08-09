@@ -1,5 +1,6 @@
 import { Modal } from "../../../../components/modals/Modal"
 import { zeroFill } from "../../../../resources/func/ceroFill";
+import { fecha } from "../../../../resources/func/fechas";
 import { moneda } from "../../../../resources/func/moneda";
 
 export const ModalCajaDetalles = ({ modal, setModal, itemCaja }:any) => {
@@ -131,7 +132,7 @@ export const ModalCajaDetalles = ({ modal, setModal, itemCaja }:any) => {
                             </span>
                             <span>
                                 <p>Fecha:</p>
-                                <h4>{ itemCaja.created_at }</h4>
+                                <h4>{ fecha(itemCaja.created_at) }</h4>
                             </span>
                         </div>
                     </div>
@@ -165,7 +166,7 @@ export const ModalCajaDetalles = ({ modal, setModal, itemCaja }:any) => {
                                                             : "info")
                                                         }
                                                     >{ e.monto_movimiento }</td>
-                                                    <td>{ e.created_at }</td>
+                                                    <td>{ fecha(e.created_at) }</td>
                                                 </tr>
                                             )
                                         })

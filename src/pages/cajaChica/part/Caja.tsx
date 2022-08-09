@@ -6,6 +6,7 @@ import { useAuth } from "../../../auth/useAuth";
 import { Loading } from "../../../components/loads/Loading";
 import { ModalWrap } from "../../../components/modals/ModalWrap";
 import { getOne } from "../../../resources/fetch";
+import { fecha } from "../../../resources/func/fechas";
 import { CAJA } from "../../../resources/routes";
 import { ModalAbrirCaja } from "../../locales/local/ModalAbrirCaja";
 import { CajaAbierta } from "./CajaAbierta";
@@ -142,7 +143,7 @@ export const Caja = ({ idLocal, nombreLocal, user }:any) => {
                                                                 }
                                                             >S/. { e.monto_movimiento }</td>
                                                             <td>{ e.usuario && e.usuario.nombre }</td>
-                                                            <td>{ e.created_at }</td>
+                                                            <td>{ fecha(e.created_at) }</td>
                                                         </tr>
                                                     )
                                                 })

@@ -1,4 +1,5 @@
 import { zeroFill } from "../../../../resources/func/ceroFill";
+import { fecha } from "../../../../resources/func/fechas";
 import { TransDropdown } from "./TransDropdown"
 
 interface transaccion {
@@ -29,7 +30,7 @@ export const Transaccion = ({ elemento, handlerVer }:transaccion) => {
             <td
                className={ handlerClassEstado(elemento.estado_general) } 
             >{ elemento.estado_general }</td>
-            <td>{ elemento.created_at }</td>
+            <td>{ fecha(elemento.created_at) }</td>
             <td>
                 <TransDropdown 
                     elemento={elemento}

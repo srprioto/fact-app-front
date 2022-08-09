@@ -1,5 +1,6 @@
 import { Loading } from "../../../components/loads/Loading";
 import { Modal } from "../../../components/modals/Modal";
+import { fecha } from "../../../resources/func/fechas";
 // import { ClienteDto } from "../../../resources/dtos/Cliente";
 
 interface modalVer{
@@ -102,11 +103,11 @@ export const ModalVer = ({ data, modal, setModal, loading }:modalVer) => {
                             <h3>Otros</h3>
                             <span className="grid-12 gap">
                                 <p>Fecha registro</p>
-                                <h4>{ data.created_at }</h4>
+                                <h4>{ fecha(data.created_at) }</h4>
                             </span>
                             <span className="grid-12 gap">
                                 <p>Ultima actualiz.</p>
-                                <h4>{ data.updated_at }</h4>
+                                <h4>{ fecha(data.updated_at) }</h4>
                             </span>
                         </div>
                         
@@ -116,34 +117,3 @@ export const ModalVer = ({ data, modal, setModal, loading }:modalVer) => {
         </Modal>
     )
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -1,4 +1,5 @@
 import { Modal } from "../../../components/modals/Modal"
+import { fecha } from "../../../resources/func/fechas";
 import { moneda } from "../../../resources/func/moneda";
 
 export const ModalVerProducto = ({ modal, setModal, producto }:any) => {
@@ -72,11 +73,11 @@ export const ModalVerProducto = ({ modal, setModal, producto }:any) => {
                     <h3>Otros</h3>
                     <span className="grid-12 gap">
                         <p>Creacion</p>
-                        <h4>{ producto.created_at }</h4>
+                        <h4>{ fecha(producto.created_at) }</h4>
                     </span>
                     <span className="grid-12 gap">
                         <p>Ultima actualizacion</p>
-                        <h4>{ producto.updated_at }</h4>
+                        <h4>{ fecha(producto.updated_at) }</h4>
                     </span>
                 </div>
             </div>

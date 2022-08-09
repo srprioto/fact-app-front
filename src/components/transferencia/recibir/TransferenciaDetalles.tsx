@@ -6,6 +6,7 @@ import { Checkbox } from "../../forms/Checkbox";
 import { Input } from "../../forms/Input";
 import { LoadSwitchBtn } from "../../btns/LoadSwitchBtn";
 import { useAuth } from "../../../auth/useAuth";
+import { fecha } from "../../../resources/func/fechas";
 // import { LoadSwitchBtn2 } from "../../btns/LoadSwitchBtn2";
 
 export const TransferenciaDetalles = ({ data, getTransacciones, setTransf }:any) => {
@@ -94,7 +95,7 @@ export const TransferenciaDetalles = ({ data, getTransacciones, setTransf }:any)
                 </span>
                 <span>
                     <h4>Fecha de envio: </h4>
-                    <p>{ data.created_at }</p>
+                    <p>{ fecha(data.created_at) }</p>
                 </span>
             </div>
 

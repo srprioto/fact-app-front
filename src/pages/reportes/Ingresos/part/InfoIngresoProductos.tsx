@@ -1,4 +1,5 @@
 import { zeroFill } from "../../../../resources/func/ceroFill"
+import { fecha } from "../../../../resources/func/fechas"
 import { moneda } from "../../../../resources/func/moneda"
 
 export const InfoIngresoProductos = ({ movimiento }:any) => {
@@ -49,7 +50,7 @@ export const InfoIngresoProductos = ({ movimiento }:any) => {
 
                     <span>
                         <p>Fecha de envio: </p>
-                        <h4>{ movimiento.created_at }</h4>
+                        <h4>{ fecha(movimiento.created_at) }</h4>
                     </span>
                 </div>                    
             </div>

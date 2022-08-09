@@ -1,5 +1,7 @@
 // import { zeroFill } from "../../../../resources/func/ceroFill"
 
+import { fecha } from "../../../../resources/func/fechas"
+
 export const InfoVenta = ({ venta, classEstado }:any) => {
 
     return (
@@ -76,7 +78,7 @@ export const InfoVenta = ({ venta, classEstado }:any) => {
 
                     <span>
                         <p>Fecha de venta: </p>
-                        <h4>{ venta.created_at }</h4>
+                        <h4>{ fecha(venta.created_at) }</h4>
                     </span>
 
                 </div>
