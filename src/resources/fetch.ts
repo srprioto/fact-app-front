@@ -17,6 +17,7 @@ async function get(endpoint:string) {
         
     } catch (error) {
         console.log(error);
+        document.location.href = "/#/404";
     }
 
     return data;
@@ -27,7 +28,6 @@ async function get(endpoint:string) {
 async function paginate(endpoint:string) {
 
     let res;
-
     try {
         const response = await fetch(API_URL + endpoint, { 
             method: "GET", 
@@ -38,8 +38,8 @@ async function paginate(endpoint:string) {
         
     } catch (error) {
         console.log(error);
+        document.location.href = "/#/404";
     }
-
     return res;
 
 }
@@ -59,6 +59,7 @@ async function getOne(id:number, endpoint:string) {
 
     } catch (error) {
         console.log(error);
+        document.location.href = "/#/404";
     }
 
     return data;
@@ -80,7 +81,8 @@ async function post(data:any, endpoint:string) {
         post = await post.json()
 
     } catch (error) {
-        console.log(error)
+        console.log(error);
+        document.location.href = "/#/404";
     }
 
     return post
@@ -102,7 +104,8 @@ async function put(id:number, data:any, endpoint:string) {
         put = await put.json()
 
     } catch (error) {
-        console.log(error)
+        console.log(error);
+        document.location.href = "/#/404";
     }
 
     return put
@@ -123,6 +126,7 @@ async function destroy(id:number|null|undefined, endpoint:string) {
         
     } catch (error) {
         console.log(error);
+        document.location.href = "/#/404";
     }
 
     return data;
