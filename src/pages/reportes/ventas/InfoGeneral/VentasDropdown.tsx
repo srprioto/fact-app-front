@@ -11,7 +11,11 @@ interface ventasDropdown {
 export const VentasDropdown = ({ ventas, handlerVer, updateData, handlerAnular }:ventasDropdown) => {
 
     const anulado = () => { 
-        if (ventas.estado_venta === "anulado" || ventas.estado_venta === "rechazado") {
+        if (
+            ventas.estado_venta === "anulado" || 
+            ventas.estado_venta === "rechazado" || 
+            ventas.estado_venta === "enviado"
+        ) {
             return true;
         } else {
             return false;
@@ -27,10 +31,6 @@ export const VentasDropdown = ({ ventas, handlerVer, updateData, handlerAnular }
                 </span>
             }
             
-            <span onClick={ () => handlerVer(ventas.id) } >
-                <BiShowAlt />Ver detalles
-            </span>
-            
             {
                 ventas.estado_venta === "rechazado"
                 && (
@@ -40,6 +40,10 @@ export const VentasDropdown = ({ ventas, handlerVer, updateData, handlerAnular }
                 )
             }
             
+            <span onClick={ () => handlerVer(ventas.id) } >
+                <BiShowAlt />Ver detalles
+            </span>
+                        
         </DropDown>
     )
 }

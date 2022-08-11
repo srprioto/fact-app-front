@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { 
-    BiBookmarkAltMinus, 
+    // BiBookmarkAltMinus, 
     BiCaretRight, 
     BiMailSend 
     // BiImport, 
@@ -17,7 +17,7 @@ import { Input } from "../../../../components/forms/Input";
 import { ModalWrap } from "../../../../components/modals/ModalWrap";
 import { ModalCorreo } from "./ModalCorreo";
 import { moneda } from "../../../../resources/func/moneda";
-import { ImpComprobante } from "./ImpComprobante";
+// import { ImpComprobante } from "./ImpComprobante";
 import { BtnImpComprobante } from "./BtnImpComprobante";
 
 

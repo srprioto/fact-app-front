@@ -3,6 +3,11 @@ import { moneda } from "../../../../resources/func/moneda"
 
 export const InfoComprobante = ({ comprobante }:any) => {
 
+    const venta:any = comprobante.ventas ? comprobante.ventas : {};
+    const idVenta = venta ? venta.id : "";
+    const codigoVenta = venta ? venta.codigo_venta : "";
+    const codigoComprobante:any = comprobante.serie + "-" + idVenta + "-" + codigoVenta + "-" + comprobante.id;
+
     const tipoDocm = () => {
         if (comprobante.tipoDocumento === "1") {
             return "DNI"
@@ -24,10 +29,9 @@ export const InfoComprobante = ({ comprobante }:any) => {
             return "Factura"
         } else if (comprobante.tipoComprobante === "03") {
             return "Boleta"
-        }
-
-        
+        }        
     }
+
 
     return (
         <div className="grid-2 gap">
@@ -38,8 +42,8 @@ export const InfoComprobante = ({ comprobante }:any) => {
 
                     <span>
                         <p>Codigo venta: </p>
-                        {/* <h4 className="info-i">{ comprobante.serie + "-" + comprobante.correlativo }</h4> */}
-                        <h4 className="info-i">{ comprobante.serie + "-" + comprobante.id }</h4>
+                        {/* <h4 className="info-i">{ comprobante.serie + "-" + comprobante.id }</h4> */}
+                        <h4 className="info-i">{ codigoComprobante }</h4>
                     </span>
 
                     <span>

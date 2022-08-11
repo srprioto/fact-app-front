@@ -4,6 +4,27 @@ import { fecha } from "../../../../resources/func/fechas"
 
 export const InfoVenta = ({ venta, classEstado }:any) => {
 
+    const comprobante:any = venta.comprobante ? venta.comprobante : [];
+
+    const correlativo:number = comprobante[0] ? comprobante[0].id : 0;
+    const codigoVenta:string = 
+        venta.serie + "-" + 
+        venta.id + "-" + 
+        venta.codigo_venta +
+        (correlativo !== 0 ? "-" + correlativo : "");
+
+        
+    const tipoComprobante = () => { 
+        if (venta.serie === "B001") {
+            return "Boleta";
+        } else if (venta.serie === "F001") {
+            return "Factura";
+        } else if (venta.serie === "V001") {
+            return "Venta rapida";
+        }
+    }
+    
+
     return (
     
         <div className="grid-2 gap">
@@ -13,9 +34,13 @@ export const InfoVenta = ({ venta, classEstado }:any) => {
                 <div className="box-wrap-descripcion3">
 
                     <span>
-                        <p>Codigo general: </p>
-                        {/* <h4 className="info-i">{ zeroFill(Number(venta.id), 5) }</h4> */}
-                        <h4 className="info-i">{ venta.serie + "-" + venta.id + "-" + venta.codigo_venta }</h4>
+                        <p>Codigo venta</p>
+                        <h4 className="info-i">{ codigoVenta }</h4>
+                    </span>
+
+                    <span>
+                        <p>Tipo comp.</p>
+                        <h4 className="info-i">{ tipoComprobante() }</h4>
                     </span>
 
                     <span>

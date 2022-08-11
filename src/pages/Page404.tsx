@@ -1,5 +1,5 @@
 import { BiReply } from "react-icons/bi"
-import { Link, useNavigate } from "react-router-dom"
+import { Link } from "react-router-dom"
 
 export const Page404 = () => {
 

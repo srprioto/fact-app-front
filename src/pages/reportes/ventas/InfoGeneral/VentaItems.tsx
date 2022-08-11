@@ -11,6 +11,14 @@ interface ventaItems {
 
 export const VentaItems = ({ ventas, handlerVer, updateData, handlerAnular }:ventaItems) => {
 
+    const comprobante:any = ventas.comprobante ? ventas.comprobante : [];
+    const correlativo:number = comprobante[0] ? comprobante[0].id : 0;
+    const codigoVenta:string = 
+        ventas.serie + "-" + 
+        ventas.id + "-" + 
+        ventas.codigo_venta +
+        (correlativo !== 0 ? "-" + correlativo : "");
+
     const classEstado = () => { 
         if (ventas.estado_venta === "listo") {
             return "success ";
@@ -30,10 +38,22 @@ export const VentaItems = ({ ventas, handlerVer, updateData, handlerAnular }:ven
             return "";
         }
     }
+
+    const tipoComprobante = () => { 
+        if (ventas.serie === "B001") {
+            return "Boleta";
+        } else if (ventas.serie === "F001") {
+            return "Factura";
+        } else if (ventas.serie === "V001") {
+            return "Venta rapida";
+        }
+    }
+
     
     return (
         <tr className="venta-items">
-            <td className={"secundary " + anulado()}>{ ventas.serie + "-" + ventas.id + "-" + ventas.codigo_venta }</td>
+            <td className={"secundary " + anulado()}>{ codigoVenta }</td>
+            <td className={"secundary " + anulado()}>{ tipoComprobante() }</td>
             <td className={"success strong " + anulado()}>S/. { moneda(ventas.total) }</td>
             <td className={ classEstado() + anulado() } >{ ventas.estado_venta }</td>
             <td className={ anulado() }>{ ventas.locales && ventas.locales.nombre }</td>
