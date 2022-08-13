@@ -72,10 +72,10 @@ export const ModalCantidad = ({ modal, setModal, localStock, getData, setSearchS
                     <div className="grid-1 gap">
                         <div>
                             <p style={{ margin: 0 }}>Añade una cantidad al producto {localStock.nombreProducto}</p>
-                            <h5>Para quitar una cantidad, usar el simbolo de resta(Menos)</h5>
+                            <h5 className="m-0">Para quitar una cantidad, usar el simbolo de resta(Menos)</h5>
                             <p style={{ margin: 0 }}>Cantidad actual <strong>{localStock.cantidad}</strong></p>
                             {
-                                <p>
+                                <p className="m-0">
                                     <span>Cantidad final: </span>
                                     {
                                         !data.cantidad
@@ -89,11 +89,10 @@ export const ModalCantidad = ({ modal, setModal, localStock, getData, setSearchS
                                                 { localStock.cantidad + (parseInt(data.cantidad)) }
                                             </strong>
                                         )
-                                        
-                                        
                                     }
                                 </p>
                             }
+                            <h5 className="danger m-0">Importante: Esta accion no deja registro, usar con precaucion</h5>
                         </div>
                     </div>
 

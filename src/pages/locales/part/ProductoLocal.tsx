@@ -1,4 +1,6 @@
 import { BiCaretDown } from "react-icons/bi";
+import { useAuth } from "../../../auth/useAuth";
+import { Roles } from "../../../resources/dtos/RolesDto";
 import { BoxDropdown } from "./BoxDropdown";
 
 import { DetallesProd } from "./DetallesProd";
@@ -13,6 +15,8 @@ export const ProductoLocal = ({
     elemento, 
     handlerCantidad 
 }:Producto) => {
+
+    const auth = useAuth();
 
     return (
         <tr>
@@ -35,15 +39,21 @@ export const ProductoLocal = ({
                         <DetallesProd producto={elemento.productos} />
                     </div>
                 </div>
-                
             </td>
             <td>
-                <BoxDropdown 
-                    nombreProducto={elemento.nombre}
-                    idLocalStock={elemento.id}
-                    cantLocalStock={elemento.cantidad}
-                    handlerCantidad={handlerCantidad}
-                />
+                {
+                    auth.rol === Roles.ADMIN
+                    && (
+                        <BoxDropdown 
+                            nombreProducto={elemento.nombre}
+                            idLocalStock={elemento.id}
+                            cantLocalStock={elemento.cantidad}
+                            handlerCantidad={handlerCantidad}
+                        />
+                    )
+                    
+                }
+                
             </td>
         </tr>
     )

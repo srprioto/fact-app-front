@@ -209,13 +209,15 @@ export const StockAlmacen = () => {
                 setSearchState={setSearchState}
             /> */}
 
-            <ModalCantidad 
-                modal={modalCant}
-                setModal={setModalCant}
-                localStock={localStock}
-                getData={getData}
-                setSearchState={setSearchState}
-            />
+            <ModalWrap modal={modalCant} >
+                <ModalCantidad 
+                    modal={modalCant}
+                    setModal={setModalCant}
+                    localStock={localStock}
+                    getData={getData}
+                    setSearchState={setSearchState}
+                />
+            </ModalWrap>
 
             <ModalWrap modal={modalTransferencia} >
                 <ModalTransferencia
