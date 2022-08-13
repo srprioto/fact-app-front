@@ -583,6 +583,9 @@ a.btn-danger:hover{ color: $danger; }
     cursor: auto;     
 }
 
+.disable{
+    cursor: no-drop!important;
+}
 
 // rotar svg botones
 
@@ -675,7 +678,7 @@ select{
     font-size: 1em;
     font-weight: 400;
     background-color: $bg-input;
-    border: 1px solid #32394e;
+    border: 1px solid $border-input;
     // -webkit-appearance: none;
     // -moz-appearance: none;
     // appearance: none;
@@ -684,6 +687,21 @@ select{
     background-clip: padding-box;
     border-radius: 15px;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+input.input2{
+    width: 100px;
+    text-align: left;
+    display: block;
+    padding: 2px 6px;
+    font-size: 1em;
+    font-weight: 400;
+    border: 1px solid transparent;
+    border-bottom: 1px solid $primary;
+    line-height: 1.5;
+    color: $texto;
+    background-clip: padding-box;
+    border-radius: 0;
+    background-color: transparent;
 }
 
 select{
@@ -861,6 +879,10 @@ table.no-hover{
     tbody tr:hover {
         background-color: transparent!important;
     }
+    tbody tr:hover {
+        background-color: none!important;
+    }
+    
 }
 
 table.no-cursor{

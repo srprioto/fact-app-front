@@ -935,11 +935,23 @@
 // **** Generales ****
 
 // modal transferir productos
-.lista-transf{
+// .lista-transf{
+//     @include static-scroll(300px);
+// }
 
-    @include static-scroll(300px);
+.enviar-transferencia{
+    .buscar-productos-transf{
+        @include static-scroll(380px);
+        .fill-txt-buscar-prod{
+            margin-bottom: 62px;
+        }
+    }
+    .lista-productos-transf{
+        @include static-scroll(380px);
+    }
 
 }
+
 
 // modal recibir productos
 

@@ -13,6 +13,7 @@ import { paginate, post } from "../../../resources/fetch";
 import { LOCAL_STOCK_SEARCH, LOCAL_STOCK_SOLO } from "../../../resources/routes";
 import { ModalCantidad } from "../../locales/part/ModalCantidad";
 import { ProductoLocal } from "../../locales/part/ProductoLocal";
+import { ModalWrap } from "../../../components/modals/ModalWrap";
 
 export const StockAlmacen = () => {
 
@@ -150,7 +151,7 @@ export const StockAlmacen = () => {
                                     <tr>
                                         <th>Codigo</th>
                                         <th>Nombre del producto</th>
-                                        <th>Cantidad</th>
+                                        <th>Cantidad en stock</th>
                                         <th>Detalles...</th>
                                         {/* <th>Precio Compra</th>
                                         <th>Precios Venta</th> */}
@@ -216,13 +217,17 @@ export const StockAlmacen = () => {
                 setSearchState={setSearchState}
             />
 
-            <ModalTransferencia
+            <ModalWrap
                 modal={modalTransferencia}
-                setModal={setModalTransferencia}
-                idLocal={Number(params.id)}
-                nombreLocal={params.nombre}
-                getData={getData}
-            />
+            >
+                <ModalTransferencia
+                    modal={modalTransferencia}
+                    setModal={setModalTransferencia}
+                    idLocal={Number(params.id)}
+                    nombreLocal={params.nombre}
+                    getData={getData}
+                />
+            </ModalWrap>
 
 
         </div>

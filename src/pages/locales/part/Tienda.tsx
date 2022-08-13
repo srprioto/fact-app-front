@@ -170,7 +170,7 @@ export const Tienda = ({ idLocal, nombreLocal, user }:tienda) => {
                                     <tr>
                                         <th>Codigo</th>
                                         <th>Nombre del producto</th>
-                                        <th>Cantidad</th>
+                                        <th>Cantidad en stock</th>
                                         <th>Detalles...</th>
                                         {/* <th>Precio Compra</th>
                                         <th>Precios Venta</th> */}

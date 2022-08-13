@@ -6,6 +6,7 @@ interface input {
     onChange:any;
     placeholder?:string;
     color?:string;
+    className?:string;
     moneda?:boolean;
     noMenos?:boolean;
 }
@@ -17,7 +18,8 @@ export const Input = ({
     value, 
     placeholder, 
     onChange, 
-    color = "", 
+    color = "",
+    className = "",
     moneda, 
     noMenos
 }:input) => {
@@ -51,6 +53,7 @@ export const Input = ({
                             value={value}
                             placeholder={placeholder}
                             onChange={onChange}
+                            className={className}
                         />
                         
                     ) : type === "number" 
@@ -63,6 +66,7 @@ export const Input = ({
                                 value={value}
                                 placeholder={placeholder}
                                 onChange={onChange}
+                                className={className}
                             />
                         ) : (
                             <NumberEstandar
@@ -71,6 +75,7 @@ export const Input = ({
                                 placeholder={placeholder}
                                 onChange={onChange}
                                 color={color}
+                                className={className}
                             />
                         )  
                     ) : (
@@ -81,6 +86,7 @@ export const Input = ({
                             value={value}
                             placeholder={placeholder}
                             onChange={onChange}
+                            className={className}
                         />
                     )
                 }
@@ -99,9 +105,11 @@ const TextEstandar = ({
     value, 
     placeholder, 
     onChange, 
+    className
 }:input) => { 
     return (
         <input 
+            className={className}
             type="text"
             name={name} 
             id={name} 
@@ -119,9 +127,11 @@ const NumberNoMenor = ({
     value, 
     placeholder, 
     onChange, 
+    className
 }:input) => { 
     return (
         <input 
+            className={className}
             type="number" 
             name={name} 
             id={name}
@@ -147,11 +157,12 @@ const NumberEstandar = ({
     value, 
     placeholder, 
     onChange, 
-    color = ""
+    color = "",
+    className
 }:input) => { 
     return (
         <input 
-            className={color}
+            className={color + " " + className}
             type="number" 
             name={name} 
             id={name} 
@@ -177,9 +188,11 @@ const InputOtros = ({
     value, 
     placeholder, 
     onChange, 
+    className
 }:any) => { 
     return (
         <input 
+            className={className}
             type={type} 
             name={name} 
             id={name} 
