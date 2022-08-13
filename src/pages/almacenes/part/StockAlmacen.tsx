@@ -217,9 +217,7 @@ export const StockAlmacen = () => {
                 setSearchState={setSearchState}
             />
 
-            <ModalWrap
-                modal={modalTransferencia}
-            >
+            <ModalWrap modal={modalTransferencia} >
                 <ModalTransferencia
                     modal={modalTransferencia}
                     setModal={setModalTransferencia}

@@ -15,6 +15,7 @@ import { LOCAL_STOCK_SEARCH, LOCAL_STOCK_SOLO } from '../../../resources/routes'
 import { ModalTransferencia } from '../../../components/transferencia/enviar/EnviarTransferencia';
 import { AlertaTransferencia } from '../../../components/transferencia/recibir/AlertaTransferencia';
 import { NoRegistros } from '../../../components/NoRegistros';
+import { ModalWrap } from '../../../components/modals/ModalWrap';
 
 interface tienda{
     idLocal:string;
@@ -240,13 +241,15 @@ export const Tienda = ({ idLocal, nombreLocal, user }:tienda) => {
                 setSearchState={setSearchState}
             />
 
-            <ModalTransferencia
-                modal={modalTransferencia}
-                setModal={setModalTransferencia}
-                idLocal={Number(idLocal)}
-                nombreLocal={nombreLocal}
-                getData={getData}
-            />
+            <ModalWrap modal={modalTransferencia}>
+                <ModalTransferencia
+                    modal={modalTransferencia}
+                    setModal={setModalTransferencia}
+                    idLocal={Number(idLocal)}
+                    nombreLocal={nombreLocal}
+                    getData={getData}
+                />
+            </ModalWrap>
 
 
         </div>
