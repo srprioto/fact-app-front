@@ -27,11 +27,13 @@ export const ListaProductosTransf = ({ listaProductos, setListaProductos, repeti
 
     const validarCantidad = (idItem:number, cantidad:number) => { 
         const elemento:any = data.find((e:any) => e.productos.id === idItem && e);
-        if (cantidad > elemento.cantidad) {
-            return true;
-        } else {
-            return false;
-        }
+        if (!!elemento) {
+            if (cantidad > elemento.cantidad) {
+                return true;
+            } else {
+                return false;
+            }      
+        }          
     }
 
 
@@ -97,8 +99,6 @@ export const ListaProductosTransf = ({ listaProductos, setListaProductos, repeti
                     </div>
                 ) : <TextoRelleno texto="Añade un elemento" />
             }
-
-            
         </div>
     )
 }

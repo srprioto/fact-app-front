@@ -35,8 +35,8 @@ export const BuscarProdTransf = ({
     }
 
     return (
-        <div className="box box-par grid-1 gap m-0 buscar-productos-transf">
-            <div>
+        <div className="box box-par m-0 buscar-productos-transf">
+            <div className="mb-20">
                 <SearchWrap 
                     setLoadingData={setLoadingData}
                     setData={setData}
