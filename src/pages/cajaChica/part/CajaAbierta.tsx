@@ -12,6 +12,10 @@ export const CajaAbierta = ({ data, caja, setCaja, setModalCerrarCaja, setModalA
         Number(infoCaja.monto_apertura) + 
         Number(infoCaja.monto_efectivo) + 
         Number(infoCaja.otros_montos);
+    const montosOtrosMedios:number = 
+        Number(infoCaja.monto_deposito) +
+        Number(infoCaja.monto_tarjeta) +
+        Number(infoCaja.monto_yape);
     
     const handlerCerrarCaja = () => { 
         setCaja({
@@ -29,7 +33,6 @@ export const CajaAbierta = ({ data, caja, setCaja, setModalCerrarCaja, setModalA
         })
     }
 
-    // console.log(infoCaja);
 
     return (
         <div className="box">
@@ -71,15 +74,40 @@ export const CajaAbierta = ({ data, caja, setCaja, setModalCerrarCaja, setModalA
                     <div></div>
                     <div></div>
 
-                    <div className="center">
-                        <p>Ingresos otros medios: </p>
-                        <h2 className="primary-i">S/. { moneda(infoCaja.monto_otros_medios) }</h2>
+                    <div className="pago-otros-ingresos right">
+                        <span className="grid-12">
+                            <p className="m-0">Tarjeta:</p>
+                            <h4 className="info m-0">S/. { moneda(infoCaja.monto_tarjeta) }</h4>
+                        </span>
+                        <span className="grid-12">
+                            <p className="m-0">Yape:</p>
+                            <h4 className="info m-0">S/. { moneda(infoCaja.monto_yape) }</h4>
+                        </span>
+                        <span className="grid-12">
+                            <p className="m-0">Deposito:</p>
+                            <h4 className="info m-0">S/. { moneda(infoCaja.monto_deposito) }</h4>
+                        </span>
                     </div>
+    
+                    <div className="center">
+                        <p>Otros ingresos: </p>
+                        <h2 className="strong success-i">
+                            S/. { moneda(montosOtrosMedios) }
+                        </h2>
+                    </div>
+
+                </div>
+
+                <div className="grid-4 gap">
+
+                    <div></div>
+                    <div></div>
+                    <div></div>
     
                     <div className="center">
                         <p>Ingresos totales: </p>
                         <h1 className="strong success-i">
-                            S/. { moneda(Number(totalEfectivo) + Number(infoCaja.monto_otros_medios)) }
+                            S/. { moneda(Number(totalEfectivo) + Number(montosOtrosMedios)) }
                         </h1>
                     </div>
 

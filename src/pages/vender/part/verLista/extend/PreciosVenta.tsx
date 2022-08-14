@@ -1,6 +1,6 @@
-import { Input } from "../../../../../components/forms/Input"
-import { Select2 } from "../../../../../components/forms/Select2"
-import { moneda } from "../../../../../resources/func/moneda"
+import { Input } from "../../../../../components/forms/Input";
+import { Select2 } from "../../../../../components/forms/Select2";
+import { moneda } from "../../../../../resources/func/moneda";
 
 export const PreciosVenta = ({ venta, alertaDescuento, handlerOnChange }:any) => {
     return (
@@ -42,7 +42,14 @@ export const PreciosVenta = ({ venta, alertaDescuento, handlerOnChange }:any) =>
                 <option value="efectivo">Efectivo</option>
                 <option value="tarjeta">Tarjeta</option>
                 <option value="yape">Yape</option>
+                <option value="yape">Deposito</option>
             </Select2>
+            {/* <MetodosPago
+                label="Forma de pago"
+                name="forma_pago"
+                onChange={handlerOnChange}
+                value={venta.forma_pago}
+            /> */}
 
             <Input 
                 label="Observaciones"

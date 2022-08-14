@@ -48,6 +48,10 @@ export const COMPROBANTE:string = "/comprobante"
 export const COMPROBANTE_SEARCH:string  = "/comprobante/search/";
 export const COMPROBANTE_PAGINATE:string = "/comprobante/paginate";
 
+export const METODOS_PAGO:string = "/metodos-pago";
+
+
+
 // almacenes
 // export const ALMACEN:string = "/locales-stock/almacen/productos"; // localstock
 // export const ALMACEN_SEARCH:string = "/locales-stock/search/"; // localstock

@@ -23,9 +23,10 @@ import { FormasPago } from "./FormasPago";
 interface descripcionVenta {
     data:any
     handlerRefresh:Function;
+    loadingOne:boolean;
 }
 
-export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
+export const DescripcionVenta = ({ data, handlerRefresh, loadingOne }:descripcionVenta) => {
 
     const clienteOk:boolean = !!data.clientes;
 
@@ -131,9 +132,6 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
     }
 
 
-    // console.log(venta);
-    
-
     return (
         <div className="descripcion-venta">
             <div className="grid-1 gap">
@@ -179,10 +177,15 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
                             <p className="info mb-10">Total</p>
                             <h1 className="success strong m-0">S/. { moneda(venta.total) }</h1>
                         </span>
-                        
                         {
                             !showFormasPago
                             && (
+                                // <MetodosPago
+                                //     label="Forma de pago"
+                                //     name="forma_pago"
+                                //     onChange={handlerChangeVenta}
+                                //     value={venta.forma_pago}
+                                // />
                                 <Select2
                                     label="Forma de pago"
                                     name="forma_pago"
@@ -191,7 +194,8 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
                                 >
                                     <option value="efectivo">Efectivo</option>
                                     <option value="tarjeta">Tarjeta</option>
-                                    <option value="yape">Yape</option>                                
+                                    <option value="yape">Yape</option> 
+                                    <option value="deposito">Deposito</option>
                                 </Select2>
                             )
                         }
@@ -373,3 +377,10 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
 
 
 // const handlerCliente = (cliente:any) => setVenta({ ...venta, clientes: cliente}) // cliente nuevo
+
+// <MetodosPago
+//     label="Forma de pago"
+//     name="forma_pago"
+//     onChange={handlerChangeVenta}
+//     value={venta.forma_pago}
+// />

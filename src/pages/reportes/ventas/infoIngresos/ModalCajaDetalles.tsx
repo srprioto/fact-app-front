@@ -9,8 +9,11 @@ export const ModalCajaDetalles = ({ modal, setModal, itemCaja }:any) => {
         Number(itemCaja.monto_efectivo) + 
         Number(itemCaja.monto_apertura) + 
         Number(itemCaja.otros_montos);
-        
-    const montoOtrosMedios:number = Number(itemCaja.monto_otros_medios);
+    
+    const montoOtrosMedios:number = 
+        Number(itemCaja.monto_deposito) +
+        Number(itemCaja.monto_tarjeta) +
+        Number(itemCaja.monto_yape);
 
     const mostrarCajaDetalles = () => { 
         const mostrarDetalles:number = itemCaja.cajaDetalles && itemCaja.cajaDetalles.length;
@@ -69,38 +72,29 @@ export const ModalCajaDetalles = ({ modal, setModal, itemCaja }:any) => {
                                 <p>Ingresos otros medios:</p>
                                 <h4 className="primary-i">S/. { moneda(montoOtrosMedios) }</h4>
                             </span>
-
-                            <span>
-                                <p>Monto diferencial:</p>
-                                <h4 className={
-                                    (itemCaja.cantidad_diferencia !== 0
-                                    ? "danger-i"
-                                    : "secundary-i")
-                                }>S/. { moneda(itemCaja.cantidad_diferencia) }</h4>
-                            </span>
-
-                            {
-                                itemCaja.nota_observacion
-                                ? (
-                                    <span>
-                                        <p>Observaciones:</p>
-                                        <h4 className="danger-i">{ itemCaja.nota_observacion }</h4>
-                                    </span>
-                                ) : (
-                                    <span>
-                                        <p className="transparent">...</p>
-                                        <h4 className="transparent">...</h4>
-                                    </span>
-                                )
-                            }
                             
+                            <div className="mb-15">
+                                <span className="m-0">
+                                    <p className="m-0">Tarjeta:</p>
+                                    <h4 className="m-0 secundary-i">S/. { moneda(itemCaja.monto_tarjeta) }</h4>
+                                </span>
+                                <span className="m-0">
+                                    <p className="m-0">Yape:</p>
+                                    <h4 className="m-0 secundary-i">S/. { moneda(itemCaja.monto_yape) }</h4>
+                                </span>
+                                <span className="m-0">
+                                    <p className="m-0">Deposito:</p>
+                                    <h4 className="m-0 secundary-i">S/. { moneda(itemCaja.monto_deposito) }</h4>
+                                </span>
+                            </div>
+
                             <span>
                                 <p className="strong">Ingresos totales:</p>
                                 <h2 className="success-i strong">
                                     S/. { moneda(montoOtrosMedios + totalCaja) }
                                 </h2>
                             </span>
-
+                            
                         </div>
 
                     </div>
@@ -113,6 +107,18 @@ export const ModalCajaDetalles = ({ modal, setModal, itemCaja }:any) => {
                             <span>
                                 <p>Codigo caja:</p>
                                 <h4>{ zeroFill(Number(itemCaja.id)) }</h4>
+                            </span>
+                            <span>
+                                <p>Monto diferencial:</p>
+                                <h4 className={
+                                    (itemCaja.cantidad_diferencia !== 0
+                                    ? "danger-i"
+                                    : "secundary-i")
+                                }>S/. { moneda(itemCaja.cantidad_diferencia) }</h4>
+                            </span>
+                            <span>
+                                <p>Observaciones:</p>
+                                <h4 className="danger-i">{ itemCaja.nota_observacion }</h4>
                             </span>
                         </div>
                         <div className="box-wrap-descripcion3">

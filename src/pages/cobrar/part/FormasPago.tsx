@@ -154,6 +154,11 @@ export const FormasPago = ({
                                     <div className="box-dividir-precios mb-10" key={index}>
                                         <div></div>
                                         <div className="grid-2 gap ">
+                                            {/* <MetodosPago
+                                                name="forma_pago"
+                                                onChange={(e:any) => handlerOnChangeArray(e, index)}
+                                                value={e.forma_pago}
+                                            /> */}
                                             <Select2
                                                 // label="Forma de pago"
                                                 name="forma_pago"
@@ -162,7 +167,8 @@ export const FormasPago = ({
                                             >
                                                 <option value="efectivo">Efectivo</option>
                                                 <option value="tarjeta">Tarjeta</option>
-                                                <option value="yape">Yape</option>                                
+                                                <option value="yape">Yape</option>
+                                                <option value="yape">Deposito</option>
                                             </Select2>
 
                                             <Input
