@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { get } from "../../resources/fetch";
 import { capi } from "../../resources/func/mayus";
 import { METODOS_PAGO } from "../../resources/routes";
-import { Select2 } from "../forms/Select2"
 
 interface metodosPago { 
     label?:string;

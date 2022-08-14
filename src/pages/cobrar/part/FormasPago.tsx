@@ -168,7 +168,7 @@ export const FormasPago = ({
                                                 <option value="efectivo">Efectivo</option>
                                                 <option value="tarjeta">Tarjeta</option>
                                                 <option value="yape">Yape</option>
-                                                <option value="yape">Deposito</option>
+                                                <option value="deposito">Deposito</option>
                                             </Select2>
 
                                             <Input
