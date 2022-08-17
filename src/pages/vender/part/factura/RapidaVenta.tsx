@@ -49,9 +49,24 @@ export const RapidaVenta = ({ loadVenta, setShowWindow, verificarCaja, handlerVe
                     >
                         <BiCaretRight /> Venta rapida
                     </LoadSwitchBtn2>
-                </BtnOnOff2>            
+                </BtnOnOff2>
             </div>
 
         </div> 
     )
 }
+
+
+// <BtnOnOff2
+//     label="Vender"
+//     estado={verCaja}
+//     icon={<BiCaretRight />}
+// >
+//     <LoadSwitchBtn2
+//         loading={loadVenta}
+//         className="btn btn-info"
+//         handler={() => verificarCaja(handlerVenta, serie, "cotizacion")}
+//     >
+//         <BiBook /> Crear cotizacion
+//     </LoadSwitchBtn2>
+// </BtnOnOff2>

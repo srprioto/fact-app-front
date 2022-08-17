@@ -14,7 +14,8 @@ export const VentasDropdown = ({ ventas, handlerVer, updateData, handlerAnular }
         if (
             ventas.estado_venta === "anulado" || 
             ventas.estado_venta === "rechazado" || 
-            ventas.estado_venta === "enviado"
+            ventas.estado_venta === "enviado" ||
+            ventas.estado_venta === "cotizacion"
         ) {
             return true;
         } else {
@@ -32,7 +33,8 @@ export const VentasDropdown = ({ ventas, handlerVer, updateData, handlerAnular }
             }
             
             {
-                ventas.estado_venta === "rechazado"
+                (ventas.estado_venta === "rechazado" ||
+                ventas.estado_venta === "rechazado")
                 && (
                     <span onClick={ () => updateData(ventas.id) } >
                         <BiLike />Habilitar venta

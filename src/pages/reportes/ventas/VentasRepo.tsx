@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import { BiBarChartAlt2, BiDetail, BiDollarCircle, BiTask } from "react-icons/bi";
+import { BiBarChartAlt2, BiBook, BiDetail, BiDollarCircle, BiTask } from "react-icons/bi";
 import { TitleBox } from "../../../components/TitleBox"
 import { get } from "../../../resources/fetch";
 import { LOCALES_SOLO } from "../../../resources/routes";
 import { Comprobantes } from "./Comprobantes";
+import { Cotizaciones } from "./Cotizaciones";
 import { EstadisticasVentas } from "./EstadisticasVentas";
 import { InfoGeneralVentas } from "./InfoGeneralVentas";
 import { InformacionIngresos } from "./InformacionIngresos";
@@ -49,7 +50,7 @@ export const VentasRepo = () => {
             
             <TitleBox titulo="Reporte de ventas"/>
 
-            <div className="grid-4 gap box box-par">
+            <div className="grid-5 box box-par">
                 <button 
                     onClick={() => handlerToggle(1)}
                     className={`btn2 btn2-info ${toggleGeneral === 1 && "btn2-sub-info"}`}>
@@ -60,19 +61,25 @@ export const VentasRepo = () => {
                     onClick={() => handlerToggle(2)}
                     className={`btn2 btn2-info ${toggleGeneral === 2 && "btn2-sub-info"}`}>
                     <BiDetail />
-                    Registro de ventas
+                    Registro ventas
                 </button>
                 <button
                     onClick={() => handlerToggle(3)}
                     className={`btn2 btn2-info ${toggleGeneral === 3 && "btn2-sub-info"}`}>
                     <BiTask />
-                    Registro de comprobantes
+                    Registro comprob.
                 </button>
                 <button 
                     onClick={() => handlerToggle(4)}
                     className={`btn2 btn2-info ${toggleGeneral === 4 && "btn2-sub-info"}`}>
                     <BiDollarCircle />
-                    Registro de caja
+                    Registro caja
+                </button>
+                <button 
+                    onClick={() => handlerToggle(5)}
+                    className={`btn2 btn2-info ${toggleGeneral === 5 && "btn2-sub-info"}`}>
+                    <BiBook />
+                    Cotizaciones
                 </button>
                 
 
@@ -104,6 +111,18 @@ export const VentasRepo = () => {
                 && (
                     
                     <InformacionIngresos 
+                        idLocal={selectLocal} 
+                        selectLocal={setSelectLocal}
+                        loadingLocal={loadingLocal}
+                        locales={locales}
+                    />
+                )
+            }
+            {
+                toggleGeneral === 5
+                && (
+                    
+                    <Cotizaciones 
                         idLocal={selectLocal} 
                         selectLocal={setSelectLocal}
                         loadingLocal={loadingLocal}

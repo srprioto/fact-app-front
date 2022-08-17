@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { BiCartAlt, BiSpreadsheet, BiTask } from "react-icons/bi";
+import { BiBook, BiCartAlt, BiSpreadsheet, BiTask } from "react-icons/bi";
 import { BoletaVenta } from "./factura/BoletaVenta";
 import { FacturaVenta } from "./factura/FacturaVenta";
 import { ModalWrap } from "../../../components/modals/ModalWrap";
@@ -9,6 +9,7 @@ import { PreciosVenta } from "./verLista/extend/PreciosVenta";
 import { TablaLista } from "./verLista/extend/TablaLista";
 import { ModalCodigoVenta } from "./verLista/short/ModalCodigoVenta";
 import { RapidaVenta } from "./factura/RapidaVenta";
+import { Cotizacion } from "./factura/Cotizacion";
 
 
 export const VerLista = ({ 
@@ -50,9 +51,13 @@ export const VerLista = ({
         })
     }
 
-    const verificarCaja = (handlerVenta:Function, serie:string) => { 
+    const verificarCaja = (handlerVenta:Function, serie:string, cotizacion?:boolean) => { 
         caja.handlerEstadoCaja();
-        handlerVenta(serie);
+        if (cotizacion) {
+            handlerVenta(serie, "cotizacion");
+        } else {
+            handlerVenta(serie);
+        }
     }
 
 
@@ -65,20 +70,25 @@ export const VerLista = ({
     }
 
 
-    const handlerVenta = async (serie:string) => { 
+    const handlerVenta = async (serie:string, estado_venta?:string) => {
         setLoadVenta(true);
         try {
-            const ventaResp:any = await postVenta(cliente, serie);
-            if (ventaResp.data) {
-                setVentaRespuesta(ventaResp.data);
-                setModalConfirm(true);
+            const ventaResp:any = await postVenta(cliente, serie, estado_venta && estado_venta);
+            if (!estado_venta) {
+                if (ventaResp.data) {
+                    setVentaRespuesta(ventaResp.data);
+                    setModalConfirm(true);
+                    reinicios2();
+                    setLoadVenta(false);
+                }    
+            } else {
+                reinicios2();
+                setLoadVenta(false);
+                setShowWindow(1);
             }
-            setLoadVenta(false);
         } catch (error) {
             setLoadVenta(true);
             console.log(error);
-        } finally{
-            reinicios2();
         }
     }
 
@@ -117,12 +127,20 @@ export const VerLista = ({
                         >
                             <BiTask /> Factura
                         </button>
+
+                        <button 
+                            className={"btn2 btn2-info " + (tabbs === 4 && "btn2-sub-info")}
+                            onClick={() => handlerTabb(4)}
+                        >
+                            <BiBook /> Cotizacion
+                        </button>
                     </div>
 
                     <PreciosVenta
                         venta={venta}
                         alertaDescuento={alertaDescuento}
                         handlerOnChange={handlerOnChange}
+                        tabbs={tabbs}
                     />
                     
                     { 
@@ -157,6 +175,18 @@ export const VerLista = ({
                             <FacturaVenta 
                                 cliente={cliente} 
                                 setCliente={setCliente} 
+                                loadVenta={loadVenta}
+                                setShowWindow={setShowWindow}
+                                verificarCaja={verificarCaja}
+                                handlerVenta={handlerVenta}
+                                verificarVender={verificarVender}
+                            />
+                        ) 
+                    }
+                    { 
+                        tabbs === 4
+                        && (
+                            <Cotizacion
                                 loadVenta={loadVenta}
                                 setShowWindow={setShowWindow}
                                 verificarCaja={verificarCaja}

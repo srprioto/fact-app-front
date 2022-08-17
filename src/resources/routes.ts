@@ -50,6 +50,10 @@ export const COMPROBANTE_PAGINATE:string = "/comprobante/paginate";
 
 export const METODOS_PAGO:string = "/metodos-pago";
 
+export const COTIZACION:string = "/cotizaciones";
+export const COTIZACION_SEARCH:string = "/cotizaciones/search/";
+export const COTIZACION_PAGINATE:string = "/cotizaciones/paginate";
+
 
 
 // almacenes

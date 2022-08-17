@@ -108,11 +108,15 @@ export const Vender = ({ idLocal, nombreLocal, user }:vender) => {
     }
 
     
-    const postVenta = async (cliente:any, serie:string) => {
+    const postVenta = async (cliente:any, serie:string, estado_venta?:string) => {
         let ventaResp:any;
         venta.ventaDetalles = listaVenta;
+        if (estado_venta) {
+            venta.estado_venta = estado_venta;
+        }
         venta.serie = serie;
         venta.cliente = cliente;
+
         try {
             ventaResp = await post(venta, VENTAS);
         } catch (error) {

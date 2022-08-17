@@ -2,7 +2,7 @@ import { Input } from "../../../../../components/forms/Input";
 import { Select2 } from "../../../../../components/forms/Select2";
 import { moneda } from "../../../../../resources/func/moneda";
 
-export const PreciosVenta = ({ venta, alertaDescuento, handlerOnChange }:any) => {
+export const PreciosVenta = ({ venta, alertaDescuento, handlerOnChange, tabbs }:any) => {
     return (
         <div className="info-venta grid-5 gap mb-25">
 
@@ -32,33 +32,42 @@ export const PreciosVenta = ({ venta, alertaDescuento, handlerOnChange }:any) =>
                 <p className="mb-5 info">Total</p>
                 <h1 className="success strong">S/. { moneda(venta.total) }</h1>
             </span>
+            {
+                tabbs !== 4
+                && (
+                    <>
+                        <Select2
+                            label="Forma de pago"
+                            name="forma_pago"
+                            onChange={handlerOnChange}
+                            value={venta.forma_pago}
+                        >
+                            <option value="efectivo">Efectivo</option>
+                            <option value="tarjeta">Tarjeta</option>
+                            <option value="yape">Yape</option>
+                            <option value="deposito">Deposito</option>
+                        </Select2>
+                        
 
-            <Select2
-                label="Forma de pago"
-                name="forma_pago"
-                onChange={handlerOnChange}
-                value={venta.forma_pago}
-            >
-                <option value="efectivo">Efectivo</option>
-                <option value="tarjeta">Tarjeta</option>
-                <option value="yape">Yape</option>
-                <option value="deposito">Deposito</option>
-            </Select2>
-            {/* <MetodosPago
-                label="Forma de pago"
-                name="forma_pago"
-                onChange={handlerOnChange}
-                value={venta.forma_pago}
-            /> */}
-
-            <Input 
-                label="Observaciones"
-                type="text"
-                name="observaciones"
-                value={venta.observaciones}
-                onChange={handlerOnChange}
-            />
+                        <Input 
+                            label="Observaciones"
+                            type="text"
+                            name="observaciones"
+                            value={venta.observaciones}
+                            onChange={handlerOnChange}
+                        />
+                    </>
+                )
+            }
+            
 
         </div>
     )
 }
+
+/* <MetodosPago
+    label="Forma de pago"
+    name="forma_pago"
+    onChange={handlerOnChange}
+    value={venta.forma_pago}
+/> */

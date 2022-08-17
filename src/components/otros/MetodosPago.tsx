@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { get } from "../../resources/fetch";
-import { capi } from "../../resources/func/mayus";
+// import { capi } from "../../resources/func/mayus";
 import { METODOS_PAGO } from "../../resources/routes";
 
 interface metodosPago { 
@@ -49,7 +49,8 @@ export const MetodosPagoDep = ({ label, name, onChange, value }:metodosPago) => 
                     : (
                         data.map((e:any) => { 
                             return (
-                                <option key={e.id} value={e.nombre}>{ capi(e.nombre) }</option>
+                                <option key={e.id} value={e.nombre}>{ e.nombre }</option>
+                                // <option key={e.id} value={e.nombre}>{ capi(e.nombre) }</option>
                             );
                         })
                     )

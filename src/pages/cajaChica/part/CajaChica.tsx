@@ -3,6 +3,7 @@ import { BiDetail, BiDollarCircle, BiRename, BiTask } from "react-icons/bi";
 import { TitleBox } from "../../../components/TitleBox"
 import { useCaja } from "../../../hooks/useContext/caja.ts/useCaja";
 import { Comprobantes } from "../../reportes/ventas/Comprobantes";
+import { Cotizaciones } from "../../reportes/ventas/Cotizaciones";
 import { InfoGeneralVentas } from "../../reportes/ventas/InfoGeneralVentas"
 import { InformacionIngresos } from "../../reportes/ventas/InformacionIngresos";
 import { Caja } from "./Caja";
@@ -33,7 +34,7 @@ export const CajaChica = ({ idLocal, nombreLocal, user }:cajaChica) => {
                 : <TitleBox titulo={"Caja chica - " + nombreLocal} back/>
             }
 
-            <div className="box btn-tabs grid-4 gap">
+            <div className="box btn-tabs grid-5">
                 <button 
                     onClick={() => handlerToggle(1)}
                     className={`btn2 btn2-info ${toggle === 1 && "btn2-sub-info"}`}>
@@ -44,21 +45,28 @@ export const CajaChica = ({ idLocal, nombreLocal, user }:cajaChica) => {
                     onClick={() => setToggle(2)}
                     className={`btn2 btn2-info ${toggle === 2 && "btn2-sub-info"}`}>
                     <BiDetail />
-                    Registro de ventas
+                    Registro ventas
                 </button>
 
                 <button 
                     onClick={() => setToggle(3)}
                     className={`btn2 btn2-info ${toggle === 3 && "btn2-sub-info"}`}>
                     <BiTask />
-                    Registro de comprobantes
+                    Registro comprob.
                 </button>
 
                 <button 
                     onClick={() => setToggle(4)}
                     className={`btn2 btn2-info ${toggle === 4 && "btn2-sub-info"}`}>
                     <BiDollarCircle />
-                    Registro de caja
+                    Registro caja
+                </button>
+                
+                <button 
+                    onClick={() => setToggle(5)}
+                    className={`btn2 btn2-info ${toggle === 5 && "btn2-sub-info"}`}>
+                    <BiDollarCircle />
+                    Cotizaciones
                 </button>
             </div>
 
@@ -66,6 +74,7 @@ export const CajaChica = ({ idLocal, nombreLocal, user }:cajaChica) => {
             { toggle === 2 && <InfoGeneralVentas idLocal={idLocal} /> }
             { toggle === 3 && <Comprobantes idLocal={idLocal} /> }
             { toggle === 4 && <InformacionIngresos idLocal={idLocal} /> }            
+            { toggle === 5 && <Cotizaciones idLocal={idLocal} /> }            
 
         </div>
     )

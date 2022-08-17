@@ -28,6 +28,8 @@ export const VentaItems = ({ ventas, handlerVer, updateData, handlerAnular }:ven
             return "danger ";
         } else if (ventas.estado_venta === "anulado") {
             return "danger ";
+        } else if (ventas.estado_venta === "cotizacion") {
+            return "secundary ";
         }
     }
 
@@ -55,7 +57,7 @@ export const VentaItems = ({ ventas, handlerVer, updateData, handlerAnular }:ven
             <td className={"secundary " + anulado()}>{ codigoVenta }</td>
             <td className={"secundary " + anulado()}>{ tipoComprobante() }</td>
             <td className={"success strong " + anulado()}>S/. { moneda(ventas.total) }</td>
-            <td className={ classEstado() + anulado() } >{ ventas.estado_venta }</td>
+            <td className={ classEstado() + anulado() + "capitalize" } >{ ventas.estado_venta }</td>
             <td className={ anulado() }>{ ventas.locales && ventas.locales.nombre }</td>
             <td>
                 <VentasDropdown 
