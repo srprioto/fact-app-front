@@ -4,8 +4,12 @@ import { ComprobanteDropdown } from "./ComprobanteDropdown"
 
 export const ComprobanteItem = ({ comprobante, handlerVer, reenviarComprobante, anularComprobante }:any) => {
 
-    const venta:any = comprobante.ventas && comprobante.ventas;
-    const codigoVenta:any = comprobante.serie + "-" + venta.id + "-" + venta.codigo_venta + "-" + comprobante.id;
+    const venta:any = comprobante.ventas ? comprobante.ventas : {id: "000", codigo_venta: "000"};
+    const codigoVenta:any = 
+        comprobante.serie + "-" + 
+        venta.id + "-" + 
+        venta.codigo_venta + "-" + 
+        comprobante.id;
 
     const tipoDocm = () => {
         if (comprobante.tipoDocumento === "1") {
