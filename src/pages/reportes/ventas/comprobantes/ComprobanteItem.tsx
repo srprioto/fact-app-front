@@ -27,6 +27,7 @@ export const ComprobanteItem = ({ comprobante, handlerVer, reenviarComprobante, 
     //     }
     // }
 
+    
     const tipoComprobante = () => { 
         if (comprobante.serie === "B001") {
             return "Boleta";
