@@ -7,7 +7,6 @@ export const fecha = (fecha:any) => {
     return moment(fecha).format('DD MMMM YYYY - LT');
 }
 
-
 export const fechaNoHora = (fecha:any) => {
     return moment(fecha).format('DD MMMM YYYY');
 }
