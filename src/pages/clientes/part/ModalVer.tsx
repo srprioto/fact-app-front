@@ -49,6 +49,10 @@ export const ModalVer = ({ data, modal, setModal, loading }:modalVer) => {
                                 <p>Email</p>
                                 <h4>{ data.email }</h4>
                             </span>
+                            <span className="grid-12 gap">
+                                <p>Estado cliente</p>
+                                <h4>{ data.estado_cliente }</h4>
+                            </span>
                         </div>
 
                         <div className="wrap-descripcion5 box box-par m-0">
@@ -90,11 +94,11 @@ export const ModalVer = ({ data, modal, setModal, loading }:modalVer) => {
                                 <h4>{ data.ubigeo !== 0 ? data.ubigeo : "" }</h4>
                             </span>
                             <span className="grid-12 gap">
-                                <p>Estado Cliente</p>
+                                <p>Estado Sunat</p>
                                 <h4>{ data.estado }</h4>
                             </span>
                             <span className="grid-12 gap">
-                                <p>Condic. Cliente</p>
+                                <p>Condic. Sunat</p>
                                 <h4>{ data.condom }</h4>
                             </span>
                         </div>

@@ -18,7 +18,7 @@ export const NuevoCliente = () => {
         try {
             await post(data, CLIENTES);
             setLoading(false);
-            navigate('/clientes')
+            navigate('/clientes');
         } catch (error) {
             setLoading(true);
             console.log(error);

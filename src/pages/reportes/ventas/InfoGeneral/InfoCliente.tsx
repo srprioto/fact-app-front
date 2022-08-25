@@ -4,7 +4,7 @@ export const InfoCliente = ({ cliente }:any) => {
         <div className="box box-par">
             <div className="wrap-descripcion5 m-0">
 
-                <h3>Respuesta de la Sunat</h3>
+                <h3>Informacion del cliente</h3>
 
                 {
                     cliente.nombre

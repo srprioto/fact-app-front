@@ -22,7 +22,8 @@ export const initialCrearCliente = {
     direccion: "",
     telefono: "",
     email: "",
-    ubigeo: 0
+    ubigeo: 0,
+    estado_cliente: ""
 }
 
 // export const clienteInfo = {

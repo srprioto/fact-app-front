@@ -25,7 +25,25 @@ export const FormGestionDocum = ({
     cliente,
 }:formGestionDocum) => {
 
-    
+    const estadoCliente = () => { 
+        let text:string = "";
+        
+        if (!!cliente.estadoCliente) {
+            text += cliente.estadoCliente;
+        } else {
+            text += "---";
+        }
+
+        if (!!cliente.estado_cliente) {
+            text += " | " + cliente.estado_cliente;
+        } else {
+            text += "";
+        }
+
+        return text;
+    }
+
+
     return (
 
         <Formik
@@ -84,7 +102,7 @@ export const FormGestionDocum = ({
 
                         <ParrafoForm
                             label="Estado del cliente"
-                            value={cliente.estadoCliente ? cliente.estadoCliente : "---"}
+                            value={estadoCliente()}
                             className={
                                 cliente.estadoCliente === "Registrado" 
                                 ? "primary" 

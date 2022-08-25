@@ -53,6 +53,7 @@ export const FormEditarCliente = ({ id, handlerEdit, loadingUpdate }:any) => {
                     distrito: data.distrito,
                     nombre: data.nombre,
                     direccion: data.direccion,
+                    estado_cliente: data.estado_cliente,
                     telefono: data.telefono,
                     email: data.email,
                     ubigeo: data.ubigeo
@@ -106,7 +107,7 @@ export const FormEditarCliente = ({ id, handlerEdit, loadingUpdate }:any) => {
                         <h4 className="desc-form">Informacion del cliente</h4>
                         <div className="grid-1 gap">
 
-                            <div className="grid-2 gap">
+                            <div className="grid-3 gap">
 
                                 <InputMk 
                                     label="Razon social"
@@ -122,15 +123,16 @@ export const FormEditarCliente = ({ id, handlerEdit, loadingUpdate }:any) => {
                                     error={errors.nombreComercial}
                                 />
 
-                            </div>
-
-                            <div className="grid-3 gap">
                                 <InputMk 
                                     label="Nombre del cliente"
                                     type="text"
                                     name="nombre"
                                     error={errors.nombre}
                                 />
+
+                            </div>
+
+                            <div className="grid-3 gap">
                                 <InputMk 
                                     label="Telefono"
                                     type="text"
@@ -143,6 +145,16 @@ export const FormEditarCliente = ({ id, handlerEdit, loadingUpdate }:any) => {
                                     name="email"
                                     error={errors.email}
                                 />
+                                <SelectMk
+                                    label="Estado cliente"
+                                    type="text"
+                                    name="estado_cliente"
+                                    error={errors.estado_cliente}
+                                >
+                                    <option value="Normal">Normal</option>
+                                    <option value="Recurrente">Recurrente</option>
+                                    <option value="Mayorista">Mayorista</option>
+                                </SelectMk>
                             </div>
 
                         </div>

@@ -8,10 +8,10 @@ export const BuscarDocum = ({ cliente, validarCrear, setValidarCrear, errors }:a
 
     const [loadVerCliente, setLoadVerCliente] = useState<boolean>(false);
 
-
+    
     useEffect(() => {
         validarDocCliente();
-    }, [cliente])
+    }, [cliente.numero_documento])
 
     
     const validarDocCliente = async () => { 

@@ -54,6 +54,24 @@ export const FormDocumCobrar = ({
     }, [switchChangeFact, tabbs])
 
 
+    const estadoCliente = () => { 
+        let text:string = "";
+        
+        if (!!cliente.estadoCliente) {
+            text += cliente.estadoCliente;
+        } else {
+            text += "---";
+        }
+
+        if (!!cliente.estado_cliente) {
+            text += " | " + cliente.estado_cliente;
+        } else {
+            text += "";
+        }
+
+        return text;
+    }
+
     return (
         
         <Formik
@@ -111,7 +129,7 @@ export const FormDocumCobrar = ({
 
                         <ParrafoForm
                             label="Estado del cliente"
-                            value={cliente.estadoCliente ? cliente.estadoCliente : "---"}
+                            value={estadoCliente()}
                             className={
                                 cliente.estadoCliente === "Registrado" 
                                 ? "primary" 
