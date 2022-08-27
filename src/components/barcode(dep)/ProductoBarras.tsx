@@ -1,5 +1,5 @@
 // import { useState } from 'react';
-import { useBarcode } from 'react-barcodes';
+// import { useBarcode } from 'react-barcodes';
 
 interface productoBarras{
     value:string;
@@ -23,14 +23,13 @@ export const ProductoBarras = ({ value, nombre, color, marca, talla }:productoBa
         fontSize: 15
     }
 
-    const { inputRef } = useBarcode({
-        value: value,
-        options: options
-    });
+    // const { inputRef } = useBarcode({
+    //     value: value,
+    //     options: options
+    // });
 
     return (
         <div className="producto-barras center">
-            
             <div className="wrap-barcode pt-10">
                 { nombre && <h4 className="m-0">{ nombre }</h4> }
                 <div className="grid-2 gap">
@@ -38,7 +37,7 @@ export const ProductoBarras = ({ value, nombre, color, marca, talla }:productoBa
                     { talla && <h5 className="m-0">Talla: <strong>{ talla }</strong></h5> }
                     {/* { marca && <h4 className="m-0">Marca: { marca }</h4> } */}
                 </div>                
-                <svg ref={inputRef} className="mb-5" />
+                {/* <svg ref={inputRef} className="mb-5" /> */}
             </div>
         </div>
     )
