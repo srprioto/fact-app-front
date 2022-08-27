@@ -1,7 +1,6 @@
 import { useRef, useState } from "react";
 import { BiPrinter } from "react-icons/bi";
 import { Input } from "../../../../components/forms/Input";
-import { DescProducto } from "./DescProducto";
 import { ProductoCodBarras } from "../../otros/ProductoCodBarras";
 import { ProdCodBarEjemplo } from "../../otros/ProdCodBarEjemplo";
 import { Checkbox2 } from "../../../../components/forms/Checkbox2";
@@ -25,7 +24,7 @@ export const GestionCodigo = ({ producto, noCreado }:any) => {
         ventimp.close();
     }
 
-        
+
     return (
         <div className="wrap-gestion-codigo grid-1 gap mb-25">
             { !noCreado && <h2 className="center">Producto registrado correctamente</h2> }
