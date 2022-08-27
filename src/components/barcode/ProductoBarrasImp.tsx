@@ -2,14 +2,10 @@
 import { useBarcode } from "react-barcodes";
 
 interface productoBarrasImp{
-    value:string;
-    nombre?:string;
-    color?:string
-    talla?:string
-    cambiarColor?:boolean;
+    producto?:any;
 }
 
-export const ProductoBarrasImp = ({ value, nombre, color, talla }:productoBarrasImp) => {
+export const ProductoBarrasImp = ({ producto }:productoBarrasImp) => {
 
     const options = {
         background: "transparent",
@@ -25,7 +21,7 @@ export const ProductoBarrasImp = ({ value, nombre, color, talla }:productoBarras
     }
 
     const { inputRef } = useBarcode({
-        value: value,
+        value: producto.codigo,
         options: options
     });
 
@@ -66,10 +62,10 @@ export const ProductoBarrasImp = ({ value, nombre, color, talla }:productoBarras
 
     return (
         <div style={container}>
-            { nombre && <h4 style={titulo}>{ nombre }</h4> }
+            { producto.nombre && <h4 style={titulo}>{ producto.nombre }</h4> }
             <div style={boxSubTitulo}>
-                { color && <h4 style={subTitulo}>Color: <strong>{ color }</strong></h4> }
-                { talla && <h4 style={subTitulo}>Talla: <strong>{ talla }</strong></h4> }
+                { producto.color && <h4 style={subTitulo}>Color: <strong>{ producto.color }</strong></h4> }
+                { producto.talla && <h4 style={subTitulo}>Talla: <strong>{ producto.talla }</strong></h4> }
             </div>
             <div style={barras}>
                 <svg ref={inputRef}/>

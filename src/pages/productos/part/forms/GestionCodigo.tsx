@@ -1,12 +1,13 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { BiPrinter } from "react-icons/bi";
-// import { Link } from "react-router-dom";
 import { ProductoBarras } from "../../../../components/barcode/ProductoBarras";
 import { ProductoBarrasImp } from "../../../../components/barcode/ProductoBarrasImp";
+import { Input } from "../../../../components/forms/Input";
 import { DescProducto } from "./DescProducto";
 
 export const GestionCodigo = ({ producto, noCreado }:any) => {
 
+    const [totalImg, setTotalImg] = useState<number>(1);
     const imprimir = useRef<any>(null);
 
     const handlerPrint = () => { 
@@ -34,9 +35,18 @@ export const GestionCodigo = ({ producto, noCreado }:any) => {
                         talla={producto.talla}
                     />
 
+                    <Input
+                        label="Cantidad de copias"
+                        type="number"
+                        name="totalImg"
+                        value={totalImg}
+                        onChange={(e:any) => { setTotalImg(e.target.value) }}
+                        moneda
+                    />
+
                     <div className="middle">
                         <div>
-                            <button className="btn btn-info" onClick={handlerPrint}>
+                            <button className="btn btn-info" onClick={() => handlerPrint()}>
                                 <BiPrinter />
                                 Imprimir Codigo
                             </button>
@@ -48,16 +58,13 @@ export const GestionCodigo = ({ producto, noCreado }:any) => {
                 <DescProducto producto={producto} />
             </div>
 
+
             <div 
                 ref={imprimir} 
-                className="none"
+                // className="none"
             >
                 <ProductoBarrasImp
-                    value={producto.codigo}
-                    nombre={producto.nombre}
-                    color={producto.color}
-                    // marca={producto.marca}
-                    talla={producto.talla}
+                    producto={producto}
                 />
             </div>
 
