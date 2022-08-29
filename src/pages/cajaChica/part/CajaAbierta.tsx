@@ -15,7 +15,7 @@ export const CajaAbierta = ({ data, caja, setCaja, setModalCerrarCaja, setModalA
     const montosOtrosMedios:number = 
         Number(infoCaja.monto_deposito) +
         Number(infoCaja.monto_tarjeta) +
-        Number(infoCaja.monto_yape);
+        Number(infoCaja.monto_pago_electronico);
     
     const handlerCerrarCaja = () => { 
         setCaja({
@@ -80,8 +80,8 @@ export const CajaAbierta = ({ data, caja, setCaja, setModalCerrarCaja, setModalA
                             <h4 className="info m-0">S/. { moneda(infoCaja.monto_tarjeta) }</h4>
                         </span>
                         <span className="grid-12">
-                            <p className="m-0">Yape:</p>
-                            <h4 className="info m-0">S/. { moneda(infoCaja.monto_yape) }</h4>
+                            <p className="m-0">P. Electro:</p>
+                            <h4 className="info m-0">S/. { moneda(infoCaja.monto_pago_electronico) }</h4>
                         </span>
                         <span className="grid-12">
                             <p className="m-0">Deposito:</p>

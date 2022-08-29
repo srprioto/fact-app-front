@@ -1,26 +1,28 @@
+import { QRCodeSVG } from "qrcode.react";
 import { useEffect, useRef } from "react";
 import { fecha } from "../../../../resources/func/fechas";
 import { moneda } from "../../../../resources/func/moneda";
 
 interface impComprobante {
     venta:any;
+    setImprimir:Function;
 }
 
-export const ImpComprobante = ({ venta }:impComprobante) => {
+export const ImpComprobante = ({ venta, setImprimir }:impComprobante) => {
 
     const imprimir = useRef<any>(null);
 
     useEffect(() => {
         handlerPrint();
-    }, [])
-    
+    }, [])   
 
     const handlerPrint = () => { 
         let ventimp:any = window.open(' ', 'popimpr');
         ventimp.document.write( imprimir.current.innerHTML );
         ventimp.document.close();
-        ventimp.print( );
+        ventimp.print();
         ventimp.close();
+        setImprimir(false);
     }
 
     const titulo = () => { 
@@ -43,12 +45,16 @@ export const ImpComprobante = ({ venta }:impComprobante) => {
     // generales
     const container:any = {
         // maxWidth: "400px"
+        fontFamily: "Helvetica"
     };
     const center:any = {
-        textAlign: "center"
+        textAlign: "center",
     }
     const m0:any = {
         margin: "0"
+    }
+    const mb10 = {
+        margin: "0 0 8px 0",
     }
     const left:any = {
         textAlign: "left",
@@ -63,23 +69,59 @@ export const ImpComprobante = ({ venta }:impComprobante) => {
     const w100:any = {
         width: "100%"
     }
-    const border:any = {
+    // const border:any = {
+    //     borderBottom: "1px solid #000",
+    //     margin: "4px 0"
+    // }
+    const borderMb:any = {
         borderBottom: "1px solid #000",
-        margin: "4px 0"
+        marginBottom: "8px"
+    }
+    const texto = {
+        fontFamily: "arial",
+        fontWeight: "100",
     }
 
     // header
+    const tituloPrinc = {
+        ...mb10,
+        ...texto,
+        fontSize: "23px",
+    }
+
     const headerInfo:any = {
-        padding: "0 10px"
+        ...mb10,
+        padding: "0 10px",
+        fontWeight: "100",
+        fontFamily: "arial",
+        fontSize: "18px",
+    }
+
+    const boxHeaderInfo:any = {
+        ...center,
+        ...mb10
     }
 
     // empresa
+    const infoEmpresa = {
+        ...texto,
+        ...mb10
+    }
 
+    const infoTxtM0 = {
+        ...texto,
+        ...m0
+    }
 
     // cliente
 
 
     // body
+    const tituloDetalles:any = {
+        ...texto,
+        textAlign: "center",
+        margin: "0 0 5px 0"
+    }
     const table:any = {
         borderCollapse: "separate",
         borderSpacing: "10px 0"
@@ -96,44 +138,69 @@ export const ImpComprobante = ({ venta }:impComprobante) => {
         width: "64%"
     }
 
+    // detalles
+    const textoResumen = {
+        ...texto,
+        ...mb10,
+        ...w100
+    }
+
+    // codigo qr    
+    const qrcode = {
+        margin: "15px 0"
+    }
+    const descripcion = {
+        ...texto,
+        ...mb10,
+        ...center
+    }
+
+
     return (
-        <div className="none">
+
+        <div className="none imprimir-comprobante">
             <div style={container} ref={imprimir}>
                 
-                <div style={center}>
-                    <h3 style={m0}>{ titulo() }</h3>
+                <div style={boxHeaderInfo}>
+                    <h3 style={tituloPrinc}>{ titulo() }</h3>
                     <span style={headerInfo}>{ venta.serie + "-" + venta.id + "-" + venta.codigo_venta }</span>
                     <span style={headerInfo}>{ fecha(venta.updated_at) }</span>
                 </div>
-                <div style={center}>
-                    <h2 style={m0}>AddidSport</h2> {/*  actualizar por nombre de empresa desde DB */}
-                    <p style={m0}>DIREC: CAL. TRINITARIAS N. 501 URB.</p>
-                    <p style={m0}>RUC: 20602956211</p>
+                <div style={boxHeaderInfo}>
+                    <h1 style={infoEmpresa}>AddidSport</h1> {/*  actualizar por nombre de empresa desde DB */}
+                    <h2 style={infoEmpresa}>INVERSIONES PERKINS E.I.R.L</h2> {/*  actualizar por nombre de empresa desde DB */}
+
+                    <p style={infoEmpresa}>INVERSIONES PERKINS EMPRESA INDIVIDUAL DE RESPONSABILIDAD LIMITADA</p>
+                    <p style={infoEmpresa}>CAL. TRINITARIAS N. 501 URB. CENTRO HISTORICO CUSCO</p>
+                    <p style={infoEmpresa}>CUSCO - CUSCO - CUSCO</p>
+                    <p style={infoTxtM0}>RUC: 20602956211</p>
+                    <p style={infoTxtM0}>CORREO: epc26irvin@gmail.com</p>
+                    <p style={infoTxtM0}>TELEFONOS: 20602956211</p>
                 </div>
-                <div style={border} />
+                <div style={borderMb} />
                 {
                     !!cliente.numero_documento
                     && (
-                        <div>
-                            { !!cliente.nombre && <p style={m0}>Cliente: { cliente.nombre }</p> }
-                            { !!cliente.razonSocial && <p style={m0}>Razon Social: { cliente.razonSocial }</p> }
+                        <div style={mb10}>
+                            { !!cliente.nombre && <p style={infoTxtM0}>Cliente: { cliente.nombre }</p> }
+                            { !!cliente.razonSocial && <p style={infoTxtM0}>Razon Social: { cliente.razonSocial }</p> }
 
-                            <p style={m0}>{ cliente.tipoDocumento }: { cliente.numero_documento }</p>
+                            <p style={infoTxtM0}>{ cliente.tipoDocumento }: { cliente.numero_documento }</p>
 
-                            { !!cliente.direccion && <p style={m0}>Direc: { cliente.direccion }</p> }
-                            { !!cliente.telefono && <p style={m0}>Tel: { cliente.telefono }</p> }
+                            { !!cliente.direccion && <p style={infoTxtM0}>Direc: { cliente.direccion }</p> }
+                            { !!cliente.telefono && <p style={infoTxtM0}>Tel: { cliente.telefono }</p> }
                             
                         </div>
                     )
                 }
 
-                <div style={border} />
-                <div>
-
+                <div style={borderMb} />
+                <div style={mb10}>
+                    <h3 style={tituloDetalles}>Detalles de venta</h3>
                     <table style={table}>
                         <thead>
-                            <tr>
-                                <th>Cod</th>
+                            <tr style={texto}>
+                                {/* <th>Cod</th> */}
                                 <th>Prod</th>
                                 <th>Cant</th>
                                 <th>P.U.</th>
@@ -144,8 +211,8 @@ export const ImpComprobante = ({ venta }:impComprobante) => {
                             {
                                 ventaDetalles.map((e:any) => {
                                     return (
-                                        <tr key={e.id}>
-                                            <td>{ e.productos.codigo }</td>
+                                        <tr key={e.id} style={texto}>
+                                            {/* <td>{ e.productos.codigo }</td> */}
                                             <td>{ e.productos.nombre }</td>
                                             <td>{ e.cantidad_venta }</td>
                                             <td>S/.{ moneda(e.precio_venta) }</td>
@@ -158,27 +225,48 @@ export const ImpComprobante = ({ venta }:impComprobante) => {
                         </tbody>
                     </table>
                 </div>
+
+                <div style={borderMb} />
+
                 <div style={detalles}>
                     <div style={blockLeft}></div>
                     <div style={blockRight}>
-                        <div style={w100}>
+                        <div style={textoResumen}>
                             <span style={left}>Subtotal:</span>
                             <span style={right}>S/. { moneda(venta.subtotal) }</span>
                         </div>
-                        <div style={w100}>
+                        <div style={textoResumen}>
                             <span style={left}>IGV:</span>
                             <span style={right}>S/. { moneda(venta.igvGeneral) }</span>
                         </div>
-                        <div style={w100}>
+                        <div style={textoResumen}>
                             <span style={left}>Inafecta:</span>
                             <span style={right}>S/. { moneda(0) }</span>
                         </div>
-                        <div style={w100}>
+                        <div style={textoResumen}>
+                            <span style={left}>Exonerada:</span>
+                            <span style={right}>S/. { moneda(0) }</span>
+                        </div>
+                        <div style={textoResumen}>
+                            <span style={left}>Gratuita:</span>
+                            <span style={right}>S/. { moneda(0) }</span>
+                        </div>
+                        <div style={textoResumen}>
                             <span style={left}>Total:</span>
                             <span style={right}>S/. { moneda(venta.total) }</span>
                         </div>
                     </div>
                 </div>
+
+                <div style={borderMb} />
+
+                <div style={center}>
+                    <div style={qrcode}>
+                        <QRCodeSVG value={`${venta.serie}|${venta.codigo_venta}|${moneda(venta.subtotal)}|${moneda(venta.igvGeneral)}|${moneda(venta.total)}|${fecha(venta.updated_at)}|${ventaDetalles.length}`} />
+                    </div>
+                    <h3 style={descripcion}>Representacion impresa del comprobante electronico</h3>
+                </div>
+
             </div>
         </div>
     );

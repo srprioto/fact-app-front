@@ -44,7 +44,7 @@ export const PreciosVenta = ({ venta, alertaDescuento, handlerOnChange, tabbs }:
                         >
                             <option value="efectivo">Efectivo</option>
                             <option value="tarjeta">Tarjeta</option>
-                            <option value="yape">Yape</option>
+                            <option value="pago_electronico">Pago electronico</option>
                             <option value="deposito">Deposito</option>
                         </Select2>
                         

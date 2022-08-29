@@ -13,7 +13,7 @@ export const ModalCajaDetalles = ({ modal, setModal, itemCaja }:any) => {
     const montoOtrosMedios:number = 
         Number(itemCaja.monto_deposito) +
         Number(itemCaja.monto_tarjeta) +
-        Number(itemCaja.monto_yape);
+        Number(itemCaja.monto_pago_electronico);
 
     const mostrarCajaDetalles = () => { 
         const mostrarDetalles:number = itemCaja.cajaDetalles && itemCaja.cajaDetalles.length;
@@ -79,8 +79,8 @@ export const ModalCajaDetalles = ({ modal, setModal, itemCaja }:any) => {
                                     <h4 className="m-0 secundary-i">S/. { moneda(itemCaja.monto_tarjeta) }</h4>
                                 </span>
                                 <span className="m-0">
-                                    <p className="m-0">Yape:</p>
-                                    <h4 className="m-0 secundary-i">S/. { moneda(itemCaja.monto_yape) }</h4>
+                                    <p className="m-0">Pago electronico:</p>
+                                    <h4 className="m-0 secundary-i">S/. { moneda(itemCaja.monto_pago_electronico) }</h4>
                                 </span>
                                 <span className="m-0">
                                     <p className="m-0">Deposito:</p>

@@ -21,7 +21,7 @@ export const BtnImpComprobante = ({ loading, registroFinal, venta }:any) => {
             ><BiBookmarkAltMinus /> Imprimir
             </LoadSwitchBtn2>
 
-            { imprimir && <ImpComprobante venta={venta} /> }           
+            { imprimir && <ImpComprobante venta={venta} setImprimir={setImprimir} /> }           
 
         </>
     )

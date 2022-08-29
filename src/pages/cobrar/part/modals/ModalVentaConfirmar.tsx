@@ -159,9 +159,7 @@ export const ModalVentaConfirmar = ({
                                 }
                             />
                         </div>
-
                     </div>
-
                 </div>
 
                 <div className="box box-par m-0">
