@@ -26,7 +26,7 @@ export const IngresoProductos = () => {
             console.log(error);
         }
     }
-        
+
 
     const handlerVerIngresos = () => { 
         if (idIngreso === 0) {

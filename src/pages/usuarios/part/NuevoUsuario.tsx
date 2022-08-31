@@ -25,6 +25,7 @@ export const NuevoUsuario = () => {
         }
     }
 
+
     return (
         <div className="nuevo-usuario">
             <TitleBox titulo="Crear usuario" link="/usuarios"/>

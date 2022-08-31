@@ -72,7 +72,6 @@ export const FormCrearUser = ({ handlerCreate, loading }:any) => {
             validationSchema={ValidCreateUsuario}
 
             onSubmit={(data, { resetForm }) => { 
-                console.log(data);
                 handlerCreate(data);
                 resetForm();
             }}
@@ -106,23 +105,23 @@ export const FormCrearUser = ({ handlerCreate, loading }:any) => {
                                 error={errors.direccion}
                             />
                             <InputMk 
-                                label="Edad"
-                                type="text"
-                                name="edad"
-                                error={errors.edad}
-                            />
-                            <InputMk 
                                 label="Telefono"
                                 type="text"
                                 name="telefono"
                                 error={errors.telefono}
+                            />
+                            <InputMk 
+                                label="Edad"
+                                type="text"
+                                name="edad"
+                                error={errors.edad}
                             />
                         </div>
 
                         <h4 className="desc-form">Informacion de registro</h4>
                         <div className="grid-2 gap">
                             <InputMk 
-                                label="Email"
+                                label="Usuario o Email"
                                 type="text"
                                 name="email"
                                 error={errors.email}
