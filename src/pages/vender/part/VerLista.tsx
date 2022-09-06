@@ -51,12 +51,12 @@ export const VerLista = ({
         })
     }
 
-    const verificarCaja = (handlerVenta:Function, serie:string, cotizacion?:boolean) => { 
+    const verificarCaja = (handlerVenta:Function, tipo_venta:string, cotizacion?:boolean) => { 
         caja.handlerEstadoCaja();
         if (cotizacion) {
-            handlerVenta(serie, "cotizacion");
+            handlerVenta(tipo_venta, "cotizacion");
         } else {
-            handlerVenta(serie);
+            handlerVenta(tipo_venta);
         }
     }
 
@@ -70,10 +70,10 @@ export const VerLista = ({
     }
 
 
-    const handlerVenta = async (serie:string, estado_venta?:string) => {
+    const handlerVenta = async (tipo_venta:string, estado_venta?:string) => {
         setLoadVenta(true);
         try {
-            const ventaResp:any = await postVenta(cliente, serie, estado_venta && estado_venta);
+            const ventaResp:any = await postVenta(cliente, tipo_venta, estado_venta && estado_venta);
             if (!estado_venta) {
                 if (ventaResp.data) {
                     setVentaRespuesta(ventaResp.data);

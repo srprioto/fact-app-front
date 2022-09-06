@@ -1,5 +1,6 @@
 import { QRCodeSVG } from "qrcode.react";
 import { useEffect, useRef } from "react";
+import { tipoVenta } from "../../../../resources/dtos/VentasDto";
 import { fecha } from "../../../../resources/func/fechas";
 import { moneda } from "../../../../resources/func/moneda";
 
@@ -25,17 +26,30 @@ export const ImpComprobante = ({ venta, setImprimir }:impComprobante) => {
         setImprimir(false);
     }
 
-    const titulo = () => { 
-        if (venta.serie === "V001") {
+    const titulo = () => {
+        if (venta.tipo_venta === tipoVenta.venta_rapida) {
             return "Nota de venta";
-        } else if (venta.serie === "B001"){
+        } else if (venta.tipo_venta === tipoVenta.boleta){
             return "Boleta electronica";
-        } else if (venta.serie === "F001"){
+        } else if (venta.tipo_venta === tipoVenta.factura){
             return "Factura electronica";
         } else {
             return "Comprobante electronico";
         }
     }
+
+    // const titulo = () => { 
+    //     if (venta.serie === "V001") {
+    //         return "Nota de venta";
+    //     } else if (venta.serie === "B003"){
+    //         return "Boleta electronica";
+    //     } else if (venta.serie === "F003"){
+    //         return "Factura electronica";
+    //     } else {
+    //         return "Comprobante electronico";
+    //     }
+    // }    
+
 
     const cliente:any = venta.clientes ? venta.clientes : "";
     const ventaDetalles:any = venta.ventaDetalles;
@@ -94,7 +108,7 @@ export const ImpComprobante = ({ venta, setImprimir }:impComprobante) => {
         padding: "0 10px",
         fontWeight: "100",
         fontFamily: "arial",
-        fontSize: "18px",
+        fontSize: "16px",
     }
 
     const boxHeaderInfo:any = {
@@ -166,16 +180,23 @@ export const ImpComprobante = ({ venta, setImprimir }:impComprobante) => {
                     <span style={headerInfo}>{ venta.serie + "-" + venta.id + "-" + venta.codigo_venta }</span>
                     <span style={headerInfo}>{ fecha(venta.updated_at) }</span>
                 </div>
+                
                 <div style={boxHeaderInfo}>
                     <h1 style={infoEmpresa}>AddidSport</h1> {/*  actualizar por nombre de empresa desde DB */}
-                    <h2 style={infoEmpresa}>INVERSIONES PERKINS E.I.R.L</h2> {/*  actualizar por nombre de empresa desde DB */}
-
-                    <p style={infoEmpresa}>INVERSIONES PERKINS EMPRESA INDIVIDUAL DE RESPONSABILIDAD LIMITADA</p>
-                    <p style={infoEmpresa}>CAL. TRINITARIAS N. 501 URB. CENTRO HISTORICO CUSCO</p>
-                    <p style={infoEmpresa}>CUSCO - CUSCO - CUSCO</p>
-                    <p style={infoTxtM0}>RUC: 20602956211</p>
-                    <p style={infoTxtM0}>CORREO: epc26irvin@gmail.com</p>
-                    <p style={infoTxtM0}>TELEFONOS: 20602956211</p>
+                    <h2 style={infoEmpresa}>INVERSIONES PERKINS E.I.R.L</h2> {/*  actualizar */}
+                    {
+                        venta.tipo_venta !== tipoVenta.venta_rapida
+                        && (
+                            <>
+                                <p style={infoEmpresa}>INVERSIONES PERKINS EMPRESA INDIVIDUAL DE RESPONSABILIDAD LIMITADA</p>
+                                <p style={infoEmpresa}>CAL. TRINITARIAS N. 501 URB. CENTRO HISTORICO CUSCO</p>
+                                <p style={infoEmpresa}>CUSCO - CUSCO - CUSCO</p>
+                                <p style={infoTxtM0}>RUC: 20602956211</p>
+                                <p style={infoTxtM0}>CORREO: epc26irvin@gmail.com</p>
+                                <p style={infoTxtM0}>TELEFONOS: 20602956211</p>
+                            </>
+                        )
+                    }
                 </div>
                 <div style={borderMb} />
                 {
@@ -261,9 +282,15 @@ export const ImpComprobante = ({ venta, setImprimir }:impComprobante) => {
                 <div style={borderMb} />
 
                 <div style={center}>
-                    <div style={qrcode}>
-                        <QRCodeSVG value={`${venta.serie}|${venta.codigo_venta}|${moneda(venta.subtotal)}|${moneda(venta.igvGeneral)}|${moneda(venta.total)}|${fecha(venta.updated_at)}|${ventaDetalles.length}`} />
-                    </div>
+                    {
+                        venta.tipo_venta !== tipoVenta.venta_rapida
+                        && (
+                            <div style={qrcode}>
+                                <QRCodeSVG value={`${venta.serie}|${venta.codigo_venta}|${moneda(venta.subtotal)}|${moneda(venta.igvGeneral)}|${moneda(venta.total)}|${fecha(venta.updated_at)}|${ventaDetalles.length}`} />
+                            </div>
+                        )
+                    }
+                    
                     <h3 style={descripcion}>Representacion impresa del comprobante electronico</h3>
                 </div>
 

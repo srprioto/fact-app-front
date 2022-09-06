@@ -3,6 +3,7 @@ import { useAuth } from "../../../../auth/useAuth";
 import { BtnOnOff2 } from "../../../../components/btns/BtnOnOff2";
 import { LoadSwitchBtn2 } from "../../../../components/btns/LoadSwitchBtn2";
 import { Roles } from "../../../../resources/dtos/RolesDto";
+import { tipoVenta } from "../../../../resources/dtos/VentasDto";
 
 interface cotizacion {
     loadVenta:boolean;
@@ -14,7 +15,8 @@ interface cotizacion {
 
 export const Cotizacion = ({ loadVenta, setShowWindow, verificarCaja, handlerVenta, verificarVender }:cotizacion) => {
 
-    const serie:string = "V001";
+    // const serie:string = "V001";
+    const tipo_venta:string = tipoVenta.venta_rapida;
     const verCaja:boolean = verificarVender();
     const auth = useAuth();
 
@@ -47,7 +49,7 @@ export const Cotizacion = ({ loadVenta, setShowWindow, verificarCaja, handlerVen
                         <LoadSwitchBtn2
                             loading={loadVenta}
                             className="btn btn-info"
-                            handler={() => verificarCaja(handlerVenta, serie, true)}
+                            handler={() => verificarCaja(handlerVenta, tipo_venta, true)}
                         >
                             <BiBook /> Crear cotizacion
                         </LoadSwitchBtn2>

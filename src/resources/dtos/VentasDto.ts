@@ -79,3 +79,9 @@ export const productDetail = {
     forzar_venta:false,
     venta_negativa:0
 }
+
+export const tipoVenta = {
+    factura: "factura",
+    boleta: "boleta",
+    venta_rapida: "venta rapida"
+}

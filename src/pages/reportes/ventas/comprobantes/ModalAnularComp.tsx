@@ -15,6 +15,8 @@ export const ModalAnularComp = ({ modal, setModal, comprobante, getData }:any) =
     const [msgAnulacion, setMsgAnulacion] = useState<string>("");
     const [restoAnulacion, setRestoAnulacion] = useState<boolean>(false);
 
+    const correlativo = comprobante.correlativos;
+
     const onChange = (e:any) => { 
         setMsgAnulacion(e.target.value);
     }
@@ -23,10 +25,10 @@ export const ModalAnularComp = ({ modal, setModal, comprobante, getData }:any) =
         setLoading(true);
         try {
             const resto:boolean = await post(
-                {  
+                {
                     id: comprobante.id,
                     notaBaja: msgAnulacion,
-                    serie: comprobante.serie,
+                    serie: correlativo.serie,
                     usuarioId: auth.userInfo.sub
                 }, 
                 COMPROBANTE + "/anular"
@@ -52,6 +54,7 @@ export const ModalAnularComp = ({ modal, setModal, comprobante, getData }:any) =
         }
     }
 
+    console.log(comprobante);    
 
     return (
         <Modal

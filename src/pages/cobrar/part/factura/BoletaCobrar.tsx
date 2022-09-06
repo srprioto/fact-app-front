@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { tipoVenta } from "../../../../resources/dtos/VentasDto";
 import { post } from "../../../../resources/fetch";
 import { CLIENTES } from "../../../../resources/routes";
 import { FormDocumCobrar } from "./FormDocumCobrar";
@@ -35,7 +36,8 @@ export const BoletaCobrar = ({
     activarConfirmarVenta
 }:boleta) => {
 
-    const serie:string = "B001";
+    // s
+    const tipo_venta:string = tipoVenta.boleta;
     // const clienteI = clienteInfo(serie);
     const [loadCliente, setLoadCliente] = useState<boolean>(false);
     const [getCliente, setGetCliente] = useState<any>({ documento: "", tipoDocumento: "DNI", });
@@ -44,7 +46,8 @@ export const BoletaCobrar = ({
     useEffect(() => {
         setVenta({
             ...venta,
-            serie: serie
+            // serie: serie,
+            tipo_venta: tipo_venta
         })
     }, [])
 
@@ -76,7 +79,7 @@ export const BoletaCobrar = ({
 
         try {
             const response = await post(updateData, CLIENTES + "/padron/search");
-            response.serie_documento = serie;
+            // response.serie_documento = serie;
             setCliente(response);
             setLoadCliente(false);
         } catch (error) {
@@ -94,7 +97,8 @@ export const BoletaCobrar = ({
             <h3>Informacion general</h3>
 
             <FormDocumCobrar
-                serie={serie}
+                // serie={serie}
+                tipoVenta={tipo_venta}
                 cliente={cliente}
                 getCliente={getCliente}
                 switchChange={switchChange}

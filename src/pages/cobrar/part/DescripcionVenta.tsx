@@ -18,6 +18,7 @@ import { TabsVenta } from "./otros/TabsVenta";
 import { moneda } from "../../../resources/func/moneda";
 import { CodigoVenta } from "./otros/CodigoVenta";
 import { FormasPago } from "./FormasPago";
+import { tipoVenta } from "../../../resources/dtos/VentasDto";
 
 
 interface descripcionVenta {
@@ -29,16 +30,28 @@ interface descripcionVenta {
 export const DescripcionVenta = ({ data, handlerRefresh, loadingOne }:descripcionVenta) => {
 
     const clienteOk:boolean = !!data.clientes;
+    // const correlativo:any = data.correlaivo ? data.correlaivo: {}
 
+    // const tipoSerie = ():number => { 
+    //     if (clienteOk) {
+    //         if (data.serie === "B003") return 2 
+    //         else if (data.serie === "F003") return 3 
+    //         else return 1
+    //     } else {
+    //         return 1
+    //     }
+    // }
+    
     const tipoSerie = ():number => { 
         if (clienteOk) {
-            if (data.serie === "B001") return 2 
-            else if (data.serie === "F001") return 3 
+            if (data.tipo_venta === tipoVenta.boleta) return 2 
+            else if (data.tipo_venta === tipoVenta.factura) return 3 
             else return 1
         } else {
             return 1
         }
     }
+
     
     const [venta, setVenta] = useState<any>(data);
     const [cliente, setCliente] = useState<any>(clienteOk ? data.clientes : clienteInfo);
@@ -85,8 +98,9 @@ export const DescripcionVenta = ({ data, handlerRefresh, loadingOne }:descripcio
         updateVenta.forma_pago = listaPrecios.length <= 0 ? venta.forma_pago : "dividido";
         updateVenta.usuarioId = venta.usuarios.id;
         updateVenta.localId = venta.locales.id;
+        updateVenta.tipo_venta = venta.tipo_venta;
         updateVenta.cliente = cliente;
-        updateVenta.serie = venta.serie;
+        // updateVenta.serie = venta.serie;
         // updateVenta.cliente = venta.clientes;
         // updateVenta.clienteId = venta.clientes && venta.clientes.id;
 

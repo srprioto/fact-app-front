@@ -19,6 +19,7 @@ import { ModalCorreo } from "./ModalCorreo";
 import { moneda } from "../../../../resources/func/moneda";
 // import { ImpComprobante } from "./ImpComprobante";
 import { BtnImpComprobante } from "./BtnImpComprobante";
+import { tipoVenta } from "../../../../resources/dtos/VentasDto";
 
 
 export const ModalVentaConfirmar = ({ 
@@ -100,13 +101,11 @@ export const ModalVentaConfirmar = ({
 
     const registroFinal = async (estado:string, sendEmail?:string, imprimir?:boolean) => { 
 
-        const updateVenta = venta.serie !== "V001" || sendEmail ? venta : false;
+        const updateVenta = venta.tipo_venta !== tipoVenta.venta_rapida || sendEmail ? venta : false;
         const sendComprobante = sendEmail ? sendEmail : false;
 
         await confirmarVenta(estado, updateVenta, sendComprobante); // confirma la venta y la guarda en nuetro registro
         // await registrarSunat();
-
-
 
     }
 

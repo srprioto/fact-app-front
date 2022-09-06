@@ -7,6 +7,7 @@ import { ModalWrap } from "../../../components/modals/ModalWrap";
 import { TextoRelleno } from "../../../components/TextoRelleno";
 import { useCaja } from "../../../hooks/useContext/caja.ts/useCaja";
 import { clienteInfo } from "../../../resources/dtos/Cliente";
+import { tipoVenta } from "../../../resources/dtos/VentasDto";
 import { post } from "../../../resources/fetch";
 import { noDecimal } from "../../../resources/func/noDecimal";
 import { VENTAS } from "../../../resources/routes";
@@ -152,7 +153,8 @@ export const VerProducto = ({
         updateListaVenta.push(updateVentaDetalle);
 
         const updateVenta:any = {
-            serie: "V001",
+            // serie: "V001",
+            tipo_venta: tipoVenta.venta_rapida,
             descuento_total: 0,
             subtotal: ventaDetalle.precio_parcial,
             total: ventaDetalle.precio_parcial,

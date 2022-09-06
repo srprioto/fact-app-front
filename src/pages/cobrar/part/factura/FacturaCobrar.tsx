@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { tipoVenta } from "../../../../resources/dtos/VentasDto";
 import { post } from "../../../../resources/fetch";
 import { CLIENTES } from "../../../../resources/routes";
 import { FormDocumCobrar } from "./FormDocumCobrar";
@@ -36,7 +37,8 @@ export const FacturaCobrar = ({
     activarConfirmarVenta
 }:factura) => {
 
-    const serie:string = "F001";
+    // const serie:string = "F003";
+    const tipo_venta:string = tipoVenta.factura;
     // const clienteI = clienteInfo(serie);
     const [loadCliente, setLoadCliente] = useState<boolean>(false);
     const [getCliente, setGetCliente] = useState<any>({ documento: "", tipoDocumento: "RUC", });
@@ -44,7 +46,8 @@ export const FacturaCobrar = ({
     useEffect(() => {
         setVenta({
             ...venta,
-            serie: serie
+            // serie: serie,
+            tipo_venta: tipo_venta
         })
     }, [])
 
@@ -75,7 +78,8 @@ export const FacturaCobrar = ({
 
         try {
             const response = await post(updateData, CLIENTES + "/padron/search");
-            response.serie_documento = serie;
+            // console.log(response);            
+            // response.serie_documento = serie;
             setCliente(response);
             setLoadCliente(false);
         } catch (error) {
@@ -91,7 +95,8 @@ export const FacturaCobrar = ({
             <h3>Informacion general</h3>
 
             <FormDocumCobrar
-                serie={serie}
+                // serie={serie}
+                tipoVenta={tipo_venta}
                 cliente={cliente}
                 getCliente={getCliente}
                 switchChange={switchChange}
@@ -124,3 +129,4 @@ export const FacturaCobrar = ({
         </div>
     )
 }
+

@@ -5,8 +5,11 @@ export const ComprobanteDropdown = ({ comprobante, handlerVer, reenviarComproban
 
     const verReenviar = () => { 
         // || comprobante.estado_sunat === "ANULADO"
-        if (comprobante.estado_sunat === "Error_envio"
-        || comprobante.estado_sunat === "Rechazado") {
+        if (
+            comprobante.estado_sunat === "Error_envio"
+            || comprobante.estado_sunat === "Rechazado"
+            // || comprobante.estado_sunat === "Observado"
+        ) {
             return true;
         } else {
             return false;

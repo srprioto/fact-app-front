@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { BiCaretRight, BiX } from "react-icons/bi";
 import { BtnOnOff2 } from "../../../../components/btns/BtnOnOff2";
 // import { ConfirmarVenta } from "./ConfirmarVenta"
+import { tipoVenta } from "../../../../resources/dtos/VentasDto";
 
 export const RapidaCobrar = ({ 
     setModalConfVenta, 
@@ -14,12 +15,14 @@ export const RapidaCobrar = ({
     activarConfirmarVenta
 }:any) => {
 
-    const serie:string = "V001";
+    // const serie:string = "V001";
+    const tipo_venta:string = tipoVenta.venta_rapida;
 
     useEffect(() => {
         setVenta({
             ...venta,
-            serie: serie
+            tipo_venta: tipo_venta
+            // serie: serie
         })
     }, [])
     

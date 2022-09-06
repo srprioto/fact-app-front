@@ -4,6 +4,7 @@ import { post } from "../../../../resources/fetch";
 import { CLIENTES } from "../../../../resources/routes";
 import { FormInfoGeneral } from "./FormInfoGeneral";
 import { FormGestionDocum } from "./FormGestionDocum";
+import { tipoVenta } from "../../../../resources/dtos/VentasDto";
 
 
 interface boleta {
@@ -26,7 +27,8 @@ export const BoletaVenta = ({
     verificarVender
 }:boleta) => {
 
-    const serie:string = "B001";
+    // const serie:string = "B003";
+    const tipo_venta:string = tipoVenta.boleta;
     const clienteI = clienteInfo;
     const [loadCliente, setLoadCliente] = useState<boolean>(false);
     const [getCliente, setGetCliente] = useState<any>({ documento: "", tipoDocumento: "DNI", });
@@ -80,7 +82,8 @@ export const BoletaVenta = ({
         <>
             
             <FormGestionDocum
-                serie={serie} 
+                // serie={serie} 
+                tipo_venta={tipo_venta}
                 handlerOnChangeGetCli={handlerOnChangeGetCli} 
                 getCliente={getCliente} 
                 handlerGetCliente={handlerGetCliente} 
@@ -99,7 +102,8 @@ export const BoletaVenta = ({
                 verificarCaja={verificarCaja}
                 handlerVenta={handlerVenta}
                 verificarVender={verificarVender}
-                serie={serie}
+                // serie={serie}
+                tipo_venta={tipo_venta}
                 labelBtn="Venta con boleta"
             />
 

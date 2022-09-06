@@ -31,7 +31,7 @@ export const ModalVerComprobante = ({ modal, setModal, idComprobante }:any) => {
             console.log(error);
         }
     }
-    
+        
 
     return (
         <Modal

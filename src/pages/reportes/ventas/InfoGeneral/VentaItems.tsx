@@ -14,7 +14,7 @@ export const VentaItems = ({ ventas, handlerVer, updateData, handlerAnular }:ven
     const comprobante:any = ventas.comprobante ? ventas.comprobante : [];
     const correlativo:number = comprobante[0] ? comprobante[0].id : 0;
     const codigoVenta:string = 
-        ventas.serie + "-" + 
+        // ventas.serie + "-" + 
         ventas.id + "-" + 
         ventas.codigo_venta +
         (correlativo !== 0 ? "-" + correlativo : "");
@@ -41,21 +41,26 @@ export const VentaItems = ({ ventas, handlerVer, updateData, handlerAnular }:ven
         }
     }
 
-    const tipoComprobante = () => { 
-        if (ventas.serie === "B001") {
-            return "Boleta";
-        } else if (ventas.serie === "F001") {
-            return "Factura";
-        } else if (ventas.serie === "V001") {
-            return "Venta rapida";
-        }
-    }
+    // const tipoComprobante = () => {
+    //     if (ventas.serie === "B003") {
+    //         return "Boleta";
+    //     } else if (ventas.serie === "F003") {
+    //         return "Factura";
+    //     } else if (ventas.serie === "V001") {
+    //         return "Venta rapida";
+    //     }
+    // }
 
     
     return (
         <tr className="venta-items">
             <td className={"secundary " + anulado()}>{ codigoVenta }</td>
-            <td className={"secundary " + anulado()}>{ tipoComprobante() }</td>
+            <td className={"secundary capitalize " + anulado()}>{ ventas.tipo_venta }</td>
+            {/* <td className={"secundary capitalize " + anulado()}>{ 
+                ventas.tipo_venta === "venta_rapida" 
+                ? "Venta rapida" 
+                : ventas.tipo_venta
+            }</td> */}
             <td className={"success strong " + anulado()}>S/. { moneda(ventas.total) }</td>
             <td className={ classEstado() + anulado() + "capitalize" } >{ ventas.estado_venta }</td>
             <td className={ anulado() }>{ ventas.locales && ventas.locales.nombre }</td>

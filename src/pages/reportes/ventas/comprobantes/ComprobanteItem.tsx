@@ -5,8 +5,9 @@ import { ComprobanteDropdown } from "./ComprobanteDropdown"
 export const ComprobanteItem = ({ comprobante, handlerVer, reenviarComprobante, anularComprobante }:any) => {
 
     const venta:any = comprobante.ventas ? comprobante.ventas : {id: "000", codigo_venta: "000"};
+    // const correlativo:any = comprobante.correlativos ? comprobante.correlativos : {};
     const codigoVenta:any = 
-        comprobante.serie + "-" + 
+        // correlativo.serie + "-" + 
         venta.id + "-" + 
         venta.codigo_venta + "-" + 
         comprobante.id;
@@ -19,30 +20,12 @@ export const ComprobanteItem = ({ comprobante, handlerVer, reenviarComprobante, 
         }
     }
 
-    // const tipoOperacion = () => { 
-    //     if (comprobante.tipoOperacion === "10") {
-    //         return "Gravado"
-    //     } else if (comprobante.tipoOperacion === "20") {
-    //         return "Exonerado"
-    //     }
-    // }
-
-    
-    const tipoComprobante = () => { 
-        if (comprobante.serie === "B001") {
-            return "Boleta";
-        } else if (comprobante.serie === "F001") {
-            return "Factura";
-        } else if (comprobante.serie === "V001") {
-            return "Venta rapida";
-        }
-    }
     
     return (
         <tr className="venta-items">
             {/* <td className="secundary">{ comprobante.serie + "-" + comprobante.correlativo }</td> */}
             <td className="secundary">{ codigoVenta }</td>
-            <td>{ tipoComprobante() }</td>
+            <td className="capitalize">{ venta.tipo_venta }</td>
             <td className="strong info">{ tipoDocm() }</td>
             <td>{ comprobante.locales ? comprobante.locales.nombre : "" }</td>
             <td>{ fecha(comprobante.fecha_emision) }</td>

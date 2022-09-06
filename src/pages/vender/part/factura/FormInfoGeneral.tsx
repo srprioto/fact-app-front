@@ -18,7 +18,8 @@ interface formInfoGeneral {
     handlerVenta:Function;
     verificarVender:Function;
     handlerOnChangeCliente:FormEventHandler<HTMLFormElement>
-    serie:string;
+    // serie:string;
+    tipo_venta:string;
     labelBtn:string;
 }
 
@@ -33,7 +34,8 @@ export const FormInfoGeneral = ({
     handlerVenta,
     verificarVender,
     handlerOnChangeCliente,
-    serie,
+    // serie,
+    tipo_venta,
     labelBtn
 }:formInfoGeneral) => {
 
@@ -57,7 +59,7 @@ export const FormInfoGeneral = ({
                 validationSchema={getCliente.tipoDocumento === "DNI" ? ValidClienteDni : ValidClienteRuc}
                 
                 onSubmit={(data, { resetForm }) => { 
-                    verificarCaja(handlerVenta, serie)
+                    verificarCaja(handlerVenta, tipo_venta)
                 }}
             >
                 {({ errors }:any) => (

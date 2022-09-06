@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { clienteInfo } from "../../../../resources/dtos/Cliente";
+import { tipoVenta } from "../../../../resources/dtos/VentasDto";
 import { post } from "../../../../resources/fetch";
 import { CLIENTES } from "../../../../resources/routes";
 import { FormGestionDocum } from "./FormGestionDocum";
@@ -26,7 +27,8 @@ export const FacturaVenta = ({
     verificarVender
 }:factura) => {
 
-    const serie:string = "F001";
+    // const serie:string = "F003";
+    const tipo_venta:string = tipoVenta.factura;
     const clienteI = clienteInfo;
     const [loadCliente, setLoadCliente] = useState<boolean>(false);
     const [getCliente, setGetCliente] = useState<any>({ documento: "", tipoDocumento: "RUC", });
@@ -80,7 +82,8 @@ export const FacturaVenta = ({
         <>
             
             <FormGestionDocum
-                serie={serie} 
+                // serie={serie} 
+                tipo_venta={tipo_venta}
                 handlerOnChangeGetCli={handlerOnChangeGetCli} 
                 getCliente={getCliente} 
                 handlerGetCliente={handlerGetCliente} 
@@ -99,7 +102,8 @@ export const FacturaVenta = ({
                 verificarCaja={verificarCaja}
                 handlerVenta={handlerVenta}
                 verificarVender={verificarVender}
-                serie={serie}
+                tipo_venta={tipo_venta}
+                // serie={serie}
                 labelBtn="Venta con factura"
             />
 

@@ -8,7 +8,8 @@ import { ValidDocumento } from "../../../../resources/validations/Clientes"
 
 
 interface formGestionDocum {
-    serie:string;
+    // serie:string;
+    tipo_venta:string;
     handlerOnChangeGetCli:FormEventHandler<HTMLFormElement>;
     getCliente:any;
     handlerGetCliente:Function;
@@ -17,7 +18,8 @@ interface formGestionDocum {
 }
 
 export const FormGestionDocum = ({ 
-    serie, 
+    // serie, 
+    tipo_venta,
     handlerOnChangeGetCli, 
     getCliente, 
     handlerGetCliente, 
@@ -62,9 +64,9 @@ export const FormGestionDocum = ({
                     <div className="boleta-info-cliente grid-4 gap mb-20">
 
                         <ParrafoForm
-                            label="Serie"
-                            value={ serie }
-                            className="info strong"
+                            label="Tipo de venta"
+                            value={ tipo_venta }
+                            className="info strong capitalize"
                         />
 
                         <ParrafoForm

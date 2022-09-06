@@ -8,21 +8,21 @@ export const InfoVenta = ({ venta, classEstado }:any) => {
 
     const correlativo:number = comprobante[0] ? comprobante[0].id : 0;
     const codigoVenta:string = 
-        venta.serie + "-" + 
+        // venta.serie + "-" + 
         venta.id + "-" + 
         venta.codigo_venta +
         (correlativo !== 0 ? "-" + correlativo : "");
 
-        
-    const tipoComprobante = () => { 
-        if (venta.serie === "B001") {
-            return "Boleta";
-        } else if (venta.serie === "F001") {
-            return "Factura";
-        } else if (venta.serie === "V001") {
-            return "Venta rapida";
-        }
-    }
+    
+    // const tipoComprobante = () => { 
+    //     if (venta.serie === "B003") {
+    //         return "Boleta";
+    //     } else if (venta.serie === "F003") {
+    //         return "Factura";
+    //     } else if (venta.serie === "V001") {
+    //         return "Venta rapida";
+    //     }
+    // }
     
 
     return (
@@ -40,7 +40,7 @@ export const InfoVenta = ({ venta, classEstado }:any) => {
 
                     <span>
                         <p>Tipo comp.</p>
-                        <h4 className="info-i">{ tipoComprobante() }</h4>
+                        <h4 className="info-i capitalize">{ venta.tipo_venta }</h4>
                     </span>
 
                     <span>

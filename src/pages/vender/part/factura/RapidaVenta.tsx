@@ -3,6 +3,7 @@ import { useAuth } from "../../../../auth/useAuth";
 import { BtnOnOff2 } from "../../../../components/btns/BtnOnOff2";
 import { LoadSwitchBtn2 } from "../../../../components/btns/LoadSwitchBtn2";
 import { Roles } from "../../../../resources/dtos/RolesDto";
+import { tipoVenta } from "../../../../resources/dtos/VentasDto";
 
 interface rapidaVenta {
     loadVenta:boolean;
@@ -14,7 +15,8 @@ interface rapidaVenta {
 
 export const RapidaVenta = ({ loadVenta, setShowWindow, verificarCaja, handlerVenta, verificarVender }:rapidaVenta) => {
 
-    const serie:string = "V001";
+    // const serie:string = "V001";
+    const tipo_venta:string = tipoVenta.venta_rapida;
     const verCaja:boolean = verificarVender();
     const auth = useAuth();
 
@@ -45,7 +47,7 @@ export const RapidaVenta = ({ loadVenta, setShowWindow, verificarCaja, handlerVe
                     <LoadSwitchBtn2
                         loading={loadVenta}
                         className="btn btn-success"
-                        handler={() => verificarCaja(handlerVenta, serie)}
+                        handler={() => verificarCaja(handlerVenta, tipo_venta)}
                     >
                         <BiCaretRight /> Venta rapida
                     </LoadSwitchBtn2>

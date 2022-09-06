@@ -4,9 +4,14 @@ import { moneda } from "../../../../resources/func/moneda"
 export const InfoComprobante = ({ comprobante }:any) => {
 
     const venta:any = comprobante.ventas ? comprobante.ventas : {};
+    const correlativo:any = comprobante.correlativos ? comprobante.correlativos : {};
     const idVenta = venta ? venta.id : "";
     const codigoVenta = venta ? venta.codigo_venta : "";
-    const codigoComprobante:any = comprobante.serie + "-" + idVenta + "-" + codigoVenta + "-" + comprobante.id;
+    const codigoComprobante:any = 
+        // correlativo.serie + "-" + 
+        idVenta + "-" + 
+        codigoVenta + "-" + 
+        comprobante.id;
 
     const tipoDocm = () => {
         if (comprobante.tipoDocumento === "1") {
@@ -22,14 +27,6 @@ export const InfoComprobante = ({ comprobante }:any) => {
         } else if (comprobante.tipoOperacion === "20") {
             return "Exonerado"
         }
-    }
-
-    const tipoComprobante = () => { 
-        if (comprobante.tipoComprobante === "01") {
-            return "Factura"
-        } else if (comprobante.tipoComprobante === "03") {
-            return "Boleta"
-        }        
     }
 
 
@@ -71,7 +68,7 @@ export const InfoComprobante = ({ comprobante }:any) => {
                     
                     <span>
                         <p>Tipo comprobante: </p>
-                        <h4>{ tipoComprobante() }</h4>
+                        <h4 className="capitalize">{ correlativo.descripcion }</h4>
                     </span>
 
                     <span>

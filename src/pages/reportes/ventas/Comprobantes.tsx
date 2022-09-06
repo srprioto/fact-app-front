@@ -97,7 +97,7 @@ export const Comprobantes = ({ idLocal, selectLocal, loadingLocal, locales }:inf
         )
     }
     
-    
+
     return (
         <>
             <div className="box">

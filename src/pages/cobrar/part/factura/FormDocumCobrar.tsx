@@ -9,7 +9,8 @@ import { clienteInfo } from "../../../../resources/dtos/Cliente"
 import { ValidDocumento } from "../../../../resources/validations/Clientes"
 
 interface formDocumCobrar{
-    serie:string;
+    // serie:string;
+    tipoVenta:string;
     cliente:any;
     getCliente:any;
     switchChange:boolean;
@@ -27,7 +28,8 @@ interface formDocumCobrar{
 }
 
 export const FormDocumCobrar = ({ 
-    serie, 
+    // serie, 
+    tipoVenta,
     cliente, 
     getCliente, 
     switchChange, 
@@ -89,9 +91,9 @@ export const FormDocumCobrar = ({
                     <div className="boleta-info-cliente grid-2 gap mb-20">
 
                         <ParrafoForm
-                            label="Serie"
-                            value={ serie }
-                            className="info strong"
+                            label="Tipo de venta"
+                            value={ tipoVenta }
+                            className="info strong capitalize"
                         />
 
                         {

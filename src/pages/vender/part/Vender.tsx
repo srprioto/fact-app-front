@@ -108,15 +108,28 @@ export const Vender = ({ idLocal, nombreLocal, user }:vender) => {
     }
 
     
-    const postVenta = async (cliente:any, serie:string, estado_venta?:string) => {
+    const postVenta = async (cliente:any, tipo_venta:string, estado_venta?:string) => {
+        
         let ventaResp:any;
+        
+        // temporal tipo venta
+        // let tipo_venta:string = "venta_rapida";
+        // if (serie === "F003") {
+        //     tipo_venta = "factura";
+        // } else if (serie === "B003"){
+        //     tipo_venta = "boleta";
+        // } else if (serie === "V001"){
+        //     tipo_venta = "venta_rapida";
+        // }
+        venta.tipo_venta = tipo_venta;
+        // fin tipo venta
+
         venta.ventaDetalles = listaVenta;
         if (estado_venta) {
             venta.estado_venta = estado_venta;
         }
-        venta.serie = serie;
+        // venta.serie = "serie";
         venta.cliente = cliente;
-
         try {
             ventaResp = await post(venta, VENTAS);
         } catch (error) {
