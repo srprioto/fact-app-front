@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Loading } from "../../../../components/loads/Loading";
 import { SearchWrap } from "../../../../components/SearchWrap";
+import { TextoRelleno } from "../../../../components/TextoRelleno";
 import { LOCAL_STOCK_SEARCH } from "../../../../resources/routes";
 
 export const BuscarProducto = ({ setElemento, elemento, data, setData, listaRepetidos, idLocal }:any) => {
@@ -28,14 +29,14 @@ export const BuscarProducto = ({ setElemento, elemento, data, setData, listaRepe
                 ? <div className="loading-lista-prod"><Loading /></div>
                 : ( 
                     data.length !== 0
-                    && (
+                    ? (
                         <div className="lista-productos box box-par m-0">
                             <table className="table3">
                                 <thead>
                                     <tr>
                                         {/* <th>Codigo</th> */}
                                         <th>Nombre</th>
-                                        <th>Descrip.</th>
+                                        {/* <th>Descrip.</th> */}
                                         {/* <th>Cantidad</th> */}
                                         <th>Color</th>
                                         <th>Marca</th>
@@ -58,7 +59,7 @@ export const BuscarProducto = ({ setElemento, elemento, data, setData, listaRepe
                                                     >
                                                         {/* <td>{ producto.codigo }</td> */}
                                                         <td>{ prod.nombre }</td>
-                                                        <td>{ prod.descripcion }</td>
+                                                        {/* <td>{ prod.descripcion }</td> */}
                                                         {/* <td>{ e.cantidad }</td> */}
                                                         <td>{ prod.color }</td>
                                                         <td>{ prod.marca }</td>
@@ -74,6 +75,10 @@ export const BuscarProducto = ({ setElemento, elemento, data, setData, listaRepe
                                     }
                                 </tbody>
                             </table>
+                        </div>
+                    ) : (
+                        <div className="lista-productos m-0">
+                            <TextoRelleno texto="No se encontraron productos" />
                         </div>
                     )
                 )
