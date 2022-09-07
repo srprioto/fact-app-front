@@ -50,7 +50,6 @@ export const VentaItems = ({ ventas, handlerVer, updateData, handlerAnular }:ven
     //         return "Venta rapida";
     //     }
     // }
-
     
     return (
         <tr className="venta-items">

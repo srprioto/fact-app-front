@@ -54,6 +54,8 @@ export const GestionPrecios = ({
             productosId: producto.id,
             codigo_producto: producto.codigo,
             nombre_producto: producto.nombre,
+            marca: producto.marca,
+            talla: producto.talla,
             precio_venta: precioVenta,
             precio_parcial: redondeo(precioSubventa),
             venta_negativa: cantidadStock <= 0 ? Number(cantidadStock) : 0

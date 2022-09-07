@@ -14,10 +14,12 @@ export const TablaListaVentaProductos = ({ venta }:tablaListaVentaProductos) => 
                 <thead>
                     <tr>
                         <th>Producto</th>
+                        <th>Marca</th>
+                        <th>Talla</th>
                         <th>Cant.</th>
-                        <th>Precio Unidad</th>
+                        <th>P. Unidad</th>
                         <th>Inc/Desc</th>
-                        <th>Precio Subventa</th>
+                        <th>P. Subventa</th>
                     </tr>
                 </thead>
                 
@@ -34,7 +36,9 @@ export const TablaListaVentaProductos = ({ venta }:tablaListaVentaProductos) => 
 
                             return (
                                 <tr key={index}>
-                                    <td>{ e.productos.nombre }</td>
+                                    <td className="nombre-prod-perdido">{ e.productos.nombre }</td>
+                                    <td>{ e.productos.marca }</td>
+                                    <td>{ e.productos.talla }</td>
                                     <td><strong>{ e.cantidad_venta }</strong></td>
                                     <td className="info">S/. { moneda(e.precio_venta) }</td>
                                     <td className={

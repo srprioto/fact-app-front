@@ -753,6 +753,14 @@
     .descripcion-venta{
         .lista-productos-pedido{
             min-height: 220px;
+            table{
+                .nombre-prod-perdido{
+                    width: 130px;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                }
+            }
         }
         
         .formas-pago{

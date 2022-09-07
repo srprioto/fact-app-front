@@ -69,7 +69,7 @@ export const ModalVentaDetalles = ({ modal, setModal, idVenta }:any) => {
             modal={modal}
             setModal={setModal}
             border="border-primary"
-            width={70}
+            width={85}
         >
             {
                 loadingOne
@@ -84,13 +84,15 @@ export const ModalVentaDetalles = ({ modal, setModal, idVenta }:any) => {
                                 <thead>
                                     <tr>
                                         <th>Producto</th>
+                                        <th>Marca</th>
+                                        <th>Talla</th>
                                         <th></th>
-                                        <th>Cantidad</th>
+                                        <th>Cant.</th>
                                         <th>Descuento</th>
-                                        <th>Precio Unidad</th>
-                                        <th>Precio Subventa</th>
-                                        <th>Venta sin stock</th>                                        
-                                        <th>Estado</th>
+                                        <th>P. Unidad</th>
+                                        <th>P. Subventa</th>
+                                        <th>Sin stock</th>                                        
+                                        {/* <th>Estado</th> */}
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -101,6 +103,8 @@ export const ModalVentaDetalles = ({ modal, setModal, idVenta }:any) => {
                                                 return (
                                                     <tr key={e.id}>
                                                         <td className="info">{ e.productos.nombre }</td>
+                                                        <td className="info">{ e.productos.marca }</td>
+                                                        <td className="info">{ e.productos.talla }</td>
                                                         <td>
                                                             <ProductoInfo producto={e.productos} />
                                                         </td>
@@ -113,9 +117,9 @@ export const ModalVentaDetalles = ({ modal, setModal, idVenta }:any) => {
                                                                 classVentaForzada(e.venta_negativa, e.forzar_venta)
                                                             }
                                                         >{ e.venta_negativa }</td>
-                                                        <td
+                                                        {/* <td
                                                             className={classEstado(e.estado_venta_detalle)}
-                                                        >{ e.estado_venta_detalle }</td>
+                                                        >{ e.estado_venta_detalle }</td> */}
                                                         
                                                     </tr>
                                                 )

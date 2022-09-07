@@ -28,6 +28,8 @@ export const ventaDet = {
     productosId:0,
     codigo_producto: "",
     nombre_producto: "",
+    talla: "",
+    marca: "",
     cantidad_venta: 1,
     descuento: 0,
     precio_venta: 0,

@@ -184,6 +184,7 @@ export const VerProducto = ({
         }
     }
 
+
     return (
         <div className={"over-hidden ver-producto" + (classStart ? " show-left" : "")}>
             <div className="grid-31 gap">

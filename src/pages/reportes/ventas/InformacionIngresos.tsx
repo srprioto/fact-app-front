@@ -22,7 +22,8 @@ export const InformacionIngresos = ({ idLocal, selectLocal, loadingLocal, locale
     const [loadingData, setLoadingData] = useState<boolean>(false);
     const [modalVer, setModalVer] = useState<boolean>(false);
     // const [modalHabilitarVenta, setModalHabilitarVenta] = useState<boolean>(false);
-    const [itemCaja, setItemCaja] = useState<any>({});
+    // const [itemCaja, setItemCaja] = useState<any>({});
+    const [cajaId, setCajaId] = useState<number>(0);
     const [pagination, setPagination] = useState<any>({ meta: {}, links: {} });
     const [data, setData] = useState<any>([]);
     // const [toggle, setToggle] = useState<number>(1); // tabs para los filtros
@@ -31,14 +32,13 @@ export const InformacionIngresos = ({ idLocal, selectLocal, loadingLocal, locale
     // const [searchState, setSearchState] = useState<boolean>(false); // estado de busqueda
     // *** end search
 
-    
     useEffect(() => {
         getData();
     }, [idLocal]);
     
 
-    const handlerVer = (e:any) => { 
-        setItemCaja(e);
+    const handlerVer = (id:number) => { 
+        setCajaId(id);
         setModalVer(!modalVer);
     }
 
@@ -71,7 +71,7 @@ export const InformacionIngresos = ({ idLocal, selectLocal, loadingLocal, locale
             setLoadingData(true);
             console.log(error);
         }
-        setItemCaja({});
+        setCajaId(0);
     }
 
 
@@ -184,7 +184,7 @@ export const InformacionIngresos = ({ idLocal, selectLocal, loadingLocal, locale
                 <ModalCajaDetalles
                     modal={modalVer}
                     setModal={setModalVer}
-                    itemCaja={itemCaja}
+                    cajaId={cajaId}
                 />
             </ModalWrap>
 

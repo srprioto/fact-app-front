@@ -1313,3 +1313,10 @@ table.no-cursor{
     // </div>
 
 }
+
+.nombre-producto{
+    width: 130px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
