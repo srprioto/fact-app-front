@@ -11,7 +11,6 @@ import { ModalCodigoVenta } from "./verLista/short/ModalCodigoVenta";
 import { RapidaVenta } from "./factura/RapidaVenta";
 import { Cotizacion } from "./factura/Cotizacion";
 
-
 export const VerLista = ({ 
     setShowWindow, 
     listaVenta, 
@@ -91,7 +90,6 @@ export const VerLista = ({
             console.log(error);
         }
     }
-
     
 
     return (

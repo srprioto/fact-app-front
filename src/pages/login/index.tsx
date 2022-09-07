@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BiLock, BiSubdirectoryRight, BiUser } from "react-icons/bi"
 // import { useNavigate } from "react-router-dom";
 
@@ -19,6 +19,14 @@ export const IndexLogin = () => {
         email: "",
         password: ""
     });
+
+    useEffect(() => {
+        setDataAccess({
+            email: "",
+            password: ""
+        })
+    }, [])
+    
 
     const handlerOnChange = (e:any) => { 
         setDataAccess({
