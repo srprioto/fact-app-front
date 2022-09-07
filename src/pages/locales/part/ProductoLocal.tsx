@@ -1,10 +1,6 @@
-import { BiCaretDown } from "react-icons/bi";
 import { useAuth } from "../../../auth/useAuth";
 import { Roles } from "../../../resources/dtos/RolesDto";
 import { BoxDropdown } from "./BoxDropdown";
-
-import { DetallesProd } from "./DetallesProd";
-
 
 interface Producto { 
     elemento:any;
@@ -20,8 +16,6 @@ export const ProductoLocal = ({
 
     return (
         <tr>
-            <td>{ elemento.productos.codigo }</td>
-            <td>{ elemento.productos.nombre }</td>
             <td className={
                     elemento.cantidad <= 10
                     ? elemento.cantidad === 0 || elemento.cantidad === null
@@ -32,14 +26,11 @@ export const ProductoLocal = ({
             >
                 {elemento.cantidad === null ? "---" : elemento.cantidad}
             </td>
-            <td>
-                <div className="wrap-detalles-prod">
-                    <BiCaretDown />
-                    <div className="detalles-prod">
-                        <DetallesProd producto={elemento.productos} />
-                    </div>
-                </div>
-            </td>
+            <td>{ elemento.productos.codigo }</td>
+            <td>{ elemento.productos.nombre }</td>
+            <td>{ elemento.productos.marca }</td>
+            <td>{ elemento.productos.talla }</td>
+            <td>{ elemento.productos.color }</td>
             <td>
                 {
                     auth.rol === Roles.ADMIN
@@ -58,3 +49,12 @@ export const ProductoLocal = ({
         </tr>
     )
 };
+
+/* <td>
+    <div className="wrap-detalles-prod">
+        <BiCaretDown />
+        <div className="detalles-prod">
+            <DetallesProd producto={elemento.productos} />
+        </div>
+    </div>
+</td> */

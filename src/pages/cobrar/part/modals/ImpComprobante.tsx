@@ -12,10 +12,16 @@ interface impComprobante {
 export const ImpComprobante = ({ venta, setImprimir }:impComprobante) => {
 
     const imprimir = useRef<any>(null);
+    const correlativos:any = venta.locales.correlativos;
+    const correlativo:any = correlativos.find((e:any) => e.descripcion === venta.tipo_venta);
+    const serie:string = correlativo ? correlativo.serie : "V001";
+
+    console.log(venta);    
 
     useEffect(() => {
         handlerPrint();
     }, [])   
+
 
     const handlerPrint = () => { 
         let ventimp:any = window.open(' ', 'popimpr');
@@ -100,7 +106,7 @@ export const ImpComprobante = ({ venta, setImprimir }:impComprobante) => {
     const tituloPrinc = {
         ...mb10,
         ...texto,
-        fontSize: "23px",
+        fontSize: "17px",
     }
 
     const headerInfo:any = {
@@ -108,7 +114,7 @@ export const ImpComprobante = ({ venta, setImprimir }:impComprobante) => {
         padding: "0 10px",
         fontWeight: "100",
         fontFamily: "arial",
-        fontSize: "16px",
+        fontSize: "14px",
     }
 
     const boxHeaderInfo:any = {
@@ -169,7 +175,6 @@ export const ImpComprobante = ({ venta, setImprimir }:impComprobante) => {
         ...center
     }
 
-
     return (
 
         <div className="none imprimir-comprobante">
@@ -177,12 +182,18 @@ export const ImpComprobante = ({ venta, setImprimir }:impComprobante) => {
                 
                 <div style={boxHeaderInfo}>
                     <h3 style={tituloPrinc}>{ titulo() }</h3>
-                    <span style={headerInfo}>{ venta.serie + "-" + venta.id + "-" + venta.codigo_venta }</span>
+                    <span style={headerInfo}>
+                        { 
+                            serie + "-" + 
+                            venta.id + "-" + 
+                            venta.codigo_venta 
+                        }
+                    </span>
                     <span style={headerInfo}>{ fecha(venta.updated_at) }</span>
                 </div>
                 
                 <div style={boxHeaderInfo}>
-                    <h1 style={infoEmpresa}>AddidSport</h1> {/*  actualizar por nombre de empresa desde DB */}
+                    <h3 style={infoEmpresa}>AddidSport</h3> {/*  actualizar por nombre de empresa desde DB */}
                     <h2 style={infoEmpresa}>INVERSIONES PERKINS E.I.R.L</h2> {/*  actualizar */}
                     {
                         venta.tipo_venta !== tipoVenta.venta_rapida
@@ -234,7 +245,12 @@ export const ImpComprobante = ({ venta, setImprimir }:impComprobante) => {
                                     return (
                                         <tr key={e.id} style={texto}>
                                             {/* <td>{ e.productos.codigo }</td> */}
-                                            <td>{ e.productos.nombre }</td>
+                                            <td>{ 
+                                                e.productos.nombre + " - " +
+                                                e.productos.marca + " - " +
+                                                e.productos.talla + " - " +
+                                                e.productos.color
+                                            }</td>
                                             <td>{ e.cantidad_venta }</td>
                                             <td>S/.{ moneda(e.precio_venta) }</td>
                                             <td>S/.{ moneda(e.precio_parcial) }</td>
@@ -268,10 +284,10 @@ export const ImpComprobante = ({ venta, setImprimir }:impComprobante) => {
                             <span style={left}>Exonerada:</span>
                             <span style={right}>S/. { moneda(0) }</span>
                         </div>
-                        <div style={textoResumen}>
+                        {/* <div style={textoResumen}>
                             <span style={left}>Gratuita:</span>
                             <span style={right}>S/. { moneda(0) }</span>
-                        </div>
+                        </div> */}
                         <div style={textoResumen}>
                             <span style={left}>Total:</span>
                             <span style={right}>S/. { moneda(venta.total) }</span>
@@ -286,7 +302,7 @@ export const ImpComprobante = ({ venta, setImprimir }:impComprobante) => {
                         venta.tipo_venta !== tipoVenta.venta_rapida
                         && (
                             <div style={qrcode}>
-                                <QRCodeSVG value={`${venta.serie}|${venta.codigo_venta}|${moneda(venta.subtotal)}|${moneda(venta.igvGeneral)}|${moneda(venta.total)}|${fecha(venta.updated_at)}|${ventaDetalles.length}`} />
+                                <QRCodeSVG value={`${serie}|${venta.codigo_venta}|${moneda(venta.subtotal)}|${moneda(venta.igvGeneral)}|${moneda(venta.total)}|${fecha(venta.updated_at)}|${ventaDetalles.length}`} />
                             </div>
                         )
                     }

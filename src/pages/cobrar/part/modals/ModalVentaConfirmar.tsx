@@ -35,6 +35,7 @@ export const ModalVentaConfirmar = ({
     const [venta, setVenta] = useState<any>(copy(dataVenta));
     const [reducirPercent, setReducirPercent] = useState<number>(0);
     const [modalCorreo, setModalCorreo] = useState<boolean>(false);
+    
 
     useEffect(() => { 
         let ventaDetallesUpdate:any = [];
@@ -106,9 +107,8 @@ export const ModalVentaConfirmar = ({
 
         await confirmarVenta(estado, updateVenta, sendComprobante); // confirma la venta y la guarda en nuetro registro
         // await registrarSunat();
-
     }
-
+    
     
     return (
         <Modal

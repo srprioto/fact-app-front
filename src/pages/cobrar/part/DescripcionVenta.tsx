@@ -144,7 +144,7 @@ export const DescripcionVenta = ({ data, handlerRefresh, loadingOne }:descripcio
             return false
         }
     }
-
+    
 
     return (
         <div className="descripcion-venta">

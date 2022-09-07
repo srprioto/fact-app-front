@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { BiBook, BiCartAlt, BiSpreadsheet, BiTask } from "react-icons/bi";
+import { BiCartAlt } from "react-icons/bi";
 import { BoletaVenta } from "./factura/BoletaVenta";
 import { FacturaVenta } from "./factura/FacturaVenta";
 import { ModalWrap } from "../../../components/modals/ModalWrap";
@@ -109,31 +109,27 @@ export const VerLista = ({
                         <button 
                             className={"btn2 btn2-success " + (tabbs === 1 && "btn2-sub-success")}
                             onClick={() => handlerTabb(1)}
-                        >
-                            <BiCartAlt
-                            /> Venta rapida
+                        ><BiCartAlt/> Venta rapida
                         </button>
 
-                        <button 
+                        {/* descomentar luego de habilitar comprobantes */}
+                        {/* <button 
                             className={"btn2 btn2-info " + (tabbs === 2 && "btn2-sub-info")}
                             onClick={() => handlerTabb(2)}
-                        >
-                            <BiSpreadsheet /> Boleta
+                        ><BiSpreadsheet /> Boleta
                         </button>
 
                         <button 
                             className={"btn2 btn2-info " + (tabbs === 3 && "btn2-sub-info")}
                             onClick={() => handlerTabb(3)}
-                        >
-                            <BiTask /> Factura
+                        ><BiTask /> Factura
                         </button>
 
                         <button 
                             className={"btn2 btn2-info " + (tabbs === 4 && "btn2-sub-info")}
                             onClick={() => handlerTabb(4)}
-                        >
-                            <BiBook /> Cotizacion
-                        </button>
+                        ><BiBook /> Cotizacion
+                        </button> */}
                     </div>
 
                     <PreciosVenta

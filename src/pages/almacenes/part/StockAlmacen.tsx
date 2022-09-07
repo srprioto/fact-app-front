@@ -149,12 +149,12 @@ export const StockAlmacen = () => {
                             
                                 <thead>
                                     <tr>
+                                        <th>Cantidad</th>
                                         <th>Codigo</th>
-                                        <th>Nombre del producto</th>
-                                        <th>Cantidad en stock</th>
-                                        <th>Detalles...</th>
-                                        {/* <th>Precio Compra</th>
-                                        <th>Precios Venta</th> */}
+                                        <th>Nombre</th>
+                                        <th>Marca</th>
+                                        <th>Talla</th>
+                                        <th>Color</th>
                                         <th className="transparent inlineblock">...</th>
                                     </tr>
                                 </thead>
