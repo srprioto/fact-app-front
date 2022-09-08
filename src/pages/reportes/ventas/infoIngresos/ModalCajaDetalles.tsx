@@ -50,8 +50,6 @@ export const ModalCajaDetalles = ({ modal, setModal, cajaId }:any) => {
         }
     }
 
-    console.log(caja);
-
     return (
         <Modal
             title="Detalles de caja"
@@ -81,14 +79,14 @@ export const ModalCajaDetalles = ({ modal, setModal, cajaId }:any) => {
                                         <h4 className="warning-i">S/. { moneda(caja.otros_montos) }</h4>
                                     </span>
 
-                                    <span>
+                                    {/* <span>
                                         <p>Ingresos en efectivo:</p>
                                         <h4 className={
                                             (caja.cantidad_diferencia > 0
                                             ? "danger-i"
                                             : "info-i")
                                         }>S/. { moneda(caja.monto_efectivo) }</h4>
-                                    </span>
+                                    </span> */}
 
                                     <span>
                                         <p>Monto total en caja:</p>
@@ -98,11 +96,6 @@ export const ModalCajaDetalles = ({ modal, setModal, cajaId }:any) => {
                                 </div>
                                     
                                 <div className="box-wrap-descripcion3">
-
-                                    <span>
-                                        <p>Ingresos otros medios:</p>
-                                        <h4 className="primary-i">S/. { moneda(montoOtrosMedios) }</h4>
-                                    </span>
                                     
                                     <div className="mb-15">
                                         <span className="m-0">
@@ -120,15 +113,23 @@ export const ModalCajaDetalles = ({ modal, setModal, cajaId }:any) => {
                                     </div>
 
                                     <span>
-                                        <p className="strong">Ingresos totales:</p>
-                                        <h2 className="success-i strong">
-                                            S/. { moneda(montoOtrosMedios + totalCaja) }
-                                        </h2>
+                                        <p>Ingresos otros medios:</p>
+                                        <h4 className="primary-i">S/. { moneda(montoOtrosMedios) }</h4>
                                     </span>
-                                    
                                 </div>
-
                             </div>
+
+                            <div className="grid-3 gap middle">
+                                <div></div>
+                                <span className="center mt-15 grid-2 gap">
+                                    <p className="strong">Ingresos totales:</p>
+                                    <h2 className="success-i strong">
+                                        S/. { moneda(montoOtrosMedios + totalCaja) }
+                                    </h2>
+                                </span>
+                                <div></div>
+                            </div>
+
                         </div>
 
                         <div className="wrap-descripcion3">

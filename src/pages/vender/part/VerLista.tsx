@@ -121,9 +121,9 @@ export const VerLista = ({
                             className={"btn2 btn2-info " + (tabbs === 3 && "btn2-sub-info")}
                             onClick={() => handlerTabb(3)}
                         ><BiTask /> Factura
-                        </button>
+                        </button> */}
 
-                        <button 
+                        {/* <button 
                             className={"btn2 btn2-info " + (tabbs === 4 && "btn2-sub-info")}
                             onClick={() => handlerTabb(4)}
                         ><BiBook /> Cotizacion

@@ -43,7 +43,7 @@ export const CajaAbierta = ({ data, caja, setCaja, setModalCerrarCaja, setModalA
                     <h2 className="strong left success">Abierto</h2>
                 </div>
     
-                <div className="grid-4 gap">
+                <div className="grid-3 gap">
     
                     <div className="center">
                         <p>Monto de apertura: </p>
@@ -55,10 +55,10 @@ export const CajaAbierta = ({ data, caja, setCaja, setModalCerrarCaja, setModalA
                         <h2 className="warning-i">S/. { moneda(infoCaja.otros_montos) }</h2>
                     </div>
 
-                    <div className="center">
+                    {/* <div className="center">
                         <p>Ingresos en efectivo: </p>
                         <h2 className="info-i">S/. { moneda(infoCaja.monto_efectivo) }</h2>
-                    </div>
+                    </div> */}
 
                     <div className="center">
                         <p>Monto total en caja: </p>
@@ -69,22 +69,21 @@ export const CajaAbierta = ({ data, caja, setCaja, setModalCerrarCaja, setModalA
     
                 </div>
 
-                <div className="grid-4 gap">
+                <div className="grid-3 gap">
 
-                    <div></div>
                     <div></div>
 
                     <div className="pago-otros-ingresos right">
-                        <span className="grid-12">
-                            <p className="m-0">Tarjeta:</p>
+                        <span className="grid-2">
+                            <p className="m-0">Tarjeta: </p>
                             <h4 className="info m-0">S/. { moneda(infoCaja.monto_tarjeta) }</h4>
                         </span>
-                        <span className="grid-12">
-                            <p className="m-0">P. Electro:</p>
+                        <span className="grid-2">
+                            <p className="m-0">P. Electronico: </p>
                             <h4 className="info m-0">S/. { moneda(infoCaja.monto_pago_electronico) }</h4>
                         </span>
-                        <span className="grid-12">
-                            <p className="m-0">Deposito:</p>
+                        <span className="grid-2">
+                            <p className="m-0">Deposito: </p>
                             <h4 className="info m-0">S/. { moneda(infoCaja.monto_deposito) }</h4>
                         </span>
                     </div>
@@ -95,12 +94,10 @@ export const CajaAbierta = ({ data, caja, setCaja, setModalCerrarCaja, setModalA
                             S/. { moneda(montosOtrosMedios) }
                         </h2>
                     </div>
-
                 </div>
 
-                <div className="grid-4 gap">
+                <div className="grid-3 gap">
 
-                    <div></div>
                     <div></div>
                     <div></div>
     
