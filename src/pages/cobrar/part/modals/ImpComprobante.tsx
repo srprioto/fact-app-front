@@ -1,23 +1,26 @@
 import { QRCodeSVG } from "qrcode.react";
 import { useEffect, useRef } from "react";
 import { tipoVenta } from "../../../../resources/dtos/VentasDto";
-import { fecha } from "../../../../resources/func/fechas";
+import { fecha, fechaResumen } from "../../../../resources/func/fechas";
 import { moneda } from "../../../../resources/func/moneda";
 
 interface impComprobante {
     venta:any;
     setImprimir:Function;
+    nuevo?:boolean;
 }
 
-export const ImpComprobante = ({ venta, setImprimir }:impComprobante) => {
+export const ImpComprobante = ({ venta, setImprimir, nuevo }:impComprobante) => {
 
     const imprimir = useRef<any>(null);
     const correlativos:any = venta.locales.correlativos;
     const correlativo:any = correlativos.find((e:any) => e.descripcion === venta.tipo_venta);
     const serie:string = correlativo ? correlativo.serie : "V001";
-
-    console.log(venta);    
-
+    const nuevoCorrelativo:string = correlativo ? correlativo.correlativo : "";
+    const existCorrelativo:string = venta.comprobante.length > 0 ? venta.comprobante[0].correlativo : "";
+    const tipVenta = correlativo ? correlativo.descripcion : "venta rapida";
+   
+    
     useEffect(() => {
         handlerPrint();
     }, [])   
@@ -32,6 +35,7 @@ export const ImpComprobante = ({ venta, setImprimir }:impComprobante) => {
         setImprimir(false);
     }
 
+
     const titulo = () => {
         if (venta.tipo_venta === tipoVenta.venta_rapida) {
             return "Nota de venta";
@@ -44,21 +48,29 @@ export const ImpComprobante = ({ venta, setImprimir }:impComprobante) => {
         }
     }
 
-    // const titulo = () => { 
-    //     if (venta.serie === "V001") {
-    //         return "Nota de venta";
-    //     } else if (venta.serie === "B003"){
-    //         return "Boleta electronica";
-    //     } else if (venta.serie === "F003"){
-    //         return "Factura electronica";
-    //     } else {
-    //         return "Comprobante electronico";
-    //     }
-    // }    
 
+    const cliente:any = venta.clientes ? venta.clientes : {};
+    const ventaDetalles:any = venta.ventaDetalles ? venta.ventaDetalles : {};
 
-    const cliente:any = venta.clientes ? venta.clientes : "";
-    const ventaDetalles:any = venta.ventaDetalles;
+    
+    const nroCorrelat = () => {
+        if (nuevo) {
+            // nueva impresion
+            if (tipVenta !== tipoVenta.venta_rapida) {
+                return Number(nuevoCorrelativo) + 1 + "-";    
+            } else {
+                return ""
+            }
+        } else {
+            // impresion existente
+            if (tipVenta !== tipoVenta.venta_rapida) {
+                return existCorrelativo + "-";
+            } else {
+                return "";
+            }
+            
+        }
+    }
 
 
     // estilos
@@ -185,11 +197,12 @@ export const ImpComprobante = ({ venta, setImprimir }:impComprobante) => {
                     <span style={headerInfo}>
                         { 
                             serie + "-" + 
+                            nroCorrelat() +
                             venta.id + "-" + 
-                            venta.codigo_venta 
+                            venta.codigo_venta
                         }
                     </span>
-                    <span style={headerInfo}>{ fecha(venta.updated_at) }</span>
+                    <span style={headerInfo}>{ fechaResumen(venta.updated_at) }</span>
                 </div>
                 
                 <div style={boxHeaderInfo}>

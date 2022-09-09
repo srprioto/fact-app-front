@@ -10,6 +10,7 @@ import { VENTAS_PAGINATE, VENTAS_SEARCH } from "../../../resources/routes";
 import { ExportarExcel } from "./InfoGeneral/ExportarExcel";
 import { ModalAnularVenta } from "./InfoGeneral/ModalAnularVenta";
 import { ModalHabilitarVenta } from "./InfoGeneral/ModalHabilitarVenta";
+import { ModalReimpVenta } from "./InfoGeneral/ModalReimpVenta";
 import { ModalVentaDetalles } from "./InfoGeneral/ModalVentaDetalles";
 import { TabbsFiltroDatos } from "./InfoGeneral/TabbsFiltroDatos";
 import { VentaItems } from "./InfoGeneral/VentaItems";
@@ -27,6 +28,7 @@ export const InfoGeneralVentas = ({ idLocal, selectLocal, loadingLocal, locales 
     const [modalVer, setModalVer] = useState<boolean>(false);
     const [modalHabilitarVenta, setModalHabilitarVenta] = useState<boolean>(false);
     const [modalAnular, setModalAnular] = useState<boolean>(false);
+    const [modalReimprimir, setModalReimprimir] = useState<boolean>(false);
     const [idVenta, setIdVenta] = useState<number>(0);
     const [pagination, setPagination] = useState<any>({ meta: {}, links: {} });
     const [data, setData] = useState<any>([]);
@@ -55,6 +57,11 @@ export const InfoGeneralVentas = ({ idLocal, selectLocal, loadingLocal, locales 
     const handlerAnular = (idVenta:number) => { 
         setIdVenta(idVenta);
         setModalAnular(true);
+    }
+
+    const handlerReimprimir = (idVenta:number) => { 
+        setIdVenta(idVenta);
+        setModalReimprimir(true);
     }
 
 
@@ -183,6 +190,7 @@ export const InfoGeneralVentas = ({ idLocal, selectLocal, loadingLocal, locales 
                                                     updateData={handlerHabilitarVenta}
                                                     handlerVer={handlerVer}
                                                     handlerAnular={handlerAnular}
+                                                    handlerReimprimir={handlerReimprimir}
                                                 />
                                             )
                                         })
@@ -218,6 +226,14 @@ export const InfoGeneralVentas = ({ idLocal, selectLocal, loadingLocal, locales 
                     setModal={setModalAnular}
                     idVenta={idVenta}
                     getData={getData}
+                />
+            </ModalWrap>
+
+            <ModalWrap modal={modalReimprimir}>
+                <ModalReimpVenta
+                    modal={modalReimprimir}
+                    setModal={setModalReimprimir}
+                    idVenta={idVenta}
                 />
             </ModalWrap>
             

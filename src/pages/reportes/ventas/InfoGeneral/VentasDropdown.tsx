@@ -1,4 +1,4 @@
-import { BiLike, BiShowAlt, BiX } from "react-icons/bi"
+import { BiBookmarkAltMinus, BiLike, BiShowAlt, BiX } from "react-icons/bi"
 import { DropDown } from "../../../../components/DropDown"
 
 interface ventasDropdown {
@@ -6,9 +6,10 @@ interface ventasDropdown {
     handlerVer:Function; 
     updateData:Function;
     handlerAnular:Function;
+    handlerReimprimir:Function;
 }
 
-export const VentasDropdown = ({ ventas, handlerVer, updateData, handlerAnular }:ventasDropdown) => {
+export const VentasDropdown = ({ ventas, handlerVer, updateData, handlerAnular, handlerReimprimir }:ventasDropdown) => {
 
     const anulado = () => { 
         if (
@@ -23,6 +24,7 @@ export const VentasDropdown = ({ ventas, handlerVer, updateData, handlerAnular }
         }
     }
 
+    
     return (
         <DropDown width="190">
             {
@@ -31,20 +33,30 @@ export const VentasDropdown = ({ ventas, handlerVer, updateData, handlerAnular }
                     <BiX />Anular Venta
                 </span>
             }
-            
+
             {
                 (ventas.estado_venta === "rechazado" ||
                 ventas.estado_venta === "rechazado")
                 && (
                     <span onClick={ () => updateData(ventas.id) } >
-                        <BiLike />Habilitar venta
+                        <BiLike /> Habilitar venta
                     </span>
                 )
             }
             
+            {
+                ventas.estado_venta === "listo"
+                && (
+                    <span onClick={ () => handlerReimprimir(ventas.id) } >
+                        <BiBookmarkAltMinus /> Reimprimir
+                    </span>
+                )
+            }
+
             <span onClick={ () => handlerVer(ventas.id) } >
-                <BiShowAlt />Ver detalles
+                <BiShowAlt /> Ver detalles
             </span>
+
                         
         </DropDown>
     )

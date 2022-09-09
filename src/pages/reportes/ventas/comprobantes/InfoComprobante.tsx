@@ -11,7 +11,7 @@ export const InfoComprobante = ({ comprobante }:any) => {
         // correlativo.serie + "-" + 
         idVenta + "-" + 
         codigoVenta + "-" + 
-        comprobante.id;
+        comprobante.correlativo;
 
     const tipoDocm = () => {
         if (comprobante.tipoDocumento === "1") {

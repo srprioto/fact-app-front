@@ -10,7 +10,7 @@ export const ComprobanteItem = ({ comprobante, handlerVer, reenviarComprobante, 
         // correlativo.serie + "-" + 
         venta.id + "-" + 
         venta.codigo_venta + "-" + 
-        comprobante.id;
+        comprobante.correlativo;
 
     const tipoDocm = () => {
         if (comprobante.tipoDocumento === "1") {

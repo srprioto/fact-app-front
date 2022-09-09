@@ -7,12 +7,13 @@ interface ventaItems {
     handlerVer:Function; 
     updateData:Function;
     handlerAnular:Function;
+    handlerReimprimir:Function;
 }
 
-export const VentaItems = ({ ventas, handlerVer, updateData, handlerAnular }:ventaItems) => {
+export const VentaItems = ({ ventas, handlerVer, updateData, handlerAnular, handlerReimprimir }:ventaItems) => {
 
     const comprobante:any = ventas.comprobante ? ventas.comprobante : [];
-    const correlativo:number = comprobante[0] ? comprobante[0].id : 0;
+    const correlativo:number = comprobante[0] ? comprobante[0].correlativo : 0;
     const codigoVenta:string = 
         // ventas.serie + "-" + 
         ventas.id + "-" + 
@@ -69,6 +70,7 @@ export const VentaItems = ({ ventas, handlerVer, updateData, handlerAnular }:ven
                     handlerVer={handlerVer} 
                     updateData={updateData} 
                     handlerAnular={handlerAnular}
+                    handlerReimprimir={handlerReimprimir}
                 />
             </td>
         </tr>

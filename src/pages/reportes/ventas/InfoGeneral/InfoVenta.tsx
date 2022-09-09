@@ -6,7 +6,7 @@ export const InfoVenta = ({ venta, classEstado }:any) => {
 
     const comprobante:any = venta.comprobante ? venta.comprobante : [];
 
-    const correlativo:number = comprobante[0] ? comprobante[0].id : 0;
+    const correlativo:number = comprobante[0] ? comprobante[0].correlativo : 0;
     const codigoVenta:string = 
         // venta.serie + "-" + 
         venta.id + "-" + 
@@ -23,7 +23,7 @@ export const InfoVenta = ({ venta, classEstado }:any) => {
     //         return "Venta rapida";
     //     }
     // }
-    
+
 
     return (
     
