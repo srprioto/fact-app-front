@@ -161,7 +161,7 @@ export const FormEditProducto = ({ id, handlerEdit, loadingUpdate }:any) => {
                         <div className="grid-4 gap mt-15">
                             <div />
 
-                            <LoadSwitchBtn label="Editar cliente" loading={loadingUpdate} />
+                            <LoadSwitchBtn label="Editar producto" loading={loadingUpdate} />
 
                             <button className="btn btn-primary" type="reset">
                                 <BiReply />

@@ -95,7 +95,7 @@ export const ModalAnularVenta = ({ modal, setModal, idVenta, getData }:modalAnul
                             auth.rol === Roles.ADMIN
                             && (
                                 <div>
-                                    <label htmlFor="afectarCaja" className="center w100">¿Devolver dinero?</label>
+                                    <label htmlFor="afectarCaja" className="center w100">Afectar ingresos de caja</label>
                                     <Checkbox2
                                         // label="Afectar estado de caja"
                                         name="afectarCaja"
