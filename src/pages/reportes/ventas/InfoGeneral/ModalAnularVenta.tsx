@@ -6,6 +6,7 @@ import { LoadSwitchBtn2 } from "../../../../components/btns/LoadSwitchBtn2";
 import { Checkbox2 } from "../../../../components/forms/Checkbox2";
 import { Input } from "../../../../components/forms/Input";
 import { Modal } from "../../../../components/modals/Modal"
+import { Roles } from "../../../../resources/dtos/RolesDto";
 import { put } from "../../../../resources/fetch";
 import { VENTAS } from "../../../../resources/routes";
 
@@ -78,7 +79,11 @@ export const ModalAnularVenta = ({ modal, setModal, idVenta, getData }:modalAnul
                 </div>
                 
                 <div>
-                    <div className="grid-21 gap">
+                    <div className={
+                        auth.rol === Roles.ADMIN
+                        ? "grid-21 gap"
+                        : "grid-1 gap"
+                    }>
                         <Input
                             label="Nota de anulación *"
                             type="text"
@@ -86,15 +91,21 @@ export const ModalAnularVenta = ({ modal, setModal, idVenta, getData }:modalAnul
                             value={msgAnulacion}
                             onChange={onChange}
                         />
-                        <div>
-                            <label htmlFor="afectarCaja" className="center w100">¿Devolver dinero?</label>
-                            <Checkbox2
-                                // label="Afectar estado de caja"
-                                name="afectarCaja"
-                                checked={afectarCaja}
-                                handlerCheck={ () => setAfectarCaja(!afectarCaja) }
-                            />
-                        </div>
+                        {
+                            auth.rol === Roles.ADMIN
+                            && (
+                                <div>
+                                    <label htmlFor="afectarCaja" className="center w100">¿Devolver dinero?</label>
+                                    <Checkbox2
+                                        // label="Afectar estado de caja"
+                                        name="afectarCaja"
+                                        checked={afectarCaja}
+                                        handlerCheck={ () => setAfectarCaja(!afectarCaja) }
+                                    />
+                                </div>
+                            )
+                        }
+                        
                         
                     </div>
                     {
