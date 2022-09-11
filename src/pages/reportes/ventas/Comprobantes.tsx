@@ -8,7 +8,7 @@ import { SearchWrap } from "../../../components/SearchWrap";
 import { paginate } from "../../../resources/fetch";
 import { COMPROBANTE_PAGINATE, COMPROBANTE_SEARCH } from "../../../resources/routes";
 import { ComprobanteItem } from "./comprobantes/ComprobanteItem";
-import { ModalAnularComp } from "./comprobantes/ModalAnularComp";
+// import { ModalAnularComp } from "./comprobantes/ModalAnularComp";
 import { ModalReenviarComp } from "./comprobantes/ModalReenviarComp";
 import { ModalVerComprobante } from "./comprobantes/ModalVerComprobante";
 import { TablaFiltro } from "./comprobantes/TablaFiltro";
@@ -224,24 +224,14 @@ export const Comprobantes = ({ idLocal, selectLocal, loadingLocal, locales }:inf
                 />
             </ModalWrap>
 
-            <ModalWrap modal={modalAnular}>
+            {/* <ModalWrap modal={modalAnular}>
                 <ModalAnularComp
                     modal={modalAnular}
                     setModal={setModalAnular}
                     comprobante={comprobante}
                     getData={getData}
                 />
-            </ModalWrap>
-
-            
-            
-
-            {/* <ModalHabilitarVenta 
-                modal={modalHabilitarVenta}
-                setModal={setModalHabilitarVenta}
-                idComprobante={idComprobante}
-                getData={getData}
-            /> */}
+            </ModalWrap> */}
 
         </>
     )

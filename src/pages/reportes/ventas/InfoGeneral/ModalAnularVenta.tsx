@@ -3,6 +3,7 @@ import { BiCheck, BiReply } from "react-icons/bi";
 import { useAuth } from "../../../../auth/useAuth";
 import { BtnOnOff2 } from "../../../../components/btns/BtnOnOff2";
 import { LoadSwitchBtn2 } from "../../../../components/btns/LoadSwitchBtn2";
+import { Checkbox2 } from "../../../../components/forms/Checkbox2";
 import { Input } from "../../../../components/forms/Input";
 import { Modal } from "../../../../components/modals/Modal"
 import { put } from "../../../../resources/fetch";
@@ -22,6 +23,7 @@ export const ModalAnularVenta = ({ modal, setModal, idVenta, getData }:modalAnul
     const [loadingOne, setLoadingOne] = useState<boolean>(false);
     const [msgAnulacion, setMsgAnulacion] = useState<string>("");
     const [restoAnulacion, setRestoAnulacion] = useState<boolean>(false);
+    const [afectarCaja, setAfectarCaja] = useState<boolean>(true);
 
     const onChange = (e:any) => {
         setMsgAnulacion(e.target.value);
@@ -33,7 +35,8 @@ export const ModalAnularVenta = ({ modal, setModal, idVenta, getData }:modalAnul
         try {
             resto = await put(idVenta, { 
                 msgAnulacion: msgAnulacion,
-                usuarioId: auth.userInfo.sub
+                usuarioId: auth.userInfo.sub,
+                afectarCaja: afectarCaja
             }, VENTAS + "/anular");
             setRestoAnulacion(resto);
             setLoadingOne(false);
@@ -55,31 +58,45 @@ export const ModalAnularVenta = ({ modal, setModal, idVenta, getData }:modalAnul
             return false;
         }
     }
-
+ 
 
     return (
         <Modal
             modal={modal}
             setModal={setModal}
             title="Anulacion de venta"
-            width={50}
+            width={60}
             border="border-danger"
         >
             <div className="grid-1 gap">
 
                 <div>
                     <h3 className="center m-0">¿Seguro que quieres ANULAR esta venta?</h3>
-                    <h5 className="center m-0 danger">Ten en cuenta que esta accion es irreversible</h5>
+                    <h5 className="center m-0 danger">
+                        Ten en cuenta que esta acción es irreversible y también anulara el comprobante asociado
+                    </h5>
                 </div>
                 
                 <div>
-                    <Input
-                        label="Nota de anulación *"
-                        type="text"
-                        name="msgAnulacion"
-                        value={msgAnulacion}
-                        onChange={onChange}
-                    />
+                    <div className="grid-21 gap">
+                        <Input
+                            label="Nota de anulación *"
+                            type="text"
+                            name="msgAnulacion"
+                            value={msgAnulacion}
+                            onChange={onChange}
+                        />
+                        <div>
+                            <label htmlFor="afectarCaja" className="center w100">¿Devolver dinero?</label>
+                            <Checkbox2
+                                // label="Afectar estado de caja"
+                                name="afectarCaja"
+                                checked={afectarCaja}
+                                handlerCheck={ () => setAfectarCaja(!afectarCaja) }
+                            />
+                        </div>
+                        
+                    </div>
                     {
                         restoAnulacion
                         ? (

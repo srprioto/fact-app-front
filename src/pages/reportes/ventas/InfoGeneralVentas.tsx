@@ -49,15 +49,18 @@ export const InfoGeneralVentas = ({ idLocal, selectLocal, loadingLocal, locales 
         setModalVer(!modalVer);        
     }
 
+    
     const handlerHabilitarVenta = (idVenta:number) => {
         setIdVenta(idVenta);
         setModalHabilitarVenta(true);
     }
 
+
     const handlerAnular = (idVenta:number) => { 
         setIdVenta(idVenta);
         setModalAnular(true);
     }
+
 
     const handlerReimprimir = (idVenta:number) => { 
         setIdVenta(idVenta);

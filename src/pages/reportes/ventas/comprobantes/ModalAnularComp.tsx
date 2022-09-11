@@ -3,6 +3,7 @@ import { BiCheck, BiReply } from "react-icons/bi";
 import { useAuth } from "../../../../auth/useAuth";
 import { BtnOnOff2 } from "../../../../components/btns/BtnOnOff2";
 import { LoadSwitchBtn2 } from "../../../../components/btns/LoadSwitchBtn2";
+import { Checkbox2 } from "../../../../components/forms/Checkbox2";
 import { Input } from "../../../../components/forms/Input";
 import { Modal } from "../../../../components/modals/Modal"
 import { post } from "../../../../resources/fetch";
@@ -14,6 +15,7 @@ export const ModalAnularComp = ({ modal, setModal, comprobante, getData }:any) =
     const [loading, setLoading] = useState(false);
     const [msgAnulacion, setMsgAnulacion] = useState<string>("");
     const [restoAnulacion, setRestoAnulacion] = useState<boolean>(false);
+    const [afectarCaja, setAfectarCaja] = useState<boolean>(true);
 
     const correlativo = comprobante.correlativos;
 
@@ -29,7 +31,8 @@ export const ModalAnularComp = ({ modal, setModal, comprobante, getData }:any) =
                     id: comprobante.id,
                     notaBaja: msgAnulacion,
                     serie: correlativo.serie,
-                    usuarioId: auth.userInfo.sub
+                    usuarioId: auth.userInfo.sub,
+                    afectarCaja: afectarCaja
                 }, 
                 COMPROBANTE + "/anular"
             );
@@ -54,28 +57,41 @@ export const ModalAnularComp = ({ modal, setModal, comprobante, getData }:any) =
         }
     }
 
-    console.log(comprobante);    
 
     return (
         <Modal
             modal={modal}
             setModal={setModal}
             title="Anulacion de comprobante"
-            width={50}
+            width={60}
             border="border-danger"
         >
             <div className="grid-1 gap">
                 
-                <h3 className="center m-0">¿Seguro que quieres ANULAR este comprobante?</h3>
+                <div>
+                    <h3 className="center m-0">¿Seguro que quieres ANULAR este comprobante?</h3>
+                    <h5 className="center m-0 danger">Ten en cuenta que esta acción es irreversible y también anulara la venta asociada</h5>
+                </div>
 
                 <div>
-                    <Input
-                        label="Nota de anulación"
-                        type="text"
-                        name="msgAnulacion"
-                        value={msgAnulacion}
-                        onChange={onChange}
-                    />
+                    <div className="grid-21 gap">
+                        <Input
+                            label="Nota de anulación *"
+                            type="text"
+                            name="msgAnulacion"
+                            value={msgAnulacion}
+                            onChange={onChange}
+                        />
+                        <div>
+                            <label htmlFor="afectarCaja" className="center w100">¿Devolver dinero?</label>
+                            <Checkbox2
+                                // label="Afectar estado de caja"
+                                name="afectarCaja"
+                                checked={afectarCaja}
+                                handlerCheck={ () => setAfectarCaja(!afectarCaja) }
+                            />
+                        </div>
+                    </div>
                     {
                         restoAnulacion
                         ? (
