@@ -13,6 +13,7 @@ import { noDecimal } from "../../../resources/func/noDecimal";
 import { VENTAS } from "../../../resources/routes";
 import { ModalCodigoVenta } from "./verLista/short/ModalCodigoVenta";
 import { VerListaShort } from "./verLista/short/VerListaShort";
+import { BtnsAnadirProds } from "./verProductos/BtnsAnadirProds";
 import { BuscarProducto } from "./verProductos/BuscarProducto";
 import { GestionCantidades } from "./verProductos/GestionCantidades";
 import { GestionPrecios } from "./verProductos/GestionPrecios";
@@ -138,6 +139,15 @@ export const VerProducto = ({
     }
 
 
+    const selectProds = () => { 
+        if (Object.keys(elemento).length !== 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
     const handlerPedidoRapido = async () => { 
 
         setloadVentaRapida(true);
@@ -200,74 +210,50 @@ export const VerProducto = ({
                         idLocal={idLocal}
                     />
 
-                    <div className="box box-par m-0 info-producto">
-                    {
-                        Object.keys(elemento).length !== 0
-                        ? (
-                            <div className="grid-1 gap">
-                                <InfoProducto 
-                                    producto={producto}
-                                />
-                                <GestionCantidades 
-                                    producto={producto} 
-                                    calcularStock={calcularStock}
-                                    ventaDetalle={ventaDetalle}
-                                    handlerOnChange={handlerOnChangeCantidad} 
-                                    idLocal={idLocal}
-                                />
-                                <GestionPrecios
-                                    producto={producto}
-                                    ventaDetalle={ventaDetalle}
-                                    setVentaDetalle={setVentaDetalle}
-                                    handlerOnChange={handlerOnChange}
-                                    calcularStock={calcularStock}
-                                    tipoDescuento={tipoDescuento}
-                                    setTipoDescuento={setTipoDescuento}
-                                />
-
-                                <div className="grid-4 gap mt-25">
-
-                                    {
-                                        listaVenta.length <= 0
-                                        ? (
-                                            <BtnOnOff2
-                                                estado={validarAñadir()}
-                                                label="Venta rapida"
-                                                // icon={<BiListPlus />}
-                                            >
-                                                <LoadSwitchBtn2
-                                                    loading={loadVentaRapida}
-                                                    className="btn btn-warning"
-                                                    handler={() => {
-                                                        verificarCaja(handlerPedidoRapido)
-                                                    }}
-                                                >
-                                                    <BiFastForward /> Venta rapida
-                                                </LoadSwitchBtn2>
-
-                                            </BtnOnOff2>
-                                        ) : (
-                                            <div></div>
-                                        )
-                                    }
-                                    <div></div>
-                                    <div></div>
-                                    <BtnOnOff2
-                                        estado={validarAñadir()}
-                                        label="Añadir"
-                                        icon={<BiListPlus />}
-                                    >
-                                        <button className="btn btn-info" onClick={() => handlerAddListaVenta()}>
-                                            <BiListPlus /> Añadir
-                                        </button>
-                                    </BtnOnOff2>
-                                    
+                    <div className="box box-par m-0">
+                        {
+                            selectProds()
+                            ? (
+                                <>
+                                    <div className="grid-1 gap info-producto info-prod-scroll1">
+                                        <InfoProducto 
+                                            producto={producto}
+                                        />
+                                        <GestionCantidades 
+                                            producto={producto} 
+                                            calcularStock={calcularStock}
+                                            ventaDetalle={ventaDetalle}
+                                            handlerOnChange={handlerOnChangeCantidad} 
+                                            idLocal={idLocal}
+                                        />
+                                        <GestionPrecios
+                                            producto={producto}
+                                            ventaDetalle={ventaDetalle}
+                                            setVentaDetalle={setVentaDetalle}
+                                            handlerOnChange={handlerOnChange}
+                                            calcularStock={calcularStock}
+                                            tipoDescuento={tipoDescuento}
+                                            setTipoDescuento={setTipoDescuento}
+                                        />
+                                    </div>
+                                    <BtnsAnadirProds
+                                        listaVenta={listaVenta}
+                                        validarAñadir={validarAñadir}
+                                        loadVentaRapida={loadVentaRapida}
+                                        verificarCaja={verificarCaja}
+                                        handlerPedidoRapido={handlerPedidoRapido}
+                                        handlerAddListaVenta={handlerAddListaVenta}
+                                        precioParcial={ventaDetalle.precio_parcial}
+                                    />
+                                </>
+                            ) : (
+                                <div className="info-prod-scroll2">
+                                    <TextoRelleno texto="Selecciona un producto" />
                                 </div>
-                            </div>
-                        ) : (
-                            <TextoRelleno texto="Selecciona un producto" />
-                        )
-                    }
+                            )
+                        }
+
+                        
                     </div>
                 </div>
 

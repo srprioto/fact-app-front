@@ -597,6 +597,7 @@
 
 .vender{
     .ver-producto{
+        // position: relative;
         @include min-scroll(144px);
         .buscar-producto{
             position: relative;
@@ -629,9 +630,13 @@
                 @include static-scroll(200px);
             }
         }
+        .info-prod-scroll1{
+            @include scroll(358px);
+        }
+        .info-prod-scroll2{
+            @include scroll(294px);
+        }
         .info-producto{
-            @include scroll(250px);
-
             .stock-general-locales{
                 position: relative;
                 span {
@@ -688,15 +693,19 @@
                 transition: .3s;
             }
 
-            
-
             // .stock-general-locales:hover ~ .box-stock-general,
             // .box-stock-general:hover{
             //     transform: scale(1);
             //     transition: .3s;
             // }
-            
+        }
 
+        .btns_anadir_prods{
+            .total_subventa{
+                h2{
+                    font-size: 1.5em;
+                }
+            }
         }
 
         .ver-lista-short{
@@ -707,6 +716,12 @@
             }
 
         }
+
+        // .btn-add-lista-prod{
+        //     position: absolute;
+        //     width: 100%;
+        // }
+
     }
     .ver-lista{
         @include scroll(144px);
@@ -741,14 +756,11 @@
     }
 }
 
-// .tabla-lista-venta{
-//     @include scroll(100px);
-    
-// }
+
+
 
 
 // caja
-
 .cobrar{
     .descripcion-venta{
         .lista-productos-pedido{
