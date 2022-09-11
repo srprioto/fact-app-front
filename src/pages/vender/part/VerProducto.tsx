@@ -1,8 +1,5 @@
 import { useState } from "react";
-import { BiFastForward, BiListPlus } from "react-icons/bi";
 import { useAuth } from "../../../auth/useAuth";
-import { BtnOnOff2 } from "../../../components/btns/BtnOnOff2";
-import { LoadSwitchBtn2 } from "../../../components/btns/LoadSwitchBtn2";
 import { ModalWrap } from "../../../components/modals/ModalWrap";
 import { TextoRelleno } from "../../../components/TextoRelleno";
 import { useCaja } from "../../../hooks/useContext/caja.ts/useCaja";
