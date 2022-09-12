@@ -124,6 +124,7 @@ export const Caja = ({ idLocal, nombreLocal, user }:any) => {
                                             <tr>
                                                 <th>Descripcion</th>
                                                 <th>Monto de movimiento</th>
+                                                <th>Tipo movimiento</th>
                                                 <th>Encargado de movimiento</th>
                                                 <th>Fecha</th>
                                             </tr>
@@ -132,9 +133,21 @@ export const Caja = ({ idLocal, nombreLocal, user }:any) => {
                                         <tbody>
                                             {
                                                 data.caja.cajaDetalles.map((e:any) => {
+
+                                                    let descripcion:any = e.descripcion.split('@');
+                                                    let anulacion:boolean = false;
+
+                                                    if (descripcion.length > 1) {
+                                                        anulacion = true;
+                                                        descripcion = descripcion[1];
+                                                    } else {
+                                                        anulacion = false;
+                                                        descripcion = descripcion[0];
+                                                    }
+
                                                     return (
                                                         <tr key={e.id}>
-                                                            <td>{ e.descripcion }</td>
+                                                            <td>{ descripcion }</td>
                                                             <td 
                                                                 className={"strong " + 
                                                                     (e.monto_movimiento < 0
@@ -142,6 +155,15 @@ export const Caja = ({ idLocal, nombreLocal, user }:any) => {
                                                                     : "success")
                                                                 }
                                                             >S/. { e.monto_movimiento }</td>
+                                                            <td className={
+                                                                anulacion
+                                                                ? "danger"
+                                                                : "warning"
+                                                            }>{ 
+                                                                anulacion
+                                                                ? "Anulacion"
+                                                                : "Otros movimientos"
+                                                            }</td>
                                                             <td>{ e.usuario && e.usuario.nombre }</td>
                                                             <td>{ fecha(e.created_at) }</td>
                                                         </tr>
