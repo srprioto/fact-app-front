@@ -28,11 +28,20 @@ export const VentasDropdown = ({ ventas, handlerVer, updateData, handlerAnular, 
     return (
         <DropDown width="190">
             {
+                ventas.tipo_venta === "venta rapida"
+                && (
+                    !anulado()
+                    && <span onClick={ () => handlerAnular(ventas.id, ventas.locales.id) } >
+                        <BiX /> Anular Venta
+                    </span>
+                )
+            }
+            {/* {
                 !anulado()
                 && <span onClick={ () => handlerAnular(ventas.id, ventas.locales.id) } >
-                    <BiX />Anular Venta
+                    <BiX /> Anular Venta
                 </span>
-            }
+            } */}
 
             {
                 (ventas.estado_venta === "rechazado" ||
