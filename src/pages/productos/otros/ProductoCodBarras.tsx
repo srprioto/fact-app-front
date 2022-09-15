@@ -77,7 +77,7 @@ export const ProductoCodBarras = ({ producto, totalBarras, precio }:productoCodB
                     return (
                         <div style={codigoBarras} key={index}>
                             <h3 style={tituloEmpresa}>AddidSport</h3>
-                            { producto.nombre && <h4 style={titulo}>{ producto.nombre }</h4> }
+                            { producto.nombre && <h4 style={titulo}>{ producto.nombre } - { producto.marca }</h4> }
                             <div style={boxSubTitulo}>
                                 {
                                     precio
