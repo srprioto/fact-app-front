@@ -20,6 +20,7 @@ export const ImpComprobante = ({ venta, setImprimir, nuevo }:impComprobante) => 
     const existCorrelativo:string = venta.comprobante.length > 0 ? venta.comprobante[0].correlativo : "";
     const tipVenta = correlativo ? correlativo.descripcion : "venta rapida";
    
+    // console.log(venta);    
     
     useEffect(() => {
         handlerPrint();
@@ -71,6 +72,8 @@ export const ImpComprobante = ({ venta, setImprimir, nuevo }:impComprobante) => 
             
         }
     }
+
+    
 
 
     // estilos
