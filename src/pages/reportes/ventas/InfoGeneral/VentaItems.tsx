@@ -1,4 +1,5 @@
 // import { ListaDetalleProductos } from "../../Ingresos/part/ListaDetalleProductos"
+import { fecha } from "../../../../resources/func/fechas";
 import { moneda } from "../../../../resources/func/moneda"
 import { VentasDropdown } from "./VentasDropdown"
 
@@ -52,6 +53,7 @@ export const VentaItems = ({ ventas, handlerVer, updateData, handlerAnular, hand
     //     }
     // }
     
+    
     return (
         <tr className="venta-items">
             <td className={"secundary " + anulado()}>{ codigoVenta }</td>
@@ -62,7 +64,8 @@ export const VentaItems = ({ ventas, handlerVer, updateData, handlerAnular, hand
                 : ventas.tipo_venta
             }</td> */}
             <td className={"success strong " + anulado()}>S/. { moneda(ventas.total) }</td>
-            <td className={ classEstado() + anulado() + "capitalize" } >{ ventas.estado_venta }</td>
+            <td className={ classEstado() + " capitalize strong" } >{ ventas.estado_venta }</td>
+            <td>{ fecha(ventas.created_at) }</td>
             <td className={ anulado() }>{ ventas.locales && ventas.locales.nombre }</td>
             <td>
                 <VentasDropdown 

@@ -170,9 +170,9 @@ export const Comprobantes = ({ idLocal, selectLocal, loadingLocal, locales }:inf
                                         <th>Codigo venta</th>
                                         <th>Tipo comprobante</th>
                                         <th>Tipo documento</th>
-                                        <th>Local</th>
-                                        <th>Fecha de emisión</th>
                                         <th>Estado</th>
+                                        <th>Fecha de emisión</th>
+                                        <th>Local</th>
                                         <th className="transparent inlineblock">...</th>
                                     </tr>
                                 </thead>

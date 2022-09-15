@@ -13,14 +13,14 @@ export const ModalAnularComp = ({ modal, setModal, comprobante, getData }:any) =
 
     const auth = useAuth();
     const [loading, setLoading] = useState(false);
-    const [msgAnulacion, setMsgAnulacion] = useState<string>("");
+    const [notaBaja, setNotaBaja] = useState<string>("");
     const [restoAnulacion, setRestoAnulacion] = useState<boolean>(false);
     const [afectarCaja, setAfectarCaja] = useState<boolean>(true);
 
     const correlativo = comprobante.correlativos;
 
     const onChange = (e:any) => { 
-        setMsgAnulacion(e.target.value);
+        setNotaBaja(e.target.value);
     }
     
     const handlerReenviarComp = async () => {
@@ -29,7 +29,7 @@ export const ModalAnularComp = ({ modal, setModal, comprobante, getData }:any) =
             const resto:boolean = await post(
                 {
                     id: comprobante.id,
-                    notaBaja: msgAnulacion,
+                    notaBaja: notaBaja,
                     serie: correlativo.serie,
                     usuarioId: auth.userInfo.sub,
                     afectarCaja: afectarCaja
@@ -50,7 +50,7 @@ export const ModalAnularComp = ({ modal, setModal, comprobante, getData }:any) =
 
 
     const validMsg = () => { 
-        if (!!msgAnulacion) {
+        if (!!notaBaja) {
             return true;
         } else {
             return false;
@@ -78,8 +78,8 @@ export const ModalAnularComp = ({ modal, setModal, comprobante, getData }:any) =
                         <Input
                             label="Nota de anulación *"
                             type="text"
-                            name="msgAnulacion"
-                            value={msgAnulacion}
+                            name="notaBaja"
+                            value={notaBaja}
                             onChange={onChange}
                         />
                         <div>

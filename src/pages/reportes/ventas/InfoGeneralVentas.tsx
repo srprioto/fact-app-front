@@ -179,6 +179,7 @@ export const InfoGeneralVentas = ({ idLocal, selectLocal, loadingLocal, locales 
                                         <th>Tipo comp.</th>
                                         <th>Costo total</th>
                                         <th>Estado de venta</th>
+                                        <th>Fecha venta</th>
                                         <th>Local</th>
                                         <th className="transparent inlineblock">...</th>
                                     </tr>

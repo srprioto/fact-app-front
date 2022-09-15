@@ -27,9 +27,9 @@ export const ComprobanteItem = ({ comprobante, handlerVer, reenviarComprobante, 
             <td className="secundary">{ codigoVenta }</td>
             <td className="capitalize">{ venta.tipo_venta }</td>
             <td className="strong info">{ tipoDocm() }</td>
-            <td>{ comprobante.locales ? comprobante.locales.nombre : "" }</td>
-            <td>{ fecha(comprobante.fecha_emision) }</td>
             <td className={classEstado(comprobante.estado_sunat) + " strong"}>{ comprobante.estado_sunat }</td>
+            <td>{ fecha(comprobante.fecha_emision) }</td>
+            <td>{ comprobante.locales ? comprobante.locales.nombre : "" }</td>
 
             <td>
                 <ComprobanteDropdown

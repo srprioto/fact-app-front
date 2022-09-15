@@ -22,12 +22,12 @@ export const ModalAnularVenta = ({ modal, setModal, idVenta, getData }:modalAnul
     const auth = useAuth();
 
     const [loadingOne, setLoadingOne] = useState<boolean>(false);
-    const [msgAnulacion, setMsgAnulacion] = useState<string>("");
+    const [notaBaja, setNotaBaja] = useState<string>("");
     const [restoAnulacion, setRestoAnulacion] = useState<boolean>(false);
     const [afectarCaja, setAfectarCaja] = useState<boolean>(true);
 
     const onChange = (e:any) => {
-        setMsgAnulacion(e.target.value);
+        setNotaBaja(e.target.value);
     }
 
     const handlerAnular = async () => { 
@@ -35,7 +35,7 @@ export const ModalAnularVenta = ({ modal, setModal, idVenta, getData }:modalAnul
         let resto:boolean;
         try {
             resto = await put(idVenta, { 
-                msgAnulacion: msgAnulacion,
+                notaBaja: notaBaja,
                 usuarioId: auth.userInfo.sub,
                 afectarCaja: afectarCaja
             }, VENTAS + "/anular");
@@ -53,7 +53,7 @@ export const ModalAnularVenta = ({ modal, setModal, idVenta, getData }:modalAnul
     }
 
     const validMsg = () => {
-        if (!!msgAnulacion) {
+        if (!!notaBaja) {
             return true;
         } else {
             return false;
@@ -87,8 +87,8 @@ export const ModalAnularVenta = ({ modal, setModal, idVenta, getData }:modalAnul
                         <Input
                             label="Nota de anulación *"
                             type="text"
-                            name="msgAnulacion"
-                            value={msgAnulacion}
+                            name="notaBaja"
+                            value={notaBaja}
                             onChange={onChange}
                         />
                         {
