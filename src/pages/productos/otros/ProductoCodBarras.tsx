@@ -9,6 +9,11 @@ interface productoCodBarras {
 export const ProductoCodBarras = ({ producto, totalBarras, precio }:productoCodBarras) => {
 
     // estilos
+
+    const fontFam:any = {
+        fontFamily: "Helvetica"
+    }
+
     const container = {
         display: "grid",
         gridTemplateColumns: "1fr 1fr",
@@ -19,7 +24,8 @@ export const ProductoCodBarras = ({ producto, totalBarras, precio }:productoCodB
     const tituloEmpresa:any = {
         color: "#000",
         textAlign: "center",
-        margin: "0"
+        margin: "0",
+        ...fontFam
     }
 
     const codigoBarras = {
@@ -29,8 +35,10 @@ export const ProductoCodBarras = ({ producto, totalBarras, precio }:productoCodB
     }
 
     const titulo:any = {
+        ...fontFam,
         display: "flex",
-        justifyContent: 'left',
+        justifyContent: 'center',
+        textTransform: "lowercase",
         color: "#000",
         margin: "0 5px",
         fontSize: "15px",
@@ -51,7 +59,8 @@ export const ProductoCodBarras = ({ producto, totalBarras, precio }:productoCodB
     const subTitulo = {
         color: "#000",
         margin: "0 10px 0 0",
-        fontSize: "14px"
+        fontSize: "14px",
+        ...fontFam
     }
 
     // const precio:any = {
@@ -77,7 +86,7 @@ export const ProductoCodBarras = ({ producto, totalBarras, precio }:productoCodB
                     return (
                         <div style={codigoBarras} key={index}>
                             <h3 style={tituloEmpresa}>AddidSport</h3>
-                            { producto.nombre && <h4 style={titulo}>{ producto.nombre } - { producto.marca }</h4> }
+                            { producto.nombre && <h4 style={titulo}>{ producto.nombre } { producto.marca }</h4> }
                             <div style={boxSubTitulo}>
                                 {
                                     precio
@@ -90,13 +99,13 @@ export const ProductoCodBarras = ({ producto, totalBarras, precio }:productoCodB
                                 }
                                 { 
                                     producto.color && 
-                                    <h4 style={subTitulo}>Color: 
+                                    <h4 style={subTitulo}>
                                         <strong>{ producto.color }</strong>
                                     </h4> 
                                 }
                                 { 
                                     producto.talla && 
-                                    <h4 style={subTitulo}>Talla: 
+                                    <h4 style={subTitulo}>
                                         <strong>{ producto.talla }</strong>
                                     </h4> 
                                 }
@@ -109,7 +118,6 @@ export const ProductoCodBarras = ({ producto, totalBarras, precio }:productoCodB
                                     fontSize={13}
                                     textAlign="left"
                                 />
-
                             </div>
                         </div>
                     )

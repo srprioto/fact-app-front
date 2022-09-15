@@ -19,12 +19,18 @@ export const ImpComprobante = ({ venta, setImprimir, nuevo }:impComprobante) => 
     const nuevoCorrelativo:string = correlativo ? correlativo.correlativo : "";
     const existCorrelativo:string = venta.comprobante.length > 0 ? venta.comprobante[0].correlativo : "";
     const tipVenta = correlativo ? correlativo.descripcion : "venta rapida";
-   
-    // console.log(venta);    
-    
+
+    let subtotal:number = 0;
+    let igv:number = 0;
+
+    if (!nuevo) {
+        subtotal = Number(venta.subtotal / 1.18);
+        igv = Number(venta.subtotal) - Number(subtotal);    
+    }
+
     useEffect(() => {
         handlerPrint();
-    }, [])   
+    }, [])
 
 
     const handlerPrint = () => { 
@@ -74,7 +80,20 @@ export const ImpComprobante = ({ venta, setImprimir, nuevo }:impComprobante) => 
     }
 
     
+    // const subTotalIgv = ():any => { 
+    //     let subtotal:number = Number(venta.subtotal / 1.18);
+    //     let igv:number = Number(venta.precio_venta) - Number(subtotal);
+    //     if (!nuevo) {
+    //         subtotal = Number(venta.subtotal / 1.18);
+    //         igv = Number(venta.precio_venta) - Number(subtotal);
+    //     }
 
+    //     return [ subtotal, igv ]
+    // }
+
+
+    // console.log(subTotalIgv().subtotal, subTotalIgv().igv);
+    
 
     // estilos
     // generales
@@ -286,11 +305,19 @@ export const ImpComprobante = ({ venta, setImprimir, nuevo }:impComprobante) => 
                     <div style={blockRight}>
                         <div style={textoResumen}>
                             <span style={left}>Subtotal:</span>
-                            <span style={right}>S/. { moneda(venta.subtotal) }</span>
+                            <span style={right}>S/. { 
+                                nuevo
+                                ? moneda(venta.subtotal)
+                                : moneda(subtotal)
+                            }</span>
                         </div>
                         <div style={textoResumen}>
                             <span style={left}>IGV:</span>
-                            <span style={right}>S/. { moneda(venta.igvGeneral) }</span>
+                            <span style={right}>S/. { 
+                                nuevo
+                                ? moneda(venta.igvGeneral)
+                                : moneda(igv)
+                            }</span>
                         </div>
                         <div style={textoResumen}>
                             <span style={left}>Inafecta:</span>
