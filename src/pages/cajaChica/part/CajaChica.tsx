@@ -2,10 +2,10 @@ import { useState } from "react";
 import { BiDetail, BiDollarCircle, BiRename, BiTask } from "react-icons/bi";
 import { TitleBox } from "../../../components/TitleBox"
 import { useCaja } from "../../../hooks/useContext/caja.ts/useCaja";
-import { Comprobantes } from "../../reportes/ventas/Comprobantes";
-import { Cotizaciones } from "../../reportes/ventas/Cotizaciones";
-import { InfoGeneralVentas } from "../../reportes/ventas/InfoGeneralVentas"
-import { InformacionIngresos } from "../../reportes/ventas/InformacionIngresos";
+import { Comprobantes } from "../../registros/ventas/Comprobantes";
+import { Cotizaciones } from "../../registros/ventas/Cotizaciones";
+import { InfoGeneralVentas } from "../../registros/ventas/InfoVentas"
+import { InformacionIngresos } from "../../registros/ventas/InfoCaja";
 import { Caja } from "./Caja";
 
 interface cajaChica {

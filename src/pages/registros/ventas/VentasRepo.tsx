@@ -6,8 +6,8 @@ import { LOCALES_SOLO } from "../../../resources/routes";
 import { Comprobantes } from "./Comprobantes";
 import { Cotizaciones } from "./Cotizaciones";
 import { EstadisticasVentas } from "./EstadisticasVentas";
-import { InfoGeneralVentas } from "./InfoGeneralVentas";
-import { InformacionIngresos } from "./InformacionIngresos";
+import { InfoGeneralVentas } from "./InfoVentas";
+import { InformacionIngresos } from "./InfoCaja";
 
 
 export const VentasRepo = () => {

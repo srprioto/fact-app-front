@@ -7,13 +7,14 @@ import { Pagination } from "../../../components/Pagination";
 import { SearchWrap } from "../../../components/SearchWrap";
 import { paginate } from "../../../resources/fetch";
 import { VENTAS_PAGINATE, VENTAS_SEARCH } from "../../../resources/routes";
-import { ExportarExcel } from "./InfoGeneral/ExportarExcel";
-import { ModalAnularVenta } from "./InfoGeneral/ModalAnularVenta";
-import { ModalHabilitarVenta } from "./InfoGeneral/ModalHabilitarVenta";
-import { ModalReimpVenta } from "./InfoGeneral/ModalReimpVenta";
-import { ModalVentaDetalles } from "./InfoGeneral/ModalVentaDetalles";
-import { TabbsFiltroDatos } from "./InfoGeneral/TabbsFiltroDatos";
-import { VentaItems } from "./InfoGeneral/VentaItems";
+import { FechasVentas } from "./ventas/FechasVentas";
+// import { ExportarExcel } from "./ventas/ExportarExcel";
+import { ModalAnularVenta } from "./ventas/ModalAnularVenta";
+import { ModalHabilitarVenta } from "./ventas/ModalHabilitarVenta";
+import { ModalReimpVenta } from "./ventas/ModalReimpVenta";
+import { ModalVentaDetalles } from "./ventas/ModalVentaDetalles";
+import { TabbsFiltroDatos } from "./ventas/TabbsFiltroDatos";
+import { VentaItems } from "./ventas/VentaItems";
 
 interface infoGeneralVentas {
     idLocal?:string; // el id local es obligatorio
@@ -124,8 +125,11 @@ export const InfoGeneralVentas = ({ idLocal, selectLocal, loadingLocal, locales 
                     />
                     <div className="grid-2 gap">
                         
-                        <div className="grid-3">
-                            <ExportarExcel />
+                        <div className="grid-4">
+                            
+                            {/* <ExportarExcel /> */}
+                            <FechasVentas />
+
                         </div>
 
                         <div className="grid-1 middle">
@@ -240,7 +244,7 @@ export const InfoGeneralVentas = ({ idLocal, selectLocal, loadingLocal, locales 
                     idVenta={idVenta}
                 />
             </ModalWrap>
-            
+
             <ModalHabilitarVenta 
                 modal={modalHabilitarVenta}
                 setModal={setModalHabilitarVenta}

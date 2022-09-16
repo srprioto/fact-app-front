@@ -7,8 +7,8 @@ import { Pagination } from "../../../components/Pagination"
 // import { SearchWrap } from "../../../components/SearchWrap"
 import { paginate } from "../../../resources/fetch"
 import { CAJA } from "../../../resources/routes"
-import { ItemCaja } from "./infoIngresos/ItemCaja"
-import { ModalCajaDetalles } from "./infoIngresos/ModalCajaDetalles"
+import { ItemCaja } from "./caja/ItemCaja"
+import { ModalCajaDetalles } from "./caja/ModalCajaDetalles"
 
 interface informacionIngresos {
     idLocal?:string // este es obligatorio

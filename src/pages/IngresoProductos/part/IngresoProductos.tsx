@@ -6,7 +6,7 @@ import { FormIngresoProductos } from "./FormIngresoProductos";
 
 import { post } from "../../../resources/fetch";
 import { MOVIMIENTOS } from "../../../resources/routes";
-import { BoxVerIngresos } from "../../reportes/Ingresos/part/BoxVerIngresos";
+import { BoxVerIngresos } from "../../registros/Ingresos/part/BoxVerIngresos";
 import { Loading } from "../../../components/loads/Loading";
 
 export const IngresoProductos = () => {

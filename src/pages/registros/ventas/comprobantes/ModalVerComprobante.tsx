@@ -4,7 +4,7 @@ import { Modal } from "../../../../components/modals/Modal"
 import { getOne } from "../../../../resources/fetch";
 import { moneda } from "../../../../resources/func/moneda";
 import { COMPROBANTE } from "../../../../resources/routes";
-import { InfoCliente } from "../InfoGeneral/InfoCliente";
+import { InfoCliente } from "../ventas/InfoCliente";
 import { InfoComprobante } from "./InfoComprobante";
 import { InfoRespuestaSunat } from "./InfoRespuestaSunat";
 

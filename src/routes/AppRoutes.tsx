@@ -23,14 +23,14 @@ import { NuevoProducto } from "../pages/productos/NuevoProducto";
 import { IndexProveedores } from "../pages/proveedores";
 import { IndexEditProv } from "../pages/proveedores/Editar";
 import { IndexNuevoProv } from "../pages/proveedores/Nuevo";
-import { Transacciones } from "../pages/reportes/Transacciones";
+import { Transacciones } from "../pages/registros/Transacciones";
 import { IndexUsuarios } from "../pages/usuarios";
 import { IndexEditUser } from "../pages/usuarios/Editar";
 import { IndexNuevoUser } from "../pages/usuarios/Nuevo";
 import { PublicRouter } from "./PublicRouter";
 import { Page404 } from "../pages/Page404";
-import { IngresoProductos } from "../pages/reportes/IngresoProductos";
-import { Ventas } from "../pages/reportes/Ventas";
+import { IngresoProductos } from "../pages/registros/IngresoProductos";
+import { Ventas } from "../pages/registros/Ventas";
 import { IndexCajaChica } from "../pages/cajaChica";
 import { IndexVender } from "../pages/vender";
 
