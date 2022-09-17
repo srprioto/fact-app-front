@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { GestionFechas } from "../../../components/fechas/GestionFechas"
 import { Select } from "../../../components/forms/Select"
 import { Loading } from "../../../components/loads/Loading"
 import { ModalWrap } from "../../../components/modals/ModalWrap"
@@ -26,6 +27,8 @@ export const InformacionIngresos = ({ idLocal, selectLocal, loadingLocal, locale
     const [cajaId, setCajaId] = useState<number>(0);
     const [pagination, setPagination] = useState<any>({ meta: {}, links: {} });
     const [data, setData] = useState<any>([]);
+
+    const [fechas, setFechas] = useState<any>({ inicio: "_", fin: "_" });
     // const [toggle, setToggle] = useState<number>(1); // tabs para los filtros
     
     // *** search
@@ -43,7 +46,9 @@ export const InformacionIngresos = ({ idLocal, selectLocal, loadingLocal, locale
     }
 
 
-    const getData = async (urlPage?:string, idToggle?:number) => {
+    const getData = async (urlPage?:string, value?:string, idToggle?:number, payloadFechas?:any) => {
+
+        const dates = payloadFechas ? payloadFechas : fechas;
 
         // const idLocal:any = "_"; // añadir un select solo de tiendas
         // const toggle = idToggle ? idToggle : 1
@@ -52,12 +57,14 @@ export const InformacionIngresos = ({ idLocal, selectLocal, loadingLocal, locale
         // setToggle(toggle);
         setLoadingData(true);
 
+        const restoURL = `/${idLocal}/${dates.inicio}/${dates.fin}/filtro`;
+
         try {
             let data:any;
             if (urlPage && urlPage !== "") {
                 data = await paginate(urlPage);
             } else {
-                data = await paginate(CAJA + `/${idLocal}/filtro`);
+                data = await paginate(CAJA + restoURL);
             }
 
             setData(data.items);
@@ -102,9 +109,18 @@ export const InformacionIngresos = ({ idLocal, selectLocal, loadingLocal, locale
             <div className="box">
 
                 <div className="grid-2 gap">
-                    <div></div>
+                    <div className="grid-4"></div>
                     <div className="grid-2 gap">
-                        <div></div>
+                        <div className="grid-4">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <GestionFechas 
+                                getData={getData} 
+                                fechas={fechas}
+                                setFechas={setFechas}
+                            />
+                        </div>
                         <div className="grid-1 middle">
                             {
                                 selectLocal

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { GestionFechas } from "../../../components/fechas/GestionFechas";
 import { Select } from "../../../components/forms/Select";
 import { Loading } from "../../../components/loads/Loading";
 import { ModalWrap } from "../../../components/modals/ModalWrap";
@@ -32,6 +33,8 @@ export const Comprobantes = ({ idLocal, selectLocal, loadingLocal, locales }:inf
     const [pagination, setPagination] = useState<any>({ meta: {}, links: {} });
     const [data, setData] = useState<any>([]);
     const [toggle, setToggle] = useState<number>(1); // tabs para los filtros
+
+    const [fechas, setFechas] = useState<any>({ inicio: "_", fin: "_" });
     
     // *** search
     const [searchState, setSearchState] = useState<boolean>(false); // estado de busqueda
@@ -43,21 +46,22 @@ export const Comprobantes = ({ idLocal, selectLocal, loadingLocal, locales }:inf
     }, [idLocal]);
     
 
-    const getData = async (urlPage?:string, value?:string, idToggle?:number) => {
-
-        // const idLocal:any = "_"; // añadir un select solo de tiendas
+    const getData = async (urlPage?:string, value?:string, idToggle?:number, payloadFechas?:any) => {
+        const dates = payloadFechas ? payloadFechas : fechas;
         const toggle = idToggle ? idToggle : 1
         const value_filtro = value ? value : "_";
 
         setToggle(toggle);
         setLoadingData(true);
 
+        const restoURL:string = `/${value_filtro}/${idLocal}/${dates.inicio}/${dates.fin}/filtro`;
+
         try {
             let data:any;
             if (urlPage && urlPage !== "") {
                 data = await paginate(urlPage);
             } else {
-                data = await paginate(COMPROBANTE_PAGINATE + `/${value_filtro}/${idLocal}/filtro`);
+                data = await paginate(COMPROBANTE_PAGINATE + restoURL);
             }
 
             setData(data.items);
@@ -115,8 +119,16 @@ export const Comprobantes = ({ idLocal, selectLocal, loadingLocal, locales }:inf
                     />
                     <div className="grid-2 gap">
                         
-                        <div className="grid-3">
+                        <div className="grid-4">
                             {/* <ExportarExcel /> */}
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <GestionFechas 
+                                getData={getData} 
+                                fechas={fechas}
+                                setFechas={setFechas}
+                            />
                         </div>
 
                         <div className="grid-1 middle">

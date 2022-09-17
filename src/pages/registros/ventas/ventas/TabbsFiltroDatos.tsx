@@ -31,9 +31,6 @@ export const TabbsFiltroDatos = ({ getData, toggle }:any) => {
                     <BiX />
                     Rechazado
                 </button>
-                
-                
-                
             </div>
             <div></div>
 

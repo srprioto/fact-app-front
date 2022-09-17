@@ -74,17 +74,17 @@ export const CajaAbierta = ({ data, caja, setCaja, setModalCerrarCaja, setModalA
                     <div></div>
 
                     <div className="pago-otros-ingresos right">
-                        <span className="grid-2">
+                        <span className="grid-2 gap">
                             <p className="m-0">Tarjeta: </p>
-                            <h4 className="info m-0">S/. { moneda(infoCaja.monto_tarjeta) }</h4>
+                            <h4 className="info m-0 left">S/. { moneda(infoCaja.monto_tarjeta) }</h4>
                         </span>
-                        <span className="grid-2">
+                        <span className="grid-2 gap">
                             <p className="m-0">P. Electronico: </p>
-                            <h4 className="info m-0">S/. { moneda(infoCaja.monto_pago_electronico) }</h4>
+                            <h4 className="info m-0 left">S/. { moneda(infoCaja.monto_pago_electronico) }</h4>
                         </span>
-                        <span className="grid-2">
+                        <span className="grid-2 gap">
                             <p className="m-0">Deposito: </p>
-                            <h4 className="info m-0">S/. { moneda(infoCaja.monto_deposito) }</h4>
+                            <h4 className="info m-0 left">S/. { moneda(infoCaja.monto_deposito) }</h4>
                         </span>
                     </div>
     

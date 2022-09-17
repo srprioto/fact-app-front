@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { GestionFechas } from "../../../components/fechas/GestionFechas";
 import { Select } from "../../../components/forms/Select";
 import { Loading } from "../../../components/loads/Loading";
 import { ModalWrap } from "../../../components/modals/ModalWrap";
@@ -7,14 +8,13 @@ import { Pagination } from "../../../components/Pagination";
 import { SearchWrap } from "../../../components/SearchWrap";
 import { paginate } from "../../../resources/fetch";
 import { VENTAS_PAGINATE, VENTAS_SEARCH } from "../../../resources/routes";
-import { FechasVentas } from "./ventas/FechasVentas";
-// import { ExportarExcel } from "./ventas/ExportarExcel";
 import { ModalAnularVenta } from "./ventas/ModalAnularVenta";
 import { ModalHabilitarVenta } from "./ventas/ModalHabilitarVenta";
 import { ModalReimpVenta } from "./ventas/ModalReimpVenta";
 import { ModalVentaDetalles } from "./ventas/ModalVentaDetalles";
 import { TabbsFiltroDatos } from "./ventas/TabbsFiltroDatos";
 import { VentaItems } from "./ventas/VentaItems";
+
 
 interface infoGeneralVentas {
     idLocal?:string; // el id local es obligatorio
@@ -34,6 +34,8 @@ export const InfoGeneralVentas = ({ idLocal, selectLocal, loadingLocal, locales 
     const [pagination, setPagination] = useState<any>({ meta: {}, links: {} });
     const [data, setData] = useState<any>([]);
     const [toggle, setToggle] = useState<number>(1); // tabs para los filtros
+
+    const [fechas, setFechas] = useState<any>({ inicio: "_", fin: "_" });
     
     // *** search
     const [searchState, setSearchState] = useState<boolean>(false); // estado de busqueda
@@ -69,21 +71,22 @@ export const InfoGeneralVentas = ({ idLocal, selectLocal, loadingLocal, locales 
     }
 
 
-    const getData = async (urlPage?:string, value?:string, idToggle?:number) => {
-
-        // const idLocal:any = "_"; // añadir un select solo de tiendas
+    const getData = async (urlPage?:string, value?:string, idToggle?:number, payloadFechas?:any) => {
+        const dates = payloadFechas ? payloadFechas : fechas;
         const toggle = idToggle ? idToggle : 1
         const value_filtro = value ? value : "_";
-
+        
         setToggle(toggle);
         setLoadingData(true);
+
+        const restoURL = `/${value_filtro}/${idLocal}/${dates.inicio}/${dates.fin}/filtro`;
 
         try {
             let data:any;
             if (urlPage && urlPage !== "") {
                 data = await paginate(urlPage);
             } else {
-                data = await paginate(VENTAS_PAGINATE + `/${value_filtro}/${idLocal}/filtro`);
+                data = await paginate(VENTAS_PAGINATE + restoURL);
             }
 
             setData(data.items);
@@ -126,9 +129,15 @@ export const InfoGeneralVentas = ({ idLocal, selectLocal, loadingLocal, locales 
                     <div className="grid-2 gap">
                         
                         <div className="grid-4">
-                            
+                            <div></div>
+                            <div></div>
+                            <div></div>
                             {/* <ExportarExcel /> */}
-                            <FechasVentas />
+                            <GestionFechas 
+                                getData={getData} 
+                                fechas={fechas}
+                                setFechas={setFechas}
+                            />
 
                         </div>
 
