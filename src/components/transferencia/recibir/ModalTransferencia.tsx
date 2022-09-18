@@ -9,7 +9,7 @@ export const ModalTransferencia = ({ modal, setModal, data, getTransacciones, ac
             title="Confirmar ingreso de productos" 
             modal={modal}
             setModal={setModal}
-            width={80}
+            width={85}
             getFuncion={actualizarDatos}
         >
             <div className="modal-transferencia">

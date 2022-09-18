@@ -242,6 +242,11 @@ a{
     grid-template-columns: 1fr 2fr;
 }
 
+.grid-11-3{
+    display: grid;
+    grid-template-columns: 1fr 1.3fr;
+}
+
 .grid-31{
     display: grid;
     grid-template-columns: 3fr 1fr;
@@ -841,6 +846,10 @@ table.table2{
     }
     tbody tr:hover {
         background-color: $box2;
+    }
+
+    .tr-active{
+        background-color: $bg-input2;
     }
 
     tbody td{

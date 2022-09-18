@@ -75,6 +75,7 @@ export const TransferenciaDetalles = ({ data, getTransacciones, setTransf }:any)
         } 
     }
 
+    
     return (
         <div className="transferencia-detalles grid-1 gap">
 
@@ -107,15 +108,14 @@ export const TransferenciaDetalles = ({ data, getTransacciones, setTransf }:any)
                         <tr>
                             <th></th>
                             <th>Cantidad</th>
-                            <th>Nombre prod.</th>
-                            <th>Codigo</th>
+                            <th>Producto</th>
                         </tr>
                     </thead>
 
                     <tbody>
-
                         {
                             data.transaccionDetalles.map((el:any) => {
+                                const producto = el.productos ? el.productos : {}
                                 return(
                                     <tr key={el.id}>
                                         <td>
@@ -126,8 +126,11 @@ export const TransferenciaDetalles = ({ data, getTransacciones, setTransf }:any)
                                             />
                                         </td>
                                         <td className="info strong">{ el.cantidad }</td>
-                                        <td>{ el.productos.nombre }</td>
-                                        <td>{ el.productos.codigo }</td>
+                                        <td>{
+                                            producto.nombre + " - " +
+                                            producto.marca + " - " +
+                                            producto.talla
+                                        }</td>
                                     </tr>
                                 )
                             })

@@ -13,21 +13,23 @@ export const RecibirTransferencia = ({
     const [transferencia, setTransferencia] = useState<any>({});
     const [toggle, setToggle] = useState<number>(0);
 
+
     const handlerTransferencia = (elemento:any, idToggle:number) => { 
         setToggle(idToggle);
         setTransferencia(elemento)
     }
 
+    
     return (
-        <div className="grid-2 gap">
+        <div className="grid-11-3 gap">
             <div className="box recibir-transferencia">
                 <h4 className="desc-form">Lista de envios</h4>
                 {
-                    <table className="table">
+                    <table className="table2">
                             
                         <thead>
                             <tr>
-                                <th>Codigo envio</th>
+                                <th>Codigo</th>
                                 <th>Origen</th>
                                 <th>Nota de envio</th>
                                 <th className="transparent inlineblock">...</th>
@@ -64,7 +66,6 @@ export const RecibirTransferencia = ({
                         </tbody>
                     </table>
                 }
-
             </div>
 
             <div className="box recibir-transferencia">

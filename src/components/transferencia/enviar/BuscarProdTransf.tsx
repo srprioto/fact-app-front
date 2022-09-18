@@ -20,6 +20,8 @@ export const BuscarProdTransf = ({
     const handlerOnClick = (e:any) => { 
         const prod = {
             productoNombre: e.productos.nombre,
+            marca: e.productos.marca,
+            talla: e.productos.talla,
             cantidad: e.cantidad,
             cantOriginal: e.cantidad,
             productosId: e.productos.id
@@ -57,7 +59,7 @@ export const BuscarProdTransf = ({
                             <table className="table3">
                                 <thead>
                                     <tr>
-                                        <th>Codigo</th>
+                                        {/* <th>Codigo</th> */}
                                         <th>Producto</th>
                                         <th>Cantidad</th>
                                     </tr>
@@ -66,9 +68,7 @@ export const BuscarProdTransf = ({
                                 <tbody>
                                     {
                                         data.map((e:any) => {
-    
                                             const producto:any = e.productos ? e.productos : {};
-                                            
                                             if (!(repetidos.includes(e.id))){
                                                 return (
                                                     <tr 
@@ -80,8 +80,14 @@ export const BuscarProdTransf = ({
                                                         }}
                                                         className={e.cantidad <= 0 ? "disable" : ""}
                                                     >
-                                                        <td className="secundary">{ producto.codigo }</td>
-                                                        <td className="secundary">{ producto.nombre }</td>
+                                                        {/* <td className="secundary">{ producto.codigo }</td> */}
+                                                        <td className="secundary">{ 
+                                                            producto.nombre + " - " + 
+                                                            producto.marca + " - " + 
+                                                            producto.talla
+                                                        }</td>
+                                                        {/* <td>{ producto.marca }</td>
+                                                        <td className="secundary">{ producto.talla }</td> */}
                                                         <td className={
                                                             "strong " + 
                                                             (

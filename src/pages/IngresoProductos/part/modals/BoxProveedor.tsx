@@ -71,7 +71,7 @@ export const BoxProveedor = ({ proveedorSolo, loading, handlerReset }:any) => {
                 )
                 : (
                     <div style={{ height: "160px" }}>
-                        <TextoRelleno texto="Seleeciona un proveedor" heightAuto />
+                        <TextoRelleno texto="Seleciona un proveedor" heightAuto />
                     </div>
                 )
             }

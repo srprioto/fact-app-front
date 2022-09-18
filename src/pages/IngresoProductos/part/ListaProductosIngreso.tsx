@@ -8,7 +8,7 @@ export const ListaProductosIngreso = ({ movimientoDetalles, itemPop, setModalAdd
             <h4 className="desc-form m-0">
                 {
                     movimientoDetalles.length > 0
-                    ? "Relacion de productos"
+                    ? "Lista de productos"
                     : "Añade un producto a la lista"
                 }
             </h4>

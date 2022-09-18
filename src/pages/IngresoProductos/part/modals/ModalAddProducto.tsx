@@ -4,6 +4,7 @@ import { BtnOnOff } from "../../../../components/btns/BtnOnOff"
 import { Input } from "../../../../components/forms/Input"
 import { InputDisable } from "../../../../components/forms/InputDisable"
 import { SelectSearch } from "../../../../components/forms/SelectSearch"
+import { SelectSearchProd } from "../../../../components/forms/SelectSearchProd"
 import { Modal } from "../../../../components/modals/Modal"
 import { ModalNuevoProducto } from "../../../../components/modals/ModalNuevoProducto"
 import { ModalNuevoProveedor } from "../../../../components/modals/ModalNuevoProveedor"
@@ -109,7 +110,7 @@ export const ModalAddProducto = ({
     }
 
     const reiniciarSelect = () => { // reinicia ambos select
-        // setSwitchProductos(false);
+        setSwitchProductos(false);
         setSwitchProveedores(false);
     }
 
@@ -119,7 +120,7 @@ export const ModalAddProducto = ({
             producto: { id: 0, nombre: "" }
         })
         setProductoSolo({})
-        // setSwitchProductos(false);
+        setSwitchProductos(false);
     }
 
     const reinicioProveedor = () => { // reinicia solo proveedor
@@ -151,7 +152,7 @@ export const ModalAddProducto = ({
                 <div className="grid-2 gap-v align-center">
                     
                     <div className="mb-15">
-                        <SelectSearch
+                        <SelectSearchProd
                             label="Producto"
                             type="text"
                             respuesta={handlerDataProductos}
@@ -160,7 +161,7 @@ export const ModalAddProducto = ({
                             // link="/productos/crear-producto"
                             modal={setModalCrearProducto}
                             switchSelect={switchProductos}
-                            // setSwitchSelect={setSwitchProductos}
+                            setSwitchSelect={setSwitchProductos}
                             placeholder="Nombre o codigo ..."
                             reinicios={reinicioProducto}
                         />

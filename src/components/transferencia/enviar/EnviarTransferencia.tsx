@@ -80,7 +80,7 @@ export const ModalTransferencia = ({ modal, setModal, idLocal, nombreLocal, getD
             title="transferencia de productos" 
             modal={modal}
             setModal={setModal}
-            width={70}
+            width={80}
             btnClose={reiniciar}
         >
 

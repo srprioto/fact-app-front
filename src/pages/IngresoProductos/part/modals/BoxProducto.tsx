@@ -69,7 +69,7 @@ export const BoxProducto = ({ productoSolo, loading, handlerReset }:any) => {
                     </>
                 ) : (
                     <div style={{ height: "160px" }}>
-                        <TextoRelleno texto="Seleeciona un producto" heightAuto />
+                        <TextoRelleno texto="Seleciona un producto" heightAuto />
                     </div>
                 )
             }

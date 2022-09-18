@@ -57,14 +57,9 @@ export const ListaProductosTransf = ({ listaProductos, setListaProductos, repeti
                                     listaProductos.map((e:any, index:number) => {
                                         return (
                                             <tr key={index}>
-                                                <td>{ e.productoNombre }</td>
+                                                <td>{ e.productoNombre + " - " + e.marca + " - " + e.talla }</td>
                                                 <td>
                                                     <Input
-                                                        // color={
-                                                        //     validarCantidad(e.productosId, e.cantidad)
-                                                        //     ? "danger-i"
-                                                        //     : "secundary-i"
-                                                        // }
                                                         className="input2"
                                                         type="number"
                                                         name="cantidad"
@@ -73,12 +68,7 @@ export const ListaProductosTransf = ({ listaProductos, setListaProductos, repeti
                                                             ? e.cantidad
                                                             : e.cantOriginal
                                                         }
-                                                        onChange={(event:any) => {
-                                                            handlerChangeCantidad(event, index)
-                                                            // if (!validarCantidad(e.productosId, e.cantidad)) {
-                                                            //     handlerChangeCantidad(event, index)
-                                                            // }
-                                                        }}
+                                                        onChange={(event:any) => handlerChangeCantidad(event, index)}
                                                         noMenos
                                                     />
                                                 </td>
