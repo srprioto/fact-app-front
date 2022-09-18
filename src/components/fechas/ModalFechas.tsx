@@ -7,7 +7,7 @@ import moment from 'moment';
 import 'moment/locale/es';
 import { Loading } from "../loads/Loading";
 import { Modal } from "../modals/Modal";
-import { BiBrush, BiCheck } from "react-icons/bi";
+import { BiCheck } from "react-icons/bi";
 
 moment.locale('es');
 registerLocale("es", es);
@@ -41,13 +41,13 @@ export const ModalFechas = ({ modal, setModal, getData, fechas, setFechas }:moda
     }
 
 
-    const handlerRestaurar = async () => { 
-        await getData("", "", "", {
-            inicio: "_",
-            fin: "_"
-        });
-        setModal();
-    }
+    // const handlerRestaurar = async () => { 
+    //     await getData("", "", "", {
+    //         inicio: "_",
+    //         fin: "_"
+    //     });
+    //     setModal();
+    // }
 
 
     const handlerFechaInicio = (date:any) => { 
@@ -95,18 +95,18 @@ export const ModalFechas = ({ modal, setModal, getData, fechas, setFechas }:moda
                             </div>
                         </div>
         
-                        <div className="grid-4 gap">
+                        <div className="grid-3 gap">
                             <div></div>
                             <button 
                                 className="btn btn-success" 
                                 onClick={() => handlerConfirmar()}
                             ><BiCheck /> Confirmar
                             </button>
-                            <button 
+                            {/* <button 
                                 className="btn btn-warning" 
                                 onClick={() => handlerRestaurar()}
                             ><BiBrush /> Restaurar
-                            </button>
+                            </button> */}
         
                         </div>
         

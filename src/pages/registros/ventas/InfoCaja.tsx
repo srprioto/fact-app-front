@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react"
-import { GestionFechas } from "../../../components/fechas/GestionFechas"
+import { useEffect, useState } from "react";
 import { Select } from "../../../components/forms/Select"
 import { Loading } from "../../../components/loads/Loading"
 import { ModalWrap } from "../../../components/modals/ModalWrap"
@@ -28,7 +27,7 @@ export const InformacionIngresos = ({ idLocal, selectLocal, loadingLocal, locale
     const [pagination, setPagination] = useState<any>({ meta: {}, links: {} });
     const [data, setData] = useState<any>([]);
 
-    const [fechas, setFechas] = useState<any>({ inicio: "_", fin: "_" });
+    // const [fechas, setFechas] = useState<any>({ inicio: "_", fin: "_" });
     // const [toggle, setToggle] = useState<number>(1); // tabs para los filtros
     
     // *** search
@@ -46,9 +45,9 @@ export const InformacionIngresos = ({ idLocal, selectLocal, loadingLocal, locale
     }
 
 
-    const getData = async (urlPage?:string, value?:string, idToggle?:number, payloadFechas?:any) => {
+    const getData = async (urlPage?:string) => {
 
-        const dates = payloadFechas ? payloadFechas : fechas;
+        // const dates = payloadFechas ? payloadFechas : fechas;
 
         // const idLocal:any = "_"; // añadir un select solo de tiendas
         // const toggle = idToggle ? idToggle : 1
@@ -57,7 +56,8 @@ export const InformacionIngresos = ({ idLocal, selectLocal, loadingLocal, locale
         // setToggle(toggle);
         setLoadingData(true);
 
-        const restoURL = `/${idLocal}/${dates.inicio}/${dates.fin}/filtro`;
+        // const restoURL = `/${idLocal}/${dates.inicio}/${dates.fin}/filtro`;
+        const restoURL = `/${idLocal}/filtro`;
 
         try {
             let data:any;
@@ -112,14 +112,11 @@ export const InformacionIngresos = ({ idLocal, selectLocal, loadingLocal, locale
                     <div className="grid-4"></div>
                     <div className="grid-2 gap">
                         <div className="grid-4">
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                            <GestionFechas 
+                            {/* <GestionFechas 
                                 getData={getData} 
                                 fechas={fechas}
                                 setFechas={setFechas}
-                            />
+                            /> */}
                         </div>
                         <div className="grid-1 middle">
                             {
@@ -146,7 +143,11 @@ export const InformacionIngresos = ({ idLocal, selectLocal, loadingLocal, locale
                             
                         </div>
                     </div>
-                </div>                
+                </div>        
+
+                {/* <TabbsFiltroDatos
+                    getData={getData}
+                /> */}
 
                 {
                     loadingData 

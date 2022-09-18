@@ -578,6 +578,21 @@ a.btn-danger:hover{ color: $danger; }
 .btn2-sub-danger{ border-bottom: 2px solid $danger; }
 .btn2-sub-transparent{ border-bottom: 2px solid transparent; }
 
+.btn-icon{
+    padding: 6px 15px;
+    border: none;
+    background-color: transparent;
+    text-align: center;
+    cursor: pointer;
+
+    display: inline-block;
+    
+    svg{
+        font-size: 23px;
+        margin-right: 2px;
+        vertical-align: middle;
+    }
+}
 
 .pointer{
     cursor: pointer;

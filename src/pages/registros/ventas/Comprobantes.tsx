@@ -121,9 +121,6 @@ export const Comprobantes = ({ idLocal, selectLocal, loadingLocal, locales }:inf
                         
                         <div className="grid-4">
                             {/* <ExportarExcel /> */}
-                            <div></div>
-                            <div></div>
-                            <div></div>
                             <GestionFechas 
                                 getData={getData} 
                                 fechas={fechas}

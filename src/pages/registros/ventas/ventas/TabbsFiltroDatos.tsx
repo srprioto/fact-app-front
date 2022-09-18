@@ -1,4 +1,4 @@
-import { BiBarChartAlt, BiCartAlt, BiCheck, BiX } from "react-icons/bi"
+import { BiBarChartAlt, BiCartAlt, BiCheck, BiRefresh, BiX } from "react-icons/bi"
 
 export const TabbsFiltroDatos = ({ getData, toggle }:any) => {
     return (
@@ -32,7 +32,17 @@ export const TabbsFiltroDatos = ({ getData, toggle }:any) => {
                     Rechazado
                 </button>
             </div>
-            <div></div>
+            <div className="right">
+                <button
+                    className="btn-icon btn2-success"
+                    onClick={() => getData("", "", "", {
+                        inicio: "_",
+                        fin: "_"
+                    })}
+                >
+                    <BiRefresh />
+                </button>
+            </div>
 
         </div>
     )

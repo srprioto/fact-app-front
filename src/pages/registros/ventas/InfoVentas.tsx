@@ -116,7 +116,7 @@ export const InfoGeneralVentas = ({ idLocal, selectLocal, loadingLocal, locales 
             <div className="box">
 
                 <div className="grid-2 gap">
-                    <SearchWrap 
+                    <SearchWrap
                         setLoadingData={setLoadingData}
                         setData={setData}
                         getData={getData}
@@ -129,9 +129,7 @@ export const InfoGeneralVentas = ({ idLocal, selectLocal, loadingLocal, locales 
                     <div className="grid-2 gap">
                         
                         <div className="grid-4">
-                            <div></div>
-                            <div></div>
-                            <div></div>
+                            
                             {/* <ExportarExcel /> */}
                             <GestionFechas 
                                 getData={getData} 

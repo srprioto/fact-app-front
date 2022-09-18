@@ -1,3 +1,5 @@
+import { BiRefresh } from "react-icons/bi"
+
 export const TablaFiltro = ({ getData, toggle }:any) => {
     return (
         <div className="grid-3 gap mb-25">
@@ -42,10 +44,18 @@ export const TablaFiltro = ({ getData, toggle }:any) => {
                     Errores
                 </button>
                 
-                
-                
             </div>
-            <div></div>
+            <div className="right">
+                <button
+                    className="btn-icon btn2-success"
+                    onClick={() => getData("", "", "", {
+                        inicio: "_",
+                        fin: "_"
+                    })}
+                >
+                    <BiRefresh />
+                </button>
+            </div>
 
         </div>
     )
