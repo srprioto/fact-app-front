@@ -112,11 +112,6 @@ export const InformacionIngresos = ({ idLocal, selectLocal, loadingLocal, locale
                     <div className="grid-4"></div>
                     <div className="grid-2 gap">
                         <div className="grid-4">
-                            {/* <GestionFechas 
-                                getData={getData} 
-                                fechas={fechas}
-                                setFechas={setFechas}
-                            /> */}
                         </div>
                         <div className="grid-1 middle">
                             {
