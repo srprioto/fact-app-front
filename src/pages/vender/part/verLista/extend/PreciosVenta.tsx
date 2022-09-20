@@ -1,5 +1,5 @@
 import { Input } from "../../../../../components/forms/Input";
-import { Select2 } from "../../../../../components/forms/Select2";
+// import { Select2 } from "../../../../../components/forms/Select2";
 import { moneda } from "../../../../../resources/func/moneda";
 
 export const PreciosVenta = ({ venta, alertaDescuento, handlerOnChange, tabbs }:any) => {
