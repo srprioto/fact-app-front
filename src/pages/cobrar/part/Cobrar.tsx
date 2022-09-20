@@ -124,7 +124,6 @@ export const Cobrar = ({ idLocal, nombreLocal, user }:cobrar) => {
                                 <DescripcionVenta
                                     data={getVenta}
                                     handlerRefresh={handlerRefresh}
-                                    loadingOne={loadingOne}
                                 />
                             ) : <TextoRelleno texto="Selecciona un pedido" />
                         )

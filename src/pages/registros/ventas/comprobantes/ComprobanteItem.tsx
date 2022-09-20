@@ -17,10 +17,13 @@ export const ComprobanteItem = ({ comprobante, handlerVer, reenviarComprobante, 
             return "DNI"
         } else if (comprobante.tipoDocumento === "6") {
             return "RUC"
+        } else {
+            return "Sin documento"
         }
     }
 
     
+
     return (
         <tr className="venta-items">
             {/* <td className="secundary">{ comprobante.serie + "-" + comprobante.correlativo }</td> */}

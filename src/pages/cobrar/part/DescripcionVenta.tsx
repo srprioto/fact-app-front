@@ -24,10 +24,9 @@ import { tipoVenta } from "../../../resources/dtos/VentasDto";
 interface descripcionVenta {
     data:any
     handlerRefresh:Function;
-    loadingOne:boolean;
 }
 
-export const DescripcionVenta = ({ data, handlerRefresh, loadingOne }:descripcionVenta) => {
+export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
 
     const clienteOk:boolean = !!data.clientes;
     // const correlativo:any = data.correlaivo ? data.correlaivo: {}
@@ -43,15 +42,39 @@ export const DescripcionVenta = ({ data, handlerRefresh, loadingOne }:descripcio
     // }
     
     const tipoSerie = ():number => { 
-        if (clienteOk) {
-            if (data.tipo_venta === tipoVenta.boleta) return 2 
-            else if (data.tipo_venta === tipoVenta.factura) return 3 
-            else return 1
+        if (data.tipo_venta === tipoVenta.boleta) return 2 
+        else if (data.tipo_venta === tipoVenta.factura) return 3 
+        else return 1
+        // if (clienteOk) {
+        //     if (data.tipo_venta === tipoVenta.boleta) return 2 
+        //     else if (data.tipo_venta === tipoVenta.factura) return 3 
+        //     else return 1
+        // } else {
+        //     return 1
+        // }
+    }
+
+    const stateSwitchChange = () => { 
+        if (
+            (data.tipo_venta === tipoVenta.factura && clienteOk) ||
+            (data.tipo_venta === tipoVenta.boleta)
+        ) {
+            return false;
         } else {
-            return 1
+            return true;
         }
     }
 
+    const showSwitchChange = () => { 
+        if (
+            (data.tipo_venta === tipoVenta.boleta) ||
+            (data.tipo_venta === tipoVenta.factura && clienteOk)
+        ) {
+            return true;
+        } else {
+            return false;
+        }
+    }
     
     const [venta, setVenta] = useState<any>(data);
     const [cliente, setCliente] = useState<any>(clienteOk ? data.clientes : clienteInfo);
@@ -60,7 +83,7 @@ export const DescripcionVenta = ({ data, handlerRefresh, loadingOne }:descripcio
     const [modalConfVenta, setModalConfVenta] = useState<boolean>(false);
     const [modalRechazVenta, setModalRechazVenta] = useState<boolean>(false);
     
-    const [switchChangeFact, setSwitchChangeFact] = useState<boolean>(clienteOk ? false : true);
+    const [switchChangeFact, setSwitchChangeFact] = useState<boolean>(stateSwitchChange());
     const [tabbs, setTabbs] = useState<number>(tipoSerie());
 
     const [listaPrecios, setListaPrecios] = useState<Array<any>>([]);
@@ -237,10 +260,10 @@ export const DescripcionVenta = ({ data, handlerRefresh, loadingOne }:descripcio
 
                 <div className="tabbs-box m-0">
                     {
-                        clienteOk
+                        showSwitchChange()
                         ? <Checkbox2
                             label={switchChangeFact ? "Restablecer tipo comprobante" : "Modificar tipo comprobante"}
-                            name="igv"
+                            name="switchChangeFact"
                             checked={switchChangeFact}
                             handlerCheck={ () => setSwitchChangeFact(!switchChangeFact) }
                         /> : <></>

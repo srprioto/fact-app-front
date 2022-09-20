@@ -21,6 +21,7 @@ interface formInfoGeneral {
     // serie:string;
     tipo_venta:string;
     labelBtn:string;
+    tipoDoc?:string;
 }
 
 export const FormInfoGeneral = ({ 
@@ -36,7 +37,8 @@ export const FormInfoGeneral = ({
     handlerOnChangeCliente,
     // serie,
     tipo_venta,
-    labelBtn
+    labelBtn,
+    tipoDoc
 }:formInfoGeneral) => {
 
     // useEffect(() => {
@@ -45,6 +47,17 @@ export const FormInfoGeneral = ({
     //         numero_documento: getCliente.documento
     //     })
     // }, [getCliente.documento])
+
+    const validacionDoc = () => { 
+        if (getCliente.tipoDocumento === "DNI") {
+            return ValidClienteDni;
+        } else if (getCliente.tipoDocumento === "RUC") {
+            return ValidClienteRuc
+        } else if (getCliente.tipoDocumento === "noDocumento") {
+            return null
+        }
+    }
+
     
     return (
         <div>
@@ -56,7 +69,7 @@ export const FormInfoGeneral = ({
                 initialValues={cliente}
                 // enableReinitialize={loadCliente} // deshabilitar en caso de que de problemas
                 enableReinitialize={true}
-                validationSchema={getCliente.tipoDocumento === "DNI" ? ValidClienteDni : ValidClienteRuc}
+                validationSchema={validacionDoc()}
                 
                 onSubmit={(data, { resetForm }) => { 
                     verificarCaja(handlerVenta, tipo_venta)
@@ -97,6 +110,7 @@ export const FormInfoGeneral = ({
                             verificarVender={verificarVender}
                             estadoCliente={!!cliente.estadoCliente}
                             labelBtn={labelBtn}
+                            tipoDoc={tipoDoc}
                         />
 
                     </Form>

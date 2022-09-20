@@ -4,7 +4,7 @@ import { moneda } from "../../../../../resources/func/moneda";
 
 export const PreciosVenta = ({ venta, alertaDescuento, handlerOnChange, tabbs }:any) => {
     return (
-        <div className="info-venta grid-5 gap mb-25">
+        <div className="info-venta grid-4 gap mb-25">
 
             <span className="center">
                 <p className="mb-5 info">Subtotal</p>
@@ -32,7 +32,16 @@ export const PreciosVenta = ({ venta, alertaDescuento, handlerOnChange, tabbs }:
                 <p className="mb-5 info">Total</p>
                 <h1 className="success strong">S/. { moneda(venta.total) }</h1>
             </span>
-            {
+
+            <Input 
+                label="Observaciones"
+                type="text"
+                name="observaciones"
+                value={venta.observaciones}
+                onChange={handlerOnChange}
+            />
+
+            {/* {
                 tabbs !== 4
                 && (
                     <>
@@ -48,7 +57,6 @@ export const PreciosVenta = ({ venta, alertaDescuento, handlerOnChange, tabbs }:
                             <option value="deposito">Deposito</option>
                         </Select2>
                         
-
                         <Input 
                             label="Observaciones"
                             type="text"
@@ -58,7 +66,7 @@ export const PreciosVenta = ({ venta, alertaDescuento, handlerOnChange, tabbs }:
                         />
                     </>
                 )
-            }
+            } */}
             
 
         </div>

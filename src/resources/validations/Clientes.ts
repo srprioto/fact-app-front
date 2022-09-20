@@ -11,6 +11,7 @@ export const ValidCreateCliente = Yup.object({
 })
 
 // validacion desde vender o cobrar
+
 export const ValidClienteDni = Yup.object({
     // numero_documento: Yup.string().required('Requerido'),
     nombre: Yup.string().required('Requerido'),
@@ -25,6 +26,14 @@ export const ValidClienteRuc = Yup.object({
     direccion: Yup.string().required('Requerido'),
     telefono: Yup.string().matches(/^[0-9]+$/, "Requiere solo numeros")
 })
+
+// export const ValidClienteNoDoc = Yup.object({
+//     // numero_documento: Yup.string().required('Requerido'),
+//     // nombre: Yup.string().required('Requerido'),
+//     // telefono: Yup.string().matches(/^[0-9]+$/, "Requiere solo numeros")
+//     // direccion: Yup.string().required('Requerido'),
+//     // email: Yup.string().required('Requerido'),
+// })
 
 export const ValidDocumento = (tipoDoc:string) => { 
     let totalDigitos:number = 0;

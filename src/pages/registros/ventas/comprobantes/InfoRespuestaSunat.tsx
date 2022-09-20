@@ -2,40 +2,6 @@ import { classEstado } from "../../../../resources/dtos/ComprobantesDto"
 
 export const InfoRespuestaSunat = ({ respuesta_sunat, estado_sunat }:any) => {
 
-    // const classEstado = () => { 
-    //     if (respuesta_sunat.estado === "ACEPTADO") {
-    //         return "success-i"
-    //     } else if (respuesta_sunat.estado === "OBSERVACION") {
-    //         return "primary-i"
-    //     } else if (respuesta_sunat.estado === "RECHAZADO") {
-    //         return "warning-i"
-    //     } else if (respuesta_sunat.estado === "Excepción") {
-    //         return "secundary-i"
-    //     } else if (respuesta_sunat.estado === "ERROR") {
-    //         return "danger-i"
-    //     } else if (respuesta_sunat.estado === "ANULADO") {
-    //         return "secundary-i opacity"
-    //     }
-    // }
-
-
-    // const estado = () => { 
-    //     if (respuesta_sunat.estado === "ACEPTADO") {
-    //         return "Aceptado"
-    //     } else if (respuesta_sunat.estado === "OBSERVACION") {
-    //         return "Observado"
-    //     } else if (respuesta_sunat.estado === "RECHAZADO") {
-    //         return "Rechazado"
-    //     } else if (respuesta_sunat.estado === "Excepción") {
-    //         return "Excepción"
-    //     } else if (respuesta_sunat.estado === "ERROR") {
-    //         return "Error"
-    //     } else if (respuesta_sunat.estado === "ANULADO") {
-    //         return "Anulado"
-    //     }
-    // }
-
-
     return (
         <div className="box box-par">
             <div className="wrap-descripcion5 m-0">
@@ -43,11 +9,12 @@ export const InfoRespuestaSunat = ({ respuesta_sunat, estado_sunat }:any) => {
                 <h3>Respuesta de la Sunat</h3>
 
                 {
-                    estado_sunat === "NO"
+                    estado_sunat === "No"
                     ? (
                         <span className="grid-12 gap">
-                            <p>No</p>
-                            <h4>{ respuesta_sunat }</h4>
+                            <p>Error</p>
+                            {/* <h4>{ respuesta_sunat }</h4> */}
+                            <h4>{ "Ha Habido un Error Crítico al enviar comprobante a la Sunat" }</h4>
                         </span>
                     )
                     : <>
@@ -119,3 +86,37 @@ export const InfoRespuestaSunat = ({ respuesta_sunat, estado_sunat }:any) => {
         </div>
     )
 }
+
+
+// const classEstado = () => { 
+//     if (respuesta_sunat.estado === "ACEPTADO") {
+//         return "success-i"
+//     } else if (respuesta_sunat.estado === "OBSERVACION") {
+//         return "primary-i"
+//     } else if (respuesta_sunat.estado === "RECHAZADO") {
+//         return "warning-i"
+//     } else if (respuesta_sunat.estado === "Excepción") {
+//         return "secundary-i"
+//     } else if (respuesta_sunat.estado === "ERROR") {
+//         return "danger-i"
+//     } else if (respuesta_sunat.estado === "ANULADO") {
+//         return "secundary-i opacity"
+//     }
+// }
+
+
+// const estado = () => { 
+//     if (respuesta_sunat.estado === "ACEPTADO") {
+//         return "Aceptado"
+//     } else if (respuesta_sunat.estado === "OBSERVACION") {
+//         return "Observado"
+//     } else if (respuesta_sunat.estado === "RECHAZADO") {
+//         return "Rechazado"
+//     } else if (respuesta_sunat.estado === "Excepción") {
+//         return "Excepción"
+//     } else if (respuesta_sunat.estado === "ERROR") {
+//         return "Error"
+//     } else if (respuesta_sunat.estado === "ANULADO") {
+//         return "Anulado"
+//     }
+// }

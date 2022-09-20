@@ -18,6 +18,8 @@ export const InfoComprobante = ({ comprobante }:any) => {
             return "DNI"
         } else if (comprobante.tipoDocumento === "6") {
             return "RUC"
+        } else {
+            return "Sin documento"
         }
     }
 

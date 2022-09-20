@@ -31,7 +31,7 @@ export const BoletaVenta = ({
     const tipo_venta:string = tipoVenta.boleta;
     const clienteI = clienteInfo;
     const [loadCliente, setLoadCliente] = useState<boolean>(false);
-    const [getCliente, setGetCliente] = useState<any>({ documento: "", tipoDocumento: "DNI", });
+    const [getCliente, setGetCliente] = useState<any>({ documento: "", tipoDocumento: "noDocumento", });
 
     useEffect(() => {
         setCliente(clienteI);
@@ -41,7 +41,7 @@ export const BoletaVenta = ({
         })
     }, [getCliente.tipoDocumento])
     
-
+    
     const handlerOnChangeGetCli = (e:any) => { 
         setGetCliente({
             ...getCliente,
@@ -105,6 +105,7 @@ export const BoletaVenta = ({
                 // serie={serie}
                 tipo_venta={tipo_venta}
                 labelBtn="Venta con boleta"
+                tipoDoc={getCliente.tipoDocumento}
             />
 
         </>

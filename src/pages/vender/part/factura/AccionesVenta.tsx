@@ -10,6 +10,7 @@ interface rapidaVenta {
     verificarVender:Function;
     estadoCliente:boolean;
     labelBtn:string;
+    tipoDoc?:string;
 }
 
 export const AccionesVenta = ({ 
@@ -17,13 +18,17 @@ export const AccionesVenta = ({
     setShowWindow, 
     verificarVender,
     estadoCliente,
-    labelBtn
+    labelBtn,
+    tipoDoc
 }:rapidaVenta) => {
 
     const auth = useAuth();
     
     const verVender = () => { 
-        if (verificarVender() && estadoCliente) {
+        if (
+            (verificarVender() && estadoCliente) ||
+            (verificarVender() && tipoDoc === "noDocumento")
+        ) {
             return true
         } else {
             return false

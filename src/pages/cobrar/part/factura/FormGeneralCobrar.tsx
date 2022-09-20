@@ -27,6 +27,7 @@ export const FormGeneralCobrar = ({
     activarConfirmarVenta
 }:formGeneralCobrar) => {
 
+
     const handlerOnChangeCliente = (e:any) => { 
         setCliente({
             ...cliente,
@@ -34,19 +35,33 @@ export const FormGeneralCobrar = ({
         })
     }
 
-    const clienteExist:boolean = !!cliente.estadoCliente;
+
+    const stateCliente:string = cliente ? cliente.estadoCliente : "";
+    const clienteExist:boolean = !!stateCliente;
+
+
+    const validacionDoc = () => { 
+        if (getCliente.tipoDocumento === "DNI") {
+            return ValidClienteDni;
+        } else if (getCliente.tipoDocumento === "RUC") {
+            return ValidClienteRuc;
+        } else if (getCliente.tipoDocumento === "noDocumento") {
+            return null;
+        }
+    }
+
 
     return (
         <div className="">
 
-            { cliente.estadoCliente === "Inexistente"
+            { stateCliente === "Inexistente"
             && <ClienteInexistente tipoDocumento={getCliente.tipoDocumento} /> }
             
             <Formik
                 initialValues={cliente}
                 // enableReinitialize={loadCliente} // deshabilitar en caso de que de problemas
                 enableReinitialize={true}
-                validationSchema={getCliente.tipoDocumento === "DNI" ? ValidClienteDni : ValidClienteRuc}
+                validationSchema={validacionDoc()}
                 
                 onSubmit={(data, { resetForm }) => { 
                     setModalConfVenta(!modalConfVenta)
@@ -101,6 +116,7 @@ export const FormGeneralCobrar = ({
                             setModalRechazVenta={setModalRechazVenta}
                             modalRechazVenta={modalRechazVenta}
                             activarConfirmarVenta={activarConfirmarVenta}
+                            getCliente={getCliente}
                         />
 
                     </Form>

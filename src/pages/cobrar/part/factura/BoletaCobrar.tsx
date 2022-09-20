@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { clienteInfo } from "../../../../resources/dtos/Cliente";
 import { tipoVenta } from "../../../../resources/dtos/VentasDto";
 import { post } from "../../../../resources/fetch";
 import { CLIENTES } from "../../../../resources/routes";
@@ -36,12 +37,23 @@ export const BoletaCobrar = ({
     activarConfirmarVenta
 }:boleta) => {
 
-    // s
+    const tipoDocum = () => { 
+        if (!!cliente) {
+            if (!!cliente.tipoDocumento) {
+                return cliente.tipoDocumento
+            } else {
+                return "noDocumento"
+            }
+        } else {
+            return "noDocumento"
+        }
+    }
+    
     const tipo_venta:string = tipoVenta.boleta;
     // const clienteI = clienteInfo(serie);
     const [loadCliente, setLoadCliente] = useState<boolean>(false);
-    const [getCliente, setGetCliente] = useState<any>({ documento: "", tipoDocumento: "DNI", });
-    
+    const [getCliente, setGetCliente] = useState<any>({ documento: "", tipoDocumento: tipoDocum(), });
+
 
     useEffect(() => {
         setVenta({
@@ -51,12 +63,26 @@ export const BoletaCobrar = ({
         })
     }, [])
 
+    // useEffect(() => {
+    //     setGetCliente({
+    //         ...getCliente,
+    //         documento: cliente ? cliente.numero_documento : ""
+    //     })
+    // }, [getCliente.tipoDocumento])
+
+
     useEffect(() => {
-        // setCliente(clienteI);
         setGetCliente({
             ...getCliente,
-            documento: cliente.numero_documento
+            documento: cliente ? cliente.numero_documento : ""
         })
+        if (getCliente.tipoDocumento === "noDocumento") {
+            setCliente(clienteInfo);
+            setGetCliente({
+                ...getCliente,
+                documento: ""
+            })
+        }
     }, [getCliente.tipoDocumento])
    
 
