@@ -88,7 +88,7 @@ export const ModalVentaDetalles = ({ modal, setModal, idVenta }:any) => {
                                         <th>Talla</th>
                                         <th></th>
                                         <th>Cant.</th>
-                                        <th>Descuento</th>
+                                        <th>Inc/Desc</th>
                                         <th>P. Unidad</th>
                                         <th>P. Subventa</th>
                                         <th>Sin stock</th>                                        

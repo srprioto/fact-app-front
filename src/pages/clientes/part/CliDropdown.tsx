@@ -1,4 +1,4 @@
-import { BiPencil, BiShowAlt, BiTrash } from "react-icons/bi";
+import { BiPencil, BiShowAlt } from "react-icons/bi";
 import { Link } from "react-router-dom";
 
 import { DropDown } from "../../../components/DropDown"
@@ -6,9 +6,9 @@ import { DropDown } from "../../../components/DropDown"
 export const CliDropdown = ({ id, nombre, handlerDeleted, handlerVer }:any) => {
     return (
         <DropDown>
-            <span onClick={ () => handlerDeleted(id, nombre) }>
+            {/* <span onClick={ () => handlerDeleted(id, nombre) }>
                 <BiTrash /> Eliminar
-            </span>
+            </span> */}
             <Link to={`/clientes/${id}/edit`} >
                 <BiPencil /> Editar cliente
             </Link>

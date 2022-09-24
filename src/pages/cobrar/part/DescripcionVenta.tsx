@@ -29,29 +29,11 @@ interface descripcionVenta {
 export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
 
     const clienteOk:boolean = !!data.clientes;
-    // const correlativo:any = data.correlaivo ? data.correlaivo: {}
-
-    // const tipoSerie = ():number => { 
-    //     if (clienteOk) {
-    //         if (data.serie === "B003") return 2 
-    //         else if (data.serie === "F003") return 3 
-    //         else return 1
-    //     } else {
-    //         return 1
-    //     }
-    // }
     
     const tipoSerie = ():number => { 
         if (data.tipo_venta === tipoVenta.boleta) return 2 
         else if (data.tipo_venta === tipoVenta.factura) return 3 
         else return 1
-        // if (clienteOk) {
-        //     if (data.tipo_venta === tipoVenta.boleta) return 2 
-        //     else if (data.tipo_venta === tipoVenta.factura) return 3 
-        //     else return 1
-        // } else {
-        //     return 1
-        // }
     }
 
     const stateSwitchChange = () => { 
@@ -90,12 +72,70 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
     const [confirmarVenta, setConfirmarVenta] = useState<boolean>(false);
     const [showFormasPago, setShowFormasPago] = useState<boolean>(false);
 
+    const [comisionTarjeta, setComisionTarjeta] = useState<number>(0);
+
+    const listaPagosTarjeta = () => { 
+        let itemsTarjeta:Array<any> = [];
+        listaPrecios.forEach((e:any) => { 
+            if (e.forma_pago === "tarjeta") {
+                itemsTarjeta.push(e);
+            }
+        })
+        return itemsTarjeta;
+    }
+
+
     useEffect(() => {
         setVenta({
             ...venta,
             clientes: cliente
         })
     }, [cliente])
+
+
+    // formas pago general
+    useEffect(() => {
+        if (venta.forma_pago === "tarjeta" && showFormasPago === false) {
+            const cincoPor:number = Number(venta.total) * 0.05;
+            setComisionTarjeta(cincoPor);
+        } else {
+            setComisionTarjeta(0);
+            setVenta({ ...venta, forma_pago: data.forma_pago })
+        }
+    }, [venta.forma_pago, showFormasPago])
+
+
+    // formas pago divididos
+    // useEffect(() => {
+    //     const listaTarjeta: Array<any> = listaPagosTarjeta();
+    //     if (listaTarjeta.length > 0 && showFormasPago === true) {
+    //         let cincoPor:number = 0;
+    //         listaTarjeta.forEach((e:any) => {
+    //             cincoPor = cincoPor + (Number(e.precio_parcial) * 0.05);
+    //         })
+    //         setComisionTarjeta(cincoPor);
+    //     } else {
+    //         setComisionTarjeta(0);
+    //     }
+
+    // }, [listaPrecios, showFormasPago])
+    
+
+    // console.log(comisionTarjeta);    
+
+
+    const verificarTarjeta = () => { 
+        if (venta.forma_pago === "tarjeta" || listaPagosTarjeta().length > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+    // console.log(verificarTarjeta());
+    // console.log(listaPagosTarjeta());
+
 
     const handlerChangeVenta = (e:any) => {
         setVenta({
@@ -111,6 +151,14 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
 
         let updateVenta:any = {}
         const ventaDet:Array<any> = [];
+        const listaLimpia:Array<any> = [];
+
+        // eliminar elementos con sin precios
+        listaPrecios.forEach((e:any) => {
+            if(Number(e.precio_parcial) !== 0){
+                listaLimpia.push(e);
+            }
+        })
         
         updateVenta.estado_venta = estado;
         updateVenta.descuento_total = venta.descuento_total;
@@ -118,37 +166,24 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
         updateVenta.observaciones = venta.observaciones;
         updateVenta.subtotal = venta.subtotal;
         updateVenta.total = venta.total;
-        updateVenta.forma_pago = listaPrecios.length <= 0 ? venta.forma_pago : "dividido";
+        updateVenta.forma_pago = listaLimpia.length <= 0 ? venta.forma_pago : "dividido";
         updateVenta.usuarioId = venta.usuarios.id;
         updateVenta.localId = venta.locales.id;
         updateVenta.tipo_venta = venta.tipo_venta;
         updateVenta.cliente = cliente;
-        // updateVenta.serie = venta.serie;
-        // updateVenta.cliente = venta.clientes;
-        // updateVenta.clienteId = venta.clientes && venta.clientes.id;
 
         data.ventaDetalles.forEach((e:any) => { // añade listo o rechazado a ventaDetalles
             e.estado_venta_detalle = "listo";
             ventaDet.push(e);
-            // if (!(listaRechazados.includes(e.id))) {
-            //     e.estado_venta_detalle = "listo"
-            //     ventaDet.push(e);
-            // } else {
-            //     e.estado_venta_detalle = "rechazado"
-            //     ventaDet.push(e);
-            // }
-            // return (null)
         })
 
         updateVenta.ventaDetalles = ventaDet;
-        updateVenta.formasPago = listaPrecios;
+        updateVenta.formasPago = listaLimpia;
 
         updateVenta.comprobante = comprobante;
         updateVenta.envioComprobante = envioComprobante;
 
         try {
-            // const response = await put(data.id, updateVenta, VENTAS);
-            // console.log(response);
             await put(data.id, updateVenta, VENTAS);
             setLoadConfirmarVenta(false);
         } catch (error) {
@@ -168,6 +203,8 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
         }
     }
     
+    // console.log(venta);
+    // console.log(listaPrecios);
 
     return (
         <div className="descripcion-venta">
@@ -211,18 +248,33 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
                         </div>
 
                         <span className="center">
-                            <p className="info mb-10">Total</p>
-                            <h1 className="success strong m-0">S/. { moneda(venta.total) }</h1>
+                            <p className={
+                                "mb-10 " + (
+                                    verificarTarjeta()
+                                    ? "warning"
+                                    : "info"
+                                )
+                            }>
+                                {
+                                    verificarTarjeta()
+                                    ? "Total +5% com."
+                                    : "Total"
+                                }
+                            </p>
+                            <h1 className={
+                                "strong m-0 " + 
+                                (
+                                    verificarTarjeta()
+                                    ? "warning"
+                                    : "success"
+                                )
+                            }>
+                                S/. { moneda(Number(venta.total) + comisionTarjeta) }
+                            </h1>
                         </span>
                         {
                             !showFormasPago
                             && (
-                                // <MetodosPago
-                                //     label="Forma de pago"
-                                //     name="forma_pago"
-                                //     onChange={handlerChangeVenta}
-                                //     value={venta.forma_pago}
-                                // />
                                 <Select2
                                     label="Forma de pago"
                                     name="forma_pago"
@@ -237,7 +289,6 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
                             )
                         }
 
-
                     </div>
 
                     <FormasPago 
@@ -247,6 +298,9 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
                         setConfirmarVenta={setConfirmarVenta}
                         listaPrecios={listaPrecios}
                         setListaPrecios={setListaPrecios}
+                        comisionTarjeta={comisionTarjeta}
+                        listaPagosTarjeta={listaPagosTarjeta}
+                        setComisionTarjeta={setComisionTarjeta}
                     />
 
                     {
@@ -421,3 +475,24 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
 //     onChange={handlerChangeVenta}
 //     value={venta.forma_pago}
 // />
+
+
+// useEffect(() => {
+//     if (venta.forma_pago === "tarjeta" && showFormasPago === false) {
+//         const cincoPor:number = Number(venta.total) * 0.05;
+//         const descuentoTotal:number = Number(venta.descuento_total) + cincoPor
+//         const total:number = Number(venta.subtotal) + Number(descuentoTotal)
+//         setVenta({
+//             ...venta,
+//             descuento_total: descuentoTotal,
+//             total: total
+//         })
+//     } else {
+//         setVenta({
+//             ...venta,
+//             descuento_total: data.descuento_total,
+//             total: data.total,
+//             forma_pago: data.forma_pago
+//         })
+//     }
+// }, [venta.forma_pago, showFormasPago])

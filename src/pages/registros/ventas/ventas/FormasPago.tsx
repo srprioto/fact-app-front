@@ -2,7 +2,6 @@ import { moneda } from "../../../../resources/func/moneda"
 
 export const FormasPago = ({ formasDePago }:any) => {
 
-
     return (
         <div className="box box-par m-0">
 
@@ -31,3 +30,4 @@ export const FormasPago = ({ formasDePago }:any) => {
         </div>
     )
 }
+

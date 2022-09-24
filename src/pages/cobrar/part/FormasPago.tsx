@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { BiChevronDown, BiChevronUp, BiPlus, BiX } from "react-icons/bi";
 import { Input } from "../../../components/forms/Input";
+import { InputDisable } from "../../../components/forms/InputDisable";
 import { Select2 } from "../../../components/forms/Select2";
 import { moneda } from "../../../resources/func/moneda";
 import { sumaArrayObj } from "../../../resources/func/sumaArrayObj";
@@ -13,6 +14,9 @@ interface formasPago {
     setConfirmarVenta:Function;
     listaPrecios:any;
     setListaPrecios:Function;
+    comisionTarjeta:number;
+    listaPagosTarjeta:Function;
+    setComisionTarjeta:Function;
 }
 
 export const FormasPago = ({ 
@@ -21,37 +25,47 @@ export const FormasPago = ({
     venta,
     setConfirmarVenta,
     listaPrecios,
-    setListaPrecios
+    setListaPrecios,
+    comisionTarjeta,
+    listaPagosTarjeta,
+    setComisionTarjeta
 }:formasPago) => {
 
-    const total:number = Number(venta.total);
-
     const [nuevoPrecio, setNuevoPrecio] = useState<any>({ forma_pago: "efectivo", precio_parcial: 0 });
-    const [totalRestante, setTotalRestante] = useState<number>(0);
+    // const [totalRestante, setTotalRestante] = useState<number>(0);
     const [switchAdd, setSwitchAdd] = useState<boolean>(false);
 
 
+    const totalRestante = ():number => { 
+        const sumaPrecios:number = sumaArrayObj(listaPrecios, "precio_parcial");
+        const comisTarjeta:number = Number(comisionTarjeta);
+        const total:number = Number(venta.total);
+        return (total + comisTarjeta) - sumaPrecios;
+    }
+
+
     useEffect(() => {
-        if (Number(totalRestante) === 0) {
+        if (Number(totalRestante()) === 0) {
             setConfirmarVenta(true);
         } else {
             setConfirmarVenta(false);
         }
-    }, [totalRestante])
+    }, [totalRestante()])
 
 
     useEffect(() => {
-        calcularRestante();
-    }, [listaPrecios])
-    
-
-    useEffect(() => {
-        if (showFormasPago) {
-            dividirPreciosProd();    
+        // calculo de comision de tarjeta
+        const listaTarjeta: Array<any> = listaPagosTarjeta();
+        if (listaTarjeta.length > 0 && showFormasPago === true) {
+            let cincoPor:number = 0;
+            listaTarjeta.forEach((e:any) => {
+                cincoPor = cincoPor + (Number(e.precio_parcial) * 0.05);
+            })
+            setComisionTarjeta(cincoPor);
         } else {
-            setListaPrecios([]);
+            setComisionTarjeta(0);
         }
-    }, [showFormasPago])
+    }, [listaPrecios, showFormasPago])
 
 
     const handlerOnChange = (e:any) => { 
@@ -65,9 +79,7 @@ export const FormasPago = ({
     const handlerOnChangeArray = (e:any, index:number) => { 
         let updateListaPrecios = [...listaPrecios];
         let objeto = updateListaPrecios[index];
-
         objeto[e.target.name] = e.target.value;
-
         updateListaPrecios[index] = objeto;
         setListaPrecios([...updateListaPrecios])
     }
@@ -89,22 +101,21 @@ export const FormasPago = ({
     }
 
 
-    const dividirPreciosProd = () => { 
-        let divPrecio:any = [];
-        venta.ventaDetalles.forEach((e:any) => { 
-            const updateDivPrecio:any = {
-                forma_pago: "efectivo",
-                precio_parcial: Number(e.precio_parcial)
-            }
-            divPrecio.push(updateDivPrecio);
-        })
-        setListaPrecios(divPrecio)
-        
-    }
-
-
-    const calcularRestante = () => { 
-        setTotalRestante(total - sumaArrayObj(listaPrecios, "precio_parcial"));
+    const dividirPreciosProd = () => { // ***
+        if (!showFormasPago) {
+            let divPrecio:any = [];
+            venta.ventaDetalles.forEach((e:any) => { 
+                const updateDivPrecio:any = {
+                    forma_pago: "efectivo",
+                    precio_parcial: Number(e.precio_parcial)
+                }
+                divPrecio.push(updateDivPrecio);
+            })
+            setListaPrecios(divPrecio)
+        } else {
+            setListaPrecios([]);
+        }
+        setShowFormasPago(!showFormasPago)
     }
 
 
@@ -113,7 +124,7 @@ export const FormasPago = ({
             <div className="grid-3 gap">
                 <div></div>
                 <button
-                    onClick={() => setShowFormasPago(!showFormasPago)}
+                    onClick={() => dividirPreciosProd()}
                     className="btn-show red-text center"
                 >
                     ¿Dividir pagos?
@@ -138,13 +149,13 @@ export const FormasPago = ({
                                 <h4 className={
                                     "center " + 
                                     (
-                                        totalRestante > 0
+                                        totalRestante() > 0
                                         ? "warning-i"
-                                        : totalRestante < 0
+                                        : totalRestante() < 0
                                         ? "danger-i"
                                         : "success-i"
                                     )
-                                }>S/. { moneda(totalRestante) }</h4>
+                                }>S/. { moneda(totalRestante()) }</h4>
                             </div>
                         </div>
                         
@@ -171,15 +182,24 @@ export const FormasPago = ({
                                                 <option value="deposito">Deposito</option>
                                             </Select2>
 
-                                            <Input
-                                                // label="Precio de compra del paquete"
-                                                type="number"
-                                                name="precio_parcial"
-                                                value={e.precio_parcial}
-                                                onChange={(e:any) => handlerOnChangeArray(e, index)}
-                                                moneda
-                                                noMenos
-                                            />
+                                            {
+                                                e.forma_pago === "tarjeta"
+                                                ? (
+                                                    <InputDisable
+                                                        value={e.precio_parcial}
+                                                        moneda
+                                                    />
+                                                ) : (
+                                                    <Input
+                                                        type="number"
+                                                        name="precio_parcial"
+                                                        value={e.precio_parcial}
+                                                        onChange={(e:any) => handlerOnChangeArray(e, index)}
+                                                        moneda
+                                                        noMenos
+                                                    />
+                                                )
+                                            }
                                         </div>
                                         <div className="delete-forma-pago">
                                             <BiX 
@@ -220,5 +240,23 @@ export const FormasPago = ({
     )
 }
 
+// const dividirPreciosProd = () => { // ***
+//     let divPrecio:any = [];
+//     venta.ventaDetalles.forEach((e:any) => { 
+//         const updateDivPrecio:any = {
+//             forma_pago: "efectivo",
+//             precio_parcial: Number(e.precio_parcial)
+//         }
+//         divPrecio.push(updateDivPrecio);
+//     })
+//     setListaPrecios(divPrecio)
+// }
 
 
+// useEffect(() => {
+//     if (showFormasPago) {
+//         dividirPreciosProd();
+//     } else {
+//         setListaPrecios([]);
+//     }
+// }, [showFormasPago])

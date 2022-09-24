@@ -13,7 +13,7 @@ export const InputDisable = ({ label, name, value, moneda, color, font_size }:in
 
     return (
         <div className="wrap-form ">
-            <label htmlFor={name}>{ label }</label><br />
+            { label && (<><label htmlFor={name}>{ label }</label><br /></>) }
             <div className="relative">
                 
                 <input 

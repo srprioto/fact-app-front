@@ -17,7 +17,8 @@ export const SelectAddPrecio = ({ pushPrecioToPrecios, handlerOnChange, nuevoPre
                 >
                     <option value="efectivo">Efectivo</option>
                     <option value="tarjeta">Tarjeta</option>
-                    <option value="pago_electronico">Pago Electronico</option>                                
+                    <option value="pago_electronico">Pago electronico</option>
+                    <option value="deposito">Deposito</option>                           
                 </Select2>
 
                 <Input

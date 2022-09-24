@@ -41,9 +41,7 @@ export const Input = ({
 
     return (
         <div className="wrap-form">
-            {
-                label && (<><label htmlFor={name}>{ label }</label><br /></>)
-            }
+            { label && (<><label htmlFor={name}>{ label }</label><br /></>) }
             <div className="relative">
                 {
                     type === "text"

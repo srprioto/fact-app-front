@@ -49,7 +49,7 @@ export const InfoVenta = ({ venta, classEstado }:any) => {
                     </span>
 
                     <span>
-                        <p>Descuento general</p>
+                        <p>Inc/Desc general</p>
                         <h4>S/. { venta.descuento_total }</h4>
                     </span>
 
