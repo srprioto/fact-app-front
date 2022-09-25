@@ -22,7 +22,7 @@ export const NuevoProducto = () => {
         try {
             const productoListo = await post(data, PRODUCTOS);
             setProducto(productoListo.data);
-            setLoading(false);                        
+            setLoading(false);
             // navigate('/productos');
         } catch (error) {
             setLoading(true);
@@ -36,7 +36,9 @@ export const NuevoProducto = () => {
 
                 <TitleBox titulo="Crear producto" back={true}/>
                 
-                <div className="box m-0 wrap-crear-producto">
+                <div className="box m-0 wrap-crear-producto relative">
+
+                    <h3>Crear un nuevo producto</h3>
 
                     <WrapCrearProducto
                         handlerCreateProducto={handlerCreateProducto} 

@@ -61,9 +61,14 @@ export const BoxVerIngresos = ({ idIngreso }:boxVerIngresos) => {
     }
 
 
-    const classNoPrecios = (precioVenta1:number|string, precioCompra:number|string) => {
+    const classNoPrecios = (precios:any) => {
         let classItem:string = "";
-        if (precioVenta1 === 0 || precioCompra === 0) {
+        if (
+            precios.precioVenta1 === 0 || 
+            precios.precioVenta2 === 0 || 
+            precios.precioVenta3 === 0 || 
+            precios.precioCompra === 0
+        ) {
             classItem = "danger-i"
         }
         return classItem
@@ -98,27 +103,37 @@ export const BoxVerIngresos = ({ idIngreso }:boxVerIngresos) => {
                                 && (
                                     movimiento.movimientoDetalles.map((e:any) => {
 
-                                        const precioVenta1:number = Number(e.productos.precio_venta_1)
-                                        const precioCompra:number = Number(e.productos.precio_compra)
+                                        const precios:any = {
+                                            precioVenta1: Number(e.productos.precio_venta_1),
+                                            precioVenta2: Number(e.productos.precio_venta_2),
+                                            precioVenta3: Number(e.productos.precio_venta_3),
+                                            precioCompra: Number(e.productos.precio_compra),
+                                        };
 
                                         return (
                                             <tr 
                                                 key={e.id} 
-                                                className={classNoPrecios(precioVenta1, precioCompra)}
+                                                className={classNoPrecios(precios)}
                                             >
                                                 <td className={
-                                                    classNoPrecios(precioVenta1, precioCompra) === ""
+                                                    classNoPrecios(precios) === ""
                                                     ? "info"
-                                                    : classNoPrecios(precioVenta1, precioCompra)
-                                                }>{ e.productos.nombre }</td>
+                                                    : classNoPrecios(precios)
+                                                }>
+                                                    {
+                                                        e.productos.nombre +
+                                                        (e.productos.marca ? " - " + e.productos.marca + " - " : "") +
+                                                        (e.productos.talla ? e.productos.talla : "")
+                                                    } 
+                                                </td>
                                                 <td><ProductoInfo producto={e.productos} /></td>
                                                 <td>{ e.cantidad }</td>
                                                 <td>S/. { moneda(e.precio_unidad) }</td>
                                                 <td className={
                                                     "strong " +
-                                                    (classNoPrecios(precioVenta1, precioCompra) === ""
+                                                    (classNoPrecios(precios) === ""
                                                     ? "info"
-                                                    : classNoPrecios(precioVenta1, precioCompra))
+                                                    : classNoPrecios(precios))
                                                 }>S/. { moneda(e.precio_parcial) }</td>
                                                 <td>{ e.proveedores && e.proveedores.nombre }</td>
                                                 <td>{ e.descripcion }</td>

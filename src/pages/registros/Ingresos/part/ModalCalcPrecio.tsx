@@ -141,7 +141,7 @@ export const ModalCalcPrecio = ({
             modal={modal}
             // back={setModal}
             setModal={setModal}
-            width={70}
+            width={80}
             border="border-primary"
             notransparent
         >
@@ -152,7 +152,13 @@ export const ModalCalcPrecio = ({
                     <div className="grid-1 gap-v m-0">
 
                         <h2 className="mayus center mb-15">
-                            Calcular precios de {movimientoDetalle.productos.nombre}
+                            Calcular precios de 
+                            {
+                                movimientoDetalle.productos.nombre + (
+                                    movimientoDetalle.productos.marca 
+                                    && (" - " + movimientoDetalle.productos.marca + " - " )
+                                ) + movimientoDetalle.productos.talla
+                            }
                         </h2>
                         
                         <div className="grid-2 gap">

@@ -292,7 +292,6 @@ a{
     align-items: center;
 }
 
-
 .gap{
     gap: 20px;
 }
@@ -305,8 +304,6 @@ a{
 .gap-v{
     gap: 0 20px;
 }
-
-
 
 
 // boxes
@@ -682,7 +679,7 @@ a.btn-danger:hover{ color: $danger; }
     .moneda{
         position: absolute;
         top: 7px;
-        left: 13px;
+        left: 32px;
         font-weight: 600;
         font-size: 16px;
         color: $warning;

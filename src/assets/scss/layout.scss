@@ -837,8 +837,23 @@
 .nuevo-producto{
     .wrap-crear-producto{
         // @include min-scroll(144px);
-        min-height: calc(100vh - 144px)
+        min-height: calc(100vh - 144px);
+        .check-crear-producto{
+            width: 100%;
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            .check-form{
+                display: flex;
+                justify-content: right;
+                align-items: center;
+                label{
+                    margin: 0 7px 0 0;
+                }
+            }
+        }
     }
+    
 }
 
 .wrap-gestion-codigo{

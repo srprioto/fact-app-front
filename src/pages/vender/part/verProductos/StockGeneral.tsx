@@ -61,8 +61,6 @@ export const StockGeneral = ({ idProducto, idLocal }:any) => {
                     </div>
                 )
             }
-            
-            
         </div>
     )
 }

@@ -3,7 +3,9 @@ import { BiBrush } from 'react-icons/bi';
 
 import { InputMk } from '../../../../components/forms/InputMk';
 import { LoadSwitchBtn } from '../../../../components/btns/LoadSwitchBtn';
-import { ValidCreateProduct } from '../../../../resources/validations/Productos';
+import { ValidCreateProduct, ValidCreateProductCompleto } from '../../../../resources/validations/Productos';
+import { useState } from 'react';
+import { Checkbox2 } from '../../../../components/forms/Checkbox2';
 
 interface formsCrearProducto {
     handlerCreateProducto:Function;
@@ -12,11 +14,14 @@ interface formsCrearProducto {
 
 export const FormsCrearProducto = ({ handlerCreateProducto, loading }:formsCrearProducto) => {
 
+    const [switchCrear, setSwitchCrear] = useState<boolean>(false);
+
     return (
         <div>
             <Formik
                 initialValues={{
-                    // codigo:"",
+                    switchCrear: switchCrear,
+                    codigo:"",
                     nombre:"",
                     descripcion:"",
                     marca:"",
@@ -26,13 +31,13 @@ export const FormsCrearProducto = ({ handlerCreateProducto, loading }:formsCrear
                     precio_venta_1:"",
                     precio_venta_2:"",
                     precio_venta_3:"",
-                    // usuarioId: 1, 
-                    categoriasId: 1 
+                    categoriasId: null
                 }}
 
-                validationSchema={ValidCreateProduct}
+                validationSchema={switchCrear ? ValidCreateProductCompleto : ValidCreateProduct}
 
                 onSubmit={(data, { resetForm }) => { 
+                    data.switchCrear = switchCrear;
                     handlerCreateProducto(data)
                     resetForm();                
                 }}
@@ -40,17 +45,34 @@ export const FormsCrearProducto = ({ handlerCreateProducto, loading }:formsCrear
                 
                 {({ errors }) => (
 
-                    <Form className="grid-1 gap mt-25 mb-25">
-                        
-
-                        <div className="grid-3 gap">
-
-                            {/* <InputMk 
-                                label="Codigo del producto"
-                                type="text"
-                                name="codigo"
-                                error={errors.codigo}
-                            /> */}
+                    <Form className="grid-1 gap mb-25 mt-25">
+                        <div className="check-crear-producto">
+                            <div className="check-form">
+                                <label htmlFor="switchCrear">
+                                    { !switchCrear ? "Producto rápido" : "Producto completo" }
+                                </label>
+                                <Checkbox2
+                                    name="switchCrear"
+                                    checked={switchCrear}
+                                    handlerCheck={ () => setSwitchCrear(!switchCrear) }
+                                />
+                            </div>
+                        </div>
+                        {
+                            switchCrear
+                            && (
+                                <div className="grid-1 gap">
+                                    <InputMk 
+                                        label="Codigo del producto"
+                                        type="text"
+                                        name="codigo"
+                                        error={errors.codigo}
+                                    />
+                                </div>
+                            )
+                        }
+                        <div className="grid-3 gap ">
+                            
                             <InputMk 
                                 label="Nombre del producto"
                                 type="text"

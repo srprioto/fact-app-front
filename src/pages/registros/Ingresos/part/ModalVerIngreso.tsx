@@ -9,7 +9,7 @@ export const ModalVerIngreso = ({ modal, setModal, idIngreso }:any) => {
             modal={modal}
             setModal={setModal}
             border="border-primary"
-            width={70}
+            width={80}
         >
             <BoxVerIngresos idIngreso={idIngreso} />
 

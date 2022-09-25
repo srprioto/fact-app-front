@@ -19,30 +19,13 @@ import { ModalVerProducto } from "./ModalVerProducto";
 export const Productos = () => {
 
     const [loadingData, setLoadingData] = useState<boolean>(false);
-    // const [loadingOne, setLoadingOne] = useState<boolean>(false);
-
     const [modalEliminar, setModalEliminar] = useState<boolean>(false);
     const [modalBarcode, setModalBarcode] = useState<boolean>(false);
     const [modalVer, setModalVer] = useState<boolean>(false);
-
     const [pagination, setPagination] = useState<any>({ meta: {}, links: {} });
-
     const [data, setData] = useState<any>([]);
-    const [producto, setProducto] = useState<any>({
-        // codigo:"",
-        // color:"",
-        // descripcion:"",
-        // marca:"",
-        // nombre:"",
-        // precio_compra:0,
-        // precio_venta_1:0,
-        // precio_venta_2:0,
-        // precio_venta_3:0,
-        // talla:"",
-        // created_at:"",
-        // updated_at:""
-    });
-
+    const [producto, setProducto] = useState<any>({});
+    const [idProducto, setIdProducto] = useState<number>(0);
     const [infoProducto, setInfoProducto] = useState<any>({});
 
     // *** search
@@ -92,7 +75,7 @@ export const Productos = () => {
     }
 
     const handlerVer = (prod:any) => { 
-        setProducto(prod);
+        setIdProducto(prod.id);
         setModalVer(!modalVer);
     }
 
@@ -234,7 +217,7 @@ export const Productos = () => {
 
             <ModalWrap modal={modalVer}>
                 <ModalVerProducto
-                    producto={producto}
+                    idProducto={idProducto}
                     modal={modalVer}
                     setModal={setModalVer}
                     // loading={loadingOne}
