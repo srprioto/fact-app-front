@@ -100,41 +100,21 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
             setComisionTarjeta(cincoPor);
         } else {
             setComisionTarjeta(0);
-            setVenta({ ...venta, forma_pago: data.forma_pago })
+            // setVenta({ ...venta, forma_pago: data.forma_pago })
         }
     }, [venta.forma_pago, showFormasPago])
 
 
-    // formas pago divididos
-    // useEffect(() => {
-    //     const listaTarjeta: Array<any> = listaPagosTarjeta();
-    //     if (listaTarjeta.length > 0 && showFormasPago === true) {
-    //         let cincoPor:number = 0;
-    //         listaTarjeta.forEach((e:any) => {
-    //             cincoPor = cincoPor + (Number(e.precio_parcial) * 0.05);
-    //         })
-    //         setComisionTarjeta(cincoPor);
-    //     } else {
-    //         setComisionTarjeta(0);
-    //     }
-
-    // }, [listaPrecios, showFormasPago])
-    
-
-    // console.log(comisionTarjeta);    
-
-
     const verificarTarjeta = () => { 
-        if (venta.forma_pago === "tarjeta" || listaPagosTarjeta().length > 0) {
+        if (
+            (venta.forma_pago === "tarjeta" && showFormasPago === false) || 
+            listaPagosTarjeta().length > 0
+        ) {
             return true;
         } else {
             return false;
         }
     }
-
-
-    // console.log(verificarTarjeta());
-    // console.log(listaPagosTarjeta());
 
 
     const handlerChangeVenta = (e:any) => {
@@ -192,6 +172,7 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
         } finally {
             handlerRefresh();
         }
+        
     }
 
 
@@ -496,3 +477,22 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
 //         })
 //     }
 // }, [venta.forma_pago, showFormasPago])
+
+
+// formas pago divididos
+// useEffect(() => {
+//     const listaTarjeta: Array<any> = listaPagosTarjeta();
+//     if (listaTarjeta.length > 0 && showFormasPago === true) {
+//         let cincoPor:number = 0;
+//         listaTarjeta.forEach((e:any) => {
+//             cincoPor = cincoPor + (Number(e.precio_parcial) * 0.05);
+//         })
+//         setComisionTarjeta(cincoPor);
+//     } else {
+//         setComisionTarjeta(0);
+//     }
+
+// }, [listaPrecios, showFormasPago])
+
+
+// console.log(comisionTarjeta);    
