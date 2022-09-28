@@ -5,6 +5,7 @@ import { InputMk } from "../../../../components/forms/InputMk"
 import { ParrafoForm } from "../../../../components/forms/ParrafoForm"
 import { LoadingImg2 } from "../../../../components/loads/LoadingImg"
 import { ValidDocumento } from "../../../../resources/validations/Clientes"
+import { tipoVenta as tipVenta } from "../../../../resources/dtos/VentasDto";
 import { Select } from "../../../../components/forms/Select"
 
 
@@ -70,23 +71,27 @@ export const FormGestionDocum = ({
                             className="info strong capitalize"
                         />
 
-                        {/* <ParrafoForm
-                            label="Tipo de documento"
-                            value={ getCliente.tipoDocumento }
-                            className="info strong"
-                        /> */}
-
-                        <Select
-                            label="Tipo de Documento"
-                            name="tipoDocumento"
-                            onChange={handlerOnChangeGetCli}
-                            value={getCliente.tipoDocumento}
-                        >
-                            <option value="noDocumento">Sin documento</option>
-                            <option value="DNI">DNI</option>
-                            <option value="RUC">RUC</option>
-                        </Select>
-
+                        {
+                            tipo_venta === tipVenta.factura
+                            ? (
+                                <ParrafoForm
+                                    label="Tipo de Documento"
+                                    value={getCliente.tipoDocumento}
+                                    className="info strong"
+                                />
+                            ) : (
+                                <Select
+                                    label="Tipo de Documento"
+                                    name="tipoDocumento"
+                                    onChange={handlerOnChangeGetCli}
+                                    value={getCliente.tipoDocumento}
+                                >
+                                    <option value="noDocumento">Sin documento</option>
+                                    <option value="DNI">DNI</option>
+                                    <option value="RUC">RUC</option>
+                                </Select>
+                            )
+                        }
                         {
                             getCliente.tipoDocumento !== "noDocumento"
                             && (

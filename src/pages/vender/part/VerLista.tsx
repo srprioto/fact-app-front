@@ -103,7 +103,7 @@ export const VerLista = ({
                         itemPop={itemPop}
                     />
 
-                    <div className="tabbs-buttons tabbs grid-5 gap mb-25">
+                    <div className="tabbs-buttons tabbs grid-4 gap mb-25">
                         <button 
                             className={"btn2 btn2-success " + (tabbs === 1 && "btn2-sub-success")}
                             onClick={() => handlerTabb(1)}

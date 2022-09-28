@@ -1,5 +1,6 @@
 import { BiBookmarkAltMinus, BiLike, BiShowAlt, BiX } from "react-icons/bi"
 import { DropDown } from "../../../../components/DropDown"
+import { tipoVenta } from "../../../../resources/dtos/VentasDto";
 
 interface ventasDropdown {
     ventas:any;
@@ -28,7 +29,8 @@ export const VentasDropdown = ({ ventas, handlerVer, updateData, handlerAnular, 
     return (
         <DropDown width="190">
             {
-                ventas.tipo_venta === "venta rapida"
+                (ventas.tipo_venta === tipoVenta.venta_rapida ||
+                ventas.tipo_venta === tipoVenta.boleta)
                 && (
                     !anulado()
                     && <span onClick={ () => handlerAnular(ventas.id, ventas.locales.id) } >

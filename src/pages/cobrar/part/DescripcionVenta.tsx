@@ -172,7 +172,6 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
         } finally {
             handlerRefresh();
         }
-        
     }
 
 

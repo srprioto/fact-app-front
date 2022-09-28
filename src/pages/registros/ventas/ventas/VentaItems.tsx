@@ -29,7 +29,7 @@ export const VentaItems = ({ ventas, handlerVer, updateData, handlerAnular, hand
         } else if (ventas.estado_venta === "rechazado") {
             return "danger ";
         } else if (ventas.estado_venta === "anulado") {
-            return "danger ";
+            return "secundary-i opacity ";
         } else if (ventas.estado_venta === "cotizacion") {
             return "secundary ";
         }
@@ -65,7 +65,7 @@ export const VentaItems = ({ ventas, handlerVer, updateData, handlerAnular, hand
             }</td> */}
             <td className={"success strong " + anulado()}>S/. { moneda(ventas.total) }</td>
             <td className={ classEstado() + " capitalize strong" } >{ ventas.estado_venta }</td>
-            <td>{ fecha(ventas.created_at) }</td>
+            <td className={ anulado() }>{ fecha(ventas.created_at) }</td>
             <td className={ anulado() }>{ ventas.locales && ventas.locales.nombre }</td>
             <td>
                 <VentasDropdown 
