@@ -1,4 +1,5 @@
 // import { ListaDetalleProductos } from "../../Ingresos/part/ListaDetalleProductos"
+import { tipoVenta } from "../../../../resources/dtos/VentasDto";
 import { fecha } from "../../../../resources/func/fechas";
 import { moneda } from "../../../../resources/func/moneda"
 import { VentasDropdown } from "./VentasDropdown"
@@ -21,6 +22,7 @@ export const VentaItems = ({ ventas, handlerVer, updateData, handlerAnular, hand
         ventas.codigo_venta +
         (correlativo !== 0 ? "-" + correlativo : "");
 
+        
     const classEstado = () => { 
         if (ventas.estado_venta === "listo") {
             return "success ";
@@ -35,29 +37,32 @@ export const VentaItems = ({ ventas, handlerVer, updateData, handlerAnular, hand
         }
     }
 
+
     const anulado = () => { 
         if (ventas.estado_venta === "anulado") {
-            return "opacity";
+            return "opacity ";
         } else {
             return "";
         }
     }
 
-    // const tipoComprobante = () => {
-    //     if (ventas.serie === "B003") {
-    //         return "Boleta";
-    //     } else if (ventas.serie === "F003") {
-    //         return "Factura";
-    //     } else if (ventas.serie === "V001") {
-    //         return "Venta rapida";
-    //     }
-    // }
+
+    const tipoComprobante = () => {
+        if (
+            ventas.tipo_venta === tipoVenta.boleta ||
+            ventas.tipo_venta === tipoVenta.factura
+        ) {
+            return "info ";
+        } else if (ventas.tipo_venta === tipoVenta.venta_rapida) {
+            return "success ";
+        }
+    }
     
     
     return (
         <tr className="venta-items">
             <td className={"secundary " + anulado()}>{ codigoVenta }</td>
-            <td className={"secundary capitalize " + anulado()}>{ ventas.tipo_venta }</td>
+            <td className={"secundary capitalize " + anulado() + tipoComprobante()}>{ ventas.tipo_venta }</td>
             {/* <td className={"secundary capitalize " + anulado()}>{ 
                 ventas.tipo_venta === "venta_rapida" 
                 ? "Venta rapida" 
