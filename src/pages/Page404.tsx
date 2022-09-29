@@ -4,6 +4,7 @@ import { Link } from "react-router-dom"
 export const Page404 = () => {
 
     // const navigate = useNavigate();
+    
 
     return (
         <div className="page-404 middle">
