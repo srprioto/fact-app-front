@@ -41,7 +41,7 @@ export const ModalReimpVenta = ({ modal, setModal, idVenta }:modalReimpVenta) =>
     return (
         <Modal
             modal={modal}
-            setModal={setModal}
+            // setModal={setModal}
         >
             {
                 loadingOne

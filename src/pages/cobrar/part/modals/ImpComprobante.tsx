@@ -303,34 +303,52 @@ export const ImpComprobante = ({ venta, setImprimir, nuevo }:impComprobante) => 
                 <div style={detalles}>
                     <div style={blockLeft}></div>
                     <div style={blockRight}>
-                        <div style={textoResumen}>
-                            <span style={left}>Subtotal:</span>
-                            <span style={right}>S/. { 
-                                nuevo
-                                ? moneda(venta.subtotal)
-                                : moneda(subtotal)
-                            }</span>
-                        </div>
-                        <div style={textoResumen}>
-                            <span style={left}>IGV:</span>
-                            <span style={right}>S/. { 
-                                nuevo
-                                ? moneda(venta.igvGeneral)
-                                : moneda(igv)
-                            }</span>
-                        </div>
-                        <div style={textoResumen}>
-                            <span style={left}>Inafecta:</span>
-                            <span style={right}>S/. { moneda(0) }</span>
-                        </div>
-                        <div style={textoResumen}>
-                            <span style={left}>Exonerada:</span>
-                            <span style={right}>S/. { moneda(0) }</span>
-                        </div>
-                        {/* <div style={textoResumen}>
-                            <span style={left}>Gratuita:</span>
-                            <span style={right}>S/. { moneda(0) }</span>
-                        </div> */}
+
+                        {
+                            tipVenta !== tipoVenta.venta_rapida
+                            && (
+                                <div style={textoResumen}>
+                                    <span style={left}>Subtotal:</span>
+                                    <span style={right}>S/. { 
+                                        nuevo
+                                        ? moneda(venta.subtotal)
+                                        : moneda(subtotal)
+                                    }</span>
+                                </div>
+                            )
+                        }
+
+                        {
+                            tipVenta !== tipoVenta.venta_rapida
+                            && (
+                                <div style={textoResumen}>
+                                    <span style={left}>IGV:</span>
+                                    <span style={right}>S/. { 
+                                        nuevo
+                                        ? moneda(venta.igvGeneral)
+                                        : moneda(igv)
+                                    }</span>
+                                </div>
+                            )
+                        }
+
+                        {
+                            tipVenta !== tipoVenta.venta_rapida
+                            && (
+                                <>
+                                    <div style={textoResumen}>
+                                        <span style={left}>Inafecta:</span>
+                                        <span style={right}>S/. { moneda(0) }</span>
+                                    </div>
+
+                                    <div style={textoResumen}>
+                                        <span style={left}>Exonerada:</span>
+                                        <span style={right}>S/. { moneda(0) }</span>
+                                    </div>
+                                </>
+                            )
+                        }
+
                         <div style={textoResumen}>
                             <span style={left}>Total:</span>
                             <span style={right}>S/. { moneda(venta.total) }</span>
@@ -358,3 +376,7 @@ export const ImpComprobante = ({ venta, setImprimir, nuevo }:impComprobante) => 
     );
 }
 
+{/* <div style={textoResumen}>
+    <span style={left}>Gratuita:</span>
+    <span style={right}>S/. { moneda(0) }</span>
+</div> */}
