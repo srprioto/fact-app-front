@@ -134,13 +134,17 @@ export const ImpComprobante = ({ venta, setImprimir, nuevo }:impComprobante) => 
     const texto = {
         fontFamily: "arial",
         fontWeight: "100",
+        fontSize: "11px",
     }
+    const lowercase:any = {
+        textTransform: "lowercase"
+    }    
 
     // header
     const tituloPrinc = {
         ...mb10,
         ...texto,
-        fontSize: "17px",
+        fontSize: "16px",
     }
 
     const headerInfo:any = {
@@ -148,7 +152,7 @@ export const ImpComprobante = ({ venta, setImprimir, nuevo }:impComprobante) => 
         padding: "0 10px",
         fontWeight: "100",
         fontFamily: "arial",
-        fontSize: "14px",
+        fontSize: "13px",
     }
 
     const boxHeaderInfo:any = {
@@ -280,7 +284,7 @@ export const ImpComprobante = ({ venta, setImprimir, nuevo }:impComprobante) => 
                                     return (
                                         <tr key={e.id} style={texto}>
                                             {/* <td>{ e.productos.codigo }</td> */}
-                                            <td>{ 
+                                            <td style={lowercase}>{ 
                                                 e.productos.nombre + " - " +
                                                 e.productos.marca + " - " +
                                                 e.productos.talla + " - " +
