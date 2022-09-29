@@ -376,7 +376,7 @@ export const ImpComprobante = ({ venta, setImprimir, nuevo }:impComprobante) => 
     );
 }
 
-{/* <div style={textoResumen}>
+/* <div style={textoResumen}>
     <span style={left}>Gratuita:</span>
     <span style={right}>S/. { moneda(0) }</span>
-</div> */}
+</div> */
