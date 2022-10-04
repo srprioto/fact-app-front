@@ -112,10 +112,13 @@ label{
 .pr-0{ padding-right: 0!important; }
 
 .mt-5{ margin-top:5px; }
+.mt-10{ margin-top:10px; }
 .mt-15{ margin-top:15px; }
 .mt-18{ margin-top:18px; }
 .mt-20{ margin-top:20px; }
 .mt-25{ margin-top:25px; }
+.mt-30{ margin-top:30px; }
+.mt-35{ margin-top:35px; }
 
 .mb-5{ margin-bottom:5px; }
 .mb-8{ margin-bottom:8px; } // sirve como el margen de un label, para una <p>
@@ -153,6 +156,18 @@ label{
 .bb-warning{ border-bottom: 1px solid $warning; }
 .bb-danger{ border-bottom: 1px solid $danger; }
 .bb-neutro{ border-bottom: 1px solid #464d62; }
+
+.bt{
+    // margin-top: 10px;
+    padding-top: 10px;
+}
+.bt-success{ border-top: 1px solid $success; }
+.bt-primary{ border-top: 1px solid $primary; }
+.bt-secundary{ border-top: 1px solid $secundary; }
+.bt-info{ border-top: 1px solid $info; }
+.bt-warning{ border-top: 1px solid $warning; }
+.bt-danger{ border-top: 1px solid $danger; }
+.bt-neutro{ border-top: 1px solid #464d62; }
 
 // size box
 
@@ -640,40 +655,12 @@ a.btn-danger:hover{ color: $danger; }
         position: relative;
 
         .msg-error{
-            position: absolute;
-            text-align: left;
-            left: 4px;
-            top: 9px;
-            width: 26px;
-            height: 24px;
-            
-            svg{
-                padding: 2px;
-                border: 1px solid $warning;
-                // background-color: ;
-                color: $warning;
-                font-size: 22px;
-                border-radius: 50%;
-                line-height: 0;
-            }
-
-            .error-message{
-                width: 300px;
-                transform: scale(0);
-                position: absolute;
-                left: 0;
-                text-align: left;
-            }
-            
-            svg:hover ~ .error-message,
-            .error-message:hover{
-                transform: scale(1);
-                color: $warning;
-                width: 300px;
-                text-align: left;
-            }    
-
+            @include msgError();
         }
+    }
+
+    .msg-error{
+        @include msgError();
     }
 
     .moneda{

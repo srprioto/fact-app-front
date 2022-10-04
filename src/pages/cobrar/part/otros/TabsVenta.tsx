@@ -9,7 +9,7 @@ interface tabsVenta {
 
 export const TabsVenta = ({ switchChangeFact, tipoSerie, tabbs, setTabbs }:tabsVenta) => {
     return (
-        <div className="tabbs-buttons tabbs grid-4 gap mb-25">
+        <div className="tabbs-buttons tabbs grid-4 mb-25">
             <button 
                 className={
                     "btn2 btn2-success " + 
@@ -31,7 +31,7 @@ export const TabsVenta = ({ switchChangeFact, tipoSerie, tabbs, setTabbs }:tabsV
             ><BiSpreadsheet /> Boleta
             </button>
 
-            <button 
+            <button
                 className={
                     "btn2 btn2-info " + 
                     (!switchChangeFact ? ( tipoSerie() === 3 ? "" : "btn2-disable " ) : "") +
@@ -40,6 +40,16 @@ export const TabsVenta = ({ switchChangeFact, tipoSerie, tabbs, setTabbs }:tabsV
                 onClick={() => {switchChangeFact && setTabbs(3)}}
             ><BiTask /> Factura
             </button>
+
+            {/* <button 
+                className={
+                    "btn2 btn2-warning " + 
+                    (!switchChangeFact ? ( tipoSerie() === 4 ? "" : "btn2-disable " ) : "") +
+                    (tabbs === 4 && "btn2-sub-warning")
+                }
+                onClick={() => {switchChangeFact && setTabbs(4)}}
+            ><BiBookBookmark /> Credito/Adelanto
+            </button> */}
         </div>
     )
 }

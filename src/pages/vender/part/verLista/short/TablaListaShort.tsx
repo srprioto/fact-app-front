@@ -25,7 +25,7 @@ export const TablaListaShort = ({ itemPop, listaVenta }:any) => {
                             return (
                                 <tr key={index}>
                                     <td>{ e.nombre_producto }</td>
-                                    <td className={"strong " + cambioPrecio}>S/. { moneda(e.precio_parcial) }</td>
+                                    <td className={"strong " + cambioPrecio}>S/.{ moneda(e.precio_parcial) }</td>
                                     <td>
                                         <span className="wrap-icons danger center">
                                             <BiX 

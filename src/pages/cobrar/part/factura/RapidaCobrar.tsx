@@ -28,7 +28,7 @@ export const RapidaCobrar = ({
     
 
     return (
-        <div className="">
+        <div className="bt bt-neutro">
 
             <div className="wrap-confirmar-venta grid-3 gap mb-10 mt-25">
                 <BtnOnOff2

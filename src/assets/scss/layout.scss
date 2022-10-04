@@ -788,15 +788,19 @@
             }
             .add-precio{
                 .box-add-precio{
-                    height: 48.5px;
+                    // height: 48.5px;
                     svg{
                         font-size: 23px;
                     }
                 }
             }
-            
-            
-            
+        }
+
+        .credito-anticipo{
+            .box-credito-anticipo{
+                display: grid;
+                grid-template-columns: 1fr 2fr 1fr;
+            }
         }
 
         // .wrap-formas-pago{

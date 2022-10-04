@@ -33,24 +33,26 @@ export const ConfirmarVenta = ({
     }
 
     return (
-        <div className="wrap-confirmar-venta grid-3 gap mb-10 mt-25">
-            <BtnOnOff2
-                label="Confirmar venta"
-                estado={validarVenta()}
-                icon={<BiCaretRight />}
-            >
+        <div className="wrap-confirmar-venta mb-10 mt-30 bt bt-neutro">
+            <div className="grid-3 gap mt-25">
+                <BtnOnOff2
+                    label="Confirmar venta"
+                    estado={validarVenta()}
+                    icon={<BiCaretRight />}
+                >
+                    <button
+                        className="btn btn-success" 
+                        type="submit"
+                    ><BiCaretRight /> Confirmar venta</button>
+                </BtnOnOff2>
+                
+                <div></div>
                 <button
-                    className="btn btn-success" 
-                    type="submit"
-                ><BiCaretRight /> Confirmar venta</button>
-            </BtnOnOff2>
-            
-            <div></div>
-            <button
-                className="btn btn-danger"
-                type="button"
-                onClick={() => setModalRechazVenta(!modalRechazVenta)}
-            ><BiX /> Rechazar venta</button>
+                    className="btn btn-danger"
+                    type="button"
+                    onClick={() => setModalRechazVenta(!modalRechazVenta)}
+                ><BiX /> Rechazar venta</button>
+            </div>
         </div>
     )
 }

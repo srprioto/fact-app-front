@@ -1,3 +1,5 @@
+import { BiQuestionMark } from "react-icons/bi";
+
 interface input {
     label?:string;
     type?:string;
@@ -6,7 +8,9 @@ interface input {
     onChange:any;
     placeholder?:string;
     color?:string;
+    colorLabel?:string;
     className?:string;
+    msgErr?:string|boolean;
     moneda?:boolean;
     noMenos?:boolean;
 }
@@ -19,7 +23,9 @@ export const Input = ({
     placeholder, 
     onChange, 
     color = "",
+    colorLabel,
     className = "",
+    msgErr,
     moneda, 
     noMenos
 }:input) => {
@@ -41,7 +47,7 @@ export const Input = ({
 
     return (
         <div className="wrap-form">
-            { label && (<><label htmlFor={name}>{ label }</label><br /></>) }
+            { label && (<><label className={colorLabel} htmlFor={name}>{ label }</label><br /></>) }
             <div className="relative">
                 {
                     type === "text"
@@ -87,6 +93,10 @@ export const Input = ({
                             className={className}
                         />
                     )
+                }
+                {
+                    !!msgErr
+                    && <MsgError msgErr={msgErr} />
                 }
                 {
                     moneda
@@ -203,7 +213,14 @@ const InputOtros = ({
     );
 }
 
-
+const MsgError = ({ msgErr }:any) => { 
+    return (
+        <div className="msg-error">
+            <BiQuestionMark />
+            <h5 className="error-message">{msgErr}</h5>
+        </div>
+    )
+}
 
 
 /*

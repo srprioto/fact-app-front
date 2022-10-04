@@ -123,5 +123,41 @@
     /* color: #000; */
 }
 
+
+@mixin msgError() {
+    position: absolute;
+    text-align: left;
+    left: 4px;
+    top: 9px;
+    width: 26px;
+    height: 24px;
+    
+    svg{
+        padding: 2px;
+        border: 1px solid $warning;
+        // background-color: ;
+        color: $warning;
+        font-size: 22px;
+        border-radius: 50%;
+        line-height: 0;
+    }
+
+    .error-message{
+        width: 250px;
+        transform: scale(0);
+        position: absolute;
+        left: 0;
+        text-align: left;
+    }
+    
+    svg:hover ~ .error-message,
+    .error-message:hover{
+        transform: scale(1);
+        color: $warning;
+        width: 250px;
+        text-align: left;
+    }    
+}
+
 // forma de uso
 // @include min-scroll(144px);

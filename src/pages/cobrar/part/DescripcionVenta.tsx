@@ -19,6 +19,8 @@ import { moneda } from "../../../resources/func/moneda";
 import { CodigoVenta } from "./otros/CodigoVenta";
 import { FormasPago } from "./FormasPago";
 import { tipoVenta } from "../../../resources/dtos/VentasDto";
+import { CreditoAdelanto } from "./CreditoAdelanto";
+import { MasAccionesCobrar } from "./otros/MasAccionesCobrar";
 
 
 interface descripcionVenta {
@@ -67,10 +69,11 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
     
     const [switchChangeFact, setSwitchChangeFact] = useState<boolean>(stateSwitchChange());
     const [tabbs, setTabbs] = useState<number>(tipoSerie());
-
+    
     const [listaPrecios, setListaPrecios] = useState<Array<any>>([]);
     const [confirmarVenta, setConfirmarVenta] = useState<boolean>(false);
     const [showFormasPago, setShowFormasPago] = useState<boolean>(false);
+    const [switchCredito, setSwitchCredito] = useState<boolean>(false);
 
     const [comisionTarjeta, setComisionTarjeta] = useState<number>(0);
 
@@ -183,8 +186,6 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
         }
     }
     
-    // console.log(venta);
-    // console.log(listaPrecios);
 
     return (
         <div className="descripcion-venta">
@@ -201,7 +202,7 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
                     setTabbs={setTabbs}
                 />
 
-                <div className="descripcion-venta grid-1 gap bb bb-neutro">
+                <div className="descripcion-venta grid-1 gap">
 
                     <div className="grid-4 gap">
 
@@ -271,9 +272,17 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
 
                     </div>
 
-                    <FormasPago 
+                    <MasAccionesCobrar
+                        venta={venta}
+                        setListaPrecios={setListaPrecios}
                         showFormasPago={showFormasPago}
                         setShowFormasPago={setShowFormasPago}
+                        switchCredito={switchCredito}
+                        setSwitchCredito={setSwitchCredito}
+                    />
+
+                    <FormasPago 
+                        showFormasPago={showFormasPago}
                         venta={venta}
                         setConfirmarVenta={setConfirmarVenta}
                         listaPrecios={listaPrecios}
@@ -283,10 +292,7 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
                         setComisionTarjeta={setComisionTarjeta}
                     />
 
-                    {
-                        !showFormasPago
-                        && <ObservacionesVenta observaciones={venta.observaciones} />
-                    }
+                    <ObservacionesVenta observaciones={venta.observaciones} />
                     
                 </div>
 
@@ -361,6 +367,15 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
                             setVenta={setVenta}
 
                             activarConfirmarVenta={activarConfirmarVenta}
+                        />
+                    }
+                    {
+                        tabbs === 4
+                        && <CreditoAdelanto
+                            venta={venta}
+                            modalRechazVenta={modalRechazVenta}
+                            setModalRechazVenta={setModalRechazVenta}
+                            setModalConfVenta={setModalConfVenta}
                         />
                     }
                 </div>

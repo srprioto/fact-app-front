@@ -101,9 +101,8 @@ export const FormGeneralCobrar = ({
                                             </>
                                         )
                                     }
-
-                                    <div className="mt-15 bb bb-neutro" />
-                                    <br />
+                                    {/* <div className="mt-15 bb bb-neutro" /> */}
+                                    {/* <br /> */}
                                 </>
                             )
                         }
