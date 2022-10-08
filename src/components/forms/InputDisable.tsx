@@ -36,3 +36,8 @@ export const InputDisable = ({ label, name, value, moneda, color, font_size }:in
 
     )
 }
+
+/* <InputDisable
+    label="Tipo de Documento"
+    value="DNI"
+/> */

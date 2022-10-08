@@ -84,26 +84,37 @@ export const ValidRegistroClienteRuc = Yup.object({
 })
 
 
-export const ValidClienteCredito = (tipoDoc:string) => { 
-    let totalDigitos:number = 0;
-    if (tipoDoc === "DNI") {
-        totalDigitos = 8;
-    } else if (tipoDoc === "RUC") {
-        totalDigitos = 11;
-    }
-    return Yup.object({
-        observaciones: Yup.string().required('Requerido'),
-        nombre: Yup.string().required('Requerido'),
-        numero_documento: Yup
-            .string()
-            .required('Requerido')
-            .matches(/^[0-9]+$/, "Requiere solo numeros")
-            .min(totalDigitos, `Necesita ${totalDigitos} digitos exactamente`)
-            .max(totalDigitos, `Necesita ${totalDigitos} digitos exactamente`)
-        // telefono: Yup.string().matches(/^[0-9]+$/, "Requiere solo numeros")
-        // direccion: Yup.string().required('Requerido'),
-        // email: Yup.string().required('Requerido'),
-    })
-}
+// export const ValidClienteCredito = (tipoDoc:string) => { 
+//     let totalDigitos:number = 0;
+//     if (tipoDoc === "DNI") {
+//         totalDigitos = 8;
+//     } else if (tipoDoc === "RUC") {
+//         totalDigitos = 11;
+//     }
+//     return Yup.object({
+//         observaciones: Yup.string().required('Requerido'),
+//         nombre: Yup.string().required('Requerido'),
+//         numero_documento: Yup
+//             .string()
+//             .required('Requerido')
+//             .matches(/^[0-9]+$/, "Requiere solo numeros")
+//             .min(totalDigitos, `Necesita ${totalDigitos} digitos exactamente`)
+//             .max(totalDigitos, `Necesita ${totalDigitos} digitos exactamente`)
+//         // telefono: Yup.string().matches(/^[0-9]+$/, "Requiere solo numeros")
+//         // direccion: Yup.string().required('Requerido'),
+//         // email: Yup.string().required('Requerido'),
+//     })
+// }
+
+export const ValidClienteCredito = Yup.object({
+    nombre: Yup.string().required('Requerido'),
+    numero_documento: Yup
+        .string()
+        .required('Requerido')
+        .matches(/^[0-9]+$/, "Requiere solo numeros")
+        .min(8, `Necesita 8 digitos exactamente`)
+        .max(8, `Necesita 8 digitos exactamente`)
+        
+})
 
 

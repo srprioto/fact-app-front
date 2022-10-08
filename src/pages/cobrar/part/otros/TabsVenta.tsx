@@ -1,4 +1,4 @@
-import { BiCartAlt, BiSpreadsheet, BiTask } from "react-icons/bi"
+import { BiBookBookmark, BiCartAlt, BiSpreadsheet, BiTask } from "react-icons/bi"
 
 interface tabsVenta {
     switchChangeFact:boolean;
@@ -41,7 +41,7 @@ export const TabsVenta = ({ switchChangeFact, tipoSerie, tabbs, setTabbs }:tabsV
             ><BiTask /> Factura
             </button>
 
-            {/* <button 
+            <button 
                 className={
                     "btn2 btn2-warning " + 
                     (!switchChangeFact ? ( tipoSerie() === 4 ? "" : "btn2-disable " ) : "") +
@@ -49,7 +49,7 @@ export const TabsVenta = ({ switchChangeFact, tipoSerie, tabbs, setTabbs }:tabsV
                 }
                 onClick={() => {switchChangeFact && setTabbs(4)}}
             ><BiBookBookmark /> Credito/Adelanto
-            </button> */}
+            </button>
         </div>
     )
 }

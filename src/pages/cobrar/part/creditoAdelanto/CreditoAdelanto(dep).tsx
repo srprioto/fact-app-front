@@ -1,13 +1,13 @@
 import { Form, Formik } from "formik";
 import { useState } from "react";
 import { BiCaretRight, BiX } from "react-icons/bi";
-import { BtnOnOff2 } from "../../../components/btns/BtnOnOff2";
-import { Checkbox3 } from "../../../components/forms/Checkbox3";
-import { Input } from "../../../components/forms/Input";
-import { InputMk } from "../../../components/forms/InputMk";
-import { SelectMk } from "../../../components/forms/SelectMk";
-import { moneda } from "../../../resources/func/moneda";
-import { ValidClienteCredito } from "../../../resources/validations/Clientes";
+import { BtnOnOff2 } from "../../../../components/btns/BtnOnOff2";
+import { Checkbox3 } from "../../../../components/forms/Checkbox3";
+import { Input } from "../../../../components/forms/Input";
+import { InputMk } from "../../../../components/forms/InputMk";
+import { SelectMk } from "../../../../components/forms/SelectMk";
+import { moneda } from "../../../../resources/func/moneda";
+import { ValidClienteCredito } from "../../../../resources/validations/Clientes";
 
 interface creditoAdelanto {
     venta:any;
@@ -144,9 +144,8 @@ export const CreditoAdelanto = ({ venta, modalRechazVenta, setModalRechazVenta, 
                         email: ""
                     }}
                     // enableReinitialize={true}
-                    validationSchema={ValidClienteCredito(infoCredito.tipo_documento)}
+                    validationSchema={ValidClienteCredito}
                     onSubmit={(data, { resetForm }) => { 
-                        // setModalConfVenta(!modalConfVenta)
                         console.log("*******");
                         console.log(infoCredito);
                         

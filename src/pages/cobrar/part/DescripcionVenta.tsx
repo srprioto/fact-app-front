@@ -19,7 +19,7 @@ import { moneda } from "../../../resources/func/moneda";
 import { CodigoVenta } from "./otros/CodigoVenta";
 import { FormasPago } from "./FormasPago";
 import { tipoVenta } from "../../../resources/dtos/VentasDto";
-import { CreditoAdelanto } from "./CreditoAdelanto";
+import { CreditoAdelanto } from "./creditoAdelanto/CreditoAdelanto";
 import { MasAccionesCobrar } from "./otros/MasAccionesCobrar";
 
 
