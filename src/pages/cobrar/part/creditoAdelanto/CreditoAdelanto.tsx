@@ -1,9 +1,8 @@
 import { Form, Formik } from "formik";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BiCaretRight, BiX } from "react-icons/bi";
 import { BtnOnOff2 } from "../../../../components/btns/BtnOnOff2";
-import { Input } from "../../../../components/forms/Input";
-import { InputMk } from "../../../../components/forms/InputMk";
+import { tipoVenta } from "../../../../resources/dtos/VentasDto";
 import { ValidClienteCredito } from "../../../../resources/validations/Clientes";
 import { BuscarCliente } from "./BuscarCliente";
 import { FormsClienteCred } from "./FormsClienteCred";
@@ -12,19 +11,29 @@ import { PagosCreditoAdel } from "./PagosCreditoAdel";
 
 interface creditoAdelanto {
     venta:any;
+    setVenta:Function;
     modalRechazVenta:boolean;
     setModalRechazVenta:Function;
+    modalConfVenta:boolean;
     setModalConfVenta:Function;
+    activarConfirmarVenta:Function;
 }
 
 export const CreditoAdelanto = ({ 
-    venta, 
+    venta,
+    setVenta,
     modalRechazVenta, 
     setModalRechazVenta, 
-    setModalConfVenta 
+    modalConfVenta,
+    setModalConfVenta,
+    activarConfirmarVenta
 }:creditoAdelanto) => {
 
-    const clienteDto = {
+    const infoCreditoDto = {
+        estado_producto: true,
+        cantidad_pagada: venta.totalPagado,
+        observaciones: "",
+
         nombre: "",
         tipoDocumento: "DNI",
         numero_documento: "",
@@ -33,26 +42,17 @@ export const CreditoAdelanto = ({
         email: ""
     }
 
-    const infoCreditoDto = {
-        estado_producto: true,
-        cantidad_pagada: 0,
-        observaciones: "",
-    }
-
-
-    const [cliente, setCliente] = useState<any>(clienteDto);
     const [infoCredito, setInfoCredito] = useState<any>(infoCreditoDto);
 
-
-    const handlerOnChange = (e:any) => { 
-        setCliente({
-            ...cliente,
-            [e.target.name]: e.target.value
+    useEffect(() => {
+        setVenta({
+            ...venta,
+            tipo_venta: infoCredito ? tipoVenta.credito : tipoVenta.adelanto
         })
-    }
+    }, [])
 
-
-    const handlerOnChangeInfo = (e:any) => { 
+    
+    const handlerOnInfoChange = (e:any) => { 
         setInfoCredito({
             ...infoCredito,
             [e.target.name]: e.target.value
@@ -61,7 +61,11 @@ export const CreditoAdelanto = ({
 
 
     const validarVenta = () => { 
-        if (infoCredito.estado_producto === false && Number(infoCredito.cantidad_pagada) === 0) {
+        if (
+            ((infoCredito.estado_producto === false) && 
+            (Number(infoCredito.cantidad_pagada) === 0)) ||
+            !activarConfirmarVenta()
+        ) {
             return false;
         } else {
             return true;
@@ -76,40 +80,51 @@ export const CreditoAdelanto = ({
                 infoCredito={infoCredito}
                 setInfoCredito={setInfoCredito}
                 venta={venta}
+                setVenta={setVenta}
             />
 
-            <div className="grid-1 gap mt-20">
-                <Input
-                    label={
-                        infoCredito.estado_producto
-                        ? "Nota del credito"
-                        : "Nota del adelanto"
-                    }
-                    type="text"
-                    name="observaciones"
-                    value={infoCredito.observaciones}
-                    onChange={handlerOnChangeInfo}
-                />
-            </div>
-
             <Formik
-                initialValues={cliente}
+                initialValues={infoCredito}
                 enableReinitialize={true}
                 validationSchema={ValidClienteCredito}
                 onSubmit={(data, { resetForm }) => { 
-                    // setModalConfVenta(!modalConfVenta)
-                    console.log("*******");
-                    console.log(cliente);
-                    console.log(infoCredito);
+
+                    const ventaUpdate = venta;
+                    const clientesUpdate:any = venta.clientes;
+                    const creditoUpdate:any = {};
+                    const credito:Array<any> = [];
                     
+                    // actualizacion cliente
+                    clientesUpdate.nombre = infoCredito.nombre;
+                    clientesUpdate.tipoDocumento = infoCredito.tipoDocumento;
+                    clientesUpdate.numero_documento = infoCredito.numero_documento;
+                    clientesUpdate.telefono = infoCredito.telefono;
+                    clientesUpdate.direccion = infoCredito.direccion;
+                    clientesUpdate.email = infoCredito.email;
+                    
+                    // actualizacion credito
+                    creditoUpdate.cantidad_pagada = Number(infoCredito.cantidad_pagada);
+                    creditoUpdate.nota = infoCredito.observaciones;
+                    creditoUpdate.fecha_estimada = new Date();
+                    credito.push(creditoUpdate);
+
+                    // actualizacion venta
+                    ventaUpdate.tipo_venta = infoCredito.estado_producto ? tipoVenta.credito : tipoVenta.adelanto;
+                    ventaUpdate.estado_producto = infoCredito.estado_producto;
+                    ventaUpdate.clientes = clientesUpdate;
+                    ventaUpdate.credito = credito;
+                    
+                    setVenta(ventaUpdate);
+                    setModalConfVenta(!modalConfVenta);
+
                 }}
             >
                 {({ errors }:any) => (
-                    <Form onChange={handlerOnChange} >
+                    <Form onChange={handlerOnInfoChange} >
 
                         <BuscarCliente
-                            cliente={cliente}
-                            setCliente={setCliente}
+                            infoCredito={infoCredito}
+                            setInfoCredito={setInfoCredito}
                             errors={errors}
                         />
 

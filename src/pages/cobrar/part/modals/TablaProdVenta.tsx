@@ -17,7 +17,6 @@ export const TablaProdVenta = ({ venta }:tablaProdVenta) => {
                         <th>IGV</th>
                         <th>Precio U.</th>
                         <th>Cant.</th>
-                        {/* <th>Inc/Desc</th> */}
                         <th>Precio V.</th>
                     </tr>
                 </thead>
@@ -36,12 +35,13 @@ export const TablaProdVenta = ({ venta }:tablaProdVenta) => {
 
                             return (
                                 <tr key={index}>
-                                    <td>{ e.productos.nombre }</td>
+                                    <td>
+                                        { e.productos.nombre + " - " + e.productos.marca + " - " + e.productos.talla }
+                                    </td>
                                     <td><strong>S/. { moneda(e.precio_gravada) }</strong></td>
                                     <td>S/. { moneda(e.igv) }</td>
                                     <td><strong>S/. { moneda(e.precio_venta) }</strong></td>
                                     <td><strong>{ e.cantidad_venta }</strong></td>
-                                    {/* <td className={cambioPrecio}>S/. { e.descuento }</td> */}
                                     <td className={cambioPrecio}><strong>S/. { moneda(e.precio_parcial) }</strong></td>
                                 </tr>
                             )

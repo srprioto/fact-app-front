@@ -27,6 +27,9 @@ interface formDocumCobrar{
     tabbs:number;
     setCliente:Function;
     setGetCliente:Function;
+
+    venta:any
+    setVenta:Function;
 }
 
 export const FormDocumCobrar = ({ 
@@ -39,7 +42,9 @@ export const FormDocumCobrar = ({
     handlerGetCliente,
     loadCliente,
 
-    switchChangeFact, setTabbs, data, tipoSerie, tabbs, setCliente, setGetCliente
+    switchChangeFact, setTabbs, data, tipoSerie, tabbs, setCliente, setGetCliente,
+
+    venta, setVenta
 }:formDocumCobrar) => {
 
     // const tipDocument = data.clientes && data.clientes.tipoDocumento;
@@ -84,6 +89,13 @@ export const FormDocumCobrar = ({
         } else {
             setCliente(clienteInfo)
         }
+        // if (tabbs !== 4) {
+        //     console.log("AQUI ESTOY");
+        //     setVenta({
+        //         ...venta,
+        //         totalPagado: 0
+        //     })
+        // }
     }, [switchChangeFact, tabbs])
 
 

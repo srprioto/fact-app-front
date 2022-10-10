@@ -20,22 +20,34 @@ import { moneda } from "../../../../resources/func/moneda";
 // import { ImpComprobante } from "./ImpComprobante";
 import { BtnImpComprobante } from "./BtnImpComprobante";
 import { tipoVenta } from "../../../../resources/dtos/VentasDto";
+import { TablaDividirPrecios } from "./TablaDividirPrecios";
 
+
+interface modalVentaConfirmar {
+    modal:boolean;
+    setModal:Function;
+    dataVenta:any;
+    confirmarVenta:Function;
+    loading:boolean;
+    comisionTarjeta:number;
+    listaPrecios:Array<any>;
+}
 
 export const ModalVentaConfirmar = ({ 
     modal,
     setModal,
     dataVenta,
-    // codigoPago,
     confirmarVenta,
-    loading
-}:any) => {
+    loading,
+    comisionTarjeta,
+    listaPrecios
+}:modalVentaConfirmar) => {
 
     const ventaAux:any = copy(dataVenta);
     const [venta, setVenta] = useState<any>(copy(dataVenta));
     const [reducirPercent, setReducirPercent] = useState<number>(0);
     const [modalCorreo, setModalCorreo] = useState<boolean>(false);
-    
+    const estadoTarjeta:boolean = comisionTarjeta > 0 ? true : false;
 
     useEffect(() => { 
         let ventaDetallesUpdate:any = [];
@@ -99,23 +111,45 @@ export const ModalVentaConfirmar = ({
     
     const onChangeRedPercent = (e:any) => setReducirPercent(Number(e.target.value));
 
-
     const registroFinal = async (estado:string, sendEmail?:string, imprimir?:boolean) => { 
 
         const updateVenta = venta.tipo_venta !== tipoVenta.venta_rapida || sendEmail ? venta : false;
         const sendComprobante = sendEmail ? sendEmail : false;
 
-        await confirmarVenta(estado, updateVenta, sendComprobante); // confirma la venta y la guarda en nuetro registro
+        // confirma la venta y la guarda en nuetro registro
+        await confirmarVenta(estado, updateVenta, sendComprobante); 
+        
         // await registrarSunat();
     }
     
     
+    const credito = () => { 
+        if (venta.tipo_venta === tipoVenta.credito || venta.tipo_venta === tipoVenta.adelanto) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+    const limpiarLista = ():Array<any> => { 
+        const listaLimpia:Array<any> = [];
+        listaPrecios.forEach((e:any) => {
+            if(Number(e.precio_parcial) !== 0){
+                listaLimpia.push(e);
+            }
+        })
+        return listaLimpia
+    }
+    
+    // console.log(venta);
+
     return (
         <Modal
             modal={modal}
             setModal={setModal}
             title={"Confirmar venta"}
-            width={60}
+            width={70}
         >
             <div className="grid-1">
 
@@ -130,7 +164,11 @@ export const ModalVentaConfirmar = ({
 
                     <TablaProdVenta venta={venta} />
 
-                    <div className="grid-4 gap center">
+                    <div className={
+                        credito()
+                        ? "grid-5 gap center"
+                        : "grid-4 gap center"
+                    }>
                         <span>
                             <p>Subtotal:</p>
                             <p className="info"><strong>S/. { moneda(venta.subtotal) }</strong></p>
@@ -141,12 +179,49 @@ export const ModalVentaConfirmar = ({
                             <p className="info"><strong>S/. { moneda(venta.igvGeneral) }</strong></p>
                         </span>
 
-                        <span>
-                            <p>TOTAL:</p><h1 className="success"><strong>S/. { moneda(venta.total) }</strong></h1>
-                        </span>
+                        {
+                            credito()
+                            ? (
+                                <>
+                                    <span>
+                                        <p>Total real:</p>
+                                        <p className="info strong">S/. { moneda(venta.total) }</p>
+                                    </span>
+                                    <span>
+                                        <p className={
+                                            estadoTarjeta
+                                            ? "warning"
+                                            : ""
+                                        }>{
+                                            estadoTarjeta
+                                            ? "Total P + 5%:"
+                                            : "Total a pagar:"
+                                        }</p>
+                                        <h1 className="success strong">S/. { moneda(
+                                            Number(venta.totalPagado) + Number(comisionTarjeta)
+                                        ) }</h1>
+                                    </span>
+                                </>
+                            ) : (
+                                <span>
+                                    <p className={
+                                        estadoTarjeta
+                                        ? "warning"
+                                        : ""
+                                    }>{
+                                        estadoTarjeta
+                                        ? "Total + 5% com."
+                                        : "Total"
+                                    }</p>
+                                    <h1 className="success strong">S/. { moneda(
+                                        Number(venta.total) + Number(comisionTarjeta)
+                                    ) }</h1>
+                                </span>
+                            )
+                        }
 
                         <div>
-                            <p>Reducir por porcentaje (%):</p>
+                            <p>Reducción porcentual (%):</p>
                             <Input
                                 type="number"
                                 name="reducirPercent"
@@ -158,7 +233,9 @@ export const ModalVentaConfirmar = ({
                                 }
                             />
                         </div>
+
                     </div>
+                    <TablaDividirPrecios limpiarLista={limpiarLista}/>
                 </div>
 
                 <div className="box box-par m-0">
@@ -173,12 +250,6 @@ export const ModalVentaConfirmar = ({
                                 registroFinal={registroFinal}
                                 venta={venta}
                             />
-                            {/* <LoadSwitchBtn2
-                                loading={loading}
-                                className="btn btn-success"
-                                handler={() => registroFinal("listo")}
-                            ><BiBookmarkAltMinus /> Imprimir
-                            </LoadSwitchBtn2> */}
 
                             <LoadSwitchBtn2
                                 loading={loading}

@@ -111,6 +111,9 @@ export const FacturaCobrar = ({
                 data={data}
                 setCliente={setCliente}
                 setGetCliente={setGetCliente}
+
+                venta={venta}
+                setVenta={setVenta}
             />
 
             <FormGeneralCobrar

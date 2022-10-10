@@ -85,5 +85,7 @@ export const productDetail = {
 export const tipoVenta = {
     factura: "factura",
     boleta: "boleta",
-    venta_rapida: "venta rapida"
+    venta_rapida: "venta rapida",
+    credito: "credito",
+    adelanto: "adelanto",
 }

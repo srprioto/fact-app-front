@@ -3,6 +3,7 @@ import { BiPlus, BiX } from "react-icons/bi";
 import { Input } from "../../../components/forms/Input";
 import { InputDisable } from "../../../components/forms/InputDisable";
 import { Select2 } from "../../../components/forms/Select2";
+import { tipoVenta } from "../../../resources/dtos/VentasDto";
 import { moneda } from "../../../resources/func/moneda";
 import { sumaArrayObj } from "../../../resources/func/sumaArrayObj";
 import { SelectAddPrecio } from "./otros/SelectAddPrecio";
@@ -19,7 +20,7 @@ interface formasPago {
     setComisionTarjeta:Function;
 }
 
-export const FormasPago = ({ 
+export const DividirPagos = ({ 
     showFormasPago,
     // setShowFormasPago,
     venta,
@@ -32,18 +33,26 @@ export const FormasPago = ({
 }:formasPago) => {
 
     const [nuevoPrecio, setNuevoPrecio] = useState<any>({ forma_pago: "efectivo", precio_parcial: 0 });
-    // const [totalRestante, setTotalRestante] = useState<number>(0);
     const [switchAdd, setSwitchAdd] = useState<boolean>(false);
 
+    // const estadoCredito:boolean = (
+    //     venta.tipo_venta === tipoVenta.credito || 
+    //     venta.tipo_venta === tipoVenta.adelanto
+    // ) ? true : false;
+
+    const totalParaDividir:number = (
+        venta.tipo_venta === tipoVenta.credito || 
+        venta.tipo_venta === tipoVenta.adelanto
+    ) ? Number(venta.totalPagado) : Number(venta.total);
 
     const totalRestante = ():number => { 
         const sumaPrecios:number = sumaArrayObj(listaPrecios, "precio_parcial");
         const comisTarjeta:number = Number(comisionTarjeta);
-        const total:number = Number(venta.total);
+        const total:number = totalParaDividir;
         return (total + comisTarjeta) - sumaPrecios;
     }
-
-
+   
+    
     useEffect(() => {
         if (Number(totalRestante()) === 0) {
             setConfirmarVenta(true);

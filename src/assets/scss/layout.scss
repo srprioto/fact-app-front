@@ -796,12 +796,57 @@
             }
         }
 
-        .credito-anticipo{
-            .box-credito-anticipo{
-                display: grid;
-                grid-template-columns: 1fr 2fr 1fr;
+        .codigo-venta-cobrar{ // *** aqui
+            // background-color: red;
+            // text-align: center;
+            position: relative;
+            .observaciones-cobrar{
+                margin-left: 5px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                svg{
+                    color: $warning;
+                    font-size: 1.5em;
+                    &:hover ~ .msj-obs-cobrar{
+                        transform: scale(1);
+                        transition: .3s;
+                    } 
+                }
+                .msj-obs-cobrar{
+                    transform: scale(0);
+                    transition: .3s;
+                    top: 35px;
+                    left: 0;
+                    position: absolute;
+                    width: 100%;
+                    text-align: center;
+                    .box-msj-obs-cobrar{
+                        display: inline-block;
+                        box-sizing: border-box;
+                        padding: 7px;
+                        width: 400px;
+                        box-shadow: 4px 5px 8px 1px #0000002f;
+                        border: 1px solid $color4;
+                        background-color: $border-input2;
+                        border-radius: 6px;
+                        h4{
+                            margin: 0;
+                        }
+                        p{
+                            margin: 0;
+                        }
+                    }
+                }
             }
         }
+        
+        // .credito-anticipo{
+        //     .box-credito-anticipo{
+        //         display: grid;
+        //         grid-template-columns: 1fr 2fr 1fr;
+        //     }
+        // }
 
         // .wrap-formas-pago{
         //     .desc-formas-pago{

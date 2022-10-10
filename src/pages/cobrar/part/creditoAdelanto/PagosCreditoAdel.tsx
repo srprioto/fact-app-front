@@ -6,15 +6,27 @@ interface pagosCreditoAdel {
     infoCredito:any
     setInfoCredito:Function;
     venta:any
+    setVenta:Function;
 }
 
-export const PagosCreditoAdel = ({ infoCredito, setInfoCredito, venta }:pagosCreditoAdel) => {
+export const PagosCreditoAdel = ({ 
+    infoCredito, 
+    setInfoCredito,
+    venta,
+    setVenta,
+}:pagosCreditoAdel) => {
 
     const handlerOnChange = (e:any) => { 
         setInfoCredito({
             ...infoCredito,
             [e.target.name]: e.target.value
         })
+        if (e.target.name === "cantidad_pagada") {
+            setVenta({
+                ...venta,
+                totalPagado: Number(e.target.value)
+            })
+        }
     }
 
     const handlerStateCheck = (e:any) => { 
@@ -38,6 +50,7 @@ export const PagosCreditoAdel = ({ infoCredito, setInfoCredito, venta }:pagosCre
             return restante;
         }
     }
+    
 
     return (
         <div>
@@ -45,7 +58,7 @@ export const PagosCreditoAdel = ({ infoCredito, setInfoCredito, venta }:pagosCre
             <div className="grid-3 gap">
                 <div></div>
                 <div className="box-descripcion center">
-                    <p className="center">Por pagar:</p>
+                    <p className="center">Pago pendiente:</p>
                     <h4 className={
                         "center " + 
                         (
@@ -59,49 +72,55 @@ export const PagosCreditoAdel = ({ infoCredito, setInfoCredito, venta }:pagosCre
                 </div>
             </div>
 
-            <div className="box-credito-anticipo">
-                <div></div>
-                <div className="grid-1 gap">
-                    <div className="grid-2 gap10">
-                        
-                        <Checkbox3
-                            className={
-                                infoCredito.estado_producto
-                                ? "info"
-                                : "warning"
-                            }
-                            label={
-                                infoCredito.estado_producto
-                                ? "Entregar producto"
-                                : "NO entregar producto"
-                            }
-                            name="checkEntregarProd"
-                            checked={infoCredito.estado_producto}
-                            handlerCheck={handlerStateCheck}
-                        />
-                        <Input
-                            label="Cantidad pagada"
-                            type="number"
-                            name="cantidad_pagada"
-                            value={
-                                (Number(venta.total) - infoCredito.cantidad_pagada) > Number(venta.total)
-                                ? Number(venta.total)
-                                : infoCredito.cantidad_pagada
-                            }
-                            onChange={handlerOnChange}
-                            msgErr={
-                                (infoCredito.cantidad_pagada <= 0 && !infoCredito.estado_producto)
-                                ? "Requiere monto pagado"
-                                : ""
-                            }
-                            moneda
-                            noMenos
-                        />
-                    </div>
+            <div className="grid-3 gap">
+                
+                <Checkbox3
+                    className={
+                        infoCredito.estado_producto
+                        ? "info"
+                        : "warning"
+                    }
+                    label={
+                        infoCredito.estado_producto
+                        ? "Entregar producto"
+                        : "NO entregar producto"
+                    }
+                    name="estado_producto"
+                    checked={infoCredito.estado_producto}
+                    handlerCheck={handlerStateCheck}
+                />
 
-                </div>
+                <Input
+                    label="Cantidad pagada"
+                    type="number"
+                    name="cantidad_pagada"
+                    value={venta.totalPagado}
+                    onChange={handlerOnChange}
+                    msgErr={
+                        (venta.totalPagado <= 0 && !infoCredito.estado_producto)
+                        ? "Requiere monto pagado"
+                        : ""
+                    }
+                    moneda
+                    noMenos
+                />
+
+                <Input
+                    label={
+                        infoCredito.estado_producto
+                        ? "Nota del credito"
+                        : "Nota del adelanto"
+                    }
+                    type="text"
+                    name="observaciones"
+                    value={infoCredito.observaciones}
+                    onChange={handlerOnChange}
+                    // msgErr={}
+                />
+
+         
+
             </div>
-
         </div>
     )   
 }

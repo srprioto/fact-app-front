@@ -113,7 +113,8 @@ export const ValidClienteCredito = Yup.object({
         .required('Requerido')
         .matches(/^[0-9]+$/, "Requiere solo numeros")
         .min(8, `Necesita 8 digitos exactamente`)
-        .max(8, `Necesita 8 digitos exactamente`)
+        .max(8, `Necesita 8 digitos exactamente`),
+    // observaciones: Yup.string().required('Requerido')
         
 })
 

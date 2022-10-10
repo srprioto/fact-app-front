@@ -1,30 +1,26 @@
 import { useEffect, useState } from "react";
-
-import { ObservacionesVenta } from "./ObservacionesVenta";
 import { TablaListaVentaProductos } from "./TablaListaVentaProductos";
-
 import { put } from "../../../resources/fetch";
 import { VENTAS } from "../../../resources/routes";
 import { ModalVentaConfirmar } from "./modals/ModalVentaConfirmar";
 import { ModalVentaRechazar } from "./modals/ModalVentaRechazar";
 import { ModalWrap } from "../../../components/modals/ModalWrap";
-import { Select2 } from "../../../components/forms/Select2";
 import { clienteInfo } from "../../../resources/dtos/Cliente";
 import { BoletaCobrar } from "./factura/BoletaCobrar";
 import { FacturaCobrar } from "./factura/FacturaCobrar";
 import { Checkbox2 } from "../../../components/forms/Checkbox2";
 import { RapidaCobrar } from "./factura/RapidaCobrar";
 import { TabsVenta } from "./otros/TabsVenta";
-import { moneda } from "../../../resources/func/moneda";
 import { CodigoVenta } from "./otros/CodigoVenta";
-import { FormasPago } from "./FormasPago";
+import { DividirPagos } from "./DividirPagos";
 import { tipoVenta } from "../../../resources/dtos/VentasDto";
 import { CreditoAdelanto } from "./creditoAdelanto/CreditoAdelanto";
 import { MasAccionesCobrar } from "./otros/MasAccionesCobrar";
+import { DescripcionCobrarVenta } from "./otros/DescripcionCobrarVenta";
 
 
 interface descripcionVenta {
-    data:any
+    data:any;
     handlerRefresh:Function;
 }
 
@@ -60,7 +56,8 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
         }
     }
     
-    const [venta, setVenta] = useState<any>(data);
+    // const [venta, setVenta] = useState<any>(data);
+    const [venta, setVenta] = useState<any>({...data, totalPagado: 0});
     const [cliente, setCliente] = useState<any>(clienteOk ? data.clientes : clienteInfo);
 
     const [loadConfirmarVenta, setLoadConfirmarVenta] = useState<boolean>(false);
@@ -108,26 +105,6 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
     }, [venta.forma_pago, showFormasPago])
 
 
-    const verificarTarjeta = () => { 
-        if (
-            (venta.forma_pago === "tarjeta" && showFormasPago === false) || 
-            listaPagosTarjeta().length > 0
-        ) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-
-    const handlerChangeVenta = (e:any) => {
-        setVenta({
-            ...venta,
-            [e.target.name]: e.target.value
-        })
-    }
-
-
     const handlerConfirmarVenta = async (estado:string, comprobante:any, envioComprobante:any) => {
 
         setLoadConfirmarVenta(true);
@@ -149,7 +126,9 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
         updateVenta.observaciones = venta.observaciones;
         updateVenta.subtotal = venta.subtotal;
         updateVenta.total = venta.total;
-        updateVenta.forma_pago = listaLimpia.length <= 0 ? venta.forma_pago : "dividido";
+        updateVenta.forma_pago = listaLimpia.length <= 0 
+            ? venta.forma_pago 
+            : "dividido";
         updateVenta.usuarioId = venta.usuarios.id;
         updateVenta.localId = venta.locales.id;
         updateVenta.tipo_venta = venta.tipo_venta;
@@ -165,6 +144,12 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
 
         updateVenta.comprobante = comprobante;
         updateVenta.envioComprobante = envioComprobante;
+
+        if (venta.tipo_venta === tipoVenta.credito || venta.tipo_venta === tipoVenta.credito) {
+            updateVenta.estado_producto = venta.estado_producto;
+            updateVenta.totalPagado = venta.totalPagado;
+            updateVenta.credito = venta.credito;
+        }
 
         try {
             await put(data.id, updateVenta, VENTAS);
@@ -191,9 +176,19 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
         <div className="descripcion-venta">
             <div className="grid-1 gap">
 
-                <CodigoVenta codigVenta={venta.codigo_venta} />
+                <CodigoVenta codigVenta={venta.codigo_venta} observaciones={venta.observaciones} />
                 
                 <TablaListaVentaProductos venta={data} />
+
+                {
+                    showSwitchChange()
+                    ? <Checkbox2
+                        label="Modificar tipo comprobante"
+                        name="switchChangeFact"
+                        checked={switchChangeFact}
+                        handlerCheck={ () => setSwitchChangeFact(!switchChangeFact) }
+                    /> : <></>
+                }
 
                 <TabsVenta
                     switchChangeFact={switchChangeFact}
@@ -204,73 +199,14 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
 
                 <div className="descripcion-venta grid-1 gap">
 
-                    <div className="grid-4 gap">
-
-                        <div className="center">
-                            <p className="info">Subtotal</p>
-                            <h3 className="success">S/. { moneda(venta.subtotal) }</h3>
-                        </div>
-
-                        <div className="center">
-                            <p className="info">{
-                                Number(venta.descuento_total) > 0
-                                ? "Incremento total"
-                                : Number(venta.descuento_total) === 0
-                                ? "Inc/Desc total"
-                                : "Descuento total"
-                            }</p>
-                            <h3 className={
-                                Number(venta.descuento_total) < 0
-                                ? "danger"
-                                : Number(venta.descuento_total) === 0
-                                ? "secundary"
-                                : "success"
-                            }>S/. {moneda(venta.descuento_total)}</h3>
-                        </div>
-
-                        <span className="center">
-                            <p className={
-                                "mb-10 " + (
-                                    verificarTarjeta()
-                                    ? "warning"
-                                    : "info"
-                                )
-                            }>
-                                {
-                                    verificarTarjeta()
-                                    ? "Total +5% com."
-                                    : "Total"
-                                }
-                            </p>
-                            <h1 className={
-                                "strong m-0 " + 
-                                (
-                                    verificarTarjeta()
-                                    ? "warning"
-                                    : "success"
-                                )
-                            }>
-                                S/. { moneda(Number(venta.total) + comisionTarjeta) }
-                            </h1>
-                        </span>
-                        {
-                            !showFormasPago
-                            && (
-                                <Select2
-                                    label="Forma de pago"
-                                    name="forma_pago"
-                                    onChange={handlerChangeVenta}
-                                    value={venta.forma_pago}
-                                >
-                                    <option value="efectivo">Efectivo</option>
-                                    <option value="tarjeta">Tarjeta</option>
-                                    <option value="pago_electronico">Pago Electronico</option> 
-                                    <option value="deposito">Deposito</option>
-                                </Select2>
-                            )
-                        }
-
-                    </div>
+                    <DescripcionCobrarVenta
+                        venta={venta}
+                        setVenta={setVenta}
+                        listaPagosTarjeta={listaPagosTarjeta}
+                        showFormasPago={showFormasPago}
+                        comisionTarjeta={comisionTarjeta}
+                        tabbs={tabbs}
+                    />
 
                     <MasAccionesCobrar
                         venta={venta}
@@ -281,7 +217,7 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
                         setSwitchCredito={setSwitchCredito}
                     />
 
-                    <FormasPago 
+                    <DividirPagos
                         showFormasPago={showFormasPago}
                         venta={venta}
                         setConfirmarVenta={setConfirmarVenta}
@@ -291,23 +227,10 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
                         listaPagosTarjeta={listaPagosTarjeta}
                         setComisionTarjeta={setComisionTarjeta}
                     />
-
-                    <ObservacionesVenta observaciones={venta.observaciones} />
                     
                 </div>
 
-                {/* formas de pago aqui */}
-
                 <div className="tabbs-box m-0">
-                    {
-                        showSwitchChange()
-                        ? <Checkbox2
-                            label={switchChangeFact ? "Restablecer tipo comprobante" : "Modificar tipo comprobante"}
-                            name="switchChangeFact"
-                            checked={switchChangeFact}
-                            handlerCheck={ () => setSwitchChangeFact(!switchChangeFact) }
-                        /> : <></>
-                    }
                     { 
                         tabbs === 1 
                         && <RapidaCobrar
@@ -373,9 +296,12 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
                         tabbs === 4
                         && <CreditoAdelanto
                             venta={venta}
+                            setVenta={setVenta}
                             modalRechazVenta={modalRechazVenta}
                             setModalRechazVenta={setModalRechazVenta}
+                            modalConfVenta={modalConfVenta}
                             setModalConfVenta={setModalConfVenta}
+                            activarConfirmarVenta={activarConfirmarVenta}
                         />
                     }
                 </div>
@@ -386,9 +312,10 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
                     modal={modalConfVenta}
                     setModal={setModalConfVenta}
                     dataVenta={venta}
-                    // codigoPago={codigoPago}
                     confirmarVenta={handlerConfirmarVenta}
                     loading={loadConfirmarVenta}
+                    comisionTarjeta={comisionTarjeta}
+                    listaPrecios={listaPrecios}
                 />
             </ModalWrap>
             

@@ -7,12 +7,12 @@ import { post } from "../../../../resources/fetch";
 import { CLIENTES } from "../../../../resources/routes";
 
 interface buscarCliente {
-    cliente:any;
-    setCliente:Function;
+    infoCredito:any;
+    setInfoCredito:Function;
     errors:any;
 }   
 
-export const BuscarCliente = ({ cliente, setCliente, errors }:buscarCliente) => {
+export const BuscarCliente = ({ infoCredito, setInfoCredito, errors }:buscarCliente) => {
 
     const [loadCliente, setLoadCliente] = useState<boolean>(false);
     const [estadoCliente, setEstadoCliente] = useState<boolean>(true);
@@ -22,17 +22,18 @@ export const BuscarCliente = ({ cliente, setCliente, errors }:buscarCliente) => 
         setLoadCliente(true);
 
         const updateData = {
-            documento: cliente.numero_documento,
-            tipoDocumento: cliente.tipoDocumento
+            documento: infoCredito.numero_documento,
+            tipoDocumento: infoCredito.tipoDocumento
         }
 
         try {
             const response = await post(updateData, CLIENTES + "/padron/search");
             if (response.estadoCliente === "Inexistente") {
                 setEstadoCliente(false);
-                setCliente({
+                setInfoCredito({
+                    ...infoCredito,
                     tipoDocumento: "DNI",
-                    numero_documento: cliente.numero_documento,
+                    numero_documento: infoCredito.numero_documento,
                     nombre: "",
                     telefono: "",
                     direccion: "",
@@ -40,7 +41,8 @@ export const BuscarCliente = ({ cliente, setCliente, errors }:buscarCliente) => 
                 })
             } else {
                 setEstadoCliente(true);
-                setCliente({
+                setInfoCredito({
+                    ...infoCredito,
                     tipoDocumento: response.tipoDocumento,
                     numero_documento: response.numero_documento,
                     nombre: response.nombre,
@@ -71,7 +73,7 @@ export const BuscarCliente = ({ cliente, setCliente, errors }:buscarCliente) => 
     
 
     return (
-        <div className="buscar-cliente">
+        <div className="buscar-cliente mt-20">
 
             {
                 !estadoCliente

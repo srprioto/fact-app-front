@@ -139,6 +139,9 @@ export const BoletaCobrar = ({
                 data={data}
                 setCliente={setCliente}
                 setGetCliente={setGetCliente}
+
+                venta={venta}
+                setVenta={setVenta}
             />
 
             <FormGeneralCobrar
