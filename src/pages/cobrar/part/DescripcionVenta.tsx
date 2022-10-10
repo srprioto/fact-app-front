@@ -29,10 +29,30 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
     const clienteOk:boolean = !!data.clientes;
     
     const tipoSerie = ():number => { 
-        if (data.tipo_venta === tipoVenta.boleta) return 2 
-        else if (data.tipo_venta === tipoVenta.factura) return 3 
-        else return 1
+        let nroTabb:number = 1;
+        switch (data.tipo_venta) {
+            case tipoVenta.venta_rapida:
+                nroTabb = 1;
+                break;
+            case tipoVenta.boleta:
+                nroTabb = 2;
+                break;
+            case tipoVenta.factura:
+                nroTabb = 3;
+                break;
+            case tipoVenta.credito:
+                nroTabb = 4;
+                break;
+            case tipoVenta.adelanto:
+                nroTabb = 4;
+                break;
+        }
+        // if (data.tipo_venta === tipoVenta.boleta) return 2 
+        // else if (data.tipo_venta === tipoVenta.factura) return 3 
+        // else return 1
+        return nroTabb;
     }
+
 
     const stateSwitchChange = () => { 
         if (

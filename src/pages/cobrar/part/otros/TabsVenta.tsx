@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { BiBookBookmark, BiCartAlt, BiSpreadsheet, BiTask } from "react-icons/bi"
 
 interface tabsVenta {
@@ -8,6 +9,13 @@ interface tabsVenta {
 }
 
 export const TabsVenta = ({ switchChangeFact, tipoSerie, tabbs, setTabbs }:tabsVenta) => {
+
+    useEffect(() => {
+        if (!switchChangeFact) {
+            setTabbs(tipoSerie())
+        }
+    }, [switchChangeFact])
+
     return (
         <div className="tabbs-buttons tabbs grid-4 mb-25">
             <button 
