@@ -28,7 +28,7 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
 
     const clienteOk:boolean = !!data.clientes;
     
-    const tipoSerie = ():number => { 
+    const tipoSerie = ():number => {
         let nroTabb:number = 1;
         switch (data.tipo_venta) {
             case tipoVenta.venta_rapida:
