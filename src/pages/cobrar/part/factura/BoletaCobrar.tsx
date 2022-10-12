@@ -114,8 +114,6 @@ export const BoletaCobrar = ({
         }
     }
 
-    // console.log(cliente);
-    // console.log(getCliente.documento);
 
     return (
         <div className="boleta">

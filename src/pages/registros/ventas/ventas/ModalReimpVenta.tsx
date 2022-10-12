@@ -36,7 +36,6 @@ export const ModalReimpVenta = ({ modal, setModal, idVenta }:modalReimpVenta) =>
         }
     }
 
-    // console.log(venta);
 
     return (
         <Modal

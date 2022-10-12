@@ -165,10 +165,10 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
         updateVenta.comprobante = comprobante;
         updateVenta.envioComprobante = envioComprobante;
 
-        if (venta.tipo_venta === tipoVenta.credito || venta.tipo_venta === tipoVenta.credito) {
+        if (venta.tipo_venta === tipoVenta.credito || venta.tipo_venta === tipoVenta.adelanto) {
             updateVenta.estado_producto = venta.estado_producto;
             updateVenta.totalPagado = venta.totalPagado;
-            updateVenta.credito = venta.credito;
+            updateVenta.creditoDetalles = venta.creditoDetalles;
         }
 
         try {
@@ -179,6 +179,7 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
             console.log(error);
         } finally {
             handlerRefresh();
+            setVenta({...data, totalPagado: 0});
         }
     }
 
@@ -454,6 +455,3 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
 //     }
 
 // }, [listaPrecios, showFormasPago])
-
-
-// console.log(comisionTarjeta);    

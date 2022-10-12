@@ -98,8 +98,7 @@ export const Tienda = ({ idLocal, nombreLocal, user }:tienda) => {
         }
     }
 
-    // console.log(data);    
-
+    
     return (
         <div className="local-stock">
             

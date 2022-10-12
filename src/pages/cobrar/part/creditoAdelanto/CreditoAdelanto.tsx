@@ -92,7 +92,7 @@ export const CreditoAdelanto = ({
                     const ventaUpdate = venta;
                     const clientesUpdate:any = venta.clientes;
                     const creditoUpdate:any = {};
-                    const credito:Array<any> = [];
+                    const creditoDetalles:Array<any> = [];
                     
                     // actualizacion cliente
                     clientesUpdate.nombre = infoCredito.nombre;
@@ -106,14 +106,14 @@ export const CreditoAdelanto = ({
                     creditoUpdate.cantidad_pagada = Number(infoCredito.cantidad_pagada);
                     creditoUpdate.nota = infoCredito.observaciones;
                     creditoUpdate.fecha_estimada = new Date();
-                    credito.push(creditoUpdate);
+                    creditoDetalles.push(creditoUpdate);
 
                     // actualizacion venta
                     ventaUpdate.tipo_venta = infoCredito.estado_producto ? tipoVenta.credito : tipoVenta.adelanto;
                     ventaUpdate.estado_producto = infoCredito.estado_producto;
                     ventaUpdate.clientes = clientesUpdate;
-                    ventaUpdate.credito = credito;
-                    
+                    ventaUpdate.creditoDetalles = creditoDetalles;
+
                     setVenta(ventaUpdate);
                     setModalConfVenta(!modalConfVenta);
 

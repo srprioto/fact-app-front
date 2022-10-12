@@ -85,18 +85,6 @@ export const Productos = () => {
     }
 
 
-    // const getOneData = async (id:number) => { 
-    //     setLoadingOne(true);
-    //     try {
-    //         const response_productos = await getOne(id, PRODUCTOS);
-    //         setProducto(response_productos);        
-    //         setLoadingOne(false);            
-    //     } catch (error) {
-    //         setLoadingOne(true);
-    //         console.log(error);
-    //     }
-    // }
-
     const getData = async (urlPage?:string) => {
         setLoadingData(true);
         try {

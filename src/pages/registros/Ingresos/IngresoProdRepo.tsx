@@ -40,9 +40,7 @@ export const IngresoProdRepo = () => {
     const handlerVer = (id:number) => { 
         // getOneData(id);
         setIdIngreso(id);
-        setModalVer(!modalVer);
-        // console.log("**********");
-        
+        setModalVer(!modalVer);        
     }
 
     const getData = async (urlPage?:string) => {

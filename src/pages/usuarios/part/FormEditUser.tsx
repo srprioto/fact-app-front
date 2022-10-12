@@ -37,7 +37,6 @@ export const FormEditUser = ({ id, handlerEdit, loadUpdate }:any) => {
         setLoadingGetOne(true);
         try {
             const response_productos = await getOne(id, USUARIOS);
-            console.log(response_productos);            
             setUsuario({
                 nombre: response_productos.nombre,
                 documento: response_productos.documento,

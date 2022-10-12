@@ -14,10 +14,11 @@ interface ventaItems {
 
 export const VentaItems = ({ ventas, handlerVer, updateData, handlerAnular, handlerReimprimir }:ventaItems) => {
 
+    const esComprobante:boolean = ventas.tipo_venta === tipoVenta.boleta || ventas.tipo_venta === tipoVenta.factura;
+    const esCredito:boolean = ventas.tipo_venta === tipoVenta.credito || ventas.tipo_venta === tipoVenta.adelanto;
     const comprobante:any = ventas.comprobante ? ventas.comprobante : [];
     const correlativo:number = comprobante[0] ? comprobante[0].correlativo : 0;
     const codigoVenta:string = 
-        // ventas.serie + "-" + 
         ventas.id + "-" + 
         ventas.codigo_venta +
         (correlativo !== 0 ? "-" + correlativo : "");
@@ -48,11 +49,10 @@ export const VentaItems = ({ ventas, handlerVer, updateData, handlerAnular, hand
 
 
     const tipoComprobante = () => {
-        if (
-            ventas.tipo_venta === tipoVenta.boleta ||
-            ventas.tipo_venta === tipoVenta.factura
-        ) {
+        if (esComprobante) {
             return "info ";
+        } else if (esCredito) {
+            return "warning ";
         } else if (ventas.tipo_venta === tipoVenta.venta_rapida) {
             return "success ";
         }

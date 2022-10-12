@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { BiSearchAlt2 } from "react-icons/bi";
-import { InputDisable } from "../../../../components/forms/InputDisable";
 import { InputMk } from "../../../../components/forms/InputMk";
+import { ParrafoForm } from "../../../../components/forms/ParrafoForm";
 import { LoadingImg2 } from "../../../../components/loads/LoadingImg";
 import { post } from "../../../../resources/fetch";
 import { CLIENTES } from "../../../../resources/routes";
@@ -73,7 +73,7 @@ export const BuscarCliente = ({ infoCredito, setInfoCredito, errors }:buscarClie
     
 
     return (
-        <div className="buscar-cliente mt-20">
+        <div className="buscar-cliente">
 
             {
                 !estadoCliente
@@ -83,13 +83,8 @@ export const BuscarCliente = ({ infoCredito, setInfoCredito, errors }:buscarClie
                 </div>
             }
 
-            <div className="grid-2 gap">
+            <div className="grid-2 gap mt-20">
 
-                <InputDisable
-                    label="Tipo de Documento"
-                    value="DNI"
-                />
-                
                 <div>
                     <p className="info center mb-8">Nro de documento</p>
                     <div className="search-general">
@@ -110,6 +105,12 @@ export const BuscarCliente = ({ infoCredito, setInfoCredito, errors }:buscarClie
 
                     </div>
                 </div>
+
+                <ParrafoForm
+                    label="Tipo de Documento"
+                    value="DNI"
+                    className="strong info"
+                />
 
             </div>
         </div>

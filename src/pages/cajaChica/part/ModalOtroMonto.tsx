@@ -28,7 +28,6 @@ export const ModalOtroMonto = ({ modal, setModal, getDataOne, idCaja, usuarioId 
 
     const handlerCrearCajaDetalle = async () => { 
         setLoading(true);
-        console.log(cajaDet);
         
         try {
             const data = await post(cajaDetalles, CAJA_DETALLES);
