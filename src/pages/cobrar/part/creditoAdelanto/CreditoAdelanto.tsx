@@ -18,6 +18,7 @@ interface creditoAdelanto {
     modalConfVenta:boolean;
     setModalConfVenta:Function;
     activarConfirmarVenta:Function;
+    setCliente:Function;
 }
 
 export const CreditoAdelanto = ({ 
@@ -27,7 +28,8 @@ export const CreditoAdelanto = ({
     setModalRechazVenta, 
     modalConfVenta,
     setModalConfVenta,
-    activarConfirmarVenta
+    activarConfirmarVenta,
+    setCliente
 }:creditoAdelanto) => {
 
     const infoCreditoDto = {
@@ -114,9 +116,10 @@ export const CreditoAdelanto = ({
                     ? tipoVenta.credito 
                     : tipoVenta.adelanto;
                     ventaUpdate.estado_producto = infoCredito.estado_producto;
-                    ventaUpdate.cliente = clientesUpdt;
                     ventaUpdate.creditoDetalles = creditoDetalles;
+                    // ventaUpdate.cliente = clientesUpdt;
 
+                    setCliente(clientesUpdt);
                     setVenta(ventaUpdate);
                     setModalConfVenta(!modalConfVenta);
 

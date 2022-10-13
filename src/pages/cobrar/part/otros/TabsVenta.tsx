@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { BiBookBookmark, BiCartAlt, BiSpreadsheet, BiTask } from "react-icons/bi"
+import { clienteInfo } from "../../../../resources/dtos/Cliente";
 // import { clienteInfo } from "../../../../resources/dtos/Cliente";
 
 interface tabsVenta {
@@ -7,7 +8,7 @@ interface tabsVenta {
     tipoSerie:Function;
     tabbs:number;
     setTabbs:Function;
-    // setCliente:Function;
+    setCliente:Function;
 }
 
 export const TabsVenta = ({ 
@@ -15,17 +16,18 @@ export const TabsVenta = ({
     tipoSerie, 
     tabbs, 
     setTabbs, 
-    // setCliente 
+    setCliente 
 }:tabsVenta) => {
+
 
     useEffect(() => {
         if (!switchChangeFact) {
             setTabbs(tipoSerie())
+        } else {
+            setCliente(clienteInfo)
         }
-        // else {
-        //     setCliente(clienteInfo)
-        // }
     }, [switchChangeFact])
+
 
     return (
         <div className="tabbs-buttons tabbs grid-4 mb-25">

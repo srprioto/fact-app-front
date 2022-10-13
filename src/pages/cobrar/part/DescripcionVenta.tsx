@@ -168,10 +168,10 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
         updateVenta.envioComprobante = envioComprobante;
 
         if (venta.tipo_venta === tipoVenta.credito || venta.tipo_venta === tipoVenta.adelanto) {
-            updateVenta.cliente = venta.cliente;
             updateVenta.estado_producto = venta.estado_producto;
             updateVenta.totalPagado = venta.totalPagado;
             updateVenta.creditoDetalles = venta.creditoDetalles;
+            // updateVenta.cliente = venta.cliente;
             // updateVenta.creditoDetalles = [
             //     {
             //         cantidad_pagada: 10,
@@ -209,6 +209,7 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
         }
     }
     
+    console.log(cliente);    
 
     return (
         <div className="descripcion-venta">
@@ -233,6 +234,7 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
                     tipoSerie={tipoSerie}
                     tabbs={tabbs}
                     setTabbs={setTabbs}
+                    setCliente={setCliente}
                 />
 
                 <div className="descripcion-venta grid-1 gap">
@@ -340,6 +342,7 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
                             modalConfVenta={modalConfVenta}
                             setModalConfVenta={setModalConfVenta}
                             activarConfirmarVenta={activarConfirmarVenta}
+                            setCliente={setCliente}
                         />
                     }
                 </div>

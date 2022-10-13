@@ -81,7 +81,7 @@ export const FormDocumCobrar = ({
 
     useEffect(() => {
         if (!switchChangeFact) {
-            setTabbs(tipoSerie())
+            // setTabbs(tipoSerie())
             setCliente(data.clientes)
             setGetCliente({
                 documento: documento(), tipoDocumento: tipDocument()
