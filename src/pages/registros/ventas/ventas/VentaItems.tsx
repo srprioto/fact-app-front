@@ -63,12 +63,13 @@ export const VentaItems = ({ ventas, handlerVer, updateData, handlerAnular, hand
         <tr className="venta-items">
             <td className={"secundary " + anulado()}>{ codigoVenta }</td>
             <td className={"secundary capitalize " + anulado() + tipoComprobante()}>{ ventas.tipo_venta }</td>
-            {/* <td className={"secundary capitalize " + anulado()}>{ 
-                ventas.tipo_venta === "venta_rapida" 
-                ? "Venta rapida" 
-                : ventas.tipo_venta
-            }</td> */}
-            <td className={"success strong " + anulado()}>S/. { moneda(ventas.total) }</td>
+
+            {
+                !esCredito
+                ? <td className={"success strong " + anulado()}>S/. { moneda(ventas.total) }</td>
+                : <td className={"warning strong " + anulado()}>S/. { moneda(ventas.totalPagado) }</td>
+            }
+            
             <td className={ classEstado() + " capitalize strong" } >{ ventas.estado_venta }</td>
             <td className={ anulado() }>{ fecha(ventas.created_at) }</td>
             <td className={ anulado() }>{ ventas.locales && ventas.locales.nombre }</td>

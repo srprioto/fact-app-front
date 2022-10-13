@@ -169,6 +169,18 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
             updateVenta.estado_producto = venta.estado_producto;
             updateVenta.totalPagado = venta.totalPagado;
             updateVenta.creditoDetalles = venta.creditoDetalles;
+            // updateVenta.creditoDetalles = [
+            //     {
+            //         cantidad_pagada: 10,
+            //         nota: 'dies',
+            //         fecha_estimada: '2022-10-12',
+            //     },
+            //     {
+            //         cantidad_pagada: 5,
+            //         nota: 'cinco',
+            //         fecha_estimada: '2022-10-12',
+            //     }
+            // ];
         }
 
         try {

@@ -15,7 +15,6 @@ import { ModalVentaDetalles } from "./ventas/ModalVentaDetalles";
 import { TabbsFiltroDatos } from "./ventas/TabbsFiltroDatos";
 import { VentaItems } from "./ventas/VentaItems";
 
-
 interface infoGeneralVentas {
     idLocal?:string; // el id local es obligatorio
     selectLocal?:Function;
@@ -110,6 +109,7 @@ export const InfoGeneralVentas = ({ idLocal, selectLocal, loadingLocal, locales 
         )
     }
 
+    console.log(data);    
 
     return (
         <>
@@ -188,7 +188,7 @@ export const InfoGeneralVentas = ({ idLocal, selectLocal, loadingLocal, locales 
                                     <tr>
                                         <th>Codigo venta</th>
                                         <th>Tipo comp.</th>
-                                        <th>Costo total</th>
+                                        <th>Ingreso venta</th>
                                         <th>Estado de venta</th>
                                         <th>Fecha venta</th>
                                         <th>Local</th>

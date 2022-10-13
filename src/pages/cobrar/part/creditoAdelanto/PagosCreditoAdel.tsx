@@ -89,7 +89,7 @@ export const PagosCreditoAdel = ({
                     checked={infoCredito.estado_producto}
                     handlerCheck={handlerStateCheck}
                 />
-
+                
                 <Input
                     label="Cantidad pagada"
                     type="number"
