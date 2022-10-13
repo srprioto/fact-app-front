@@ -47,10 +47,12 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
                 nroTabb = 4;
                 break;
         }
+        
+        return nroTabb;
+
         // if (data.tipo_venta === tipoVenta.boleta) return 2 
         // else if (data.tipo_venta === tipoVenta.factura) return 3 
         // else return 1
-        return nroTabb;
     }
 
 
@@ -166,6 +168,7 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
         updateVenta.envioComprobante = envioComprobante;
 
         if (venta.tipo_venta === tipoVenta.credito || venta.tipo_venta === tipoVenta.adelanto) {
+            updateVenta.cliente = venta.cliente;
             updateVenta.estado_producto = venta.estado_producto;
             updateVenta.totalPagado = venta.totalPagado;
             updateVenta.creditoDetalles = venta.creditoDetalles;
@@ -190,8 +193,8 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
             setLoadConfirmarVenta(false);
             console.log(error);
         } finally {
+            setVenta({...data, totalPagado: 0}); // puede generar problemas al desmontar componente
             handlerRefresh();
-            setVenta({...data, totalPagado: 0});
         }
     }
 

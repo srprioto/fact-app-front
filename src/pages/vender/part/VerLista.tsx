@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BiCartAlt, BiSpreadsheet, BiTask } from "react-icons/bi";
 import { BoletaVenta } from "./factura/BoletaVenta";
 import { FacturaVenta } from "./factura/FacturaVenta";
@@ -9,7 +9,7 @@ import { PreciosVenta } from "./verLista/extend/PreciosVenta";
 import { TablaLista } from "./verLista/extend/TablaLista";
 import { ModalCodigoVenta } from "./verLista/short/ModalCodigoVenta";
 import { RapidaVenta } from "./factura/RapidaVenta";
-import { Cotizacion } from "./factura/Cotizacion";
+
 
 export const VerLista = ({ 
     setShowWindow, 
@@ -31,12 +31,9 @@ export const VerLista = ({
 
     const [cliente, setCliente] = useState<any>(clienteInfo);
 
-
-    // useEffect(() => {
-    //     if (listaVenta.length <= 0) {
-    //         setShowWindow(1);
-    //     }
-    // }, [listaVenta])
+    useEffect(() => {
+        setCliente(clienteInfo);
+    }, [tabbs])
 
     const handlerTabb = (tab:number) => { 
         // setCliente("");
@@ -79,8 +76,9 @@ export const VerLista = ({
                     setModalConfirm(true);
                     reinicios2();
                     setLoadVenta(false);
-                }    
+                }
             } else {
+                setCliente(clienteInfo);
                 reinicios2();
                 setLoadVenta(false);
                 setShowWindow(1);
@@ -90,7 +88,7 @@ export const VerLista = ({
             console.log(error);
         }
     }
-    
+
 
     return (
         <div className="over-hidden">
@@ -177,7 +175,7 @@ export const VerLista = ({
                             />
                         ) 
                     }
-                    { 
+                    {/* { 
                         tabbs === 4
                         && (
                             <Cotizacion
@@ -188,7 +186,7 @@ export const VerLista = ({
                                 verificarVender={verificarVender}
                             />
                         ) 
-                    }
+                    } */}
                     
                 </div>
             </div>

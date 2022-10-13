@@ -31,22 +31,20 @@ export const Vender = ({ idLocal, nombreLocal, user }:vender) => {
         ventaDetalles: [],
     }
 
-    const [data, setData] = useState<any>([]); // reinicio
-    const [elemento, setElemento] = useState<any>({}); // reinicio
-
-    const [listaRepetidos, setListaRepetidos] = useState<Array<number>>([]); // reinicio final
-    
     const [showWindow, setShowWindow] = useState<number>(0);
     const [classStart, setClassStart] = useState<boolean>(false);
     
     const [listaVenta, setlistaVenta] = useState<Array<any>>([]);
     const [venta, setVenta] = useState<any>(ventaItem);
-
-    const [descuentoOn, setDescuentoOn] = useState<boolean>(false);
-
-    const [ventaDetalle, setVentaDetalle] = useState<ventaDetalles>(ventaDet); // reinicio
+    const [descuentoOn, setDescuentoOn] = useState<boolean>(false);    
     const [tipoDescuento, setTipoDescuento] = useState<boolean>(false);
-    
+
+    // reiniciables
+    const [ventaDetalle, setVentaDetalle] = useState<ventaDetalles>(ventaDet);
+    const [listaRepetidos, setListaRepetidos] = useState<Array<number>>([]);
+    const [data, setData] = useState<any>([]);
+    const [elemento, setElemento] = useState<any>({});
+
 
     useEffect(() => {
         setShowWindow(1);
@@ -56,7 +54,7 @@ export const Vender = ({ idLocal, nombreLocal, user }:vender) => {
     useEffect(() => {
         listaVenta.forEach((e:any) => { // verficar que existen descuentos activos
             if (e.descuento < 0) { setDescuentoOn(true) }
-        })
+        });
         const sumaSubtotal = listaVenta
             .map((item:any) => item.precio_parcial)
             .reduce((prev:number, curr:number) => prev + curr, 0);
@@ -108,19 +106,13 @@ export const Vender = ({ idLocal, nombreLocal, user }:vender) => {
     }
 
     
-    const postVenta = async (cliente:any, tipo_venta:string, estado_venta?:string) => {
+    const postVenta = async (
+        cliente:any, 
+        tipo_venta:string, 
+        estado_venta?:string
+    ) => {
         
         let ventaResp:any;
-        
-        // temporal tipo venta
-        // let tipo_venta:string = "venta_rapida";
-        // if (serie === "F003") {
-        //     tipo_venta = "factura";
-        // } else if (serie === "B003"){
-        //     tipo_venta = "boleta";
-        // } else if (serie === "V001"){
-        //     tipo_venta = "venta_rapida";
-        // }
         venta.tipo_venta = tipo_venta;
         // fin tipo venta
 
@@ -193,3 +185,13 @@ export const Vender = ({ idLocal, nombreLocal, user }:vender) => {
         </div>
     )
 }
+    
+// temporal tipo venta
+// let tipo_venta:string = "venta_rapida";
+// if (serie === "F003") {
+//     tipo_venta = "factura";
+// } else if (serie === "B003"){
+//     tipo_venta = "boleta";
+// } else if (serie === "V001"){
+//     tipo_venta = "venta_rapida";
+// }

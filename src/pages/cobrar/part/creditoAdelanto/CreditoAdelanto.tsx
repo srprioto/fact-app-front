@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { BiCaretRight, BiX } from "react-icons/bi";
 import { BtnOnOff2 } from "../../../../components/btns/BtnOnOff2";
 import { tipoVenta } from "../../../../resources/dtos/VentasDto";
+import { copy } from "../../../../resources/func/deepCopy";
 import { ValidClienteCredito } from "../../../../resources/validations/Clientes";
 import { BuscarCliente } from "./BuscarCliente";
 import { FormsClienteCred } from "./FormsClienteCred";
@@ -89,18 +90,18 @@ export const CreditoAdelanto = ({
                 validationSchema={ValidClienteCredito}
                 onSubmit={(data, { resetForm }) => { 
 
-                    const ventaUpdate = venta;
-                    const clientesUpdate:any = venta.clientes;
+                    const ventaUpdate = copy(venta);
+                    const clientesUpdt:any = copy(venta.clientes);
                     const creditoUpdate:any = {};
                     const creditoDetalles:Array<any> = [];
                     
                     // actualizacion cliente
-                    clientesUpdate.nombre = infoCredito.nombre;
-                    clientesUpdate.tipoDocumento = infoCredito.tipoDocumento;
-                    clientesUpdate.numero_documento = infoCredito.numero_documento;
-                    clientesUpdate.telefono = infoCredito.telefono;
-                    clientesUpdate.direccion = infoCredito.direccion;
-                    clientesUpdate.email = infoCredito.email;
+                    clientesUpdt.nombre = infoCredito.nombre;
+                    clientesUpdt.tipoDocumento = infoCredito.tipoDocumento;
+                    clientesUpdt.numero_documento = infoCredito.numero_documento;
+                    clientesUpdt.telefono = infoCredito.telefono;
+                    clientesUpdt.direccion = infoCredito.direccion;
+                    clientesUpdt.email = infoCredito.email;
                     
                     // actualizacion credito
                     creditoUpdate.cantidad_pagada = Number(infoCredito.cantidad_pagada);
@@ -109,9 +110,11 @@ export const CreditoAdelanto = ({
                     creditoDetalles.push(creditoUpdate);
 
                     // actualizacion venta
-                    ventaUpdate.tipo_venta = infoCredito.estado_producto ? tipoVenta.credito : tipoVenta.adelanto;
+                    ventaUpdate.tipo_venta = infoCredito.estado_producto 
+                    ? tipoVenta.credito 
+                    : tipoVenta.adelanto;
                     ventaUpdate.estado_producto = infoCredito.estado_producto;
-                    ventaUpdate.clientes = clientesUpdate;
+                    ventaUpdate.cliente = clientesUpdt;
                     ventaUpdate.creditoDetalles = creditoDetalles;
 
                     setVenta(ventaUpdate);

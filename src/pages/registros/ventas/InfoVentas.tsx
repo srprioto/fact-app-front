@@ -109,8 +109,7 @@ export const InfoGeneralVentas = ({ idLocal, selectLocal, loadingLocal, locales 
         )
     }
 
-    console.log(data);    
-
+    
     return (
         <>
             <div className="box">

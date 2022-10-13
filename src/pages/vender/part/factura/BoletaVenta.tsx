@@ -40,8 +40,8 @@ export const BoletaVenta = ({
             documento: ""
         })
     }, [getCliente.tipoDocumento])
-    
-    
+        
+
     const handlerOnChangeGetCli = (e:any) => { 
         setGetCliente({
             ...getCliente,

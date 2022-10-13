@@ -1,19 +1,30 @@
 import { useEffect } from "react";
 import { BiBookBookmark, BiCartAlt, BiSpreadsheet, BiTask } from "react-icons/bi"
+// import { clienteInfo } from "../../../../resources/dtos/Cliente";
 
 interface tabsVenta {
     switchChangeFact:boolean;
     tipoSerie:Function;
     tabbs:number;
     setTabbs:Function;
+    // setCliente:Function;
 }
 
-export const TabsVenta = ({ switchChangeFact, tipoSerie, tabbs, setTabbs }:tabsVenta) => {
+export const TabsVenta = ({ 
+    switchChangeFact, 
+    tipoSerie, 
+    tabbs, 
+    setTabbs, 
+    // setCliente 
+}:tabsVenta) => {
 
     useEffect(() => {
         if (!switchChangeFact) {
             setTabbs(tipoSerie())
         }
+        // else {
+        //     setCliente(clienteInfo)
+        // }
     }, [switchChangeFact])
 
     return (
