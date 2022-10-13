@@ -186,6 +186,8 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
             // ];
         }
 
+        console.log(updateVenta.cliente);        
+
         try {
             await put(data.id, updateVenta, VENTAS);
             setLoadConfirmarVenta(false);

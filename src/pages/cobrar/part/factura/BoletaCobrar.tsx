@@ -72,12 +72,12 @@ export const BoletaCobrar = ({
 
 
     useEffect(() => {
+        setCliente(clienteInfo);
         setGetCliente({
             ...getCliente,
             documento: cliente ? cliente.numero_documento : ""
         })
         if (getCliente.tipoDocumento === "noDocumento") {
-            setCliente(clienteInfo);
             setGetCliente({
                 ...getCliente,
                 documento: ""
