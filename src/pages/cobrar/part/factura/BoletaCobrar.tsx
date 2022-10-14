@@ -11,48 +11,58 @@ interface boleta {
     cliente:any;
     setCliente:Function;
     switchChange:boolean;
-
     setModalConfVenta:Function;
     modalConfVenta:any;
     setModalRechazVenta:Function;
     modalRechazVenta:any;
-
     switchChangeFact:boolean;
     setTabbs:Function;
     tipoSerie:Function;
     data:any;
     tabbs:number;
-
     venta:any;
     setVenta:Function;
-
     activarConfirmarVenta:Function;
+    getCliente:any;
+    setGetCliente:Function;
 }
 
 export const BoletaCobrar = ({ 
-    cliente, setCliente, switchChange,
-    setModalConfVenta, modalConfVenta, setModalRechazVenta, modalRechazVenta,
-    switchChangeFact, setTabbs, data, tipoSerie, tabbs,
-    venta, setVenta,
-    activarConfirmarVenta
+    cliente, 
+    setCliente, 
+    switchChange,
+    setModalConfVenta, 
+    modalConfVenta, 
+    setModalRechazVenta, 
+    modalRechazVenta,
+    switchChangeFact, 
+    setTabbs, 
+    data, 
+    tipoSerie, 
+    tabbs,
+    venta, 
+    setVenta,
+    activarConfirmarVenta,
+    getCliente, 
+    setGetCliente
 }:boleta) => {
 
-    const tipoDocum = () => { 
-        if (!!cliente) {
-            if (!!cliente.tipoDocumento) {
-                return cliente.tipoDocumento
-            } else {
-                return "noDocumento"
-            }
-        } else {
-            return "noDocumento"
-        }
-    }
+    // const tipoDocum = () => { 
+    //     if (!!cliente) {
+    //         if (!!cliente.tipoDocumento) {
+    //             return cliente.tipoDocumento
+    //         } else {
+    //             return "noDocumento"
+    //         }
+    //     } else {
+    //         return "noDocumento"
+    //     }
+    // }
     
     const tipo_venta:string = tipoVenta.boleta;
     // const clienteI = clienteInfo(serie);
     const [loadCliente, setLoadCliente] = useState<boolean>(false);
-    const [getCliente, setGetCliente] = useState<any>({ documento: "", tipoDocumento: tipoDocum(), });
+    
 
 
     useEffect(() => {
@@ -130,16 +140,16 @@ export const BoletaCobrar = ({
                 handlerGetCliente={handlerGetCliente}
                 loadCliente={loadCliente}
 
-                switchChangeFact={switchChangeFact}
-                tabbs={tabbs}
-                setTabbs={setTabbs}
-                tipoSerie={tipoSerie}
-                data={data}
-                setCliente={setCliente}
-                setGetCliente={setGetCliente}
+                // switchChangeFact={switchChangeFact}
+                // tabbs={tabbs}
+                // setTabbs={setTabbs}
+                // tipoSerie={tipoSerie}
+                // data={data}
+                // setCliente={setCliente}
+                // setGetCliente={setGetCliente}
 
-                venta={venta}
-                setVenta={setVenta}
+                // venta={venta}
+                // setVenta={setVenta}
             />
 
             <FormGeneralCobrar

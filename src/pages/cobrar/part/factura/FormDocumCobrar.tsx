@@ -20,16 +20,16 @@ interface formDocumCobrar{
     handlerGetCliente:Function;
     loadCliente:boolean;
 
-    switchChangeFact:boolean;
-    setTabbs:Function;
-    tipoSerie:Function;
-    data:any
-    tabbs:number;
-    setCliente:Function;
-    setGetCliente:Function;
+    // switchChangeFact:boolean;
+    // setTabbs:Function;
+    // data:any
+    // tipoSerie:Function;
+    // tabbs:number;
+    // setCliente:Function;
+    // setGetCliente:Function;
 
-    venta:any
-    setVenta:Function;
+    // venta:any
+    // setVenta:Function;
 }
 
 export const FormDocumCobrar = ({ 
@@ -42,61 +42,66 @@ export const FormDocumCobrar = ({
     handlerGetCliente,
     loadCliente,
 
-    switchChangeFact, setTabbs, data, tipoSerie, tabbs, setCliente, setGetCliente,
+    // switchChangeFact, setTabbs, data, tipoSerie, tabbs, setCliente, 
+    // setGetCliente,
 
-    venta, setVenta
+    // venta, setVenta
 }:formDocumCobrar) => {
 
     // const tipDocument = data.clientes && data.clientes.tipoDocumento;
     // const documento = data.clientes && data.clientes.numero_documento;
 
-    const tipDocument = () => { 
-        if (!!data.clientes) {
-            if (!!data.clientes.tipoDocumento) {
-                return data.clientes.tipoDocumento
-            } else {
-                return "noDocumento"
-            }
-        } else {
-            return "noDocumento"
-        }
-    }
 
-    const documento = () => { 
-        if (!!data.clientes) {
-            if (!!data.clientes.numero_documento) {
-                return data.clientes.numero_documento
-            } else {
-                return ""
-            }
-        } else {
-            return ""
-        }
-    }
+
+
+    
+    // const tipDocument = () => { 
+    //     if (!!data.clientes) {
+    //         if (!!data.clientes.tipoDocumento) {
+    //             return data.clientes.tipoDocumento
+    //         } else {
+    //             return "noDocumento"
+    //         }
+    //     } else {
+    //         return "noDocumento"
+    //     }
+    // }
+
+    // const documento = () => { 
+    //     if (!!data.clientes) {
+    //         if (!!data.clientes.numero_documento) {
+    //             return data.clientes.numero_documento
+    //         } else {
+    //             return ""
+    //         }
+    //     } else {
+    //         return ""
+    //     }
+    // }
 
 
     const stateCliente:string = cliente ? cliente.estadoCliente : "";
     const state_cliente:string = cliente ? cliente.estado_cliente : "";
     
 
-    useEffect(() => {
-        if (!switchChangeFact) {
-            // setTabbs(tipoSerie())
-            setCliente(data.clientes)
-            setGetCliente({
-                documento: documento(), tipoDocumento: tipDocument()
-            })
-        } else {
-            setCliente(clienteInfo)
-        }
-        // if (tabbs !== 4) {
-        //     console.log("AQUI ESTOY");
-        //     setVenta({
-        //         ...venta,
-        //         totalPagado: 0
-        //     })
-        // }
-    }, [switchChangeFact, tabbs])
+    // useEffect(() => {
+    //     if (!switchChangeFact) {
+    //         // setTabbs(tipoSerie())
+    //         setCliente(data.clientes)
+    //         setGetCliente({
+    //             documento: documento(), tipoDocumento: tipDocument()
+    //         })
+    //     } else {
+    //         setCliente(clienteInfo)
+    //     }
+    //     // if (tabbs !== 4) {
+    //     //     console.log("AQUI ESTOY");
+    //     //     setVenta({
+    //     //         ...venta,
+    //     //         totalPagado: 0
+    //     //     })
+    //     // }
+    // }, [switchChangeFact, tabbs])
 
 
     const estadoCliente = () => { 

@@ -11,37 +11,47 @@ interface factura {
     cliente:any;
     setCliente:Function;
     switchChange:boolean;
-
     setModalConfVenta:Function;
     modalConfVenta:any;
     setModalRechazVenta:Function;
     modalRechazVenta:any;
-
     switchChangeFact:boolean;
     setTabbs:Function;
     tipoSerie:Function;
     data:any
     tabbs:number;
-
     venta:any;
     setVenta:Function;
-
     activarConfirmarVenta:Function;
+    getCliente:any;
+    setGetCliente:Function;
 }
 
 export const FacturaCobrar = ({ 
-    cliente, setCliente, switchChange,
-    setModalConfVenta, modalConfVenta, setModalRechazVenta, modalRechazVenta,
-    switchChangeFact, setTabbs, data, tipoSerie, tabbs,
-    venta, setVenta,
-    activarConfirmarVenta
+    cliente, 
+    setCliente, 
+    switchChange,
+    setModalConfVenta, 
+    modalConfVenta, 
+    setModalRechazVenta, 
+    modalRechazVenta,
+    switchChangeFact, 
+    setTabbs, 
+    data, 
+    tipoSerie, 
+    tabbs,
+    venta, 
+    setVenta,
+    activarConfirmarVenta,
+    getCliente, 
+    setGetCliente
 }:factura) => {
 
     // const serie:string = "F003";
     const tipo_venta:string = tipoVenta.factura;
     // const clienteI = clienteInfo(serie);
     const [loadCliente, setLoadCliente] = useState<boolean>(false);
-    const [getCliente, setGetCliente] = useState<any>({ documento: "", tipoDocumento: "RUC", });
+    // const [getCliente, setGetCliente] = useState<any>({ documento: "", tipoDocumento: "RUC", });
 
     useEffect(() => {
         setVenta({
@@ -104,16 +114,16 @@ export const FacturaCobrar = ({
                 handlerGetCliente={handlerGetCliente}
                 loadCliente={loadCliente}
 
-                switchChangeFact={switchChangeFact}
-                tabbs={tabbs}
-                setTabbs={setTabbs}
-                tipoSerie={tipoSerie}
-                data={data}
-                setCliente={setCliente}
-                setGetCliente={setGetCliente}
+                // switchChangeFact={switchChangeFact}
+                // tabbs={tabbs}
+                // setTabbs={setTabbs}
+                // tipoSerie={tipoSerie}
+                // data={data}
+                // setCliente={setCliente}
+                // setGetCliente={setGetCliente}
 
-                venta={venta}
-                setVenta={setVenta}
+                // venta={venta}
+                // setVenta={setVenta}
             />
 
             <FormGeneralCobrar

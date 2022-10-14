@@ -9,6 +9,8 @@ interface tabsVenta {
     tabbs:number;
     setTabbs:Function;
     setCliente:Function;
+    data:any;
+    setGetCliente:Function;
 }
 
 export const TabsVenta = ({ 
@@ -16,17 +18,54 @@ export const TabsVenta = ({
     tipoSerie, 
     tabbs, 
     setTabbs, 
-    setCliente 
+    setCliente,
+    data,
+    setGetCliente
 }:tabsVenta) => {
+
+    const tipDocument = () => { 
+        if (!!data.clientes) {
+            if (!!data.clientes.tipoDocumento) {
+                return data.clientes.tipoDocumento
+            } else {
+                return "noDocumento"
+            }
+        } else {
+            return "noDocumento"
+        }
+    }
+
+    const documento = () => { 
+        if (!!data.clientes) {
+            if (!!data.clientes.numero_documento) {
+                return data.clientes.numero_documento
+            } else {
+                return ""
+            }
+        } else {
+            return ""
+        }
+    }
 
 
     useEffect(() => {
         if (!switchChangeFact) {
             setTabbs(tipoSerie())
+            setCliente(data.clientes)
+            setGetCliente({
+                documento: documento(), tipoDocumento: tipDocument()
+            })
         } else {
             setCliente(clienteInfo)
         }
-    }, [switchChangeFact])
+        // if (tabbs !== 4) {
+        //     console.log("AQUI ESTOY");
+        //     setVenta({
+        //         ...venta,
+        //         totalPagado: 0
+        //     })
+        // }
+    }, [switchChangeFact, tabbs])
 
 
     return (

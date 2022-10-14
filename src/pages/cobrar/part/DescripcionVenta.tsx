@@ -77,6 +77,18 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
             return false;
         }
     }
+
+    const tipoDocum = () => { 
+        if (!!cliente) {
+            if (!!cliente.tipoDocumento) {
+                return cliente.tipoDocumento
+            } else {
+                return "noDocumento"
+            }
+        } else {
+            return "noDocumento"
+        }
+    }
     
     // const [venta, setVenta] = useState<any>(data);
     const [venta, setVenta] = useState<any>({...data, totalPagado: 0});
@@ -95,6 +107,8 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
     const [switchCredito, setSwitchCredito] = useState<boolean>(false);
 
     const [comisionTarjeta, setComisionTarjeta] = useState<number>(0);
+
+    const [getCliente, setGetCliente] = useState<any>({ documento: "", tipoDocumento: tipoDocum(), });
 
     const listaPagosTarjeta = () => { 
         let itemsTarjeta:Array<any> = [];
@@ -209,7 +223,6 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
         }
     }
     
-    console.log(cliente);    
 
     return (
         <div className="descripcion-venta">
@@ -235,6 +248,8 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
                     tabbs={tabbs}
                     setTabbs={setTabbs}
                     setCliente={setCliente}
+                    data={data}
+                    setGetCliente={setGetCliente}
                 />
 
                 <div className="descripcion-venta grid-1 gap">
@@ -306,6 +321,9 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
                             setVenta={setVenta}
 
                             activarConfirmarVenta={activarConfirmarVenta}
+
+                            getCliente={getCliente}
+                            setGetCliente={setGetCliente}
                         /> 
                     }
                     {
@@ -330,6 +348,9 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
                             setVenta={setVenta}
 
                             activarConfirmarVenta={activarConfirmarVenta}
+
+                            getCliente={getCliente}
+                            setGetCliente={setGetCliente}
                         />
                     }
                     {
