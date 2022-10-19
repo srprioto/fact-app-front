@@ -10,9 +10,17 @@ interface ventaItems {
     updateData:Function;
     handlerAnular:Function;
     handlerReimprimir:Function;
+    handlerCredito:Function;
 }
 
-export const VentaItems = ({ ventas, handlerVer, updateData, handlerAnular, handlerReimprimir }:ventaItems) => {
+export const VentaItems = ({ 
+    ventas, 
+    handlerVer, 
+    updateData, 
+    handlerAnular, 
+    handlerReimprimir, 
+    handlerCredito 
+}:ventaItems) => {
 
     const esComprobante:boolean = ventas.tipo_venta === tipoVenta.boleta || ventas.tipo_venta === tipoVenta.factura;
     const esCredito:boolean = ventas.tipo_venta === tipoVenta.credito || ventas.tipo_venta === tipoVenta.adelanto;
@@ -80,6 +88,7 @@ export const VentaItems = ({ ventas, handlerVer, updateData, handlerAnular, hand
                     updateData={updateData} 
                     handlerAnular={handlerAnular}
                     handlerReimprimir={handlerReimprimir}
+                    handlerCredito={handlerCredito}
                 />
             </td>
         </tr>

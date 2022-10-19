@@ -89,6 +89,7 @@ export const VerLista = ({
         }
     }
 
+    // console.log(cliente);    
 
     return (
         <div className="over-hidden">

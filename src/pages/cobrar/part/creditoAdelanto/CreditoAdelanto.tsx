@@ -19,6 +19,7 @@ interface creditoAdelanto {
     setModalConfVenta:Function;
     activarConfirmarVenta:Function;
     setCliente:Function;
+    setCreditoDetalles:Function;
 }
 
 export const CreditoAdelanto = ({ 
@@ -29,7 +30,8 @@ export const CreditoAdelanto = ({
     modalConfVenta,
     setModalConfVenta,
     activarConfirmarVenta,
-    setCliente
+    setCliente,
+    setCreditoDetalles
 }:creditoAdelanto) => {
 
     const infoCreditoDto = {
@@ -92,7 +94,8 @@ export const CreditoAdelanto = ({
                 validationSchema={ValidClienteCredito}
                 onSubmit={(data, { resetForm }) => { 
 
-                    const ventaUpdate = copy(venta);
+                    // const ventaUpdate = copy(venta);
+                    const ventaUpdate = venta;
                     const clientesUpdt:any = copy(venta.clientes);
                     const creditoUpdate:any = {};
                     const creditoDetalles:Array<any> = [];
@@ -109,6 +112,7 @@ export const CreditoAdelanto = ({
                     creditoUpdate.cantidad_pagada = Number(infoCredito.cantidad_pagada);
                     creditoUpdate.nota = infoCredito.observaciones;
                     creditoUpdate.fecha_estimada = new Date();
+                    creditoUpdate.estado = true;
                     creditoDetalles.push(creditoUpdate);
 
                     // actualizacion venta
@@ -116,9 +120,10 @@ export const CreditoAdelanto = ({
                     ? tipoVenta.credito 
                     : tipoVenta.adelanto;
                     ventaUpdate.estado_producto = infoCredito.estado_producto;
-                    ventaUpdate.creditoDetalles = creditoDetalles;
+                    // ventaUpdate.creditoDetalles = creditoDetalles;
                     // ventaUpdate.cliente = clientesUpdt;
 
+                    setCreditoDetalles(creditoDetalles);
                     setCliente(clientesUpdt);
                     setVenta(ventaUpdate);
                     setModalConfVenta(!modalConfVenta);

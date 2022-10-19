@@ -11,6 +11,7 @@ interface tabsVenta {
     setCliente:Function;
     data:any;
     setGetCliente:Function;
+    tipoDocumUpdate:Function;
 }
 
 export const TabsVenta = ({ 
@@ -20,7 +21,8 @@ export const TabsVenta = ({
     setTabbs, 
     setCliente,
     data,
-    setGetCliente
+    setGetCliente,
+    tipoDocumUpdate
 }:tabsVenta) => {
 
     const tipDocument = () => { 
@@ -47,16 +49,22 @@ export const TabsVenta = ({
         }
     }
 
+    // console.log(!switchChangeFact);    
 
     useEffect(() => {
         if (!switchChangeFact) {
             setTabbs(tipoSerie())
-            setCliente(data.clientes)
+            setCliente(data.clientes);
             setGetCliente({
-                documento: documento(), tipoDocumento: tipDocument()
+                documento: documento(), 
+                tipoDocumento: tipDocument()
             })
         } else {
-            setCliente(clienteInfo)
+            setCliente(clienteInfo);
+            setGetCliente({
+                documento: documento(), 
+                tipoDocumento: tipoDocumUpdate()
+            })
         }
         // if (tabbs !== 4) {
         //     console.log("AQUI ESTOY");
@@ -66,6 +74,10 @@ export const TabsVenta = ({
         //     })
         // }
     }, [switchChangeFact, tabbs])
+
+    // console.log(venta.tipo_venta);
+    // console.log(venta.tipo_venta === "factura");
+    // console.log("***************");
 
 
     return (

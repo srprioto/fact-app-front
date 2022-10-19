@@ -3,9 +3,10 @@ interface Checkbox {
     name:string;
     checked:any;
     handlerCheck:any;
+    classname?:string;
 }
 
-export const Checkbox2 = ({ label, name, checked, handlerCheck }:Checkbox) => {
+export const Checkbox2 = ({ label, name, checked, handlerCheck, classname }:Checkbox) => {
     return (
         <div className="checkbox wrap-switch">
 
@@ -20,7 +21,7 @@ export const Checkbox2 = ({ label, name, checked, handlerCheck }:Checkbox) => {
             
             {
                 label
-                && <label className="switch-label" htmlFor={name}><span>{ label }</span></label>
+                && <label className={"switch-label " + classname} htmlFor={name}><span>{ label }</span></label>
             }
             
         </div>

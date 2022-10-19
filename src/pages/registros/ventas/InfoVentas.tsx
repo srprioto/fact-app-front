@@ -9,6 +9,7 @@ import { SearchWrap } from "../../../components/SearchWrap";
 import { paginate } from "../../../resources/fetch";
 import { VENTAS_PAGINATE, VENTAS_SEARCH } from "../../../resources/routes";
 import { ModalAnularVenta } from "./ventas/ModalAnularVenta";
+import { ModalCredito } from "./ventas/ModalCredito/ModalCredito";
 import { ModalHabilitarVenta } from "./ventas/ModalHabilitarVenta";
 import { ModalReimpVenta } from "./ventas/ModalReimpVenta";
 import { ModalVentaDetalles } from "./ventas/ModalVentaDetalles";
@@ -29,6 +30,7 @@ export const InfoGeneralVentas = ({ idLocal, selectLocal, loadingLocal, locales 
     const [modalHabilitarVenta, setModalHabilitarVenta] = useState<boolean>(false);
     const [modalAnular, setModalAnular] = useState<boolean>(false);
     const [modalReimprimir, setModalReimprimir] = useState<boolean>(false);
+    const [modalCredito, setModalCredito] = useState<boolean>(false);
     const [idVenta, setIdVenta] = useState<number>(0);
     const [pagination, setPagination] = useState<any>({ meta: {}, links: {} });
     const [data, setData] = useState<any>([]);
@@ -67,6 +69,11 @@ export const InfoGeneralVentas = ({ idLocal, selectLocal, loadingLocal, locales 
     const handlerReimprimir = (idVenta:number) => { 
         setIdVenta(idVenta);
         setModalReimprimir(true);
+    }
+
+    const handlerCredito = (idVenta:number) => { 
+        setIdVenta(idVenta);
+        setModalCredito(true);
     }
 
 
@@ -205,6 +212,7 @@ export const InfoGeneralVentas = ({ idLocal, selectLocal, loadingLocal, locales 
                                                     handlerVer={handlerVer}
                                                     handlerAnular={handlerAnular}
                                                     handlerReimprimir={handlerReimprimir}
+                                                    handlerCredito={handlerCredito}
                                                 />
                                             )
                                         })
@@ -248,6 +256,15 @@ export const InfoGeneralVentas = ({ idLocal, selectLocal, loadingLocal, locales 
                     modal={modalReimprimir}
                     setModal={setModalReimprimir}
                     idVenta={idVenta}
+                />
+            </ModalWrap>
+
+            <ModalWrap modal={modalCredito}>
+                <ModalCredito
+                    modal={modalCredito}
+                    setModal={setModalCredito}
+                    idVenta={idVenta}
+                    getData={getData}
                 />
             </ModalWrap>
 

@@ -15,11 +15,11 @@ interface factura {
     modalConfVenta:any;
     setModalRechazVenta:Function;
     modalRechazVenta:any;
-    switchChangeFact:boolean;
-    setTabbs:Function;
-    tipoSerie:Function;
-    data:any
-    tabbs:number;
+    // switchChangeFact:boolean;
+    // setTabbs:Function;
+    // tipoSerie:Function;
+    // data:any
+    // tabbs:number;
     venta:any;
     setVenta:Function;
     activarConfirmarVenta:Function;
@@ -35,11 +35,11 @@ export const FacturaCobrar = ({
     modalConfVenta, 
     setModalRechazVenta, 
     modalRechazVenta,
-    switchChangeFact, 
-    setTabbs, 
-    data, 
-    tipoSerie, 
-    tabbs,
+    // switchChangeFact, 
+    // setTabbs, 
+    // data, 
+    // tipoSerie, 
+    // tabbs,
     venta, 
     setVenta,
     activarConfirmarVenta,
@@ -64,7 +64,7 @@ export const FacturaCobrar = ({
     useEffect(() => {
         // setCliente(clienteI);
         setGetCliente({
-            ...getCliente,
+            tipoDocumento: "RUC",
             documento: cliente.numero_documento
         })
     }, [getCliente.tipoDocumento])
@@ -97,7 +97,7 @@ export const FacturaCobrar = ({
             console.log(error);
         }
     }
-    
+        
 
     return (
         <div className="factura">
@@ -114,15 +114,14 @@ export const FacturaCobrar = ({
                 handlerGetCliente={handlerGetCliente}
                 loadCliente={loadCliente}
 
+                // venta={venta}
                 // switchChangeFact={switchChangeFact}
                 // tabbs={tabbs}
                 // setTabbs={setTabbs}
                 // tipoSerie={tipoSerie}
                 // data={data}
                 // setCliente={setCliente}
-                // setGetCliente={setGetCliente}
-
-                // venta={venta}
+                // setGetCliente={setGetCliente}                
                 // setVenta={setVenta}
             />
 

@@ -54,6 +54,8 @@ export const COTIZACION:string = "/cotizaciones";
 export const COTIZACION_SEARCH:string = "/cotizaciones/search/";
 export const COTIZACION_PAGINATE:string = "/cotizaciones/paginate";
 
+export const CREDITO_DETALLES:string = "/credito-detalles";
+
 
 
 // almacenes

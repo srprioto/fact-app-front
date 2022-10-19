@@ -1,12 +1,10 @@
 import { Form, Formik } from "formik"
-import { useEffect } from "react"
 import { BiSearchAlt2 } from "react-icons/bi"
 import { InputDisable } from "../../../../components/forms/InputDisable"
 import { InputMk } from "../../../../components/forms/InputMk"
 import { ParrafoForm } from "../../../../components/forms/ParrafoForm"
 import { Select } from "../../../../components/forms/Select"
 import { LoadingImg2 } from "../../../../components/loads/LoadingImg"
-import { clienteInfo } from "../../../../resources/dtos/Cliente"
 import { tipoVenta as tipVenta } from "../../../../resources/dtos/VentasDto";
 import { ValidDocumento } from "../../../../resources/validations/Clientes"
 
@@ -22,8 +20,8 @@ interface formDocumCobrar{
 
     // switchChangeFact:boolean;
     // setTabbs:Function;
-    // data:any
     // tipoSerie:Function;
+    // data:any
     // tabbs:number;
     // setCliente:Function;
     // setGetCliente:Function;
@@ -42,17 +40,13 @@ export const FormDocumCobrar = ({
     handlerGetCliente,
     loadCliente,
 
-    // switchChangeFact, setTabbs, data, tipoSerie, tabbs, setCliente, 
-    // setGetCliente,
+    // switchChangeFact, setTabbs, data, tipoSerie, tabbs, setCliente, setGetCliente,
 
     // venta, setVenta
 }:formDocumCobrar) => {
 
     // const tipDocument = data.clientes && data.clientes.tipoDocumento;
     // const documento = data.clientes && data.clientes.numero_documento;
-
-
-
 
     
     // const tipDocument = () => { 
@@ -102,7 +96,6 @@ export const FormDocumCobrar = ({
     //     //     })
     //     // }
     // }, [switchChangeFact, tabbs])
-
 
     const estadoCliente = () => { 
         let text:string = "";
@@ -224,10 +217,6 @@ export const FormDocumCobrar = ({
                                 </>
                             )
                         }
-
-                        
-
-
                     </div>
                 </Form>
             )} 

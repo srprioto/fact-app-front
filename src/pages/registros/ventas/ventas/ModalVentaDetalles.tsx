@@ -4,6 +4,7 @@ import { Modal } from "../../../../components/modals/Modal"
 import { getOne } from "../../../../resources/fetch";
 import { VENTAS } from "../../../../resources/routes";
 import { ProductoInfo } from "../../../productos/otros/ProductoInfo";
+import { CreditoDetalles } from "./CreditoDetalles";
 import { FormasPago } from "./FormasPago";
 import { InfoCliente } from "./InfoCliente";
 import { InfoVenta } from "./InfoVenta";
@@ -62,6 +63,18 @@ export const ModalVentaDetalles = ({ modal, setModal, idVenta }:any) => {
             }
         }
     }
+
+
+    const verCreditoDetalles = () => { 
+        if (!!venta.creditoDetalles) {
+            if (venta.creditoDetalles.length > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+    
 
     return (
         <Modal
@@ -128,7 +141,6 @@ export const ModalVentaDetalles = ({ modal, setModal, idVenta }:any) => {
                                     }
                                 </tbody>
                             </table>
-
                         </div>
 
                         <InfoVenta venta={venta} classEstado={classEstado} />
@@ -136,6 +148,10 @@ export const ModalVentaDetalles = ({ modal, setModal, idVenta }:any) => {
                         {
                             verFormasPago()
                             && <FormasPago formasDePago={venta.formasPago} />
+                        }
+                        {
+                            verCreditoDetalles()
+                            && <CreditoDetalles creditoDetalles={venta.creditoDetalles} />
                         }
                         {
                             venta.clientes

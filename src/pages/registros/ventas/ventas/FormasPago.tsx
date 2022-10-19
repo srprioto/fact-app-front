@@ -4,12 +4,12 @@ export const FormasPago = ({ formasDePago }:any) => {
 
     return (
         <div className="box box-par m-0">
-
+            <h3>Formas de pago</h3>
             <table className="table2">
                 
                 <thead>
                     <tr>
-                        <th>Forma de pago</th>
+                        <th>Forma pago</th>
                         <th>Cantidad</th>
                     </tr>
                 </thead>

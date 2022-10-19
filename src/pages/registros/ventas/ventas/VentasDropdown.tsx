@@ -1,5 +1,6 @@
-import { BiBookmarkAltMinus, BiLike, BiShowAlt, BiX } from "react-icons/bi"
+import { BiBookBookmark, BiBookmarkAltMinus, BiLike, BiShowAlt, BiX } from "react-icons/bi"
 import { DropDown } from "../../../../components/DropDown"
+import { tipoVenta } from "../../../../resources/dtos/VentasDto";
 // import { tipoVenta } from "../../../../resources/dtos/VentasDto";
 
 interface ventasDropdown {
@@ -8,9 +9,18 @@ interface ventasDropdown {
     updateData:Function;
     handlerAnular:Function;
     handlerReimprimir:Function;
+    handlerCredito:Function;
 }
 
-export const VentasDropdown = ({ ventas, handlerVer, updateData, handlerAnular, handlerReimprimir }:ventasDropdown) => {
+export const VentasDropdown = ({ 
+    ventas, 
+    handlerVer, 
+    updateData, 
+    handlerAnular, 
+    handlerReimprimir, 
+    handlerCredito 
+}:ventasDropdown) => {
+
 
     const anulado = () => { 
         if (
@@ -24,6 +34,19 @@ export const VentasDropdown = ({ ventas, handlerVer, updateData, handlerAnular, 
             return false;
         }
     }
+
+
+    const esCredito = () => { 
+        if (
+            ventas.tipo_venta === tipoVenta.credito ||
+            ventas.tipo_venta === tipoVenta.adelanto
+        ) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
     return (
         <DropDown width="190">
@@ -56,6 +79,15 @@ export const VentasDropdown = ({ ventas, handlerVer, updateData, handlerAnular, 
                     </span>
                 )
             }
+
+            {
+                esCredito()
+                && (
+                    <span onClick={ () => handlerCredito(ventas.id) } >
+                        <BiBookBookmark /> Cred/Adel
+                    </span>
+                )
+            }
             
             {
                 ventas.estado_venta === "listo"
@@ -69,7 +101,6 @@ export const VentasDropdown = ({ ventas, handlerVer, updateData, handlerAnular, 
             <span onClick={ () => handlerVer(ventas.id) } >
                 <BiShowAlt /> Ver detalles
             </span>
-
                         
         </DropDown>
     )

@@ -78,7 +78,11 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
         }
     }
 
-    const tipoDocum = () => { 
+    const [venta, setVenta] = useState<any>({...data, totalPagado: 0});
+    const [cliente, setCliente] = useState<any>(clienteOk ? data.clientes : clienteInfo);
+    const [creditoDetalles, setCreditoDetalles] = useState<Array<any>>([]);
+
+    const tipoDocumUpdate = () => { 
         if (!!cliente) {
             if (!!cliente.tipoDocumento) {
                 return cliente.tipoDocumento
@@ -91,9 +95,7 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
     }
     
     // const [venta, setVenta] = useState<any>(data);
-    const [venta, setVenta] = useState<any>({...data, totalPagado: 0});
-    const [cliente, setCliente] = useState<any>(clienteOk ? data.clientes : clienteInfo);
-
+    
     const [loadConfirmarVenta, setLoadConfirmarVenta] = useState<boolean>(false);
     const [modalConfVenta, setModalConfVenta] = useState<boolean>(false);
     const [modalRechazVenta, setModalRechazVenta] = useState<boolean>(false);
@@ -108,7 +110,10 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
 
     const [comisionTarjeta, setComisionTarjeta] = useState<number>(0);
 
-    const [getCliente, setGetCliente] = useState<any>({ documento: "", tipoDocumento: tipoDocum(), });
+    const [getCliente, setGetCliente] = useState<any>({ 
+        documento: "", 
+        tipoDocumento: tipoDocumUpdate()
+    });
 
     const listaPagosTarjeta = () => { 
         let itemsTarjeta:Array<any> = [];
@@ -184,7 +189,7 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
         if (venta.tipo_venta === tipoVenta.credito || venta.tipo_venta === tipoVenta.adelanto) {
             updateVenta.estado_producto = venta.estado_producto;
             updateVenta.totalPagado = venta.totalPagado;
-            updateVenta.creditoDetalles = venta.creditoDetalles;
+            updateVenta.creditoDetalles = creditoDetalles;
             // updateVenta.cliente = venta.cliente;
             // updateVenta.creditoDetalles = [
             //     {
@@ -198,9 +203,7 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
             //         fecha_estimada: '2022-10-12',
             //     }
             // ];
-        }
-
-        console.log(updateVenta.cliente);        
+        } 
 
         try {
             await put(data.id, updateVenta, VENTAS);
@@ -209,6 +212,8 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
             setLoadConfirmarVenta(false);
             console.log(error);
         } finally {
+            setCliente({});
+            setCreditoDetalles([]);
             setVenta({...data, totalPagado: 0}); // puede generar problemas al desmontar componente
             handlerRefresh();
         }
@@ -222,7 +227,7 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
             return false
         }
     }
-    
+
 
     return (
         <div className="descripcion-venta">
@@ -250,6 +255,7 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
                     setCliente={setCliente}
                     data={data}
                     setGetCliente={setGetCliente}
+                    tipoDocumUpdate={tipoDocumUpdate}
                 />
 
                 <div className="descripcion-venta grid-1 gap">
@@ -312,10 +318,10 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
                             modalRechazVenta={modalRechazVenta}
 
                             switchChangeFact={switchChangeFact}
-                            tabbs={tabbs}
-                            setTabbs={setTabbs}
-                            tipoSerie={tipoSerie}
-                            data={data}
+                            // tabbs={tabbs}
+                            // setTabbs={setTabbs}
+                            // tipoSerie={tipoSerie}
+                            // data={data}
 
                             venta={venta}
                             setVenta={setVenta}
@@ -338,11 +344,11 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
                             setModalRechazVenta={setModalRechazVenta}
                             modalRechazVenta={modalRechazVenta}
 
-                            switchChangeFact={switchChangeFact}
-                            tabbs={tabbs}
-                            setTabbs={setTabbs}
-                            tipoSerie={tipoSerie}
-                            data={data}
+                            // switchChangeFact={switchChangeFact}
+                            // tabbs={tabbs}
+                            // setTabbs={setTabbs}
+                            // tipoSerie={tipoSerie}
+                            // data={data}
 
                             venta={venta}
                             setVenta={setVenta}
@@ -364,6 +370,7 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
                             setModalConfVenta={setModalConfVenta}
                             activarConfirmarVenta={activarConfirmarVenta}
                             setCliente={setCliente}
+                            setCreditoDetalles={setCreditoDetalles}
                         />
                     }
                 </div>

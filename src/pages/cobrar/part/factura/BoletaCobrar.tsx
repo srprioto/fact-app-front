@@ -16,10 +16,10 @@ interface boleta {
     setModalRechazVenta:Function;
     modalRechazVenta:any;
     switchChangeFact:boolean;
-    setTabbs:Function;
-    tipoSerie:Function;
-    data:any;
-    tabbs:number;
+    // setTabbs:Function;
+    // tipoSerie:Function;
+    // data:any;
+    // tabbs:number;
     venta:any;
     setVenta:Function;
     activarConfirmarVenta:Function;
@@ -36,15 +36,15 @@ export const BoletaCobrar = ({
     setModalRechazVenta, 
     modalRechazVenta,
     switchChangeFact, 
-    setTabbs, 
-    data, 
-    tipoSerie, 
-    tabbs,
+    // setTabbs, 
+    // data, 
+    // tipoSerie, 
+    // tabbs,
     venta, 
     setVenta,
     activarConfirmarVenta,
     getCliente, 
-    setGetCliente
+    setGetCliente,
 }:boleta) => {
 
     // const tipoDocum = () => { 
@@ -64,7 +64,6 @@ export const BoletaCobrar = ({
     const [loadCliente, setLoadCliente] = useState<boolean>(false);
     
 
-
     useEffect(() => {
         setVenta({
             ...venta,
@@ -82,7 +81,10 @@ export const BoletaCobrar = ({
 
 
     useEffect(() => {
-        setCliente(clienteInfo);
+        
+        if (switchChangeFact) { // revisar en caso de que de problemas
+            setCliente(clienteInfo);
+        }
         setGetCliente({
             ...getCliente,
             documento: cliente ? cliente.numero_documento : ""
@@ -139,7 +141,8 @@ export const BoletaCobrar = ({
                 handlerOnChangeGetCli={handlerOnChangeGetCli}
                 handlerGetCliente={handlerGetCliente}
                 loadCliente={loadCliente}
-
+                
+                // venta={venta}
                 // switchChangeFact={switchChangeFact}
                 // tabbs={tabbs}
                 // setTabbs={setTabbs}
@@ -147,8 +150,6 @@ export const BoletaCobrar = ({
                 // data={data}
                 // setCliente={setCliente}
                 // setGetCliente={setGetCliente}
-
-                // venta={venta}
                 // setVenta={setVenta}
             />
 

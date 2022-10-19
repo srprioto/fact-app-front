@@ -19,42 +19,42 @@ export const BuscarCliente = ({ infoCredito, setInfoCredito, errors }:buscarClie
 
     
     const handlerGetCliente = async () => { 
-        setLoadCliente(true);
-
-        const updateData = {
-            documento: infoCredito.numero_documento,
-            tipoDocumento: infoCredito.tipoDocumento
-        }
-
-        try {
-            const response = await post(updateData, CLIENTES + "/padron/search");
-            if (response.estadoCliente === "Inexistente") {
-                setEstadoCliente(false);
-                setInfoCredito({
-                    ...infoCredito,
-                    tipoDocumento: "DNI",
-                    numero_documento: infoCredito.numero_documento,
-                    nombre: "",
-                    telefono: "",
-                    direccion: "",
-                    email: "",
-                })
-            } else {
-                setEstadoCliente(true);
-                setInfoCredito({
-                    ...infoCredito,
-                    tipoDocumento: response.tipoDocumento,
-                    numero_documento: response.numero_documento,
-                    nombre: response.nombre,
-                    telefono: response.telefono,
-                    direccion: response.direccion,
-                    email: response.email,
-                })
-            }
-            setLoadCliente(false);
-        } catch (error) {
+        if (infoCredito.numero_documento.length === 8) {
             setLoadCliente(true);
-            console.log(error);
+            const updateData = {
+                documento: infoCredito.numero_documento,
+                tipoDocumento: infoCredito.tipoDocumento
+            }
+            try {
+                const response = await post(updateData, CLIENTES + "/padron/search");
+                if (response.estadoCliente === "Inexistente") {
+                    setEstadoCliente(false);
+                    setInfoCredito({
+                        ...infoCredito,
+                        tipoDocumento: "DNI",
+                        numero_documento: infoCredito.numero_documento,
+                        nombre: "",
+                        telefono: "",
+                        direccion: "",
+                        email: "",
+                    })
+                } else {
+                    setEstadoCliente(true);
+                    setInfoCredito({
+                        ...infoCredito,
+                        tipoDocumento: response.tipoDocumento,
+                        numero_documento: response.numero_documento,
+                        nombre: response.nombre,
+                        telefono: response.telefono,
+                        direccion: response.direccion,
+                        email: response.email,
+                    })
+                }
+                setLoadCliente(false);
+            } catch (error) {
+                setLoadCliente(true);
+                console.log(error);
+            }    
         }
     }
 

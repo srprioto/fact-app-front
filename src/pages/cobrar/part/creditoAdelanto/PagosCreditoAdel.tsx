@@ -17,14 +17,26 @@ export const PagosCreditoAdel = ({
 }:pagosCreditoAdel) => {
 
     const handlerOnChange = (e:any) => { 
-        setInfoCredito({
-            ...infoCredito,
-            [e.target.name]: e.target.value
-        })
-        if (e.target.name === "cantidad_pagada") {
+        // setInfoCredito({
+        //     ...infoCredito,
+        //     [e.target.name]: e.target.value
+        // })
+        if (e.target.name === "cantidad_pagada") {            
+            const total_pagado:number = Number(e.target.value) > Number(venta.total) 
+            ? Number(venta.total) 
+            : Number(e.target.value);
             setVenta({
                 ...venta,
-                totalPagado: Number(e.target.value)
+                totalPagado: total_pagado
+            })
+            setInfoCredito({
+                ...infoCredito,
+                cantidad_pagada: total_pagado
+            })
+        } else {
+            setInfoCredito({
+                ...infoCredito,
+                [e.target.name]: e.target.value
             })
         }
     }

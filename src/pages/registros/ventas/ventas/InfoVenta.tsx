@@ -1,6 +1,8 @@
 // import { zeroFill } from "../../../../resources/func/ceroFill"
 
+import { tipoVenta } from "../../../../resources/dtos/VentasDto";
 import { fecha } from "../../../../resources/func/fechas"
+import { moneda } from "../../../../resources/func/moneda";
 
 export const InfoVenta = ({ venta, classEstado }:any) => {
 
@@ -12,6 +14,8 @@ export const InfoVenta = ({ venta, classEstado }:any) => {
         venta.id + "-" + 
         venta.codigo_venta +
         (correlativo !== 0 ? "-" + correlativo : "");
+
+    const esCredito:boolean = venta.tipo_venta === tipoVenta.credito || venta.tipo_venta === tipoVenta.adelanto
 
     
     // const tipoComprobante = () => { 
@@ -39,23 +43,37 @@ export const InfoVenta = ({ venta, classEstado }:any) => {
                     </span>
 
                     <span>
-                        <p>Tipo comp.</p>
-                        <h4 className="info-i capitalize">{ venta.tipo_venta }</h4>
-                    </span>
-
-                    <span>
                         <p>Subtotal</p>
-                        <h4>S/. { venta.subtotal }</h4>
+                        <h4>S/. { moneda(venta.subtotal) }</h4>
                     </span>
 
                     <span>
                         <p>Inc/Desc general</p>
-                        <h4>S/. { venta.descuento_total }</h4>
+                        <h4>S/. { moneda(venta.descuento_total) }</h4>
                     </span>
 
                     <span>
                         <p>Total</p>
-                        <h4 className="success-i">S/. { venta.total }</h4>
+                        <h4 className="success-i">S/. { moneda(venta.total) }</h4>
+                    </span>
+
+                    {
+                        esCredito
+                        && (
+                            <span>
+                                <p>Total pagado</p>
+                                <h4 className="warning-i">S/. { moneda(venta.totalPagado) }</h4>
+                            </span>
+                        )
+                    }
+                    
+                    <span>
+                        <p>Tipo de venta</p>
+                        <h4 className={
+                            esCredito
+                            ? "warning-i capitalize"
+                            : "info-i capitalize"
+                        }>{ venta.tipo_venta }</h4>
                     </span>
 
                     <span>
