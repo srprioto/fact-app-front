@@ -20,6 +20,8 @@ interface creditoAdelanto {
     activarConfirmarVenta:Function;
     setCliente:Function;
     setCreditoDetalles:Function;
+    setListaPrecios:Function;
+    showFormasPago:boolean;
 }
 
 export const CreditoAdelanto = ({ 
@@ -31,7 +33,9 @@ export const CreditoAdelanto = ({
     setModalConfVenta,
     activarConfirmarVenta,
     setCliente,
-    setCreditoDetalles
+    setCreditoDetalles,
+    setListaPrecios,
+    showFormasPago
 }:creditoAdelanto) => {
 
     const infoCreditoDto = {
@@ -117,12 +121,18 @@ export const CreditoAdelanto = ({
 
                     // actualizacion venta
                     ventaUpdate.tipo_venta = infoCredito.estado_producto 
-                    ? tipoVenta.credito 
+                    ? tipoVenta.credito
                     : tipoVenta.adelanto;
                     ventaUpdate.estado_producto = infoCredito.estado_producto;
                     // ventaUpdate.creditoDetalles = creditoDetalles;
                     // ventaUpdate.cliente = clientesUpdt;
 
+                    if (!showFormasPago) {
+                        setListaPrecios([ {   
+                            forma_pago: venta.forma_pago, 
+                            precio_parcial: infoCreditoDto.cantidad_pagada 
+                        } ]);    
+                    }
                     setCreditoDetalles(creditoDetalles);
                     setCliente(clientesUpdt);
                     setVenta(ventaUpdate);

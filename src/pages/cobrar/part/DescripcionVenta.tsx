@@ -228,7 +228,7 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
         }
     }
 
-
+    
     return (
         <div className="descripcion-venta">
             <div className="grid-1 gap">
@@ -371,6 +371,8 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
                             activarConfirmarVenta={activarConfirmarVenta}
                             setCliente={setCliente}
                             setCreditoDetalles={setCreditoDetalles}
+                            setListaPrecios={setListaPrecios}
+                            showFormasPago={showFormasPago}
                         />
                     }
                 </div>

@@ -81,7 +81,7 @@ export const VentasDropdown = ({
             }
 
             {
-                esCredito()
+                (esCredito() && !anulado())
                 && (
                     <span onClick={ () => handlerCredito(ventas.id) } >
                         <BiBookBookmark /> Cred/Adel
@@ -90,7 +90,7 @@ export const VentasDropdown = ({
             }
             
             {
-                ventas.estado_venta === "listo"
+                (ventas.estado_venta === "listo" && !esCredito())
                 && (
                     <span onClick={ () => handlerReimprimir(ventas.id) } >
                         <BiBookmarkAltMinus /> Reimprimir

@@ -8,6 +8,7 @@ export interface infoCredito {
     forma_pago:string;
     estado_producto:boolean;
     mod_estado_prod:boolean;
+    localId:number;
 }
 
 export const infoCreditoDto = {

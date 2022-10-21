@@ -8,11 +8,12 @@ import { Pagination } from "../../../components/Pagination";
 import { SearchWrap } from "../../../components/SearchWrap";
 import { paginate } from "../../../resources/fetch";
 import { VENTAS_PAGINATE, VENTAS_SEARCH } from "../../../resources/routes";
-import { ModalAnularVenta } from "./ventas/ModalAnularVenta";
-import { ModalCredito } from "./ventas/ModalCredito/ModalCredito";
-import { ModalHabilitarVenta } from "./ventas/ModalHabilitarVenta";
-import { ModalReimpVenta } from "./ventas/ModalReimpVenta";
-import { ModalVentaDetalles } from "./ventas/ModalVentaDetalles";
+import { ModalCredito } from "./ventas/modalCreditos/ModalCredito";
+import { ModalAnularVenta } from "./ventas/modals/ModalAnularVenta";
+// import { ModalCredito } from "./ventas/modalCredito/ModalCredito";
+import { ModalHabilitarVenta } from "./ventas/modals/ModalHabilitarVenta";
+import { ModalReimpVenta } from "./ventas/modals/ModalReimpVenta";
+import { ModalVentaDetalles } from "./ventas/modals/ModalVentaDetalles";
 import { TabbsFiltroDatos } from "./ventas/TabbsFiltroDatos";
 import { VentaItems } from "./ventas/VentaItems";
 
@@ -265,6 +266,7 @@ export const InfoGeneralVentas = ({ idLocal, selectLocal, loadingLocal, locales 
                     setModal={setModalCredito}
                     idVenta={idVenta}
                     getData={getData}
+                    localId={Number(idLocal)}
                 />
             </ModalWrap>
 

@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
-import { Loading } from "../../../../components/loads/Loading";
-import { Modal } from "../../../../components/modals/Modal"
-import { getOne } from "../../../../resources/fetch";
-import { VENTAS } from "../../../../resources/routes";
-import { ProductoInfo } from "../../../productos/otros/ProductoInfo";
-import { CreditoDetalles } from "./CreditoDetalles";
-import { FormasPago } from "./FormasPago";
-import { InfoCliente } from "./InfoCliente";
-import { InfoVenta } from "./InfoVenta";
+import { Loading } from "../../../../../components/loads/Loading";
+import { Modal } from "../../../../../components/modals/Modal"
+import { getOne } from "../../../../../resources/fetch";
+import { VENTAS } from "../../../../../resources/routes";
+import { ProductoInfo } from "../../../../productos/otros/ProductoInfo";
+import { CreditoDetalles } from "../CreditoDetalles";
+import { FormasPago } from "../FormasPago";
+import { InfoCliente } from "../InfoCliente";
+import { InfoVenta } from "../InfoVenta";
 
 export const ModalVentaDetalles = ({ modal, setModal, idVenta }:any) => {
 
@@ -146,12 +146,12 @@ export const ModalVentaDetalles = ({ modal, setModal, idVenta }:any) => {
                         <InfoVenta venta={venta} classEstado={classEstado} />
 
                         {
-                            verFormasPago()
-                            && <FormasPago formasDePago={venta.formasPago} />
-                        }
-                        {
                             verCreditoDetalles()
                             && <CreditoDetalles creditoDetalles={venta.creditoDetalles} />
+                        }
+                        {
+                            verFormasPago()
+                            && <FormasPago formasDePago={venta.formasPago} />
                         }
                         {
                             venta.clientes

@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { BiX } from "react-icons/bi"
-import { LoadSwitchBtn } from "../../../../components/btns/LoadSwitchBtn"
-import { Modal } from "../../../../components/modals/Modal"
-import { put } from "../../../../resources/fetch";
-import { VENTAS } from "../../../../resources/routes";
+import { LoadSwitchBtn } from "../../../../../components/btns/LoadSwitchBtn"
+import { Modal } from "../../../../../components/modals/Modal"
+import { put } from "../../../../../resources/fetch";
+import { VENTAS } from "../../../../../resources/routes";
 
 export const ModalHabilitarVenta = ({ modal, setModal, idVenta, getData }:any) => {
 

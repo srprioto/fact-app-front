@@ -18,7 +18,12 @@ export const ImpComprobante = ({ venta, setImprimir, nuevo }:impComprobante) => 
     const serie:string = correlativo ? correlativo.serie : "V001";
     const nuevoCorrelativo:string = correlativo ? correlativo.correlativo : "";
     const existCorrelativo:string = venta.comprobante.length > 0 ? venta.comprobante[0].correlativo : "";
-    const tipVenta = correlativo ? correlativo.descripcion : "venta rapida";
+    const tipVenta = venta.tipo_venta;
+    // const tipVenta = correlativo ? correlativo.descripcion : "venta rapida";
+
+    const esComprobante:boolean = venta.tipo_venta === tipoVenta.boleta || venta.tipo_venta === tipoVenta.factura;
+    const esCredito:boolean = venta.tipo_venta === tipoVenta.credito || venta.tipo_venta === tipoVenta.adelanto;
+    // const esVentaRapida:boolean = venta.tipo_venta === tipoVenta.venta_rapida;
 
     let subtotal:number = 0;
     let igv:number = 0;
@@ -59,18 +64,17 @@ export const ImpComprobante = ({ venta, setImprimir, nuevo }:impComprobante) => 
     const cliente:any = venta.clientes ? venta.clientes : {};
     const ventaDetalles:any = venta.ventaDetalles ? venta.ventaDetalles : {};
 
-    
     const nroCorrelat = () => {
         if (nuevo) {
             // nueva impresion
-            if (tipVenta !== tipoVenta.venta_rapida) {
+            if (esComprobante) {
                 return Number(nuevoCorrelativo) + 1 + "-";    
             } else {
                 return ""
             }
         } else {
             // impresion existente
-            if (tipVenta !== tipoVenta.venta_rapida) {
+            if (esComprobante) {
                 return existCorrelativo + "-";
             } else {
                 return "";
@@ -235,7 +239,7 @@ export const ImpComprobante = ({ venta, setImprimir, nuevo }:impComprobante) => 
                     <h3 style={infoEmpresa}>AddidSport</h3> {/*  actualizar por nombre de empresa desde DB */}
                     <h2 style={infoEmpresa}>INVERSIONES PERKINS E.I.R.L</h2> {/*  actualizar */}
                     {
-                        venta.tipo_venta !== tipoVenta.venta_rapida
+                        esComprobante
                         && (
                             <>
                                 <p style={infoEmpresa}>INVERSIONES PERKINS EMPRESA INDIVIDUAL DE RESPONSABILIDAD LIMITADA</p>
@@ -309,7 +313,7 @@ export const ImpComprobante = ({ venta, setImprimir, nuevo }:impComprobante) => 
                     <div style={blockRight}>
 
                         {
-                            tipVenta !== tipoVenta.venta_rapida
+                            esComprobante
                             && (
                                 <div style={textoResumen}>
                                     <span style={left}>Subtotal:</span>
@@ -323,7 +327,7 @@ export const ImpComprobante = ({ venta, setImprimir, nuevo }:impComprobante) => 
                         }
 
                         {
-                            tipVenta !== tipoVenta.venta_rapida
+                            esComprobante
                             && (
                                 <div style={textoResumen}>
                                     <span style={left}>IGV:</span>
@@ -337,7 +341,7 @@ export const ImpComprobante = ({ venta, setImprimir, nuevo }:impComprobante) => 
                         }
 
                         {
-                            tipVenta !== tipoVenta.venta_rapida
+                            esComprobante
                             && (
                                 <>
                                     <div style={textoResumen}>
@@ -364,7 +368,7 @@ export const ImpComprobante = ({ venta, setImprimir, nuevo }:impComprobante) => 
 
                 <div style={center}>
                     {
-                        venta.tipo_venta !== tipoVenta.venta_rapida
+                        esComprobante
                         && (
                             <div style={qrcode}>
                                 <QRCodeSVG value={`${serie}|${venta.codigo_venta}|${moneda(venta.subtotal)}|${moneda(venta.igvGeneral)}|${moneda(venta.total)}|${fecha(venta.updated_at)}|${ventaDetalles.length}`} />

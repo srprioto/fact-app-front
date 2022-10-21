@@ -1,4 +1,4 @@
-import { Modal } from "../../../../components/modals/Modal"
+import { Modal } from "../../../../../components/modals/Modal"
 
 export const ModalExportarExcel = ({ modal, setModal }:any) => {
     return (

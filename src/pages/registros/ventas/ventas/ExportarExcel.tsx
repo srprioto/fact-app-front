@@ -4,7 +4,7 @@ import { BiDownload } from "react-icons/bi";
 import { ModalWrap } from "../../../../components/modals/ModalWrap";
 import { url } from "../../../../resources/fetch";
 import { VENTAS } from "../../../../resources/routes";
-import { ModalExportarExcel } from "./ModalExportarExcel";
+import { ModalExportarExcel } from "./modals/ModalExportarExcel";
 
 export const ExportarExcel = () => {
 
