@@ -17,8 +17,8 @@ interface gestionCreditoAdelanto {
     getDataOne:Function;
     localId:number;
     cantidadRestante:number;
-    // loading:boolean;
-    // setLoading:Function;
+    loading:boolean;
+    setLoading:Function;
 }
 
 export const GestionCreditoAdelanto = ({ 
@@ -26,12 +26,12 @@ export const GestionCreditoAdelanto = ({
     getDataOne, 
     localId, 
     cantidadRestante,
-    // loading,
-    // setLoading
+    loading,
+    setLoading
 }:gestionCreditoAdelanto) => {
     
     const [tabbs, setTabbs] = useState<number>(1);
-    const [loading, setLoading] = useState<boolean>(false);
+    // const [loading, setLoading] = useState<boolean>(false);
     const [infoCredito, setInfoCredito] = useState<infoCredito>({ 
         ...infoCreditoDto,
         ventas: venta.id, 
@@ -84,7 +84,6 @@ export const GestionCreditoAdelanto = ({
         }
     }
 
-
     const handlerCreditoDetalles = async () => {
         setLoading(true);
         try {
@@ -99,11 +98,10 @@ export const GestionCreditoAdelanto = ({
                 ventas: 0,
                 estado_producto: false,
                 mod_estado_prod: false,
-                localId: 0
+                localId: localId
             })
             getDataOne();
         }
-
     }
 
 
@@ -120,9 +118,9 @@ export const GestionCreditoAdelanto = ({
     return (
         <div className="box box-par m-0 gestion-credito-venta">
 
-            {
+            {/* {
                 !loading
-                ? <>
+                ? <> */}
                     <div className="grid-4 gap mb-25">
 
                         <button 
@@ -138,33 +136,38 @@ export const GestionCreditoAdelanto = ({
                             && (
                                 <div className="grid-1 gap">
 
-                                    <div className="grid-4 gap mb-10">
-                                        <div></div>
-                                        <div className="flex-space">
-                                            <p className="center m-0">Cantidad restante:</p>
-                                            <h3 className="center m-0 warning-i">
-                                                S/. { moneda(
-                                                    cantidadRestante - 
-                                                    Number(infoCredito.cantidad_pagada)) 
-                                                }
-                                            </h3>
-                                        </div>
-                                        <Checkbox2
-                                            classname={
-                                                !infoCredito.estado_producto
-                                                ? "warning"
-                                                : ""
-                                            }
-                                            label={
-                                                infoCredito.estado_producto
-                                                ? "Producto entregado"
-                                                : "Producto sin entregar"
-                                            }
-                                            name="switchChangeFact"
-                                            checked={infoCredito.estado_producto}
-                                            handlerCheck={handlerStateCheck}
-                                        />
-                                    </div>
+                                    {
+                                        !loading
+                                        ? <>
+                                            <div className="grid-4 gap mb-10">
+                                                <div></div>
+                                                <div className="flex-space">
+                                                    <p className="center m-0">Cantidad restante:</p>
+                                                    <h3 className="center m-0 warning-i">
+                                                        S/. { moneda(
+                                                            cantidadRestante - 
+                                                            Number(infoCredito.cantidad_pagada)) 
+                                                        }
+                                                    </h3>
+                                                </div>
+                                                <Checkbox2
+                                                    classname={
+                                                        !infoCredito.estado_producto
+                                                        ? "warning"
+                                                        : ""
+                                                    }
+                                                    label={
+                                                        infoCredito.estado_producto
+                                                        ? "Producto entregado"
+                                                        : "Producto sin entregar"
+                                                    }
+                                                    name="switchChangeFact"
+                                                    checked={infoCredito.estado_producto}
+                                                    handlerCheck={handlerStateCheck}
+                                                />
+                                            </div>
+                                        </> : <Loading />
+                                    }
 
                                     {
                                         cantidadRestante > 0
@@ -223,6 +226,7 @@ export const GestionCreditoAdelanto = ({
                                             </div>
                                         )
                                     }
+
                                     <div className="grid-4 gap">
                                         <div></div>
                                         <BtnImpCredAde
@@ -247,8 +251,8 @@ export const GestionCreditoAdelanto = ({
                             )
                         }
                     </div>
-                </> : <Loading />
-            }
+                {/* </> : <Loading />
+            } */}
         </div>
     )
 }

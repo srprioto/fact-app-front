@@ -21,7 +21,7 @@ interface modalCredito {
 
 export const ModalCredito = ({ modal, setModal, idVenta, getData, localId }:modalCredito) => {
 
-    const [loadingOne, setLoadingOne] = useState<boolean>(false);
+    const [loading, setLoading] = useState<boolean>(false);
     const [venta, setVenta] = useState<any>({});
 
     const cantidadRestante:number = Number(venta.total) - Number(venta.totalPagado);
@@ -33,13 +33,13 @@ export const ModalCredito = ({ modal, setModal, idVenta, getData, localId }:moda
 
 
     const getDataOne = async () => { 
-        setLoadingOne(true);
+        setLoading(true);
         try {
             const dataOne = await getOne(idVenta, VENTAS);
             setVenta(dataOne);
-            setLoadingOne(false);
+            setLoading(false);
         } catch (error) {
-            setLoadingOne(true);
+            setLoading(true);
             console.log(error);
         }
     }
@@ -53,45 +53,57 @@ export const ModalCredito = ({ modal, setModal, idVenta, getData, localId }:moda
             title={`Gestion de ${venta.tipo_venta} de la venta`}
             btnClose={getData}
         >
-            {
-                loadingOne
-                ? <Loading />
-                : (
-                    <div className="grid-1 gap modal-credito">
 
+            <div className="grid-1 gap modal-credito">
+
+                {
+                    loading
+                    ? <Loading />
+                    : <>
+                        
                         <TablaInfoCredito
                             venta={venta}
                             cantidadRestante={cantidadRestante}
                         />
+                             
+                    </>
+                }
 
-                        {
-                            (cantidadRestante <= 0 && venta.estado_producto)
-                            ? (
-                                // si la venta esta cancelado
-                                <ConfirmCreditoAdelanto venta={venta} />
-                            ) : (
-                                // si el credito esta activo
-                                <>
-                                    <GestionCreditoAdelanto 
-                                        venta={venta} 
-                                        getDataOne={getDataOne}
-                                        localId={localId}
-                                        cantidadRestante={cantidadRestante}
-                                        // loading={loadingOne}
-                                        // setLoading={setLoadingOne}
-                                    />
-                                    {
-                                        venta.clientes
-                                        && (
-                                            <InfoCliente cliente={venta.clientes} />
-                                        )
-                                    }
-                                </>
-                            )
-                        }
-                    </div>
-                )
-            }
+                {
+                    (cantidadRestante <= 0 && venta.estado_producto)
+                    ? (
+                        // si la venta esta cancelado
+                        <ConfirmCreditoAdelanto venta={venta} />
+                    ) : (
+                        // si el credito esta activo
+                        <>
+                            <GestionCreditoAdelanto 
+                                venta={venta} 
+                                getDataOne={getDataOne}
+                                localId={localId}
+                                cantidadRestante={cantidadRestante}
+                                loading={loading}
+                                setLoading={setLoading}
+                            />
+                            {
+                                venta.clientes
+                                && (
+                                    <InfoCliente cliente={venta.clientes} />
+                                )
+                            }
+                        </>
+                    )
+                }
+
+
+
+
+                
+            </div>
+
+
+
+
         </Modal>
     )
 }
