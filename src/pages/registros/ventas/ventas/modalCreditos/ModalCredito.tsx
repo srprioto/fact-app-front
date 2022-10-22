@@ -24,9 +24,8 @@ export const ModalCredito = ({ modal, setModal, idVenta, getData, localId }:moda
     const [loadingOne, setLoadingOne] = useState<boolean>(false);
     const [venta, setVenta] = useState<any>({});
 
-    const creditoDetalles:Array<any> = venta.creditoDetalles ? venta.creditoDetalles : [];
     const cantidadRestante:number = Number(venta.total) - Number(venta.totalPagado);
-    const codigoVenta:string = venta.id + "-" + venta.codigo_venta;
+
 
     useEffect(() => {
         getDataOne();
