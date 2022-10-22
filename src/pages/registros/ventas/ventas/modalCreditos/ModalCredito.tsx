@@ -9,6 +9,7 @@ import { InfoCliente } from "../InfoCliente";
 import { ConfirmCreditoAdelanto } from "./ConfirmCreditoAdelanto";
 import { GestionCreditoAdelanto } from "./GestionCreditoAdelanto";
 import { InfoGeneralCredito } from "./InfoGeneralCredito";
+import { TablaInfoCredito } from "./TablaInfoCredito";
 
 interface modalCredito {
     modal:boolean;
@@ -59,56 +60,11 @@ export const ModalCredito = ({ modal, setModal, idVenta, getData, localId }:moda
                 : (
                     <div className="grid-1 gap modal-credito">
 
-                        <h3 className="info center m-0">Codigo de venta: { codigoVenta }</h3>
+                        <TablaInfoCredito
+                            venta={venta}
+                            cantidadRestante={cantidadRestante}
+                        />
 
-                        <div className="box box-par m-0">
-
-                            <h3>Informacion de {venta.tipo_venta}</h3>
-
-                            <table className="table2">
-                                
-                                <thead>
-                                    <tr>
-                                        <th>Cantidad pagada</th>
-                                        <th>Estado</th>
-                                        <th>Nota</th>
-                                        <th>Fecha pago</th>
-                                        {/* <th className="transparent">...</th> */}
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {
-                                        creditoDetalles.map((e:any) => {
-                                            return (
-                                                <tr key={e.id}>
-                                                    <td className={
-                                                        Number(e.cantidad_pagada) === 0
-                                                        ? "warning strong"
-                                                        : "success strong"
-                                                    }>S/.{ moneda(e.cantidad_pagada) }</td>
-                                                    <td className={e.estado ? "success" : "warning"}>
-                                                        { e.estado ? "Listo" : "Sin pagar" }
-                                                    </td>
-                                                    <td>{ e.nota }</td>
-                                                    <td>{ fecha(e.created_at) }</td>
-                                                    {/* <td>
-                                                        <DropDown>
-                                                            <span onClick={ () => {} } >
-                                                                <BiTrash /> Eliminar
-                                                            </span>
-                                                        </DropDown>
-                                                    </td> */}
-                                                </tr>
-                                            )
-                                        })
-                                    }
-                                </tbody>
-                            </table>
-                            {
-                                !(cantidadRestante <= 0 && venta.estado_producto)
-                                && <InfoGeneralCredito venta={venta} />
-                            }
-                        </div>
                         {
                             (cantidadRestante <= 0 && venta.estado_producto)
                             ? (
