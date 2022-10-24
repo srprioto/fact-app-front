@@ -129,7 +129,7 @@ export const InfoGeneralVentas = ({ idLocal, selectLocal, loadingLocal, locales 
                         searchState={searchState}
                         setSearchState={setSearchState}
                         url={VENTAS_SEARCH}
-                        placeholder="Codigo de venta"
+                        placeholder="Codigo de venta, cliente o nro de doc."
                         localId={idLocal}
                     />
                     <div className="grid-2 gap">
