@@ -10,7 +10,6 @@ import { paginate } from "../../../resources/fetch";
 import { VENTAS_PAGINATE, VENTAS_SEARCH } from "../../../resources/routes";
 import { ModalCredito } from "./ventas/modalCreditos/ModalCredito";
 import { ModalAnularVenta } from "./ventas/modals/ModalAnularVenta";
-// import { ModalCredito } from "./ventas/modalCredito/ModalCredito";
 import { ModalHabilitarVenta } from "./ventas/modals/ModalHabilitarVenta";
 import { ModalReimpVenta } from "./ventas/modals/ModalReimpVenta";
 import { ModalVentaDetalles } from "./ventas/modals/ModalVentaDetalles";
@@ -194,7 +193,7 @@ export const InfoGeneralVentas = ({ idLocal, selectLocal, loadingLocal, locales 
                                 <thead>
                                     <tr>
                                         <th>Codigo venta</th>
-                                        <th>Tipo comp.</th>
+                                        <th>Tipo venta</th>
                                         <th>Ingreso venta</th>
                                         <th>Estado de venta</th>
                                         <th>Fecha venta</th>

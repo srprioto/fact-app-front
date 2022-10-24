@@ -34,7 +34,7 @@ export const CajaChica = ({ idLocal, nombreLocal, user }:cajaChica) => {
                 : <TitleBox titulo={"Caja chica - " + nombreLocal} back/>
             }
 
-            <div className="box btn-tabs grid-5">
+            <div className="box btn-tabs grid-4">
                 <button 
                     onClick={() => handlerToggle(1)}
                     className={`btn2 btn2-info ${toggle === 1 && "btn2-sub-info"}`}>
@@ -62,12 +62,12 @@ export const CajaChica = ({ idLocal, nombreLocal, user }:cajaChica) => {
                     Registro caja
                 </button>
                 
-                <button 
+                {/* <button 
                     onClick={() => setToggle(5)}
                     className={`btn2 btn2-info ${toggle === 5 && "btn2-sub-info"}`}>
                     <BiDollarCircle />
                     Cotizaciones
-                </button>
+                </button> */}
             </div>
 
             { toggle === 1 && <Caja idLocal={idLocal} nombreLocal={nombreLocal} user={user} /> }

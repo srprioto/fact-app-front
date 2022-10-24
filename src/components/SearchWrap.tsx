@@ -31,9 +31,9 @@ export const SearchWrap = ({
 }:searchWrap) => {
     
     const [searchTxt, setSearchTxt] = useState<string>("");
-    const searchFocus = useRef<any>(null)
+    const searchFocus = useRef<any>(null);
 
-    const idLocal:string = localId ? `${localId}` : ""
+    const idLocal:string = localId ? `${localId}` : "";
     
     const searchData = async () => { 
         if (searchTxt === "" || searchTxt === undefined || searchTxt === null || searchTxt.length === 0) {

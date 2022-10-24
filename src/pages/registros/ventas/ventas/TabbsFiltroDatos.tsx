@@ -1,11 +1,11 @@
-import { BiBarChartAlt, BiCartAlt, BiCheck, BiRefresh, BiX } from "react-icons/bi"
+import { BiBarChartAlt, BiCartAlt, BiCheck, BiRefresh, BiTask, BiX } from "react-icons/bi"
 
 export const TabbsFiltroDatos = ({ getData, toggle }:any) => {
     return (
         <div className="grid-3 gap mb-25">
 
             <div></div>
-            <div className="grid-4 gap">
+            <div className="grid-6">
 
                 <button 
                     onClick={() => getData("", "_", 1)}
@@ -30,6 +30,18 @@ export const TabbsFiltroDatos = ({ getData, toggle }:any) => {
                     className={`btn2 btn2-danger ${toggle === 3 && "btn2-sub-danger"}`}>
                     <BiX />
                     Rechazado
+                </button>
+                <button 
+                    onClick={() => getData("", "anulado", 6)}
+                    className={`btn2 btn2-secundary opacity ${toggle === 6 && "btn2-sub-secundary opacity"}`}>
+                    <BiX />
+                    Anulado
+                </button>
+                <button
+                    onClick={() => getData("", "credito", 5)}
+                    className={`btn2 btn2-warning ${toggle === 5 && "btn2-sub-warning"}`}>
+                    <BiTask />
+                    Credito/Adelanto
                 </button>
             </div>
             <div className="right">

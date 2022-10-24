@@ -50,7 +50,7 @@ export const VentasRepo = () => {
             
             <TitleBox titulo="Reporte de ventas"/>
 
-            <div className="grid-5 box box-par">
+            <div className="grid-4 box box-par">
                 <button 
                     onClick={() => handlerToggle(1)}
                     className={`btn2 btn2-info ${toggleGeneral === 1 && "btn2-sub-info"}`}>
@@ -75,12 +75,12 @@ export const VentasRepo = () => {
                     <BiDollarCircle />
                     Registro caja
                 </button>
-                <button 
+                {/* <button 
                     onClick={() => handlerToggle(5)}
                     className={`btn2 btn2-info ${toggleGeneral === 5 && "btn2-sub-info"}`}>
                     <BiBook />
                     Cotizaciones
-                </button>
+                </button> */}
                 
 
             </div>

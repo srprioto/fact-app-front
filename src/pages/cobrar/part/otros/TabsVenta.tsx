@@ -75,10 +75,6 @@ export const TabsVenta = ({
         // }
     }, [switchChangeFact, tabbs])
 
-    // console.log(venta.tipo_venta);
-    // console.log(venta.tipo_venta === "factura");
-    // console.log("***************");
-
 
     return (
         <div className="tabbs-buttons tabbs grid-4 mb-25">
