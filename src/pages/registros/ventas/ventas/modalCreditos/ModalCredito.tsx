@@ -47,7 +47,7 @@ export const ModalCredito = ({ modal, setModal, idVenta, getData, localId }:moda
         <Modal
             modal={modal}
             setModal={setModal}
-            width={75}
+            width={85}
             btnClose={getData}
         >
             <h2 className="center m-0">Gestion de {venta.tipo_venta} de la venta</h2>
@@ -58,20 +58,8 @@ export const ModalCredito = ({ modal, setModal, idVenta, getData, localId }:moda
                 {
                     (cantidadRestante <= 0 && venta.estado_producto)
                     ? (
-                        // si la venta esta cancelada
-                        <>
-                            <ConfirmCreditoAdelanto venta={venta} />
-                            {
-                                loading
-                                ? <Loading />
-                                : <>
-                                    <TablaInfoCredito
-                                        venta={venta}
-                                        cantidadRestante={cantidadRestante}
-                                    />
-                                </>
-                            }
-                        </>
+                        // si el credito esta cancelado
+                        <ConfirmCreditoAdelanto venta={venta} cantidadRestante={cantidadRestante} />
                     ) : (
                         // si el credito esta activo
                         <>

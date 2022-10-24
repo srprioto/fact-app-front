@@ -10,7 +10,21 @@ import { InfoCliente } from "../InfoCliente";
 import { InfoVenta } from "../InfoVenta";
 
 export const ModalVentaDetalles = ({ modal, setModal, idVenta }:any) => {
+    return (
+        <Modal
+            title="Detalles de la venta"
+            modal={modal}
+            setModal={setModal}
+            border="border-primary"
+            width={85}
+        >
+            <BoxModalVentaDetalles idVenta={idVenta} />
+        </Modal>
+    )
+}
 
+export const BoxModalVentaDetalles = ({ idVenta }:any) => {
+    
     const [loadingOne, setLoadingOne] = useState<boolean>(false);
     const [venta, setVenta] = useState<any>({});
     const formasPago:any = venta.formasPago;
@@ -74,16 +88,9 @@ export const ModalVentaDetalles = ({ modal, setModal, idVenta }:any) => {
             }
         }
     }
-    
 
     return (
-        <Modal
-            title="Detalles de la venta"
-            modal={modal}
-            setModal={setModal}
-            border="border-primary"
-            width={85}
-        >
+        <>
             {
                 loadingOne
                 ? <Loading />
@@ -163,21 +170,6 @@ export const ModalVentaDetalles = ({ modal, setModal, idVenta }:any) => {
                     </div>        
                 )
             }
-
-
-        </Modal>
+        </>
     )
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
