@@ -37,6 +37,9 @@ export const ConfirmCreditoAdelanto = ({ venta }:any) => {
 
             <TablaListaVentaProductos venta={venta} />
 
+            <h1 className="center danger m-0">¡Cancelado!</h1>
+            <h5 className="center warning m-0">Continue el proceso confirmando un tipo de venta</h5>
+
             <TabbsCompCredito
                 tabbs={tabbs}
                 setTabbs={setTabbs}

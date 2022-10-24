@@ -21,6 +21,7 @@ import { moneda } from "../../../../resources/func/moneda";
 import { BtnImpComprobante } from "./BtnImpComprobante";
 import { tipoVenta } from "../../../../resources/dtos/VentasDto";
 import { TablaDividirPrecios } from "./TablaDividirPrecios";
+import { BtnImpCredito } from "./BtnImpCredito";
 
 
 interface modalVentaConfirmar {
@@ -31,6 +32,7 @@ interface modalVentaConfirmar {
     loading:boolean;
     comisionTarjeta:number;
     listaPrecios:Array<any>;
+    creditoDetalles:Array<any>;
 }
 
 export const ModalVentaConfirmar = ({ 
@@ -40,14 +42,17 @@ export const ModalVentaConfirmar = ({
     confirmarVenta,
     loading,
     comisionTarjeta,
-    listaPrecios
+    listaPrecios,
+    creditoDetalles
 }:modalVentaConfirmar) => {
 
     const ventaAux:any = copy(dataVenta);
     const [venta, setVenta] = useState<any>(copy(dataVenta));
     const [reducirPercent, setReducirPercent] = useState<number>(0);
     const [modalCorreo, setModalCorreo] = useState<boolean>(false);
+
     const estadoTarjeta:boolean = comisionTarjeta > 0 ? true : false;
+    // const esCredito:boolean = venta.tipo_venta === tipoVenta.credito || venta.tipo_venta === tipoVenta.adelanto; 
 
     useEffect(() => { 
         let ventaDetallesUpdate:any = [];
@@ -124,7 +129,10 @@ export const ModalVentaConfirmar = ({
     
     
     const credito = () => { 
-        if (venta.tipo_venta === tipoVenta.credito || venta.tipo_venta === tipoVenta.adelanto) {
+        if (
+            (venta.tipo_venta === tipoVenta.credito || venta.tipo_venta === tipoVenta.adelanto) &&
+            !(Number(venta.totalPagado) === Number(venta.total))
+        ) {
             return true;
         } else {
             return false;
@@ -142,7 +150,6 @@ export const ModalVentaConfirmar = ({
         return listaLimpia
     }
     
-    // console.log(venta);
 
     return (
         <Modal
@@ -245,11 +252,19 @@ export const ModalVentaConfirmar = ({
 
                         <div className="grid-2 gap">
                             
-                            <BtnImpComprobante
-                                loading={loading}
-                                registroFinal={registroFinal}
-                                venta={venta}
-                            />
+                            {
+                                !credito()
+                                ? <BtnImpComprobante
+                                    loading={loading}
+                                    registroFinal={registroFinal}
+                                    venta={venta}
+                                /> : <BtnImpCredito 
+                                    loading={loading}
+                                    registroFinal={registroFinal}
+                                    venta={venta}
+                                    creditoDetalles={creditoDetalles}
+                                />
+                            }
 
                             <LoadSwitchBtn2
                                 loading={loading}

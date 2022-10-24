@@ -3,7 +3,7 @@ import { moneda } from "../../../../../resources/func/moneda";
 export const InfoGeneralCredito = ({ venta }:any) => {
 
     return (
-        <div className="grid-4 gap mt-25">
+        <div className="grid-4 gap mb-25">
             <div></div>
             <span>
                 <p className="center mb-10 info">Total general</p>

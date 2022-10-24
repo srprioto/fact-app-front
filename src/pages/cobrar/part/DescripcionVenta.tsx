@@ -115,6 +115,8 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
         tipoDocumento: tipoDocumUpdate()
     });
 
+    const esCredito:boolean = venta.tipo_venta === tipoVenta.credito || venta.tipo_venta === tipoVenta.adelanto;
+
     const listaPagosTarjeta = () => { 
         let itemsTarjeta:Array<any> = [];
         listaPrecios.forEach((e:any) => { 
@@ -186,7 +188,7 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
         updateVenta.comprobante = comprobante;
         updateVenta.envioComprobante = envioComprobante;
 
-        if (venta.tipo_venta === tipoVenta.credito || venta.tipo_venta === tipoVenta.adelanto) {
+        if (esCredito) {
             updateVenta.estado_producto = venta.estado_producto;
             updateVenta.totalPagado = venta.totalPagado;
             updateVenta.creditoDetalles = creditoDetalles;
@@ -387,6 +389,7 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
                     loading={loadConfirmarVenta}
                     comisionTarjeta={comisionTarjeta}
                     listaPrecios={listaPrecios}
+                    creditoDetalles={creditoDetalles}
                 />
             </ModalWrap>
             

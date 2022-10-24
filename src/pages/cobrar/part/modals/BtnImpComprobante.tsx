@@ -12,6 +12,7 @@ export const BtnImpComprobante = ({ loading, registroFinal, venta }:any) => {
         await registroFinal("listo");
     }
 
+
     return (
         <>
             <LoadSwitchBtn2
