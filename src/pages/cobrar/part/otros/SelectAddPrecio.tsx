@@ -64,6 +64,3 @@ export const SelectAddPrecio = ({
         </div>
     )
 }
-
-
-// Number(nuevoPrecio.precio_parcial)
