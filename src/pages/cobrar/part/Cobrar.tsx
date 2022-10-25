@@ -73,7 +73,7 @@ export const Cobrar = ({ idLocal, nombreLocal, user }:cobrar) => {
             <div className="grid-13 gap">
                 <div className="box scroll-box-no-margin">
 
-                    <div className="grid-1 gap mb-25">
+                    <div className="grid-1 gap">
                         <div className="grid-all-btn">
                             <SearchWrap 
                                 setLoadingData={setLoadingData}

@@ -45,11 +45,18 @@ export const DividirPagos = ({
         venta.tipo_venta === tipoVenta.adelanto
     ) ? Number(venta.totalPagado) : Number(venta.total);
 
+    // const totalRestante = ():number => { // añadir comision a tarjeta
+    //     const sumaPrecios:number = sumaArrayObj(listaPrecios, "precio_parcial");
+    //     const comisTarjeta:number = Number(comisionTarjeta);
+    //     const total:number = totalParaDividir;
+    //     return (total + comisTarjeta) - sumaPrecios;
+    // }
+
+    
     const totalRestante = ():number => { 
         const sumaPrecios:number = sumaArrayObj(listaPrecios, "precio_parcial");
-        const comisTarjeta:number = Number(comisionTarjeta);
         const total:number = totalParaDividir;
-        return (total + comisTarjeta) - sumaPrecios;
+        return total - sumaPrecios;
     }
    
     
@@ -85,6 +92,12 @@ export const DividirPagos = ({
     }
 
 
+    const mostrarComisionTarjeta = (valor:number):Array<number> => { 
+        const cincoPor:number = Number(valor) * 0.05;
+        return [Number(valor) + Number(cincoPor), Number(cincoPor)];
+    }
+
+
     const handlerOnChangeArray = (e:any, index:number) => { 
         let updateListaPrecios = [...listaPrecios];
         let objeto = updateListaPrecios[index];
@@ -94,7 +107,7 @@ export const DividirPagos = ({
     }
 
 
-    const pushPrecioToPrecios = () => { 
+    const pushPrecioToPrecios = () => { // añade elemento a lista de precios
         const updateDividirPrecios:Array<any> = listaPrecios;
         updateDividirPrecios.push(nuevoPrecio)
         setListaPrecios([ ...updateDividirPrecios ])
@@ -103,12 +116,12 @@ export const DividirPagos = ({
     }
 
 
-    const itemPop = (i:number) => {
+    const itemPop = (i:number) => { // elimina elemento de lista de precios
         let lista:Array<any> = [...listaPrecios];
         lista.splice(i,1);
         setListaPrecios([...lista]);
     }
-
+    
 
     if (showFormasPago) {
         return (
@@ -117,16 +130,18 @@ export const DividirPagos = ({
                     <div></div>
                     <div className="box-descripcion center">
                         <p className="center">Sin asignar:</p>
-                        <h4 className={
-                            "center " + 
-                            (
-                                totalRestante() > 0
-                                ? "warning-i"
-                                : totalRestante() < 0
-                                ? "danger-i"
-                                : "success-i"
-                            )
-                        }>S/. { moneda(totalRestante()) }</h4>
+                        <span className="middle">
+                            <h4 className={
+                                "center " + 
+                                (
+                                    totalRestante() > 0
+                                    ? "warning-i"
+                                    : totalRestante() < 0
+                                    ? "danger-i"
+                                    : "success-i"
+                                )
+                            }>S/. { moneda(totalRestante())}</h4>
+                        </span>
                     </div>
                 </div>
                 
@@ -157,7 +172,8 @@ export const DividirPagos = ({
                                         e.forma_pago === "tarjeta"
                                         ? (
                                             <InputDisable
-                                                value={e.precio_parcial}
+                                                value={mostrarComisionTarjeta(e.precio_parcial)[0]}
+                                                color="warning"
                                                 moneda
                                             />
                                         ) : (

@@ -77,7 +77,7 @@ export const TabsVenta = ({
 
 
     return (
-        <div className="tabbs-buttons tabbs grid-4 mb-25">
+        <div className="tabbs-buttons tabbs grid-4 mb-10">
             <button 
                 className={
                     "btn2 btn2-success " + 
