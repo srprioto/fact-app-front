@@ -2,7 +2,21 @@ import { BiCheck, BiX } from "react-icons/bi"
 import { Input } from "../../../../components/forms/Input"
 import { Select2 } from "../../../../components/forms/Select2"
 
-export const SelectAddPrecio = ({ pushPrecioToPrecios, handlerOnChange, nuevoPrecio, switchAdd, setSwitchAdd }:any) => {
+interface selectAddPrecio {
+    pushPrecioToPrecios:Function;
+    handlerOnChange:Function;
+    nuevoPrecio:any;
+    switchAdd:boolean;
+    setSwitchAdd:Function;
+}
+
+export const SelectAddPrecio = ({ 
+    pushPrecioToPrecios, 
+    handlerOnChange, 
+    nuevoPrecio, 
+    switchAdd, 
+    setSwitchAdd 
+}:selectAddPrecio) => {
 
     return (
         <div className="box-dividir-precios mb-10">
@@ -33,14 +47,18 @@ export const SelectAddPrecio = ({ pushPrecioToPrecios, handlerOnChange, nuevoPre
             </div>
 
             <div className="delete-forma-pago">
-                <BiCheck 
-                    className="pointer success" 
-                    onClick={() => pushPrecioToPrecios()} 
-                />
                 <BiX 
                     className="pointer danger" 
                     onClick={() => setSwitchAdd(!switchAdd)} 
                 />
+                {
+                    nuevoPrecio.precio_parcial > 0
+                    && <BiCheck 
+                        className="pointer success" 
+                        onClick={() => pushPrecioToPrecios()} 
+                    />
+                }
+                
             </div>
 
         </div>
@@ -48,3 +66,4 @@ export const SelectAddPrecio = ({ pushPrecioToPrecios, handlerOnChange, nuevoPre
 }
 
 
+// Number(nuevoPrecio.precio_parcial)

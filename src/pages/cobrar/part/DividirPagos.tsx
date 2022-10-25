@@ -3,6 +3,7 @@ import { BiPlus, BiX } from "react-icons/bi";
 import { Input } from "../../../components/forms/Input";
 import { InputDisable } from "../../../components/forms/InputDisable";
 import { Select2 } from "../../../components/forms/Select2";
+import { formasPago } from "../../../resources/dtos/FormasPago";
 import { tipoVenta } from "../../../resources/dtos/VentasDto";
 import { moneda } from "../../../resources/func/moneda";
 import { sumaArrayObj } from "../../../resources/func/sumaArrayObj";
@@ -15,7 +16,7 @@ interface formasPago {
     setConfirmarVenta:Function;
     listaPrecios:any;
     setListaPrecios:Function;
-    comisionTarjeta:number;
+    // comisionTarjeta:number;
     listaPagosTarjeta:Function;
     setComisionTarjeta:Function;
 }
@@ -27,7 +28,7 @@ export const DividirPagos = ({
     setConfirmarVenta,
     listaPrecios,
     setListaPrecios,
-    comisionTarjeta,
+    // comisionTarjeta,
     listaPagosTarjeta,
     setComisionTarjeta
 }:formasPago) => {
@@ -92,19 +93,13 @@ export const DividirPagos = ({
     }
 
 
-    const mostrarComisionTarjeta = (valor:number):Array<number> => { 
-        const cincoPor:number = Number(valor) * 0.05;
-        return [Number(valor) + Number(cincoPor), Number(cincoPor)];
-    }
-
-
-    const handlerOnChangeArray = (e:any, index:number) => { 
-        let updateListaPrecios = [...listaPrecios];
-        let objeto = updateListaPrecios[index];
-        objeto[e.target.name] = e.target.value;
-        updateListaPrecios[index] = objeto;
-        setListaPrecios([...updateListaPrecios])
-    }
+    // const handlerOnChangeArray = (e:any, index:number) => { // edita un elemento del array
+    //     let updateListaPrecios = [...listaPrecios];
+    //     let objeto = updateListaPrecios[index];
+    //     objeto[e.target.name] = e.target.value;
+    //     updateListaPrecios[index] = objeto;
+    //     setListaPrecios([...updateListaPrecios])
+    // }
 
 
     const pushPrecioToPrecios = () => { // añade elemento a lista de precios
@@ -121,6 +116,25 @@ export const DividirPagos = ({
         lista.splice(i,1);
         setListaPrecios([...lista]);
     }
+
+
+    const mostrarFormaPago = (forma:string) => { 
+        if (forma === formasPago.pago_electronico) {
+            return "Pago electronico"
+        } else if (forma === formasPago.deposito) {
+            return "Deposito";
+        } else if (forma === formasPago.efectivo) {
+            return "Efectivo";
+        } else if (forma === formasPago.tarjeta) {
+            return "Tarjeta";
+        }
+    }
+
+
+    const mostrarComisionTarjeta = (valor:number):Array<number> => { 
+        const cincoPor:number = Number(valor) * 0.05;
+        return [Number(valor) + Number(cincoPor), Number(cincoPor)];
+    }
     
 
     if (showFormasPago) {
@@ -134,13 +148,13 @@ export const DividirPagos = ({
                             <h4 className={
                                 "center " + 
                                 (
-                                    totalRestante() > 0
+                                    (Number(totalRestante()) - Number(nuevoPrecio.precio_parcial)) > 0
                                     ? "warning-i"
-                                    : totalRestante() < 0
+                                    : (Number(totalRestante()) - Number(nuevoPrecio.precio_parcial)) < 0
                                     ? "danger-i"
                                     : "success-i"
                                 )
-                            }>S/. { moneda(totalRestante())}</h4>
+                            }>S/. { moneda(Number(totalRestante()) - Number(nuevoPrecio.precio_parcial))}</h4>
                         </span>
                     </div>
                 </div>
@@ -156,7 +170,10 @@ export const DividirPagos = ({
                                         onChange={(e:any) => handlerOnChangeArray(e, index)}
                                         value={e.forma_pago}
                                     /> */}
-                                    <Select2
+                                    <InputDisable
+                                        value={mostrarFormaPago(e.forma_pago)}
+                                    />
+                                    {/* <Select2
                                         // label="Forma de pago"
                                         name="forma_pago"
                                         onChange={(e:any) => handlerOnChangeArray(e, index)}
@@ -166,7 +183,7 @@ export const DividirPagos = ({
                                         <option value="tarjeta">Tarjeta</option>
                                         <option value="pago_electronico">Pago electronico</option>
                                         <option value="deposito">Deposito</option>
-                                    </Select2>
+                                    </Select2> */}
 
                                     {
                                         e.forma_pago === "tarjeta"
@@ -177,14 +194,18 @@ export const DividirPagos = ({
                                                 moneda
                                             />
                                         ) : (
-                                            <Input
-                                                type="number"
-                                                name="precio_parcial"
+                                            <InputDisable
                                                 value={e.precio_parcial}
-                                                onChange={(e:any) => handlerOnChangeArray(e, index)}
                                                 moneda
-                                                noMenos
                                             />
+                                            // <Input
+                                            //     type="number"
+                                            //     name="precio_parcial"
+                                            //     value={e.precio_parcial}
+                                            //     onChange={(e:any) => handlerOnChangeArray(e, index)}
+                                            //     moneda
+                                            //     noMenos
+                                            // />
                                         )
                                     }
                                 </div>

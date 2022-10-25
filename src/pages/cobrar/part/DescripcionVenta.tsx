@@ -286,7 +286,7 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
                         setConfirmarVenta={setConfirmarVenta}
                         listaPrecios={listaPrecios}
                         setListaPrecios={setListaPrecios}
-                        comisionTarjeta={comisionTarjeta}
+                        // comisionTarjeta={comisionTarjeta}
                         listaPagosTarjeta={listaPagosTarjeta}
                         setComisionTarjeta={setComisionTarjeta}
                     />
