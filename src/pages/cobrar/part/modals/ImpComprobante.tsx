@@ -18,11 +18,11 @@ export const ImpComprobante = ({ venta, setImprimir, nuevo }:impComprobante) => 
     const serie:string = correlativo ? correlativo.serie : "V001";
     const nuevoCorrelativo:string = correlativo ? correlativo.correlativo : "";
     const existCorrelativo:string = venta.comprobante.length > 0 ? venta.comprobante[0].correlativo : "";
-    const tipVenta = venta.tipo_venta;
+    // const tipVenta = venta.tipo_venta;
     // const tipVenta = correlativo ? correlativo.descripcion : "venta rapida";
 
     const esComprobante:boolean = venta.tipo_venta === tipoVenta.boleta || venta.tipo_venta === tipoVenta.factura;
-    const esCredito:boolean = venta.tipo_venta === tipoVenta.credito || venta.tipo_venta === tipoVenta.adelanto;
+    // const esCredito:boolean = venta.tipo_venta === tipoVenta.credito || venta.tipo_venta === tipoVenta.adelanto;
     // const esVentaRapida:boolean = venta.tipo_venta === tipoVenta.venta_rapida;
 
     let subtotal:number = 0;

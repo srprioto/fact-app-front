@@ -1,15 +1,13 @@
 import { useEffect, useState } from "react";
 import { BiPlus, BiX } from "react-icons/bi";
-import { Input } from "../../../components/forms/Input";
 import { InputDisable } from "../../../components/forms/InputDisable";
-import { Select2 } from "../../../components/forms/Select2";
 import { formasPago } from "../../../resources/dtos/FormasPago";
 import { tipoVenta } from "../../../resources/dtos/VentasDto";
 import { moneda } from "../../../resources/func/moneda";
 import { sumaArrayObj } from "../../../resources/func/sumaArrayObj";
 import { SelectAddPrecio } from "./otros/SelectAddPrecio";
 
-interface formasPago {
+interface dividirPagos {
     showFormasPago:boolean;
     // setShowFormasPago:Function;
     venta:any;
@@ -31,7 +29,7 @@ export const DividirPagos = ({
     // comisionTarjeta,
     listaPagosTarjeta,
     setComisionTarjeta
-}:formasPago) => {
+}:dividirPagos) => {
 
     const [nuevoPrecio, setNuevoPrecio] = useState<any>({ forma_pago: "efectivo", precio_parcial: 0 });
     const [switchAdd, setSwitchAdd] = useState<boolean>(false);

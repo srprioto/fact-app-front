@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { BiBarChartAlt2, BiBook, BiDetail, BiDollarCircle, BiTask } from "react-icons/bi";
+import { BiBarChartAlt2, BiDetail, BiDollarCircle, BiTask } from "react-icons/bi";
 import { TitleBox } from "../../../components/TitleBox"
 import { get } from "../../../resources/fetch";
 import { LOCALES_SOLO } from "../../../resources/routes";
