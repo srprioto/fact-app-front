@@ -1,4 +1,5 @@
 import { BiSearchAlt2, BiX } from "react-icons/bi";
+import { Input } from "./forms/Input";
 
 interface SearchType {
     searchTxt:string;
@@ -39,7 +40,14 @@ export const Search = ({
     return (
         <form className="search">
 
-            <input 
+            <Input
+                type="text"
+                name="search"
+                value={searchTxt}
+                onChange={onChangeSearch}
+            />
+
+            {/* <input
                 type="search" 
                 placeholder={placeholder}
                 name="search" 
@@ -47,7 +55,7 @@ export const Search = ({
                 onChange={onChangeSearch}
                 ref={searchFocus}
                 autoComplete="off"
-            />
+            /> */}
 
             {
                 searchState && (

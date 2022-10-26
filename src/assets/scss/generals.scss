@@ -640,6 +640,7 @@ a.btn-danger:hover{ color: $danger; }
 
 .wrap-form{
     text-align: center;
+    width: 100%;
     input{
         text-align: center;
     }
@@ -659,10 +660,6 @@ a.btn-danger:hover{ color: $danger; }
         }
     }
 
-    .msg-error{
-        @include msgError();
-    }
-
     .moneda{
         position: absolute;
         top: 7px;
@@ -671,6 +668,10 @@ a.btn-danger:hover{ color: $danger; }
         font-size: 16px;
         color: $warning;
     }
+}
+
+.msg-error{
+    @include msgError();
 }
 
 .form-disabled{
