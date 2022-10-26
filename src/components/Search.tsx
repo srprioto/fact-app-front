@@ -1,5 +1,6 @@
 import { Form, Formik } from "formik";
 import { BiSearchAlt2, BiX } from "react-icons/bi";
+import { validSearchProd } from "../resources/validations/Ventas";
 import { InputMk } from "./forms/InputMk";
 
 interface srcText {
@@ -16,6 +17,7 @@ interface SearchType {
     searchFocus:React.MutableRefObject<any>;
     placeholder:string;
     reiniciar?:Function;
+    validacion:number|undefined;
 }
 
 export const Search = ({ 
@@ -26,7 +28,8 @@ export const Search = ({
     handlerStateSearch,
     searchData,
     placeholder,
-    reiniciar
+    reiniciar,
+    validacion
 }:SearchType) => {
 
 
@@ -42,15 +45,12 @@ export const Search = ({
     //     searchData();
     // }
 
-
-    console.log(searchTxt);  
-
-
+    
     return (
 
         <Formik        
             initialValues={searchTxt}
-            // validationSchema={cliente.tipoDocumento === "DNI" ? ValidRegistroClienteDni : ValidRegistroClienteRuc}
+            validationSchema={!!validacion ? validSearchProd(4) : null}
             onSubmit={(data, { resetForm }) => { 
                 // handlerCreate(data);
                 searchData();

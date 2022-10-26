@@ -20,6 +20,7 @@ export const BuscarProducto = ({ setElemento, elemento, data, setData, listaRepe
                     searchState={searchState}
                     setSearchState={setSearchState}
                     placeholder="Buscar un producto ..."
+                    validacion={4}
                     // reiniciar={reinicios}
                     // reSearch={listaRepetidos}
                 />

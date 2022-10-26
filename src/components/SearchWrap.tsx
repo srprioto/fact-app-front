@@ -12,6 +12,7 @@ interface searchWrap {
     // estados de busqueda, estos van por fuera
     searchState:boolean;
     setSearchState:Function;
+    validacion?:number;
     reiniciar?:Function;
     localId?:string;
     // reSearch?:any;
@@ -29,6 +30,7 @@ export const SearchWrap = ({
     placeholder, 
     searchState, 
     setSearchState,
+    validacion,
     reiniciar,
     localId
     // reSearch
@@ -36,7 +38,6 @@ export const SearchWrap = ({
     
     const [searchTxt, setSearchTxt] = useState<srcText>({ value: "" });
     const searchFocus = useRef<any>(null);
-
     const idLocal:string = localId ? `${localId}` : "";
     
     const searchData = async () => { 
@@ -81,6 +82,7 @@ export const SearchWrap = ({
             searchFocus={searchFocus}
             placeholder={placeholder}
             reiniciar={reiniciar}
+            validacion={validacion}
         />
     )
 }
