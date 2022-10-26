@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { BiPlusCircle } from "react-icons/bi";
 
@@ -6,14 +6,14 @@ import { TitleBox } from "../../../components/TitleBox";
 import { Loading } from "../../../components/loads/Loading";
 import { Pagination } from "../../../components/Pagination";
 import { ModalEliminar } from "../../../components/modals/ModalEliminar";
-import { Search } from "../../../components/Search";
 import { ModalVer } from "./ModalVer";
 import { Usuario } from "./Usuario";
 
 import { UsuarioDto } from "../../../resources/dtos/UsuariosDto";
 import { USUARIOS, USUARIOS_SEARCH } from "../../../resources/routes";
-import { getOne, paginate, post } from "../../../resources/fetch";
+import { getOne, paginate } from "../../../resources/fetch";
 import { NoRegistros } from "../../../components/NoRegistros";
+import { SearchWrap } from "../../../components/SearchWrap";
 
 export const Usuarios = () => {
 
@@ -45,8 +45,8 @@ export const Usuarios = () => {
 
     // *** search
     const [searchState, setSearchState] = useState<boolean>(false);
-    const [searchTxt, setSearchTxt] = useState<string>("");
-    const searchFocus = useRef<any>(null)
+    // const [searchTxt, setSearchTxt] = useState<string>("");
+    // const searchFocus = useRef<any>(null)
     // *** end search
 
 
@@ -66,32 +66,32 @@ export const Usuarios = () => {
 
 
     // *** search
-    const searchData = async () => { 
-        if (searchTxt === "" || searchTxt === undefined || searchTxt === null || searchTxt.length === 0) {
-            searchFocus.current.focus();
-        } else {
-            setLoadingData(true);
-            setSearchState(true);
-            try {
-                const data = await post({value: searchTxt}, USUARIOS_SEARCH);
-                setLoadingData(false);
-                setData(data);
-            } catch (error) {
-                setLoadingData(true);
-                console.log(error);
-            }
-        }
-    }
+    // const searchData = async () => { 
+    //     if (searchTxt === "" || searchTxt === undefined || searchTxt === null || searchTxt.length === 0) {
+    //         searchFocus.current.focus();
+    //     } else {
+    //         setLoadingData(true);
+    //         setSearchState(true);
+    //         try {
+    //             const data = await post({value: searchTxt}, USUARIOS_SEARCH);
+    //             setLoadingData(false);
+    //             setData(data);
+    //         } catch (error) {
+    //             setLoadingData(true);
+    //             console.log(error);
+    //         }
+    //     }
+    // }
 
-    const handlerStateSearch = () => {
-        setSearchTxt("");
-        setSearchState(false);
-        getData();
-    }
+    // const handlerStateSearch = () => {
+    //     setSearchTxt("");
+    //     setSearchState(false);
+    //     getData();
+    // }
 
-    const onChangeSearch = (e:any) => { 
-        setSearchTxt(e.target.value);
-    }
+    // const onChangeSearch = (e:any) => { 
+    //     setSearchTxt(e.target.value);
+    // }
 
     // *** end search
 
@@ -137,8 +137,16 @@ export const Usuarios = () => {
             <div className="box">
 
                 <div className="grid-211 gap">
-                    
-                    <Search
+                    <SearchWrap 
+                        setLoadingData={setLoadingData}
+                        setData={setData}
+                        getData={getData}
+                        searchState={searchState}
+                        setSearchState={setSearchState}
+                        url={USUARIOS_SEARCH}
+                        placeholder="Nombre del cliente ..."
+                    />
+                    {/* <Search
                         searchTxt={searchTxt}
                         searchData={searchData}
                         searchState={searchState}
@@ -146,7 +154,7 @@ export const Usuarios = () => {
                         handlerStateSearch={handlerStateSearch}
                         searchFocus={searchFocus}
                         placeholder="Nombre o documento ..."
-                    />
+                    /> */}
                     <div></div>
                     <Link to="/usuarios/nuevo" className="btn btn-info" >
                         <BiPlusCircle />

@@ -1,21 +1,21 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { BiCartAlt, BiTransfer } from 'react-icons/bi';
 import { Link } from 'react-router-dom';
 
 import { Loading } from '../../../components/loads/Loading';
 import { Pagination } from '../../../components/Pagination';
-import { Search } from '../../../components/Search';
 import { TitleBox } from '../../../components/TitleBox';
 import { ModalCantidad } from './ModalCantidad';
 import { ProductoLocal } from './ProductoLocal';
 
 import { LocalStockModalDto } from '../../../resources/dtos/LocalStockDto';
-import { paginate, post } from '../../../resources/fetch';
+import { paginate } from '../../../resources/fetch';
 import { LOCAL_STOCK_SEARCH, LOCAL_STOCK_SOLO } from '../../../resources/routes';
 import { ModalTransferencia } from '../../../components/transferencia/enviar/EnviarTransferencia';
 import { AlertaTransferencia } from '../../../components/transferencia/recibir/AlertaTransferencia';
 import { NoRegistros } from '../../../components/NoRegistros';
 import { ModalWrap } from '../../../components/modals/ModalWrap';
+import { SearchWrap } from '../../../components/SearchWrap';
 
 interface tienda{
     idLocal:string;
@@ -25,12 +25,10 @@ interface tienda{
 
 export const Tienda = ({ idLocal, nombreLocal, user }:tienda) => {
 
-    const searchFocus = useRef<any>(null)
-
-    const [loadingData, setLoading] = useState<boolean>(false);
+    const [loadingData, setLoadingData] = useState<boolean>(false);
     const [modalCant, setModalCant] = useState<boolean>(false);
     const [modalTransferencia, setModalTransferencia] = useState<boolean>(false);
-    const [searchTxt, setSearchTxt] = useState<string>("");
+    
     const [searchState, setSearchState] = useState<boolean>(false);
     const [data, setData] = useState<any>([]);
     const [pagination, setPagination] = useState<any>({ meta: {}, links: {} });
@@ -41,10 +39,10 @@ export const Tienda = ({ idLocal, nombreLocal, user }:tienda) => {
     });
 
     useEffect(() => {
-        getData();        
+        getData();
     }, []);
 
-    const onChangeSearch = (e:any) => setSearchTxt(e.target.value);
+    
     const handlerTransaccion = () => setModalTransferencia(!modalTransferencia)
 
     const handlerCantidad = (id:number, cantidad:number, nombreProducto:string) => { 
@@ -52,32 +50,37 @@ export const Tienda = ({ idLocal, nombreLocal, user }:tienda) => {
         setLocalStock({ id, cantidad, nombreProducto });
     }
 
-    const handlerStateSearch = () => {
-        setSearchTxt("");
-        setSearchState(false);
-        getData();
-    }
+    // const searchFocus = useRef<any>(null)
+    // const [searchTxt, setSearchTxt] = useState<string>("");
 
-    const searchData = async () => { 
-        if (searchTxt === "" || searchTxt === undefined || searchTxt === null || searchTxt.length === 0) {
-            searchFocus.current.focus();
-        } else {
-            setLoading(true);
-            setSearchState(true);
-            try {
-                // const data = await get(LOCAL_STOCK_SEARCH + idLocal + "/" + searchTxt);
-                const data = await post({value: searchTxt}, LOCAL_STOCK_SEARCH + idLocal);
-                setLoading(false);
-                setData(data);
-            } catch (error) {
-                setLoading(true);
-                console.log(error);
-            }
-        }
-    }
+    // const onChangeSearch = (e:any) => setSearchTxt(e.target.value);
+
+    // const handlerStateSearch = () => {
+    //     setSearchTxt("");
+    //     setSearchState(false);
+    //     getData();
+    // }
+
+    // const searchData = async () => { 
+    //     if (searchTxt === "" || searchTxt === undefined || searchTxt === null || searchTxt.length === 0) {
+    //         searchFocus.current.focus();
+    //     } else {
+    //         setLoadingData(true);
+    //         setSearchState(true);
+    //         try {
+    //             // const data = await get(LOCAL_STOCK_SEARCH + idLocal + "/" + searchTxt);
+    //             const data = await post({value: searchTxt}, LOCAL_STOCK_SEARCH + idLocal);
+    //             setLoadingData(false);
+    //             setData(data);
+    //         } catch (error) {
+    //             setLoadingData(true);
+    //             console.log(error);
+    //         }
+    //     }
+    // }
 
     const getData = async (urlPage?:string) => {
-        setLoading(true);
+        setLoadingData(true);
         try {
             let data:any;
             if (urlPage) {
@@ -91,9 +94,9 @@ export const Tienda = ({ idLocal, nombreLocal, user }:tienda) => {
                 meta: data.meta,
                 links: data.links
             });
-            setLoading(false);
+            setLoadingData(false);
         } catch (error) {
-            setLoading(true);
+            setLoadingData(true);
             console.log(error);
         }
     }
@@ -113,7 +116,18 @@ export const Tienda = ({ idLocal, nombreLocal, user }:tienda) => {
 
                 <div className="grid-2 gap">
 
-                    <Search
+                    <SearchWrap 
+                        setLoadingData={setLoadingData}
+                        setData={setData}
+                        getData={getData}
+                        searchState={searchState}
+                        setSearchState={setSearchState}
+                        url={LOCAL_STOCK_SEARCH}
+                        placeholder="Codigo o nombre del producto ..."
+                        localId={idLocal}
+                    />
+                    
+                    {/* <Search
                         searchTxt={searchTxt}
                         searchData={searchData}
                         searchState={searchState}
@@ -121,7 +135,7 @@ export const Tienda = ({ idLocal, nombreLocal, user }:tienda) => {
                         handlerStateSearch={handlerStateSearch}
                         searchFocus={searchFocus}
                         placeholder="Codigo o nombre del producto ..."
-                    />
+                    /> */}
 
                     <div className="grid-2 gap">
 

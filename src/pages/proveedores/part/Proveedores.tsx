@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { BiPlusCircle } from "react-icons/bi";
 
@@ -7,16 +7,15 @@ import { Loading } from "../../../components/loads/Loading";
 import { ModalEliminar } from "../../../components/modals/ModalEliminar";
 import { Proveedor } from "./Proveedor";
 import { Pagination } from "../../../components/Pagination";
-import { Search } from "../../../components/Search";
 
 import { PROVEEDORES, PROVEEDORES_SEARCH } from "../../../resources/routes";
 import { ProveedoresDto } from "../../../resources/dtos/ProveedoresDto";
-import { getOne, paginate, post } from "../../../resources/fetch";
+import { getOne, paginate } from "../../../resources/fetch";
 import { ModalVer } from "./ModalVer";
 import { NoRegistros } from "../../../components/NoRegistros";
+import { SearchWrap } from "../../../components/SearchWrap";
 
 export const Proveedores = () => {
-
     
     const [loadingData, setLoadingData] = useState<boolean>(false);
     const [loadingProv, setLoadingProv] = useState<boolean>(false);
@@ -47,35 +46,35 @@ export const Proveedores = () => {
     // search
 
     const [searchState, setSearchState] = useState<boolean>(false);
-    const [searchTxt, setSearchTxt] = useState<string>("");
-    const searchFocus = useRef<any>(null)
+    // const [searchTxt, setSearchTxt] = useState<string>("");
+    // const searchFocus = useRef<any>(null)
 
-    const searchData = async () => { 
-        if (searchTxt === "" || searchTxt === undefined || searchTxt === null || searchTxt.length === 0) {
-            searchFocus.current.focus();
-        } else {
-            setLoadingData(true);
-            setSearchState(true);
-            try {
-                const data = await post({value: searchTxt}, PROVEEDORES_SEARCH);
-                setLoadingData(false);
-                setData(data);
-            } catch (error) {
-                setLoadingData(true);
-                console.log(error);
-            }
-        }
-    }
+    // const searchData = async () => { 
+    //     if (searchTxt === "" || searchTxt === undefined || searchTxt === null || searchTxt.length === 0) {
+    //         searchFocus.current.focus();
+    //     } else {
+    //         setLoadingData(true);
+    //         setSearchState(true);
+    //         try {
+    //             const data = await post({value: searchTxt}, PROVEEDORES_SEARCH);
+    //             setLoadingData(false);
+    //             setData(data);
+    //         } catch (error) {
+    //             setLoadingData(true);
+    //             console.log(error);
+    //         }
+    //     }
+    // }
 
-    const handlerStateSearch = () => {
-        setSearchTxt("");
-        setSearchState(false);
-        getData();
-    }
+    // const handlerStateSearch = () => {
+    //     setSearchTxt("");
+    //     setSearchState(false);
+    //     getData();
+    // }
 
-    const onChangeSearch = (e:any) => { 
-        setSearchTxt(e.target.value);
-    }
+    // const onChangeSearch = (e:any) => { 
+    //     setSearchTxt(e.target.value);
+    // }
     
     // end search
     
@@ -139,7 +138,16 @@ export const Proveedores = () => {
 
                 <div className="grid-211 gap">
                     
-                    <Search
+                    <SearchWrap 
+                        setLoadingData={setLoadingData}
+                        setData={setData}
+                        getData={getData}
+                        searchState={searchState}
+                        setSearchState={setSearchState}
+                        url={PROVEEDORES_SEARCH}
+                        placeholder="Nombre o razon social ..."
+                    />
+                    {/* <Search
                         searchTxt={searchTxt}
                         searchData={searchData}
                         searchState={searchState}
@@ -147,7 +155,7 @@ export const Proveedores = () => {
                         handlerStateSearch={handlerStateSearch}
                         searchFocus={searchFocus}
                         placeholder="Nombre o razon social ..."
-                    />
+                    /> */}
 
                     <div></div>
                     <Link to="/proveedores/nuevo" className="btn btn-info" >

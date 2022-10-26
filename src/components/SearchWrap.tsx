@@ -17,6 +17,10 @@ interface searchWrap {
     // reSearch?:any;
 }
 
+interface srcText {
+    value: string
+}
+
 export const SearchWrap = ({ 
     setLoadingData, 
     setData, 
@@ -30,20 +34,20 @@ export const SearchWrap = ({
     // reSearch
 }:searchWrap) => {
     
-    const [searchTxt, setSearchTxt] = useState<string>("");
+    const [searchTxt, setSearchTxt] = useState<srcText>({ value: "" });
     const searchFocus = useRef<any>(null);
 
     const idLocal:string = localId ? `${localId}` : "";
     
     const searchData = async () => { 
-        if (searchTxt === "" || searchTxt === undefined || searchTxt === null || searchTxt.length === 0) {
+        if (searchTxt.value === "" || searchTxt.value === undefined || searchTxt.value === null || searchTxt.value.length === 0) {
             searchFocus.current.focus();
         } else {
             setLoadingData(true);
             setSearchState(true);
             try {
                 // const data = await get(url + searchTxt + idLocal);
-                const data = await post({value: searchTxt}, url + idLocal);
+                const data = await post(searchTxt, url + idLocal);
                 setLoadingData(false);
                 setData(data);
             } catch (error) {
@@ -54,13 +58,17 @@ export const SearchWrap = ({
     }
 
     const handlerStateSearch = () => {
-        setSearchTxt("");
+        setSearchTxt({ value: "" });
         setSearchState(false);
         getData && getData();
     }
 
     const onChangeSearch = (e:any) => { 
-        setSearchTxt(e.target.value);
+        // setSearchTxt(e.target.value);
+        setSearchTxt({
+            ...searchTxt,
+            [e.target.name]: e.target.value
+        });
     }
 
     return (
@@ -89,5 +97,17 @@ const [searchState, setSearchState] = useState<boolean>(false);
     setSearchState={setSearchState}
     url={VENTAS_SEARCH}
     placeholder="Nombre del cliente ..."
-/> 
+/>
+
+<SearchWrap 
+    setLoadingData={setLoadingData}
+    setData={setData}
+    getData={getData}
+    searchState={searchState}
+    setSearchState={setSearchState}
+    url={COMPROBANTE_SEARCH}
+    placeholder="Codigo de venta"
+    localId={idLocal}
+/>
+
 */

@@ -1,10 +1,14 @@
 import { Form, Formik } from "formik";
 import { BiSearchAlt2, BiX } from "react-icons/bi";
-import { Input } from "./forms/Input";
 import { InputMk } from "./forms/InputMk";
 
+interface srcText {
+    value: string
+}
+
 interface SearchType {
-    searchTxt:string;
+    searchTxt:srcText;
+    // searchTxt:string;
     searchData:Function;
     searchState:boolean;
     onChangeSearch:any;
@@ -33,21 +37,19 @@ export const Search = ({
     }
 
 
-    const handlerSearch = (e:any) => { 
-        e.preventDefault();
-        searchData();
-    }
+    // const handlerSearch = (e:any) => { 
+    //     e.preventDefault();
+    //     searchData();
+    // }
 
 
-    console.log(searchTxt);    
+    console.log(searchTxt);  
 
 
     return (
 
         <Formik        
-            initialValues={{
-                searchTxt: ""
-            }}
+            initialValues={searchTxt}
             // validationSchema={cliente.tipoDocumento === "DNI" ? ValidRegistroClienteDni : ValidRegistroClienteRuc}
             onSubmit={(data, { resetForm }) => { 
                 // handlerCreate(data);
@@ -61,9 +63,9 @@ export const Search = ({
 
                     <InputMk
                         type="text"
-                        name="nombre"
+                        name="value"
                         placeholder={placeholder}
-                        error={errors.searchTxt}
+                        error={errors.value}
                     />
 
                     {/* <input
