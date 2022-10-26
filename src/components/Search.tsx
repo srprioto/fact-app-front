@@ -1,5 +1,7 @@
+import { Form, Formik } from "formik";
 import { BiSearchAlt2, BiX } from "react-icons/bi";
 import { Input } from "./forms/Input";
+import { InputMk } from "./forms/InputMk";
 
 interface SearchType {
     searchTxt:string;
@@ -37,39 +39,60 @@ export const Search = ({
     }
 
 
+    console.log(searchTxt);    
+
+
     return (
-        <form className="search">
 
-            <Input
-                type="text"
-                name="search"
-                value={searchTxt}
-                onChange={onChangeSearch}
-            />
+        <Formik        
+            initialValues={{
+                searchTxt: ""
+            }}
+            // validationSchema={cliente.tipoDocumento === "DNI" ? ValidRegistroClienteDni : ValidRegistroClienteRuc}
+            onSubmit={(data, { resetForm }) => { 
+                // handlerCreate(data);
+                searchData();
+            }}
+        >
+            
+            {({ errors }) => (
 
-            {/* <input
-                type="search" 
-                placeholder={placeholder}
-                name="search" 
-                value={searchTxt}
-                onChange={onChangeSearch}
-                ref={searchFocus}
-                autoComplete="off"
-            /> */}
+                <Form className="search" onChange={onChangeSearch}>
 
-            {
-                searchState && (
-                    <div className="reload-search" onClick={reloadSearch}>
-                        <BiX />
-                    </div>
-                )
-            }
+                    <InputMk
+                        type="text"
+                        name="nombre"
+                        placeholder={placeholder}
+                        error={errors.searchTxt}
+                    />
 
-            <button className="btn btn-info" onClick={handlerSearch}>
-                <BiSearchAlt2 />
-            </button>
+                    {/* <input
+                        type="search" 
+                        placeholder={placeholder}
+                        name="search" 
+                        value={searchTxt}
+                        onChange={onChangeSearch}
+                        ref={searchFocus}
+                        autoComplete="off"
+                    /> */}
 
-        </form>
+                    {
+                        searchState && (
+                            <div className="reload-search" onClick={reloadSearch}>
+                                <BiX />
+                            </div>
+                        )
+                    }
+
+                    <button className="btn btn-info" type="submit">
+                        <BiSearchAlt2 />
+                    </button>
+
+                </Form>
+
+            )}
+
+        </Formik>
     )
 };
 
