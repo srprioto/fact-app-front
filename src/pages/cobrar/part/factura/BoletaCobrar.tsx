@@ -15,11 +15,7 @@ interface boleta {
     modalConfVenta:any;
     setModalRechazVenta:Function;
     modalRechazVenta:any;
-    switchChangeFact:boolean;
-    // setTabbs:Function;
-    // tipoSerie:Function;
-    // data:any;
-    // tabbs:number;
+    // switchChangeFact:boolean;
     venta:any;
     setVenta:Function;
     activarConfirmarVenta:Function;
@@ -35,11 +31,7 @@ export const BoletaCobrar = ({
     modalConfVenta, 
     setModalRechazVenta, 
     modalRechazVenta,
-    switchChangeFact, 
-    // setTabbs, 
-    // data, 
-    // tipoSerie, 
-    // tabbs,
+    // switchChangeFact, 
     venta, 
     setVenta,
     activarConfirmarVenta,
@@ -82,7 +74,7 @@ export const BoletaCobrar = ({
 
     useEffect(() => {
         
-        if (switchChangeFact) { // revisar en caso de que de problemas
+        if (switchChange) { // revisar en caso de que de problemas
             setCliente(clienteInfo);
         }
         setGetCliente({

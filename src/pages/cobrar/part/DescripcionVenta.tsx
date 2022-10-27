@@ -80,6 +80,7 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
 
     const [venta, setVenta] = useState<any>({...data, totalPagado: 0});
     const [cliente, setCliente] = useState<any>(clienteOk ? data.clientes : clienteInfo);
+    // const [cliente, setCliente] = useState<any>({});
     const [creditoDetalles, setCreditoDetalles] = useState<Array<any>>([]);
 
     const tipoDocumUpdate = () => { 
@@ -110,10 +111,7 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
 
     const [comisionTarjeta, setComisionTarjeta] = useState<number>(0);
 
-    const [getCliente, setGetCliente] = useState<any>({ 
-        documento: "", 
-        tipoDocumento: tipoDocumUpdate()
-    });
+    const [getCliente, setGetCliente] = useState<any>({documento: "", tipoDocumento: tipoDocumUpdate()});
 
     const esCredito:boolean = venta.tipo_venta === tipoVenta.credito || venta.tipo_venta === tipoVenta.adelanto;
 
@@ -127,6 +125,10 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
         return itemsTarjeta;
     }
 
+    useEffect(() => {
+        setCliente(clienteOk ? data.clientes : clienteInfo);
+    }, [])
+    
 
     useEffect(() => {
         setVenta({
@@ -303,7 +305,6 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
                             modalRechazVenta={modalRechazVenta}
                             venta={venta}
                             setVenta={setVenta}
-
                             activarConfirmarVenta={activarConfirmarVenta}
                         />
                     }
@@ -313,25 +314,16 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
                             switchChange={switchChangeFact}
                             cliente={cliente}
                             setCliente={setCliente}
-
                             setModalConfVenta={setModalConfVenta}
                             modalConfVenta={modalConfVenta}
                             setModalRechazVenta={setModalRechazVenta}
                             modalRechazVenta={modalRechazVenta}
-
-                            switchChangeFact={switchChangeFact}
-                            // tabbs={tabbs}
-                            // setTabbs={setTabbs}
-                            // tipoSerie={tipoSerie}
-                            // data={data}
-
                             venta={venta}
                             setVenta={setVenta}
-
                             activarConfirmarVenta={activarConfirmarVenta}
-
                             getCliente={getCliente}
                             setGetCliente={setGetCliente}
+                            // switchChangeFact={switchChangeFact}
                         /> 
                     }
                     {
@@ -340,23 +332,13 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
                             switchChange={switchChangeFact}
                             cliente={cliente}
                             setCliente={setCliente}
-
                             setModalConfVenta={setModalConfVenta}
                             modalConfVenta={modalConfVenta}
                             setModalRechazVenta={setModalRechazVenta}
                             modalRechazVenta={modalRechazVenta}
-
-                            // switchChangeFact={switchChangeFact}
-                            // tabbs={tabbs}
-                            // setTabbs={setTabbs}
-                            // tipoSerie={tipoSerie}
-                            // data={data}
-
                             venta={venta}
                             setVenta={setVenta}
-
                             activarConfirmarVenta={activarConfirmarVenta}
-
                             getCliente={getCliente}
                             setGetCliente={setGetCliente}
                         />

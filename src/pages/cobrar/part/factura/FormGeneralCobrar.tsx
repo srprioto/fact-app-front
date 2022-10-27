@@ -95,7 +95,7 @@ export const FormGeneralCobrar = ({
                                                         errors={errors}
                                                         switchChange={switchChange}
                                                         cliente={cliente}
-                                                        setCliente={setCliente} 
+                                                        // setCliente={setCliente} 
                                                     />
                                                 }
                                             </>

@@ -9,11 +9,11 @@ import { InputMk } from "../../../../components/forms/InputMk";
 interface clienteRuc {
     errors:any;
     cliente:any;
-    setCliente:Function;
+    // setCliente:Function;
     switchChange?:boolean;
 }
 
-export const CobrarClienteRuc = ({ errors, cliente, setCliente, switchChange = true }:clienteRuc) => {
+export const CobrarClienteRuc = ({ errors, cliente, switchChange = true }:clienteRuc) => {
 
     // const handlerOnChangeCliente = (e:any) => { 
     //     setCliente({

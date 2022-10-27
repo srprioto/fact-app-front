@@ -106,7 +106,7 @@ export const Vender = ({ idLocal, nombreLocal, user }:vender) => {
     }
 
     
-    const postVenta = async (
+    const postVenta = async ( // enviar venta a COBRAR
         cliente:any, 
         tipo_venta:string, 
         estado_venta?:string
