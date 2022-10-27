@@ -4,13 +4,13 @@ import 'moment/locale/es';
 moment.locale('es');
 
 export const fecha = (fecha:any) => {
-    return moment(fecha).format('DD MMMM YYYY - LT');
+    return moment(fecha, false).format('DD MMMM YYYY - LT');
 }
 
 export const fechaResumen = (fecha:any) => {
-    return moment(fecha).format('DD/MM/yy - LT');
+    return moment(fecha, false).format('DD/MM/yy - LT');
 }
 
 export const fechaNoHora = (fecha:any) => {
-    return moment(fecha).format('DD MMMM YYYY');
+    return moment(fecha, false).format('DD MMMM YYYY');
 }

@@ -1,6 +1,6 @@
 // import { ListaDetalleProductos } from "../../Ingresos/part/ListaDetalleProductos"
 import { tipoVenta } from "../../../../resources/dtos/VentasDto";
-// import { fecha } from "../../../../resources/func/fechas";
+import { fecha } from "../../../../resources/func/fechas";
 import { moneda } from "../../../../resources/func/moneda"
 import { VentasDropdown } from "./VentasDropdown"
 
@@ -79,7 +79,7 @@ export const VentaItems = ({
             }
             
             <td className={ classEstado() + " capitalize strong" } >{ ventas.estado_venta }</td>
-            <td className={ anulado() }>{ (ventas.created_at) }</td>
+            <td className={ anulado() }>{ fecha(ventas.created_at) }</td>
             <td className={ anulado() }>{ ventas.locales && ventas.locales.nombre }</td>
             <td>
                 <VentasDropdown 
