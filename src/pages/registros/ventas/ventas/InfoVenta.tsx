@@ -121,7 +121,12 @@ export const InfoVenta = ({ venta, classEstado }:any) => {
 
                     <span>
                         <p>Fecha de venta: </p>
-                        <h4>{ fecha(venta.created_at) }</h4>
+                        <h4>{ (venta.created_at) }</h4>
+                    </span>
+
+                    <span>
+                        <p>Fecha de venta: </p>
+                        <h4>{ (venta.updated_at) }</h4>
                     </span>
 
                 </div>
