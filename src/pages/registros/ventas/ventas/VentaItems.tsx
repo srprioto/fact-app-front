@@ -1,6 +1,6 @@
 // import { ListaDetalleProductos } from "../../Ingresos/part/ListaDetalleProductos"
 import { tipoVenta } from "../../../../resources/dtos/VentasDto";
-import { fecha } from "../../../../resources/func/fechas";
+// import { fecha } from "../../../../resources/func/fechas";
 import { moneda } from "../../../../resources/func/moneda"
 import { VentasDropdown } from "./VentasDropdown"
 
