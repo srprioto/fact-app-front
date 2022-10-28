@@ -35,13 +35,17 @@ export const BoletaVenta = ({
 
     
     useEffect(() => {
-        setCliente(clienteI);
+        setCliente({
+            ...clienteI,
+            numero_documento: getCliente.documento,
+            tipoDocumento: getCliente.tipoDocumento
+        });
         setGetCliente({
             ...getCliente,
             documento: ""
         })
     }, [getCliente.tipoDocumento])
-        
+
 
     const handlerOnChangeGetCli = (e:any) => { 
         setGetCliente({
@@ -52,7 +56,7 @@ export const BoletaVenta = ({
             setCliente({
                 ...cliente,
                 numero_documento: e.target.value
-            })    
+            })
         }
     }
 

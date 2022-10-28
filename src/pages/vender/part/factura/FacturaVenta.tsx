@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { clienteInfo } from "../../../../resources/dtos/Cliente";
+// import { clienteInfo } from "../../../../resources/dtos/Cliente";
 import { tipoVenta } from "../../../../resources/dtos/VentasDto";
 import { post } from "../../../../resources/fetch";
 import { CLIENTES } from "../../../../resources/routes";
@@ -29,17 +29,23 @@ export const FacturaVenta = ({
 
     // const serie:string = "F003";
     const tipo_venta:string = tipoVenta.factura;
-    const clienteI = clienteInfo;
+    // const clienteI = clienteInfo;
     const [loadCliente, setLoadCliente] = useState<boolean>(false);
     const [getCliente, setGetCliente] = useState<any>({ documento: "", tipoDocumento: "RUC", });
 
+    // useEffect(() => {
+    //     setGetCliente({
+    //         ...getCliente,
+    //         documento: ""
+    //     })
+    // }, [getCliente.tipoDocumento])
+
     useEffect(() => {
-        setCliente(clienteI);
-        setGetCliente({
-            ...getCliente,
-            documento: ""
-        })
-    }, [getCliente.tipoDocumento])
+        setCliente({
+            ...cliente,
+            tipoDocumento: getCliente.tipoDocumento
+        });
+    }, [getCliente])
     
 
     const handlerOnChangeGetCli = (e:any) => { 
