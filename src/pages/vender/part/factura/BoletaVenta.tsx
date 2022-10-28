@@ -47,6 +47,12 @@ export const BoletaVenta = ({
             ...getCliente,
             [e.target.name]: e.target.value
         })
+        if (e.target.name === "documento") {
+            setCliente({
+                ...cliente,
+                numero_documento: e.target.value
+            })    
+        }
     }
 
 
@@ -67,9 +73,18 @@ export const BoletaVenta = ({
         }
 
         try {
-            const response = await post(updateData, CLIENTES + "/padron/search");
-            // response.serie_documento = serie;
+            let response = await post(updateData, CLIENTES + "/padron/search");
+            response.numero_documento = cliente.numero_documento;
             setCliente(response);
+            // if (response.estadoCliente === "Inexistente") {
+            //     const numeroDocumento = cliente.numero_documento;
+            //     setCliente({
+            //         ... cliente,
+            //         estadoCliente: response.estadoCliente
+            //     });
+            // } else {
+            //     setCliente(response);
+            // }
             setLoadCliente(false);
         } catch (error) {
             setLoadCliente(true);

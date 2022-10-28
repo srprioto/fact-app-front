@@ -58,6 +58,8 @@ export const FormInfoGeneral = ({
         }
     }
 
+    const showFormsCliente:boolean = getCliente.documento.length === (getCliente.tipoDocumento === "RUC" ? 11 : 8);
+    
     
     return (
         <div>
@@ -77,30 +79,26 @@ export const FormInfoGeneral = ({
             >
                 {({ errors }:any) => (
                     <Form 
-                        className="boleta" 
+                        className="boleta"
                         onChange={handlerOnChangeCliente}
                     >
                         {
-                            !!cliente.estadoCliente
+                            showFormsCliente
                             && (
-                                <>
-                                    {
-                                        loadCliente
-                                        ? <Loading />
-                                        : (
-                                            <>
-                                                {
-                                                    getCliente.tipoDocumento === "DNI"
-                                                    && <VenderClienteDni errors={errors} />
-                                                }
-                                                {
-                                                    getCliente.tipoDocumento === "RUC"
-                                                    && <VenderClienteRuc errors={errors} cliente={cliente} />
-                                                }
-                                            </>
-                                        )
-                                    }
-                                </>
+                                loadCliente
+                                ? <Loading />
+                                : (
+                                    <>
+                                        {
+                                            getCliente.tipoDocumento === "DNI"
+                                            && <VenderClienteDni errors={errors} />
+                                        }
+                                        {
+                                            getCliente.tipoDocumento === "RUC"
+                                            && <VenderClienteRuc errors={errors} cliente={cliente} />
+                                        }
+                                    </>
+                                )
                             )
                         }
 
@@ -111,6 +109,7 @@ export const FormInfoGeneral = ({
                             estadoCliente={!!cliente.estadoCliente}
                             labelBtn={labelBtn}
                             tipoDoc={tipoDoc}
+                            showFormsCliente={showFormsCliente}
                         />
 
                     </Form>
