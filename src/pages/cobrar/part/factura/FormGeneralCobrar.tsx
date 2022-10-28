@@ -27,6 +27,12 @@ export const FormGeneralCobrar = ({
     activarConfirmarVenta
 }:formGeneralCobrar) => {
 
+    // const [showFormsCliente, setShowFormsCliente] = useState<boolean>(false);
+
+    // useEffect(() => {
+    //     setShowFormsCliente(getCliente.documento.length === (getCliente.tipoDocumento === "RUC" ? 11 : 8))
+    // }, [getCliente])
+    
 
     const handlerOnChangeCliente = (e:any) => { 
         setCliente({
@@ -37,7 +43,7 @@ export const FormGeneralCobrar = ({
 
 
     const stateCliente:string = cliente ? cliente.estadoCliente : "";
-    const clienteExist:boolean = !!stateCliente;
+    // const clienteExist:boolean = !!stateCliente;
 
 
     const validacionDoc = () => { 
@@ -49,6 +55,9 @@ export const FormGeneralCobrar = ({
             return null;
         }
     }
+
+
+    const showFormsCliente:boolean = getCliente.documento.length === (getCliente.tipoDocumento === "RUC" ? 11 : 8);
 
 
     return (
@@ -73,49 +82,43 @@ export const FormGeneralCobrar = ({
                         onChange={handlerOnChangeCliente}
                     >
                         {
-                            clienteExist
+                            showFormsCliente
                             && (
-                                <>
-                                    {
-                                        loadCliente
-                                        ? <Loading />
-                                        : (
-                                            <>
-                                                {
-                                                    getCliente.tipoDocumento === "DNI"
-                                                    && <CobrarClienteDni
-                                                        errors={errors}
-                                                        switchChange={switchChange}
-                                                        cliente={cliente}
-                                                    />
-                                                }
-                                                {
-                                                    getCliente.tipoDocumento === "RUC"
-                                                    && <CobrarClienteRuc 
-                                                        errors={errors}
-                                                        switchChange={switchChange}
-                                                        cliente={cliente}
-                                                        // setCliente={setCliente} 
-                                                    />
-                                                }
-                                            </>
-                                        )
-                                    }
-                                    {/* <div className="mt-15 bb bb-neutro" /> */}
-                                    {/* <br /> */}
-                                </>
+                                loadCliente
+                                ? <Loading />
+                                : (
+                                    <>
+                                        {
+                                            getCliente.tipoDocumento === "DNI"
+                                            && <CobrarClienteDni
+                                                errors={errors}
+                                                switchChange={switchChange}
+                                                cliente={cliente}
+                                            />
+                                        }
+                                        {
+                                            getCliente.tipoDocumento === "RUC"
+                                            && <CobrarClienteRuc 
+                                                errors={errors}
+                                                switchChange={switchChange}
+                                                cliente={cliente}
+                                                // setCliente={setCliente} 
+                                            />
+                                        }
+                                    </>
+                                )
                             )
                         }
-                        
 
                         <ConfirmarVenta
                             // setModalConfVenta={setModalConfVenta}
                             // modalConfVenta={modalConfVenta}
-                            clienteExist={clienteExist}
+                            // clienteExist={clienteExist}
                             setModalRechazVenta={setModalRechazVenta}
                             modalRechazVenta={modalRechazVenta}
                             activarConfirmarVenta={activarConfirmarVenta}
                             getCliente={getCliente}
+                            showFormsCliente={showFormsCliente}
                         />
 
                     </Form>

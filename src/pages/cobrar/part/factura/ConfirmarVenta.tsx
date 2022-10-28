@@ -6,9 +6,10 @@ interface confirmarVenta {
     // modalConfVenta?:any;
     setModalRechazVenta:Function;
     modalRechazVenta:any;
-    clienteExist:boolean;
+    // clienteExist:boolean;
     activarConfirmarVenta:Function;
     getCliente:any;
+    showFormsCliente:boolean;
 }
 
 export const ConfirmarVenta = ({ 
@@ -16,14 +17,16 @@ export const ConfirmarVenta = ({
     // modalConfVenta, 
     setModalRechazVenta, 
     modalRechazVenta,
-    clienteExist,
+    // clienteExist,
     activarConfirmarVenta,
-    getCliente
+    getCliente,
+    showFormsCliente
 }:confirmarVenta) => {
 
     const validarVenta = () => { 
         if (
-            (activarConfirmarVenta() && clienteExist) ||
+            (activarConfirmarVenta() && showFormsCliente) ||
+            // (activarConfirmarVenta() && clienteExist) ||
             (activarConfirmarVenta() && getCliente.tipoDocumento === "noDocumento")
         ) {
             return true

@@ -73,7 +73,6 @@ export const BoletaCobrar = ({
 
 
     useEffect(() => {
-        
         if (switchChange) { // revisar en caso de que de problemas
             setCliente(clienteInfo);
         }
@@ -87,6 +86,10 @@ export const BoletaCobrar = ({
                 documento: ""
             })
         }
+        setCliente({ // añade el tipo de documento cambiado a cliente
+            ...cliente,
+            tipoDocumento: getCliente.tipoDocumento
+        })
     }, [getCliente.tipoDocumento])
    
 
@@ -95,8 +98,13 @@ export const BoletaCobrar = ({
             ...getCliente,
             [e.target.name]: e.target.value
         })
+        if (e.target.name === "documento") {
+            setCliente({
+                ...cliente,
+                numero_documento: e.target.value
+            })
+        }
     }
-
 
     // traer data
     const handlerGetCliente = async () => { 
@@ -109,7 +117,8 @@ export const BoletaCobrar = ({
 
         try {
             const response = await post(updateData, CLIENTES + "/padron/search");
-            // response.serie_documento = serie;
+            response.numero_documento = cliente.numero_documento;
+            response.tipoDocumento = getCliente.tipoDocumento;
             setCliente(response);
             setLoadCliente(false);
         } catch (error) {

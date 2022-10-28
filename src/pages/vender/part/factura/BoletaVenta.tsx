@@ -33,6 +33,7 @@ export const BoletaVenta = ({
     const [loadCliente, setLoadCliente] = useState<boolean>(false);
     const [getCliente, setGetCliente] = useState<any>({ documento: "", tipoDocumento: "noDocumento", });
 
+    
     useEffect(() => {
         setCliente(clienteI);
         setGetCliente({
@@ -73,7 +74,7 @@ export const BoletaVenta = ({
         }
 
         try {
-            let response = await post(updateData, CLIENTES + "/padron/search");
+            const response = await post(updateData, CLIENTES + "/padron/search");
             response.numero_documento = cliente.numero_documento;
             setCliente(response);
             // if (response.estadoCliente === "Inexistente") {

@@ -216,6 +216,10 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
             setLoadConfirmarVenta(false);
             console.log(error);
         } finally {
+            setGetCliente({
+                documento: "",
+                tipoDocumento: "noDocumento"
+            })
             setCliente({});
             setCreditoDetalles([]);
             setVenta({...data, totalPagado: 0}); // puede generar problemas al desmontar componente

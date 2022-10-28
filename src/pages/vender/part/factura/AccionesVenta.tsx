@@ -8,7 +8,7 @@ interface rapidaVenta {
     loadVenta:boolean;
     setShowWindow:Function;
     verificarVender:Function;
-    estadoCliente:boolean;
+    // estadoCliente:boolean;
     labelBtn:string;
     showFormsCliente:boolean;
     tipoDoc?:string;
@@ -18,7 +18,7 @@ export const AccionesVenta = ({
     loadVenta, 
     setShowWindow, 
     verificarVender,
-    estadoCliente,
+    // estadoCliente,
     labelBtn,
     showFormsCliente,
     tipoDoc

@@ -67,6 +67,10 @@ export const FacturaCobrar = ({
             tipoDocumento: "RUC",
             documento: cliente.numero_documento
         })
+        setCliente({ // añade el tipo de documento cambiado a cliente
+            ...cliente,
+            tipoDocumento: getCliente.tipoDocumento
+        })
     }, [getCliente.tipoDocumento])
 
 
@@ -75,6 +79,12 @@ export const FacturaCobrar = ({
             ...getCliente,
             [e.target.name]: e.target.value
         })
+        if (e.target.name === "documento") {
+            setCliente({
+                ...cliente,
+                numero_documento: e.target.value
+            })
+        }
     }
 
 
@@ -88,8 +98,8 @@ export const FacturaCobrar = ({
 
         try {
             const response = await post(updateData, CLIENTES + "/padron/search");
-            // console.log(response);            
-            // response.serie_documento = serie;
+            response.numero_documento = cliente.numero_documento;
+            response.tipoDocumento = getCliente.tipoDocumento;
             setCliente(response);
             setLoadCliente(false);
         } catch (error) {
