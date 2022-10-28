@@ -14,7 +14,7 @@ interface SearchType {
     searchState:boolean;
     onChangeSearch:any;
     handlerStateSearch:Function;
-    searchFocus:React.MutableRefObject<any>;
+    // searchFocus:React.MutableRefObject<any>;
     placeholder:string;
     reiniciar?:Function;
     validacion:number|undefined;
@@ -24,7 +24,7 @@ export const Search = ({
     searchTxt, 
     searchState, 
     onChangeSearch, 
-    searchFocus, 
+    // searchFocus, 
     handlerStateSearch,
     searchData,
     placeholder,

@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { Search } from "./Search";
 import { post } from "../resources/fetch";
 
@@ -37,13 +37,16 @@ export const SearchWrap = ({
 }:searchWrap) => {
     
     const [searchTxt, setSearchTxt] = useState<srcText>({ value: "" });
-    const searchFocus = useRef<any>(null);
+    // const searchFocus = useRef<any>(null);
     const idLocal:string = localId ? `${localId}` : "";
     
     const searchData = async () => { 
-        if (searchTxt.value === "" || searchTxt.value === undefined || searchTxt.value === null || searchTxt.value.length === 0) {
-            searchFocus.current.focus();
-        } else {
+        if (
+            !(searchTxt.value === "" || 
+            searchTxt.value === undefined || 
+            searchTxt.value === null || 
+            searchTxt.value.length === 0)
+        ) {
             setLoadingData(true);
             setSearchState(true);
             try {
@@ -55,6 +58,9 @@ export const SearchWrap = ({
                 setLoadingData(true);
                 console.log(error);
             }
+            
+        } else {
+            // searchFocus.current.focus();
         }
     }
 
@@ -79,7 +85,7 @@ export const SearchWrap = ({
             searchState={searchState}
             onChangeSearch={onChangeSearch}
             handlerStateSearch={handlerStateSearch}
-            searchFocus={searchFocus}
+            // searchFocus={searchFocus}
             placeholder={placeholder}
             reiniciar={reiniciar}
             validacion={validacion}
