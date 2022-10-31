@@ -25,7 +25,6 @@ export const ModalFechas = ({ modal, setModal, getData, fechas, setFechas }:moda
     const fechaActual = moment().format('L');
     const inidioDia = moment(fechaActual, "DDMMYYYY");
     const finDia = inidioDia.clone().add(1, "day").subtract(1, 'second');
-
     
     useEffect(() => {
         setFechas({
