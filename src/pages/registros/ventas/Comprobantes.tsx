@@ -40,6 +40,9 @@ export const Comprobantes = ({ idLocal, selectLocal, loadingLocal, locales }:inf
     const [searchState, setSearchState] = useState<boolean>(false); // estado de busqueda
     // *** end search
 
+    // verifica si estamos en tiendas o en registros
+    const tiendas = !locales ? 1 : 0;
+
     
     useEffect(() => {
         getData();
@@ -54,7 +57,7 @@ export const Comprobantes = ({ idLocal, selectLocal, loadingLocal, locales }:inf
         setToggle(toggle);
         setLoadingData(true);
 
-        const restoURL:string = `/${value_filtro}/${idLocal}/${dates.inicio}/${dates.fin}/filtro`;
+        const restoURL:string = `/${value_filtro}/${idLocal}/${dates.inicio}/${dates.fin}/${tiendas}`;
 
         try {
             let data:any;

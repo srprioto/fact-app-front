@@ -42,7 +42,10 @@ export const InfoGeneralVentas = ({ idLocal, selectLocal, loadingLocal, locales 
     const [searchState, setSearchState] = useState<boolean>(false); // estado de busqueda
     // *** end search
 
+    // verifica si estamos en tiendas o en registros
+    const tiendas = !locales ? 1 : 0;
     
+
     useEffect(() => {
         getData();
     }, [idLocal]);
@@ -71,6 +74,7 @@ export const InfoGeneralVentas = ({ idLocal, selectLocal, loadingLocal, locales 
         setModalReimprimir(true);
     }
 
+    
     const handlerCredito = (idVenta:number) => { 
         setIdVenta(idVenta);
         setModalCredito(true);
@@ -85,7 +89,7 @@ export const InfoGeneralVentas = ({ idLocal, selectLocal, loadingLocal, locales 
         setToggle(toggle);
         setLoadingData(true);
 
-        const restoURL = `/${value_filtro}/${idLocal}/${dates.inicio}/${dates.fin}/filtro`;
+        const restoURL = `/${value_filtro}/${idLocal}/${dates.inicio}/${dates.fin}/${tiendas}`;
 
         try {
             let data:any;
@@ -147,7 +151,7 @@ export const InfoGeneralVentas = ({ idLocal, selectLocal, loadingLocal, locales 
 
                         <div className="grid-1 middle">
                             {
-                                selectLocal
+                                !tiendas
                                 && (
                                     <Select
                                         loading={loadingLocal}

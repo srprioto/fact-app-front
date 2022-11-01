@@ -49,7 +49,7 @@ export const GestionFechas = ({ getData, fechas, setFechas }:fechasVentas) => {
 // }
 
 
-// en la paginacion:
+// en la paginacion del backend:
 
 // controller
 // @Get(".../:inicio/:fin/filtro")

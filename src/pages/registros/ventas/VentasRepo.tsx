@@ -81,7 +81,6 @@ export const VentasRepo = () => {
                     <BiBook />
                     Cotizaciones
                 </button> */}
-                
 
             </div>
 
