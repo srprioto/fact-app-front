@@ -14,3 +14,4 @@ export const fechaResumen = (fecha:any) => {
 export const fechaNoHora = (fecha:any) => {
     return moment(fecha).utc(false).format('DD MMMM YYYY');
 }
+
