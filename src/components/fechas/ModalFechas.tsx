@@ -1,15 +1,13 @@
-import { useEffect } from "react";
 import DatePicker, { registerLocale } from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import es from "date-fns/locale/es";
-
-import moment from 'moment';
-import 'moment/locale/es';
 import { Loading } from "../loads/Loading";
 import { Modal } from "../modals/Modal";
 import { BiCheck } from "react-icons/bi";
+import { DateTime } from "luxon";
+import "react-datepicker/dist/react-datepicker.css";
+import es from "date-fns/locale/es";
+import { useEffect } from "react";
+import { fechaInicioFin } from "../../resources/func/fechas";
 
-moment.locale('es');
 registerLocale("es", es);
 
 interface modalFechas {
@@ -22,17 +20,23 @@ interface modalFechas {
 
 export const ModalFechas = ({ modal, setModal, getData, fechas, setFechas }:modalFechas) => {
 
-    const fechaActual = moment().format('L');
-    const inidioDia = moment(fechaActual, "DDMMYYYY");
-    const finDia = inidioDia.clone().add(1, "day").subtract(1, 'second');
+    const [ inidioDia, finDia ] = fechaInicioFin();
     
     useEffect(() => {
         setFechas({
-            inicio: inidioDia.format(),
-            fin: finDia.format()
+            inicio: inidioDia,
+            fin: finDia
         })
     }, [])
 
+
+    const handlerFechaInicio = (date:any) => {
+        setFechas({ ...fechas, inicio: DateTime.fromJSDate(date).toISO() })
+    }
+
+    const handlerFechaFin = (date:any) => { 
+        setFechas({ ...fechas, fin: DateTime.fromJSDate(date).toISO() })
+    }
 
     const handlerConfirmar = async () => { 
         await getData();
@@ -47,15 +51,6 @@ export const ModalFechas = ({ modal, setModal, getData, fechas, setFechas }:moda
     //     });
     //     setModal();
     // }
-
-
-    const handlerFechaInicio = (date:any) => { 
-        setFechas({ ...fechas, inicio: moment(date).format() })
-    }
-
-    const handlerFechaFin = (date:any) => { 
-        setFechas({ ...fechas, fin: moment(date).format() })
-    }
 
 
     return (
@@ -78,7 +73,7 @@ export const ModalFechas = ({ modal, setModal, getData, fechas, setFechas }:moda
                                     onChange={(date:Date) => handlerFechaInicio(date)}
                                     locale="es"
                                     dateFormat="dd MMM yyyy"
-                                    maxDate={moment().toDate()}
+                                    maxDate={new Date(inidioDia)}
                                 />
                             </div>
         
@@ -89,7 +84,7 @@ export const ModalFechas = ({ modal, setModal, getData, fechas, setFechas }:moda
                                     onChange={(date:Date) => handlerFechaFin(date)}
                                     locale="es"
                                     dateFormat="dd MMM yyyy"
-                                    maxDate={moment().toDate()}
+                                    maxDate={new Date(inidioDia)}
                                 />
                             </div>
                         </div>

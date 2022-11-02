@@ -30,9 +30,7 @@ export const ModalOtroMonto = ({ modal, setModal, getDataOne, idCaja, usuarioId 
         setLoading(true);
         
         try {
-            const data = await post(cajaDetalles, CAJA_DETALLES);
-            console.log(data);
-            
+            await post(cajaDetalles, CAJA_DETALLES);           
             setLoading(false);
         } catch (error) {
             setLoading(true);

@@ -7,6 +7,7 @@ import { NoRegistros } from "../../../components/NoRegistros";
 import { Pagination } from "../../../components/Pagination";
 import { SearchWrap } from "../../../components/SearchWrap";
 import { paginate } from "../../../resources/fetch";
+import { fechaInicioFin } from "../../../resources/func/fechas";
 import { COMPROBANTE_PAGINATE, COMPROBANTE_SEARCH } from "../../../resources/routes";
 import { ComprobanteItem } from "./comprobantes/ComprobanteItem";
 // import { ModalAnularComp } from "./comprobantes/ModalAnularComp";
@@ -22,6 +23,9 @@ interface infoComprobante {
 }
 
 export const Comprobantes = ({ idLocal, selectLocal, loadingLocal, locales }:infoComprobante) => {
+
+    const [ inidioDia, finDia ] = fechaInicioFin();
+    const tiendas = !locales ? true : false;
     
     const [loadingData, setLoadingData] = useState<boolean>(false);
     const [modalVer, setModalVer] = useState<boolean>(false);
@@ -34,14 +38,14 @@ export const Comprobantes = ({ idLocal, selectLocal, loadingLocal, locales }:inf
     const [data, setData] = useState<any>([]);
     const [toggle, setToggle] = useState<number>(1); // tabs para los filtros
 
-    const [fechas, setFechas] = useState<any>({ inicio: "_", fin: "_" });
+    const [fechas, setFechas] = useState<any>({ 
+        inicio: tiendas ? inidioDia : "_", 
+        fin: tiendas ? finDia : "_"
+    });
     
     // *** search
     const [searchState, setSearchState] = useState<boolean>(false); // estado de busqueda
     // *** end search
-
-    // verifica si estamos en tiendas o en registros
-    const tiendas = !locales ? 1 : 0;
 
     
     useEffect(() => {
@@ -57,7 +61,7 @@ export const Comprobantes = ({ idLocal, selectLocal, loadingLocal, locales }:inf
         setToggle(toggle);
         setLoadingData(true);
 
-        const restoURL:string = `/${value_filtro}/${idLocal}/${dates.inicio}/${dates.fin}/${tiendas}`;
+        const restoURL:string = `/${value_filtro}/${idLocal}/${dates.inicio}/${dates.fin}`;
 
         try {
             let data:any;
@@ -133,7 +137,7 @@ export const Comprobantes = ({ idLocal, selectLocal, loadingLocal, locales }:inf
 
                         <div className="grid-1 middle">
                             {
-                                selectLocal
+                                !tiendas
                                 && (
                                     <Select
                                         loading={loadingLocal}

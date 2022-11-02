@@ -1,17 +1,46 @@
-import moment from 'moment';
-import 'moment/locale/es';
-
-moment.locale('es');
+import { DateTime } from "luxon";
 
 export const fecha = (fecha:any) => {
-    return moment(fecha).utc(false).format('DD MMMM YYYY - LT');
+    const newFecha:any = DateTime.fromISO(fecha)
+        // .setZone('America/Lima')
+        .setLocale('es')
+        .toFormat('dd LLL yyyy - HH:mm');
+    return newFecha
 }
 
 export const fechaResumen = (fecha:any) => {
-    return moment(fecha).utc(false).format('DD/MM/yy - LT');
+    const newFecha:any = DateTime.fromISO(fecha)
+        // .setZone('America/Lima')
+        .setLocale('es')
+        .toFormat('dd/LL/yy-HH:mm');
+    return newFecha
 }
 
 export const fechaNoHora = (fecha:any) => {
-    return moment(fecha).utc(false).format('DD MMMM YYYY');
+    const newFecha:any = DateTime.fromISO(fecha)
+        // .setZone('America/Lima')
+        .setLocale('es')
+        .toFormat('dd/LL/yyyy');
+    return newFecha
 }
 
+export const fechaInicioFin = () => { 
+    const inidioDia = DateTime
+        .now()
+        .startOf('day')
+        .toISO();
+
+    const finDia = DateTime
+        .now()
+        .endOf('day')
+        .toISO();
+
+    // .startOf('day')
+    // .plus({day:1})
+    // .minus({second:1})
+
+    return [
+        inidioDia,
+        finDia
+    ];
+}

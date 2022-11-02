@@ -7,6 +7,7 @@ import { NoRegistros } from "../../../components/NoRegistros";
 import { Pagination } from "../../../components/Pagination";
 import { SearchWrap } from "../../../components/SearchWrap";
 import { paginate } from "../../../resources/fetch";
+import { fechaInicioFin } from "../../../resources/func/fechas";
 import { VENTAS_PAGINATE, VENTAS_SEARCH } from "../../../resources/routes";
 import { ModalCredito } from "./ventas/modalCreditos/ModalCredito";
 import { ModalAnularVenta } from "./ventas/modals/ModalAnularVenta";
@@ -25,6 +26,9 @@ interface infoGeneralVentas {
 
 export const InfoGeneralVentas = ({ idLocal, selectLocal, loadingLocal, locales }:infoGeneralVentas) => {
 
+    const [ inidioDia, finDia ] = fechaInicioFin();
+    const tiendas = !locales ? true : false;
+
     const [loadingData, setLoadingData] = useState<boolean>(false);
     const [modalVer, setModalVer] = useState<boolean>(false);
     const [modalHabilitarVenta, setModalHabilitarVenta] = useState<boolean>(false);
@@ -35,15 +39,14 @@ export const InfoGeneralVentas = ({ idLocal, selectLocal, loadingLocal, locales 
     const [pagination, setPagination] = useState<any>({ meta: {}, links: {} });
     const [data, setData] = useState<any>([]);
     const [toggle, setToggle] = useState<number>(1); // tabs para los filtros
-
-    const [fechas, setFechas] = useState<any>({ inicio: "_", fin: "_" });
+    const [fechas, setFechas] = useState<any>({ 
+        inicio: tiendas ? inidioDia : "_", 
+        fin: tiendas ? finDia : "_"
+    });
     
     // *** search
     const [searchState, setSearchState] = useState<boolean>(false); // estado de busqueda
     // *** end search
-
-    // verifica si estamos en tiendas o en registros
-    const tiendas = !locales ? 1 : 0;
     
 
     useEffect(() => {
@@ -89,7 +92,7 @@ export const InfoGeneralVentas = ({ idLocal, selectLocal, loadingLocal, locales 
         setToggle(toggle);
         setLoadingData(true);
 
-        const restoURL = `/${value_filtro}/${idLocal}/${dates.inicio}/${dates.fin}/${tiendas}`;
+        const restoURL = `/${value_filtro}/${idLocal}/${dates.inicio}/${dates.fin}`;
 
         try {
             let data:any;

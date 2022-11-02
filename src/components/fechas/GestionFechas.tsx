@@ -12,7 +12,7 @@ interface fechasVentas{
 export const GestionFechas = ({ getData, fechas, setFechas }:fechasVentas) => {
     
     const [modalFechas, setModalFechas] = useState<boolean>(false);
-    
+
     return (
         <div>
 
