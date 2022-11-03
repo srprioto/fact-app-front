@@ -1,7 +1,9 @@
 import { DateTime } from "luxon";
 
+// solo lectura
 export const fecha = (fecha:any) => {
-    const newFecha:any = DateTime.fromISO(fecha)
+    const newFecha:any = DateTime
+        .fromISO(fecha, { locale: "UTC" })
         // .setZone('America/Lima')
         .setLocale('es')
         .toFormat('dd LLL yyyy - HH:mm');
@@ -9,7 +11,8 @@ export const fecha = (fecha:any) => {
 }
 
 export const fechaResumen = (fecha:any) => {
-    const newFecha:any = DateTime.fromISO(fecha)
+    const newFecha:any = DateTime
+        .fromISO(fecha, { locale: "UTC" })
         // .setZone('America/Lima')
         .setLocale('es')
         .toFormat('dd/LL/yy-HH:mm');
@@ -17,13 +20,16 @@ export const fechaResumen = (fecha:any) => {
 }
 
 export const fechaNoHora = (fecha:any) => {
-    const newFecha:any = DateTime.fromISO(fecha)
+    const newFecha:any = DateTime
+        .fromISO(fecha, { locale: "UTC" })
         // .setZone('America/Lima')
         .setLocale('es')
         .toFormat('dd/LL/yyyy');
     return newFecha
 }
 
+
+// solo escritura
 export const fechaInicioFin = () => { 
     const inidioDia = DateTime
         .now()

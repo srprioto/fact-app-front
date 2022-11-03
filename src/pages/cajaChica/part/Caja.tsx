@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
+import { BiTrash } from "react-icons/bi";
 import { useAuth } from "../../../auth/useAuth";
+import { DropDown } from "../../../components/DropDown";
 // import { BiChevronDown, BiChevronUp, BiLock, BiPlus } from "react-icons/bi";
 // import { useParams } from "react-router-dom";
 // import { Input } from "../../../components/forms/Input";
@@ -12,6 +14,7 @@ import { ModalAbrirCaja } from "../../locales/local/ModalAbrirCaja";
 import { CajaAbierta } from "./CajaAbierta";
 import { CajaCerrada } from "./CajaCerrada";
 import { ModalCerrarCaja } from "./ModalCerrarCaja";
+import { ModalEliminarCajDet } from "./ModalEliminarCajDet";
 import { ModalOtroMonto } from "./ModalOtroMonto";
 
 export const Caja = ({ idLocal, nombreLocal, user }:any) => {
@@ -22,9 +25,10 @@ export const Caja = ({ idLocal, nombreLocal, user }:any) => {
     const [modalCerrarCaja, setModalCerrarCaja] = useState<boolean>(false);
     const [modalAbrirCaja, setModalAbrirCaja] = useState<boolean>(false);
     const [modalAddMonto, setModalAddMonto] = useState<boolean>(false);
+    const [modalEliminar, setModalEliminar] = useState<boolean>(false);
+    const [idCajaDetalle, setIdCajaDetalle] = useState<number>(0);
 
     const [loadCaja, setLoadCaja] = useState<boolean>(false);
-    // const [showObserv, setShowObserv] = useState<boolean>(false);
     const [data, setData] = useState<any>({});
     const [caja, setCaja] = useState<any>({
         estado_caja: true,
@@ -40,13 +44,18 @@ export const Caja = ({ idLocal, nombreLocal, user }:any) => {
     // const otrosIngresos:any = data.caja ? data.caja.otros_montos : null;
     // const totalIngresos:number = data.totalIngresos ? data.totalIngresos : 0;
     const montoApertura:any = data.caja ? data.caja.monto_apertura : 0;
-    const idCaja:number = data.caja && data.caja.id;
+    const idCaja:number = data.caja ? data.caja.id : 0;
     
 
     useEffect(() => {
         getDataOne();
     }, [])
     
+
+    const handlerEliminar = (id:number) => { 
+        setIdCajaDetalle(id);
+        setModalEliminar(!modalEliminar);
+    }
 
     // const handlerOnChange = (e:any) => { 
     //     setCaja({
@@ -89,6 +98,7 @@ export const Caja = ({ idLocal, nombreLocal, user }:any) => {
     }
 
 
+
     return (
         <>
             {
@@ -119,14 +129,15 @@ export const Caja = ({ idLocal, nombreLocal, user }:any) => {
                                 <div className="box">
                             
                                     <table className="table">
-                                            
+
                                         <thead>
                                             <tr>
                                                 <th>Descripcion</th>
                                                 <th>Monto de movimiento</th>
                                                 <th>Tipo movimiento</th>
-                                                <th>Encargado de movimiento</th>
+                                                <th>Encargado</th>
                                                 <th>Fecha</th>
+                                                <th></th>
                                             </tr>
                                         </thead>
                                         
@@ -166,6 +177,17 @@ export const Caja = ({ idLocal, nombreLocal, user }:any) => {
                                                             }</td>
                                                             <td>{ e.usuario && e.usuario.nombre }</td>
                                                             <td>{ fecha(e.created_at) }</td>
+                                                            <td>
+                                                                {
+                                                                    !anulacion
+                                                                    && <DropDown>
+                                                                        <span onClick={ () => handlerEliminar(e.id) }>
+                                                                            <BiTrash />Eliminar
+                                                                        </span>
+                                                                    </DropDown>
+                                                                }
+                                                                
+                                                            </td>
                                                         </tr>
                                                     )
                                                 })
@@ -209,6 +231,16 @@ export const Caja = ({ idLocal, nombreLocal, user }:any) => {
                     setModal={setModalAddMonto}
                     getDataOne={getDataOne}
                     usuarioId={auth.userInfo.sub}
+                    idCaja={idCaja}
+                />
+            </ModalWrap>
+
+            <ModalWrap modal={modalEliminar}>
+                <ModalEliminarCajDet
+                    modal={modalEliminar}
+                    setModal={setModalEliminar}
+                    idCajaDetalle={idCajaDetalle}
+                    getDataOne={getDataOne}
                     idCaja={idCaja}
                 />
             </ModalWrap>
