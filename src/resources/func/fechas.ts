@@ -3,8 +3,8 @@ import { DateTime } from "luxon";
 // solo lectura
 export const fecha = (fecha:any) => {
     const newFecha:any = DateTime
-        .fromISO(fecha, { locale: "UTC" })
-        // .setZone('America/Lima')
+        .fromISO(fecha)
+        .setZone('UTC')
         .setLocale('es')
         .toFormat('dd LLL yyyy - HH:mm');
     return newFecha
@@ -12,8 +12,8 @@ export const fecha = (fecha:any) => {
 
 export const fechaResumen = (fecha:any) => {
     const newFecha:any = DateTime
-        .fromISO(fecha, { locale: "UTC" })
-        // .setZone('America/Lima')
+        .fromISO(fecha)
+        .setZone('UTC')
         .setLocale('es')
         .toFormat('dd/LL/yy-HH:mm');
     return newFecha
@@ -21,8 +21,8 @@ export const fechaResumen = (fecha:any) => {
 
 export const fechaNoHora = (fecha:any) => {
     const newFecha:any = DateTime
-        .fromISO(fecha, { locale: "UTC" })
-        // .setZone('America/Lima')
+        .fromISO(fecha)
+        .setZone('UTC')
         .setLocale('es')
         .toFormat('dd/LL/yyyy');
     return newFecha
