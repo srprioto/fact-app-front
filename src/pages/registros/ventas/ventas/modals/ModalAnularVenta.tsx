@@ -24,7 +24,7 @@ export const ModalAnularVenta = ({ modal, setModal, idVenta, getData }:modalAnul
     const [loadingOne, setLoadingOne] = useState<boolean>(false);
     const [notaBaja, setNotaBaja] = useState<string>("");
     const [restoAnulacion, setRestoAnulacion] = useState<boolean>(false);
-    const [afectarCaja, setAfectarCaja] = useState<boolean>(true);
+    // const [afectarCaja, setAfectarCaja] = useState<boolean>(true);
 
     const onChange = (e:any) => {
         setNotaBaja(e.target.value);
@@ -37,7 +37,7 @@ export const ModalAnularVenta = ({ modal, setModal, idVenta, getData }:modalAnul
             resto = await put(idVenta, { 
                 notaBaja: notaBaja,
                 usuarioId: auth.userInfo.sub,
-                afectarCaja: afectarCaja
+                // afectarCaja: afectarCaja
             }, VENTAS + "/anular");
             setRestoAnulacion(resto);
             setLoadingOne(false);
@@ -66,7 +66,7 @@ export const ModalAnularVenta = ({ modal, setModal, idVenta, getData }:modalAnul
             modal={modal}
             setModal={setModal}
             title="Anulacion de venta"
-            width={60}
+            width={50}
             border="border-danger"
         >
             <div className="grid-1 gap">
@@ -79,11 +79,7 @@ export const ModalAnularVenta = ({ modal, setModal, idVenta, getData }:modalAnul
                 </div>
                 
                 <div>
-                    <div className={
-                        auth.rol === Roles.ADMIN
-                        ? "grid-21 gap"
-                        : "grid-1 gap"
-                    }>
+                    <div className="grid-1 gap">
                         <Input
                             label="Nota de anulación *"
                             type="text"
@@ -91,7 +87,7 @@ export const ModalAnularVenta = ({ modal, setModal, idVenta, getData }:modalAnul
                             value={notaBaja}
                             onChange={onChange}
                         />
-                        {
+                        {/* {
                             auth.rol === Roles.ADMIN
                             && (
                                 <div>
@@ -104,7 +100,7 @@ export const ModalAnularVenta = ({ modal, setModal, idVenta, getData }:modalAnul
                                     />
                                 </div>
                             )
-                        }
+                        } */}
                         
                         
                     </div>

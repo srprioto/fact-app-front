@@ -4,6 +4,7 @@ import { BtnOnOff2 } from "../../../components/btns/BtnOnOff2";
 import { LoadSwitchBtn2 } from "../../../components/btns/LoadSwitchBtn2";
 import { Input } from "../../../components/forms/Input"
 import { Modal } from "../../../components/modals/Modal"
+import { tipoMovimiento } from "../../../resources/dtos/Caja";
 import { post } from "../../../resources/fetch";
 import { CAJA_DETALLES } from "../../../resources/routes";
 
@@ -12,8 +13,10 @@ export const ModalOtroMonto = ({ modal, setModal, getDataOne, idCaja, usuarioId 
     const cajaDet = {
         monto_movimiento: 0,
         descripcion: "",
+        tipo_movimiento: tipoMovimiento.otrosMovimientos,
+        forma_pago: "efectivo",
         cajaId: idCaja,
-        usuarioId: usuarioId
+        usuarioId: usuarioId,
     }
 
     const [loading, setLoading] = useState<boolean>(false);

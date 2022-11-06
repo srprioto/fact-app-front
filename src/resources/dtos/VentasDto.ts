@@ -89,3 +89,10 @@ export const tipoVenta = {
     credito: "credito",
     adelanto: "adelanto",
 }
+
+// export const forma_pago = {
+//     efectivo: "efectivo"
+//     tarjeta: "tarjeta"
+//     pago_electronico: "pago_electronico"
+//     deposito: "deposito"
+// }

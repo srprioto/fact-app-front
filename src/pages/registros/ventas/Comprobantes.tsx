@@ -121,7 +121,7 @@ export const Comprobantes = ({ idLocal, selectLocal, loadingLocal, locales }:inf
                         searchState={searchState}
                         setSearchState={setSearchState}
                         url={COMPROBANTE_SEARCH}
-                        placeholder="Codigo de venta"
+                        placeholder="Codigo de venta, correlativo, cliente o nro de doc."
                         localId={idLocal}
                     />
                     <div className="grid-2 gap">

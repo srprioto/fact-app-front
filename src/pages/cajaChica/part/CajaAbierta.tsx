@@ -43,7 +43,7 @@ export const CajaAbierta = ({ data, caja, setCaja, setModalCerrarCaja, setModalA
                     <h2 className="strong left success">Abierto</h2>
                 </div>
     
-                <div className="grid-3 gap">
+                <div className="grid-4">
     
                     <div className="center">
                         <p>Monto de apertura: </p>
@@ -55,10 +55,10 @@ export const CajaAbierta = ({ data, caja, setCaja, setModalCerrarCaja, setModalA
                         <h2 className="warning-i">S/. { moneda(infoCaja.otros_montos) }</h2>
                     </div>
 
-                    {/* <div className="center">
-                        <p>Ingresos en efectivo: </p>
+                    <div className="center">
+                        <p>Ingresos recaudados: </p>
                         <h2 className="info-i">S/. { moneda(infoCaja.monto_efectivo) }</h2>
-                    </div> */}
+                    </div>
 
                     <div className="center">
                         <p>Monto total en caja: </p>
@@ -69,7 +69,7 @@ export const CajaAbierta = ({ data, caja, setCaja, setModalCerrarCaja, setModalA
     
                 </div>
 
-                <div className="grid-3 gap">
+                <div className="grid-121">
 
                     <div></div>
 
@@ -96,8 +96,9 @@ export const CajaAbierta = ({ data, caja, setCaja, setModalCerrarCaja, setModalA
                     </div>
                 </div>
 
-                <div className="grid-3 gap">
+                <div className="grid-4">
 
+                    <div></div>
                     <div></div>
                     <div></div>
     

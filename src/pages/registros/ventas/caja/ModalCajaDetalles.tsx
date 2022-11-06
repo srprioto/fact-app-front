@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { Loading } from "../../../../components/loads/Loading";
 import { Modal } from "../../../../components/modals/Modal"
+import { tipoMovimiento } from "../../../../resources/dtos/Caja";
 import { getOne } from "../../../../resources/fetch";
 import { zeroFill } from "../../../../resources/func/ceroFill";
 import { fecha } from "../../../../resources/func/fechas";
 import { moneda } from "../../../../resources/func/moneda";
 import { CAJA } from "../../../../resources/routes";
+import { CajaDetalles } from "../../../cajaChica/part/CajaDetalles";
 
 export const ModalCajaDetalles = ({ modal, setModal, cajaId }:any) => {
     
@@ -55,7 +57,7 @@ export const ModalCajaDetalles = ({ modal, setModal, cajaId }:any) => {
             title="Detalles de caja"
             modal={modal}
             setModal={setModal}
-            width={65}
+            width={80}
         >
             {
                 loading
@@ -186,41 +188,9 @@ export const ModalCajaDetalles = ({ modal, setModal, cajaId }:any) => {
 
                         {
                             mostrarCajaDetalles()
-                            && (
-                                <div className="box">
-                                    <h3>Otros movimientos</h3>
-                                    <table className="table">
-                                                
-                                        <thead>
-                                            <tr>
-                                                <th>Descripcion</th>
-                                                <th>Monto movimiento</th>
-                                                <th>Fecha</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {
-                                                caja.cajaDetalles.map((e:any) => {
-                                                    return (
-                                                        <tr key={e.id}>
-                                                            <td>{ e.descripcion }</td>
-                                                            <td
-                                                                className={
-                                                                    "strong " +
-                                                                    (e.monto_movimiento < 0
-                                                                    ? "danger"
-                                                                    : "info")
-                                                                }
-                                                            >{ e.monto_movimiento }</td>
-                                                            <td>{ fecha(e.created_at) }</td>
-                                                        </tr>
-                                                    )
-                                                })
-                                            }
-                                        </tbody>
-                                    </table>
-                                </div>
-                            )
+                            && <CajaDetalles
+                                cajaDetalles={caja.cajaDetalles}
+                            />
                         }
                     </div>
                 )

@@ -13,27 +13,36 @@ export const ItemCaja = ({ item, handlerVer }:any) => {
         <tr className="items-caja">
 
             <td className="">{ zeroFill(Number(item.id)) }</td>
-
             <td className={ item.estado_caja ? "success-i" : "danger-i" }>
-                {
-                    item.estado_caja ? "Abierto" : "Cerrado"
-                }
+                { item.estado_caja ? "Abierto" : "Cerrado" }
             </td>
-
             <td className="info">S/. { moneda(montoApertura) }</td>
-
             <td className={
                 "strong " +
                 (Number(item.cantidad_diferencia) > 0
                 ? "danger"
                 : "primary")
-            }>S/. { moneda(montoEfectivo + montoApertura + montoOtros) }</td>
-
-            <td className="success strong">S/. { moneda(montoEfectivo + montoOtros) }</td>
-
+            }>
+                {
+                    item.estado_caja
+                    ? "---"
+                    : <> S/. { moneda(montoEfectivo + montoApertura + montoOtros) } </>
+                }
+            </td>
+            <td className="success strong">
+                {
+                    item.estado_caja
+                    ? "---"
+                    : <> S/. { moneda(montoEfectivo + montoOtros) } </>
+                }
+            </td>
             <td>{ fechaNoHora(item.created_at) }</td>
-
-            <td><CajaDropDown item={item} handlerVer={handlerVer}/></td>
+            <td>
+                {
+                    !item.estado_caja
+                    && <CajaDropDown item={item} handlerVer={handlerVer}/>
+                }
+            </td>
         </tr>
     )
 }
