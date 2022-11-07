@@ -11,6 +11,7 @@ interface crearCreditoDetal {
     localId:number;
     setValidarCredito:Function;
     setUpdateCredito:Function;
+    setRestanteCero:Function;
 }
 
 export const CrearCreditoDetal = ({ 
@@ -18,7 +19,8 @@ export const CrearCreditoDetal = ({
     cantidadRestante, 
     localId, 
     setValidarCredito, 
-    setUpdateCredito 
+    setUpdateCredito,
+    setRestanteCero,
 }:crearCreditoDetal) => {
 
     const [infoCredito, setInfoCredito] = useState<infoCredito>({ 
@@ -38,9 +40,17 @@ export const CrearCreditoDetal = ({
 
 
     useEffect(() => {
+        if ((cantidadRestante - Number(infoCredito.cantidad_pagada)) === 0) {
+            setRestanteCero(true);
+        } else {
+            setRestanteCero(false);
+        }
+    }, [infoCredito.cantidad_pagada])
+    
 
+
+    useEffect(() => {
         setUpdateCredito(infoCredito);
-
         if (
             (infoCredito.estado_producto !== venta.estado_producto) ||
             (infoCredito.cantidad_pagada > 0)
@@ -50,8 +60,7 @@ export const CrearCreditoDetal = ({
             setValidarCredito(false);
         }
     }, [infoCredito])
-    
-    
+        
 
     const handlerOnChange = (e:any) => {
         if (e.target.name === "cantidad_pagada") {

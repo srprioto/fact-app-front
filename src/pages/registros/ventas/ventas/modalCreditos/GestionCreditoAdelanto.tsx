@@ -30,6 +30,7 @@ export const GestionCreditoAdelanto = ({
     
     const [tabbs, setTabbs] = useState<number>(1);
     const [validarCredito, setValidarCredito] = useState<boolean>(true);
+    const [restanteCero, setRestanteCero] = useState<boolean>(false);
     const [updateCredito, setUpdateCredito] = useState<any>({});
 
 
@@ -57,7 +58,6 @@ export const GestionCreditoAdelanto = ({
     return (
         <div className="box box-par m-0 gestion-credito-venta">
             <div className="grid-4 gap mb-25">
-
                 <button 
                     className={"btn2 btn2-info " + (tabbs === 1 && "btn2-sub-info")}
                     onClick={() => {setTabbs(1)}}
@@ -79,6 +79,7 @@ export const GestionCreditoAdelanto = ({
                                     localId={localId}
                                     setValidarCredito={setValidarCredito}
                                     setUpdateCredito={setUpdateCredito}
+                                    setRestanteCero={setRestanteCero}
                                 />
                             }
                             
@@ -94,7 +95,7 @@ export const GestionCreditoAdelanto = ({
 
                                 <BtnOnOff2
                                     label="Confirmar"
-                                    estado={validarCredito}
+                                    estado={(validarCredito && !restanteCero)}
                                     icon={<BiCheck />}
                                 >
                                     <LoadSwitchBtn2

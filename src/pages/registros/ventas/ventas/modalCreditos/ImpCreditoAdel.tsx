@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { fechaNoHora, fechaResumen } from "../../../../../resources/func/fechas";
+import { fechaActualJs, fechaResumen } from "../../../../../resources/func/fechas";
 import { moneda } from "../../../../../resources/func/moneda";
 
 interface impCreditoAdel {
@@ -29,7 +29,6 @@ export const ImpCreditoAdel = ({ ventaUpdate, setImprimir }:impCreditoAdel) => {
         setImprimir(false);
     }
 
-
     const cancelado = () => { 
         if (
             Number(ventaUpdate.total) === Number(ventaUpdate.totalPagado) &&
@@ -40,6 +39,8 @@ export const ImpCreditoAdel = ({ ventaUpdate, setImprimir }:impCreditoAdel) => {
             return false;
         }
     }
+
+    console.log(cancelado());
 
     // estilos
     // generales
@@ -209,9 +210,10 @@ export const ImpCreditoAdel = ({ ventaUpdate, setImprimir }:impCreditoAdel) => {
                             {
                                 creditoDetalles.map((e:any, index:number) => {
                                     return (
-                                        <tr key={index}>
+                                        <tr key={index} style={texto}>
                                             <td>S/.{ moneda(e.cantidad_pagada) }</td>
-                                            <td>{ fechaNoHora(e.fecha_estimada) }</td>
+                                            <td>{ fechaActualJs(new Date()) }</td>
+                                            {/* <td>{ e.fecha_estimada }</td> */}
                                         </tr>            
                                     );                                
                                 })

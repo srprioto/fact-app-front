@@ -28,6 +28,14 @@ export const fechaNoHora = (fecha:any) => {
     return newFecha
 }
 
+export const fechaActualJs = (fecha:any) => {
+    const newFecha:any = DateTime
+        .fromJSDate(fecha)
+        .setZone('UTC')
+        .setLocale('es')
+        .toFormat('dd/LL/yyyy');
+    return newFecha
+}
 
 // solo escritura
 export const fechaInicioFin = () => { 
