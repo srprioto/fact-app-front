@@ -137,10 +137,6 @@ export const BoxModalVentaDetalles = ({ idVenta }:any) => {
                                                                 classVentaForzada(e.venta_negativa, e.forzar_venta)
                                                             }
                                                         >{ e.venta_negativa }</td>
-                                                        {/* <td
-                                                            className={classEstado(e.estado_venta_detalle)}
-                                                        >{ e.estado_venta_detalle }</td> */}
-                                                        
                                                     </tr>
                                                 )
                                             })

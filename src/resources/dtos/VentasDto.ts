@@ -6,7 +6,7 @@ export interface ventaDetalles {
     precio_parcial:number;
     cantidad_venta:number;
     descuento:number;
-    estado_venta_detalle:string;
+    // estado_venta_detalle:string;
     forzar_venta:boolean;
     venta_negativa:number;
 }
@@ -34,7 +34,7 @@ export const ventaDet = {
     descuento: 0,
     precio_venta: 0,
     precio_parcial: 0,
-    estado_venta_detalle:"enviado",
+    // estado_venta_detalle:"enviado",
     forzar_venta:false,
     venta_negativa:0
 }
@@ -50,7 +50,7 @@ export interface ProductoDetalles {
     precio_parcial:number;
     cantidad_venta:number;
     descuento:number;
-    estado_venta_detalle:string;
+    // estado_venta_detalle:string;
     forzar_venta:boolean;
     venta_negativa:number;
 }
@@ -75,7 +75,7 @@ export const productDetail = {
     nombre_producto: "",
     cantidad_venta: 1,
     descuento: 0,
-    estado_venta_detalle:"enviado",
+    // estado_venta_detalle:"enviado",
     precio_venta: 0,
     precio_parcial: 0,
     forzar_venta:false,

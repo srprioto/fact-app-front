@@ -78,6 +78,7 @@ export const VentaItems = ({
                 : <td className={"warning strong " + anulado()}>S/. { moneda(ventas.totalPagado) }</td>
             }
             
+            <td className={ anulado() + " secundary capitalize" }>{ ventas.forma_pago }</td>
             <td className={ classEstado() + " capitalize strong" } >{ ventas.estado_venta }</td>
             <td className={ anulado() }>{ fecha(ventas.created_at) }</td>
             <td className={ anulado() }>{ ventas.locales && ventas.locales.nombre }</td>

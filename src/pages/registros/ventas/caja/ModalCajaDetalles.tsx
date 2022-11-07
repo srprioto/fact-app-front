@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Loading } from "../../../../components/loads/Loading";
 import { Modal } from "../../../../components/modals/Modal"
-import { tipoMovimiento } from "../../../../resources/dtos/Caja";
 import { getOne } from "../../../../resources/fetch";
 import { zeroFill } from "../../../../resources/func/ceroFill";
 import { fecha } from "../../../../resources/func/fechas";

@@ -107,14 +107,6 @@ export const ModalCotizDetalles = ({ modal, setModal, idVenta }:any) => {
                                                         <td>S/. { e.descuento }</td>
                                                         <td>S/. { e.precio_venta }</td>
                                                         <td>S/. { e.precio_parcial }</td>
-                                                        {/* <td
-                                                            className={
-                                                                classVentaForzada(e.venta_negativa, e.forzar_venta)
-                                                            }
-                                                        >{ e.venta_negativa }</td> */}
-                                                        {/* <td
-                                                            className={classEstado(e.estado_venta_detalle)}
-                                                        >{ e.estado_venta_detalle }</td> */}
                                                         
                                                     </tr>
                                                 )

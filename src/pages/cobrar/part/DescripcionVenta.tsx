@@ -17,6 +17,7 @@ import { tipoVenta } from "../../../resources/dtos/VentasDto";
 import { CreditoAdelanto } from "./creditoAdelanto/CreditoAdelanto";
 import { MasAccionesCobrar } from "./otros/MasAccionesCobrar";
 import { DescripcionCobrarVenta } from "./otros/DescripcionCobrarVenta";
+import { copy } from "../../../resources/func/deepCopy";
 
 
 interface descripcionVenta {
@@ -78,7 +79,7 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
         }
     }
 
-    const [venta, setVenta] = useState<any>({...data, totalPagado: 0});
+    const [venta, setVenta] = useState<any>({...copy(data), totalPagado: 0});
     const [cliente, setCliente] = useState<any>(clienteOk ? data.clientes : clienteInfo);
     // const [cliente, setCliente] = useState<any>({});
     const [creditoDetalles, setCreditoDetalles] = useState<Array<any>>([]);
@@ -158,7 +159,7 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
         const ventaDet:Array<any> = [];
         const listaLimpia:Array<any> = [];
 
-        // eliminar elementos con sin precios
+        // eliminar elementos sin precios
         listaPrecios.forEach((e:any) => {
             if(Number(e.precio_parcial) !== 0){
                 listaLimpia.push(e);
@@ -166,27 +167,26 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
         })
         
         updateVenta.estado_venta = estado;
-        updateVenta.descuento_total = venta.descuento_total;
-        updateVenta.codigo_venta = venta.codigo_venta;
-        updateVenta.observaciones = venta.observaciones;
-        updateVenta.subtotal = venta.subtotal;
-        updateVenta.total = venta.total;
+        // updateVenta.descuento_total = venta.descuento_total;
+        // updateVenta.codigo_venta = venta.codigo_venta;
+        // updateVenta.observaciones = venta.observaciones;
+        // updateVenta.subtotal = venta.subtotal;
+        // updateVenta.total = venta.total;
+        // updateVenta.usuarioId = venta.usuarios.id;
+        updateVenta.localId = venta.locales.id;
         updateVenta.forma_pago = listaLimpia.length <= 0 
             ? venta.forma_pago 
             : "dividido";
-        updateVenta.usuarioId = venta.usuarios.id;
-        updateVenta.localId = venta.locales.id;
         updateVenta.tipo_venta = venta.tipo_venta;
         updateVenta.cliente = cliente;
 
-        data.ventaDetalles.forEach((e:any) => { // añade listo o rechazado a ventaDetalles
-            e.estado_venta_detalle = "listo";
-            ventaDet.push(e);
-        })
+        // data.ventaDetalles.forEach((e:any) => { // añade listo o rechazado a ventaDetalles
+        //     e.estado_venta_detalle = "listo";
+        //     ventaDet.push(e);
+        // })
 
         updateVenta.ventaDetalles = ventaDet;
         updateVenta.formasPago = listaLimpia;
-
         updateVenta.comprobante = comprobante;
         updateVenta.envioComprobante = envioComprobante;
 
@@ -194,19 +194,6 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
             updateVenta.estado_producto = venta.estado_producto;
             updateVenta.totalPagado = venta.totalPagado;
             updateVenta.creditoDetalles = creditoDetalles;
-            // updateVenta.cliente = venta.cliente;
-            // updateVenta.creditoDetalles = [
-            //     {
-            //         cantidad_pagada: 10,
-            //         nota: 'dies',
-            //         fecha_estimada: '2022-10-12',
-            //     },
-            //     {
-            //         cantidad_pagada: 5,
-            //         nota: 'cinco',
-            //         fecha_estimada: '2022-10-12',
-            //     }
-            // ];
         } 
 
         try {
