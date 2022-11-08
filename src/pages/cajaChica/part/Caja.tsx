@@ -61,16 +61,6 @@ export const Caja = ({ idLocal, nombreLocal, user }:any) => {
     }
 
 
-    const mostrarCajaDetalles = () => { 
-        const mostrarDetalles:number = data.caja && data.caja.cajaDetalles.length;
-        if (mostrarDetalles > 0) {
-            return true
-        } else {
-            return false
-        }
-    }
-
-
     return (
         <>
             {
@@ -79,7 +69,7 @@ export const Caja = ({ idLocal, nombreLocal, user }:any) => {
                 : (
                     <>
                         {
-                            montoApertura === 0
+                            (montoApertura === 0 || !montoApertura)
                             ? (
                                 <CajaCerrada
                                     setModalAbrirCaja={setModalAbrirCaja}
@@ -91,15 +81,7 @@ export const Caja = ({ idLocal, nombreLocal, user }:any) => {
                                     setCaja={setCaja}
                                     setModalCerrarCaja={setModalCerrarCaja}
                                     setModalAddMonto={setModalAddMonto}
-                                />
-                            )
-                        }
-                        { 
-                            mostrarCajaDetalles()
-                            && (
-                                <CajaDetalles 
-                                    cajaDetalles={data.caja.cajaDetalles}
-                                    handlerEliminar={handlerEliminar} 
+                                    handlerEliminar={handlerEliminar}
                                 />
                             )
                         }
