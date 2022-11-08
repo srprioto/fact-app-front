@@ -3,10 +3,8 @@ import { BiCheck, BiReply } from "react-icons/bi";
 import { useAuth } from "../../../../../auth/useAuth";
 import { BtnOnOff2 } from "../../../../../components/btns/BtnOnOff2";
 import { LoadSwitchBtn2 } from "../../../../../components/btns/LoadSwitchBtn2";
-import { Checkbox2 } from "../../../../../components/forms/Checkbox2";
 import { Input } from "../../../../../components/forms/Input";
 import { Modal } from "../../../../../components/modals/Modal"
-import { Roles } from "../../../../../resources/dtos/RolesDto";
 import { put } from "../../../../../resources/fetch";
 import { VENTAS } from "../../../../../resources/routes";
 

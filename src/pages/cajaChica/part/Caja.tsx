@@ -7,7 +7,6 @@ import { CAJA } from "../../../resources/routes";
 import { ModalAbrirCaja } from "../../locales/local/ModalAbrirCaja";
 import { CajaAbierta } from "./CajaAbierta";
 import { CajaCerrada } from "./CajaCerrada";
-import { CajaDetalles } from "./CajaDetalles";
 import { ModalCerrarCaja } from "./ModalCerrarCaja";
 import { ModalEliminarCajDet } from "./ModalEliminarCajDet";
 import { ModalOtroMonto } from "./ModalOtroMonto";
