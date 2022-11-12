@@ -276,9 +276,9 @@ export const ImpComprobante = ({ venta, setImprimir, nuevo }:impComprobante) => 
                         <thead>
                             <tr style={texto}>
                                 {/* <th>Cod</th> */}
-                                <th>Prod</th>
                                 <th>Cant</th>
-                                {/* <th>P.U.</th> */}
+                                <th>Prod</th>
+                                <th>P.U.</th>
                                 <th>P.Sv.</th>
                             </tr>
                         </thead>
@@ -288,14 +288,14 @@ export const ImpComprobante = ({ venta, setImprimir, nuevo }:impComprobante) => 
                                     return (
                                         <tr key={e.id} style={texto}>
                                             {/* <td>{ e.productos.codigo }</td> */}
+                                            <td>{ e.cantidad_venta }</td>
                                             <td style={lowercase}>{ 
                                                 e.productos.nombre + " - " +
                                                 e.productos.marca + " - " +
                                                 e.productos.talla + " - " +
                                                 e.productos.color
                                             }</td>
-                                            <td>{ e.cantidad_venta }</td>
-                                            {/* <td>S/.{ moneda(e.precio_venta) }</td> */}
+                                            <td>S/.{ moneda(e.precio_venta) }</td>
                                             <td>S/.{ moneda(e.precio_parcial) }</td>
                                         </tr>            
                                     );                                
