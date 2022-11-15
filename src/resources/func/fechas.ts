@@ -37,6 +37,31 @@ export const fechaActualJs = (fecha:any) => {
     return newFecha
 }
 
+// fechas del mes
+export const inicioMes = () => { 
+    return DateTime
+        .now()
+        .startOf('month')
+        .toISO();
+}
+
+export const finMes = () => { 
+    return DateTime
+        .now()
+        .endOf('month')
+        .toISO();
+}
+
+export const fechaInicioFinMes = () => { 
+    const inicio:string = inicioMes();
+    const fin:string = finMes();
+    return [
+        inicio,
+        fin
+    ];
+}
+
+
 // solo escritura
 export const fechaInicioFin = () => { 
     const inidioDia = DateTime

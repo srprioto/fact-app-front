@@ -42,6 +42,8 @@ import { VenderSup } from "../roles/supervisor/pages/VenderSup";
 import { Seller } from "../roles/vendedor/Seller";
 import { CobrarSup } from "../roles/supervisor/pages/CobrarSup";
 import { StockSup } from "../roles/supervisor/pages/StockSup";
+import { IndexGanancias } from "../pages/reportes/ganancias/Index";
+import { IndexVentas } from "../pages/reportes/ventas/Index";
 
 
 export const AppRoutes = () => {
@@ -62,8 +64,7 @@ export const AppRoutes = () => {
 
                     {
                         auth.rol === Roles.ADMIN
-                        && (
-                            <>
+                        && <>
                             {/* dashboard */}
                             <Route path="/dashboard" element={ <IndexDashboard /> } />
 
@@ -97,12 +98,17 @@ export const AppRoutes = () => {
                             <Route path="/usuarios/nuevo" element={ <IndexNuevoUser /> } />
                             <Route path="/usuarios/:id/edit" element={ <IndexEditUser /> } />
 
+                            {/* registros */}
+                            <Route path="/registros/transacciones" element={ <Transacciones /> } />
+                            <Route path="/registros/ingreso-productos" element={ <IngresoProductos /> } />
+                            <Route path="/registros/ventas" element={ <Ventas /> } />
+
                             {/* reportes */}
-                            <Route path="/reporte/transacciones" element={ <Transacciones /> } />
-                            <Route path="/reporte/ingreso-productos" element={ <IngresoProductos /> } />
-                            <Route path="/reporte/ventas" element={ <Ventas /> } />
-                            </>
-                        )
+                            <Route path="/reporte/ventas" element={ <IndexVentas /> } />
+                            <Route path="/reporte/ganancias" element={ <IndexGanancias /> } />
+
+                            
+                        </>
                     }
 
                     {

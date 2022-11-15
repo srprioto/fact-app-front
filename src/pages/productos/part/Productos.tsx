@@ -163,9 +163,10 @@ export const Productos = () => {
                                         <th>Marca</th>
                                         <th>Talla</th>
                                         <th>Color</th>
-                                        <th>P/u</th>
+                                        <th>P/und</th>
                                         <th>P/men</th>
                                         <th>P/may</th>
+                                        <th>P/comp</th>
                                         <th className="transparent inlineblock">...</th>
                                     </tr>
                                 </thead>

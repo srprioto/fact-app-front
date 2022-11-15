@@ -48,7 +48,7 @@ export const VentasRepo = () => {
     return (
         <div className="ventas-repo">
             
-            <TitleBox titulo="Reporte de ventas"/>
+            <TitleBox titulo="Registros de ventas"/>
 
             <div className="grid-4 box box-par">
                 <button 

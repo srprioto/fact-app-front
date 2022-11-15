@@ -67,7 +67,7 @@ export const IngresoProdRepo = () => {
     return (
         <div className="ingreso-prod-repo">
             
-            <TitleBox titulo="Reporte de ingreso de productos"/>
+            <TitleBox titulo="Registros de ingreso de productos"/>
 
             <div className="box">
 

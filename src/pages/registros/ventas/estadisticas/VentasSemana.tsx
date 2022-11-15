@@ -9,7 +9,6 @@ export const VentasSemana = () => {
     const [data, setData] = useState<any>([]);
     const [LoadingVentas, setLoadingVentas] = useState<boolean>(false);
 
-
     useEffect(() => {
         getData();
     }, [])

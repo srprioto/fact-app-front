@@ -5,7 +5,7 @@ import { VentasSemana } from "../../registros/ventas/estadisticas/VentasSemana"
 
 export const Dashboard = () => {
     return (
-        <div className="dashboard">
+        <div className="dashboard grid-1 gap">
             
             <TitleBox titulo="Dashboard"/>
 

@@ -10,6 +10,8 @@ import {
     BiTransfer,
     BiArchiveIn,
     BiCartAlt,
+    BiDollarCircle,
+    BiBarChartAlt,
 } from "react-icons/bi";
 import { BoxMenu } from "./menu/BoxMenu";
 import { ItemMenu } from "./menu/ItemMenu";
@@ -40,9 +42,14 @@ export const Menu = () => {
                 </BoxMenu>
 
                 <BoxMenu titulo="Registros">
-                    <ItemMenu url="/reporte/ventas" label="Ventas" icon={ <BiCartAlt /> } />
-                    <ItemMenu url="/reporte/transacciones" label="Transferencias" icon={ <BiTransfer /> } />
-                    <ItemMenu url="/reporte/ingreso-productos" label="Reabastecimiento" icon={ <BiArchiveIn /> } />
+                    <ItemMenu url="/registros/ventas" label="Ventas" icon={ <BiCartAlt /> } />
+                    <ItemMenu url="/registros/transacciones" label="Transferencias" icon={ <BiTransfer /> } />
+                    <ItemMenu url="/registros/ingreso-productos" label="Reabastecimiento" icon={ <BiArchiveIn /> } />
+                </BoxMenu>
+
+                <BoxMenu titulo="Reportes">
+                    <ItemMenu url="/reporte/ventas" label="Ventas" icon={ <BiBarChartAlt /> } />
+                    <ItemMenu url="/reporte/ganancias" label="Ganancias" icon={ <BiDollarCircle /> } />
                 </BoxMenu>
 
                 <BoxMenu titulo="Personas">
@@ -50,6 +57,8 @@ export const Menu = () => {
                     <ItemMenu url="/proveedores" label="Proveedores" icon={ <BiWalk /> } />
                     <ItemMenu url="/usuarios" label="Usuarios" icon={ <BiUser /> } />
                 </BoxMenu>
+
+                
 
                 {/* <BoxMenu>
                     <ul>

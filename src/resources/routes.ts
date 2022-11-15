@@ -56,7 +56,7 @@ export const COTIZACION_PAGINATE:string = "/cotizaciones/paginate";
 
 export const CREDITO_DETALLES:string = "/credito-detalles";
 
-
+export const GANANCIAS:string = "/ventas-reportes"
 
 // almacenes
 // export const ALMACEN:string = "/locales-stock/almacen/productos"; // localstock

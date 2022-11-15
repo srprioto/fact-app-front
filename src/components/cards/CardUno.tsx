@@ -18,7 +18,7 @@ export const CardUno = ({ titulo, label, descripcion, icon, coloricon = "primary
             <LoadingImg />
         ) : (
             <div className="wrap-card-uno">
-                <div className="box box-par card-uno grid-31">
+                <div className="box box-par m-0 card-uno grid-31">
                     <div className="info-card-uno">
                         <h4 className="mayus">{ titulo }</h4>
                         <h2>{ label !== undefined ? label : "..."}</h2>

@@ -72,31 +72,23 @@ export const TransaccionRepo = () => {
 
     return (
         <div className="index-transac">
-            <TitleBox titulo="Reporte de transferencias"/>
+            <TitleBox titulo="Registros de transferencias"/>
 
-            <CardsDatosTransf/>
-
-            <div className="box">
-
-                <div className="grid-2 gap">
-
-                    <SearchWrap 
-                        setLoadingData={setLoadingData}
-                        setData={setData}
-                        getData={getData}
-                        searchState={searchState}
-                        setSearchState={setSearchState}
-                        url={TRANSACCIONES_SEARCH}
-                        placeholder="Descripcion ..."
-                    />
-                    
-                    <div className="grid-4 gap">
-
+            <div className="grid-1 gap">
+                <CardsDatosTransf/>
+                <div className="box">
+                    <div className="grid-2 gap">
+                        <SearchWrap 
+                            setLoadingData={setLoadingData}
+                            setData={setData}
+                            getData={getData}
+                            searchState={searchState}
+                            setSearchState={setSearchState}
+                            url={TRANSACCIONES_SEARCH}
+                            placeholder="Descripcion ..."
+                        />
                     </div>
-
-                    
                 </div>
-
             </div>
 
             <div className="box">

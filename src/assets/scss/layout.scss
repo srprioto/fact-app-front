@@ -1228,6 +1228,34 @@
 }
 
 
+// ganancias
+.ganancias{
+    .reporte-general{
+        .chars-ganancias{
+            .box-fechas-chars-ganan{
+                position: absolute;
+                top: 15px;
+                right: 20px;
+            }
+        }
+    }
+    .ganancias-detalles{
+        .box-fechas-chars-ganan-2{
+            display: flex;
+            justify-content: flex-end;
+        }
+        .box-total-ganancias{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            h3{
+                margin: 0 5px;
+            }
+        }
+    }
+}
+
+
 // impresiones
 
 // @media print {

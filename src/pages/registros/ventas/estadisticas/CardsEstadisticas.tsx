@@ -15,7 +15,7 @@ export const CardsEstadisticas = () => {
     useEffect(() => {
         getData();
     }, [])
-    
+
 
     const getData = async () => { 
         setLoading(true);
@@ -29,6 +29,7 @@ export const CardsEstadisticas = () => {
         }
     }
 
+    
     return (
 
         <div className="grid-4 gap">

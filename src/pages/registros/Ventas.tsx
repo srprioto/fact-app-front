@@ -1,5 +1,5 @@
-import { Layout } from "../../components/layouts/Layout"
-import { VentasRepo } from "./ventas/VentasRepo"
+import { Layout } from "../../components/layouts/Layout";
+import { VentasRepo } from "./ventas/VentasRepo";
 
 export const Ventas = () => {
     return (

@@ -29,6 +29,7 @@ export const Producto = ({
             <td className="strong secundary">S/. { moneda(producto.precio_venta_1) }</td>
             <td className="strong secundary">S/. { moneda(producto.precio_venta_2) }</td>
             <td className="strong secundary">S/. { moneda(producto.precio_venta_3) }</td>
+            <td className="strong secundary">S/. { moneda(producto.precio_compra) }</td>
             <td>
                 <ProdDropdown 
                     id={producto.id}
