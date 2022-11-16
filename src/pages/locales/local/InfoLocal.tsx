@@ -8,7 +8,7 @@ import { ModalWrap } from "../../../components/modals/ModalWrap";
 import { TextoRelleno } from "../../../components/TextoRelleno"
 import { getOne } from "../../../resources/fetch";
 import { CAJA_VERIFICAR } from "../../../resources/routes";
-import { GananciaSemanaLocal } from "../../registros/ventas/estadisticas/GananciaSemanaLocal";
+import { GananciaSemanaLocal } from "../../reportes/ventas/reporteGeneral/GananciaSemanaLocal";
 import { ModalAbrirCaja } from "./ModalAbrirCaja";
 
 interface infoLocal {

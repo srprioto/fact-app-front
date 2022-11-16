@@ -25,7 +25,7 @@ export const CharsGanancias = ({ data, loading, getData, fechas, setFechas }:cha
                         <BiCalendar/>
                     </button>
                 </div>
-                <h3>Ventas de la semana</h3>
+                <h3>Estadisticas de las ganancias</h3>
                 {
                     loading
                     ? <Loading />

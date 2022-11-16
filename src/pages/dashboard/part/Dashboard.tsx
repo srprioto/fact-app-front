@@ -1,7 +1,7 @@
 import { TitleBox } from "../../../components/TitleBox"
 import { CardsDatosTransf } from "../../registros/transacciones/part/CardsDatosTransf"
-import { CardsEstadisticas } from "../../registros/ventas/estadisticas/CardsEstadisticas"
-import { VentasSemana } from "../../registros/ventas/estadisticas/VentasSemana"
+import { CardsEstadisticas } from "../../reportes/ventas/reporteGeneral/CardsEstadisticas"
+import { VentasSemana } from "../../reportes/ventas/reporteGeneral/VentasSemana"
 
 export const Dashboard = () => {
     return (

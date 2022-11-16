@@ -5,7 +5,6 @@ import { get } from "../../../resources/fetch";
 import { LOCALES_SOLO } from "../../../resources/routes";
 import { Comprobantes } from "./Comprobantes";
 import { Cotizaciones } from "./Cotizaciones";
-import { EstadisticasVentas } from "./EstadisticasVentas";
 import { InfoGeneralVentas } from "./InfoVentas";
 import { InformacionIngresos } from "./InfoCaja";
 
@@ -51,27 +50,27 @@ export const VentasRepo = () => {
             <TitleBox titulo="Registros de ventas"/>
 
             <div className="grid-4 box box-par">
-                <button 
+                {/* <button 
                     onClick={() => handlerToggle(1)}
                     className={`btn2 btn2-info ${toggleGeneral === 1 && "btn2-sub-info"}`}>
                     <BiBarChartAlt2 />
                     Estadisticas
-                </button>
+                </button> */}
                 <button 
-                    onClick={() => handlerToggle(2)}
-                    className={`btn2 btn2-info ${toggleGeneral === 2 && "btn2-sub-info"}`}>
+                    onClick={() => handlerToggle(1)}
+                    className={`btn2 btn2-info ${toggleGeneral === 1 && "btn2-sub-info"}`}>
                     <BiDetail />
                     Registro ventas
                 </button>
                 <button
-                    onClick={() => handlerToggle(3)}
-                    className={`btn2 btn2-info ${toggleGeneral === 3 && "btn2-sub-info"}`}>
+                    onClick={() => handlerToggle(2)}
+                    className={`btn2 btn2-info ${toggleGeneral === 2 && "btn2-sub-info"}`}>
                     <BiTask />
                     Registro comprob.
                 </button>
                 <button 
-                    onClick={() => handlerToggle(4)}
-                    className={`btn2 btn2-info ${toggleGeneral === 4 && "btn2-sub-info"}`}>
+                    onClick={() => handlerToggle(3)}
+                    className={`btn2 btn2-info ${toggleGeneral === 3 && "btn2-sub-info"}`}>
                     <BiDollarCircle />
                     Registro caja
                 </button>
@@ -84,9 +83,8 @@ export const VentasRepo = () => {
 
             </div>
 
-            { toggleGeneral === 1 && <EstadisticasVentas /> }
             { 
-                toggleGeneral === 2 
+                toggleGeneral === 1 
                 && <InfoGeneralVentas 
                     idLocal={selectLocal} 
                     selectLocal={setSelectLocal}
@@ -95,7 +93,7 @@ export const VentasRepo = () => {
                 /> 
             }
             {
-                toggleGeneral === 3 
+                toggleGeneral === 2 
                 && (
                     <Comprobantes 
                         idLocal={selectLocal} 
@@ -106,7 +104,7 @@ export const VentasRepo = () => {
                 )
             }
             {
-                toggleGeneral === 4
+                toggleGeneral === 3
                 && (
                     
                     <InformacionIngresos 
@@ -117,7 +115,7 @@ export const VentasRepo = () => {
                     />
                 )
             }
-            {
+            {/* {
                 toggleGeneral === 5
                 && (
                     
@@ -128,7 +126,7 @@ export const VentasRepo = () => {
                         locales={locales}
                     />
                 )
-            }
+            } */}
 
         </div>
     )

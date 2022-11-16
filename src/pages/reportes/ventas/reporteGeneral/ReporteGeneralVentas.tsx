@@ -1,9 +1,11 @@
+import { CardsEstadisticas } from "./CardsEstadisticas"
+import { VentasSemana } from "./VentasSemana"
+
 export const ReporteGeneralVentas = () => {
     return (
         <div className="grid-1 gap">
-            <h2>asdfasd fasd fa sdfasd</h2>
-            <h2>asdfasd fasd fa sdfasd</h2>
-            <h2>asdfasd fasd fa sdfasd</h2>
+            <CardsEstadisticas />
+            <VentasSemana />
         </div>
     )
 }
