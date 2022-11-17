@@ -44,7 +44,7 @@ export const TabbsFiltroDatos = ({ getData, toggle }:any) => {
                     Credito/Adelanto
                 </button>
             </div>
-            <div className="right">
+            {/* <div className="right">
                 <button
                     className="btn-icon btn2-success"
                     onClick={() => getData("", "", "", {
@@ -54,7 +54,7 @@ export const TabbsFiltroDatos = ({ getData, toggle }:any) => {
                 >
                     <BiRefresh />
                 </button>
-            </div>
+            </div> */}
 
         </div>
     )

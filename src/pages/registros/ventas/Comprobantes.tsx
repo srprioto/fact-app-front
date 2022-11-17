@@ -114,7 +114,7 @@ export const Comprobantes = ({ idLocal, selectLocal, loadingLocal, locales }:inf
             <div className="box">
 
                 <div className="grid-2 gap">
-                    <SearchWrap 
+                    <SearchWrap
                         setLoadingData={setLoadingData}
                         setData={setData}
                         getData={getData}
