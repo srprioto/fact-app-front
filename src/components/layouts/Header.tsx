@@ -1,35 +1,20 @@
-import { BiFullscreen } from "react-icons/bi";
+import { Tickets } from "../tickets/Tickets";
+import { FullScreen } from "./header/FullScreen";
 import { User } from "./header/User";
 
 export const Header = () => {
 
-    const fullScreenOn = () => { 
-        if (!document.fullscreenElement) {
-            document.documentElement.requestFullscreen();
-        } else {
-            if (document.exitFullscreen) {
-                document.exitFullscreen();
-            }
-        }
-    }
-
     return (
-        <div className="header grid-5 gap">
+        <div className="header grid-2 gap">
 
-            <div className="icons-header grid-7 gap">
-                <span className="" onClick={() => { fullScreenOn() }}>
-                    <BiFullscreen />
-                </span>
-
+            <div className="header-left">
+                <FullScreen />
             </div>
 
-            <div></div>
-
-            <div></div>
-
-            <div></div>
-
-            <User />
+            <div className="header-right">
+                <Tickets />
+                <User />
+            </div>
 
         </div>
     )

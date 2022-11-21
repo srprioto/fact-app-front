@@ -165,7 +165,7 @@ export const Usuarios = () => {
             </div>
 
             <div className="box">
-            {
+                {
                     loadingData 
                     ? <Loading />
                     : (

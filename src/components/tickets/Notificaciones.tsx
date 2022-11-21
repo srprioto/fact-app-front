@@ -1,0 +1,99 @@
+import { useEffect, useState } from "react";
+import { BiX } from "react-icons/bi";
+import { Link } from "react-router-dom";
+import { estados_comprobante } from "../../resources/dtos/ComprobantesDto";
+import { get } from "../../resources/fetch";
+import { timeAgo } from "../../resources/func/fechas";
+import { TICKETS } from "../../resources/routes";
+import { Loading } from "../loads/Loading";
+import { NoRegistros } from "../NoRegistros";
+
+
+export const Notificaciones = ({ setShowNotificaciones, handlerModalVer }:any) => {
+
+    const [loading, setLoading] = useState<boolean>(false);
+    const [tickets, setTickets] = useState<Array<any>>([]);
+
+
+    useEffect(() => {
+        getUltimosTickets();
+    }, [])
+
+
+    const getUltimosTickets = async () => { 
+        setLoading(true);
+        try {
+            const data = await get(TICKETS + "/ultimos_tickets/_");
+            setTickets(data);
+            setLoading(false);
+        } catch (error) {
+            setLoading(true);
+            console.log(error);
+        }
+    }
+
+
+    return (
+        <div className="notificaciones">
+            <div onClick={() => setShowNotificaciones(false)} className="cerrar-notificaciones pointer">
+                <BiX className="m-0" size={25}/>
+            </div>
+            <h4 className="titulo-notificaciones">Notificaciones</h4>
+            {
+                loading
+                ? <Loading />
+                : (
+                    <div className="lista-notificaciones">
+                        {
+                            tickets.length <= 0
+                            ? <NoRegistros />
+                            : (
+                                <TablaNotificaciones tickets={tickets} handlerModalVer={handlerModalVer} />
+                            )
+                        }
+                    </div>
+                )
+            }
+            <Link to="" className="middle">Mostrar todas las notificaciones</Link>
+        </div>
+    )
+}
+
+
+const TablaNotificaciones = ({ tickets, handlerModalVer }:any) => { 
+    return (
+        <table className="table2 pointer">
+            <tbody>
+                {
+                    tickets.map((e:any) => {
+                        let classTipo:string = "";
+                        if (
+                            e.tipo === estados_comprobante.Error_envio || 
+                            e.tipo === estados_comprobante.Error_anulacion
+                        ) {
+                            classTipo = "danger";
+                        } else if (e.tipo === estados_comprobante.Rechazado) {
+                            classTipo = "warning"
+                        } else if (e.tipo === estados_comprobante.Anulacion_procesada) {
+                            classTipo = "secundary opacity2"
+                        }
+                        return (
+                            <tr key={e.id} onClick={() => handlerModalVer(e.id)}>
+                                <td>
+                                    <span  className={
+                                        e.estado
+                                        ? "opacity2"
+                                        : "secundary"
+                                    }>{ e.titulo }</span>
+                                    <h5 className={classTipo + " m-0"}>{ e.tipo.replace('_', ' ') }</h5>
+                                    <h5 className="m-0 capitalize"
+                                    >{ timeAgo(e.created_at) }</h5>
+                                </td>
+                            </tr>
+                        )
+                    })   
+                }
+            </tbody>
+        </table>
+    )
+}

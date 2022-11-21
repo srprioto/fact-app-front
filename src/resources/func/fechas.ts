@@ -74,12 +74,15 @@ export const fechaInicioFin = () => {
         .endOf('day')
         .toISO();
 
-    // .startOf('day')
-    // .plus({day:1})
-    // .minus({second:1})
-
     return [
         inidioDia,
         finDia
     ];
 }
+
+export const timeAgo = (fecha:any) => {
+    return DateTime
+        .fromISO(fecha)
+        .setLocale('es')
+        .toRelative();
+};

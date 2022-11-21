@@ -17,16 +17,16 @@ export const LoadingImg = ({ height = 132, size }:loadingImg) => {
 
 export const LoadingImg2 = ({ size }:loadingImg) => {
     return (
-            <div className="rotarIcon">
-                <BiLoaderAlt size={size} />
-            </div>
+        <div className="rotarIcon">
+            <BiLoaderAlt size={size} />
+        </div>
     )
 }
 
 export const LoadingImg3 = ({ size }:any) => {
     return (
-            <span className="rotarIcon">
-                <BiLoaderAlt size={size} />
-            </span>
+        <span className="rotarIcon">
+            <BiLoaderAlt size={size} />
+        </span>
     )
 }

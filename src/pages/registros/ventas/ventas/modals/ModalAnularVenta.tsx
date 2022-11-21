@@ -12,7 +12,7 @@ interface modalAnularVenta {
     modal:boolean;
     setModal:Function;
     idVenta:number;
-    getData:Function;
+    getData?:Function;
 }
 
 export const ModalAnularVenta = ({ modal, setModal, idVenta, getData }:modalAnularVenta) => {
@@ -40,7 +40,7 @@ export const ModalAnularVenta = ({ modal, setModal, idVenta, getData }:modalAnul
             setRestoAnulacion(resto);
             setLoadingOne(false);
             if (!resto) {
-                await getData();
+                getData && await getData();
                 setModal(false);
             }
         } catch (error) {

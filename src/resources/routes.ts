@@ -58,6 +58,8 @@ export const CREDITO_DETALLES:string = "/credito-detalles";
 
 export const GANANCIAS:string = "/ventas-reportes"
 
+export const TICKETS:string = "/tickets"
+
 // almacenes
 // export const ALMACEN:string = "/locales-stock/almacen/productos"; // localstock
 // export const ALMACEN_SEARCH:string = "/locales-stock/search/"; // localstock

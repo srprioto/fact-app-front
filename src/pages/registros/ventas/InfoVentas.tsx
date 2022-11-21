@@ -277,7 +277,7 @@ export const InfoGeneralVentas = ({ idLocal, selectLocal, loadingLocal, locales 
                 />
             </ModalWrap>
 
-            <ModalHabilitarVenta 
+            <ModalHabilitarVenta
                 modal={modalHabilitarVenta}
                 setModal={setModalHabilitarVenta}
                 idVenta={idVenta}

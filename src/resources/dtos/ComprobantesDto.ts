@@ -17,6 +17,13 @@ export const classEstado = (estado_sunat:any) => {
 }
 
 
+export const estados_comprobante = {
+    Error_envio: "Error_envio",
+    Rechazado: "Rechazado",
+    Error_anulacion: "Error_anulacion",
+    Anulacion_procesada: "Anulacion procesada",
+}
+
 // Aceptado
 // Observado
 // Rechazado

@@ -5,8 +5,8 @@ import { DropDown } from "../../../components/DropDown";
 export const ProdDropdown = ({ id, nombre, producto, handlerDeleted, handlerBarcode, handlerVer }:any) => {
     return (
         <DropDown>
-            <span onClick={ () => handlerDeleted(id, nombre) }>
-                <BiTrash /> Eliminar
+            <span onClick={ () => handlerVer(producto) }>
+                <BiShowAlt /> Ver Producto
             </span>
             <Link to={`/productos/${id}/edit`} >
                 <BiPencil /> Editar producto
@@ -14,8 +14,8 @@ export const ProdDropdown = ({ id, nombre, producto, handlerDeleted, handlerBarc
             <span onClick={ () => handlerBarcode(producto) }>
                 <BiBarcodeReader /> Codigo de barras
             </span>
-            <span onClick={ () => handlerVer(producto) }>
-                <BiShowAlt /> Ver Producto
+            <span onClick={ () => handlerDeleted(id, nombre) }>
+                <BiTrash /> Eliminar
             </span>
         </DropDown>
     )

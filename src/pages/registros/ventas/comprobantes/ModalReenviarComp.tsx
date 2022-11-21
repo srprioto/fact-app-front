@@ -5,7 +5,14 @@ import { Modal } from "../../../../components/modals/Modal"
 import { post } from "../../../../resources/fetch"
 import { COMPROBANTE } from "../../../../resources/routes"
 
-export const ModalReenviarComp = ({ modal, setModal, idComprobante, getData }:any) => {
+interface modalReenviarComp {
+    modal:boolean;
+    setModal:Function;
+    idComprobante:number;
+    getData?:Function
+}
+
+export const ModalReenviarComp = ({ modal, setModal, idComprobante, getData }:modalReenviarComp) => {
 
     const [loading, setLoading] = useState(false);
 
@@ -20,7 +27,7 @@ export const ModalReenviarComp = ({ modal, setModal, idComprobante, getData }:an
             setLoading(true);
             console.log(error);
         } finally {
-            getData();
+            getData && getData();
             setModal(false);
         }
     }
