@@ -14,6 +14,7 @@ import { ComprobanteItem } from "./comprobantes/ComprobanteItem";
 import { ModalReenviarComp } from "./comprobantes/ModalReenviarComp";
 import { ModalVerComprobante } from "./comprobantes/ModalVerComprobante";
 import { TablaFiltro } from "./comprobantes/TablaFiltro";
+import { ModalAnularVenta } from "./ventas/modals/ModalAnularVenta";
 
 interface infoComprobante {
     idLocal?:string; // el id local es obligatorio
@@ -31,9 +32,10 @@ export const Comprobantes = ({ idLocal, selectLocal, loadingLocal, locales }:inf
     const [modalVer, setModalVer] = useState<boolean>(false);
     const [modalReenviar, setModalReenviar] = useState<boolean>(false);
     const [modalAnular, setModalAnular] = useState<boolean>(false);
+    
     // const [modalHabilitarVenta, setModalHabilitarVenta] = useState<boolean>(false);
-    // const [idComprobante, setIdComprobante] = useState<number>(0);
-    const [comprobante, setComprobante] = useState<any>({});
+    const [idComprobante, setIdComprobante] = useState<number>(0);
+    // const [comprobante, setComprobante] = useState<any>({});
     const [pagination, setPagination] = useState<any>({ meta: {}, links: {} });
     const [data, setData] = useState<any>([]);
     const [toggle, setToggle] = useState<number>(1); // tabs para los filtros
@@ -82,22 +84,22 @@ export const Comprobantes = ({ idLocal, selectLocal, loadingLocal, locales }:inf
             setLoadingData(true);
             console.log(error);
         }
-        setComprobante({});
+        setIdComprobante(0);
     }
 
 
-    const handlerVer = (comp:any) => { 
-        setComprobante(comp);
+    const handlerVer = (idComp:number) => { 
+        setIdComprobante(idComp);
         setModalVer(!modalVer);        
     }
 
-    const reenviarComprobante = (comp:any) => { 
-        setComprobante(comp);
+    const reenviarComprobante = (idComp:number) => { 
+        setIdComprobante(idComp);
         setModalReenviar(!modalReenviar);
     }
 
-    const anularComprobante = (comp:any) => { 
-        setComprobante(comp);
+    const anularComprobante = (idComp:number) => { 
+        setIdComprobante(idComp); // guarda el id de la venta, no del comprobante
         setModalAnular(!modalAnular);
     }
 
@@ -227,7 +229,8 @@ export const Comprobantes = ({ idLocal, selectLocal, loadingLocal, locales }:inf
                 <ModalVerComprobante
                     modal={modalVer}
                     setModal={setModalVer}
-                    idComprobante={comprobante.id}
+                    idComprobante={idComprobante}
+                    getData={getData}
                 />
             </ModalWrap>
 
@@ -235,19 +238,19 @@ export const Comprobantes = ({ idLocal, selectLocal, loadingLocal, locales }:inf
                 <ModalReenviarComp
                     modal={modalReenviar}
                     setModal={setModalReenviar}
-                    idComprobante={comprobante.id}
+                    idComprobante={idComprobante}
                     getData={getData}
                 />
             </ModalWrap>
 
-            {/* <ModalWrap modal={modalAnular}>
-                <ModalAnularComp
+            <ModalWrap modal={modalAnular}>
+                <ModalAnularVenta
                     modal={modalAnular}
                     setModal={setModalAnular}
-                    comprobante={comprobante}
+                    idVenta={idComprobante}
                     getData={getData}
                 />
-            </ModalWrap> */}
+            </ModalWrap>
 
         </>
     )

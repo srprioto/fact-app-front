@@ -1,17 +1,34 @@
 import { useEffect, useState } from "react";
+import { BiRedo, BiX } from "react-icons/bi";
 import { Loading } from "../../../../components/loads/Loading";
 import { Modal } from "../../../../components/modals/Modal"
+import { ModalWrap } from "../../../../components/modals/ModalWrap";
+import { estados_comprobante } from "../../../../resources/dtos/ComprobantesDto";
 import { getOne } from "../../../../resources/fetch";
 import { moneda } from "../../../../resources/func/moneda";
 import { COMPROBANTE } from "../../../../resources/routes";
 import { InfoCliente } from "../ventas/InfoCliente";
+import { ModalAnularVenta } from "../ventas/modals/ModalAnularVenta";
 import { InfoComprobante } from "./InfoComprobante";
 import { InfoRespuestaSunat } from "./InfoRespuestaSunat";
+import { ModalReenviarComp } from "./ModalReenviarComp";
 
-export const ModalVerComprobante = ({ modal, setModal, idComprobante }:any) => {
+interface modalVerComprobante {
+    modal:boolean;
+    setModal:Function;
+    idComprobante:number;
+    getData?:Function;
+}
+
+export const ModalVerComprobante = ({ modal, setModal, idComprobante, getData }:modalVerComprobante) => {
 
     const [loadingOne, setLoadingOne] = useState<boolean>(false);
     const [comprobante, setComprobante] = useState<any>({});
+
+    const [modalReenviar, setModalReenviar] = useState<boolean>(false);
+    const [modalAnularComp, setModalAnularComp] = useState<boolean>(false);
+
+    const venta:any = comprobante.ventas ? comprobante.ventas : {};
 
 
     useEffect(() => {
@@ -23,7 +40,6 @@ export const ModalVerComprobante = ({ modal, setModal, idComprobante }:any) => {
         setLoadingOne(true);
         try {
             const dataOne = await getOne(idComprobante, COMPROBANTE);
-            // console.log(dataOne);
             setComprobante(dataOne);
             setLoadingOne(false);            
         } catch (error) {
@@ -32,6 +48,42 @@ export const ModalVerComprobante = ({ modal, setModal, idComprobante }:any) => {
         }
     }
 
+
+    const updateData = () => { 
+        getComprobante();
+        getData && getData();
+    }
+
+
+    const acciones = ():Array<any> => {
+        const accionesArray:Array<any> = [];
+        if (!loadingOne) {
+            if (
+                comprobante.estado_sunat === estados_comprobante.Error_envio || 
+                comprobante.estado_sunat === estados_comprobante.Rechazado
+            ) {
+                accionesArray.push({
+                    label: "Reenviar",
+                    funcion: () => setModalReenviar(true),
+                    icon: <BiRedo />
+                });
+            }
+            if (
+                comprobante.estado_sunat === estados_comprobante.Error_anulacion ||
+                comprobante.estado_sunat === estados_comprobante.Anulacion_procesada ||
+                comprobante.estado_sunat === estados_comprobante.Aceptado
+            ) {
+                accionesArray.push({
+                    label: "Anular Comp.",
+                    funcion: () => setModalAnularComp(true),
+                    icon: <BiX />
+                });
+            }
+        }
+        return accionesArray;
+    }
+
+
     return (
         <Modal
             title="Detalles del comprobante"
@@ -39,6 +91,7 @@ export const ModalVerComprobante = ({ modal, setModal, idComprobante }:any) => {
             setModal={setModal}
             border="border-primary"
             width={70}
+            acciones={acciones().length > 0 ? acciones() : null}
         >
 
             {
@@ -46,9 +99,7 @@ export const ModalVerComprobante = ({ modal, setModal, idComprobante }:any) => {
                 ? <Loading />
                 : (
                     <div className="modal-ver-ingreso grid-1 gap">
-
                         <div className="box m-0">
-
                             <table className="table2">
     
                                 <thead>
@@ -106,6 +157,24 @@ export const ModalVerComprobante = ({ modal, setModal, idComprobante }:any) => {
                     </div>        
                 )
             }
+
+            <ModalWrap modal={modalReenviar}>
+                <ModalReenviarComp
+                    modal={modalReenviar}
+                    setModal={setModalReenviar}
+                    idComprobante={comprobante.id}
+                    getData={updateData}
+                />
+            </ModalWrap>
+
+            <ModalWrap modal={modalAnularComp}>
+                <ModalAnularVenta
+                    modal={modalAnularComp}
+                    setModal={setModalAnularComp}
+                    idVenta={venta.id}
+                    getData={updateData}
+                />
+            </ModalWrap>
 
         </Modal>
     )

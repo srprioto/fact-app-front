@@ -72,7 +72,10 @@ export const FormCrearUser = ({ handlerCreate, loading }:any) => {
             validationSchema={ValidCreateUsuario}
 
             onSubmit={(data, { resetForm }) => { 
-                handlerCreate(data);
+                handlerCreate({
+                    ...data, 
+                    localesId: data.rolesId === "1" ? null : data.localesId
+                });
                 resetForm();
             }}
         >

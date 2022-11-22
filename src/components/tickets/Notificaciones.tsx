@@ -1,15 +1,21 @@
 import { useEffect, useState } from "react";
 import { BiX } from "react-icons/bi";
 import { Link } from "react-router-dom";
-import { estados_comprobante } from "../../resources/dtos/ComprobantesDto";
+import { TicketsDto } from "../../resources/dtos/TicketsDto";
 import { get } from "../../resources/fetch";
 import { timeAgo } from "../../resources/func/fechas";
 import { TICKETS } from "../../resources/routes";
 import { Loading } from "../loads/Loading";
 import { NoRegistros } from "../NoRegistros";
 
+interface notificaciones {
+    setShowNotificaciones:Function;
+    handlerModalVer:Function;
+    getTickets:Function;
+    idLocal:string;
+}
 
-export const Notificaciones = ({ setShowNotificaciones, handlerModalVer }:any) => {
+export const Notificaciones = ({ setShowNotificaciones, handlerModalVer, getTickets, idLocal }:notificaciones) => {
 
     const [loading, setLoading] = useState<boolean>(false);
     const [tickets, setTickets] = useState<Array<any>>([]);
@@ -17,13 +23,14 @@ export const Notificaciones = ({ setShowNotificaciones, handlerModalVer }:any) =
 
     useEffect(() => {
         getUltimosTickets();
+        getTickets();
     }, [])
 
 
     const getUltimosTickets = async () => { 
         setLoading(true);
         try {
-            const data = await get(TICKETS + "/ultimos_tickets/_");
+            const data = await get(TICKETS + `/ultimos_tickets/${idLocal}`);
             setTickets(data);
             setLoading(false);
         } catch (error) {
@@ -32,7 +39,7 @@ export const Notificaciones = ({ setShowNotificaciones, handlerModalVer }:any) =
         }
     }
 
-
+    
     return (
         <div className="notificaciones">
             <div onClick={() => setShowNotificaciones(false)} className="cerrar-notificaciones pointer">
@@ -68,13 +75,13 @@ const TablaNotificaciones = ({ tickets, handlerModalVer }:any) => {
                     tickets.map((e:any) => {
                         let classTipo:string = "";
                         if (
-                            e.tipo === estados_comprobante.Error_envio || 
-                            e.tipo === estados_comprobante.Error_anulacion
+                            e.tipo === TicketsDto.Error_envio || 
+                            e.tipo === TicketsDto.Error_anulacion
                         ) {
                             classTipo = "danger";
-                        } else if (e.tipo === estados_comprobante.Rechazado) {
+                        } else if (e.tipo === TicketsDto.Rechazado) {
                             classTipo = "warning"
-                        } else if (e.tipo === estados_comprobante.Anulacion_procesada) {
+                        } else if (e.tipo === TicketsDto.Anulacion_procesada) {
                             classTipo = "secundary opacity2"
                         }
                         return (

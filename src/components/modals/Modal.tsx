@@ -1,4 +1,4 @@
-import { BiArrowBack, BiX } from "react-icons/bi";
+import { BiArrowBack, BiDotsVertical, BiX } from "react-icons/bi";
 
 import { Loading } from "../loads/Loading";
 
@@ -14,6 +14,7 @@ interface modal{
     btnClose?:Function;
     loading?:boolean;
     notransparent?:boolean;
+    acciones?:Array<any>|null; // abre modals, tiene que estar fuera, dentro del modal principal
     children:any;
 }
 
@@ -29,6 +30,7 @@ export const Modal = ({
     btnClose,
     loading = false, 
     notransparent,
+    acciones,
     children 
 }:modal) => {
     
@@ -43,6 +45,7 @@ export const Modal = ({
         width: `${width}%`,
         height: height && `${height}%`
     }
+
 
     return (
         <>
@@ -78,6 +81,24 @@ export const Modal = ({
                                             )
                                         }
                                         {
+                                            acciones
+                                            && <span className="wrap-dropdown-modal acciones-modal">
+                                                <BiDotsVertical />
+                                                <div className="dropdown-modal" >
+                                                    {
+                                                        acciones.map((e:any, i:number) => { 
+                                                            return (
+                                                                <span key={i} onClick={ e.funcion } >
+                                                                    { e.icon } { e.label }
+                                                                </span>
+                                                            )
+                                                        })
+                                                    }
+
+                                                </div>
+                                            </span>
+                                        }
+                                        {
                                             setModal
                                             && <span 
                                                 className="close-modal" 
@@ -85,11 +106,7 @@ export const Modal = ({
                                             ><BiX /></span>
                                         }
                                     </div>
-
-
-
                                     { children }
-
                                 </div>
                             )
                         }

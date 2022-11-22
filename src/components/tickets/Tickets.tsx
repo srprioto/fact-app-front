@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { BiBell } from "react-icons/bi"
+import { useAuth } from "../../auth/useAuth";
 import { get } from "../../resources/fetch";
 import { TICKETS } from "../../resources/routes";
 import { ModalWrap } from "../modals/ModalWrap";
@@ -7,6 +8,9 @@ import { ModalVerTicket } from "./ModalVerTicket";
 import { Notificaciones } from "./Notificaciones";
 
 export const Tickets = () => {
+
+    const auth = useAuth();
+    const idLocal:string = !!auth.userInfo.local.id ? auth.userInfo.local.id : "_";
 
     const [showNotificaciones, setShowNotificaciones] = useState<boolean>(false);
     const [ticketsNoVistos, setTicketsNoVistos] = useState<number>(0);
@@ -17,14 +21,14 @@ export const Tickets = () => {
     
 
     useEffect(() => {
-        getLocales();
+        getTickets();
     }, [])
     
 
-    const getLocales = async () => { 
+    const getTickets = async () => { 
         setLoading(true);
         try {
-            const data = await get(TICKETS + "/no_vistos/2");
+            const data = await get(TICKETS + `/no_vistos/${idLocal}`);
             setTicketsNoVistos(data);
             setLoading(false);
         } catch (error) {
@@ -68,6 +72,8 @@ export const Tickets = () => {
                     && <Notificaciones
                         setShowNotificaciones={setShowNotificaciones} 
                         handlerModalVer={handlerModalVer}
+                        getTickets={getTickets}
+                        idLocal={idLocal}
                     />
                 }
             </div>
@@ -77,6 +83,7 @@ export const Tickets = () => {
                     modal={modalVer}
                     setModal={setModalVer}
                     ticketId={ticketId}
+                    getTickets={getTickets}
                 />
             </ModalWrap>
 

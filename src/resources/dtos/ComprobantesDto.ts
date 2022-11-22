@@ -22,6 +22,7 @@ export const estados_comprobante = {
     Rechazado: "Rechazado",
     Error_anulacion: "Error_anulacion",
     Anulacion_procesada: "Anulacion procesada",
+    Aceptado: "Aceptado"
 }
 
 // Aceptado
