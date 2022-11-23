@@ -1,4 +1,4 @@
-import { Tickets } from "../tickets/Tickets";
+import { WrapTickets } from "../tickets/WrapTickets";
 import { FullScreen } from "./header/FullScreen";
 import { User } from "./header/User";
 
@@ -12,7 +12,7 @@ export const Header = () => {
             </div>
 
             <div className="header-right">
-                <Tickets />
+                <WrapTickets />
                 <User />
             </div>
 

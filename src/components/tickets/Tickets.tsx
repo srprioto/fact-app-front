@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react"
 import { BiBell } from "react-icons/bi"
-import { useAuth } from "../../auth/useAuth";
 import { get } from "../../resources/fetch";
 import { TICKETS } from "../../resources/routes";
 import { ModalWrap } from "../modals/ModalWrap";
 import { ModalVerTicket } from "./ModalVerTicket";
 import { Notificaciones } from "./Notificaciones";
 
-export const Tickets = () => {
+interface tickets {
+    idLocal:string;
+}
 
-    const auth = useAuth();
-    const idLocal:string = !!auth.userInfo.local.id ? auth.userInfo.local.id : "_";
+export const Tickets = ({ idLocal }:tickets) => {
 
     const [showNotificaciones, setShowNotificaciones] = useState<boolean>(false);
     const [ticketsNoVistos, setTicketsNoVistos] = useState<number>(0);
@@ -18,7 +18,7 @@ export const Tickets = () => {
 
     const [modalVer, setModalVer] = useState<boolean>(false);
     const [ticketId, setTicketId] = useState<number>(0);
-    
+
 
     useEffect(() => {
         getTickets();

@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { BiShowAlt } from "react-icons/bi";
+import { useAuth } from "../../../auth/useAuth";
 import { DropDown } from "../../../components/DropDown";
 import { Loading } from "../../../components/loads/Loading"
 import { ModalWrap } from "../../../components/modals/ModalWrap";
 import { NoRegistros } from "../../../components/NoRegistros"
 import { Pagination } from "../../../components/Pagination";
-import { SearchWrap } from "../../../components/SearchWrap";
 import { ModalVerTicket } from "../../../components/tickets/ModalVerTicket";
 import { TitleBox } from "../../../components/TitleBox"
 import { TicketsDto } from "../../../resources/dtos/TicketsDto";
@@ -15,6 +15,9 @@ import { subguionEspacio } from "../../../resources/func/guionEspacio";
 import { TICKETS } from "../../../resources/routes";
 
 export const TicketsAll = () => {
+
+    const auth = useAuth();
+    const idLocal:string = !!auth.userInfo.local.id ? auth.userInfo.local.id : "_";
 
     const [loading, setLoading] = useState<boolean>(false);
     const [data, setData] = useState<Array<any>>([]);
@@ -36,7 +39,7 @@ export const TicketsAll = () => {
             if (urlPage) {
                 data = await paginate(urlPage);
             }else{
-                data = await paginate(TICKETS + "/paginate/_");
+                data = await paginate(TICKETS + `/paginate/${idLocal}`);
             }
             setData(data.items);
             setPagination({
