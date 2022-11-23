@@ -5,6 +5,7 @@ import { Loading } from "../../../components/loads/Loading"
 import { ModalWrap } from "../../../components/modals/ModalWrap";
 import { NoRegistros } from "../../../components/NoRegistros"
 import { Pagination } from "../../../components/Pagination";
+import { SearchWrap } from "../../../components/SearchWrap";
 import { ModalVerTicket } from "../../../components/tickets/ModalVerTicket";
 import { TitleBox } from "../../../components/TitleBox"
 import { TicketsDto } from "../../../resources/dtos/TicketsDto";
@@ -59,6 +60,31 @@ export const TicketsAll = () => {
     return (
         <div className="tickets-notificaciones">
             <TitleBox titulo="Notificaciones"/>
+
+            {/* <div className="box">
+
+                <div className="grid-211 gap">
+                    
+                    <SearchWrap 
+                        setLoadingData={setLoadingData}
+                        setData={setData}
+                        getData={getData}
+                        searchState={searchState}
+                        setSearchState={setSearchState}
+                        url={CLIENTES_SEARCH}
+                        placeholder="Nombre, razon social o documento ..."
+                    />
+
+                    <div></div>
+                    
+                    <Link to="/clientes/nuevo" className="btn btn-info" >
+                        <BiPlusCircle />
+                        Nuevo cliente
+                    </Link>
+                    
+                </div>
+
+            </div> */}
 
             <div className="box">
                 {
