@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { TicketsDto } from "../../resources/dtos/TicketsDto";
 import { get } from "../../resources/fetch";
 import { timeAgo } from "../../resources/func/fechas";
+import { subguionEspacio } from "../../resources/func/guionEspacio";
 import { TICKETS } from "../../resources/routes";
 import { Loading } from "../loads/Loading";
 import { NoRegistros } from "../NoRegistros";
@@ -61,7 +62,7 @@ export const Notificaciones = ({ setShowNotificaciones, handlerModalVer, getTick
                     </div>
                 )
             }
-            <Link to="" className="middle">Mostrar todas las notificaciones</Link>
+            <Link to="/tickets" className="middle">Mostrar todas las notificaciones</Link>
         </div>
     )
 }
@@ -87,12 +88,12 @@ const TablaNotificaciones = ({ tickets, handlerModalVer }:any) => {
                         return (
                             <tr key={e.id} onClick={() => handlerModalVer(e.id)}>
                                 <td>
-                                    <span  className={
+                                    <span className={
                                         e.estado
                                         ? "opacity2"
                                         : "secundary"
                                     }>{ e.titulo }</span>
-                                    <h5 className={classTipo + " m-0"}>{ e.tipo.replace('_', ' ') }</h5>
+                                    <h5 className={classTipo + " m-0"}>{ subguionEspacio(e.tipo) }</h5>
                                     <h5 className="m-0 capitalize"
                                     >{ timeAgo(e.created_at) }</h5>
                                 </td>

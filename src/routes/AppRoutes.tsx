@@ -44,6 +44,7 @@ import { CobrarSup } from "../roles/supervisor/pages/CobrarSup";
 import { StockSup } from "../roles/supervisor/pages/StockSup";
 import { IndexGanancias } from "../pages/reportes/ganancias/Index";
 import { IndexVentas } from "../pages/reportes/ventas/Index";
+import { IndexTickets } from "../pages/tickets/Index";
 
 
 export const AppRoutes = () => {
@@ -107,20 +108,20 @@ export const AppRoutes = () => {
                             <Route path="/reporte/ventas" element={ <IndexVentas /> } />
                             <Route path="/reporte/ganancias" element={ <IndexGanancias /> } />
 
+                            {/* tickets */}
+                            <Route path="/tickets" element={ <IndexTickets /> } />
                             
                         </>
                     }
 
                     {
                         auth.rol === Roles.SUPERVISOR
-                        && (
-                            <>
+                        && <>
                             <Route path="/local" element={ <DashboardSup /> } />
                             <Route path="/local/vender" element={ <VenderSup /> } />
                             <Route path="/local/cobrar" element={ <CobrarSup /> } />
                             <Route path="/local/stock" element={ <StockSup /> } />
-                            </>
-                        )
+                        </>
                     }
 
                     {

@@ -41,8 +41,6 @@ export const ModalVerTicket = ({ modal, setModal, ticketId, getTickets }:modalVe
         } catch (error) {
             setLoading(true);
             console.log(error);
-        } finally {
-            getTickets();
         }
     }
  
@@ -73,6 +71,7 @@ export const ModalVerTicket = ({ modal, setModal, ticketId, getTickets }:modalVe
             setModal={setModal}
             title={loading ? "..." : ticket.titulo}
             width={50}
+            btnClose={getTickets}
             acciones={acciones().length > 0 ? acciones() : null}
         >
             {

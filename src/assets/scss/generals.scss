@@ -790,6 +790,13 @@ table.table {
     thead{
         border-bottom: .1px solid $warning;
     }
+
+    tbody{
+        .td-dd{
+            width: 0;
+        }
+    }
+
     tbody tr{
         border-bottom: .1px solid $color4;
     }
@@ -801,10 +808,11 @@ table.table {
         background-color: $bg-input2;
     }
 
-    tbody td {
-        position: relative;
-        margin:0;
 
+
+    tbody td {
+        // position: relative;
+        margin:0;
         svg{
             font-size: 22px
         }
@@ -831,6 +839,11 @@ table.table2{
     th, td {
         padding: 10px 5px;
     }
+    tbody{
+        .td-dd{
+            width: 0;
+        }
+    }
     tbody tr:hover {
         background-color: $box2;
     }
@@ -840,16 +853,16 @@ table.table2{
     }
 
     tbody td{
-        position: relative;
+        // position: relative;
         svg{
             font-size: 19px
         }
-        .wrap-dropdown {
-            .dropdown {
-                bottom: 0px;
-                padding: 0px 13px;
-            }
-        }
+        // .wrap-dropdown {
+        //     .dropdown {
+        //         bottom: 0px;
+        //         padding: 0px 13px;
+        //     }
+        // }
     }
     
 }
@@ -864,6 +877,11 @@ table.table3{
     th, td {
         padding: 6px 5px;
     }
+    tbody{
+        .td-dd{
+            width: 0;
+        }
+    }
     tbody tr{
         cursor: pointer;
     }
@@ -876,16 +894,16 @@ table.table3{
     }
 
     tbody td{
-        position: relative;
+        // position: relative;
         svg{
             font-size: 19px
         }
-        .wrap-dropdown {
-            .dropdown {
-                bottom: 0px;
-                padding: 0px 13px;
-            }
-        }
+        // .wrap-dropdown {
+        //     .dropdown {
+        //         bottom: 0px;
+        //         padding: 0px 13px;
+        //     }
+        // }
     }
     
 }
@@ -1095,10 +1113,10 @@ table.no-cursor{
 
 
 // dropdown
-
 .wrap-dropdown {
     font-size: 0;
     line-height: 0;
+    position: relative;
     .dropdown {
         padding: 4px 18px;
         position: absolute;
@@ -1107,8 +1125,8 @@ table.no-cursor{
         transform: scale(0);
         transition: 0.3s;
         border-radius: 6px;
-        top: 36px;
-        right: 30px;
+        top: 15px;
+        right: 0;
         box-shadow: 4px 5px 8px 1px #0000002f;
         border: 1px solid $color4;
         min-width: 190px;
