@@ -13,7 +13,7 @@ import { LOCAL_STOCK_SEARCH, LOCAL_STOCK_SOLO } from "../../../resources/routes"
 import { ModalCantidad } from "../../locales/part/ModalCantidad";
 import { ProductoLocal } from "../../locales/part/ProductoLocal";
 import { ModalWrap } from "../../../components/modals/ModalWrap";
-import { SearchWrap } from "../../../components/SearchWrap";
+import { SearchWrap } from "../../../components/search/SearchWrap";
 
 export const StockAlmacen = () => {
 

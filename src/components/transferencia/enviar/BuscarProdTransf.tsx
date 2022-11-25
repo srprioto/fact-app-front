@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { LOCAL_STOCK_SEARCH } from "../../../resources/routes";
 import { Loading } from "../../loads/Loading";
-import { SearchWrap } from "../../SearchWrap";
+import { SearchWrap } from "../../search/SearchWrap";
 import { TextoRelleno } from "../../TextoRelleno";
 
 export const BuscarProdTransf = ({ 

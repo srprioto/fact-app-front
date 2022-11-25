@@ -13,7 +13,7 @@ import { ProveedoresDto } from "../../../resources/dtos/ProveedoresDto";
 import { getOne, paginate } from "../../../resources/fetch";
 import { ModalVer } from "./ModalVer";
 import { NoRegistros } from "../../../components/NoRegistros";
-import { SearchWrap } from "../../../components/SearchWrap";
+import { SearchWrap } from "../../../components/search/SearchWrap";
 
 export const Proveedores = () => {
     

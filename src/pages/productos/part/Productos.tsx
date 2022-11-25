@@ -14,7 +14,7 @@ import { NoRegistros } from "../../../components/NoRegistros";
 import { ModalCodigoBarras } from "./ModalCodigoBarras";
 import { ModalWrap } from "../../../components/modals/ModalWrap";
 import { ModalVerProducto } from "./ModalVerProducto";
-import { SearchWrap } from "../../../components/SearchWrap";
+import { SearchWrap } from "../../../components/search/SearchWrap";
 
 export const Productos = () => {
 

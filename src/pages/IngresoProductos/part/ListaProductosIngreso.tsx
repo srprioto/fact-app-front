@@ -9,7 +9,7 @@ export const ListaProductosIngreso = ({ movimientoDetalles, itemPop, setModalAdd
                 {
                     movimientoDetalles.length > 0
                     ? "Lista de productos"
-                    : "Añade un producto a la lista"
+                    : "Añade productos a la lista"
                 }
             </h4>
             {

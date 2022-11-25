@@ -108,7 +108,7 @@ export const BoletaVenta = ({
                 getCliente={getCliente} 
                 handlerGetCliente={handlerGetCliente} 
                 loadCliente={loadCliente} 
-                cliente={cliente} 
+                cliente={cliente}
             />
 
             <FormInfoGeneral

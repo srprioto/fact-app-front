@@ -8,6 +8,8 @@ interface inputMk{
     name:string;
     error:any;
     moneda?:boolean;
+    color?:string;
+    colorLabel?:string;
     placeholder?:string;
     noError?:boolean;
 }
@@ -17,22 +19,19 @@ interface msgError {
 }
 
 // requiere formik
-export const InputMk = ({ label, value, type, name, error, moneda, placeholder, noError }:inputMk) => {
+export const InputMk = ({ label, value, type, name, error, moneda, color, colorLabel, placeholder, noError }:inputMk) => {
 
     return (
         <div className="wrap-form">
-
-            {
-                label && (<><label htmlFor={name}>{ label }</label><br /></>)
-            }
-
+            {/* { label && (<><label htmlFor={name}>{ label }</label><br /></>) } */}
+            { label && (<><label className={colorLabel} htmlFor={name}>{ label }</label><br /></>) }
             <div className="relative">
-            
                 <div className="box-form">
                     {
                         value
                         ? (
                         <Field 
+                            className={color}
                             type={type}
                             value={value}
                             id={name}
@@ -41,6 +40,7 @@ export const InputMk = ({ label, value, type, name, error, moneda, placeholder, 
                             autoComplete="off"
                         /> ) : (
                             <Field 
+                                className={color}
                                 type={type}
                                 id={name}
                                 name={name} 
@@ -49,7 +49,6 @@ export const InputMk = ({ label, value, type, name, error, moneda, placeholder, 
                             />
                         )
                     }
-                    
                     {
                         !noError
                         && <ErrorMessage

@@ -13,7 +13,7 @@ import { UsuarioDto } from "../../../resources/dtos/UsuariosDto";
 import { USUARIOS, USUARIOS_SEARCH } from "../../../resources/routes";
 import { getOne, paginate } from "../../../resources/fetch";
 import { NoRegistros } from "../../../components/NoRegistros";
-import { SearchWrap } from "../../../components/SearchWrap";
+import { SearchWrap } from "../../../components/search/SearchWrap";
 
 export const Usuarios = () => {
 

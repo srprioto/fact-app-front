@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Loading } from "../../../components/loads/Loading";
 import { TitleBox } from "../../../components/TitleBox"
-import { SearchWrap } from "../../../components/SearchWrap";
+import { SearchWrap } from "../../../components/search/SearchWrap";
 import { TablaVentas } from "./TablaVentas";
 import { DescripcionVenta } from "./DescripcionVenta";
 import { get, getOne } from "../../../resources/fetch";

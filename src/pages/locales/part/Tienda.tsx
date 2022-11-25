@@ -15,7 +15,7 @@ import { ModalTransferencia } from '../../../components/transferencia/enviar/Env
 import { AlertaTransferencia } from '../../../components/transferencia/recibir/AlertaTransferencia';
 import { NoRegistros } from '../../../components/NoRegistros';
 import { ModalWrap } from '../../../components/modals/ModalWrap';
-import { SearchWrap } from '../../../components/SearchWrap';
+import { SearchWrap } from '../../../components/search/SearchWrap';
 
 interface tienda{
     idLocal:string;

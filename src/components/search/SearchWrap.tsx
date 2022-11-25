@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Search } from "./Search";
-import { post } from "../resources/fetch";
+import { post } from "../../resources/fetch";
 
 interface searchWrap {
     setLoadingData:Function; // estado de carga de datos
@@ -15,7 +15,6 @@ interface searchWrap {
     validacion?:number;
     reiniciar?:Function;
     localId?:string;
-    // reSearch?:any;
 }
 
 interface srcText {
@@ -33,11 +32,9 @@ export const SearchWrap = ({
     validacion,
     reiniciar,
     localId
-    // reSearch
 }:searchWrap) => {
     
     const [searchTxt, setSearchTxt] = useState<srcText>({ value: "" });
-    // const searchFocus = useRef<any>(null);
     const idLocal:string = localId ? `${localId}` : "";
     
     const searchData = async () => { 
@@ -50,7 +47,6 @@ export const SearchWrap = ({
             setLoadingData(true);
             setSearchState(true);
             try {
-                // const data = await get(url + searchTxt + idLocal);
                 const data = await post(searchTxt, url + idLocal);
                 setLoadingData(false);
                 setData(data);
@@ -58,11 +54,9 @@ export const SearchWrap = ({
                 setLoadingData(true);
                 console.log(error);
             }
-            
-        } else {
-            // searchFocus.current.focus();
         }
     }
+
 
     const handlerStateSearch = () => {
         setSearchTxt({ value: "" });
@@ -70,13 +64,14 @@ export const SearchWrap = ({
         getData && getData();
     }
 
+
     const onChangeSearch = (e:any) => { 
-        // setSearchTxt(e.target.value);
         setSearchTxt({
             ...searchTxt,
             [e.target.name]: e.target.value
         });
     }
+
 
     return (
         <Search

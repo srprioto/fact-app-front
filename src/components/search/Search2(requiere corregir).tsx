@@ -1,7 +1,8 @@
 import { Form, Formik } from "formik";
+import { useEffect } from "react";
 import { BiSearchAlt2, BiX } from "react-icons/bi";
-import { validSearchProd } from "../resources/validations/Ventas";
-import { InputMk } from "./forms/InputMk";
+import { validSearchProd } from "../../resources/validations/Ventas";
+import { InputMk } from "../forms/InputMk";
 
 interface srcText {
     value: string
@@ -12,20 +13,26 @@ interface SearchType {
     // searchTxt:string;
     searchData:Function;
     searchState:boolean;
-    onChangeSearch:any;
-    handlerStateSearch:Function;
+    setSearchState:Function;
+    setSearchTxt:Function;
+    // onChangeSearch:any;
+    // handlerStateSearch:Function;
     // searchFocus:React.MutableRefObject<any>;
     placeholder:string;
     reiniciar?:Function;
-    validacion:number|undefined;
+    validacion?:number|undefined;
 }
 
-export const Search = ({ 
+// sirve si tu paginacion usa post
+
+export const Search2 = ({ 
     searchTxt, 
     searchState, 
-    onChangeSearch, 
+    setSearchState,
+    // onChangeSearch, 
+    setSearchTxt,
     // searchFocus, 
-    handlerStateSearch,
+    // handlerStateSearch,
     searchData,
     placeholder,
     reiniciar,
@@ -35,8 +42,27 @@ export const Search = ({
 
     const reloadSearch = (e:any) => { 
         e.preventDefault();
-        handlerStateSearch();
+        setSearchState(false);
+        searchData();
         reiniciar && reiniciar();
+    }
+
+    useEffect(() => {
+        if (searchState) {
+            setSearchTxt({ value: "" });
+        }
+    }, [searchState])
+    
+
+    console.log(searchState);
+    console.log(searchTxt);
+
+
+    const onChangeSearch = (e:any) => { 
+        setSearchTxt({
+            ...searchTxt,
+            [e.target.name]: e.target.value
+        });
     }
 
 
@@ -50,9 +76,11 @@ export const Search = ({
 
         <Formik        
             initialValues={searchTxt}
+            // enableReinitialize={true}
             validationSchema={!!validacion ? validSearchProd(4) : null}
-            onSubmit={(data, { resetForm }) => { 
+            onSubmit={(data, { resetForm }) => {
                 // handlerCreate(data);
+                setSearchState(true);
                 searchData();
             }}
         >
@@ -79,7 +107,8 @@ export const Search = ({
                     /> */}
 
                     {
-                        searchState && (
+                        searchState 
+                        && (
                             <div className="reload-search" onClick={reloadSearch}>
                                 <BiX />
                             </div>

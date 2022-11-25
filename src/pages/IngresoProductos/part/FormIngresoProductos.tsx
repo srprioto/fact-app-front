@@ -198,7 +198,7 @@ export const FormIngresoProductos = ({
                     itemPop={itemPop}
                     setModalAdd={setModalAdd}
                 />
-
+                
                 {
                     loading
                     ? <Loading />

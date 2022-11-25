@@ -12,7 +12,7 @@ import { getOne, paginate } from "../../../resources/fetch"
 import { CLIENTES, CLIENTES_SEARCH } from "../../../resources/routes"
 import { Cliente } from "./Cliente"
 import { NoRegistros } from "../../../components/NoRegistros"
-import { SearchWrap } from "../../../components/SearchWrap"
+import { SearchWrap } from "../../../components/search/SearchWrap"
 // import { ClienteDto } from "../../../resources/dtos/Cliente"
 
 export const Clientes = () => {

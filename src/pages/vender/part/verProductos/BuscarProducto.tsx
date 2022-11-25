@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Loading } from "../../../../components/loads/Loading";
-import { SearchWrap } from "../../../../components/SearchWrap";
+import { SearchWrap } from "../../../../components/search/SearchWrap";
 import { TextoRelleno } from "../../../../components/TextoRelleno";
 import { LOCAL_STOCK_SEARCH } from "../../../../resources/routes";
 

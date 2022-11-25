@@ -4,7 +4,7 @@ import { Loading } from "../../../components/loads/Loading";
 import { ModalWrap } from "../../../components/modals/ModalWrap";
 import { NoRegistros } from "../../../components/NoRegistros";
 import { Pagination } from "../../../components/Pagination";
-import { SearchWrap } from "../../../components/SearchWrap";
+import { SearchWrap } from "../../../components/search/SearchWrap";
 import { paginate } from "../../../resources/fetch";
 import { COTIZACION_PAGINATE, COTIZACION_SEARCH } from "../../../resources/routes";
 import { CotizacionItem } from "./cotizaciones/CotizacionItem";

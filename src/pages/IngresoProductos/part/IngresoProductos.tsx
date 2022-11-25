@@ -50,7 +50,6 @@ export const IngresoProductos = () => {
                 ? <TitleBox titulo="Ingreso de productos"/>
                 : <TitleBox titulo="Ingreso de productos" accion={handlerRegresar}/>
             }
-            
 
             {
                 loading
