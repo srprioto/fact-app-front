@@ -38,9 +38,5 @@ export const useSumArray = () => {
     //     return [...acumulador, valorActual];
     // }, []);
 
-    // console.log();
-
-
-
     return subTotal;
 }

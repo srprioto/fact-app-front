@@ -54,8 +54,6 @@ export const Search2 = ({
     }, [searchState])
     
 
-    console.log(searchState);
-    console.log(searchTxt);
 
 
     const onChangeSearch = (e:any) => { 

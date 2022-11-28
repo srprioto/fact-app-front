@@ -40,8 +40,6 @@ export const ImpCreditoAdel = ({ ventaUpdate, setImprimir }:impCreditoAdel) => {
         }
     }
 
-    console.log(cancelado());
-
     // estilos
     // generales
     const container:any = {
