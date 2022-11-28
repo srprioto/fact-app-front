@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react"
 import { BiPlusCircle } from "react-icons/bi"
+import { Select } from "../../../components/forms/Select"
 import { Loading } from "../../../components/loads/Loading"
 import { ModalWrap } from "../../../components/modals/ModalWrap"
 import { NoRegistros } from "../../../components/NoRegistros"
 import { Pagination } from "../../../components/Pagination"
 import { SearchWrap } from "../../../components/search/SearchWrap"
 import { TitleBox } from "../../../components/TitleBox"
-import { paginate } from "../../../resources/fetch"
-import { INGRESOS_EGRESOS_PAGINATE, INGRESOS_EGRESOS_SEARCH } from "../../../resources/routes"
+import { get, paginate } from "../../../resources/fetch"
+import { INGRESOS_EGRESOS_PAGINATE, INGRESOS_EGRESOS_SEARCH, LOCALES_SOLO } from "../../../resources/routes"
 import { ListaIngresosEgresos } from "./ListaIngresosEgresos"
 import { ModalAddIngresoEgreso } from "./ModalAddIngresoEgreso"
 import { ModalEditarIngresEgreso } from "./modals/ModalEditarIngresEgreso"
@@ -18,6 +19,8 @@ export const IngresosEgresos = () => {
 
     const [loading, setLoading] = useState<boolean>(false);
     const [data, setData] = useState<Array<any>>([]);
+    const [locales, setLocales] = useState<Array<any>>([]);
+    const [idLocal, setIdLocal] = useState<string>("_"); // local seleccionado para la filtracion
     const [modalAddIE, setModalAddIE] = useState<boolean>(false);
     const [pagination, setPagination] = useState<any>({ meta: {}, links: {} });
 
@@ -25,7 +28,6 @@ export const IngresosEgresos = () => {
     const [idIngresoEgreso, setIdIngresoEgreso] = useState<number>(0);
     const [modalEditar, setModalEditar] = useState<boolean>(false);
     const [ingresoEgreso, setingresoEgreso] = useState<any>({});
-    
 
     // *** search
     const [searchState, setSearchState] = useState<boolean>(false);
@@ -33,7 +35,26 @@ export const IngresosEgresos = () => {
 
     useEffect(() => {
         getData();
-    }, []);
+    }, [idLocal]);
+
+
+    useEffect(() => {
+        getLocales();
+    }, [])
+    
+
+    const getLocales = async () => { 
+        setLoading(true);
+        try {
+            const locales = await get(LOCALES_SOLO);
+            setLocales(locales);
+            setLoading(false);
+        } catch (error) {
+            setLoading(true);
+            console.log(error);
+        }
+    }
+    
 
 
     const getData = async (urlPage?:string) => {
@@ -43,7 +64,7 @@ export const IngresosEgresos = () => {
             if (urlPage) {
                 data = await paginate(urlPage);
             }else{
-                data = await paginate(INGRESOS_EGRESOS_PAGINATE);
+                data = await paginate(INGRESOS_EGRESOS_PAGINATE + `/${idLocal}`);
             }
             setData(data.items);
             setPagination({
@@ -56,6 +77,9 @@ export const IngresosEgresos = () => {
             console.log(error);
         }
     }
+
+
+
 
 
     const handlerAddIE = () => { 
@@ -72,6 +96,10 @@ export const IngresosEgresos = () => {
     const handlerDeleted = (id:any) => { 
         setIdIngresoEgreso(id);
         setModalEliminar(!modalEliminar);
+    }
+
+    const handlerLocal = (e:any) => { 
+        idLocal && setIdLocal(e.target.value)
     }
 
 
@@ -91,13 +119,30 @@ export const IngresosEgresos = () => {
                         url={INGRESOS_EGRESOS_SEARCH}
                         placeholder="Descripcion de ingreso o egreso ..."
                     />
-                    
-                    <div></div>
-                    <button title="Añade un ingreso o egreso" className="btn btn-info" onClick={handlerAddIE}>
+                   
+                   <button title="Añade un ingreso o egreso" className="btn btn-info" onClick={handlerAddIE}>
                         <BiPlusCircle />
                         Añadir I/E
                     </button>
-                    
+
+                    <Select
+                        loading={loading}
+                        name={"id_local"}
+                        onChange={handlerLocal}
+                        textDefault="Selecciona un local"
+                        defaultValue={false}
+                    >
+                        <option value={"_"}>Todas las tiendas</option>
+                        <option value={"No"}>Sin tienda</option>
+                        {
+                            locales.map((e:any) => { 
+                                return (
+                                    <option key={e.id} value={Number(e.id)}>{ e.nombre }</option>
+                                )
+                            })
+                        }
+                    </Select>
+
                 </div>
             </div>
 
@@ -115,7 +160,6 @@ export const IngresosEgresos = () => {
                         />
                     )
                 }
-
                 <Pagination
                     getData={getData}
                     previous={pagination.links.previous} 
@@ -131,6 +175,7 @@ export const IngresosEgresos = () => {
                     modal={modalAddIE}
                     setModal={setModalAddIE}
                     getData={getData}
+                    locales={locales}
                 />
             </ModalWrap>
 
@@ -149,6 +194,7 @@ export const IngresosEgresos = () => {
                     setModal={setModalEditar}
                     ingresoEgreso={ingresoEgreso}
                     getData={getData}
+                    locales={locales}
                 />
             </ModalWrap>
 

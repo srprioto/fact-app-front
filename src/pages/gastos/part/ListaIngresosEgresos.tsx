@@ -20,7 +20,7 @@ export const ListaIngresosEgresos = ({ data, handlerEditar, handlerDeleted }:lis
                     <th>Descripcion</th>
                     <th>Tipo</th>
                     <th>Local ligado</th>
-                    <th>Por</th>
+                    <th>Usuario</th>
                     <th>Fecha movimiento</th>
                     <th></th>
                     {/* <th className="transparent inlineblock">...</th> */}

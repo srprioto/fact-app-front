@@ -8,9 +8,10 @@ import { Notificaciones } from "./Notificaciones";
 
 interface tickets {
     idLocal:string;
+    idUser:string;
 }
 
-export const Tickets = ({ idLocal }:tickets) => {
+export const Tickets = ({ idLocal, idUser }:tickets) => {
 
     const [showNotificaciones, setShowNotificaciones] = useState<boolean>(false);
     const [ticketsNoVistos, setTicketsNoVistos] = useState<number>(0);
@@ -28,7 +29,7 @@ export const Tickets = ({ idLocal }:tickets) => {
     const getTickets = async () => { 
         setLoading(true);
         try {
-            const data = await get(TICKETS + `/no_vistos/${idLocal}`);
+            const data = await get(TICKETS + `/no_vistos/${idLocal}/${idUser}`);
             setTicketsNoVistos(data);
             setLoading(false);
         } catch (error) {
@@ -74,6 +75,7 @@ export const Tickets = ({ idLocal }:tickets) => {
                         handlerModalVer={handlerModalVer}
                         getTickets={getTickets}
                         idLocal={idLocal}
+                        idUser={idUser}
                     />
                 }
             </div>

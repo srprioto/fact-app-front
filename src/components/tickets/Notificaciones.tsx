@@ -14,9 +14,16 @@ interface notificaciones {
     handlerModalVer:Function;
     getTickets:Function;
     idLocal:string;
+    idUser:string;
 }
 
-export const Notificaciones = ({ setShowNotificaciones, handlerModalVer, getTickets, idLocal }:notificaciones) => {
+export const Notificaciones = ({ 
+    setShowNotificaciones, 
+    handlerModalVer, 
+    getTickets, 
+    idLocal, 
+    idUser 
+}:notificaciones) => {
 
     const [loading, setLoading] = useState<boolean>(false);
     const [tickets, setTickets] = useState<Array<any>>([]);
@@ -31,7 +38,7 @@ export const Notificaciones = ({ setShowNotificaciones, handlerModalVer, getTick
     const getUltimosTickets = async () => { 
         setLoading(true);
         try {
-            const data = await get(TICKETS + `/ultimos_tickets/${idLocal}`);
+            const data = await get(TICKETS + `/ultimos_tickets/${idLocal}/${idUser}`);
             setTickets(data);
             setLoading(false);
         } catch (error) {

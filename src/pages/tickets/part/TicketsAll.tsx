@@ -39,7 +39,7 @@ export const TicketsAll = () => {
             if (urlPage) {
                 data = await paginate(urlPage);
             }else{
-                data = await paginate(TICKETS + `/paginate/${idLocal}`);
+                data = await paginate(TICKETS + `/paginate/${idLocal}/${auth.userInfo.sub}`);
             }
             setData(data.items);
             setPagination({
@@ -101,6 +101,7 @@ export const TicketsAll = () => {
                                 
                                 <thead>
                                     <tr>
+                                        <th>id</th>
                                         <th>Titulo</th>
                                         <th>Tipo</th>
                                         <th>Fecha de emisión</th>
@@ -131,6 +132,7 @@ export const TicketsAll = () => {
                                                     ? "opacity2"
                                                     : "secundary"
                                                 } key={e.id}>
+                                                    <td>{ e.id }</td>
                                                     <td>{ e.titulo }</td>
                                                     <td className={classTipo}>{ subguionEspacio(e.tipo) }</td>
                                                     <td>{ fecha(e.created_at) }</td>

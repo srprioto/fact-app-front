@@ -13,6 +13,7 @@ interface input {
     msgErr?:string|boolean;
     moneda?:boolean;
     noMenos?:boolean;
+    noMas?:boolean;
 }
 
 export const Input = ({ 
@@ -27,7 +28,8 @@ export const Input = ({
     className = "",
     msgErr,
     moneda, 
-    noMenos
+    noMenos,
+    noMas,
 }:input) => {
 
     // const checkValue = () => { 
@@ -72,6 +74,16 @@ export const Input = ({
                                 onChange={onChange}
                                 className={className}
                             />
+                        ) : noMas
+                        ? (
+                            <NumberNoMas
+                                name={name}
+                                value={value}
+                                placeholder={placeholder}
+                                onChange={onChange}
+                                className={className}
+                            />
+                            
                         ) : (
                             <NumberEstandar
                                 name={name}
@@ -156,6 +168,36 @@ const NumberNoMenor = ({
             placeholder={placeholder}
             autoComplete="off"
             min="0"
+        />
+    );
+}
+
+const NumberNoMas = ({ 
+    name, 
+    value, 
+    placeholder, 
+    onChange, 
+    className
+}:input) => { 
+    return (
+        <input 
+            className="danger-i"
+            type="number" 
+            name={name} 
+            id={name}
+            value={
+                value === isNaN ||
+                value === undefined ||
+                value === null ||
+                value >= 0
+                ? ""
+                : value
+            }
+            onWheel={ event => event.currentTarget.blur() }
+            onChange={onChange}
+            placeholder={placeholder}
+            autoComplete="off"
+            max="0"
         />
     );
 }

@@ -1,8 +1,9 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { BiCheck, BiReply } from "react-icons/bi";
 import { BtnOnOff2 } from "../../../components/btns/BtnOnOff2";
 import { LoadSwitchBtn2 } from "../../../components/btns/LoadSwitchBtn2";
 import { Input } from "../../../components/forms/Input"
+import { Select2 } from "../../../components/forms/Select2";
 import { Modal } from "../../../components/modals/Modal"
 import { tipoMovimiento } from "../../../resources/dtos/Caja";
 import { post } from "../../../resources/fetch";
@@ -13,7 +14,7 @@ export const ModalOtroMonto = ({ modal, setModal, getDataOne, idCaja, usuarioId 
     const cajaDet = {
         monto_movimiento: 0,
         descripcion: "",
-        tipo_movimiento: tipoMovimiento.otrosMovimientos,
+        tipo_movimiento: tipoMovimiento.ingresosEgresosCaja,
         forma_pago: "efectivo",
         cajaId: idCaja,
         usuarioId: usuarioId,
@@ -22,12 +23,23 @@ export const ModalOtroMonto = ({ modal, setModal, getDataOne, idCaja, usuarioId 
     const [loading, setLoading] = useState<boolean>(false);
     const [cajaDetalles, setCajaDetalles] = useState<any>(cajaDet);
 
+
+    useEffect(() => {
+        setCajaDetalles({
+            ...cajaDetalles,
+            monto_movimiento: 0
+        })
+    }, [cajaDetalles.tipo_movimiento])
+    
+
+
     const handlerOnChange = (e:any) => { 
         setCajaDetalles({
             ...cajaDetalles,
             [e.target.name]: e.target.value
         })
     }
+
 
     const handlerCrearCajaDetalle = async () => { 
         setLoading(true);
@@ -55,12 +67,14 @@ export const ModalOtroMonto = ({ modal, setModal, getDataOne, idCaja, usuarioId 
     }
 
 
+    console.log(cajaDetalles);
+
     return (
         <Modal
             title="Movimiento de caja"
             modal={modal}
             setModal={setModal}
-            width={50}
+            width={60}
         >
             <div className="grid-1 gap">
 
@@ -69,26 +83,51 @@ export const ModalOtroMonto = ({ modal, setModal, getDataOne, idCaja, usuarioId 
                     <h6 className="warning">Para retirar dinero de caja ingresa una cantidad negativa</h6>
                 </div>
 
-                <div className="grid-2 gap">
-                    <Input
-                        label={
-                            cajaDetalles.monto_movimiento > 0
-                            ? "Realizando ingreso"
-                            : cajaDetalles.monto_movimiento < 0
-                            ? "Realizando retiro"
-                            : "Ingreso o retiro *"                            
-                        }
-                        type="number"
-                        name="monto_movimiento"
-                        value={cajaDetalles.monto_movimiento}
+                <div className="grid-3 gap mb-15">
+
+                    {
+                        cajaDetalles.tipo_movimiento === tipoMovimiento.ingresosEgresosCaja
+                        ? <Input
+                            label="Realizar retiro *"
+                            type="number"
+                            name="monto_movimiento"
+                            value={cajaDetalles.monto_movimiento}
+                            onChange={handlerOnChange}
+                            moneda
+                            noMas
+                        />
+                        : <Input
+                            label={
+                                cajaDetalles.monto_movimiento > 0
+                                ? "Realizando ingreso"
+                                : cajaDetalles.monto_movimiento < 0
+                                ? "Realizando retiro"
+                                : "Ingreso o retiro *"                            
+                            }
+                            type="number"
+                            name="monto_movimiento"
+                            value={cajaDetalles.monto_movimiento}
+                            onChange={handlerOnChange}
+                            color={
+                                cajaDetalles.monto_movimiento < 0
+                                ? "danger-i"
+                                : ""
+                            }
+                            moneda
+                        />
+                    }
+
+                    <Select2
+                        label="Tipo de movimiento"
+                        name="tipo_movimiento"
+                        value={cajaDetalles.tipo_movimiento}
                         onChange={handlerOnChange}
-                        color={
-                            cajaDetalles.monto_movimiento < 0
-                            ? "danger-i"
-                            : ""
-                        }
-                        moneda
-                    />
+                        defaultValue={tipoMovimiento.ingresosEgresosCaja}
+                    >
+                        <option value={tipoMovimiento.ingresosEgresosCaja}>Gastos internos</option>
+                        <option value={tipoMovimiento.otrosMovimientos}>Otros movimientos</option>
+                    </Select2>
+
                     <Input
                         label="Nota de movimiento *"
                         type="text"
@@ -98,7 +137,7 @@ export const ModalOtroMonto = ({ modal, setModal, getDataOne, idCaja, usuarioId 
                     />
                 </div>
 
-                <div className="grid-4 gap">
+                <div className="grid-4 gap mb-10">
                     <div></div>
                     <BtnOnOff2
                         label="Confirmar"

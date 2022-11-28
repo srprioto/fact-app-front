@@ -116,13 +116,6 @@ export const InfoGeneralVentas = ({ idLocal, selectLocal, loadingLocal, locales 
         setIdVenta(0);
     }
 
-
-    const handlerLocal = (e:any) => { 
-        selectLocal && selectLocal(
-            e.target.value
-        )
-    }
-
     
     return (
         <>
@@ -159,7 +152,7 @@ export const InfoGeneralVentas = ({ idLocal, selectLocal, loadingLocal, locales 
                                     <Select
                                         loading={loadingLocal}
                                         name={"id_local"}
-                                        onChange={handlerLocal}
+                                        onChange={(e:any) => selectLocal && selectLocal(e.target.value)}
                                         textDefault="Selecciona un local"
                                         defaultValue={false}
                                     >

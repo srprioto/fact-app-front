@@ -46,6 +46,7 @@ import { IndexGanancias } from "../pages/reportes/ganancias/Index";
 import { IndexVentas } from "../pages/reportes/ventas/Index";
 import { IndexTickets } from "../pages/tickets/Index";
 import { IndexIngresosEgresos } from "../pages/gastos/Index";
+import { TicketsSup } from "../roles/supervisor/pages/TicketsSup";
 
 
 export const AppRoutes = () => {
@@ -126,6 +127,7 @@ export const AppRoutes = () => {
                             <Route path="/local/vender" element={ <VenderSup /> } />
                             <Route path="/local/cobrar" element={ <CobrarSup /> } />
                             <Route path="/local/stock" element={ <StockSup /> } />
+                            <Route path="/tickets" element={ <TicketsSup /> } />
                         </>
                     }
 

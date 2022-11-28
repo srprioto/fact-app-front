@@ -13,8 +13,7 @@ export const Ganancias = () => {
 
     const [tabbs, setTabbs] = useState<number>(1);
     const [loading, setLoading] = useState<boolean>(false);
-    const [data, setData] = useState<Array<any>>([]);
-    const [totalGanancias, settotalGanancias] = useState<number>(0);
+    const [data, setData] = useState<any>({});
     const [fechas, setFechas] = useState<any>({ inicio: inicioMes, fin: finMes });
 
 
@@ -33,8 +32,7 @@ export const Ganancias = () => {
 
         try {
             const resto:any = await post(fechasMes, GANANCIAS + "/reporte_ingresos_ventas");
-            setData(resto.query);
-            settotalGanancias(resto.sumaGanancias);
+            setData(resto);
             setLoading(false);
         } catch (error) {
             setLoading(true);
@@ -64,7 +62,7 @@ export const Ganancias = () => {
             {
                 tabbs === 1
                 && <ReporteGeneral 
-                    data={data} 
+                    data={data.query} 
                     loading={loading} 
                     getData={getData}
                     fechas={fechas}
@@ -80,7 +78,7 @@ export const Ganancias = () => {
                     getData={getData}
                     fechas={fechas}
                     setFechas={setFechas} 
-                    totalGanancias={totalGanancias}
+                    // totalGanancias={totalGanancias}
                 />
             }
 

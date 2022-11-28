@@ -70,7 +70,7 @@ export const CajaAbierta = ({
                         </div>                   
 
                         <div className="center">
-                            <p>Otros movimientos: </p>
+                            <p>Movimientos de caja: </p>
                             <h2 className="warning-i">S/. { moneda(infoCaja.otros_montos) }</h2>
                         </div>
 

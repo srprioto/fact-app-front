@@ -7,8 +7,10 @@ export const WrapTickets = () => {
     const auth = useAuth();
     const idLocal:string = !!auth.userInfo.local.id ? auth.userInfo.local.id : "_";
 
+    console.log(auth.userInfo.sub);    
+
     if (auth.rol === Roles.ADMIN || auth.rol === Roles.SUPERVISOR) {
-        return <Tickets idLocal={idLocal} />
+        return <Tickets idLocal={idLocal} idUser={auth.userInfo.sub} />
     } else {
         return null;
     }

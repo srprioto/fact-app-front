@@ -33,7 +33,10 @@ export const CajaDetalles = ({ cajaDetalles, handlerEliminar }:cajaDetalles) => 
                             let otrosMov:boolean = false;
                             let colorClass:string = "";
 
-                            if (e.tipo_movimiento === tipoMovimiento.otrosMovimientos) {
+                            if (
+                                e.tipo_movimiento === tipoMovimiento.otrosMovimientos ||
+                                e.tipo_movimiento === tipoMovimiento.ingresosEgresosCaja
+                            ) {
                                 colorClass = "warning";
                                 otrosMov = true;
                             } else if (e.tipo_movimiento === tipoMovimiento.anulacion1) {
@@ -54,7 +57,11 @@ export const CajaDetalles = ({ cajaDetalles, handlerEliminar }:cajaDetalles) => 
                                             : "success")
                                         }
                                     >S/. { e.monto_movimiento }</td>
-                                    <td className={colorClass}>{ e.tipo_movimiento }</td>
+                                    <td className={colorClass}>{ 
+                                        e.tipo_movimiento === tipoMovimiento.ingresosEgresosCaja
+                                        ? "Gastos internos"
+                                        : e.tipo_movimiento
+                                    }</td>
                                     <td className={
                                         e.forma_pago === "efectivo"
                                         ? "secundary capitalize"
