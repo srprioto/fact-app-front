@@ -1,7 +1,9 @@
 import { Loading } from "../../../../components/loads/Loading";
 import { NoRegistros } from "../../../../components/NoRegistros";
-import { moneda } from "../../../../resources/func/moneda";
 import { GestionFechas } from "../../../../components/fechas/GestionFechas";
+import { Select } from "../../../../components/forms/Select";
+import { TablaGananciasDetall } from "./TablaGananciasDetall";
+import { ResumGananciaDetall } from "./ResumGananciaDetall";
 
 interface gananciasDetalles {
     data:any;
@@ -9,74 +11,79 @@ interface gananciasDetalles {
     getData:Function;
     fechas:string;
     setFechas:Function;
-    // totalGanancias:number;
+    // idLocal:string;
+    handlerLocal:Function;
+    loadingLocales:boolean;
+    locales:any;
 }
 
-export const GananciasDetalles = ({ data, loading, getData, fechas, setFechas }:gananciasDetalles) => {
+export const GananciasDetalles = ({ 
+    data, 
+    loading, 
+    getData, 
+    fechas, 
+    setFechas, 
+    // idLocal, 
+    handlerLocal,
+    loadingLocales,
+    locales
+}:gananciasDetalles) => {
 
     const sumaMontos:any = data.sumaMontos ? data.sumaMontos : {};
 
-    
     return (
-        <div className="box ganancias-detalles">
-            <div className="grid-21 gap">
-                <div className="grid-3 gap">
-                    <div className="box-total-ganancias gap10">
-                        <h3 className="secundary">Ingresos: </h3>
-                        <h3 className="strong info">S/. { moneda(sumaMontos.sumaIngresos) }</h3>
+        <>
+            <div className="box box-par grid-2 gap">
+                <div></div>
+                <div className="grid-2 gap">
+                    <div className="grid-4 gap">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <GestionFechas
+                            getData={getData}
+                            fechas={fechas}
+                            setFechas={setFechas}
+                        />
                     </div>
-                    <div className="box-total-ganancias gap10">
-                        <h3 className="secundary">Costos: </h3>
-                        <h3 className="strong info">S/. { moneda(sumaMontos.sumaCostos) }</h3>
-                    </div>
-                    <div className="box-total-ganancias gap10">
-                        <h3 className="secundary">Total ganado: </h3>
-                        <h2 className="strong success m-0">S/. { moneda(sumaMontos.sumaGanancias) }</h2>
-                    </div>
-                </div>
-                <div className="box-fechas-chars-ganan-2">
-                    <GestionFechas
-                        getData={getData}
-                        fechas={fechas}
-                        setFechas={setFechas}
-                    />
+
+                    <Select
+                        loading={loadingLocales}
+                        name={"id_local"}
+                        onChange={handlerLocal}
+                        textDefault="Selecciona un local"
+                        defaultValue={false}
+                    >
+                        <option value={"_"}>Todas las tiendas</option>
+                        {
+                            locales.map((e:any) => { 
+                                return (
+                                    <option key={e.id} value={Number(e.id)}>{ e.nombre }</option>
+                                )
+                            })
+                        }
+                    </Select>
                 </div>
             </div>
-            {
-                loading 
-                ? <Loading />
-                : (
-                    data.query.length <= 0
-                    ? <NoRegistros />
+
+            <div className="box ganancias-detalles">
+                {
+                    loading 
+                    ? <Loading />
                     : (
-                        <table className="table">
-                            <thead>
-                                <tr>
-                                    <th>Ingresos del dia</th>
-                                    <th>Costos del dia</th>
-                                    <th>Ganancias del dia</th>
-                                    <th>Fecha</th>
-                                    {/* <th className="transparent inlineblock">...</th> */}
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {
-                                    data.query.map((e:any, index:number) => {
-                                        return (
-                                            <tr className="items-caja" key={index}>
-                                                <td>S/. { moneda(e.Ingresos_dia) }</td>
-                                                <td>S/. { moneda(e.Costos_dia) }</td>
-                                                <td className="success strong">S/. { moneda(e.Ganancias_dia) }</td>
-                                                <td className="">{ e.Fecha }</td>
-                                            </tr>
-                                        )
-                                    })
-                                }
-                            </tbody>
-                        </table>
+                        data.query.length <= 0
+                        ? <NoRegistros />
+                        : <>
+                            <ResumGananciaDetall sumaMontos={sumaMontos} />
+                            <TablaGananciasDetall 
+                                data={data} 
+                                locales={locales}
+                                loadingLocales={loadingLocales}
+                            />
+                        </>
                     )
-                )
-            }
-        </div>
+                }
+            </div>
+        </>
     )
 }

@@ -54,7 +54,6 @@ export const IngresosEgresos = () => {
             console.log(error);
         }
     }
-    
 
 
     const getData = async (urlPage?:string) => {
@@ -77,9 +76,6 @@ export const IngresosEgresos = () => {
             console.log(error);
         }
     }
-
-
-
 
 
     const handlerAddIE = () => { 

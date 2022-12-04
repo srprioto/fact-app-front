@@ -3,7 +3,7 @@ import { BiBarChartAlt, BiDollar } from "react-icons/bi"
 import { CardUno } from "../../../../components/cards/CardUno"
 import { get } from "../../../../resources/fetch";
 import { moneda } from "../../../../resources/func/moneda";
-import { GANANCIAS } from "../../../../resources/routes";
+import { VENTAS_REPORTES } from "../../../../resources/routes";
 
 export const CardsIngresosGenerales = () => {
 
@@ -18,7 +18,7 @@ export const CardsIngresosGenerales = () => {
     const getData = async () => { 
         setLoading(true);
         try {
-            const resto = await get(GANANCIAS + "/ingresos_ventas_general");
+            const resto = await get(VENTAS_REPORTES + "/ingresos_ventas_general");
             setData(resto);
             setLoading(false);
         } catch (error) {
@@ -30,13 +30,6 @@ export const CardsIngresosGenerales = () => {
     return (
         <div className="grid-4 gap">
             <CardUno
-                titulo="Ganancias del dia"
-                label={"S/. " + moneda(data.gananciasHoy)}
-                icon={<BiDollar />}
-                coloricon="success"
-                loading={loading}
-            />
-            <CardUno
                 titulo="Total de ingresos del mes"
                 label={"S/. " + moneda(data.ingresos)}
                 icon={<BiDollar />}
@@ -46,6 +39,13 @@ export const CardsIngresosGenerales = () => {
             <CardUno
                 titulo="Total costos de productos del mes"
                 label={"S/. " + moneda(data.costos)}
+                icon={<BiDollar />}
+                coloricon="danger"
+                loading={loading}
+            />
+            <CardUno
+                titulo="Otros gastos"
+                label={"S/. " + moneda(data.otrosGastos)}
                 icon={<BiDollar />}
                 coloricon="danger"
                 loading={loading}

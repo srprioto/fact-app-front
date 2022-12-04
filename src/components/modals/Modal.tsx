@@ -63,8 +63,6 @@ export const Modal = ({
                                     border +
                                     (notransparent ? " modal-notransparent" : "")
                                 } style={styles}>
-
-                                    
                                     <div className="relative w100">
                                         {
                                             back

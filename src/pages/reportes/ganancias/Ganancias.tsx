@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { BiBarChartAlt2, BiListUl } from "react-icons/bi";
 import { TitleBox } from "../../../components/TitleBox"
-import { post } from "../../../resources/fetch";
+import { get, post } from "../../../resources/fetch";
 import { fechaInicioFinMes } from "../../../resources/func/fechas";
-import { GANANCIAS } from "../../../resources/routes";
+import { VENTAS_REPORTES, LOCALES_SOLO } from "../../../resources/routes";
 import { GananciasDetalles } from "./gananciasDetalles/GananciasDetalles";
 import { ReporteGeneral } from "./reportesGenerales/ReporteGeneral";
 
@@ -15,23 +15,43 @@ export const Ganancias = () => {
     const [loading, setLoading] = useState<boolean>(false);
     const [data, setData] = useState<any>({});
     const [fechas, setFechas] = useState<any>({ inicio: inicioMes, fin: finMes });
+    const [loadingLocales, setLoadingLocales] = useState<boolean>(false);
+    const [locales, setLocales] = useState<Array<any>>([]);
+
+    const [idLocal, setIdLocal] = useState<string>("_");
 
 
     useEffect(() => {
-        getData();
+        getLocales();
     }, [])
+
+    useEffect(() => {
+        getData();
+    }, [idLocal])
+
+
+    const getLocales = async () => { 
+        setLoadingLocales(true);
+        try {
+            const locales = await get(LOCALES_SOLO);
+            setLocales(locales);
+            setLoadingLocales(false);
+        } catch (error) {
+            setLoadingLocales(true);
+            console.log(error);
+        }
+    }
 
 
     const getData = async () => { 
         setLoading(true);
-
         const fechasMes:any = { 
             inicioMes: fechas.inicio, 
-            finMes: fechas.fin 
+            finMes: fechas.fin,
+            idLocal: idLocal
         }
-
         try {
-            const resto:any = await post(fechasMes, GANANCIAS + "/reporte_ingresos_ventas");
+            const resto:any = await post(fechasMes, VENTAS_REPORTES + "/reporte_ingresos_ventas");
             setData(resto);
             setLoading(false);
         } catch (error) {
@@ -39,7 +59,12 @@ export const Ganancias = () => {
             console.log(error);
         }
     }
-  
+
+
+    const handlerLocal = (e:any) => { 
+        setIdLocal(e.target.value)
+    }
+
 
     return (
         <div className="ganancias">
@@ -67,6 +92,9 @@ export const Ganancias = () => {
                     getData={getData}
                     fechas={fechas}
                     setFechas={setFechas}
+                    handlerLocal={handlerLocal}
+                    loadingLocales={loadingLocales}
+                    locales={locales}
                 />
             }
 
@@ -78,7 +106,10 @@ export const Ganancias = () => {
                     getData={getData}
                     fechas={fechas}
                     setFechas={setFechas} 
-                    // totalGanancias={totalGanancias}
+                    // idLocal={idLocal}
+                    handlerLocal={handlerLocal}
+                    loadingLocales={loadingLocales}
+                    locales={locales}
                 />
             }
 

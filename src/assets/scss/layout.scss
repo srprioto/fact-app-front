@@ -1261,6 +1261,7 @@
     .reporte-general{
         .chars-ganancias{
             .box-fechas-chars-ganan{
+                width: 350px;
                 position: absolute;
                 top: 15px;
                 right: 20px;
@@ -1268,10 +1269,10 @@
         }
     }
     .ganancias-detalles{
-        .box-fechas-chars-ganan-2{
-            display: flex;
-            justify-content: flex-end;
-        }
+        // .box-fechas-chars-ganan-2{
+        //     display: flex;
+        //     justify-content: flex-end;
+        // }
         .box-total-ganancias{
             display: flex;
             // justify-content: center;
@@ -1281,6 +1282,15 @@
             }
         }
     }
+}
+
+// modal detalles ganancias
+// .modal-detalles-ganancias{
+//     height: calc(100vh - 322px);
+// }
+
+.info-tabbs-ganancias-detalles{
+    min-height: calc(100vh - 387px);
 }
 
 

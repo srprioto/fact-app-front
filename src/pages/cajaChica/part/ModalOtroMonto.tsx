@@ -67,8 +67,6 @@ export const ModalOtroMonto = ({ modal, setModal, getDataOne, idCaja, usuarioId 
     }
 
 
-    console.log(cajaDetalles);
-
     return (
         <Modal
             title="Movimiento de caja"

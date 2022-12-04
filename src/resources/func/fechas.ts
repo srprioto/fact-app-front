@@ -24,7 +24,7 @@ export const fechaNoHora = (fecha:any) => {
         .fromISO(fecha)
         .setZone('UTC')
         .setLocale('es')
-        .toFormat('dd/LL/yyyy');
+        .toFormat('dd LLL yyyy');
     return newFecha
 }
 
@@ -86,3 +86,22 @@ export const timeAgo = (fecha:any) => {
         .setLocale('es')
         .toRelative();
 };
+
+
+export const formatoConSlashJson = (fecha:string) => { 
+    return {
+        day: fecha.split('/')[0],
+        month: fecha.split('/')[1],
+        year: fecha.split('/')[2]
+    }
+}
+
+
+export const formatoConSlash = (fecha:string) => {
+    const resto:any = formatoConSlashJson(fecha);
+    return DateTime
+        .fromObject(resto)
+        .setZone('UTC')
+        .setLocale('es')
+        .toFormat('dd LLL yyyy')
+}
