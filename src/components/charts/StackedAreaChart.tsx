@@ -7,9 +7,6 @@ interface stackedAreaChart {
 }
 
 export const StackedAreaChart = ({ data, color = "#556ee6", dataKey = "Cantidad" }:stackedAreaChart) => {
-
-    console.log(data);    
-
     return (
         <div className="stacked-area-chart">
 
