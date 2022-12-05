@@ -18,7 +18,7 @@ import { TabbsFiltroDatos } from "./ventas/TabbsFiltroDatos";
 import { VentaItems } from "./ventas/VentaItems";
 
 interface infoGeneralVentas {
-    idLocal?:string; // el id local es obligatorio
+    idLocal:string; // el id local es obligatorio
     selectLocal?:Function;
     loadingLocal?:boolean;
     locales?:any;
@@ -116,6 +116,7 @@ export const InfoGeneralVentas = ({ idLocal, selectLocal, loadingLocal, locales 
         setIdVenta(0);
     }
 
+    console.log(idLocal);
     
     return (
         <>
@@ -266,7 +267,7 @@ export const InfoGeneralVentas = ({ idLocal, selectLocal, loadingLocal, locales 
                     setModal={setModalCredito}
                     idVenta={idVenta}
                     getData={getData}
-                    localId={Number(idLocal)}
+                    localId={idLocal}
                 />
             </ModalWrap>
 

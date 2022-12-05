@@ -13,11 +13,11 @@ interface modalCredito {
     setModal:Function;
     idVenta:number;
     getData:Function;
-    localId:number;
+    localId:string;
 }
 
 export const ModalCredito = ({ modal, setModal, idVenta, getData, localId }:modalCredito) => {
-
+    
     const [loading, setLoading] = useState<boolean>(false);
     const [venta, setVenta] = useState<any>({});
 

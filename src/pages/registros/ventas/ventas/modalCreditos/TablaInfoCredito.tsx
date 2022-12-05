@@ -17,7 +17,6 @@ export const TablaInfoCredito = ({ venta, cantidadRestante }:any) => {
             }
 
             <table className="table2">
-                
                 <thead>
                     <tr>
                         <th>Partes de pago</th>

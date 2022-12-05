@@ -1,5 +1,3 @@
-// import { zeroFill } from "../../../../resources/func/ceroFill"
-
 import { tipoVenta } from "../../../../resources/dtos/VentasDto";
 import { fecha } from "../../../../resources/func/fechas"
 import { moneda } from "../../../../resources/func/moneda";

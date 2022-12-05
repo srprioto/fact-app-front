@@ -18,13 +18,6 @@ export const ModalVerDetalles = ({ modal, setModal, fecha, locales, loadingLocal
     const [tabbs, setTabbs] = useState<number>(1);
     const [idLocal, setIdLocal] = useState<string>("_");
 
-    // console.log(ingresosVentasDia);
-    // console.log(ingresosEgresosDia);
-    // console.log(movimientosCajaDia);
-    // console.log("");
-    // console.log(sumatorias);
-    // console.log(idLocal);
-
 
     return (
         <Modal

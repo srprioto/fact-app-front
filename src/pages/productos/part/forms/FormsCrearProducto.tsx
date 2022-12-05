@@ -45,7 +45,7 @@ export const FormsCrearProducto = ({ handlerCreateProducto, loading }:formsCrear
                 
                 {({ errors }) => (
 
-                    <Form className="grid-1 gap mb-25 mt-25">
+                    <Form className="grid-1 gap mb-25">
                         <div className="check-crear-producto">
                             <div className="check-form">
                                 <label htmlFor="switchCrear">

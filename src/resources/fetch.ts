@@ -68,25 +68,19 @@ async function getOne(id:number, endpoint:string) {
 
 
 async function post(data:any, endpoint:string) {
-
     let post;
-
     try {
-
         post = await fetch(API_URL + endpoint, {
             method: 'POST', 
             body: JSON.stringify(data), 
             headers
         })
         post = await post.json()
-
     } catch (error) {
         console.log(error);
         document.location.href = "/#/404";
     }
-
     return post
-
 }
 
 

@@ -13,7 +13,7 @@ import { CrearCreditoDetal } from "./CrearCreditoDetal";
 interface gestionCreditoAdelanto {
     venta:any;
     getDataOne:Function;
-    localId:number;
+    localId:string;
     cantidadRestante:number;
     loading:boolean;
     setLoading:Function;
@@ -35,7 +35,6 @@ export const GestionCreditoAdelanto = ({
 
 
     const handlerCreditoDetalles = async () => { 
-
         setLoading(true);
         try {
             await post(updateCredito, CREDITO_DETALLES);
@@ -54,6 +53,7 @@ export const GestionCreditoAdelanto = ({
             getDataOne();
         }
     }
+
 
     return (
         <div className="box box-par m-0 gestion-credito-venta">

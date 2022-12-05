@@ -1,7 +1,7 @@
 import { QRCodeSVG } from "qrcode.react";
 import { useEffect, useRef } from "react";
 import { tipoVenta } from "../../../../resources/dtos/VentasDto";
-import { fecha, fechaResumen, fechaResumenGuiones } from "../../../../resources/func/fechas";
+import { fechaResumen, fechaResumenGuiones } from "../../../../resources/func/fechas";
 import { fixedInput } from "../../../../resources/func/fixedInput";
 import { moneda } from "../../../../resources/func/moneda";
 

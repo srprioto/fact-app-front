@@ -8,7 +8,7 @@ import { moneda } from "../../../../../resources/func/moneda";
 interface crearCreditoDetal {
     venta:any;
     cantidadRestante:number;
-    localId:number;
+    localId:string;
     setValidarCredito:Function;
     setUpdateCredito:Function;
     setRestanteCero:Function;
