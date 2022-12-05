@@ -7,7 +7,7 @@ interface loadingImg {
 
 export const LoadingImg = ({ height = 132, size }:loadingImg) => {
     return (
-        <div className="mb-20">
+        <div className="">
             <div className="box box-par rotarIcon middle" style={{ height: `${height}px` }}>
                 <BiLoaderAlt size={size} />
             </div>

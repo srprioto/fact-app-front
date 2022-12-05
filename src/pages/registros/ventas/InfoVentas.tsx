@@ -116,7 +116,6 @@ export const InfoGeneralVentas = ({ idLocal, selectLocal, loadingLocal, locales 
         setIdVenta(0);
     }
 
-    console.log(idLocal);
     
     return (
         <>
