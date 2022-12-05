@@ -1,7 +1,8 @@
 import { QRCodeSVG } from "qrcode.react";
 import { useEffect, useRef } from "react";
 import { tipoVenta } from "../../../../resources/dtos/VentasDto";
-import { fecha, fechaResumen } from "../../../../resources/func/fechas";
+import { fecha, fechaResumen, fechaResumenGuiones } from "../../../../resources/func/fechas";
+import { fixedInput } from "../../../../resources/func/fixedInput";
 import { moneda } from "../../../../resources/func/moneda";
 
 interface impComprobante {
@@ -12,21 +13,45 @@ interface impComprobante {
 
 export const ImpComprobante = ({ venta, setImprimir, nuevo }:impComprobante) => {
 
+    // console.log(venta);    
+
     const imprimir = useRef<any>(null);
+
+    // info comprobante
     const correlativos:any = venta.locales.correlativos;
     const correlativo:any = correlativos.find((e:any) => e.descripcion === venta.tipo_venta);
     const serie:string = correlativo ? correlativo.serie : "V001";
     const nuevoCorrelativo:string = correlativo ? correlativo.correlativo : "";
     const existCorrelativo:string = venta.comprobante.length > 0 ? venta.comprobante[0].correlativo : "";
-    // const tipVenta = venta.tipo_venta;
-    // const tipVenta = correlativo ? correlativo.descripcion : "venta rapida";
-
     const esComprobante:boolean = venta.tipo_venta === tipoVenta.boleta || venta.tipo_venta === tipoVenta.factura;
-    // const esCredito:boolean = venta.tipo_venta === tipoVenta.credito || venta.tipo_venta === tipoVenta.adelanto;
-    // const esVentaRapida:boolean = venta.tipo_venta === tipoVenta.venta_rapida;
-
+    const cliente:any = venta.clientes ? venta.clientes : {};
+    const ventaDetalles:any = venta.ventaDetalles ? venta.ventaDetalles : {};
+    
     let subtotal:number = 0;
     let igv:number = 0;
+    let tipoComprobante:string = "";
+    let tipoDocumento:string = "";
+    if (venta.tipo_venta === tipoVenta.boleta) {
+        tipoComprobante = "03";
+    } else if (venta.tipo_venta === tipoVenta.factura) {
+        tipoComprobante = "01";
+    }
+    if (cliente.tipoDocumento === "DNI") {
+        tipoDocumento = "1"
+    } else if (cliente.tipoDocumento === "RUC") {
+        tipoDocumento = "6"
+    } else if (
+        cliente.tipoDocumento === "noDocumento" || 
+        (!cliente.tipoDocumento && venta.tipo_venta === tipoVenta.boleta)
+    ) {
+        tipoDocumento = "00"
+    }
+
+    const nroDocumento:string = tipoDocumento !== "00" ? cliente.numero_documento + "|" : "";
+
+    // info empresa - requiere automatizar
+    const ruc:string = "20602956211";
+
 
     if (!nuevo) {
         subtotal = Number(venta.subtotal / 1.18);
@@ -61,43 +86,24 @@ export const ImpComprobante = ({ venta, setImprimir, nuevo }:impComprobante) => 
     }
 
 
-    const cliente:any = venta.clientes ? venta.clientes : {};
-    const ventaDetalles:any = venta.ventaDetalles ? venta.ventaDetalles : {};
-
     const nroCorrelat = () => {
         if (nuevo) {
             // nueva impresion
             if (esComprobante) {
-                return Number(nuevoCorrelativo) + 1 + "-";    
+                return Number(nuevoCorrelativo) + 1;    
             } else {
                 return ""
             }
         } else {
             // impresion existente
             if (esComprobante) {
-                return existCorrelativo + "-";
+                return existCorrelativo;
             } else {
                 return "";
             }
             
         }
-    }
-
-    
-    // const subTotalIgv = ():any => { 
-    //     let subtotal:number = Number(venta.subtotal / 1.18);
-    //     let igv:number = Number(venta.precio_venta) - Number(subtotal);
-    //     if (!nuevo) {
-    //         subtotal = Number(venta.subtotal / 1.18);
-    //         igv = Number(venta.precio_venta) - Number(subtotal);
-    //     }
-
-    //     return [ subtotal, igv ]
-    // }
-
-
-    // console.log(subTotalIgv().subtotal, subTotalIgv().igv);
-    
+    }  
 
     // estilos
     // generales
@@ -175,9 +181,6 @@ export const ImpComprobante = ({ venta, setImprimir, nuevo }:impComprobante) => 
         ...m0
     }
 
-    // cliente
-
-
     // body
     const tituloDetalles:any = {
         ...texto,
@@ -217,6 +220,10 @@ export const ImpComprobante = ({ venta, setImprimir, nuevo }:impComprobante) => 
         ...center
     }
 
+    // info de QR
+    const informacionQR:string = `${ruc}|${tipoComprobante}|${serie}|${nroCorrelat()}|${fixedInput(nuevo ? moneda(venta.igvGeneral) : moneda(igv))}|${fixedInput(venta.total)}|${fechaResumenGuiones(venta.updated_at)}|${tipoDocumento}|${nroDocumento}`;
+
+    
     return (
 
         <div className="none imprimir-comprobante">
@@ -227,7 +234,7 @@ export const ImpComprobante = ({ venta, setImprimir, nuevo }:impComprobante) => 
                     <span style={headerInfo}>
                         { 
                             serie + "-" + 
-                            nroCorrelat() +
+                            (nroCorrelat() ? nroCorrelat() + "-" : "") +
                             venta.id + "-" + 
                             venta.codigo_venta
                         }
@@ -245,7 +252,7 @@ export const ImpComprobante = ({ venta, setImprimir, nuevo }:impComprobante) => 
                                 <p style={infoEmpresa}>INVERSIONES PERKINS EMPRESA INDIVIDUAL DE RESPONSABILIDAD LIMITADA</p>
                                 <p style={infoEmpresa}>CAL. TRINITARIAS N. 501 URB. CENTRO HISTORICO CUSCO</p>
                                 <p style={infoEmpresa}>CUSCO - CUSCO - CUSCO</p>
-                                <p style={infoTxtM0}>RUC: 20602956211</p>
+                                <p style={infoTxtM0}>RUC: {ruc}</p>
                                 <p style={infoTxtM0}>CORREO: epc26irvin@gmail.com</p>
                                 <p style={infoTxtM0}>TELEFONOS: 20602956211</p>
                             </>
@@ -371,7 +378,7 @@ export const ImpComprobante = ({ venta, setImprimir, nuevo }:impComprobante) => 
                         esComprobante
                         && (
                             <div style={qrcode}>
-                                <QRCodeSVG value={`${serie}|${venta.codigo_venta}|${moneda(venta.subtotal)}|${moneda(venta.igvGeneral)}|${moneda(venta.total)}|${fecha(venta.updated_at)}|${ventaDetalles.length}`} />
+                                <QRCodeSVG value={informacionQR} />
                             </div>
                         )
                     }

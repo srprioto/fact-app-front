@@ -19,6 +19,15 @@ export const fechaResumen = (fecha:any) => {
     return newFecha
 }
 
+export const fechaResumenGuiones = (fecha:any) => {
+    const newFecha:any = DateTime
+        .fromISO(fecha)
+        .setZone('UTC')
+        .setLocale('es')
+        .toFormat('dd-LL-yy');
+    return newFecha
+}
+
 export const fechaNoHora = (fecha:any) => {
     const newFecha:any = DateTime
         .fromISO(fecha)
