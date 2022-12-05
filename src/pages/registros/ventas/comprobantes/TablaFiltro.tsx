@@ -1,4 +1,4 @@
-import { BiRefresh } from "react-icons/bi"
+// import { BiRefresh } from "react-icons/bi"
 
 export const TablaFiltro = ({ getData, toggle }:any) => {
     return (

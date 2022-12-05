@@ -1,4 +1,4 @@
-import { BiBarChartAlt, BiCartAlt, BiCheck, BiRefresh, BiTask, BiX } from "react-icons/bi"
+import { BiBarChartAlt, BiCartAlt, BiCheck, BiTask, BiX } from "react-icons/bi"
 
 export const TabbsFiltroDatos = ({ getData, toggle }:any) => {
     return (
