@@ -13,8 +13,6 @@ interface impComprobante {
 
 export const ImpComprobante = ({ venta, setImprimir, nuevo }:impComprobante) => {
 
-    // console.log(venta);    
-
     const imprimir = useRef<any>(null);
 
     // info comprobante
@@ -223,7 +221,7 @@ export const ImpComprobante = ({ venta, setImprimir, nuevo }:impComprobante) => 
     // info de QR
     const informacionQR:string = `${ruc}|${tipoComprobante}|${serie}|${nroCorrelat()}|${fixedInput(nuevo ? moneda(venta.igvGeneral) : moneda(igv))}|${fixedInput(venta.total)}|${fechaResumenGuiones(venta.updated_at)}|${tipoDocumento}|${nroDocumento}`;
 
-    
+
     return (
 
         <div className="none imprimir-comprobante">
