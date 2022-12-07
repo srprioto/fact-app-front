@@ -5,7 +5,6 @@ import { useAuth } from "../../auth/useAuth";
 import { LoadSwitchBtn2 } from "../../components/btns/LoadSwitchBtn2";
 import { InputMk } from "../../components/forms/InputMk";
 import { ValidLogin } from "../../resources/validations/Login";
-// import { DataLogin } from "../../resources/dtos/Login";
 
 
 export const IndexLogin = () => {
@@ -38,7 +37,7 @@ export const IndexLogin = () => {
                 }}
             >
 
-                {({ values, errors }:any) => (
+                {({ errors }:any) => (
                     <Form className="box-login grid-1 gap">
                         
                         <h3 className="">Acceder</h3>
@@ -48,39 +47,22 @@ export const IndexLogin = () => {
                                 <div className="item-input">
                                     <label htmlFor="email"><BiUser /></label>
                                     <InputMk 
-                                        // label="Nombre"
                                         type="text"
                                         name="email"
                                         error={errors.email}
                                         placeholder="Usuario o E-mail" 
                                     />
-
-                                    {/* <input 
-                                        id="email"
-                                        name="email"
-                                        type="text" 
-                                        placeholder="E-mail" 
-                                        onChange={handlerOnChange}
-                                    /> */}
                                 </div>
                             </div>
                             <div className="content-input">
                                 <div className="item-input">
                                     <label htmlFor="password"><BiLock /></label>
                                     <InputMk 
-                                        // label="Nombre"
                                         type="password"
                                         name="password"
                                         error={errors.password}
                                         placeholder="Contraseña"
                                     />
-                                    {/* <input 
-                                        id="password" 
-                                        name="password"
-                                        type="password"
-                                        placeholder="Contraseña" 
-                                        onChange={handlerOnChange}
-                                    /> */}
                                 </div>
                             </div>
                         </div>
@@ -90,7 +72,6 @@ export const IndexLogin = () => {
                             <LoadSwitchBtn2
                                 loading={loading}
                                 className="btn btn-success"
-                                // handler={handlerLogin}
                             >
                                 Acceder
                                 <BiSubdirectoryRight />
