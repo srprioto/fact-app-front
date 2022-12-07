@@ -290,10 +290,18 @@ export const ImpComprobante = ({ venta, setImprimir, nuevo }:impComprobante) => 
                         <tbody>
                             {
                                 ventaDetalles.map((e:any) => {
-                                    const precio_venta:number = 
+
+                                    let precio_venta:number = 0;
+
+                                    if (nuevo) {
+                                        precio_venta = e.precio_venta
+                                    } else {
+                                        precio_venta = 
                                         Number(e.precio_venta) + 
                                         (Number(e.descuento) / 
                                         Number(e.cantidad_venta));
+                                    }
+
                                     return (
                                         <tr key={e.id} style={texto}>
                                             {/* <td>{ e.productos.codigo }</td> */}
