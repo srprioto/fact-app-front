@@ -290,6 +290,10 @@ export const ImpComprobante = ({ venta, setImprimir, nuevo }:impComprobante) => 
                         <tbody>
                             {
                                 ventaDetalles.map((e:any) => {
+                                    const precio_venta:number = 
+                                        Number(e.precio_venta) + 
+                                        (Number(e.descuento) / 
+                                        Number(e.cantidad_venta));
                                     return (
                                         <tr key={e.id} style={texto}>
                                             {/* <td>{ e.productos.codigo }</td> */}
@@ -300,7 +304,7 @@ export const ImpComprobante = ({ venta, setImprimir, nuevo }:impComprobante) => 
                                                 e.productos.talla + " - " +
                                                 e.productos.color
                                             }</td>
-                                            <td>S/.{ moneda(e.precio_venta) }</td>
+                                            <td>S/.{ moneda(precio_venta) }</td>
                                             <td>S/.{ moneda(e.precio_parcial) }</td>
                                         </tr>            
                                     );                                

@@ -24,12 +24,10 @@ export const AuthProvider = ({ children }:any) => {
 
 
     const login = async (dataAccess:DataLogin) => {
-
-        // setLoading(true);
         let loginState:boolean = false;
-
         try {
             const responseLogin = await post(dataAccess, LOGIN);
+            console.log(responseLogin);            
             if (responseLogin.statusCode !== 401 && responseLogin.statusCode !== 'Unauthorized') {
                 localStorage.setItem("UserApp", JSON.stringify(responseLogin));
                 setLoggedUserApp(responseLogin);
@@ -38,13 +36,10 @@ export const AuthProvider = ({ children }:any) => {
                 setLoggedUserApp(null);
                 loginState = false;
             }
-            // setLoading(false);
         } catch (error) {
             localStorage.removeItem("UserApp");
             console.log(error);
-            // setLoading(false);            
         }
-
         return loginState
     }
 
@@ -98,3 +93,10 @@ export const AuthProvider = ({ children }:any) => {
         // )
     )
 }
+
+
+// export const asdf = {
+//     statusCode: 401,
+//     message: "not allow",
+//     error: "Unauthorized"
+// }

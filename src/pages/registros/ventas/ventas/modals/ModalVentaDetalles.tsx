@@ -129,7 +129,13 @@ export const BoxModalVentaDetalles = ({ idVenta }:any) => {
                                                             <ProductoInfo producto={e.productos} />
                                                         </td>
                                                         <td>{ e.cantidad_venta }</td>
-                                                        <td>S/. { e.descuento }</td>
+                                                        <td className={(
+                                                            Number(e.descuento) > 0
+                                                            ? "success"
+                                                            : Number(e.descuento) < 0
+                                                            ? "danger"
+                                                            : ""
+                                                        )}>S/. { e.descuento }</td>
                                                         <td>S/. { e.precio_venta }</td>
                                                         <td>S/. { e.precio_parcial }</td>
                                                         <td
