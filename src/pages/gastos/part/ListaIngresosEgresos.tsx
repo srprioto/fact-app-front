@@ -52,7 +52,7 @@ export const ListaIngresosEgresos = ({ data, handlerEditar, handlerDeleted }:lis
                                             <BiTrash />Eliminar
                                         </span>
                                         <span onClick={ () => handlerEditar(e) }>
-                                            <BiPencil />Editar usuario
+                                            <BiPencil />Editar Ingr/Egre
                                         </span>
                                     </DropDown>
                                 </td>
