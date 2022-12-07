@@ -127,10 +127,13 @@
 @mixin msgError() {
     position: absolute;
     text-align: left;
-    left: 4px;
-    top: 9px;
+    top: 0;
+    left: 2px;
     width: 26px;
-    height: 24px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     
     svg{
         padding: 2px;
@@ -147,6 +150,7 @@
         transform: scale(0);
         position: absolute;
         left: 0;
+        top: 40px;
         text-align: left;
     }
     

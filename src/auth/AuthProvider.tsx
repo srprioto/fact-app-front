@@ -27,7 +27,6 @@ export const AuthProvider = ({ children }:any) => {
         let loginState:boolean = false;
         try {
             const responseLogin = await post(dataAccess, LOGIN);
-            console.log(responseLogin);            
             if (responseLogin.statusCode !== 401 && responseLogin.statusCode !== 'Unauthorized') {
                 localStorage.setItem("UserApp", JSON.stringify(responseLogin));
                 setLoggedUserApp(responseLogin);
