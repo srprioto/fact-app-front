@@ -15,14 +15,12 @@ export const RapidaCobrar = ({
     activarConfirmarVenta
 }:any) => {
 
-    // const serie:string = "V001";
     const tipo_venta:string = tipoVenta.venta_rapida;
 
     useEffect(() => {
         setVenta({
             ...venta,
             tipo_venta: tipo_venta
-            // serie: serie
         })
     }, [])
     

@@ -15,7 +15,6 @@ interface boleta {
     modalConfVenta:any;
     setModalRechazVenta:Function;
     modalRechazVenta:any;
-    // switchChangeFact:boolean;
     venta:any;
     setVenta:Function;
     activarConfirmarVenta:Function;
@@ -31,45 +30,23 @@ export const BoletaCobrar = ({
     modalConfVenta, 
     setModalRechazVenta, 
     modalRechazVenta,
-    // switchChangeFact, 
     venta, 
     setVenta,
     activarConfirmarVenta,
     getCliente, 
     setGetCliente,
 }:boleta) => {
-
-    // const tipoDocum = () => { 
-    //     if (!!cliente) {
-    //         if (!!cliente.tipoDocumento) {
-    //             return cliente.tipoDocumento
-    //         } else {
-    //             return "noDocumento"
-    //         }
-    //     } else {
-    //         return "noDocumento"
-    //     }
-    // }
     
     const tipo_venta:string = tipoVenta.boleta;
-    // const clienteI = clienteInfo(serie);
     const [loadCliente, setLoadCliente] = useState<boolean>(false);
     
 
     useEffect(() => {
         setVenta({
             ...venta,
-            // serie: serie,
             tipo_venta: tipo_venta
         })
     }, [])
-
-    // useEffect(() => {
-    //     setGetCliente({
-    //         ...getCliente,
-    //         documento: cliente ? cliente.numero_documento : ""
-    //     })
-    // }, [getCliente.tipoDocumento])
 
 
     useEffect(() => {
@@ -134,7 +111,6 @@ export const BoletaCobrar = ({
             <h3>Informacion general</h3>
 
             <FormDocumCobrar
-                // serie={serie}
                 tipoVenta={tipo_venta}
                 cliente={cliente}
                 getCliente={getCliente}
@@ -142,16 +118,6 @@ export const BoletaCobrar = ({
                 handlerOnChangeGetCli={handlerOnChangeGetCli}
                 handlerGetCliente={handlerGetCliente}
                 loadCliente={loadCliente}
-                
-                // venta={venta}
-                // switchChangeFact={switchChangeFact}
-                // tabbs={tabbs}
-                // setTabbs={setTabbs}
-                // tipoSerie={tipoSerie}
-                // data={data}
-                // setCliente={setCliente}
-                // setGetCliente={setGetCliente}
-                // setVenta={setVenta}
             />
 
             <FormGeneralCobrar
@@ -170,44 +136,3 @@ export const BoletaCobrar = ({
         </div>
     )
 }
-
-
-
-// <div className="box-boleta">
-
-// {
-//     loadCliente
-//     ? <Loading />
-//     : (
-//         <>
-//             {
-//                 getCliente.tipoDocumento === "DNI"
-//                 && <CobrarClienteDni 
-//                     switchChange={switchChange}
-//                     cliente={cliente}
-//                     setCliente={setCliente} 
-//                 />
-//             }
-//             {
-//                 getCliente.tipoDocumento === "RUC"
-//                 && <CobrarClienteRuc 
-//                     switchChange={switchChange}
-//                     cliente={cliente}
-//                     setCliente={setCliente} 
-//                 />
-//             }
-//         </>
-//     )
-// }
-
-// <div className="mt-15 bb bb-neutro" />
-// <br />
-
-// <ConfirmarVenta
-//     setModalConfVenta={setModalConfVenta}
-//     modalConfVenta={modalConfVenta}
-//     setModalRechazVenta={setModalRechazVenta}
-//     modalRechazVenta={modalRechazVenta}
-// />
-
-// </div>

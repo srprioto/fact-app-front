@@ -60,6 +60,10 @@ export const TabsVenta = ({
                 tipoDocumento: tipDocument()
             })
         } else {
+            console.log("*****");
+            console.log(clienteInfo);
+            console.log("*****");
+            
             setCliente(clienteInfo);
             setGetCliente({
                 documento: documento(), 

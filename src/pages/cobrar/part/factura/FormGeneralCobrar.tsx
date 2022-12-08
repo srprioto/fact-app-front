@@ -27,13 +27,6 @@ export const FormGeneralCobrar = ({
     activarConfirmarVenta
 }:formGeneralCobrar) => {
 
-    // const [showFormsCliente, setShowFormsCliente] = useState<boolean>(false);
-
-    // useEffect(() => {
-    //     setShowFormsCliente(getCliente.documento.length === (getCliente.tipoDocumento === "RUC" ? 11 : 8))
-    // }, [getCliente])
-    
-
     const handlerOnChangeCliente = (e:any) => { 
         setCliente({
             ...cliente,
@@ -43,7 +36,6 @@ export const FormGeneralCobrar = ({
 
 
     const stateCliente:string = cliente ? cliente.estadoCliente : "";
-    // const clienteExist:boolean = !!stateCliente;
 
 
     const validacionDoc = () => { 
@@ -102,7 +94,6 @@ export const FormGeneralCobrar = ({
                                                 errors={errors}
                                                 switchChange={switchChange}
                                                 cliente={cliente}
-                                                // setCliente={setCliente} 
                                             />
                                         }
                                     </>
@@ -111,9 +102,6 @@ export const FormGeneralCobrar = ({
                         }
 
                         <ConfirmarVenta
-                            // setModalConfVenta={setModalConfVenta}
-                            // modalConfVenta={modalConfVenta}
-                            // clienteExist={clienteExist}
                             setModalRechazVenta={setModalRechazVenta}
                             modalRechazVenta={modalRechazVenta}
                             activarConfirmarVenta={activarConfirmarVenta}

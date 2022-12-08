@@ -4,7 +4,6 @@ import { post } from "../../../../resources/fetch";
 import { CLIENTES } from "../../../../resources/routes";
 import { FormDocumCobrar } from "./FormDocumCobrar";
 import { FormGeneralCobrar } from "./FormGeneralCobrar";
-// import { CobrarClienteRuc } from "../../../../components/factura/cliente/CobrarClienteRuc";
 
 
 interface factura {
@@ -15,11 +14,6 @@ interface factura {
     modalConfVenta:any;
     setModalRechazVenta:Function;
     modalRechazVenta:any;
-    // switchChangeFact:boolean;
-    // setTabbs:Function;
-    // tipoSerie:Function;
-    // data:any
-    // tabbs:number;
     venta:any;
     setVenta:Function;
     activarConfirmarVenta:Function;
@@ -35,11 +29,6 @@ export const FacturaCobrar = ({
     modalConfVenta, 
     setModalRechazVenta, 
     modalRechazVenta,
-    // switchChangeFact, 
-    // setTabbs, 
-    // data, 
-    // tipoSerie, 
-    // tabbs,
     venta, 
     setVenta,
     activarConfirmarVenta,
@@ -47,27 +36,24 @@ export const FacturaCobrar = ({
     setGetCliente
 }:factura) => {
 
-    // const serie:string = "F003";
     const tipo_venta:string = tipoVenta.factura;
-    // const clienteI = clienteInfo(serie);
     const [loadCliente, setLoadCliente] = useState<boolean>(false);
-    // const [getCliente, setGetCliente] = useState<any>({ documento: "", tipoDocumento: "RUC", });
+
 
     useEffect(() => {
         setVenta({
             ...venta,
-            // serie: serie,
             tipo_venta: tipo_venta
         })
     }, [])
 
+
     useEffect(() => {
-        // setCliente(clienteI);
         setGetCliente({
             tipoDocumento: "RUC",
             documento: cliente.numero_documento
         })
-        setCliente({ // añade el tipo de documento cambiado a cliente
+        setCliente({
             ...cliente,
             tipoDocumento: getCliente.tipoDocumento
         })
@@ -115,7 +101,6 @@ export const FacturaCobrar = ({
             <h3>Informacion general</h3>
 
             <FormDocumCobrar
-                // serie={serie}
                 tipoVenta={tipo_venta}
                 cliente={cliente}
                 getCliente={getCliente}
@@ -123,16 +108,6 @@ export const FacturaCobrar = ({
                 handlerOnChangeGetCli={handlerOnChangeGetCli}
                 handlerGetCliente={handlerGetCliente}
                 loadCliente={loadCliente}
-
-                // venta={venta}
-                // switchChangeFact={switchChangeFact}
-                // tabbs={tabbs}
-                // setTabbs={setTabbs}
-                // tipoSerie={tipoSerie}
-                // data={data}
-                // setCliente={setCliente}
-                // setGetCliente={setGetCliente}                
-                // setVenta={setVenta}
             />
 
             <FormGeneralCobrar

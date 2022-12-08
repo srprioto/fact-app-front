@@ -224,6 +224,9 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
     }
 
     
+    console.log(cliente);
+
+
     return (
         <div className="descripcion-venta">
             <div className="grid-1 gap">
