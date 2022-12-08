@@ -317,7 +317,6 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
                             activarConfirmarVenta={activarConfirmarVenta}
                             getCliente={getCliente}
                             setGetCliente={setGetCliente}
-                            // switchChangeFact={switchChangeFact}
                         /> 
                     }
                     {
