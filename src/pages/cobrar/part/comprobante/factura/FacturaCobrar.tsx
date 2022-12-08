@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { tipoVenta } from "../../../../resources/dtos/VentasDto";
-import { post } from "../../../../resources/fetch";
-import { CLIENTES } from "../../../../resources/routes";
-import { FormDocumCobrar } from "./FormDocumCobrar";
-import { FormGeneralCobrar } from "./FormGeneralCobrar";
+import { tipoVenta } from "../../../../../resources/dtos/VentasDto";
+import { post } from "../../../../../resources/fetch";
+import { CLIENTES } from "../../../../../resources/routes";
+import { FormDocumFacturaCob } from "./FormDocumFacturaCob";
+import { FormGeneralFacturaCob } from "./FormGeneralFacturaCob";
 
 
 interface factura {
@@ -100,7 +100,7 @@ export const FacturaCobrar = ({
 
             <h3>Informacion general</h3>
 
-            <FormDocumCobrar
+            <FormDocumFacturaCob
                 tipoVenta={tipo_venta}
                 cliente={cliente}
                 getCliente={getCliente}
@@ -110,7 +110,7 @@ export const FacturaCobrar = ({
                 loadCliente={loadCliente}
             />
 
-            <FormGeneralCobrar
+            <FormGeneralFacturaCob
                 loadCliente={loadCliente}
                 getCliente={getCliente}
                 switchChange={switchChange}

@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { clienteInfo } from "../../../../resources/dtos/Cliente";
-import { tipoVenta } from "../../../../resources/dtos/VentasDto";
-import { post } from "../../../../resources/fetch";
-import { CLIENTES } from "../../../../resources/routes";
-import { FormDocumCobrar } from "./FormDocumCobrar";
-import { FormGeneralCobrar } from "./FormGeneralCobrar";
+import { clienteInfo } from "../../../../../resources/dtos/Cliente";
+import { tipoVenta } from "../../../../../resources/dtos/VentasDto";
+import { post } from "../../../../../resources/fetch";
+import { CLIENTES } from "../../../../../resources/routes";
+import { FormDocumBoletaCob } from "./FormDocumBoletaCob";
+import { FormGeneralBoletaCob } from "./FormGeneralBoletaCob";
 
 
 interface boleta {
@@ -110,7 +110,7 @@ export const BoletaCobrar = ({
 
             <h3>Informacion general</h3>
 
-            <FormDocumCobrar
+            <FormDocumBoletaCob
                 tipoVenta={tipo_venta}
                 cliente={cliente}
                 getCliente={getCliente}
@@ -120,7 +120,7 @@ export const BoletaCobrar = ({
                 loadCliente={loadCliente}
             />
 
-            <FormGeneralCobrar
+            <FormGeneralBoletaCob
                 loadCliente={loadCliente}
                 getCliente={getCliente}
                 switchChange={switchChange}

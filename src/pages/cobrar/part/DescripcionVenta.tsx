@@ -6,10 +6,10 @@ import { ModalVentaConfirmar } from "./modals/ModalVentaConfirmar";
 import { ModalVentaRechazar } from "./modals/ModalVentaRechazar";
 import { ModalWrap } from "../../../components/modals/ModalWrap";
 import { clienteInfo } from "../../../resources/dtos/Cliente";
-import { BoletaCobrar } from "./factura/BoletaCobrar";
-import { FacturaCobrar } from "./factura/FacturaCobrar";
+import { BoletaCobrar } from "./comprobante/boleta/BoletaCobrar";
+import { FacturaCobrar } from "./comprobante/factura/FacturaCobrar";
 import { Checkbox2 } from "../../../components/forms/Checkbox2";
-import { RapidaCobrar } from "./factura/RapidaCobrar";
+import { RapidaCobrar } from "./comprobante/RapidaCobrar";
 import { TabsVenta } from "./otros/TabsVenta";
 import { CodigoVenta } from "./otros/CodigoVenta";
 import { DividirPagos } from "./DividirPagos";
@@ -208,9 +208,6 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
             return false
         }
     }
-
-    
-    console.log(cliente);
 
 
     return (

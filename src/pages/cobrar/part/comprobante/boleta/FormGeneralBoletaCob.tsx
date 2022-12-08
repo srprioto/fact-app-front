@@ -1,10 +1,10 @@
 import { Form, Formik } from "formik";
-import { Loading } from "../../../../components/loads/Loading"
-import { ValidClienteDni, ValidClienteRuc } from "../../../../resources/validations/Clientes";
-import { ClienteInexistente } from "../../../vender/part/factura/ClienteInexistente";
-import { CobrarClienteDni } from "./CobrarClienteDni"
-import { CobrarClienteRuc } from "./CobrarClienteRuc"
-import { ConfirmarVenta } from "./ConfirmarVenta"
+import { Loading } from "../../../../../components/loads/Loading";
+import { ValidClienteDni, ValidClienteRuc } from "../../../../../resources/validations/Clientes";
+import { ClienteInexistente } from "../../../../vender/part/factura/ClienteInexistente";
+import { CobrarClienteDni } from "../CobrarClienteDni";
+import { CobrarClienteRuc } from "../CobrarClienteRuc";
+import { ConfirmarVenta } from "../ConfirmarVenta";
 
 interface formGeneralCobrar{
     loadCliente:boolean;
@@ -12,18 +12,23 @@ interface formGeneralCobrar{
     switchChange:boolean;
     cliente:any
     setCliente:Function;
-
     setModalConfVenta:Function;
     modalConfVenta:any;
     setModalRechazVenta:Function;
     modalRechazVenta:any;
-
     activarConfirmarVenta:Function;
 }
 
-export const FormGeneralCobrar = ({ 
-    loadCliente, getCliente, switchChange, cliente, setCliente,
-    setModalConfVenta, modalConfVenta, setModalRechazVenta, modalRechazVenta,
+export const FormGeneralBoletaCob = ({
+    loadCliente, 
+    getCliente, 
+    switchChange, 
+    cliente, 
+    setCliente,
+    setModalConfVenta, 
+    modalConfVenta, 
+    setModalRechazVenta, 
+    modalRechazVenta,
     activarConfirmarVenta
 }:formGeneralCobrar) => {
 
@@ -50,7 +55,6 @@ export const FormGeneralCobrar = ({
 
 
     const showFormsCliente:boolean = getCliente.documento.length === (getCliente.tipoDocumento === "RUC" ? 11 : 8);
-
 
     return (
         <div className="">
@@ -115,6 +119,3 @@ export const FormGeneralCobrar = ({
         </div>
     )
 }
-
-
-

@@ -60,23 +60,12 @@ export const TabsVenta = ({
                 tipoDocumento: tipDocument()
             })
         } else {
-            console.log("*****");
-            console.log(clienteInfo);
-            console.log("*****");
-            
             setCliente(clienteInfo);
             setGetCliente({
                 documento: documento(), 
                 tipoDocumento: tipoDocumUpdate()
             })
         }
-        // if (tabbs !== 4) {
-        //     console.log("AQUI ESTOY");
-        //     setVenta({
-        //         ...venta,
-        //         totalPagado: 0
-        //     })
-        // }
     }, [switchChangeFact, tabbs])
 
 
