@@ -142,6 +142,7 @@ export const TransaccionRepo = () => {
                                     <tr>
                                         <th>Codigo envio</th>
                                         <th>Descripcion</th>
+                                        {/* <th>Local origen</th> */}
                                         <th>Local destino</th>
                                         <th>Estado de envio</th>
                                         <th>Fecha de envio</th>
@@ -157,7 +158,6 @@ export const TransaccionRepo = () => {
                                                     key={e.id}
                                                     elemento={e}
                                                     handlerVer={handlerVer}
-                                                    // handlerDeleted={handlerDeleted}
                                                 />
                                             )
                                         })
@@ -177,8 +177,6 @@ export const TransaccionRepo = () => {
                 />
 
             </div>
-
-            {/* modals aqui */}
 
             <ModalWrap modal={modalVer}>
                 <ModalVerTransac

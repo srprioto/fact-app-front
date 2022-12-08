@@ -193,6 +193,7 @@ export const InfoGeneralVentas = ({ idLocal, selectLocal, loadingLocal, locales 
                                 <thead>
                                     <tr>
                                         <th>Codigo venta</th>
+                                        <th></th>
                                         <th>Tipo venta</th>
                                         <th>Ingreso venta</th>
                                         <th>Forma pago</th>

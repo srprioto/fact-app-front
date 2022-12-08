@@ -2,6 +2,7 @@
 import { tipoVenta } from "../../../../resources/dtos/VentasDto";
 import { fecha } from "../../../../resources/func/fechas";
 import { moneda } from "../../../../resources/func/moneda"
+import { ListaDetalleProductos } from "../../Ingresos/part/ListaDetalleProductos";
 import { VentasDropdown } from "./VentasDropdown"
 
 interface ventaItems {
@@ -27,11 +28,11 @@ export const VentaItems = ({
     const comprobante:any = ventas.comprobante ? ventas.comprobante : [];
     const correlativo:number = comprobante[0] ? comprobante[0].correlativo : 0;
     const codigoVenta:string = 
-        ventas.id + "-" + 
+        ventas.id + "-" +
         ventas.codigo_venta +
         (correlativo !== 0 ? "-" + correlativo : "");
 
-        
+
     const classEstado = () => { 
         if (ventas.estado_venta === "listo") {
             return "success ";
@@ -65,11 +66,14 @@ export const VentaItems = ({
             return "success ";
         }
     }
-    
+
     
     return (
         <tr className="venta-items">
             <td className={"secundary " + anulado()}>{ codigoVenta }</td>
+            <td className={"" + anulado()}>
+                <ListaDetalleProductos detalles={ventas.ventaDetalles} />
+            </td>
             <td className={"secundary capitalize " + anulado() + tipoComprobante()}>{ ventas.tipo_venta }</td>
 
             {

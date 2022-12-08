@@ -981,51 +981,48 @@
 
 // reportes
 // ingreso de productos
-.ingreso-prod-repo{
-    .ingresos-item{
-        .lista-ingreso-productos{
-
-            .box-lista-ingreso-productos{
-                top: 10px;
-                // top: 45px;
-                right: -10px;
-                position: absolute;
-                transform: scale(0);
-                width: 220px;
-                z-index: 3;
-                background-color: $box2;
-                border-radius: 6px;
-                border: 1px solid $primary;
-                padding: 10px 10px 10px 0px;
-                
-                li{
-                    margin: 0 0 0 35px;
-                    padding: 0px 0px 4px 0px;
-                }
-            }
+// .ingreso-prod-repo{
+//     .ingresos-item{
         
-            svg{
-                margin-right: 4px;
-                font-size: 20px;
-                cursor: pointer;
-            }
-        
-            svg:hover ~ .box-lista-ingreso-productos,
-            .box-lista-ingreso-productos:hover{
-                transform: scale(1);
-                transition: .3s;
-            }
+//     }
+
+// }
 
 
+.lista-ingreso-productos{
+    position: relative;
+    .box-lista-ingreso-productos{
+        margin: 0;
+        top: 17px;
+        left: -20px;
+        position: absolute;
+        transform: scale(0);
+        width: 400px;
+        z-index: 3;
+        background-color: $box2;
+        border-radius: 6px;
+        border: 1px solid $primary;
+        padding: 10px 10px 10px 0px;
+        li{
+            margin: 0 0 0 35px;
+            padding: 0px 0px 4px 0px;
         }
     }
-
+    svg{
+        margin-right: 4px;
+        font-size: 20px;
+        cursor: pointer;
+    }
+    svg:hover ~ .box-lista-ingreso-productos,
+    .box-lista-ingreso-productos:hover{
+        transform: scale(1);
+        transition: .3s;
+    }
 }
 
+
 .producto-dropdown-info-ingrso{
-
     position: relative;
-
     .producto-ddbox-info-ingrso{
         top: 0px;
         left: 0px;

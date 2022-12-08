@@ -8,7 +8,11 @@ export const ListaDetalleProductos = ({ detalles }:any) => {
                 {
                     detalles.map((e:any) => { 
                         return (
-                            <li key={e.id}>{e.productos.nombre}</li>
+                            <li key={e.id}>
+                                {e.productos.nombre}
+                                {e.productos.marca && " - " + e.productos.marca}
+                                {e.productos.talla && " - " + e.productos.talla}
+                            </li>
                         )
                     })
                 }

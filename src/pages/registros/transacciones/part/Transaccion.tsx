@@ -26,6 +26,7 @@ export const Transaccion = ({ elemento, handlerVer }:transaccion) => {
         <tr className="transaccion">
             <td>{ zeroFill(elemento.id, 6) }</td>
             <td>{ elemento.descripcion }</td>
+            {/* {<td>{ elemento.localOrigen && elemento.localOrigen.nombre }</td>} */}
             <td>{ elemento.localDestino.nombre }</td>
             <td
                className={ handlerClassEstado(elemento.estado_general) } 
