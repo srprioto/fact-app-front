@@ -81,7 +81,6 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
 
     const [venta, setVenta] = useState<any>({...copy(data), totalPagado: 0});
     const [cliente, setCliente] = useState<any>(clienteOk ? data.clientes : clienteInfo);
-    // const [cliente, setCliente] = useState<any>({});
     const [creditoDetalles, setCreditoDetalles] = useState<Array<any>>([]);
 
     const tipoDocumUpdate = () => { 
@@ -126,9 +125,9 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
         return itemsTarjeta;
     }
 
-    useEffect(() => {
-        setCliente(clienteOk ? data.clientes : clienteInfo);
-    }, [])
+    // useEffect(() => {
+    //     setCliente(clienteOk ? data.clientes : clienteInfo);
+    // }, [])
     
 
     useEffect(() => {
@@ -146,7 +145,6 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
             setComisionTarjeta(cincoPor);
         } else {
             setComisionTarjeta(0);
-            // setVenta({ ...venta, forma_pago: data.forma_pago })
         }
     }, [venta.forma_pago, showFormasPago])
 
@@ -167,24 +165,12 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
         })
         
         updateVenta.estado_venta = estado;
-        // updateVenta.descuento_total = venta.descuento_total;
-        // updateVenta.codigo_venta = venta.codigo_venta;
-        // updateVenta.observaciones = venta.observaciones;
-        // updateVenta.subtotal = venta.subtotal;
-        // updateVenta.total = venta.total;
-        // updateVenta.usuarioId = venta.usuarios.id;
         updateVenta.localId = venta.locales.id;
         updateVenta.forma_pago = listaLimpia.length <= 0 
             ? venta.forma_pago 
             : "dividido";
         updateVenta.tipo_venta = venta.tipo_venta;
         updateVenta.cliente = cliente;
-
-        // data.ventaDetalles.forEach((e:any) => { // añade listo o rechazado a ventaDetalles
-        //     e.estado_venta_detalle = "listo";
-        //     ventaDet.push(e);
-        // })
-
         updateVenta.ventaDetalles = ventaDet;
         updateVenta.formasPago = listaLimpia;
         updateVenta.comprobante = comprobante;
@@ -373,7 +359,6 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
                     modal={modalRechazVenta}
                     setModal={setModalRechazVenta}
                     venta={venta}
-                    // codigoPago={codigoPago}
                     rechazarVenta={handlerConfirmarVenta}
                     loading={loadConfirmarVenta}
                 />
@@ -382,104 +367,3 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
         </div>
     )
 }
-
-// const [listaRechazados, setListaRechazados] = useState<any>([]);
-// const [ModalCliente, setModalCliente] = useState<boolean>(false);
-
-
-// useEffect(() => { 
-//     let ventaDetails:any = []; // añadir lista detalles
-//     data.ventaDetalles.map((e:any) => { 
-//         if (!(listaRechazados.includes(e.id))) {
-//             ventaDetails.push(e);
-//         }
-//         return (null)
-//     })
-
-//     const sumaSubtotal = venta.ventaDetalles // calcular subtotal
-//     .map((e:any) => e.precio_parcial)
-//     .reduce((prev:number, curr:number) => prev + curr, 0);
-    
-//     setVenta({ 
-//         ...venta, 
-//         subtotal: sumaSubtotal,
-//         ventaDetalles: ventaDetails
-//     });
-
-// }, [venta.ventaDetalles, listaRechazados])
-
-
-// useEffect(() => { // calcular total
-//     setVenta({
-//         ...venta,
-//         total: (venta.subtotal + (Number(venta.descuento_total)))
-//     })
-// }, [venta.subtotal, venta.descuento_total])
-
-
-// useEffect(() => {
-//     if (!switchChangeFact) {
-//         setTabbs(tipoSerie())
-//         setCliente(data.clientes)
-//     } else {
-//         setCliente(clienteInfo(""))
-//     }
-// }, [switchChangeFact, tabbs])
-
-
-// const handlerCheckbox = (e:any) => {
-//     let updatedList = [ ...listaRechazados ];
-//     if (e.target.checked) {
-//         updatedList = [ ...listaRechazados, Number(e.target.value)];
-//     } else {
-//         updatedList.splice(listaRechazados.indexOf(e.target.value), 1);
-//     }
-//     setListaRechazados(updatedList);
-// }
-
-
-// const handlerCliente = (cliente:any) => setVenta({ ...venta, clientes: cliente}) // cliente nuevo
-
-// <MetodosPago
-//     label="Forma de pago"
-//     name="forma_pago"
-//     onChange={handlerChangeVenta}
-//     value={venta.forma_pago}
-// />
-
-
-// useEffect(() => {
-//     if (venta.forma_pago === "tarjeta" && showFormasPago === false) {
-//         const cincoPor:number = Number(venta.total) * 0.05;
-//         const descuentoTotal:number = Number(venta.descuento_total) + cincoPor
-//         const total:number = Number(venta.subtotal) + Number(descuentoTotal)
-//         setVenta({
-//             ...venta,
-//             descuento_total: descuentoTotal,
-//             total: total
-//         })
-//     } else {
-//         setVenta({
-//             ...venta,
-//             descuento_total: data.descuento_total,
-//             total: data.total,
-//             forma_pago: data.forma_pago
-//         })
-//     }
-// }, [venta.forma_pago, showFormasPago])
-
-
-// formas pago divididos
-// useEffect(() => {
-//     const listaTarjeta: Array<any> = listaPagosTarjeta();
-//     if (listaTarjeta.length > 0 && showFormasPago === true) {
-//         let cincoPor:number = 0;
-//         listaTarjeta.forEach((e:any) => {
-//             cincoPor = cincoPor + (Number(e.precio_parcial) * 0.05);
-//         })
-//         setComisionTarjeta(cincoPor);
-//     } else {
-//         setComisionTarjeta(0);
-//     }
-
-// }, [listaPrecios, showFormasPago])
