@@ -61,6 +61,7 @@ export const SearchWrap = ({
     const handlerStateSearch = () => {
         setSearchTxt({ value: "" });
         setSearchState(false);
+        reiniciar && reiniciar();
         getData && getData();
     }
 
@@ -82,7 +83,7 @@ export const SearchWrap = ({
             handlerStateSearch={handlerStateSearch}
             // searchFocus={searchFocus}
             placeholder={placeholder}
-            reiniciar={reiniciar}
+            // reiniciar={reiniciar}
             validacion={validacion}
         />
     )

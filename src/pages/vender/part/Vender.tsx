@@ -7,6 +7,7 @@ import { VENTAS } from "../../../resources/routes";
 import { VerLista } from "./VerLista";
 import { VerProducto } from "./VerProducto";
 
+
 interface vender{
     idLocal:string;
     nombreLocal?:string;

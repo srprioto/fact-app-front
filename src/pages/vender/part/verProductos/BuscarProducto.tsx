@@ -4,10 +4,23 @@ import { SearchWrap } from "../../../../components/search/SearchWrap";
 import { TextoRelleno } from "../../../../components/TextoRelleno";
 import { LOCAL_STOCK_SEARCH } from "../../../../resources/routes";
 
-export const BuscarProducto = ({ setElemento, elemento, data, setData, listaRepetidos, idLocal }:any) => {
+export const BuscarProducto = ({ 
+    setElemento, 
+    elemento, 
+    data, 
+    setData, 
+    listaRepetidos, 
+    idLocal
+}:any) => {
 
     const [loadingData, setLoadingData] = useState<boolean>(false);
     const [searchState, setSearchState] = useState<boolean>(false);
+
+    const reiniciar = () => { 
+        setElemento({});
+        setData([]);
+    }
+
 
     return (
         <div className="buscar-producto box box-par m-0 grid-1 gap">
@@ -21,7 +34,7 @@ export const BuscarProducto = ({ setElemento, elemento, data, setData, listaRepe
                     setSearchState={setSearchState}
                     placeholder="Buscar un producto ..."
                     validacion={4}
-                    // reiniciar={reinicios}
+                    reiniciar={reiniciar}
                     // reSearch={listaRepetidos}
                 />
             </div>
@@ -79,7 +92,7 @@ export const BuscarProducto = ({ setElemento, elemento, data, setData, listaRepe
                         </div>
                     ) : (
                         <div className="lista-productos m-0">
-                            <TextoRelleno texto="No se encontraron productos" />
+                            <TextoRelleno texto="No hay productos en la lista" />
                         </div>
                     )
                 )

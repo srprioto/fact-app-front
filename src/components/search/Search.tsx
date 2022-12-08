@@ -16,7 +16,7 @@ interface SearchType {
     handlerStateSearch:Function;
     // searchFocus:React.MutableRefObject<any>;
     placeholder:string;
-    reiniciar?:Function;
+    // reiniciar?:Function;
     validacion?:number|undefined;
 }
 
@@ -28,16 +28,16 @@ export const Search = ({
     handlerStateSearch,
     searchData,
     placeholder,
-    reiniciar,
+    // reiniciar,
     validacion
 }:SearchType) => {
 
 
-    const reloadSearch = (e:any) => { 
-        e.preventDefault();
-        handlerStateSearch();
-        reiniciar && reiniciar();
-    }
+    // const reloadSearch = (e:any) => { 
+    //     e.preventDefault();
+    //     handlerStateSearch();
+    //     reiniciar && reiniciar();
+    // }
 
 
     // const handlerSearch = (e:any) => { 
@@ -50,6 +50,7 @@ export const Search = ({
 
         <Formik        
             initialValues={searchTxt}
+            enableReinitialize={true}
             validationSchema={!!validacion ? validSearchProd(4) : null}
             onSubmit={(data, { resetForm }) => { 
                 // handlerCreate(data);
@@ -81,7 +82,7 @@ export const Search = ({
                     {
                         searchState 
                         && (
-                            <div className="reload-search" onClick={reloadSearch}>
+                            <div className="reload-search" onClick={() => handlerStateSearch()}>
                                 <BiX />
                             </div>
                         )
