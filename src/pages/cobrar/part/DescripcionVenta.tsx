@@ -28,60 +28,41 @@ interface descripcionVenta {
 export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
 
     const clienteOk:boolean = !!data.clientes;
+    // estado del switch
     const stateSwitchChange:boolean = !((data.tipo_venta === tipoVenta.factura && clienteOk) ||
-    (data.tipo_venta === tipoVenta.boleta)) // estado del switch
+    (data.tipo_venta === tipoVenta.boleta))
+    // visivilidad del switch
     const showSwitchChange:boolean = ((data.tipo_venta === tipoVenta.boleta) ||
-    (data.tipo_venta === tipoVenta.factura && clienteOk)); // visivilidad del switch
+    (data.tipo_venta === tipoVenta.factura && clienteOk));
+    // tabbs por comprobante
+    const tabbComprob:number = data.tipo_venta === tipoVenta.venta_rapida ? 1 
+    : data.tipo_venta === tipoVenta.boleta ? 2 
+    : data.tipo_venta === tipoVenta.factura ? 3 : 4 // 4 es credito y adelanto
 
-    const tipoSerie = ():number => {
-        let nroTabb:number = 1;
-        switch (data.tipo_venta) {
-            case tipoVenta.venta_rapida:
-                nroTabb = 1;
-                break;
-            case tipoVenta.boleta:
-                nroTabb = 2;
-                break;
-            case tipoVenta.factura:
-                nroTabb = 3;
-                break;
-            case tipoVenta.credito:
-                nroTabb = 4;
-                break;
-            case tipoVenta.adelanto:
-                nroTabb = 4;
-                break;
-        }
+
+    // const tabbComp = ():number => {
+    //     let nroTabb:number = 1;
+    //     switch (data.tipo_venta) {
+    //         case tipoVenta.venta_rapida:
+    //             nroTabb = 1;
+    //             break;
+    //         case tipoVenta.boleta:
+    //             nroTabb = 2;
+    //             break;
+    //         case tipoVenta.factura:
+    //             nroTabb = 3;
+    //             break;
+    //         case tipoVenta.credito:
+    //             nroTabb = 4;
+    //             break;
+    //         case tipoVenta.adelanto:
+    //             nroTabb = 4;
+    //             break;
+    //     }
         
-        return nroTabb;
-
-        // if (data.tipo_venta === tipoVenta.boleta) return 2 
-        // else if (data.tipo_venta === tipoVenta.factura) return 3 
-        // else return 1
-    }
-
-
-    // const stateSwitchChange = () => { 
-    //     if (
-    //         !((data.tipo_venta === tipoVenta.factura && clienteOk) ||
-    //         (data.tipo_venta === tipoVenta.boleta))
-    //     ) {
-    //         return false;
-    //     } else {
-    //         return true;
-    //     }
+    //     return nroTabb;
     // }
 
-    // const showSwitchChange = () => { 
-    //     if (
-    //         ((data.tipo_venta === tipoVenta.boleta) ||
-    //         (data.tipo_venta === tipoVenta.factura && clienteOk))
-    //     ) {
-    //         return true;
-    //     } else {
-    //         return false;
-    //     }
-    // }
 
     const [venta, setVenta] = useState<any>({...copy(data), totalPagado: 0});
     const [cliente, setCliente] = useState<any>(clienteOk ? data.clientes : clienteInfo);
@@ -103,7 +84,7 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
     const [modalConfVenta, setModalConfVenta] = useState<boolean>(false);
     const [modalRechazVenta, setModalRechazVenta] = useState<boolean>(false);
     const [switchChangeFact, setSwitchChangeFact] = useState<boolean>(stateSwitchChange);
-    const [tabbs, setTabbs] = useState<number>(tipoSerie());
+    const [tabbs, setTabbs] = useState<number>(tabbComprob);
     const [listaPrecios, setListaPrecios] = useState<Array<any>>([]);
     const [confirmarVenta, setConfirmarVenta] = useState<boolean>(false);
     const [showFormasPago, setShowFormasPago] = useState<boolean>(false);
@@ -123,9 +104,9 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
         return itemsTarjeta;
     }
 
-    // useEffect(() => {
-    //     setCliente(clienteOk ? data.clientes : clienteInfo);
-    // }, [])
+    useEffect(() => {
+        setCliente(clienteOk ? data.clientes : clienteInfo);
+    }, [])
     
 
     useEffect(() => {
@@ -147,8 +128,6 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
     }, [venta.forma_pago, showFormasPago])
 
 
-
-
     const handlerConfirmarVenta = async (estado:string, comprobante:any, envioComprobante:any) => {
 
         setLoadConfirmarVenta(true);
@@ -156,11 +135,11 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
         let updateVenta:any = {}
         const ventaDet:Array<any> = [];
         const listaLimpia:Array<any> = [];
-        const updateCliente:any = {
-            ...cliente,
-            numero_documento: getCliente.documento,
-            tipoDocumento: getCliente.tipoDocumento
-        };
+        // const updateCliente:any = {
+        //     ...cliente,
+        //     numero_documento: getCliente.documento,
+        //     tipoDocumento: getCliente.tipoDocumento
+        // };
 
         // eliminar elementos sin precios
         listaPrecios.forEach((e:any) => {
@@ -175,11 +154,16 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
             ? venta.forma_pago 
             : "dividido";
         updateVenta.tipo_venta = venta.tipo_venta;
-        updateVenta.cliente = updateCliente;
+        // updateVenta.cliente = updateCliente;
         updateVenta.ventaDetalles = ventaDet;
         updateVenta.formasPago = listaLimpia;
         updateVenta.comprobante = comprobante;
         updateVenta.envioComprobante = envioComprobante;
+        updateVenta.cliente = {
+            ...cliente,
+            numero_documento: getCliente.documento,
+            tipoDocumento: getCliente.tipoDocumento
+        };;
 
         if (esCredito) {
             updateVenta.estado_producto = venta.estado_producto;
@@ -215,11 +199,6 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
     }
 
 
-    // console.log(getCliente);
-    // console.log(cliente);
-    // console.log("**********");
-    
-
     return (
         <div className="descripcion-venta">
             <div className="grid-1 gap">
@@ -240,7 +219,7 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
 
                 <TabsVenta
                     switchChangeFact={switchChangeFact}
-                    tipoSerie={tipoSerie}
+                    tabbComprob={tabbComprob}
                     tabbs={tabbs}
                     setTabbs={setTabbs}
                     setCliente={setCliente}

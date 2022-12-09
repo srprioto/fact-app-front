@@ -5,7 +5,7 @@ import { clienteInfo } from "../../../../resources/dtos/Cliente";
 
 interface tabsVenta {
     switchChangeFact:boolean;
-    tipoSerie:Function;
+    tabbComprob:number;
     tabbs:number;
     setTabbs:Function;
     setCliente:Function;
@@ -16,7 +16,7 @@ interface tabsVenta {
 
 export const TabsVenta = ({ 
     switchChangeFact, 
-    tipoSerie, 
+    tabbComprob, 
     tabbs, 
     setTabbs, 
     setCliente,
@@ -53,7 +53,7 @@ export const TabsVenta = ({
 
     useEffect(() => {
         if (!switchChangeFact) {
-            setTabbs(tipoSerie())
+            setTabbs(tabbComprob)
             setCliente(data.clientes);
             setGetCliente({
                 documento: documento(), 
@@ -62,10 +62,10 @@ export const TabsVenta = ({
         } else {
             setCliente(clienteInfo);
             setGetCliente({
-                // documento: documento(), 
-                // tipoDocumento: tipoDocumUpdate()
                 documento: "", 
-                tipoDocumento: ""
+                tipoDocumento: tipoDocumUpdate()
+                // documento: documento(), 
+                // tipoDocumento: ""
             })
         }
     }, [switchChangeFact, tabbs])
@@ -76,7 +76,7 @@ export const TabsVenta = ({
             <button 
                 className={
                     "btn2 btn2-success " + 
-                    (!switchChangeFact ? ( tipoSerie() === 1 ? "" : "btn2-disable " ) : "") +
+                    (!switchChangeFact ? ( tabbComprob === 1 ? "" : "btn2-disable " ) : "") +
                     (tabbs === 1 && "btn2-sub-success")
                 }
                 
@@ -87,7 +87,7 @@ export const TabsVenta = ({
             <button
                 className={
                     "btn2 btn2-info " + 
-                    (!switchChangeFact ? ( tipoSerie() === 2 ? "" : "btn2-disable " ) : "") +
+                    (!switchChangeFact ? ( tabbComprob === 2 ? "" : "btn2-disable " ) : "") +
                     (tabbs === 2 && "btn2-sub-info")
                 }
                 onClick={() => {switchChangeFact && setTabbs(2)}}
@@ -97,7 +97,7 @@ export const TabsVenta = ({
             <button
                 className={
                     "btn2 btn2-info " + 
-                    (!switchChangeFact ? ( tipoSerie() === 3 ? "" : "btn2-disable " ) : "") +
+                    (!switchChangeFact ? ( tabbComprob === 3 ? "" : "btn2-disable " ) : "") +
                     (tabbs === 3 && "btn2-sub-info")
                 }
                 onClick={() => {switchChangeFact && setTabbs(3)}}
@@ -107,7 +107,7 @@ export const TabsVenta = ({
             <button 
                 className={
                     "btn2 btn2-warning " + 
-                    (!switchChangeFact ? ( tipoSerie() === 4 ? "" : "btn2-disable " ) : "") +
+                    (!switchChangeFact ? ( tabbComprob === 4 ? "" : "btn2-disable " ) : "") +
                     (tabbs === 4 && "btn2-sub-warning")
                 }
                 onClick={() => {switchChangeFact && setTabbs(4)}}

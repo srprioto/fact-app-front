@@ -34,7 +34,7 @@ export const FormGeneralFacturaCob = ({
     const stateCliente:string = cliente ? cliente.estadoCliente : "";
     const showFormsCliente:boolean = (getCliente.documento ? getCliente.documento.length : 0) === 11;
 
-    const handlerOnChangeCliente = (e:any) => { 
+    const handlerOnChangeCliente = (e:any) => {
         setCliente({
             ...cliente, [e.target.name]: e.target.value
         })

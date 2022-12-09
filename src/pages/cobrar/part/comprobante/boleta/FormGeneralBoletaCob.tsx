@@ -32,15 +32,16 @@ export const FormGeneralBoletaCob = ({
     activarConfirmarVenta
 }:formGeneralCobrar) => {
 
+    const showFormsCliente:boolean = getCliente.documento.length === (getCliente.tipoDocumento === "RUC" ? 11 : 8);
+    const stateCliente:string = cliente ? cliente.estadoCliente : "";
+
+    
     const handlerOnChangeCliente = (e:any) => { 
         setCliente({
             ...cliente,
             [e.target.name]: e.target.value
         })
     }
-
-
-    const stateCliente:string = cliente ? cliente.estadoCliente : "";
 
 
     const validacionDoc = () => { 
@@ -53,8 +54,6 @@ export const FormGeneralBoletaCob = ({
         }
     }
 
-
-    const showFormsCliente:boolean = getCliente.documento.length === (getCliente.tipoDocumento === "RUC" ? 11 : 8);
 
     return (
         <div className="">

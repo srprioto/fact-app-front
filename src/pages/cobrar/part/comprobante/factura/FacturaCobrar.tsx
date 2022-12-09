@@ -55,7 +55,7 @@ export const FacturaCobrar = ({
         })
         // setCliente({
         //     ...cliente,
-        //     tipoDocumento: getCliente.tipoDocumento
+        //     tipoDocumento: "RUC"
         // })
     }, [getCliente.tipoDocumento])
 
@@ -65,12 +65,6 @@ export const FacturaCobrar = ({
             ...getCliente,
             [e.target.name]: e.target.value
         })
-        // if (e.target.name === "documento") {
-        //     setCliente({
-        //         ...cliente,
-        //         numero_documento: e.target.value
-        //     })
-        // }
     }
 
 
@@ -94,6 +88,7 @@ export const FacturaCobrar = ({
         }
     }
         
+       
 
     return (
         <div className="factura">

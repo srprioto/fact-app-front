@@ -104,7 +104,7 @@ export const BoletaCobrar = ({
             console.log(error);
         }
     }
-
+    
 
     return (
         <div className="boleta">
