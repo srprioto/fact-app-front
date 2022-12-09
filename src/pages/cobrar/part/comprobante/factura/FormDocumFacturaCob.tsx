@@ -48,7 +48,7 @@ export const FormDocumFacturaCob = ({
 
         return text;
     }
-
+    
     
     return (
         
@@ -72,39 +72,11 @@ export const FormDocumFacturaCob = ({
                             className="info strong capitalize"
                         />
 
-                        {
-                            tipoVenta === tipVenta.factura
-                            ? (
-                                <ParrafoForm
-                                    label="Tipo de Documento"
-                                    value={getCliente.tipoDocumento}
-                                    className="info strong"
-                                />
-                            ) : (
-                                switchChange
-                                ? (
-                                    <Select
-                                        label="Tipo de Documento"
-                                        name="tipoDocumento"
-                                        onChange={handlerOnChangeGetCli}
-                                        value={getCliente.tipoDocumento}
-                                    >
-                                        <option value="noDocumento">Sin documento</option>
-                                        <option value="DNI">DNI</option>
-                                        <option value="RUC">RUC</option>
-                                    </Select>
-                                ) : (
-                                    <InputDisable
-                                        label="Tipo de Documento"
-                                        value={
-                                            getCliente.tipoDocumento === "noDocumento" 
-                                            ? "Sin documento"
-                                            : getCliente.tipoDocumento
-                                        }
-                                    />
-                                )
-                            )
-                        }
+                        <ParrafoForm
+                            label="Tipo de Documento"
+                            value={getCliente.tipoDocumento}
+                            className="info strong"
+                        />
                         
                         {
                             getCliente.tipoDocumento !== "noDocumento"
@@ -116,14 +88,11 @@ export const FormDocumFacturaCob = ({
                                             <div>
                                                 <p className="info center mb-8">Nro de documento</p>
                                                 <div className="search-general">
-
                                                     <InputMk
-                                                        // label="Nombre"
                                                         type="text"
                                                         name="documento"
                                                         error={errors.documento}
                                                     />
-
                                                     <button className="btn btn-info" type="submit">
                                                         { loadCliente ? <LoadingImg2 size="23px" /> : <BiSearchAlt2 /> }
                                                     </button>

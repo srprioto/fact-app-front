@@ -28,7 +28,11 @@ interface descripcionVenta {
 export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
 
     const clienteOk:boolean = !!data.clientes;
-    
+    const stateSwitchChange:boolean = !((data.tipo_venta === tipoVenta.factura && clienteOk) ||
+    (data.tipo_venta === tipoVenta.boleta))
+    const showSwitchChange:boolean = ((data.tipo_venta === tipoVenta.boleta) ||
+    (data.tipo_venta === tipoVenta.factura && clienteOk));
+
     const tipoSerie = ():number => {
         let nroTabb:number = 1;
         switch (data.tipo_venta) {
@@ -57,27 +61,27 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
     }
 
 
-    const stateSwitchChange = () => { 
-        if (
-            (data.tipo_venta === tipoVenta.factura && clienteOk) ||
-            (data.tipo_venta === tipoVenta.boleta)
-        ) {
-            return false;
-        } else {
-            return true;
-        }
-    }
+    // const stateSwitchChange = () => { 
+    //     if (
+    //         !((data.tipo_venta === tipoVenta.factura && clienteOk) ||
+    //         (data.tipo_venta === tipoVenta.boleta))
+    //     ) {
+    //         return false;
+    //     } else {
+    //         return true;
+    //     }
+    // }
 
-    const showSwitchChange = () => { 
-        if (
-            (data.tipo_venta === tipoVenta.boleta) ||
-            (data.tipo_venta === tipoVenta.factura && clienteOk)
-        ) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+    // const showSwitchChange = () => { 
+    //     if (
+    //         ((data.tipo_venta === tipoVenta.boleta) ||
+    //         (data.tipo_venta === tipoVenta.factura && clienteOk))
+    //     ) {
+    //         return true;
+    //     } else {
+    //         return false;
+    //     }
+    // }
 
     const [venta, setVenta] = useState<any>({...copy(data), totalPagado: 0});
     const [cliente, setCliente] = useState<any>(clienteOk ? data.clientes : clienteInfo);
@@ -95,22 +99,16 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
         }
     }
     
-    // const [venta, setVenta] = useState<any>(data);
-    
     const [loadConfirmarVenta, setLoadConfirmarVenta] = useState<boolean>(false);
     const [modalConfVenta, setModalConfVenta] = useState<boolean>(false);
     const [modalRechazVenta, setModalRechazVenta] = useState<boolean>(false);
-    
-    const [switchChangeFact, setSwitchChangeFact] = useState<boolean>(stateSwitchChange());
+    const [switchChangeFact, setSwitchChangeFact] = useState<boolean>(stateSwitchChange);
     const [tabbs, setTabbs] = useState<number>(tipoSerie());
-    
     const [listaPrecios, setListaPrecios] = useState<Array<any>>([]);
     const [confirmarVenta, setConfirmarVenta] = useState<boolean>(false);
     const [showFormasPago, setShowFormasPago] = useState<boolean>(false);
     const [switchCredito, setSwitchCredito] = useState<boolean>(false);
-
     const [comisionTarjeta, setComisionTarjeta] = useState<number>(0);
-
     const [getCliente, setGetCliente] = useState<any>({documento: "", tipoDocumento: tipoDocumUpdate()});
 
     const esCredito:boolean = venta.tipo_venta === tipoVenta.credito || venta.tipo_venta === tipoVenta.adelanto;
@@ -147,6 +145,8 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
             setComisionTarjeta(0);
         }
     }, [venta.forma_pago, showFormasPago])
+
+
 
 
     const handlerConfirmarVenta = async (estado:string, comprobante:any, envioComprobante:any) => {
@@ -209,6 +209,9 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
         }
     }
 
+    
+    console.log(cliente);
+    
 
     return (
         <div className="descripcion-venta">
@@ -219,7 +222,7 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
                 <TablaListaVentaProductos venta={data} />
 
                 {
-                    showSwitchChange()
+                    showSwitchChange
                     ? <Checkbox2
                         label="Modificar tipo comprobante"
                         name="switchChangeFact"

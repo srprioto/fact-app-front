@@ -1,8 +1,7 @@
 import { Form, Formik } from "formik";
 import { Loading } from "../../../../../components/loads/Loading"
-import { ValidClienteDni, ValidClienteRuc } from "../../../../../resources/validations/Clientes";
+import { ValidClienteRuc } from "../../../../../resources/validations/Clientes";
 import { ClienteInexistente } from "../../../../vender/part/factura/ClienteInexistente";
-import { CobrarClienteDni } from "../CobrarClienteDni"
 import { CobrarClienteRuc } from "../CobrarClienteRuc"
 import { ConfirmarVenta } from "../ConfirmarVenta"
 
@@ -25,43 +24,26 @@ export const FormGeneralFacturaCob = ({
     activarConfirmarVenta
 }:formGeneralCobrar) => {
 
+    const stateCliente:string = cliente ? cliente.estadoCliente : "";
+    const showFormsCliente:boolean = getCliente.documento.length === 11;
+    
     const handlerOnChangeCliente = (e:any) => { 
         setCliente({
-            ...cliente,
-            [e.target.name]: e.target.value
+            ...cliente, [e.target.name]: e.target.value
         })
     }
 
 
-    const stateCliente:string = cliente ? cliente.estadoCliente : "";
-
-
-    const validacionDoc = () => { 
-        if (getCliente.tipoDocumento === "DNI") {
-            return ValidClienteDni;
-        } else if (getCliente.tipoDocumento === "RUC") {
-            return ValidClienteRuc;
-        } else if (getCliente.tipoDocumento === "noDocumento") {
-            return null;
-        }
-    }
-
-
-    const showFormsCliente:boolean = getCliente.documento.length === (getCliente.tipoDocumento === "RUC" ? 11 : 8);
-
-
     return (
-        <div className="">
+        <div>
 
             { stateCliente === "Inexistente"
             && <ClienteInexistente tipoDocumento={getCliente.tipoDocumento} /> }
             
             <Formik
                 initialValues={cliente}
-                // enableReinitialize={loadCliente} // deshabilitar en caso de que de problemas
                 enableReinitialize={true}
-                validationSchema={validacionDoc()}
-                
+                validationSchema={ValidClienteRuc}
                 onSubmit={(data, { resetForm }) => { 
                     setModalConfVenta(!modalConfVenta)
                 }}
@@ -77,24 +59,11 @@ export const FormGeneralFacturaCob = ({
                                 loadCliente
                                 ? <Loading />
                                 : (
-                                    <>
-                                        {
-                                            getCliente.tipoDocumento === "DNI"
-                                            && <CobrarClienteDni
-                                                errors={errors}
-                                                switchChange={switchChange}
-                                                cliente={cliente}
-                                            />
-                                        }
-                                        {
-                                            getCliente.tipoDocumento === "RUC"
-                                            && <CobrarClienteRuc 
-                                                errors={errors}
-                                                switchChange={switchChange}
-                                                cliente={cliente}
-                                            />
-                                        }
-                                    </>
+                                    <CobrarClienteRuc 
+                                        errors={errors}
+                                        switchChange={switchChange}
+                                        cliente={cliente}
+                                    />
                                 )
                             )
                         }
@@ -114,5 +83,12 @@ export const FormGeneralFacturaCob = ({
     )
 }
 
-
-
+// const validacionDoc = () => { 
+//     if (getCliente.tipoDocumento === "DNI") {
+//         return ValidClienteDni;
+//     } else if (getCliente.tipoDocumento === "RUC") {
+//         return ValidClienteRuc;
+//     } else if (getCliente.tipoDocumento === "noDocumento") {
+//         return null;
+//     }
+// }
