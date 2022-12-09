@@ -53,20 +53,21 @@ export const BoletaCobrar = ({
         if (switchChange) { // revisar en caso de que de problemas
             setCliente(clienteInfo);
         }
-        setGetCliente({
-            ...getCliente,
-            documento: cliente ? cliente.numero_documento : ""
-        })
         if (getCliente.tipoDocumento === "noDocumento") {
             setGetCliente({
                 ...getCliente,
                 documento: ""
             })
+        } else {
+            setGetCliente({
+                ...getCliente,
+                documento: cliente ? cliente.numero_documento : ""
+            })
         }
-        setCliente({ // añade el tipo de documento cambiado a cliente
-            ...cliente,
-            tipoDocumento: getCliente.tipoDocumento
-        })
+        // setCliente({ // añade el tipo de documento cambiado a cliente
+        //     ...cliente,
+        //     tipoDocumento: getCliente.tipoDocumento
+        // })
     }, [getCliente.tipoDocumento])
    
 
@@ -75,12 +76,12 @@ export const BoletaCobrar = ({
             ...getCliente,
             [e.target.name]: e.target.value
         })
-        if (e.target.name === "documento") {
-            setCliente({
-                ...cliente,
-                numero_documento: e.target.value
-            })
-        }
+        // if (e.target.name === "documento") {
+        //     setCliente({
+        //         ...cliente,
+        //         numero_documento: e.target.value
+        //     })
+        // }
     }
 
     // traer data

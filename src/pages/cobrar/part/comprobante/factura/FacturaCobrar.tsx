@@ -53,10 +53,10 @@ export const FacturaCobrar = ({
             tipoDocumento: "RUC",
             documento: cliente.numero_documento
         })
-        setCliente({
-            ...cliente,
-            tipoDocumento: getCliente.tipoDocumento
-        })
+        // setCliente({
+        //     ...cliente,
+        //     tipoDocumento: getCliente.tipoDocumento
+        // })
     }, [getCliente.tipoDocumento])
 
 
@@ -65,12 +65,12 @@ export const FacturaCobrar = ({
             ...getCliente,
             [e.target.name]: e.target.value
         })
-        if (e.target.name === "documento") {
-            setCliente({
-                ...cliente,
-                numero_documento: e.target.value
-            })
-        }
+        // if (e.target.name === "documento") {
+        //     setCliente({
+        //         ...cliente,
+        //         numero_documento: e.target.value
+        //     })
+        // }
     }
 
 
@@ -127,3 +127,65 @@ export const FacturaCobrar = ({
     )
 }
 
+
+
+// // const serie:string = "F003";
+// const tipo_venta:string = tipoVenta.factura;
+// // const clienteI = clienteInfo(serie);
+// const [loadCliente, setLoadCliente] = useState<boolean>(false);
+// // const [getCliente, setGetCliente] = useState<any>({ documento: "", tipoDocumento: "RUC", });
+
+// useEffect(() => {
+//     setVenta({
+//         ...venta,
+//         // serie: serie,
+//         tipo_venta: tipo_venta
+//     })
+// }, [])
+
+// useEffect(() => {
+//     // setCliente(clienteI);
+//     setGetCliente({
+//         tipoDocumento: "RUC",
+//         documento: cliente.numero_documento
+//     })
+//     setCliente({ // añade el tipo de documento cambiado a cliente
+//         ...cliente,
+//         tipoDocumento: getCliente.tipoDocumento
+//     })
+// }, [getCliente.tipoDocumento])
+
+
+// const handlerOnChangeGetCli = (e:any) => { 
+//     setGetCliente({
+//         ...getCliente,
+//         [e.target.name]: e.target.value
+//     })
+//     if (e.target.name === "documento") {
+//         setCliente({
+//             ...cliente,
+//             numero_documento: e.target.value
+//         })
+//     }
+// }
+
+
+// const handlerGetCliente = async () => { 
+//     setLoadCliente(true);
+
+//     const updateData = {
+//         documento: getCliente.documento,
+//         tipoDocumento: getCliente.tipoDocumento
+//     }
+
+//     try {
+//         const response = await post(updateData, CLIENTES + "/padron/search");
+//         response.numero_documento = cliente.numero_documento;
+//         response.tipoDocumento = getCliente.tipoDocumento;
+//         setCliente(response);
+//         setLoadCliente(false);
+//     } catch (error) {
+//         setLoadCliente(true);
+//         console.log(error);
+//     }
+// }

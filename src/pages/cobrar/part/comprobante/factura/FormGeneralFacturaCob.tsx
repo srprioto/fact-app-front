@@ -19,14 +19,21 @@ interface formGeneralCobrar{
 }
 
 export const FormGeneralFacturaCob = ({ 
-    loadCliente, getCliente, switchChange, cliente, setCliente,
-    setModalConfVenta, modalConfVenta, setModalRechazVenta, modalRechazVenta,
+    loadCliente, 
+    getCliente, 
+    switchChange, 
+    cliente, 
+    setCliente,
+    setModalConfVenta, 
+    modalConfVenta, 
+    setModalRechazVenta, 
+    modalRechazVenta,
     activarConfirmarVenta
 }:formGeneralCobrar) => {
 
     const stateCliente:string = cliente ? cliente.estadoCliente : "";
-    const showFormsCliente:boolean = getCliente.documento.length === 11;
-    
+    const showFormsCliente:boolean = (getCliente.documento ? getCliente.documento.length : 0) === 11;
+
     const handlerOnChangeCliente = (e:any) => { 
         setCliente({
             ...cliente, [e.target.name]: e.target.value

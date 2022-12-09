@@ -62,8 +62,10 @@ export const TabsVenta = ({
         } else {
             setCliente(clienteInfo);
             setGetCliente({
-                documento: documento(), 
-                tipoDocumento: tipoDocumUpdate()
+                // documento: documento(), 
+                // tipoDocumento: tipoDocumUpdate()
+                documento: "", 
+                tipoDocumento: ""
             })
         }
     }, [switchChangeFact, tabbs])

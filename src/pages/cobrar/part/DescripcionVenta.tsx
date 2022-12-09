@@ -29,9 +29,9 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
 
     const clienteOk:boolean = !!data.clientes;
     const stateSwitchChange:boolean = !((data.tipo_venta === tipoVenta.factura && clienteOk) ||
-    (data.tipo_venta === tipoVenta.boleta))
+    (data.tipo_venta === tipoVenta.boleta)) // estado del switch
     const showSwitchChange:boolean = ((data.tipo_venta === tipoVenta.boleta) ||
-    (data.tipo_venta === tipoVenta.factura && clienteOk));
+    (data.tipo_venta === tipoVenta.factura && clienteOk)); // visivilidad del switch
 
     const tipoSerie = ():number => {
         let nroTabb:number = 1;
@@ -156,6 +156,11 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
         let updateVenta:any = {}
         const ventaDet:Array<any> = [];
         const listaLimpia:Array<any> = [];
+        const updateCliente:any = {
+            ...cliente,
+            numero_documento: getCliente.documento,
+            tipoDocumento: getCliente.tipoDocumento
+        };
 
         // eliminar elementos sin precios
         listaPrecios.forEach((e:any) => {
@@ -170,7 +175,7 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
             ? venta.forma_pago 
             : "dividido";
         updateVenta.tipo_venta = venta.tipo_venta;
-        updateVenta.cliente = cliente;
+        updateVenta.cliente = updateCliente;
         updateVenta.ventaDetalles = ventaDet;
         updateVenta.formasPago = listaLimpia;
         updateVenta.comprobante = comprobante;
@@ -209,8 +214,10 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
         }
     }
 
-    
-    console.log(cliente);
+
+    // console.log(getCliente);
+    // console.log(cliente);
+    // console.log("**********");
     
 
     return (
