@@ -171,8 +171,6 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
             updateVenta.creditoDetalles = creditoDetalles;
         } 
 
-        console.log(updateVenta);
-
         try {
             await put(data.id, updateVenta, VENTAS);
             setLoadConfirmarVenta(false);

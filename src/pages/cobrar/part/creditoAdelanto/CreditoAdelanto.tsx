@@ -114,8 +114,8 @@ export const CreditoAdelanto = ({
                     clientesUpdt.email = infoCredito.email;
 
                     // info comprobante
-                    infoDocum.documento = infoCredito.tipoDocumento;
-                    infoDocum.tipoDocumento = infoCredito.numero_documento;
+                    infoDocum.documento = infoCredito.numero_documento;
+                    infoDocum.tipoDocumento = infoCredito.tipoDocumento;
                     
                     // actualizacion credito
                     creditoUpdate.cantidad_pagada = Number(infoCredito.cantidad_pagada);

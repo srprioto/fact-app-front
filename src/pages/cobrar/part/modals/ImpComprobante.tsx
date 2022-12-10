@@ -142,7 +142,7 @@ export const ImpComprobante = ({ venta, setImprimir, nuevo }:impComprobante) => 
     const texto = {
         fontFamily: "arial",
         fontWeight: "100",
-        fontSize: "11px",
+        fontSize: "12px",
     }
     const lowercase:any = {
         textTransform: "lowercase"
@@ -221,6 +221,10 @@ export const ImpComprobante = ({ venta, setImprimir, nuevo }:impComprobante) => 
     // info de QR
     const informacionQR:string = `${ruc}|${tipoComprobante}|${serie}|${nroCorrelat()}|${fixedInput(nuevo ? moneda(venta.igvGeneral) : moneda(igv))}|${fixedInput(venta.total)}|${fechaResumenGuiones(venta.updated_at)}|${tipoDocumento}|${nroDocumento}`;
 
+    // const nroComprobante:string = serie + "-" + (nroCorrelat() ? nroCorrelat() + "-" : "") + venta.id + "-" + venta.codigo_venta;
+    const nroComprobante:string = serie + "-" + nroCorrelat();
+    const nroVenta:string = venta.id + "-" + venta.codigo_venta
+
 
     return (
 
@@ -228,15 +232,18 @@ export const ImpComprobante = ({ venta, setImprimir, nuevo }:impComprobante) => 
             <div style={container} ref={imprimir}>
                 
                 <div style={boxHeaderInfo}>
-                    <h3 style={tituloPrinc}>{ titulo() }</h3>
-                    <span style={headerInfo}>
-                        { 
-                            serie + "-" + 
-                            (nroCorrelat() ? nroCorrelat() + "-" : "") +
-                            venta.id + "-" + 
-                            venta.codigo_venta
+                    <div>
+                        <h3 style={tituloPrinc}>{ titulo() }</h3>
+                        {
+                            nroCorrelat()
+                            && <p>{ nroComprobante }</p>
                         }
-                    </span>
+                    </div>
+                    <span style={headerInfo}>{ 
+                        nroCorrelat()
+                        ? nroVenta 
+                        : "V001-" + nroVenta
+                    }</span>
                     <span style={headerInfo}>{ fechaResumen(venta.updated_at) }</span>
                 </div>
                 
@@ -248,14 +255,15 @@ export const ImpComprobante = ({ venta, setImprimir, nuevo }:impComprobante) => 
                         && (
                             <>
                                 <p style={infoEmpresa}>INVERSIONES PERKINS EMPRESA INDIVIDUAL DE RESPONSABILIDAD LIMITADA</p>
-                                <p style={infoEmpresa}>CAL. TRINITARIAS N. 501 URB. CENTRO HISTORICO CUSCO</p>
                                 <p style={infoEmpresa}>CUSCO - CUSCO - CUSCO</p>
                                 <p style={infoTxtM0}>RUC: {ruc}</p>
-                                <p style={infoTxtM0}>CORREO: epc26irvin@gmail.com</p>
-                                <p style={infoTxtM0}>TELEFONOS: 20602956211</p>
+                                {/* <p style={infoTxtM0}>TELEFONO: 20602956211</p> */}
                             </>
                         )
                     }
+                    <p style={infoEmpresa}>CAL. TRINITARIAS N. 501 URB. CENTRO HISTORICO CUSCO</p>
+                    <p style={infoTxtM0}>CORREO: epc26irvin@gmail.com</p>
+                    <p style={infoTxtM0}>WSP: 937604653</p>
                 </div>
                 <div style={borderMb} />
                 {
