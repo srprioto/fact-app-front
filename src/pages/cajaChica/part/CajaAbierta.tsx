@@ -27,9 +27,8 @@ export const CajaAbierta = ({
     const cajaDetalles = !!data.caja ? data.caja.cajaDetalles : [];
     const infoCaja:any = data.caja && data.caja;
     const totalEfectivo:number = 
-        Number(infoCaja.monto_apertura) + 
-        Number(infoCaja.monto_efectivo) + 
-        Number(infoCaja.otros_montos);
+        Number(infoCaja.monto_apertura) +
+        Number(infoCaja.monto_efectivo)
     const montosOtrosMedios:number = 
         Number(infoCaja.monto_deposito) +
         Number(infoCaja.monto_tarjeta) +

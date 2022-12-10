@@ -3,10 +3,9 @@ import { BiSearchAlt2 } from "react-icons/bi"
 import { InputDisable } from "../../../../../components/forms/InputDisable"
 import { InputMk } from "../../../../../components/forms/InputMk"
 import { ParrafoForm } from "../../../../../components/forms/ParrafoForm"
-import { Select } from "../../../../../components/forms/Select"
 import { LoadingImg2 } from "../../../../../components/loads/LoadingImg"
-import { tipoVenta as tipVenta } from "../../../../../resources/dtos/VentasDto";
 import { ValidDocumento } from "../../../../../resources/validations/Clientes"
+
 
 interface formDocumCobrar{
     tipoVenta:string;

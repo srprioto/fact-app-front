@@ -7,6 +7,7 @@ import { Select2 } from "../../../components/forms/Select2";
 import { Modal } from "../../../components/modals/Modal"
 import { tipoMovimiento } from "../../../resources/dtos/Caja";
 import { post } from "../../../resources/fetch";
+import { negative } from "../../../resources/func/negative";
 import { CAJA_DETALLES } from "../../../resources/routes";
 
 export const ModalOtroMonto = ({ modal, setModal, getDataOne, idCaja, usuarioId }:any) => {
@@ -41,9 +42,16 @@ export const ModalOtroMonto = ({ modal, setModal, getDataOne, idCaja, usuarioId 
     }
 
 
+    const handlerIngresoEgreso = (e:any) => {
+        setCajaDetalles({
+            ...cajaDetalles,
+            monto_movimiento: negative(e.target.value)
+        })
+    }
+
+
     const handlerCrearCajaDetalle = async () => { 
         setLoading(true);
-        
         try {
             await post(cajaDetalles, CAJA_DETALLES);           
             setLoading(false);
@@ -66,7 +74,7 @@ export const ModalOtroMonto = ({ modal, setModal, getDataOne, idCaja, usuarioId 
         }
     }
 
-
+    
     return (
         <Modal
             title="Movimiento de caja"
@@ -85,15 +93,18 @@ export const ModalOtroMonto = ({ modal, setModal, getDataOne, idCaja, usuarioId 
 
                     {
                         cajaDetalles.tipo_movimiento === tipoMovimiento.ingresosEgresosCaja
-                        ? <Input
-                            label="Realizar retiro *"
-                            type="number"
-                            name="monto_movimiento"
-                            value={cajaDetalles.monto_movimiento}
-                            onChange={handlerOnChange}
-                            moneda
-                            noMas
-                        />
+                        ? <div className="relative">
+                            <Input
+                                label="Realizar retiro *"
+                                type="number"
+                                name="monto_movimiento"
+                                value={cajaDetalles.monto_movimiento}
+                                onChange={handlerIngresoEgreso}
+                                moneda
+                                noMas
+                            />
+                            <h5 className="warning absolute center w100">El monto siempre sera negativo</h5>
+                        </div>
                         : <Input
                             label={
                                 cajaDetalles.monto_movimiento > 0
