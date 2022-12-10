@@ -22,6 +22,7 @@ interface creditoAdelanto {
     setCreditoDetalles:Function;
     setListaPrecios:Function;
     showFormasPago:boolean;
+    setGetCliente:Function;
 }
 
 export const CreditoAdelanto = ({ 
@@ -35,7 +36,8 @@ export const CreditoAdelanto = ({
     setCliente,
     setCreditoDetalles,
     setListaPrecios,
-    showFormasPago
+    showFormasPago,
+    setGetCliente
 }:creditoAdelanto) => {
 
     const infoCreditoDto = {
@@ -101,16 +103,19 @@ export const CreditoAdelanto = ({
                     // const ventaUpdate = copy(venta);
                     const ventaUpdate = venta;
                     const clientesUpdt:any = copy(venta.clientes);
+                    const infoDocum:any = {};
                     const creditoUpdate:any = {};
                     const creditoDetalles:Array<any> = [];
                     
                     // actualizacion cliente
                     clientesUpdt.nombre = infoCredito.nombre;
-                    clientesUpdt.tipoDocumento = infoCredito.tipoDocumento;
-                    clientesUpdt.numero_documento = infoCredito.numero_documento;
                     clientesUpdt.telefono = infoCredito.telefono;
                     clientesUpdt.direccion = infoCredito.direccion;
                     clientesUpdt.email = infoCredito.email;
+
+                    // info comprobante
+                    infoDocum.documento = infoCredito.tipoDocumento;
+                    infoDocum.tipoDocumento = infoCredito.numero_documento;
                     
                     // actualizacion credito
                     creditoUpdate.cantidad_pagada = Number(infoCredito.cantidad_pagada);
@@ -135,6 +140,7 @@ export const CreditoAdelanto = ({
                     }
                     setCreditoDetalles(creditoDetalles);
                     setCliente(clientesUpdt);
+                    setGetCliente(infoDocum);
                     setVenta(ventaUpdate);
                     setModalConfVenta(!modalConfVenta);
 
