@@ -1,10 +1,6 @@
 import { CliDropdown } from "./CliDropdown"
 
 export const Cliente = ({ cliente, handlerDeleted, handlerVer }:any) => {
-
-    console.log(cliente.nombre);
-    console.log(cliente.razonSocial);
-
     return (
         <tr className="cliente">
             <td className="box-resume-350">

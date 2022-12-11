@@ -128,10 +128,12 @@ export const ModalCalcPrecio = ({
 
 
     const classDiferenciaPreciosComrpa = () => { 
-        if(difePrecioCompra >= 0){
+        if(difePrecioCompra > 0){
             return "danger-i"
         } else if (difePrecioCompra < 0){
             return "info-i"
+        } else {
+            return "secundary-i"
         }
     }
 
