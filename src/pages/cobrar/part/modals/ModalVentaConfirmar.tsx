@@ -22,6 +22,8 @@ import { BtnImpComprobante } from "./BtnImpComprobante";
 import { tipoVenta } from "../../../../resources/dtos/VentasDto";
 import { TablaDividirPrecios } from "./TablaDividirPrecios";
 import { BtnImpCredito } from "./BtnImpCredito";
+import { useAuth } from "../../../../auth/useAuth";
+import { Roles } from "../../../../resources/dtos/RolesDto";
 
 
 interface modalVentaConfirmar {
@@ -45,6 +47,8 @@ export const ModalVentaConfirmar = ({
     listaPrecios,
     creditoDetalles
 }:modalVentaConfirmar) => {
+
+    const auth = useAuth();
 
     const ventaAux:any = copy(dataVenta);
     const [venta, setVenta] = useState<any>(copy(dataVenta));
@@ -151,6 +155,18 @@ export const ModalVentaConfirmar = ({
     }
     
 
+    const totalGrid = ():number => { 
+        let total:number = 4;
+        if (credito()) {
+            total = total + 1
+        } 
+        if (auth.rol !== Roles.ADMIN) {
+            total = total - 1
+        }
+        return total;
+    }
+
+
     return (
         <Modal
             modal={modal}
@@ -171,11 +187,7 @@ export const ModalVentaConfirmar = ({
 
                     <TablaProdVenta venta={venta} />
 
-                    <div className={
-                        credito()
-                        ? "grid-5 gap center"
-                        : "grid-4 gap center"
-                    }>
+                    <div className={`grid-${totalGrid()} gap center`}>
                         <span>
                             <p>Subtotal:</p>
                             <p className="info"><strong>S/. { moneda(venta.subtotal) }</strong></p>
@@ -226,20 +238,22 @@ export const ModalVentaConfirmar = ({
                                 </span>
                             )
                         }
-
-                        <div>
-                            <p>Reducción porcentual (%):</p>
-                            <Input
-                                type="number"
-                                name="reducirPercent"
-                                value={reducirPercent}
-                                onChange={onChangeRedPercent}
-                                color={
-                                    reducirPercent < 0
-                                    ? "danger-i" : ""
-                                }
-                            />
-                        </div>
+                        {
+                            auth.rol === Roles.ADMIN
+                            && <div>
+                                <p>Modif. porcentual (%):</p>
+                                <Input
+                                    type="number"
+                                    name="reducirPercent"
+                                    value={reducirPercent}
+                                    onChange={onChangeRedPercent}
+                                    color={
+                                        reducirPercent < 0
+                                        ? "danger-i" : ""
+                                    }
+                                />
+                            </div>
+                        }
 
                     </div>
                     <TablaDividirPrecios limpiarLista={limpiarLista}/>
