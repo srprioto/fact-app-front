@@ -1,5 +1,5 @@
 import { Form, Formik } from "formik";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BiLock, BiSubdirectoryRight, BiUser } from "react-icons/bi"
 import { useAuth } from "../../auth/useAuth";
 import { LoadSwitchBtn2 } from "../../components/btns/LoadSwitchBtn2";
@@ -13,6 +13,10 @@ export const IndexLogin = () => {
 
     const [loading, setLoading] = useState<boolean>(false);
     const [errorMessage, setErrorMessage] = useState<boolean>(false);
+
+    useEffect(() => {
+        document.title = "FactApp - AddidSsport";
+    }, [])
 
     return (
         <div className="index-login">

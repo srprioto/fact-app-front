@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { BiCoffee } from "react-icons/bi";
 import { useAuth } from "../../auth/useAuth";
 import { useCaja } from "../../hooks/useContext/caja.ts/useCaja";
@@ -9,6 +10,11 @@ export const WrapVender = () => {
     const auth = useAuth();
     const cajaState = caja.cajaState;
     const idLocal:string = auth.userInfo.local.id;
+
+    useEffect(() => {
+        document.title = "Hola. " + auth.userInfo.name + "!";
+    }, [])
+
 
     return (
         <div className="box-seller">

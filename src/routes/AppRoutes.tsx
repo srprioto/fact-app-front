@@ -47,11 +47,16 @@ import { IndexVentas } from "../pages/reportes/ventas/Index";
 import { IndexTickets } from "../pages/tickets/Index";
 import { IndexIngresosEgresos } from "../pages/gastos/Index";
 import { TicketsSup } from "../roles/supervisor/pages/TicketsSup";
+import { useEffect } from "react";
 
 
 export const AppRoutes = () => {
 
     const auth = useAuth();
+
+    useEffect(() => {
+        document.title = "FactApp - AddidSsport";
+    }, [])
     
     return (
         <HashRouter>
