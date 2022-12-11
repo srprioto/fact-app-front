@@ -1,6 +1,3 @@
-import { moneda } from "../../../../resources/func/moneda";
-import { ProductoInfo } from "../../../productos/otros/ProductoInfo";
-import { IngresoDetalleDropD } from "./IngresoDetalleDropD";
 import { ItemTablaListaIngresos } from "./ItemTablaListaIngresos";
 
 export const TablaListaIngresos = ({ 

@@ -1,15 +1,12 @@
 import { useEffect, useState } from "react"
 import { Loading } from "../../../../components/loads/Loading";
 import { ModalWrap } from "../../../../components/modals/ModalWrap";
-
 import { getOne } from "../../../../resources/fetch";
-import { moneda } from "../../../../resources/func/moneda";
 import { MOVIMIENTOS } from "../../../../resources/routes";
-import { ProductoInfo } from "../../../productos/otros/ProductoInfo";
 import { InfoIngresoProductos } from "./InfoIngresoProductos";
-import { IngresoDetalleDropD } from "./IngresoDetalleDropD";
 import { ModalCalcPrecio } from "./ModalCalcPrecio";
 import { TablaListaIngresos } from "./TablaListaIngresos";
+
 
 interface boxVerIngresos {
     idIngreso:number;
@@ -21,7 +18,7 @@ export const BoxVerIngresos = ({ idIngreso }:boxVerIngresos) => {
     const [modalCalcPrecio, setModalCalcPrecio] = useState<boolean>(false);
     const [movimientoDetalle, setMovimientoDetalle] = useState<any>({});
     const [movimiento, setMovimiento] = useState<any>({});
-    
+
     
     useEffect(() => {
         getDataOne();
