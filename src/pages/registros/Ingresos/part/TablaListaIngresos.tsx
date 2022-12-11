@@ -31,10 +31,10 @@ export const TablaListaIngresos = ({
                         <th>Producto</th>
                         <th></th>
                         <th>Cantidad</th>
-                        <th>Precio/unidad</th>
-                        <th>Precio/paquete</th>
+                        <th>Precio unidad</th>
+                        <th>Precio paquete</th>
+                        <th>Precio diferencia</th>
                         <th>Proveedor</th>
-                        <th>Descripcion</th>
                         <th></th>
                     </tr>
                 </thead>

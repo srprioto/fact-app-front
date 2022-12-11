@@ -44,8 +44,8 @@ export const ItemTablaListaIngresos = ({
                 ? "strong info"
                 : "strong " +classNoPrecios(precios, precioDiferencia)
             )}>S/.{ moneda(elemento.precio_parcial) }</td>
+            <td>S/.{ moneda(precioDiferencia) }</td>
             <td>{ elemento.proveedores && elemento.proveedores.nombre }</td>
-            <td>{ elemento.descripcion }</td>
             
             <td>
                 <IngresoDetalleDropD
