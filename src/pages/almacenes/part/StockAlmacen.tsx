@@ -226,7 +226,7 @@ export const StockAlmacen = () => {
             /> */}
 
             <ModalWrap modal={modalCant} >
-                <ModalCantidad 
+                <ModalCantidad
                     modal={modalCant}
                     setModal={setModalCant}
                     localStock={localStock}

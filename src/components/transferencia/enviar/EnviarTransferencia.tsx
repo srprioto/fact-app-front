@@ -48,6 +48,9 @@ export const ModalTransferencia = ({ modal, setModal, idLocal, nombreLocal, getD
                 estado = false;
             }
         })
+        if (listaProductos.length <= 0) {
+            estado = false;
+        }
         if (!transferencia.descripcion) {
             estado = false;
         }
@@ -112,6 +115,7 @@ export const ModalTransferencia = ({ modal, setModal, idLocal, nombreLocal, getD
                 confirmarEnvio={confirmarEnvio}
                 loadingPost={loadingPost}
                 reiniciar={reiniciar}
+                listaProductos={listaProductos}
             />
 
         </Modal>

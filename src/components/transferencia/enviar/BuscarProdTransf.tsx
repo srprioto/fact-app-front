@@ -19,6 +19,7 @@ export const BuscarProdTransf = ({
 
     const handlerOnClick = (e:any) => { 
         const prod = {
+            codigo: e.productos.codigo,
             productoNombre: e.productos.nombre,
             marca: e.productos.marca,
             talla: e.productos.talla,

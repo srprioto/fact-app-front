@@ -45,19 +45,15 @@ export const ModalReimpVenta = ({ modal, setModal, idVenta }:modalReimpVenta) =>
             {
                 loadingOne
                 ? <Loading />
-                : (
-                    <>
-                        <TextoRelleno 
-                            texto="Imprimiendo comprobante" 
-                            icon={ <BiBookmarkAltMinus /> }
-                        />
-                        <h5 className="center m-0 warning">Confirme o cierre la ventana de impresion</h5>
-                        <ImpComprobante venta={venta} setImprimir={setModal}/>
-                    </>
-                )
-                
+                : <>
+                    <TextoRelleno 
+                        texto="Imprimiendo comprobante" 
+                        icon={ <BiBookmarkAltMinus /> }
+                    />
+                    <h5 className="center m-0 warning">Confirme o cierre la ventana de impresion</h5>
+                    <ImpComprobante venta={venta} setImprimir={setModal}/>
+                </>
             }
-            
         </Modal>
     )
 }

@@ -209,10 +209,6 @@ export const Tienda = ({ idLocal, nombreLocal, user }:tienda) => {
                                 </tbody>
                             </table>
                         )
-
-
-                        
-                        
                     )
                 }
 

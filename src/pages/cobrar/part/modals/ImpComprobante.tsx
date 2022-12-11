@@ -208,7 +208,7 @@ export const ImpComprobante = ({ venta, setImprimir, nuevo }:impComprobante) => 
         ...w100
     }
 
-    // codigo qr    
+    // codigo qr
     const qrcode = {
         margin: "15px 0"
     }

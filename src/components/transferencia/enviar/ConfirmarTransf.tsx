@@ -1,29 +1,47 @@
 import { useEffect, useState } from "react";
-import { BiBrush, BiCheck } from "react-icons/bi";
+import { BiBookmarkAltMinus, BiBrush, BiCheck } from "react-icons/bi";
 import { get } from "../../../resources/fetch";
 import { LOCALES } from "../../../resources/routes";
 import { LoadSwitchBtn } from "../../btns/LoadSwitchBtn";
 import { Input } from "../../forms/Input";
 import { InputDisable } from "../../forms/InputDisable";
 import { Select } from "../../forms/Select";
+import { ModalWrap } from "../../modals/ModalWrap";
+import { ModalConfirmImp } from "./ModalConfirmImp";
+
+interface confirmarTransf {
+    nombreLocal:string|undefined;
+    idLocal:number;
+    setTransferencia:Function;
+    transferencia:any;
+    validarEnvio:Function;
+    confirmarEnvio:Function;
+    loadingPost:boolean;
+    reiniciar:Function;
+    listaProductos:any;
+}
 
 export const ConfirmarTransf = ({ 
     nombreLocal, 
     idLocal, 
     setTransferencia, 
     transferencia, 
-    validarEnvio, 
+    validarEnvio,
     confirmarEnvio,
     loadingPost,
-    reiniciar
-}:any) => {
+    reiniciar,
+    listaProductos
+}:confirmarTransf) => {
 
     const [loadingLocales, setLoadingLocales] = useState<boolean>(false);
     const [locales, setLocales] = useState<Array<any>>([]);
+    const [ModalConfImprimir, setModalConfImprimir] = useState<boolean>(false);
+
 
     useEffect(() => {
         getLocales();
     }, [])
+
 
     const getLocales = async () => { 
         setLoadingLocales(true);
@@ -37,6 +55,7 @@ export const ConfirmarTransf = ({
         }
     }
 
+    
     const handlerChangeGenerales = (e:any) => { 
         setTransferencia({ ...transferencia, [e.target.name]: e.target.value })
     }
@@ -69,7 +88,6 @@ export const ConfirmarTransf = ({
                             return (null);
                         })
                     }
-                    
                 </Select>
 
                 <Input
@@ -82,7 +100,7 @@ export const ConfirmarTransf = ({
 
             </div>
 
-            <div className="grid-4 gap mt-25">
+            <div className="grid-5 gap mt-25">
 
                 <div></div>
                 {
@@ -99,9 +117,24 @@ export const ConfirmarTransf = ({
                             Confirmar envio
                         </button>
                     )
-                    
                 }
-                
+                {
+                    (validarEnvio())
+                    ? (
+                        <LoadSwitchBtn
+                            label="Confirmar e Imp."
+                            loading={loadingPost}
+                            handler={() => setModalConfImprimir(!ModalConfImprimir)}
+                            className="btn btn-warning"
+                            icon={<BiBookmarkAltMinus />}
+                        />
+                    ) : (
+                        <button className="btn btn-disable">
+                            <BiBookmarkAltMinus />
+                            Confirmar e Imp.
+                        </button>
+                    )
+                }
                 <button className="btn btn-primary" onClick={() => reiniciar()}>
                     <BiBrush />
                     Limpiar
@@ -109,6 +142,20 @@ export const ConfirmarTransf = ({
                 <div></div>
 
             </div>
+
+            <ModalWrap modal={ModalConfImprimir}>
+                <ModalConfirmImp
+                    modal={ModalConfImprimir}
+                    setModal={setModalConfImprimir}
+                    confirmarEnvio={confirmarEnvio}
+                    loadingPost={loadingPost}
+                    transferencia={transferencia}
+                    listaProductos={listaProductos}
+                    nombreLocal={nombreLocal}
+                    locales={locales}
+                />
+            </ModalWrap>
+
         </div>
     )
 }

@@ -72,6 +72,10 @@ export const fechaInicioFinMes = () => {
 
 
 // solo escritura
+export const ahora = () => { 
+    return DateTime.now().setZone('America/Lima').toISO();
+}
+
 export const fechaInicioFin = () => { 
     const inidioDia = DateTime
         .now()
