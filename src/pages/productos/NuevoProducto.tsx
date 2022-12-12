@@ -12,18 +12,15 @@ import { WrapCrearProducto } from "./part/forms/WrapCrearProducto";
 
 export const NuevoProducto = () => {
 
-    // const navigate = useNavigate();
-
     const [loading, setLoading] = useState<boolean>(false);
     const [producto, setProducto] = useState<any>({});
 
-    const handlerCreateProducto = async (data:any) => { 
+    const handlerCreateProducto = async (data:any) => {
         setLoading(true);
         try {
             const productoListo = await post(data, PRODUCTOS);
             setProducto(productoListo.data);
             setLoading(false);
-            // navigate('/productos');
         } catch (error) {
             setLoading(true);
             console.log(error);

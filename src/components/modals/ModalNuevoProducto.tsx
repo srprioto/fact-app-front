@@ -4,7 +4,14 @@ import { post } from "../../resources/fetch";
 import { PRODUCTOS } from "../../resources/routes";
 import { Modal } from "./Modal"
 
-export const ModalNuevoProducto = ({ modal, setModal, movDetails, setMovDetails, productoSolo, setProductoSolo }:any) => {
+export const ModalNuevoProducto = ({ 
+    modal, 
+    setModal, 
+    movDetails, 
+    setMovDetails, 
+    productoSolo, 
+    setProductoSolo 
+}:any) => {
 
     const [loading, setLoading] = useState<boolean>(false);
     // const [producto, setProducto] = useState<any>({});

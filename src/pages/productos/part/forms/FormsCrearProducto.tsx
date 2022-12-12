@@ -10,9 +10,16 @@ import { Checkbox2 } from '../../../../components/forms/Checkbox2';
 interface formsCrearProducto {
     handlerCreateProducto:Function;
     loading:boolean;
+    clearInput:boolean;
+    setClearInput:Function;
 }
 
-export const FormsCrearProducto = ({ handlerCreateProducto, loading }:formsCrearProducto) => {
+export const FormsCrearProducto = ({ 
+    handlerCreateProducto, 
+    loading, 
+    clearInput, 
+    setClearInput 
+}:formsCrearProducto) => {
 
     const [switchCrear, setSwitchCrear] = useState<boolean>(false);
 
@@ -39,7 +46,7 @@ export const FormsCrearProducto = ({ handlerCreateProducto, loading }:formsCrear
                 onSubmit={(data, { resetForm }) => { 
                     data.switchCrear = switchCrear;
                     handlerCreateProducto(data)
-                    resetForm();                
+                    !clearInput && resetForm();
                 }}
             >
                 
@@ -120,9 +127,6 @@ export const FormsCrearProducto = ({ handlerCreateProducto, loading }:formsCrear
                         </div>
 
                         <div className="grid-3 gap">
-
-
-
                             <InputMk 
                                 label="Precio por unidad"
                                 type="number"
@@ -147,10 +151,15 @@ export const FormsCrearProducto = ({ handlerCreateProducto, loading }:formsCrear
 
                         </div>
 
-
-
                         <div className="grid-4 gap mt-25">
-                            <div />
+                            <div className="middle">
+                                <Checkbox2
+                                    label='Mantener informacion'
+                                    name="clearInput"
+                                    checked={clearInput}
+                                    handlerCheck={ () => setClearInput(!clearInput) }
+                                />
+                            </div>
 
                             <LoadSwitchBtn label="Crear producto" loading={loading} />
 
@@ -159,7 +168,6 @@ export const FormsCrearProducto = ({ handlerCreateProducto, loading }:formsCrear
                                 Limpiar
                             </button>
 
-                            <div />
                         </div>
 
                     </Form>
