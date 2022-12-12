@@ -27,6 +27,7 @@ export const NuevoProducto = () => {
         }
     }
 
+    
     return (
         <Layout>
             <div className="nuevo-producto">
