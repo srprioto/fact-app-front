@@ -14,7 +14,6 @@ export const ModalNuevoProducto = ({
 }:any) => {
 
     const [loading, setLoading] = useState<boolean>(false);
-    // const [producto, setProducto] = useState<any>({});
 
     const handlerCreateProducto = async (data:any) => { 
         setLoading(true);
@@ -22,7 +21,6 @@ export const ModalNuevoProducto = ({
             const productoListo = await post(data, PRODUCTOS);
             setProductoSolo(productoListo.data);
             setLoading(false);
-
             setMovDetails({
                 ...movDetails,
                 producto: {
