@@ -30,8 +30,6 @@ export const ModalNuevoProducto = ({
                     nombre: productoListo.data.nombre
                 }
             })
-
-            // navigate('/productos');
         } catch (error) {
             setLoading(true);
             console.log(error);
