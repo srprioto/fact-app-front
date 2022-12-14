@@ -11,6 +11,7 @@ import { LoadSwitchBtn } from "../../../components/btns/LoadSwitchBtn";
 import { get, getOne } from "../../../resources/fetch";
 import { LOCALES_SOLO, ROLES, USUARIOS } from "../../../resources/routes";
 import { Roles } from "../../../resources/dtos/RolesDto";
+import { ValidEditUsuario } from "../../../resources/validations/Usuarios";
 
 // import { ValidCreateUsuario, ValidEditUsuario } from "../../../resources/validations/Usuarios";
 
@@ -79,7 +80,7 @@ export const FormEditUser = ({ id, handlerEdit, loadUpdate }:any) => {
         <Formik
             enableReinitialize={true}
             initialValues={usuario}
-            // validationSchema={ValidEditUsuario}
+            validationSchema={ValidEditUsuario}
             onSubmit={(data, { resetForm }) => { 
 
                 let local:number|null = null

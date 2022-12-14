@@ -23,7 +23,10 @@ export const ValidEditUsuario = Yup.object({
     // edad: Yup.string().required('Requerido'),
     telefono: Yup.string().required('Requerido'),
     email: Yup.string().required('Req. usuario o email'),
-    // password: Yup.string().required('Requerido'),
+    password: Yup
+        .string()
+        .min(6, `Necesita al menos 6 digitos`)
+        .max(18, `No se puede ingresar mas de 18 caracteres`)
     // rolesId: Yup.string().required('Requerido'),
     // localesId: Yup.string().required('Requerido'),
 })
