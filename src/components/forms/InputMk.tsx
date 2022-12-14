@@ -19,7 +19,18 @@ interface msgError {
 }
 
 // requiere formik
-export const InputMk = ({ label, value, type, name, error, moneda, color, colorLabel, placeholder, noError }:inputMk) => {
+export const InputMk = ({ 
+    label, 
+    value, 
+    type, 
+    name, 
+    error, 
+    moneda, 
+    color, 
+    colorLabel, 
+    placeholder, 
+    noError 
+}:inputMk) => {
 
     return (
         <div className="wrap-form">

@@ -9,8 +9,11 @@ import { TitleBox } from "../../components/TitleBox";
 // import { FormsCrearProducto } from "./part/forms/FormsCrearProducto";
 // import { useNavigate } from "react-router-dom";
 import { WrapCrearProducto } from "./part/forms/WrapCrearProducto";
+import { useToast } from "../../hooks/useContext/toast/useToast";
 
 export const NuevoProducto = () => {
+
+    const toast = useToast();
 
     const [loading, setLoading] = useState<boolean>(false);
     const [producto, setProducto] = useState<any>({});
@@ -20,6 +23,7 @@ export const NuevoProducto = () => {
         try {
             const productoListo = await post(data, PRODUCTOS);
             setProducto(productoListo.data);
+            toast.show("success", "Producto registro correctamente!");
             setLoading(false);
         } catch (error) {
             setLoading(true);

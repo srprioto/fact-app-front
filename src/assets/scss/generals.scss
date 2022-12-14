@@ -1112,6 +1112,48 @@ table.no-cursor{
 }
 
 
+
+// toast
+.toast{
+    position: fixed;
+    top: 88px;
+    right: 18px;
+    z-index: 5;
+    animation: showright .5s;
+    .box-toast{
+        background-color: $boxT2;
+        width: 100%;
+        padding: 17px 35px 17px 30px;
+        margin-bottom: 0px;
+        border-radius: 6px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .toast-icon{
+            line-height: 0;
+            svg{
+                font-size: 45px;
+            }
+        }
+        .toast-info{
+            padding: 0 0 0 15px;
+            min-width: 150px;
+            max-width: 250px;
+        }
+        h2, p{
+            margin: 0;
+        }
+    }
+    .closeToast{
+        position: absolute;
+        top: 3px;
+        right: 4px;
+        font-size: 25px;
+        cursor: pointer;
+    }
+}
+
+
 // dropdown
 .wrap-dropdown {
     font-size: 0;
