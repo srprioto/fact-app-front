@@ -23,7 +23,11 @@ export const NuevoProducto = () => {
         try {
             const productoListo = await post(data, PRODUCTOS);
             setProducto(productoListo.data);
-            toast.show("success", "Producto registro correctamente!");
+            if (productoListo.estado) {
+                toast.show("success", "Producto registro correctamente!");    
+            } else {
+                toast.show("warning", "El producto fue registrado anteriormente!");
+            }
             setLoading(false);
         } catch (error) {
             setLoading(true);
@@ -46,7 +50,7 @@ export const NuevoProducto = () => {
                         handlerCreateProducto={handlerCreateProducto} 
                         loading={loading}
                         producto={producto}
-                        // setCodigoProd={setCodigoProd}
+                        setProducto={setProducto}
                     />
 
                 </div>                

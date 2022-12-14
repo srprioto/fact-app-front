@@ -1112,13 +1112,12 @@ table.no-cursor{
 }
 
 
-
 // toast
 .toast{
     position: fixed;
     top: 88px;
     right: 18px;
-    z-index: 5;
+    z-index: 6;
     animation: showright .5s;
     .box-toast{
         background-color: $boxT2;

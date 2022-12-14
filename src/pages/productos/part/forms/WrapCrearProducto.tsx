@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FormsCrearProducto } from "./FormsCrearProducto"
 import { GestionCodigo } from "./GestionCodigo";
 
@@ -6,11 +6,17 @@ interface wrapCrearProducto {
     handlerCreateProducto:Function;
     loading:boolean;
     producto:any;
+    setProducto?:Function;
 }
 
-export const WrapCrearProducto = ({ handlerCreateProducto, loading, producto }:wrapCrearProducto) => {
+export const WrapCrearProducto = ({ handlerCreateProducto, loading, producto, setProducto }:wrapCrearProducto) => {
     
     const [clearInput, setClearInput] = useState<boolean>(false);
+
+    useEffect(() => {
+        setProducto && setProducto({});
+    }, [clearInput])
+    
 
     const createProduct = () => { 
         if (!(Object.keys(producto).length)) {
