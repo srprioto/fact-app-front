@@ -5,15 +5,18 @@ import { useAuth } from "../../../auth/useAuth";
 
 export const User = () => {
 
-    const [showUser, setShowUser] = useState<boolean>(false);
-
     const navigate = useNavigate();
     const auth = useAuth();
+
+    const [showUser, setShowUser] = useState<boolean>(false);
+
+    const nameUser:string = auth.userInfo.name.replaceAll('Ã±', 'ñ');
 
     const handlerSalir = () => { 
         auth.logout();
         navigate('/login');
     }
+
 
     return (
         <div className="user">
@@ -23,7 +26,7 @@ export const User = () => {
                 && <div 
                     className="div-close" 
                     onClick={() => setShowUser(false)}
-                /> 
+                />
             }
             <BiUserCircle size="40" className="icon-header m-0" />
 
@@ -32,7 +35,7 @@ export const User = () => {
                     className="show-dropdown-user pointer"
                     onClick={() => setShowUser(!showUser)}
                 >
-                    <p>{ auth.userInfo.name }</p>
+                    <p>{ nameUser }</p>
                     <BiChevronDown className="icon-header m-0" />
                 </div>
                 {

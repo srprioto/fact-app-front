@@ -13,16 +13,6 @@ export const AuthProvider = ({ children }:any) => {
 
     const [loggedUserApp, setLoggedUserApp] = usePlugIn();
 
-    // useEffect(() => {
-    //     try {
-    //         localStorage.setItem("UserApp", JSON.stringify(loggedUserApp));
-    //     } catch (error) {
-    //         localStorage.removeItem("UserApp");
-    //         console.log(error);
-    //     }
-    // }, [loggedUserApp])
-
-
     const login = async (dataAccess:DataLogin) => {
         let loginState:boolean = false;
         try {
@@ -69,13 +59,11 @@ export const AuthProvider = ({ children }:any) => {
 
 
     const contextValue = {
-        // loggedUserApp,
         login,
         logout,
         isLogged: isLogged(),
         userInfo: userInfo(),
         rol: rol()        
-        // loadLogin: loading
     }
 
 
@@ -83,19 +71,5 @@ export const AuthProvider = ({ children }:any) => {
         <AuthContext.Provider value={contextValue}>
             { children }
         </AuthContext.Provider>
-        // loading
-        // ? <Loading />
-        // : (
-        //     <AuthContext.Provider value={contextValue}>
-        //         { children }
-        //     </AuthContext.Provider>
-        // )
     )
 }
-
-
-// export const asdf = {
-//     statusCode: 401,
-//     message: "not allow",
-//     error: "Unauthorized"
-// }
