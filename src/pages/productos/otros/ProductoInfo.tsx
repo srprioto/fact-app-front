@@ -1,6 +1,11 @@
 import { BiCaretDown } from "react-icons/bi"
+import { useAuth } from "../../../auth/useAuth"
+import { Roles } from "../../../resources/dtos/RolesDto";
 
 export const ProductoInfo = ({ producto }:any) => {
+
+    const auth = useAuth();
+
     return (
         <div className="producto-dropdown-info-ingrso">
             <BiCaretDown />
@@ -26,10 +31,13 @@ export const ProductoInfo = ({ producto }:any) => {
                         <p>Talla: </p>
                         <h4>{ producto.talla }</h4>
                     </span>
-                    <span>
-                        <p>Precio compra: </p>
-                        <h4>S/. { producto.precio_compra }</h4>
-                    </span>
+                    {
+                        auth.rol === Roles.ADMIN
+                        && <span>
+                            <p>Precio compra: </p>
+                            <h4>S/. { producto.precio_compra }</h4>
+                        </span>
+                    }
                     <span>
                         <p>Precio/unidad: </p>
                         <h4>S/. { producto.precio_venta_1 }</h4>

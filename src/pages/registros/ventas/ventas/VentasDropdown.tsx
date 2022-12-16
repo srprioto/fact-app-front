@@ -1,4 +1,4 @@
-import { BiBookBookmark, BiBookmarkAltMinus, BiLike, BiShowAlt, BiX } from "react-icons/bi"
+import { BiBookBookmark, BiBookmarkAltMinus, BiShowAlt, BiTask, BiX } from "react-icons/bi"
 import { DropDown } from "../../../../components/DropDown"
 import { tipoVenta } from "../../../../resources/dtos/VentasDto";
 // import { tipoVenta } from "../../../../resources/dtos/VentasDto";
@@ -6,21 +6,24 @@ import { tipoVenta } from "../../../../resources/dtos/VentasDto";
 interface ventasDropdown {
     ventas:any;
     handlerVer:Function; 
-    updateData:Function;
+    // updateData:Function;
     handlerAnular:Function;
     handlerReimprimir:Function;
     handlerCredito:Function;
+    handlerConvertirComp:Function;
 }
 
 export const VentasDropdown = ({ 
     ventas, 
     handlerVer, 
-    updateData, 
+    // updateData, 
     handlerAnular, 
     handlerReimprimir, 
-    handlerCredito 
+    handlerCredito,
+    handlerConvertirComp
 }:ventasDropdown) => {
 
+    const esVenta:boolean = ventas.tipo_venta === tipoVenta.venta_rapida;
 
     const anulado = () => { 
         if (
@@ -46,23 +49,11 @@ export const VentasDropdown = ({
             return false;
         }
     }
-
+    
 
     return (
         <DropDown width="190">
-            {/* {
-                (
-                    ventas.tipo_venta === tipoVenta.venta_rapida ||
-                    ventas.tipo_venta === tipoVenta.boleta || 
-                    ventas.tipo_venta === tipoVenta.factura
-                )
-                && (
-                    !anulado()
-                    && <span onClick={ () => handlerAnular(ventas.id, ventas.locales.id) } >
-                        <BiX /> Anular Venta
-                    </span>
-                )
-            } */}
+
             {
                 !anulado()
                 && <span onClick={ () => handlerAnular(ventas.id, ventas.locales.id) } >
@@ -70,7 +61,7 @@ export const VentasDropdown = ({
                 </span>
             }
 
-            {
+            {/* {
                 (ventas.estado_venta === "rechazado" ||
                 ventas.estado_venta === "rechazado")
                 && (
@@ -78,7 +69,7 @@ export const VentasDropdown = ({
                         <BiLike /> Habilitar venta
                     </span>
                 )
-            }
+            } */}
 
             {
                 (esCredito() && !anulado())
@@ -87,6 +78,13 @@ export const VentasDropdown = ({
                         <BiBookBookmark /> Cred/Adel
                     </span>
                 )
+            }
+
+            {
+                esVenta
+                && <span onClick={ () => handlerConvertirComp(ventas.id) } >
+                    <BiTask /> Cambiar Comp.
+                </span>
             }
             
             {

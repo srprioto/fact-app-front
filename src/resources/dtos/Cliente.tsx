@@ -49,7 +49,6 @@ export const initialCrearCliente = {
 export const clienteInfo = {
     estadoCliente: "",
     tipoDocumento: "",
-    // serie_documento: serie,
     numero_documento: "",
     nombre: "",
     razonSocial: "",

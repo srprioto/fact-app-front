@@ -8,19 +8,21 @@ import { VentasDropdown } from "./VentasDropdown"
 interface ventaItems {
     ventas:any;
     handlerVer:Function; 
-    updateData:Function;
+    // updateData:Function;
     handlerAnular:Function;
     handlerReimprimir:Function;
     handlerCredito:Function;
+    handlerConvertirComp:Function;
 }
 
 export const VentaItems = ({ 
     ventas, 
     handlerVer, 
-    updateData, 
+    // updateData, 
     handlerAnular, 
     handlerReimprimir, 
-    handlerCredito 
+    handlerCredito,
+    handlerConvertirComp
 }:ventaItems) => {
 
     const esComprobante:boolean = ventas.tipo_venta === tipoVenta.boleta || ventas.tipo_venta === tipoVenta.factura;
@@ -90,10 +92,11 @@ export const VentaItems = ({
                 <VentasDropdown 
                     ventas={ventas} 
                     handlerVer={handlerVer} 
-                    updateData={updateData} 
+                    // updateData={updateData} 
                     handlerAnular={handlerAnular}
                     handlerReimprimir={handlerReimprimir}
                     handlerCredito={handlerCredito}
+                    handlerConvertirComp={handlerConvertirComp}
                 />
             </td>
         </tr>

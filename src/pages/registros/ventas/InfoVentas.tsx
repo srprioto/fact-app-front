@@ -11,7 +11,8 @@ import { fechaInicioFin } from "../../../resources/func/fechas";
 import { VENTAS_PAGINATE, VENTAS_SEARCH } from "../../../resources/routes";
 import { ModalCredito } from "./ventas/modalCreditos/ModalCredito";
 import { ModalAnularVenta } from "./ventas/modals/ModalAnularVenta";
-import { ModalHabilitarVenta } from "./ventas/modals/ModalHabilitarVenta";
+import { ModalConvertirComp } from "./ventas/modals/ModalConvertirComp";
+// import { ModalHabilitarVenta } from "./ventas/modals/ModalHabilitarVenta";
 import { ModalReimpVenta } from "./ventas/modals/ModalReimpVenta";
 import { ModalVentaDetalles } from "./ventas/modals/ModalVentaDetalles";
 import { TabbsFiltroDatos } from "./ventas/TabbsFiltroDatos";
@@ -31,10 +32,11 @@ export const InfoGeneralVentas = ({ idLocal, selectLocal, loadingLocal, locales 
 
     const [loadingData, setLoadingData] = useState<boolean>(false);
     const [modalVer, setModalVer] = useState<boolean>(false);
-    const [modalHabilitarVenta, setModalHabilitarVenta] = useState<boolean>(false);
+    // const [modalHabilitarVenta, setModalHabilitarVenta] = useState<boolean>(false);
     const [modalAnular, setModalAnular] = useState<boolean>(false);
     const [modalReimprimir, setModalReimprimir] = useState<boolean>(false);
     const [modalCredito, setModalCredito] = useState<boolean>(false);
+    const [modalConvComprobante, setModalConvComprobante] = useState<boolean>(false);
     const [idVenta, setIdVenta] = useState<number>(0);
     const [pagination, setPagination] = useState<any>({ meta: {}, links: {} });
     const [data, setData] = useState<any>([]);
@@ -60,10 +62,10 @@ export const InfoGeneralVentas = ({ idLocal, selectLocal, loadingLocal, locales 
     }
 
     
-    const handlerHabilitarVenta = (idVenta:number) => {
-        setIdVenta(idVenta);
-        setModalHabilitarVenta(true);
-    }
+    // const handlerHabilitarVenta = (idVenta:number) => {
+    //     setIdVenta(idVenta);
+    //     setModalHabilitarVenta(true);
+    // }
 
 
     const handlerAnular = (idVenta:number) => { 
@@ -81,6 +83,12 @@ export const InfoGeneralVentas = ({ idLocal, selectLocal, loadingLocal, locales 
     const handlerCredito = (idVenta:number) => { 
         setIdVenta(idVenta);
         setModalCredito(true);
+    }
+
+
+    const handlerConvertirComp = (idVenta:number) => {
+        setIdVenta(idVenta);
+        setModalConvComprobante(true);
     }
 
 
@@ -210,11 +218,12 @@ export const InfoGeneralVentas = ({ idLocal, selectLocal, loadingLocal, locales 
                                                 <VentaItems
                                                     key={e.id}
                                                     ventas={e}
-                                                    updateData={handlerHabilitarVenta}
+                                                    // updateData={handlerHabilitarVenta}
                                                     handlerVer={handlerVer}
                                                     handlerAnular={handlerAnular}
                                                     handlerReimprimir={handlerReimprimir}
                                                     handlerCredito={handlerCredito}
+                                                    handlerConvertirComp={handlerConvertirComp}
                                                 />
                                             )
                                         })
@@ -271,12 +280,21 @@ export const InfoGeneralVentas = ({ idLocal, selectLocal, loadingLocal, locales 
                 />
             </ModalWrap>
 
-            <ModalHabilitarVenta
+            <ModalWrap modal={modalConvComprobante}>
+                <ModalConvertirComp
+                    modal={modalConvComprobante}
+                    setModal={setModalConvComprobante}
+                    idVenta={idVenta}
+                    getData={getData}
+                />
+            </ModalWrap>
+
+            {/* <ModalHabilitarVenta
                 modal={modalHabilitarVenta}
                 setModal={setModalHabilitarVenta}
                 idVenta={idVenta}
                 getData={getData}
-            />
+            /> */}
 
         </>
     )
