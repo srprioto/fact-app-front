@@ -10,8 +10,8 @@ import { clienteInfo } from "../../../../../resources/dtos/Cliente";
 import { tipoVenta } from "../../../../../resources/dtos/VentasDto";
 import { put } from "../../../../../resources/fetch";
 import { VENTAS } from "../../../../../resources/routes";
-import { ConvertirBoleta } from "./comprobantes/boleta/ConvertirBoleta";
-import { ConvertirFactura } from "./comprobantes/factura/ConvertirFactura";
+import { ConvertirBoleta } from "./convertirComp/boleta/ConvertirBoleta";
+import { ConvertirFactura } from "./convertirComp/factura/ConvertirFactura";
 import { ModalVentaDetalles } from "./ModalVentaDetalles";
 
 interface modalConvertirComp {
