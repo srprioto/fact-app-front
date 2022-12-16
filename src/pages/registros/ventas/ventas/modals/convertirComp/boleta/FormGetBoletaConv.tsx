@@ -2,7 +2,6 @@ import { Form, Formik } from "formik"
 import { BiSearchAlt2 } from "react-icons/bi";
 import { InputMk } from "../../../../../../../components/forms/InputMk";
 import { ParrafoForm } from "../../../../../../../components/forms/ParrafoForm";
-import { Select } from "../../../../../../../components/forms/Select";
 import { Select2 } from "../../../../../../../components/forms/Select2";
 import { LoadingImg2 } from "../../../../../../../components/loads/LoadingImg";
 import { ValidDocumento } from "../../../../../../../resources/validations/Clientes";
