@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
-import { RadioButton2 } from "../../../../../components/forms/RadioButton2";
-import { Modal } from "../../../../../components/modals/Modal"
-import { ModalWrap } from "../../../../../components/modals/ModalWrap";
-import { TextoRelleno } from "../../../../../components/TextoRelleno";
-import { clienteInfo } from "../../../../../resources/dtos/Cliente";
-import { tipoVenta } from "../../../../../resources/dtos/VentasDto";
-import { put } from "../../../../../resources/fetch";
-import { VENTAS } from "../../../../../resources/routes";
-import { ConvertirBoleta } from "./convertirComp/boleta/ConvertirBoleta";
-import { ConvertirFactura } from "./convertirComp/factura/ConvertirFactura";
-import { ModalVentaDetalles } from "./ModalVentaDetalles";
+import { RadioButton2 } from "../../../../../../components/forms/RadioButton2";
+import { Modal } from "../../../../../../components/modals/Modal"
+import { ModalWrap } from "../../../../../../components/modals/ModalWrap";
+import { TextoRelleno } from "../../../../../../components/TextoRelleno";
+import { clienteInfo } from "../../../../../../resources/dtos/Cliente";
+import { tipoVenta } from "../../../../../../resources/dtos/VentasDto";
+import { put } from "../../../../../../resources/fetch";
+import { VENTAS } from "../../../../../../resources/routes";
+import { ConvertirBoleta } from "./boleta/ConvertirBoleta";
+import { ConvertirFactura } from "./factura/ConvertirFactura";
+
+import { ModalVentaDetalles } from "../ModalVentaDetalles";
 
 interface modalConvertirComp {
     modal:boolean;

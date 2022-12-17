@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { BiBookmarkAltMinus } from "react-icons/bi"
-import { BtnOnOff2 } from "../../../../../components/btns/BtnOnOff2"
-import { LoadSwitchBtn2 } from "../../../../../components/btns/LoadSwitchBtn2";
-import { copy } from "../../../../../resources/func/deepCopy";
+import { BtnOnOff2 } from "../../../../../../components/btns/BtnOnOff2";
+import { LoadSwitchBtn2 } from "../../../../../../components/btns/LoadSwitchBtn2";
+import { copy } from "../../../../../../resources/func/deepCopy";
 import { ImpCreditoAdel } from "./ImpCreditoAdel";
 
 interface btnImpCredAde {

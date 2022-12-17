@@ -1,9 +1,9 @@
 import { useState } from "react"
-import { Loading } from "../../../../../components/loads/Loading";
-import { put } from "../../../../../resources/fetch";
-import { VENTAS } from "../../../../../resources/routes";
-import { TablaListaVentaProductos } from "../../../../cobrar/part/TablaListaVentaProductos";
-import { BoxModalVentaDetalles } from "../modals/ModalVentaDetalles";
+import { Loading } from "../../../../../../components/loads/Loading";
+import { put } from "../../../../../../resources/fetch";
+import { VENTAS } from "../../../../../../resources/routes";
+import { TablaListaVentaProductos } from "../../../../../cobrar/part/TablaListaVentaProductos";
+import { BoxModalVentaDetalles } from "../ModalVentaDetalles";
 import { BoletaCred } from "./comprobantes/BoletaCred";
 import { FacturaCred } from "./comprobantes/FacturaCred";
 import { RapidoCred } from "./comprobantes/RapidoCred";

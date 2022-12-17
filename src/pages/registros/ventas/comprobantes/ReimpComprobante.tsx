@@ -12,6 +12,8 @@ interface impComprobante {
 }
 
 export const ReimpComprobante = ({ comprobante, setImprimir, nuevo }:impComprobante) => {
+
+    console.log(comprobante);
     
     const imprimir = useRef<any>(null);
 

@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import { Checkbox2 } from "../../../../../components/forms/Checkbox2";
-import { Input } from "../../../../../components/forms/Input";
-import { Select2 } from "../../../../../components/forms/Select2";
-import { infoCreditoDto, infoCredito } from "../../../../../resources/dtos/CreditoDto";
-import { moneda } from "../../../../../resources/func/moneda";
+import { Checkbox2 } from "../../../../../../components/forms/Checkbox2";
+import { Input } from "../../../../../../components/forms/Input";
+import { Select2 } from "../../../../../../components/forms/Select2";
+import { infoCreditoDto, infoCredito } from "../../../../../../resources/dtos/CreditoDto";
+import { moneda } from "../../../../../../resources/func/moneda";
+
 
 interface crearCreditoDetal {
     venta:any;

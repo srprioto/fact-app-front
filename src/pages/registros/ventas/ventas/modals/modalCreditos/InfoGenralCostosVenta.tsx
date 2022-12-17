@@ -1,4 +1,4 @@
-import { moneda } from "../../../../../resources/func/moneda"
+import { moneda } from "../../../../../../resources/func/moneda";
 
 export const InfoGenralCostosVenta = ({ venta }:any) => {
     return (

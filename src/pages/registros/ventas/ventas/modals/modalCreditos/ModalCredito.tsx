@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { Loading } from "../../../../../components/loads/Loading";
-import { Modal } from "../../../../../components/modals/Modal"
-import { getOne } from "../../../../../resources/fetch";
-import { VENTAS } from "../../../../../resources/routes";
-import { InfoCliente } from "../InfoCliente";
+import { Loading } from "../../../../../../components/loads/Loading";
+import { Modal } from "../../../../../../components/modals/Modal";
+import { getOne } from "../../../../../../resources/fetch";
+import { VENTAS } from "../../../../../../resources/routes";
+import { InfoCliente } from "../../InfoCliente";
 import { ConfirmCreditoAdelanto } from "./ConfirmCreditoAdelanto";
 import { GestionCreditoAdelanto } from "./GestionCreditoAdelanto";
 import { TablaInfoCredito } from "./TablaInfoCredito";

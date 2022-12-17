@@ -1,7 +1,7 @@
 import { BiCaretRight } from "react-icons/bi"
-import { BtnOnOff2 } from "../../../../../../components/btns/BtnOnOff2"
-import { LoadSwitchBtn2 } from "../../../../../../components/btns/LoadSwitchBtn2";
-import { tipoVenta } from "../../../../../../resources/dtos/VentasDto";
+import { BtnOnOff2 } from "../../../../../../../components/btns/BtnOnOff2";
+import { LoadSwitchBtn2 } from "../../../../../../../components/btns/LoadSwitchBtn2";
+import { tipoVenta } from "../../../../../../../resources/dtos/VentasDto";
 import { ImpComVentaCredito } from "./ImpComVentaCredito";
 
 export const RapidoCred = ({ confirmarVenta, loading, venta }:any) => {

@@ -1,11 +1,11 @@
 import { useState } from "react"
 import { BiCaretRight, BiCheck, BiLayerPlus } from "react-icons/bi";
-import { BtnOnOff2 } from "../../../../../components/btns/BtnOnOff2";
-import { LoadSwitchBtn2 } from "../../../../../components/btns/LoadSwitchBtn2";
-import { Loading } from "../../../../../components/loads/Loading";
-import { infoCreditoDto } from "../../../../../resources/dtos/CreditoDto";
-import { post } from "../../../../../resources/fetch";
-import { CREDITO_DETALLES } from "../../../../../resources/routes";
+import { BtnOnOff2 } from "../../../../../../components/btns/BtnOnOff2";
+import { LoadSwitchBtn2 } from "../../../../../../components/btns/LoadSwitchBtn2";
+import { Loading } from "../../../../../../components/loads/Loading";
+import { infoCreditoDto } from "../../../../../../resources/dtos/CreditoDto";
+import { post } from "../../../../../../resources/fetch";
+import { CREDITO_DETALLES } from "../../../../../../resources/routes";
 import { BtnImpCredAde } from "./BtnImpCredAde";
 import { CrearCreditoDetal } from "./CrearCreditoDetal";
 

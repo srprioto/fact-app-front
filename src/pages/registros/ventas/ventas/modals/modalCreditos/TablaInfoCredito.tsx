@@ -1,5 +1,5 @@
-import { fecha } from "../../../../../resources/func/fechas";
-import { moneda } from "../../../../../resources/func/moneda";
+import { fecha } from "../../../../../../resources/func/fechas";
+import { moneda } from "../../../../../../resources/func/moneda";
 import { InfoGeneralCredito } from "./InfoGeneralCredito";
 
 export const TablaInfoCredito = ({ venta, cantidadRestante }:any) => {

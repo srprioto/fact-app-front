@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
-import { fechaActualJs, fechaResumen } from "../../../../../resources/func/fechas";
-import { moneda } from "../../../../../resources/func/moneda";
+import { fechaActualJs, fechaResumen } from "../../../../../../resources/func/fechas";
+import { moneda } from "../../../../../../resources/func/moneda";
+
 
 interface impCreditoAdel {
     ventaUpdate:any;
