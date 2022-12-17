@@ -96,7 +96,7 @@ export const ModalConvertirComp = ({ modal, setModal, idVenta, getData }:modalCo
 
                 {
                     !selectTipoComp
-                    && <TextoRelleno texto="Selecciona un documento" />
+                    && <div style={{ height: "176px" }}><TextoRelleno texto="Selecciona un documento" /></div>
                 }
 
                 {
