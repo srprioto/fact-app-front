@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { BiRedo, BiX } from "react-icons/bi";
+import { BiBookmarkAltMinus, BiRedo, BiX } from "react-icons/bi";
 import { Loading } from "../../../../components/loads/Loading";
 import { Modal } from "../../../../components/modals/Modal"
 import { ModalWrap } from "../../../../components/modals/ModalWrap";
@@ -12,6 +12,7 @@ import { ModalAnularVenta } from "../ventas/modals/ModalAnularVenta";
 import { InfoComprobante } from "./InfoComprobante";
 import { InfoRespuestaSunat } from "./InfoRespuestaSunat";
 import { ModalReenviarComp } from "./ModalReenviarComp";
+import { ModalReimpComprob } from "./ModalReimpComprob";
 
 interface modalVerComprobante {
     modal:boolean;
@@ -27,6 +28,7 @@ export const ModalVerComprobante = ({ modal, setModal, idComprobante, getData }:
 
     const [modalReenviar, setModalReenviar] = useState<boolean>(false);
     const [modalAnularComp, setModalAnularComp] = useState<boolean>(false);
+    const [modalReimprimir, setModalReimprimir] = useState<boolean>(false);
 
     const venta:any = comprobante.ventas ? comprobante.ventas : {};
 
@@ -56,7 +58,11 @@ export const ModalVerComprobante = ({ modal, setModal, idComprobante, getData }:
 
 
     const acciones = ():Array<any> => {
-        const accionesArray:Array<any> = [];
+        const accionesArray:Array<any> = [{
+            label: "Reimprimir",
+            funcion: () => setModalReimprimir(true),
+            icon: <BiBookmarkAltMinus />
+        }];
         if (!loadingOne) {
             if (
                 comprobante.estado_sunat === estados_comprobante.Error_envio || 
@@ -173,6 +179,14 @@ export const ModalVerComprobante = ({ modal, setModal, idComprobante, getData }:
                     setModal={setModalAnularComp}
                     idVenta={venta.id}
                     getData={updateData}
+                />
+            </ModalWrap>
+            
+            <ModalWrap modal={modalReimprimir}>
+                <ModalReimpComprob
+                    modal={modalReimprimir}
+                    setModal={setModalReimprimir}
+                    idComprobante={comprobante.id}
                 />
             </ModalWrap>
 

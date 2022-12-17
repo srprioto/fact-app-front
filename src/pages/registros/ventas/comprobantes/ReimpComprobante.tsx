@@ -6,32 +6,32 @@ import { fixedInput } from "../../../../resources/func/fixedInput";
 import { moneda } from "../../../../resources/func/moneda";
 
 interface impComprobante {
-    venta:any;
+    comprobante:any;
     setImprimir:Function;
     nuevo?:boolean;
 }
 
-export const ImpComprobante = ({ venta, setImprimir, nuevo }:impComprobante) => {
-
+export const ReimpComprobante = ({ comprobante, setImprimir, nuevo }:impComprobante) => {
+    
     const imprimir = useRef<any>(null);
 
     // info comprobante
-    const correlativos:any = venta.locales.correlativos;
-    const correlativo:any = correlativos.find((e:any) => e.descripcion === venta.tipo_venta);
+    const correlativos:any = comprobante.locales.correlativos;
+    const correlativo:any = correlativos.find((e:any) => e.descripcion === comprobante.tipo_venta);
     const serie:string = correlativo ? correlativo.serie : "V001";
     const nuevoCorrelativo:string = correlativo ? correlativo.correlativo : "";
-    const existCorrelativo:string = venta.comprobante.length > 0 ? venta.comprobante[0].correlativo : "";
-    const esComprobante:boolean = venta.tipo_venta === tipoVenta.boleta || venta.tipo_venta === tipoVenta.factura;
-    const cliente:any = venta.clientes ? venta.clientes : {};
-    const ventaDetalles:any = venta.ventaDetalles ? venta.ventaDetalles : {};
+    const existCorrelativo:string = comprobante.comprobante.length > 0 ? comprobante.comprobante[0].correlativo : "";
+    const esComprobante:boolean = comprobante.tipo_venta === tipoVenta.boleta || comprobante.tipo_venta === tipoVenta.factura;
+    const cliente:any = comprobante.clientes ? comprobante.clientes : {};
+    const ventaDetalles:any = comprobante.ventaDetalles ? comprobante.ventaDetalles : {};
     
     let subtotal:number = 0;
     let igv:number = 0;
     let tipoComprobante:string = "";
     let tipoDocumento:string = "";
-    if (venta.tipo_venta === tipoVenta.boleta) {
+    if (comprobante.tipo_venta === tipoVenta.boleta) {
         tipoComprobante = "03";
-    } else if (venta.tipo_venta === tipoVenta.factura) {
+    } else if (comprobante.tipo_venta === tipoVenta.factura) {
         tipoComprobante = "01";
     }
     if (cliente.tipoDocumento === "DNI") {
@@ -40,7 +40,7 @@ export const ImpComprobante = ({ venta, setImprimir, nuevo }:impComprobante) => 
         tipoDocumento = "6"
     } else if (
         cliente.tipoDocumento === "noDocumento" || 
-        (!cliente.tipoDocumento && venta.tipo_venta === tipoVenta.boleta)
+        (!cliente.tipoDocumento && comprobante.tipo_venta === tipoVenta.boleta)
     ) {
         tipoDocumento = "00"
     }
@@ -52,8 +52,8 @@ export const ImpComprobante = ({ venta, setImprimir, nuevo }:impComprobante) => 
 
 
     if (!nuevo) {
-        subtotal = Number(venta.subtotal / 1.18);
-        igv = Number(venta.subtotal) - Number(subtotal);    
+        subtotal = Number(comprobante.subtotal / 1.18);
+        igv = Number(comprobante.subtotal) - Number(subtotal);    
     }
 
     useEffect(() => {
@@ -72,11 +72,11 @@ export const ImpComprobante = ({ venta, setImprimir, nuevo }:impComprobante) => 
 
 
     const titulo = () => {
-        if (venta.tipo_venta === tipoVenta.venta_rapida) {
+        if (comprobante.tipo_venta === tipoVenta.venta_rapida) {
             return "Nota de venta";
-        } else if (venta.tipo_venta === tipoVenta.boleta){
+        } else if (comprobante.tipo_venta === tipoVenta.boleta){
             return "Boleta electronica";
-        } else if (venta.tipo_venta === tipoVenta.factura){
+        } else if (comprobante.tipo_venta === tipoVenta.factura){
             return "Factura electronica";
         } else {
             return "Comprobante electronico";
@@ -219,11 +219,11 @@ export const ImpComprobante = ({ venta, setImprimir, nuevo }:impComprobante) => 
     }
 
     // info de QR
-    const informacionQR:string = `${ruc}|${tipoComprobante}|${serie}|${nroCorrelat()}|${fixedInput(nuevo ? moneda(venta.igvGeneral) : moneda(igv))}|${fixedInput(venta.total)}|${fechaResumenGuiones(venta.updated_at)}|${tipoDocumento}|${nroDocumento}`;
+    const informacionQR:string = `${ruc}|${tipoComprobante}|${serie}|${nroCorrelat()}|${fixedInput(nuevo ? moneda(comprobante.igvGeneral) : moneda(igv))}|${fixedInput(comprobante.total)}|${fechaResumenGuiones(comprobante.updated_at)}|${tipoDocumento}|${nroDocumento}`;
 
     // const nroComprobante:string = serie + "-" + (nroCorrelat() ? nroCorrelat() + "-" : "") + venta.id + "-" + venta.codigo_venta;
     const nroComprobante:string = serie + "-" + nroCorrelat();
-    const nroVenta:string = venta.id + "-" + venta.codigo_venta
+    const nroVenta:string = comprobante.id + "-" + comprobante.codigo_venta
 
 
     return (
@@ -244,7 +244,7 @@ export const ImpComprobante = ({ venta, setImprimir, nuevo }:impComprobante) => 
                         ? nroVenta 
                         : "V001-" + nroVenta
                     }</span>
-                    <span style={headerInfo}>{ fechaResumen(venta.updated_at) }</span>
+                    <span style={headerInfo}>{ fechaResumen(comprobante.updated_at) }</span>
                 </div>
                 
                 <div style={boxHeaderInfo}>
@@ -344,7 +344,7 @@ export const ImpComprobante = ({ venta, setImprimir, nuevo }:impComprobante) => 
                                     <span style={left}>Subtotal:</span>
                                     <span style={right}>S/. { 
                                         nuevo
-                                        ? moneda(venta.subtotal)
+                                        ? moneda(comprobante.subtotal)
                                         : moneda(subtotal)
                                     }</span>
                                 </div>
@@ -358,7 +358,7 @@ export const ImpComprobante = ({ venta, setImprimir, nuevo }:impComprobante) => 
                                     <span style={left}>IGV:</span>
                                     <span style={right}>S/. { 
                                         nuevo
-                                        ? moneda(venta.igvGeneral)
+                                        ? moneda(comprobante.igvGeneral)
                                         : moneda(igv)
                                     }</span>
                                 </div>
@@ -384,7 +384,7 @@ export const ImpComprobante = ({ venta, setImprimir, nuevo }:impComprobante) => 
 
                         <div style={textoResumen}>
                             <span style={left}>Total:</span>
-                            <span style={right}>S/. { moneda(venta.total) }</span>
+                            <span style={right}>S/. { moneda(comprobante.total) }</span>
                         </div>
                     </div>
                 </div>
@@ -408,8 +408,3 @@ export const ImpComprobante = ({ venta, setImprimir, nuevo }:impComprobante) => 
         </div>
     );
 }
-
-/* <div style={textoResumen}>
-    <span style={left}>Gratuita:</span>
-    <span style={right}>S/. { moneda(0) }</span>
-</div> */

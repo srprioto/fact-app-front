@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { BiBookmarkAltMinus } from "react-icons/bi"
 import { LoadSwitchBtn2 } from "../../../../components/btns/LoadSwitchBtn2"
-import { ImpComprobante } from "./ImpComprobante"
+import { ImpVenta } from "./ImpVenta"
 
 export const BtnImpComprobante = ({ loading, registroFinal, venta }:any) => {
 
@@ -22,7 +22,7 @@ export const BtnImpComprobante = ({ loading, registroFinal, venta }:any) => {
             ><BiBookmarkAltMinus /> Imprimir
             </LoadSwitchBtn2>
 
-            { imprimir && <ImpComprobante venta={venta} setImprimir={setImprimir} nuevo /> }           
+            { imprimir && <ImpVenta venta={venta} setImprimir={setImprimir} nuevo /> }           
 
         </>
     )
