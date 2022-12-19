@@ -8,27 +8,27 @@ import { moneda } from "../../../../resources/func/moneda";
 interface impComprobante {
     comprobante:any;
     setImprimir:Function;
-    nuevo?:boolean;
 }
 
-export const ReimpComprobante = ({ comprobante, setImprimir, nuevo }:impComprobante) => {
+export const ReimpComprobante = ({ comprobante, setImprimir }:impComprobante) => {
 
-    console.log(comprobante);
+    const venta:any = comprobante.venta ? comprobante.venta : {};
+    const cliente:any = comprobante.clientes ? comprobante.clientes : {};
     
     const imprimir = useRef<any>(null);
 
     // info comprobante
-    const correlativos:any = comprobante.locales.correlativos;
-    const correlativo:any = correlativos.find((e:any) => e.descripcion === comprobante.tipo_venta);
-    const serie:string = correlativo ? correlativo.serie : "V001";
-    const nuevoCorrelativo:string = correlativo ? correlativo.correlativo : "";
-    const existCorrelativo:string = comprobante.comprobante.length > 0 ? comprobante.comprobante[0].correlativo : "";
-    const esComprobante:boolean = comprobante.tipo_venta === tipoVenta.boleta || comprobante.tipo_venta === tipoVenta.factura;
-    const cliente:any = comprobante.clientes ? comprobante.clientes : {};
-    const ventaDetalles:any = comprobante.ventaDetalles ? comprobante.ventaDetalles : {};
+    // const correlativos:any = comprobante.locales.correlativos;
+    // const correlativo:any = correlativos.find((e:any) => e.descripcion === comprobante.tipo_venta);
+    // const serie:string = correlativo ? correlativo.serie : "V001";
+    // const nuevoCorrelativo:string = correlativo ? correlativo.correlativo : "";
+    // const existCorrelativo:string = comprobante.comprobante.length > 0 ? comprobante.comprobante[0].correlativo : "";
+    // const esComprobante:boolean = comprobante.tipo_venta === tipoVenta.boleta || comprobante.tipo_venta === tipoVenta.factura;
     
-    let subtotal:number = 0;
-    let igv:number = 0;
+    // const ventaDetalles:any = comprobante.ventaDetalles ? comprobante.ventaDetalles : {};
+    
+    // let subtotal:number = 0;
+    // let igv:number = 0;
     let tipoComprobante:string = "";
     let tipoDocumento:string = "";
     if (comprobante.tipo_venta === tipoVenta.boleta) {
@@ -53,10 +53,10 @@ export const ReimpComprobante = ({ comprobante, setImprimir, nuevo }:impComproba
     const ruc:string = "20602956211";
 
 
-    if (!nuevo) {
-        subtotal = Number(comprobante.subtotal / 1.18);
-        igv = Number(comprobante.subtotal) - Number(subtotal);    
-    }
+    // if (!nuevo) {
+    //     subtotal = Number(comprobante.subtotal / 1.18);
+    //     igv = Number(comprobante.subtotal) - Number(subtotal);    
+    // }
 
     useEffect(() => {
         handlerPrint();
@@ -86,24 +86,24 @@ export const ReimpComprobante = ({ comprobante, setImprimir, nuevo }:impComproba
     }
 
 
-    const nroCorrelat = () => {
-        if (nuevo) {
-            // nueva impresion
-            if (esComprobante) {
-                return Number(nuevoCorrelativo) + 1;    
-            } else {
-                return ""
-            }
-        } else {
-            // impresion existente
-            if (esComprobante) {
-                return existCorrelativo;
-            } else {
-                return "";
-            }
+    // const nroCorrelat = () => {
+    //     if (nuevo) {
+    //         // nueva impresion
+    //         if (esComprobante) {
+    //             return Number(nuevoCorrelativo) + 1;    
+    //         } else {
+    //             return ""
+    //         }
+    //     } else {
+    //         // impresion existente
+    //         if (esComprobante) {
+    //             return existCorrelativo;
+    //         } else {
+    //             return "";
+    //         }
             
-        }
-    }  
+    //     }
+    // }  
 
     // estilos
     // generales
@@ -221,11 +221,11 @@ export const ReimpComprobante = ({ comprobante, setImprimir, nuevo }:impComproba
     }
 
     // info de QR
-    const informacionQR:string = `${ruc}|${tipoComprobante}|${serie}|${nroCorrelat()}|${fixedInput(nuevo ? moneda(comprobante.igvGeneral) : moneda(igv))}|${fixedInput(comprobante.total)}|${fechaResumenGuiones(comprobante.updated_at)}|${tipoDocumento}|${nroDocumento}`;
+    const informacionQR:string = `${ruc}|${tipoComprobante}|${comprobante.serie}|${comprobante.correlativo}|${moneda(comprobante.igvGeneral)}|${fixedInput(comprobante.total)}|${fechaResumenGuiones(comprobante.updated_at)}|${tipoDocumento}|${nroDocumento}`;
 
     // const nroComprobante:string = serie + "-" + (nroCorrelat() ? nroCorrelat() + "-" : "") + venta.id + "-" + venta.codigo_venta;
-    const nroComprobante:string = serie + "-" + nroCorrelat();
-    const nroVenta:string = comprobante.id + "-" + comprobante.codigo_venta
+    // const nroComprobante:string = serie + "-" + nroCorrelat();
+    const nroVenta:string = venta.id + "-" + venta.codigo_venta
 
 
     return (
@@ -236,37 +236,24 @@ export const ReimpComprobante = ({ comprobante, setImprimir, nuevo }:impComproba
                 <div style={boxHeaderInfo}>
                     <div>
                         <h3 style={tituloPrinc}>{ titulo() }</h3>
-                        {
-                            nroCorrelat()
-                            && <p>{ nroComprobante }</p>
-                        }
+                        <p>{ comprobante.correlativo + "-" + comprobante.serie }</p>
                     </div>
-                    <span style={headerInfo}>{ 
-                        nroCorrelat()
-                        ? nroVenta 
-                        : "V001-" + nroVenta
-                    }</span>
-                    <span style={headerInfo}>{ fechaResumen(comprobante.updated_at) }</span>
+                    <span style={headerInfo}>{ nroVenta }</span>
+                    <span style={headerInfo}>{ fechaResumen(comprobante.created_at) }</span>
                 </div>
                 
                 <div style={boxHeaderInfo}>
                     <h3 style={infoEmpresa}>AddidSport</h3> {/*  actualizar por nombre de empresa desde DB */}
                     <h2 style={infoEmpresa}>INVERSIONES PERKINS E.I.R.L</h2> {/*  actualizar */}
-                    {
-                        esComprobante
-                        && (
-                            <>
-                                <p style={infoEmpresa}>INVERSIONES PERKINS EMPRESA INDIVIDUAL DE RESPONSABILIDAD LIMITADA</p>
-                                <p style={infoEmpresa}>CUSCO - CUSCO - CUSCO</p>
-                                <p style={infoTxtM0}>RUC: {ruc}</p>
-                                {/* <p style={infoTxtM0}>TELEFONO: 20602956211</p> */}
-                            </>
-                        )
-                    }
+                    <p style={infoEmpresa}>INVERSIONES PERKINS EMPRESA INDIVIDUAL DE RESPONSABILIDAD LIMITADA</p>
+                    <p style={infoEmpresa}>CUSCO - CUSCO - CUSCO</p>
+                    <p style={infoTxtM0}>RUC: {ruc}</p>
+                    {/* <p style={infoTxtM0}>TELEFONO: 20602956211</p> */}
                     <p style={infoEmpresa}>CAL. TRINITARIAS N. 501 URB. CENTRO HISTORICO CUSCO</p>
                     <p style={infoTxtM0}>CORREO: epc26irvin@gmail.com</p>
                     <p style={infoTxtM0}>WSP: 937604653</p>
                 </div>
+
                 <div style={borderMb} />
                 {
                     !!cliente.numero_documento
@@ -299,31 +286,16 @@ export const ReimpComprobante = ({ comprobante, setImprimir, nuevo }:impComproba
                         </thead>
                         <tbody>
                             {
-                                ventaDetalles.map((e:any) => {
+                                comprobante.comprobanteDetalles.map((e:any) => {
 
-                                    let precio_venta:number = 0;
-
-                                    if (nuevo) {
-                                        precio_venta = e.precio_venta
-                                    } else {
-                                        precio_venta = 
-                                        Number(e.precio_venta) + 
-                                        (Number(e.descuento) / 
-                                        Number(e.cantidad_venta));
-                                    }
+                                    const totalSubventa:number = Number(e.unidad_con_igv) * Number(e.cantidad_venta)
 
                                     return (
                                         <tr key={e.id} style={texto}>
-                                            {/* <td>{ e.productos.codigo }</td> */}
                                             <td>{ e.cantidad_venta }</td>
-                                            <td style={lowercase}>{ 
-                                                e.productos.nombre + " - " +
-                                                e.productos.marca + " - " +
-                                                e.productos.talla + " - " +
-                                                e.productos.color
-                                            }</td>
-                                            <td>S/.{ moneda(precio_venta) }</td>
-                                            <td>S/.{ moneda(e.precio_parcial) }</td>
+                                            <td style={lowercase}>{ e.nombre }</td>
+                                            <td>S/.{ moneda(e.unidad_con_igv) }</td>
+                                            <td>S/.{ moneda(totalSubventa) }</td>
                                         </tr>            
                                     );                                
                                 })
@@ -339,69 +311,40 @@ export const ReimpComprobante = ({ comprobante, setImprimir, nuevo }:impComproba
                     <div style={blockLeft}></div>
                     <div style={blockRight}>
 
-                        {
-                            esComprobante
-                            && (
-                                <div style={textoResumen}>
-                                    <span style={left}>Subtotal:</span>
-                                    <span style={right}>S/. { 
-                                        nuevo
-                                        ? moneda(comprobante.subtotal)
-                                        : moneda(subtotal)
-                                    }</span>
-                                </div>
-                            )
-                        }
+                        <div style={textoResumen}>
+                            <span style={left}>Subtotal:</span>
+                            <span style={right}>S/. { moneda(comprobante.subtotal) }</span>
+                        </div>
 
-                        {
-                            esComprobante
-                            && (
-                                <div style={textoResumen}>
-                                    <span style={left}>IGV:</span>
-                                    <span style={right}>S/. { 
-                                        nuevo
-                                        ? moneda(comprobante.igvGeneral)
-                                        : moneda(igv)
-                                    }</span>
-                                </div>
-                            )
-                        }
+                        <div style={textoResumen}>
+                            <span style={left}>IGV:</span>
+                            <span style={right}>S/. { moneda(comprobante.igvGeneral) }</span>
+                        </div>
 
-                        {
-                            esComprobante
-                            && (
-                                <>
-                                    <div style={textoResumen}>
-                                        <span style={left}>Inafecta:</span>
-                                        <span style={right}>S/. { moneda(0) }</span>
-                                    </div>
+                        <div style={textoResumen}>
+                            <span style={left}>Inafecta:</span>
+                            <span style={right}>S/. { moneda(0) }</span>
+                        </div>
 
-                                    <div style={textoResumen}>
-                                        <span style={left}>Exonerada:</span>
-                                        <span style={right}>S/. { moneda(0) }</span>
-                                    </div>
-                                </>
-                            )
-                        }
+                        <div style={textoResumen}>
+                            <span style={left}>Exonerada:</span>
+                            <span style={right}>S/. { moneda(0) }</span>
+                        </div>
 
                         <div style={textoResumen}>
                             <span style={left}>Total:</span>
                             <span style={right}>S/. { moneda(comprobante.total) }</span>
                         </div>
+
                     </div>
                 </div>
 
                 <div style={borderMb} />
 
                 <div style={center}>
-                    {
-                        esComprobante
-                        && (
-                            <div style={qrcode}>
-                                <QRCodeSVG value={informacionQR} />
-                            </div>
-                        )
-                    }
+                    <div style={qrcode}>
+                        <QRCodeSVG value={informacionQR} />
+                    </div>
                     
                     <h3 style={descripcion}>Representacion impresa del comprobante electronico</h3>
                 </div>
