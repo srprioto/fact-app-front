@@ -49,7 +49,8 @@ export const ModalConvertirComp = ({ modal, setModal, idVenta, getData }:modalCo
         updateCliente.tipoDocumento = getCliente.tipoDocumento;
 
         try {
-            await put(idVenta, { tipoComprobante: selectTipoComp, cliente: updateCliente }, url);
+            const resto:any = await put(idVenta, { tipoComprobante: selectTipoComp, cliente: updateCliente }, url);
+            console.log(resto.data.id);            
             setLoadingPost(false);
         } catch (error) {
             setLoadingPost(true);

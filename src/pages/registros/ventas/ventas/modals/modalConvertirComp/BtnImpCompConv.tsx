@@ -1,26 +1,26 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { BiBookmarkAltMinus, BiCheck } from "react-icons/bi"
 import { BtnOnOff2 } from "../../../../../../components/btns/BtnOnOff2"
 import { LoadSwitchBtn2 } from "../../../../../../components/btns/LoadSwitchBtn2"
-import { ImpVenta } from "../../../../../cobrar/part/modals/ImpVenta";
+import { ReimpComprobante } from "../../../comprobantes/ReimpComprobante";
 
 interface btnImpCompConv {
     validarPost:boolean;
     loadingPost:boolean;
     restoComprobante:any;
-    imprimir:boolean;
-    setImprimir:Function;
+    // imprimir:boolean;
+    // setImprimir:Function;
 }
 
-export const BtnImpCompConv = ({ validarPost, loadingPost, restoComprobante, imprimir, setImprimir }:btnImpCompConv) => {
+export const BtnImpCompConv = ({ validarPost, loadingPost, restoComprobante }:btnImpCompConv) => {
 
-    // const [imprimir, setImprimir] = useState<boolean>(false);
+    const [imprimir, setImprimir] = useState<boolean>(false);
 
-    // const handlerImprimir = async () => { 
-    //     setImprimir(true);
-    // }
+    const handlerImprimir = async () => { 
+        setImprimir(true);
+        // aqui ejecutamos la funcion de vender
+    }
 
-    
 
     return <>
         <BtnOnOff2
@@ -37,7 +37,7 @@ export const BtnImpCompConv = ({ validarPost, loadingPost, restoComprobante, imp
             </LoadSwitchBtn2>
         </BtnOnOff2>
     
-        { imprimir && <ImpVenta venta={restoComprobante} setImprimir={setImprimir} /> }     
+        { imprimir && <ReimpComprobante comprobante={restoComprobante} setImprimir={setImprimir} /> }     
         {/* { imprimir && <ImpPrueba venta={restoComprobante} setImprimir={setImprimir} /> }      */}
     </>    
 }
