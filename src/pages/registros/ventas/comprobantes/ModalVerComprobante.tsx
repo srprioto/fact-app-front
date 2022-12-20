@@ -19,9 +19,10 @@ interface modalVerComprobante {
     setModal:Function;
     idComprobante:number;
     getData?:Function;
+    btnClose?:Function;
 }
 
-export const ModalVerComprobante = ({ modal, setModal, idComprobante, getData }:modalVerComprobante) => {
+export const ModalVerComprobante = ({ modal, setModal, idComprobante, getData, btnClose }:modalVerComprobante) => {
 
     const [loadingOne, setLoadingOne] = useState<boolean>(false);
     const [comprobante, setComprobante] = useState<any>({});
@@ -59,7 +60,7 @@ export const ModalVerComprobante = ({ modal, setModal, idComprobante, getData }:
 
     const acciones = ():Array<any> => {
         const accionesArray:Array<any> = [{
-            label: "Reimprimir",
+            label: "Imprimir",
             funcion: () => setModalReimprimir(true),
             icon: <BiBookmarkAltMinus />
         }];
@@ -98,6 +99,7 @@ export const ModalVerComprobante = ({ modal, setModal, idComprobante, getData }:
             border="border-primary"
             width={70}
             acciones={acciones().length > 0 ? acciones() : null}
+            btnClose={btnClose}
         >
 
             {

@@ -91,7 +91,7 @@ export const VentasDropdown = ({
                 (ventas.estado_venta === "listo" && !esCredito())
                 && (
                     <span onClick={ () => handlerReimprimir(ventas.id) } >
-                        <BiBookmarkAltMinus /> Reimprimir
+                        <BiBookmarkAltMinus /> Imprimir
                     </span>
                 )
             }
