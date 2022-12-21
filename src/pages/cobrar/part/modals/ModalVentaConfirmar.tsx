@@ -157,7 +157,7 @@ export const ModalVentaConfirmar = ({
 
     const totalGrid = ():number => { 
         let total:number = 4;
-        if (credito()) {
+        if (credito() && auth.rol !== Roles.ADMIN) {
             total = total + 1
         } 
         if (auth.rol !== Roles.ADMIN) {
@@ -239,7 +239,7 @@ export const ModalVentaConfirmar = ({
                             )
                         }
                         {
-                            auth.rol === Roles.ADMIN
+                            (auth.rol === Roles.ADMIN && !credito())
                             && <div>
                                 <p>Modif. porcentual (%):</p>
                                 <Input
