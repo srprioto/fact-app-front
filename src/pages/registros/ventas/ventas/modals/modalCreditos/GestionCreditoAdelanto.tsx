@@ -3,6 +3,7 @@ import { BiCaretRight, BiCheck, BiLayerPlus } from "react-icons/bi";
 import { BtnOnOff2 } from "../../../../../../components/btns/BtnOnOff2";
 import { LoadSwitchBtn2 } from "../../../../../../components/btns/LoadSwitchBtn2";
 import { Loading } from "../../../../../../components/loads/Loading";
+import { useToast } from "../../../../../../hooks/useContext/toast/useToast";
 import { infoCreditoDto } from "../../../../../../resources/dtos/CreditoDto";
 import { post } from "../../../../../../resources/fetch";
 import { CREDITO_DETALLES } from "../../../../../../resources/routes";
@@ -27,6 +28,8 @@ export const GestionCreditoAdelanto = ({
     loading,
     setLoading
 }:gestionCreditoAdelanto) => {
+
+    const toast = useToast();
     
     const [tabbs, setTabbs] = useState<number>(1);
     const [validarCredito, setValidarCredito] = useState<boolean>(true);
@@ -38,6 +41,7 @@ export const GestionCreditoAdelanto = ({
         setLoading(true);
         try {
             await post(updateCredito, CREDITO_DETALLES);
+            toast.show("success", "Monto añadido correctamente!");
             setLoading(false);
         } catch (error) {
             setLoading(true);
