@@ -5,7 +5,7 @@ import { Modal } from "../../../../../components/modals/Modal";
 import { TextoRelleno } from "../../../../../components/TextoRelleno";
 import { getOne } from "../../../../../resources/fetch";
 import { VENTAS } from "../../../../../resources/routes";
-import { ImpVenta } from "../../../../../components/imprimir/ImpVenta";
+import { ReimpVenta } from "../../../../../components/imprimir/ReimpVenta";
 
 interface modalReimpVenta {
     modal:boolean;
@@ -51,7 +51,7 @@ export const ModalReimpVenta = ({ modal, setModal, idVenta }:modalReimpVenta) =>
                         icon={ <BiBookmarkAltMinus /> }
                     />
                     <h5 className="center m-0 warning">Confirme o cierre la ventana de impresion</h5>
-                    <ImpVenta venta={venta} setImprimir={setModal}/>
+                    <ReimpVenta venta={venta} setImprimir={setModal}/>
                 </>
             }
         </Modal>

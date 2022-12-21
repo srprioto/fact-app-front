@@ -1,4 +1,4 @@
-import { BiBookBookmark, BiBookmarkAltMinus, BiShowAlt, BiTask, BiX } from "react-icons/bi"
+import { BiBookBookmark, BiBookmarkAltMinus, BiMoveHorizontal, BiShowAlt, BiX } from "react-icons/bi"
 import { DropDown } from "../../../../components/DropDown"
 import { tipoVenta } from "../../../../resources/dtos/VentasDto";
 // import { tipoVenta } from "../../../../resources/dtos/VentasDto";
@@ -54,22 +54,9 @@ export const VentasDropdown = ({
     return (
         <DropDown width="190">
 
-            {
-                !anulado()
-                && <span onClick={ () => handlerAnular(ventas.id, ventas.locales.id) } >
-                    <BiX /> Anular Venta
-                </span>
-            }
-
-            {/* {
-                (ventas.estado_venta === "rechazado" ||
-                ventas.estado_venta === "rechazado")
-                && (
-                    <span onClick={ () => updateData(ventas.id) } >
-                        <BiLike /> Habilitar venta
-                    </span>
-                )
-            } */}
+            <span onClick={ () => handlerVer(ventas.id) } >
+                <BiShowAlt /> Ver detalles
+            </span>
 
             {
                 (esCredito() && !anulado())
@@ -81,13 +68,6 @@ export const VentasDropdown = ({
             }
 
             {
-                esVenta
-                && <span onClick={ () => handlerConvertirComp(ventas.id) } >
-                    <BiTask /> Cambiar Comp.
-                </span>
-            }
-            
-            {
                 (ventas.estado_venta === "listo" && !esCredito())
                 && (
                     <span onClick={ () => handlerReimprimir(ventas.id) } >
@@ -96,10 +76,31 @@ export const VentasDropdown = ({
                 )
             }
 
-            <span onClick={ () => handlerVer(ventas.id) } >
-                <BiShowAlt /> Ver detalles
-            </span>
+            {
+                esVenta
+                && <span onClick={ () => handlerConvertirComp(ventas.id) } >
+                    <BiMoveHorizontal /> Cambiar Comp.
+                </span>
+            }
+
+            {
+                !anulado()
+                && <span onClick={ () => handlerAnular(ventas.id, ventas.locales.id) } >
+                    <BiX /> Anular Venta
+                </span>
+            }
                         
         </DropDown>
     )
 }
+
+
+/* {
+    (ventas.estado_venta === "rechazado" ||
+    ventas.estado_venta === "rechazado")
+    && (
+        <span onClick={ () => updateData(ventas.id) } >
+            <BiLike /> Habilitar venta
+        </span>
+    )
+} */

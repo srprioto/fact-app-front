@@ -110,7 +110,7 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
         let updateVenta:any = {}
         const ventaDet:Array<any> = [];
         const listaLimpia:Array<any> = [];
-        const updateComprobante:any = comprobante;
+        const updateComprobante:any = copy(comprobante);
         const updateCliente:any = {
             ...cliente,
             numero_documento: getCliente.documento,

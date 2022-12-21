@@ -55,7 +55,7 @@ export const ModalVerTicket = ({ modal, setModal, ticketId, getTickets }:modalVe
                 ticket.tipo === TicketsDto.Anulacion_procesada
             ) {
                 accionesArray.push({
-                    label: "Ver compr.",
+                    label: "Ver comprob.",
                     funcion: () => setModalVerComp(true),
                     icon: <BiShowAlt />
                 });

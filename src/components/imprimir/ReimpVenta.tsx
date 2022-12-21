@@ -1,60 +1,57 @@
-import { QRCodeSVG } from "qrcode.react";
 import { useEffect, useRef } from "react";
-import { tipoVenta } from "../../resources/dtos/VentasDto";
-import { fechaResumen, fechaResumenGuiones } from "../../resources/func/fechas";
-import { fixedInput } from "../../resources/func/fixedInput";
+import { fechaResumen } from "../../resources/func/fechas";
 import { moneda } from "../../resources/func/moneda";
 
-interface impComprobante {
+interface reimpVenta {
     venta:any;
     setImprimir:Function;
     nuevo?:boolean;
 }
 
-export const ImpVenta = ({ venta, setImprimir, nuevo }:impComprobante) => {
-    
+export const ReimpVenta = ({ venta, setImprimir, nuevo }:reimpVenta) => {
+
     const imprimir = useRef<any>(null);
 
     // info comprobante
-    const correlativos:any = venta.locales.correlativos;
-    const correlativo:any = correlativos.find((e:any) => e.descripcion === venta.tipo_venta);
-    const serie:string = correlativo ? correlativo.serie : "V001";
-    const nuevoCorrelativo:string = correlativo ? correlativo.correlativo : "";
-    const existCorrelativo:string = venta.comprobante.length > 0 ? venta.comprobante[0].correlativo : "";
-    const esComprobante:boolean = venta.tipo_venta === tipoVenta.boleta || venta.tipo_venta === tipoVenta.factura;
-    const cliente:any = venta.clientes ? venta.clientes : {};
+    // const correlativos:any = venta.locales.correlativos;
+    // const correlativo:any = correlativos.find((e:any) => e.descripcion === venta.tipo_venta);
+    // const serie:string = correlativo ? correlativo.serie : "V001";
+    // const nuevoCorrelativo:string = correlativo ? correlativo.correlativo : "";
+    // const existCorrelativo:string = venta.comprobante.length > 0 ? venta.comprobante[0].correlativo : "";
+    // const esComprobante:boolean = venta.tipo_venta === tipoVenta.boleta || venta.tipo_venta === tipoVenta.factura;
+    // const cliente:any = venta.clientes ? venta.clientes : {};
     const ventaDetalles:any = venta.ventaDetalles ? venta.ventaDetalles : {};
+    
+    // let subtotal:number = 0;
+    // let igv:number = 0;
+    // let tipoComprobante:string = "";
+    // let tipoDocumento:string = "";
+    // if (venta.tipo_venta === tipoVenta.boleta) {
+    //     tipoComprobante = "03";
+    // } else if (venta.tipo_venta === tipoVenta.factura) {
+    //     tipoComprobante = "01";
+    // }
+    // if (cliente.tipoDocumento === "DNI") {
+    //     tipoDocumento = "1"
+    // } else if (cliente.tipoDocumento === "RUC") {
+    //     tipoDocumento = "6"
+    // } else if (
+    //     cliente.tipoDocumento === "noDocumento" || 
+    //     (!cliente.tipoDocumento && venta.tipo_venta === tipoVenta.boleta)
+    // ) {
+    //     tipoDocumento = "00"
+    // }
 
-    let subtotal:number = 0;
-    let igv:number = 0;
-    let tipoComprobante:string = "";
-    let tipoDocumento:string = "";
-    if (venta.tipo_venta === tipoVenta.boleta) {
-        tipoComprobante = "03";
-    } else if (venta.tipo_venta === tipoVenta.factura) {
-        tipoComprobante = "01";
-    }
-    if (cliente.tipoDocumento === "DNI") {
-        tipoDocumento = "1"
-    } else if (cliente.tipoDocumento === "RUC") {
-        tipoDocumento = "6"
-    } else if (
-        cliente.tipoDocumento === "noDocumento" || 
-        (!cliente.tipoDocumento && venta.tipo_venta === tipoVenta.boleta)
-    ) {
-        tipoDocumento = "00"
-    }
-
-    const nroDocumento:string = tipoDocumento !== "00" ? cliente.numero_documento + "|" : "";
+    // const nroDocumento:string = tipoDocumento !== "00" ? cliente.numero_documento + "|" : "";
 
     // info empresa - requiere automatizar
-    const ruc:string = "20602956211";
+    // const ruc:string = "20602956211";
 
 
-    if (!nuevo) {
-        subtotal = Number(venta.subtotal / 1.18);
-        igv = Number(venta.subtotal) - Number(subtotal);    
-    }
+    // if (!nuevo) {
+    //     subtotal = Number(venta.subtotal / 1.18);
+    //     igv = Number(venta.subtotal) - Number(subtotal);    
+    // }
 
     useEffect(() => {
         handlerPrint();
@@ -71,37 +68,37 @@ export const ImpVenta = ({ venta, setImprimir, nuevo }:impComprobante) => {
     }
 
 
-    const titulo = () => {
-        if (venta.tipo_venta === tipoVenta.venta_rapida) {
-            return "Nota de venta";
-        } else if (venta.tipo_venta === tipoVenta.boleta){
-            return "Boleta electronica";
-        } else if (venta.tipo_venta === tipoVenta.factura){
-            return "Factura electronica";
-        } else {
-            return "Comprobante electronico";
-        }
-    }
+    // const titulo = () => {
+    //     if (venta.tipo_venta === tipoVenta.venta_rapida) {
+    //         return "Nota de venta";
+    //     } else if (venta.tipo_venta === tipoVenta.boleta){
+    //         return "Boleta electronica";
+    //     } else if (venta.tipo_venta === tipoVenta.factura){
+    //         return "Factura electronica";
+    //     } else {
+    //         return "Comprobante electronico";
+    //     }
+    // }
 
 
-    const nroCorrelat = () => {
-        if (nuevo) {
-            // nueva impresion
-            if (esComprobante) {
-                return Number(nuevoCorrelativo) + 1;    
-            } else {
-                return ""
-            }
-        } else {
-            // impresion existente
-            if (esComprobante) {
-                return existCorrelativo;
-            } else {
-                return "";
-            }
+    // const nroCorrelat = () => {
+    //     if (nuevo) {
+    //         // nueva impresion
+    //         if (esComprobante) {
+    //             return Number(nuevoCorrelativo) + 1;    
+    //         } else {
+    //             return ""
+    //         }
+    //     } else {
+    //         // impresion existente
+    //         if (esComprobante) {
+    //             return existCorrelativo;
+    //         } else {
+    //             return "";
+    //         }
             
-        }
-    }  
+    //     }
+    // }  
 
     // estilos
     // generales
@@ -209,9 +206,9 @@ export const ImpVenta = ({ venta, setImprimir, nuevo }:impComprobante) => {
     }
 
     // codigo qr
-    const qrcode = {
-        margin: "15px 0"
-    }
+    // const qrcode = {
+    //     margin: "15px 0"
+    // }
     const descripcion = {
         ...texto,
         ...mb10,
@@ -219,10 +216,10 @@ export const ImpVenta = ({ venta, setImprimir, nuevo }:impComprobante) => {
     }
 
     // info de QR
-    const informacionQR:string = `${ruc}|${tipoComprobante}|${serie}|${nroCorrelat()}|${fixedInput(nuevo ? moneda(venta.igvGeneral) : moneda(igv))}|${fixedInput(venta.total)}|${fechaResumenGuiones(venta.updated_at)}|${tipoDocumento}|${nroDocumento}`;
+    // const informacionQR:string = `${ruc}|${tipoComprobante}|${serie}|${nroCorrelat()}|${fixedInput(nuevo ? moneda(venta.igvGeneral) : moneda(igv))}|${fixedInput(venta.total)}|${fechaResumenGuiones(venta.updated_at)}|${tipoDocumento}|${nroDocumento}`;
 
     // const nroComprobante:string = serie + "-" + (nroCorrelat() ? nroCorrelat() + "-" : "") + venta.id + "-" + venta.codigo_venta;
-    const nroComprobante:string = serie + "-" + nroCorrelat();
+    // const nroComprobante:string = serie + "-" + nroCorrelat();
     const nroVenta:string = venta.id + "-" + venta.codigo_venta
 
 
@@ -233,40 +230,31 @@ export const ImpVenta = ({ venta, setImprimir, nuevo }:impComprobante) => {
                 
                 <div style={boxHeaderInfo}>
                     <div>
-                        <h3 style={tituloPrinc}>{ titulo() }</h3>
-                        {
-                            nroCorrelat()
-                            && <p>{ nroComprobante }</p>
-                        }
+                        <h3 style={tituloPrinc}>Nota de venta</h3>
                     </div>
-                    <span style={headerInfo}>{ 
-                        nroCorrelat()
-                        ? nroVenta 
-                        : "V001-" + nroVenta
-                    }</span>
+                    <span style={headerInfo}>{"V001-" + nroVenta}</span>
                     <span style={headerInfo}>{ fechaResumen(venta.updated_at) }</span>
                 </div>
                 
                 <div style={boxHeaderInfo}>
                     <h3 style={infoEmpresa}>AddidSport</h3> {/*  actualizar por nombre de empresa desde DB */}
                     <h2 style={infoEmpresa}>INVERSIONES PERKINS E.I.R.L</h2> {/*  actualizar */}
-                    {
+                    {/* {
                         esComprobante
                         && (
                             <>
                                 <p style={infoEmpresa}>INVERSIONES PERKINS EMPRESA INDIVIDUAL DE RESPONSABILIDAD LIMITADA</p>
                                 <p style={infoEmpresa}>CUSCO - CUSCO - CUSCO</p>
                                 <p style={infoTxtM0}>RUC: {ruc}</p>
-                                {/* <p style={infoTxtM0}>TELEFONO: 20602956211</p> */}
                             </>
                         )
-                    }
+                    } */}
                     <p style={infoEmpresa}>CAL. TRINITARIAS N. 501 URB. CENTRO HISTORICO CUSCO</p>
                     <p style={infoTxtM0}>CORREO: epc26irvin@gmail.com</p>
                     <p style={infoTxtM0}>WSP: 937604653</p>
                 </div>
                 <div style={borderMb} />
-                {
+                {/* {
                     !!cliente.numero_documento
                     && (
                         <div style={mb10}>
@@ -280,7 +268,7 @@ export const ImpVenta = ({ venta, setImprimir, nuevo }:impComprobante) => {
                             
                         </div>
                     )
-                }
+                } */}
 
                 <div style={borderMb} />
                 <div style={mb10}>
@@ -288,7 +276,6 @@ export const ImpVenta = ({ venta, setImprimir, nuevo }:impComprobante) => {
                     <table style={table}>
                         <thead>
                             <tr style={texto}>
-                                {/* <th>Cod</th> */}
                                 <th>Cant</th>
                                 <th>Prod</th>
                                 <th>P.U.</th>
@@ -337,7 +324,7 @@ export const ImpVenta = ({ venta, setImprimir, nuevo }:impComprobante) => {
                     <div style={blockLeft}></div>
                     <div style={blockRight}>
 
-                        {
+                        {/* {
                             esComprobante
                             && (
                                 <div style={textoResumen}>
@@ -380,7 +367,7 @@ export const ImpVenta = ({ venta, setImprimir, nuevo }:impComprobante) => {
                                     </div>
                                 </>
                             )
-                        }
+                        } */}
 
                         <div style={textoResumen}>
                             <span style={left}>Total:</span>
@@ -392,14 +379,14 @@ export const ImpVenta = ({ venta, setImprimir, nuevo }:impComprobante) => {
                 <div style={borderMb} />
 
                 <div style={center}>
-                    {
+                    {/* {
                         esComprobante
                         && (
                             <div style={qrcode}>
                                 <QRCodeSVG value={informacionQR} />
                             </div>
                         )
-                    }
+                    } */}
                     
                     <h3 style={descripcion}>Representacion impresa del comprobante electronico</h3>
                 </div>

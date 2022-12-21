@@ -47,8 +47,8 @@ export const ValidDocumento = (tipoDoc:string) => {
             .string()
             .required('Requerido')
             .matches(/^[0-9]+$/, "Requiere solo numeros")
-            .min(totalDigitos, `Necesita ${totalDigitos} digitos exactamente`)
-            .max(totalDigitos, `Necesita ${totalDigitos} digitos exactamente`)
+            .min(totalDigitos, `${tipoDoc} necesita ${totalDigitos} digitos exactamente`)
+            .max(totalDigitos, `${tipoDoc} necesita ${totalDigitos} digitos exactamente`)
     })
 }
 
