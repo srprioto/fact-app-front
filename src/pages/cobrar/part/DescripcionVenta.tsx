@@ -30,39 +30,14 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
     const clienteOk:boolean = !!data.clientes;
     // estado del switch
     const stateSwitchChange:boolean = !((data.tipo_venta === tipoVenta.factura && clienteOk) ||
-    (data.tipo_venta === tipoVenta.boleta))
+    (data.tipo_venta === tipoVenta.boleta));
     // visivilidad del switch
     const showSwitchChange:boolean = ((data.tipo_venta === tipoVenta.boleta) ||
     (data.tipo_venta === tipoVenta.factura && clienteOk));
     // tabbs por comprobante
     const tabbComprob:number = data.tipo_venta === tipoVenta.venta_rapida ? 1 
     : data.tipo_venta === tipoVenta.boleta ? 2 
-    : data.tipo_venta === tipoVenta.factura ? 3 : 4 // 4 es credito y adelanto
-
-
-    // const tabbComp = ():number => {
-    //     let nroTabb:number = 1;
-    //     switch (data.tipo_venta) {
-    //         case tipoVenta.venta_rapida:
-    //             nroTabb = 1;
-    //             break;
-    //         case tipoVenta.boleta:
-    //             nroTabb = 2;
-    //             break;
-    //         case tipoVenta.factura:
-    //             nroTabb = 3;
-    //             break;
-    //         case tipoVenta.credito:
-    //             nroTabb = 4;
-    //             break;
-    //         case tipoVenta.adelanto:
-    //             nroTabb = 4;
-    //             break;
-    //     }
-        
-    //     return nroTabb;
-    // }
-
+    : data.tipo_venta === tipoVenta.factura ? 3 : 4; // 4 es credito y adelanto
 
     const [venta, setVenta] = useState<any>({...copy(data), totalPagado: 0});
     const [cliente, setCliente] = useState<any>(clienteOk ? data.clientes : clienteInfo);
@@ -135,11 +110,12 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
         let updateVenta:any = {}
         const ventaDet:Array<any> = [];
         const listaLimpia:Array<any> = [];
-        // const updateCliente:any = {
-        //     ...cliente,
-        //     numero_documento: getCliente.documento,
-        //     tipoDocumento: getCliente.tipoDocumento
-        // };
+        const updateComprobante:any = comprobante;
+        const updateCliente:any = {
+            ...cliente,
+            numero_documento: getCliente.documento,
+            tipoDocumento: getCliente.tipoDocumento
+        };
 
         // eliminar elementos sin precios
         listaPrecios.forEach((e:any) => {
@@ -147,6 +123,10 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
                 listaLimpia.push(e);
             }
         })
+
+        // updateComprobante.clientes = updateCliente;
+        delete updateComprobante.clientes;
+        delete updateComprobante.comprobante;
         
         updateVenta.estado_venta = estado;
         updateVenta.localId = venta.locales.id;
@@ -154,16 +134,11 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
             ? venta.forma_pago 
             : "dividido";
         updateVenta.tipo_venta = venta.tipo_venta;
-        // updateVenta.cliente = updateCliente;
+        updateVenta.cliente = updateCliente;
         updateVenta.ventaDetalles = ventaDet;
         updateVenta.formasPago = listaLimpia;
-        updateVenta.comprobante = comprobante;
+        updateVenta.comprobante = updateComprobante;
         updateVenta.envioComprobante = envioComprobante;
-        updateVenta.cliente = {
-            ...cliente,
-            numero_documento: getCliente.documento,
-            tipoDocumento: getCliente.tipoDocumento
-        };;
 
         if (esCredito) {
             updateVenta.estado_producto = venta.estado_producto;
@@ -178,10 +153,7 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
             setLoadConfirmarVenta(false);
             console.log(error);
         } finally {
-            setGetCliente({
-                documento: "",
-                tipoDocumento: "noDocumento"
-            })
+            setGetCliente({ documento: "", tipoDocumento: "noDocumento" })
             setCliente({});
             setCreditoDetalles([]);
             setVenta({...data, totalPagado: 0}); // puede generar problemas al desmontar componente

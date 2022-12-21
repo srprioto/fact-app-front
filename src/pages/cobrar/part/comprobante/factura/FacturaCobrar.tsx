@@ -51,7 +51,7 @@ export const FacturaCobrar = ({
     useEffect(() => {
         setGetCliente({
             tipoDocumento: "RUC",
-            documento: cliente.numero_documento
+            documento: cliente.numero_documento ? cliente.numero_documento : ""
         })
         // setCliente({
         //     ...cliente,
