@@ -9,7 +9,14 @@ import { FormasPago } from "../FormasPago";
 import { InfoCliente } from "../InfoCliente";
 import { InfoVenta } from "../InfoVenta";
 
-export const ModalVentaDetalles = ({ modal, setModal, idVenta }:any) => {
+interface modalVentaDetalles {
+    modal:boolean;
+    setModal:Function;
+    idVenta:number;
+    btnClose?:Function;
+}
+
+export const ModalVentaDetalles = ({ modal, setModal, idVenta, btnClose }:modalVentaDetalles) => {
     return (
         <Modal
             title="Detalles de la venta"
@@ -17,6 +24,7 @@ export const ModalVentaDetalles = ({ modal, setModal, idVenta }:any) => {
             setModal={setModal}
             border="border-primary"
             width={85}
+            btnClose={btnClose}
         >
             <BoxModalVentaDetalles idVenta={idVenta} />
         </Modal>

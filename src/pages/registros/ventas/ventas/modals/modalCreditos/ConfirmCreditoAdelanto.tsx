@@ -1,11 +1,10 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Loading } from "../../../../../../components/loads/Loading";
-import { put } from "../../../../../../resources/fetch";
-import { VENTAS } from "../../../../../../resources/routes";
+import { clienteInfo } from "../../../../../../resources/dtos/Cliente";
+import { tipoVenta } from "../../../../../../resources/dtos/VentasDto";
 import { TablaListaVentaProductos } from "../../../../../cobrar/part/TablaListaVentaProductos";
-import { BoxModalVentaDetalles } from "../ModalVentaDetalles";
-import { BoletaCred } from "./comprobantes/BoletaCred";
-import { FacturaCred } from "./comprobantes/FacturaCred";
+import { ConvertirBoleta } from "../modalConvertirComp/boleta/ConvertirBoleta";
+import { ConvertirFactura } from "../modalConvertirComp/factura/ConvertirFactura";
 import { RapidoCred } from "./comprobantes/RapidoCred";
 import { TabbsCompCredito } from "./comprobantes/TabbsCompCredito";
 import { InfoGenralCostosVenta } from "./InfoGenralCostosVenta";
@@ -15,65 +14,54 @@ import { TablaInfoCredito } from "./TablaInfoCredito";
 interface confirmCreditoAdelanto {
     venta:any;
     cantidadRestante:number;
-}
-
-interface boxConfirmCredito {
-    venta:any;
-    tabbs:number;
-    setTabbs:Function;
-    confirmarVenta:Function;
+    // confirmarVenta:Function;
     loading:boolean;
-    cantidadRestante:number;
+
+    clienteConv:any;
+    setClienteConv:Function;
+    getCliente:any;
+    setGetCliente:Function;
+    loadingPost:boolean;
+    enviarVenta:Function;
+    selectTipoComp:string;
+    setSelectTipoComp:Function;
 }
 
-export const ConfirmCreditoAdelanto = ({ venta, cantidadRestante }:confirmCreditoAdelanto) => {
+// interface boxConfirmCredito {
+//     venta:any;
+//     tabbs:number;
+//     setTabbs:Function;
+//     confirmarVenta:Function;
+//     loading:boolean;
+//     cantidadRestante:number;
+// }
+
+export const ConfirmCreditoAdelanto = ({ 
+    venta, 
+    cantidadRestante, 
+    // confirmarVenta, 
+    loading,
+    clienteConv,
+    setClienteConv,
+    getCliente,
+    setGetCliente,
+    loadingPost,
+    enviarVenta,
+    selectTipoComp,
+    setSelectTipoComp
+}:confirmCreditoAdelanto) => {
 
     const [tabbs, setTabbs] = useState<number>(1);
-    const [loading, setLoading] = useState<boolean>(false);
-    const [resto, setResto] = useState<any>({});
 
-    const confirmarVenta = async (tipo_venta:string) => { 
-        setLoading(true);
-
-        const updateVenta:any = { tipo_venta: tipo_venta }
-
-        try {
-            const resto:any = await put(venta.id, updateVenta, VENTAS + "/cambiar_tipo_venta");
-            setResto(resto);
-            setLoading(false);
-        } catch (error) {
-            setLoading(true);
-            console.log(error);
-        } 
-    }
+    useEffect(() => {
+        setClienteConv(clienteInfo);
+        setGetCliente({ 
+            documento: "", 
+            tipoDocumento: selectTipoComp === tipoVenta.factura ? "RUC" : "noDocumento"
+        });
+    }, [selectTipoComp])
 
 
-    return (
-
-        !resto.success
-        ? <BoxConfirmCredito
-            venta={venta}
-            tabbs={tabbs}
-            setTabbs={setTabbs}
-            confirmarVenta={confirmarVenta}
-            loading={loading}
-            cantidadRestante={cantidadRestante}
-        />
-        // : <div></div>
-        : <BoxModalVentaDetalles idVenta={resto.id} />
-
-    )
-}
-
-
-const BoxConfirmCredito = ({ 
-    venta, 
-    tabbs, 
-    setTabbs, 
-    confirmarVenta, 
-    loading, 
-    cantidadRestante 
-}:boxConfirmCredito) => { 
     return (
         <>
             <div className="box box-par m-0 confirm-credito-venta">
@@ -86,6 +74,7 @@ const BoxConfirmCredito = ({
                 <TabbsCompCredito
                     tabbs={tabbs}
                     setTabbs={setTabbs}
+                    setSelectTipoComp={setSelectTipoComp}
                 />
 
                 <InfoGenralCostosVenta
@@ -97,18 +86,33 @@ const BoxConfirmCredito = ({
                     {
                         tabbs === 1
                         && <RapidoCred 
-                            confirmarVenta={confirmarVenta} 
+                            enviarVenta={enviarVenta} 
                             loading={loading}
-                            venta={venta}
                         />
                     }
                     {
                         tabbs === 2
-                        && <BoletaCred />
+                        && <ConvertirBoleta 
+                            clienteConv={clienteConv}
+                            setClienteConv={setClienteConv}
+                            selectTipoComp={selectTipoComp}
+                            getCliente={getCliente}
+                            setGetCliente={setGetCliente}
+                            loadingPost={loadingPost}
+                            enviarVenta={enviarVenta}
+                        />
                     }
                     {
                         tabbs === 3
-                        && <FacturaCred />
+                        && <ConvertirFactura 
+                            clienteConv={clienteConv}
+                            setClienteConv={setClienteConv}
+                            selectTipoComp={selectTipoComp}
+                            getCliente={getCliente}
+                            setGetCliente={setGetCliente}
+                            loadingPost={loadingPost}
+                            enviarVenta={enviarVenta}
+                        />
                     }
                     
                 </div>
@@ -127,4 +131,6 @@ const BoxConfirmCredito = ({
             }
         </>
     );
+
 }
+

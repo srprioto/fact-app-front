@@ -1,6 +1,13 @@
 import { BiCartAlt, BiSpreadsheet, BiTask } from "react-icons/bi"
+import { tipoVenta } from "../../../../../../../resources/dtos/VentasDto";
 
-export const TabbsCompCredito = ({ tabbs, setTabbs }:any) => {
+interface tabbsCompCredito {
+    tabbs:number;
+    setTabbs:Function;
+    setSelectTipoComp:Function;
+}
+
+export const TabbsCompCredito = ({ tabbs, setTabbs, setSelectTipoComp }:tabbsCompCredito) => {
     return (
         <div className="grid-4 gap mt-15">
             <button 
@@ -9,7 +16,10 @@ export const TabbsCompCredito = ({ tabbs, setTabbs }:any) => {
                     (tabbs === 1 && "btn2-sub-success")
                 }
                 
-                onClick={() => {setTabbs(1)}}
+                onClick={() => {
+                    setTabbs(1);
+                    setSelectTipoComp(tipoVenta.venta_rapida);
+                }}
             ><BiCartAlt/> Venta rapida
             </button>
 
@@ -18,7 +28,10 @@ export const TabbsCompCredito = ({ tabbs, setTabbs }:any) => {
                     "btn2 btn2-info " +
                     (tabbs === 2 && "btn2-sub-info")
                 }
-                onClick={() => {setTabbs(2)}}
+                onClick={() => {
+                    setTabbs(2);
+                    setSelectTipoComp(tipoVenta.boleta);
+                }}
             ><BiSpreadsheet /> Boleta
             </button>
 
@@ -27,7 +40,10 @@ export const TabbsCompCredito = ({ tabbs, setTabbs }:any) => {
                     "btn2 btn2-info " +
                     (tabbs === 3 && "btn2-sub-info")
                 }
-                onClick={() => {setTabbs(3)}}
+                onClick={() => {
+                    setTabbs(3);
+                    setSelectTipoComp(tipoVenta.factura);
+                }}
             ><BiTask /> Factura
             </button>
         </div>

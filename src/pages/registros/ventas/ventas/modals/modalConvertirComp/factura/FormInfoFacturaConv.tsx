@@ -1,5 +1,5 @@
 import { Form, Formik } from "formik";
-import { BiCheck } from "react-icons/bi";
+import { BiCaretRight } from "react-icons/bi";
 import { BtnOnOff2 } from "../../../../../../../components/btns/BtnOnOff2";
 import { LoadSwitchBtn2 } from "../../../../../../../components/btns/LoadSwitchBtn2";
 import { Loading } from "../../../../../../../components/loads/Loading";
@@ -68,7 +68,7 @@ export const FormInfoFacturaConv = ({
                             <div></div>
                             <BtnOnOff2
                                 estado={(!!selectTipoComp && showFormsCliente)}
-                                icon={<BiCheck />}
+                                icon={<BiCaretRight />}
                                 label="Confirmar"
                             >
                                 <LoadSwitchBtn2
@@ -76,7 +76,7 @@ export const FormInfoFacturaConv = ({
                                     className="btn btn-success"
                                     // handler={enviarVenta}
                                 >
-                                    <BiCheck /> Confirmar
+                                    <BiCaretRight /> Confirmar
                                 </LoadSwitchBtn2>
                             </BtnOnOff2>
 
