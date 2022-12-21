@@ -1,4 +1,4 @@
-import { BiCartAlt } from "react-icons/bi"
+import { BiCartAlt, BiSpreadsheet, BiTask } from "react-icons/bi"
 
 export const TabbsCompCredito = ({ tabbs, setTabbs }:any) => {
     return (
@@ -13,7 +13,7 @@ export const TabbsCompCredito = ({ tabbs, setTabbs }:any) => {
             ><BiCartAlt/> Venta rapida
             </button>
 
-            {/* <button
+            <button
                 className={
                     "btn2 btn2-info " +
                     (tabbs === 2 && "btn2-sub-info")
@@ -29,7 +29,7 @@ export const TabbsCompCredito = ({ tabbs, setTabbs }:any) => {
                 }
                 onClick={() => {setTabbs(3)}}
             ><BiTask /> Factura
-            </button> */}
+            </button>
         </div>
     )
 }

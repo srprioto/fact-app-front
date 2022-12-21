@@ -35,9 +35,7 @@ export const ConfirmCreditoAdelanto = ({ venta, cantidadRestante }:confirmCredit
     const confirmarVenta = async (tipo_venta:string) => { 
         setLoading(true);
 
-        const updateVenta:any = {
-            tipo_venta: tipo_venta
-        }
+        const updateVenta:any = { tipo_venta: tipo_venta }
 
         try {
             const resto:any = await put(venta.id, updateVenta, VENTAS + "/cambiar_tipo_venta");
