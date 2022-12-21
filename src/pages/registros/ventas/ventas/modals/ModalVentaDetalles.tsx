@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
+import { BiBookmarkAltMinus, BiMoveHorizontal, BiX } from "react-icons/bi";
 import { Loading } from "../../../../../components/loads/Loading";
 import { Modal } from "../../../../../components/modals/Modal"
+import { ModalWrap } from "../../../../../components/modals/ModalWrap";
+import { tipoVenta } from "../../../../../resources/dtos/VentasDto";
 import { getOne } from "../../../../../resources/fetch";
 import { VENTAS } from "../../../../../resources/routes";
 import { ProductoInfo } from "../../../../productos/otros/ProductoInfo";
@@ -8,33 +11,27 @@ import { CreditoDetalles } from "../CreditoDetalles";
 import { FormasPago } from "../FormasPago";
 import { InfoCliente } from "../InfoCliente";
 import { InfoVenta } from "../InfoVenta";
+import { ModalAnularVenta } from "./ModalAnularVenta";
+import { ModalConvertirComp } from "./modalConvertirComp/ModalConvertirComp";
+import { ModalReimpVenta } from "./ModalReimpVenta";
 
 interface modalVentaDetalles {
     modal:boolean;
     setModal:Function;
     idVenta:number;
+    getData?:Function;
     btnClose?:Function;
 }
 
-export const ModalVentaDetalles = ({ modal, setModal, idVenta, btnClose }:modalVentaDetalles) => {
-    return (
-        <Modal
-            title="Detalles de la venta"
-            modal={modal}
-            setModal={setModal}
-            border="border-primary"
-            width={85}
-            btnClose={btnClose}
-        >
-            <BoxModalVentaDetalles idVenta={idVenta} />
-        </Modal>
-    )
-}
+export const ModalVentaDetalles = ({ modal, setModal, idVenta, getData, btnClose }:modalVentaDetalles) => {
 
-export const BoxModalVentaDetalles = ({ idVenta }:any) => {
-    
+    const [modalAnular, setModalAnular] = useState<boolean>(false);
+    const [modalReimprimir, setModalReimprimir] = useState<boolean>(false);
+    const [modalConvComprobante, setModalConvComprobante] = useState<boolean>(false);
+
     const [loadingOne, setLoadingOne] = useState<boolean>(false);
     const [venta, setVenta] = useState<any>({});
+
     const formasPago:any = venta.formasPago;
     
     useEffect(() => {
@@ -97,18 +94,57 @@ export const BoxModalVentaDetalles = ({ idVenta }:any) => {
         }
     }
 
+    const acciones = ():Array<any> => {
+        const accionesArray:Array<any> = [];
+
+        if (!loadingOne && venta.estado_venta === "listo") {
+            accionesArray.push({
+                label: "Imprimir",
+                funcion: () => setModalReimprimir(true),
+                icon: <BiBookmarkAltMinus />
+            });
+            if ( venta.tipo_venta === tipoVenta.venta_rapida ) {
+                accionesArray.push({
+                    label: "Cambiar Comp.",
+                    funcion: () => setModalConvComprobante(true),
+                    icon: <BiMoveHorizontal />
+                });
+            }
+            accionesArray.push({
+                label: "Anular Venta",
+                funcion: () => setModalAnular(true),
+                icon: <BiX /> 
+            });
+        }
+        
+        return accionesArray;
+    }
+    
+    const gData = () => { 
+        getData && getData();
+        getDataOne();
+    }
+
     return (
-        <>
+        <Modal
+            title="Detalles de la venta"
+            modal={modal}
+            setModal={setModal}
+            border="border-primary"
+            width={85}
+            btnClose={btnClose}
+            acciones={acciones().length > 0 ? acciones() : null}
+        >
             {
                 loadingOne
                 ? <Loading />
-                : (
+                : <>
                     <div className="modal-ver-ingreso grid-1 gap">
 
                         <div className="box m-0">
 
                             <table className="table2">
-    
+
                                 <thead>
                                     <tr>
                                         <th>Producto</th>
@@ -177,9 +213,36 @@ export const BoxModalVentaDetalles = ({ idVenta }:any) => {
                             )
                         }
 
-                    </div>        
-                )
+                    </div>
+
+                    <ModalWrap modal={modalAnular}>
+                        <ModalAnularVenta
+                            modal={modalAnular}
+                            setModal={setModalAnular}
+                            idVenta={idVenta}
+                            getData={gData}
+                        />
+                    </ModalWrap>
+
+                    <ModalWrap modal={modalReimprimir}>
+                        <ModalReimpVenta
+                            modal={modalReimprimir}
+                            setModal={setModalReimprimir}
+                            idVenta={idVenta}
+                        />
+                    </ModalWrap>
+
+                    <ModalWrap modal={modalConvComprobante}>
+                        <ModalConvertirComp
+                            modal={modalConvComprobante}
+                            setModal={setModalConvComprobante}
+                            idVenta={idVenta}
+                            getData={gData}
+                        />
+                    </ModalWrap>
+
+                </>
             }
-        </>
+        </Modal>
     )
 }

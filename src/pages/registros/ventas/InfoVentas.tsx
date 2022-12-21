@@ -250,6 +250,7 @@ export const InfoGeneralVentas = ({ idLocal, selectLocal, loadingLocal, locales 
                     modal={modalVer}
                     setModal={setModalVer}
                     idVenta={idVenta}
+                    getData={getData}
                 />
             </ModalWrap>
 

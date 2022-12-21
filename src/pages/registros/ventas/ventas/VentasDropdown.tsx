@@ -69,18 +69,17 @@ export const VentasDropdown = ({
 
             {
                 (ventas.estado_venta === "listo" && !esCredito())
-                && (
+                && <>
                     <span onClick={ () => handlerReimprimir(ventas.id) } >
                         <BiBookmarkAltMinus /> Imprimir
                     </span>
-                )
-            }
-
-            {
-                esVenta
-                && <span onClick={ () => handlerConvertirComp(ventas.id) } >
-                    <BiMoveHorizontal /> Cambiar Comp.
-                </span>
+                    {
+                        esVenta
+                        && <span onClick={ () => handlerConvertirComp(ventas.id) } >
+                            <BiMoveHorizontal /> Cambiar Comp.
+                        </span>
+                    }
+                </>
             }
 
             {
