@@ -238,6 +238,7 @@ export const ModalVentaDetalles = ({ modal, setModal, idVenta, getData, btnClose
                             setModal={setModalConvComprobante}
                             idVenta={idVenta}
                             getData={gData}
+                            inModal
                         />
                     </ModalWrap>
 

@@ -17,10 +17,11 @@ interface modalConvertirComp {
     modal:boolean;
     setModal:Function;
     idVenta:number;
-    getData:Function;
+    getData?:Function;
+    inModal?:boolean;
 }
 
-export const ModalConvertirComp = ({ modal, setModal, idVenta, getData }:modalConvertirComp) => {
+export const ModalConvertirComp = ({ modal, setModal, idVenta, getData, inModal }:modalConvertirComp) => {
 
     const getCli:any = { documento: "", tipoDocumento: "" }
 
@@ -55,19 +56,22 @@ export const ModalConvertirComp = ({ modal, setModal, idVenta, getData }:modalCo
             const resto:any = await put(idVenta, { tipo_venta: selectTipoComp, cliente: updateCliente }, url);
             if (resto.data.id !== 0) {
                 setIdComprobante(resto.data.id);
-                setModalComprobante(true);
+                !inModal && setModalComprobante(true);
             }
             setLoadingPost(false);
         } catch (error) {
             setLoadingPost(true);
             console.log(error);
         } finally {
-            getData();
-            // setModal(false);
+            getData && getData();
+            if (inModal) {
+                // setModalComprobante(false);
+                setModal(false);
+            }
         }
 
     }
-
+    
 
     return (
         <Modal
@@ -144,15 +148,18 @@ export const ModalConvertirComp = ({ modal, setModal, idVenta, getData }:modalCo
             </ModalWrap>
 
             {
-                (idComprobante !== 0 && !loadingPost)
-                && <ModalWrap modal={modalComprobante}>
-                    <ModalVerComprobante
-                        modal={modalComprobante}
-                        setModal={setModalComprobante}
-                        idComprobante={idComprobante}
-                        btnClose={setModal}
-                    />
-                </ModalWrap>
+                !inModal
+                && (
+                    (idComprobante !== 0 && !loadingPost)
+                    && <ModalWrap modal={modalComprobante}>
+                        <ModalVerComprobante
+                            modal={modalComprobante}
+                            setModal={setModalComprobante}
+                            idComprobante={idComprobante}
+                            btnClose={setModal}
+                        />
+                    </ModalWrap>
+                )
             }
 
         </Modal>
