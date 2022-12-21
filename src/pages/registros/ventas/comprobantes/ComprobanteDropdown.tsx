@@ -1,7 +1,13 @@
-import { BiRedo, BiShowAlt, BiX } from "react-icons/bi"
+import { BiBookmarkAltMinus, BiRedo, BiShowAlt, BiX } from "react-icons/bi"
 import { DropDown } from "../../../../components/DropDown"
 
-export const ComprobanteDropdown = ({ comprobante, handlerVer, reenviarComprobante, anularComprobante }:any) => {
+export const ComprobanteDropdown = ({ 
+    comprobante, 
+    handlerVer, 
+    reenviarComprobante, 
+    anularComprobante, 
+    imprimirComprobante 
+}:any) => {
 
     const verReenviar = () => { 
         // || comprobante.estado_sunat === "ANULADO"
@@ -21,12 +27,20 @@ export const ComprobanteDropdown = ({ comprobante, handlerVer, reenviarComproban
     return (
         <DropDown width="190">
 
+            <span onClick={ () => handlerVer(comprobante.id) } >
+                <BiShowAlt /> Ver detalles
+            </span>
+
             {
                 verReenviar()
                 && <span onClick={ () => reenviarComprobante(comprobante.id) } >
                     <BiRedo /> Reenviar
                 </span>
             }
+
+            <span onClick={ () => imprimirComprobante(comprobante.id) } >
+                <BiBookmarkAltMinus /> Imprimir
+            </span>
 
             {
                 comprobante.estado_sunat !== "Anulado"
@@ -35,10 +49,6 @@ export const ComprobanteDropdown = ({ comprobante, handlerVer, reenviarComproban
                 </span>
             }
 
-            <span onClick={ () => handlerVer(comprobante.id) } >
-                <BiShowAlt /> Ver detalles
-            </span>            
-            
         </DropDown>
     )
 }

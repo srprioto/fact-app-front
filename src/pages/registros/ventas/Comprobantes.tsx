@@ -12,6 +12,7 @@ import { COMPROBANTE_PAGINATE, COMPROBANTE_SEARCH } from "../../../resources/rou
 import { ComprobanteItem } from "./comprobantes/ComprobanteItem";
 // import { ModalAnularComp } from "./comprobantes/ModalAnularComp";
 import { ModalReenviarComp } from "./comprobantes/ModalReenviarComp";
+import { ModalReimpComprob } from "./comprobantes/ModalReimpComprob";
 import { ModalVerComprobante } from "./comprobantes/ModalVerComprobante";
 import { TablaFiltro } from "./comprobantes/TablaFiltro";
 import { ModalAnularVenta } from "./ventas/modals/ModalAnularVenta";
@@ -32,6 +33,7 @@ export const Comprobantes = ({ idLocal, selectLocal, loadingLocal, locales }:inf
     const [modalVer, setModalVer] = useState<boolean>(false);
     const [modalReenviar, setModalReenviar] = useState<boolean>(false);
     const [modalAnular, setModalAnular] = useState<boolean>(false);
+    const [modalReimprimir, setModalReimprimir] = useState<boolean>(false);
     
     // const [modalHabilitarVenta, setModalHabilitarVenta] = useState<boolean>(false);
     const [idComprobante, setIdComprobante] = useState<number>(0);
@@ -101,6 +103,11 @@ export const Comprobantes = ({ idLocal, selectLocal, loadingLocal, locales }:inf
     const anularComprobante = (idComp:number) => { 
         setIdComprobante(idComp); // guarda el id de la venta, no del comprobante
         setModalAnular(!modalAnular);
+    }
+
+    const imprimirComprobante = (idComp:number) => { 
+        setIdComprobante(idComp); // guarda el id de la venta, no del comprobante
+        setModalReimprimir(!modalReimprimir);
     }
 
 
@@ -204,6 +211,7 @@ export const Comprobantes = ({ idLocal, selectLocal, loadingLocal, locales }:inf
                                                     handlerVer={handlerVer}
                                                     reenviarComprobante={reenviarComprobante}
                                                     anularComprobante={anularComprobante}
+                                                    imprimirComprobante={imprimirComprobante}
                                                 />
                                             )
                                         })
@@ -249,6 +257,14 @@ export const Comprobantes = ({ idLocal, selectLocal, loadingLocal, locales }:inf
                     setModal={setModalAnular}
                     idVenta={idComprobante}
                     getData={getData}
+                />
+            </ModalWrap>
+
+            <ModalWrap modal={modalReimprimir}>
+                <ModalReimpComprob
+                    modal={modalReimprimir}
+                    setModal={setModalReimprimir}
+                    idComprobante={idComprobante}
                 />
             </ModalWrap>
 

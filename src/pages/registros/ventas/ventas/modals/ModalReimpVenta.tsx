@@ -5,7 +5,7 @@ import { Modal } from "../../../../../components/modals/Modal";
 import { TextoRelleno } from "../../../../../components/TextoRelleno";
 import { getOne } from "../../../../../resources/fetch";
 import { VENTAS } from "../../../../../resources/routes";
-import { ImpVenta } from "../../../../cobrar/part/modals/ImpVenta";
+import { ImpVenta } from "../../../../../components/imprimir/ImpVenta";
 
 interface modalReimpVenta {
     modal:boolean;

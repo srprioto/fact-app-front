@@ -5,7 +5,7 @@ import { Modal } from "../../../../components/modals/Modal";
 import { TextoRelleno } from "../../../../components/TextoRelleno";
 import { getOne } from "../../../../resources/fetch";
 import { COMPROBANTE } from "../../../../resources/routes";
-import { ReimpComprobante } from "./ReimpComprobante";
+import { ReimpComprobante } from "../../../../components/imprimir/ReimpComprobante";
 
 
 interface modalReimpComprobante {

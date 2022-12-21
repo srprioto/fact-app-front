@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { BiBookmarkAltMinus } from "react-icons/bi"
 import { LoadSwitchBtn2 } from "../../../../components/btns/LoadSwitchBtn2"
-import { ImpVenta } from "./ImpVenta"
+import { ImpVenta } from "../../../../components/imprimir/ImpVenta"
 
 export const BtnImpComprobante = ({ loading, registroFinal, venta }:any) => {
 

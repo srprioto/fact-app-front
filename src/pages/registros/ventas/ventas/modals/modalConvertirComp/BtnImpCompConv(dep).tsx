@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { BiBookmarkAltMinus, BiCheck } from "react-icons/bi"
 import { BtnOnOff2 } from "../../../../../../components/btns/BtnOnOff2"
 import { LoadSwitchBtn2 } from "../../../../../../components/btns/LoadSwitchBtn2"
-import { ReimpComprobante } from "../../../comprobantes/ReimpComprobante";
+import { ReimpComprobante } from "../../../../../../components/imprimir/ReimpComprobante";
 
 interface btnImpCompConv {
     validarPost:boolean;

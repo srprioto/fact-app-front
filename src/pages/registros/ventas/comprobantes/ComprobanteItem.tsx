@@ -2,7 +2,13 @@ import { classEstado } from "../../../../resources/dtos/ComprobantesDto"
 import { fecha } from "../../../../resources/func/fechas"
 import { ComprobanteDropdown } from "./ComprobanteDropdown"
 
-export const ComprobanteItem = ({ comprobante, handlerVer, reenviarComprobante, anularComprobante }:any) => {
+export const ComprobanteItem = ({ 
+    comprobante, 
+    handlerVer, 
+    reenviarComprobante, 
+    anularComprobante, 
+    imprimirComprobante 
+}:any) => {
 
     const venta:any = comprobante.ventas ? comprobante.ventas : {id: "000", codigo_venta: "000"};
     // const correlativo:any = comprobante.correlativos ? comprobante.correlativos : {};
@@ -40,6 +46,7 @@ export const ComprobanteItem = ({ comprobante, handlerVer, reenviarComprobante, 
                     handlerVer={handlerVer}
                     reenviarComprobante={reenviarComprobante}
                     anularComprobante={anularComprobante}
+                    imprimirComprobante={imprimirComprobante}
                 />
             </td>
         </tr>
