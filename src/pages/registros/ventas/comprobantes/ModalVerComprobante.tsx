@@ -20,9 +20,17 @@ interface modalVerComprobante {
     idComprobante:number;
     getData?:Function;
     btnClose?:Function;
+    contable?:boolean;
 }
 
-export const ModalVerComprobante = ({ modal, setModal, idComprobante, getData, btnClose }:modalVerComprobante) => {
+export const ModalVerComprobante = ({ 
+    modal, 
+    setModal, 
+    idComprobante, 
+    getData, 
+    btnClose, 
+    contable 
+}:modalVerComprobante) => {
 
     const [loadingOne, setLoadingOne] = useState<boolean>(false);
     const [comprobante, setComprobante] = useState<any>({});
@@ -59,35 +67,42 @@ export const ModalVerComprobante = ({ modal, setModal, idComprobante, getData, b
 
 
     const acciones = ():Array<any> => {
-        const accionesArray:Array<any> = [{
-            label: "Imprimir",
-            funcion: () => setModalReimprimir(true),
-            icon: <BiBookmarkAltMinus />
-        }];
-        if (!loadingOne) {
-            if (
-                comprobante.estado_sunat === estados_comprobante.Error_envio || 
-                comprobante.estado_sunat === estados_comprobante.Rechazado
-            ) {
-                accionesArray.push({
-                    label: "Reenviar",
-                    funcion: () => setModalReenviar(true),
-                    icon: <BiRedo />
-                });
+
+        if (!contable) {
+            const accionesArray:Array<any> = [{
+                label: "Imprimir",
+                funcion: () => setModalReimprimir(true),
+                icon: <BiBookmarkAltMinus />
+            }];
+            if (!loadingOne) {
+                if (
+                    comprobante.estado_sunat === estados_comprobante.Error_envio || 
+                    comprobante.estado_sunat === estados_comprobante.Rechazado
+                ) {
+                    accionesArray.push({
+                        label: "Reenviar",
+                        funcion: () => setModalReenviar(true),
+                        icon: <BiRedo />
+                    });
+                }
+                if (
+                    comprobante.estado_sunat === estados_comprobante.Error_anulacion ||
+                    comprobante.estado_sunat === estados_comprobante.Anulacion_procesada ||
+                    comprobante.estado_sunat === estados_comprobante.Aceptado
+                ) {
+                    accionesArray.push({
+                        label: "Anular Comp.",
+                        funcion: () => setModalAnularComp(true),
+                        icon: <BiX />
+                    });
+                }
             }
-            if (
-                comprobante.estado_sunat === estados_comprobante.Error_anulacion ||
-                comprobante.estado_sunat === estados_comprobante.Anulacion_procesada ||
-                comprobante.estado_sunat === estados_comprobante.Aceptado
-            ) {
-                accionesArray.push({
-                    label: "Anular Comp.",
-                    funcion: () => setModalAnularComp(true),
-                    icon: <BiX />
-                });
-            }
+            return accionesArray;
+        } else {
+            return [];
         }
-        return accionesArray;
+
+        
     }
 
 

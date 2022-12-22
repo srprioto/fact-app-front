@@ -23,6 +23,8 @@ const RolesRedirect = () => {
         return <Navigate to="/local" />
     } else if (auth.userInfo.role === Roles.SALLER) {
         return <Navigate to="/punto-venta" />
+    } else if (auth.userInfo.role === Roles.CONTABLE) {
+        return <Navigate to="/contabilidad" />
     }
 
     return null

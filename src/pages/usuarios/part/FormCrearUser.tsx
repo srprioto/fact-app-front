@@ -44,7 +44,7 @@ export const FormCrearUser = ({ handlerCreate, loading }:any) => {
         if (rolId) {
             const rol:any = roles.find((e:any) => e.id === Number(rolId));
             if (rol) {
-                if (rol.rol === Roles.ADMIN) {
+                if (rol.rol === Roles.ADMIN || rol.rol === Roles.CONTABLE) {
                     return false;
                 } else {
                     return true;

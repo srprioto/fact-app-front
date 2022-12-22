@@ -10,6 +10,7 @@ export enum Roles {
     ADMIN = 'admin',
     SUPERVISOR = 'supervisor',
     SALLER = 'seller',
+    CONTABLE = 'contable',
     
     
     OUT = "out"

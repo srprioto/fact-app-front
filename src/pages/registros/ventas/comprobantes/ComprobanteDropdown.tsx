@@ -1,13 +1,24 @@
 import { BiBookmarkAltMinus, BiRedo, BiShowAlt, BiX } from "react-icons/bi"
 import { DropDown } from "../../../../components/DropDown"
 
+
+interface comprobanteDropdown {
+    comprobante:any
+    handlerVer:Function;
+    reenviarComprobante:Function;
+    anularComprobante:Function;
+    imprimirComprobante:Function;
+    contable?:boolean;
+}
+
 export const ComprobanteDropdown = ({ 
     comprobante, 
     handlerVer, 
     reenviarComprobante, 
     anularComprobante, 
-    imprimirComprobante 
-}:any) => {
+    imprimirComprobante,
+    contable
+}:comprobanteDropdown) => {
 
     const verReenviar = () => { 
         // || comprobante.estado_sunat === "ANULADO"
@@ -32,22 +43,29 @@ export const ComprobanteDropdown = ({
             </span>
 
             {
-                verReenviar()
-                && <span onClick={ () => reenviarComprobante(comprobante.id) } >
-                    <BiRedo /> Reenviar
-                </span>
+                !contable
+                && <>
+                    {
+                        verReenviar()
+                        && <span onClick={ () => reenviarComprobante(comprobante.id) } >
+                            <BiRedo /> Reenviar
+                        </span>
+                    }
+
+                    <span onClick={ () => imprimirComprobante(comprobante.id) } >
+                        <BiBookmarkAltMinus /> Imprimir
+                    </span>
+
+                    {
+                        comprobante.estado_sunat !== "Anulado"
+                        && <span onClick={ () => anularComprobante(comprobante.ventas.id) } >
+                            <BiX /> Anular Comp.
+                        </span>
+                    }
+                </>
             }
 
-            <span onClick={ () => imprimirComprobante(comprobante.id) } >
-                <BiBookmarkAltMinus /> Imprimir
-            </span>
 
-            {
-                comprobante.estado_sunat !== "Anulado"
-                && <span onClick={ () => anularComprobante(comprobante.ventas.id) } >
-                    <BiX /> Anular Comp.
-                </span>
-            }
 
         </DropDown>
     )

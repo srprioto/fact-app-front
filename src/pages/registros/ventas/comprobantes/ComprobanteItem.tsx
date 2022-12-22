@@ -2,13 +2,24 @@ import { classEstado } from "../../../../resources/dtos/ComprobantesDto"
 import { fecha } from "../../../../resources/func/fechas"
 import { ComprobanteDropdown } from "./ComprobanteDropdown"
 
+interface comprobanteItem {
+    comprobante:any
+    handlerVer:Function;
+    reenviarComprobante:Function;
+    anularComprobante:Function;
+    imprimirComprobante:Function;
+    contable?:boolean;
+}
+
+
 export const ComprobanteItem = ({ 
     comprobante, 
     handlerVer, 
     reenviarComprobante, 
     anularComprobante, 
-    imprimirComprobante 
-}:any) => {
+    imprimirComprobante,
+    contable
+}:comprobanteItem) => {
 
     const venta:any = comprobante.ventas ? comprobante.ventas : {id: "000", codigo_venta: "000"};
     // const correlativo:any = comprobante.correlativos ? comprobante.correlativos : {};
@@ -39,7 +50,6 @@ export const ComprobanteItem = ({
             <td className={classEstado(comprobante.estado_sunat) + " strong"}>{ comprobante.estado_sunat }</td>
             <td>{ fecha(comprobante.fecha_emision) }</td>
             <td>{ comprobante.locales ? comprobante.locales.nombre : "" }</td>
-
             <td>
                 <ComprobanteDropdown
                     comprobante={comprobante}
@@ -47,6 +57,7 @@ export const ComprobanteItem = ({
                     reenviarComprobante={reenviarComprobante}
                     anularComprobante={anularComprobante}
                     imprimirComprobante={imprimirComprobante}
+                    contable={contable}
                 />
             </td>
         </tr>

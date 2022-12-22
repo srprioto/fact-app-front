@@ -48,6 +48,7 @@ import { IndexTickets } from "../pages/tickets/Index";
 import { IndexIngresosEgresos } from "../pages/gastos/Index";
 import { TicketsSup } from "../roles/supervisor/pages/TicketsSup";
 import { useEffect } from "react";
+import { Contable } from "../roles/contable/Contable";
 
 
 export const AppRoutes = () => {
@@ -140,6 +141,13 @@ export const AppRoutes = () => {
                         auth.rol === Roles.SALLER
                         && (
                             <Route path="/punto-venta" element={ <Seller /> } />
+                        )
+                    }
+
+                    {
+                        auth.rol === Roles.CONTABLE
+                        && (
+                            <Route path="/contabilidad" element={ <Contable /> } />
                         )
                     }
                     

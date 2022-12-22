@@ -1253,6 +1253,15 @@
     }
 }
 
+.contable {
+    .wrap-contable{
+        @include max-scroll(80px);
+        .box-contable{
+            padding: 11px 22px;
+        }
+    }
+}
+
 
 // ganancias
 .ganancias{

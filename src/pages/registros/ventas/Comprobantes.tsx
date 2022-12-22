@@ -7,7 +7,7 @@ import { NoRegistros } from "../../../components/NoRegistros";
 import { Pagination } from "../../../components/Pagination";
 import { SearchWrap } from "../../../components/search/SearchWrap";
 import { paginate } from "../../../resources/fetch";
-import { fechaInicioFin } from "../../../resources/func/fechas";
+import { fechaInicioFin, fechaInicioFinMes } from "../../../resources/func/fechas";
 import { COMPROBANTE_PAGINATE, COMPROBANTE_SEARCH } from "../../../resources/routes";
 import { ComprobanteItem } from "./comprobantes/ComprobanteItem";
 // import { ModalAnularComp } from "./comprobantes/ModalAnularComp";
@@ -22,11 +22,13 @@ interface infoComprobante {
     selectLocal?:Function;
     loadingLocal?:boolean;
     locales?:any;
+    contable?:boolean;
 }
 
-export const Comprobantes = ({ idLocal, selectLocal, loadingLocal, locales }:infoComprobante) => {
+export const Comprobantes = ({ idLocal, selectLocal, loadingLocal, locales, contable }:infoComprobante) => {
 
     const [ inidioDia, finDia ] = fechaInicioFin();
+    const [ inicioMes, finMes ] = fechaInicioFinMes();
     const tiendas = !locales ? true : false;
     
     const [loadingData, setLoadingData] = useState<boolean>(false);
@@ -42,10 +44,15 @@ export const Comprobantes = ({ idLocal, selectLocal, loadingLocal, locales }:inf
     const [data, setData] = useState<any>([]);
     const [toggle, setToggle] = useState<number>(1); // tabs para los filtros
 
-    const [fechas, setFechas] = useState<any>({ 
-        inicio: tiendas ? inidioDia : "_", 
-        fin: tiendas ? finDia : "_"
+    const [fechas, setFechas] = useState<any>({
+        inicio:     contable ? inicioMes : tiendas ? inidioDia : "_", 
+        fin:        contable ? finMes : tiendas ? finDia : "_"
     });
+
+    // const [fechas, setFechas] = useState<any>({ 
+    //     inicio: tiendas ? inidioDia : "_", 
+    //     fin: tiendas ? finDia : "_"
+    // });
     
     // *** search
     const [searchState, setSearchState] = useState<boolean>(false); // estado de busqueda
@@ -212,6 +219,7 @@ export const Comprobantes = ({ idLocal, selectLocal, loadingLocal, locales }:inf
                                                     reenviarComprobante={reenviarComprobante}
                                                     anularComprobante={anularComprobante}
                                                     imprimirComprobante={imprimirComprobante}
+                                                    contable={contable}
                                                 />
                                             )
                                         })
@@ -239,6 +247,7 @@ export const Comprobantes = ({ idLocal, selectLocal, loadingLocal, locales }:inf
                     setModal={setModalVer}
                     idComprobante={idComprobante}
                     getData={getData}
+                    contable={contable}
                 />
             </ModalWrap>
 
