@@ -10,11 +10,11 @@ import { paginate } from "../../../resources/fetch";
 import { fechaInicioFin, fechaInicioFinMes } from "../../../resources/func/fechas";
 import { COMPROBANTE_PAGINATE, COMPROBANTE_SEARCH } from "../../../resources/routes";
 import { ComprobanteItem } from "./comprobantes/ComprobanteItem";
-// import { ModalAnularComp } from "./comprobantes/ModalAnularComp";
 import { ModalReenviarComp } from "./comprobantes/ModalReenviarComp";
 import { ModalReimpComprob } from "./comprobantes/ModalReimpComprob";
 import { ModalVerComprobante } from "./comprobantes/ModalVerComprobante";
 import { TablaFiltro } from "./comprobantes/TablaFiltro";
+import { ExportarExcelComprobantes } from "./ventas/ExportarExcelComprobantes";
 import { ModalAnularVenta } from "./ventas/modals/ModalAnularVenta";
 
 interface infoComprobante {
@@ -142,12 +142,14 @@ export const Comprobantes = ({ idLocal, selectLocal, loadingLocal, locales, cont
                     />
                     <div className="grid-2 gap">
                         
-                        <div className="grid-4">
-                            {/* <ExportarExcel /> */}
+                        <div className="grid-4 gap">
                             <GestionFechas 
                                 getData={getData} 
                                 fechas={fechas}
                                 setFechas={setFechas}
+                            />
+                            <ExportarExcelComprobantes
+                                fechas={fechas}
                             />
                         </div>
 

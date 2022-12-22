@@ -127,9 +127,9 @@ async function destroy(id:number|null|undefined, endpoint:string) {
 
 }
 
-function url(){
-    return API_URL;
-}
+// function url(){
+//     return API_URL;
+// }
 
 
 export {
@@ -139,5 +139,6 @@ export {
     post, 
     put, 
     destroy,
-    url
+    API_URL,
+    // ur1l
 }
