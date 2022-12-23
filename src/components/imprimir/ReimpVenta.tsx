@@ -68,6 +68,14 @@ export const ReimpVenta = ({ venta, setImprimir, nuevo }:reimpVenta) => {
     }
 
 
+    const totalUnidades = ():number => { 
+        let totalUnd:number = 0;
+        ventaDetalles.forEach((e:any) => { 
+            totalUnd += e.cantidad_venta;       
+        })
+        return totalUnd;
+    }
+
     // const titulo = () => {
     //     if (venta.tipo_venta === tipoVenta.venta_rapida) {
     //         return "Nota de venta";
@@ -369,6 +377,10 @@ export const ReimpVenta = ({ venta, setImprimir, nuevo }:reimpVenta) => {
                             )
                         } */}
 
+                        <div style={textoResumen}>
+                            <span style={left}>Cont Unid:</span>
+                            <span style={right}>{ totalUnidades() }</span>
+                        </div>
                         <div style={textoResumen}>
                             <span style={left}>Total:</span>
                             <span style={right}>S/. { moneda(venta.total) }</span>

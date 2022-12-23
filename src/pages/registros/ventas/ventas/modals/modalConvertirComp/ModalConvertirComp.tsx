@@ -71,7 +71,6 @@ export const ModalConvertirComp = ({ modal, setModal, idVenta, getData, inModal 
         }
 
     }
-    
 
     return (
         <Modal
@@ -82,17 +81,23 @@ export const ModalConvertirComp = ({ modal, setModal, idVenta, getData, inModal 
         >
             <div className="box m-0 grid-1 gap">
 
-                <div className="grid-3 mb-10">
-                    {/* <h3 className="m-0">Selecciona un documento</h3>  */}
-                    <div></div>
-                    <div className="center">
-                        <span
-                            onClick={() => setModalVenta(true)}
-                            className="redtext pointer"
-                        >Informacion de la venta</span>
-                    </div>
-                    <div></div>
-                </div>
+                {
+                    !inModal
+                    && (
+                        <div className="grid-3 mb-10">
+                            <div></div>
+                            <div className="center">
+                                <span
+                                    onClick={() => setModalVenta(true)}
+                                    className="redtext pointer"
+                                >Informacion de la venta</span>
+                            </div>
+                            <div></div>
+                        </div>
+                    )
+                }
+                
+
                 <div className="grid-121 gap">
                     <div></div>
                     <RadioButton2
@@ -139,27 +144,32 @@ export const ModalConvertirComp = ({ modal, setModal, idVenta, getData, inModal 
 
             </div>
 
-            <ModalWrap modal={modalVenta}>
-                <ModalVentaDetalles
-                    modal={modalVenta}
-                    setModal={setModalVenta}
-                    idVenta={idVenta}
-                />
-            </ModalWrap>
+
 
             {
                 !inModal
-                && (
-                    (idComprobante !== 0 && !loadingPost)
-                    && <ModalWrap modal={modalComprobante}>
-                        <ModalVerComprobante
-                            modal={modalComprobante}
-                            setModal={setModalComprobante}
-                            idComprobante={idComprobante}
-                            btnClose={setModal}
+                && <>
+                    <ModalWrap modal={modalVenta}>
+                        <ModalVentaDetalles
+                            modal={modalVenta}
+                            setModal={setModalVenta}
+                            idVenta={idVenta}
+                            modalConvert
                         />
                     </ModalWrap>
-                )
+                    
+                    {
+                        (idComprobante !== 0 && !loadingPost)
+                        && <ModalWrap modal={modalComprobante}>
+                            <ModalVerComprobante
+                                modal={modalComprobante}
+                                setModal={setModalComprobante}
+                                idComprobante={idComprobante}
+                                btnClose={setModal}
+                            />
+                        </ModalWrap>
+                    }
+                </>
             }
 
         </Modal>

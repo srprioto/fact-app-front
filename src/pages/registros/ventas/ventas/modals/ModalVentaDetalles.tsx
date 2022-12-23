@@ -21,9 +21,10 @@ interface modalVentaDetalles {
     idVenta:number;
     getData?:Function;
     btnClose?:Function;
+    modalConvert?:boolean;
 }
 
-export const ModalVentaDetalles = ({ modal, setModal, idVenta, getData, btnClose }:modalVentaDetalles) => {
+export const ModalVentaDetalles = ({ modal, setModal, idVenta, getData, btnClose, modalConvert }:modalVentaDetalles) => {
 
     const [modalAnular, setModalAnular] = useState<boolean>(false);
     const [modalReimprimir, setModalReimprimir] = useState<boolean>(false);
@@ -97,7 +98,7 @@ export const ModalVentaDetalles = ({ modal, setModal, idVenta, getData, btnClose
     const acciones = ():Array<any> => {
         const accionesArray:Array<any> = [];
 
-        if (!loadingOne && venta.estado_venta === "listo") {
+        if (!loadingOne && venta.estado_venta === "listo" && !modalConvert) {
             accionesArray.push({
                 label: "Imprimir",
                 funcion: () => setModalReimprimir(true),

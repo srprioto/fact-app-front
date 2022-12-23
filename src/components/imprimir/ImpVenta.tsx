@@ -101,7 +101,17 @@ export const ImpVenta = ({ venta, setImprimir, nuevo }:impComprobante) => {
             }
             
         }
-    }  
+    }
+
+
+    const totalUnidades = ():number => { 
+        let totalUnd:number = 0;
+        ventaDetalles.forEach((e:any) => { 
+            totalUnd += e.cantidad_venta;       
+        })
+        return totalUnd;
+    }
+
 
     // estilos
     // generales
@@ -381,6 +391,11 @@ export const ImpVenta = ({ venta, setImprimir, nuevo }:impComprobante) => {
                                 </>
                             )
                         }
+
+                        <div style={textoResumen}>
+                            <span style={left}>Cont Unid:</span>
+                            <span style={right}>{ totalUnidades() }</span>
+                        </div>
 
                         <div style={textoResumen}>
                             <span style={left}>Total:</span>

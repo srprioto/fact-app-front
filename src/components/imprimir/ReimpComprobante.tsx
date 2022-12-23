@@ -105,6 +105,16 @@ export const ReimpComprobante = ({ comprobante, setImprimir }:impComprobante) =>
     //     }
     // }  
 
+    
+    const totalUnidades = ():number => { 
+        let totalUnd:number = 0;
+        comprobante.comprobanteDetalles.forEach((e:any) => { 
+            totalUnd += e.cantidad_venta;       
+        })
+        return totalUnd;
+    }
+
+
     // estilos
     // generales
     const container:any = {
@@ -329,6 +339,11 @@ export const ReimpComprobante = ({ comprobante, setImprimir }:impComprobante) =>
                         <div style={textoResumen}>
                             <span style={left}>Exonerada:</span>
                             <span style={right}>S/. { moneda(0) }</span>
+                        </div>
+
+                        <div style={textoResumen}>
+                            <span style={left}>Cont Unid:</span>
+                            <span style={right}>{ totalUnidades() }</span>
                         </div>
 
                         <div style={textoResumen}>
