@@ -48,8 +48,6 @@ export const ModalVentaConfirmar = ({
     creditoDetalles
 }:modalVentaConfirmar) => {
 
-    const auth = useAuth();
-
     const ventaAux:any = copy(dataVenta);
     const [venta, setVenta] = useState<any>(copy(dataVenta));
     const [reducirPercent, setReducirPercent] = useState<number>(0);
@@ -155,16 +153,13 @@ export const ModalVentaConfirmar = ({
     }
     
 
-    const totalGrid = ():number => { 
-        let total:number = 4;
-        if (credito() && auth.rol !== Roles.ADMIN) {
-            total = total + 1
-        } 
-        if (auth.rol !== Roles.ADMIN) {
-            total = total - 1
-        }
-        return total;
-    }
+    // const totalGrid = ():number => { 
+    //     let total:number = 4;
+    //     // if (credito()) {
+    //     //     total = total + 1
+    //     // } 
+    //     return total;
+    // }
 
 
     return (
@@ -187,7 +182,7 @@ export const ModalVentaConfirmar = ({
 
                     <TablaProdVenta venta={venta} />
 
-                    <div className={`grid-${totalGrid()} gap center`}>
+                    <div className={`grid-4 gap center`}>
                         <span>
                             <p>Subtotal:</p>
                             <p className="info"><strong>S/. { moneda(venta.subtotal) }</strong></p>
@@ -239,7 +234,7 @@ export const ModalVentaConfirmar = ({
                             )
                         }
                         {
-                            (auth.rol === Roles.ADMIN && !credito())
+                            (!credito())
                             && <div>
                                 <p>Modif. porcentual (%):</p>
                                 <Input
@@ -289,7 +284,7 @@ export const ModalVentaConfirmar = ({
 
                         </div>
 
-                        <div className="grid-5 gap">
+                        {/* <div className="grid-5 gap">
                             <div></div>
                             <div></div>
                             <div></div>
@@ -301,7 +296,7 @@ export const ModalVentaConfirmar = ({
                                 handler={() => setModalCorreo(true)}
                             ><BiMailSend />
                             </LoadSwitchBtn2>  
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>
