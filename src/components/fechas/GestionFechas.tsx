@@ -14,7 +14,7 @@ export const GestionFechas = ({ getData, fechas, setFechas }:fechasVentas) => {
     const [modalFechas, setModalFechas] = useState<boolean>(false);
 
     return (
-        <div>
+        <>
 
             <button className="btn btn-info" onClick={() => setModalFechas(!modalFechas)}>
                 <BiCalendar/>
@@ -30,7 +30,7 @@ export const GestionFechas = ({ getData, fechas, setFechas }:fechasVentas) => {
                 />
             </ModalWrap>
             
-        </div>
+        </>
     )
 }
 

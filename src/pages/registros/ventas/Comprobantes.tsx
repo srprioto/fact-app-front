@@ -27,10 +27,23 @@ interface infoComprobante {
 
 export const Comprobantes = ({ idLocal, selectLocal, loadingLocal, locales, contable }:infoComprobante) => {
 
-    const [ inidioDia, finDia ] = fechaInicioFin();
-    const [ inicioMes, finMes ] = fechaInicioFinMes();
     const tiendas = !locales ? true : false;
-    
+    let inicioFecha:string = "";
+    let finFecha:string = "";
+
+    if (contable) {
+        const [ inicioMes, finMes ] = fechaInicioFinMes();
+        inicioFecha = inicioMes;
+        finFecha = finMes;
+    } else if (tiendas) {
+        const [ inidioDia, finDia ] = fechaInicioFin();
+        inicioFecha = inidioDia;
+        finFecha = finDia;
+    } else {
+        inicioFecha = "_";
+        finFecha = "_";
+    }
+
     const [loadingData, setLoadingData] = useState<boolean>(false);
     const [modalVer, setModalVer] = useState<boolean>(false);
     const [modalReenviar, setModalReenviar] = useState<boolean>(false);
@@ -44,9 +57,9 @@ export const Comprobantes = ({ idLocal, selectLocal, loadingLocal, locales, cont
     const [data, setData] = useState<any>([]);
     const [toggle, setToggle] = useState<number>(1); // tabs para los filtros
 
-    const [fechas, setFechas] = useState<any>({
-        inicio:     contable ? inicioMes : tiendas ? inidioDia : "_", 
-        fin:        contable ? finMes : tiendas ? finDia : "_"
+    const [fechas, setFechas] = useState<any>({ 
+        inicio: inicioFecha,
+        fin: finFecha
     });
 
     // const [fechas, setFechas] = useState<any>({ 
