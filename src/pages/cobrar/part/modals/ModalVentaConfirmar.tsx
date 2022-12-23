@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { 
     // BiBookmarkAltMinus, 
     BiCaretRight, 
-    BiMailSend 
+    // BiMailSend 
     // BiImport, 
 } from "react-icons/bi";
 // import { FaWhatsapp } from "react-icons/fa";
@@ -22,8 +22,8 @@ import { BtnImpComprobante } from "./BtnImpComprobante";
 import { tipoVenta } from "../../../../resources/dtos/VentasDto";
 import { TablaDividirPrecios } from "./TablaDividirPrecios";
 import { BtnImpCredito } from "./BtnImpCredito";
-import { useAuth } from "../../../../auth/useAuth";
-import { Roles } from "../../../../resources/dtos/RolesDto";
+// import { useAuth } from "../../../../auth/useAuth";
+// import { Roles } from "../../../../resources/dtos/RolesDto";
 
 
 interface modalVentaConfirmar {
