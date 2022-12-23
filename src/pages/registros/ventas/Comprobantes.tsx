@@ -14,7 +14,7 @@ import { ModalReenviarComp } from "./comprobantes/ModalReenviarComp";
 import { ModalReimpComprob } from "./comprobantes/ModalReimpComprob";
 import { ModalVerComprobante } from "./comprobantes/ModalVerComprobante";
 import { TablaFiltro } from "./comprobantes/TablaFiltro";
-import { ExportarExcelComprobantes } from "./ventas/ExportarExcelComprobantes";
+import { ExportarExcelComprobantes } from "./comprobantes/ExportarExcelComprobantes";
 import { ModalAnularVenta } from "./ventas/modals/ModalAnularVenta";
 
 interface infoComprobante {

@@ -9,6 +9,7 @@ import { SearchWrap } from "../../../components/search/SearchWrap";
 import { paginate } from "../../../resources/fetch";
 import { fechaInicioFin } from "../../../resources/func/fechas";
 import { VENTAS_PAGINATE, VENTAS_SEARCH } from "../../../resources/routes";
+import { ExportarExcelVentas } from "./ventas/ExportarExcelVentas";
 import { ModalAnularVenta } from "./ventas/modals/ModalAnularVenta";
 import { ModalConvertirComp } from "./ventas/modals/modalConvertirComp/ModalConvertirComp";
 import { ModalCredito } from "./ventas/modals/modalCreditos/ModalCredito";
@@ -142,14 +143,14 @@ export const InfoGeneralVentas = ({ idLocal, selectLocal, loadingLocal, locales 
                     />
                     <div className="grid-2 gap">
                         
-                        <div className="grid-4">
+                        <div className="grid-4 gap">
                             
-                            {/* <ExportarExcel /> */}
                             <GestionFechas 
                                 getData={getData} 
                                 fechas={fechas}
                                 setFechas={setFechas}
                             />
+                            <ExportarExcelVentas fechas={fechas} />
 
                         </div>
 
