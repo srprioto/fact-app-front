@@ -26,9 +26,7 @@ export const ReimpComprobante = ({ comprobante, setImprimir }:impComprobante) =>
     // const esComprobante:boolean = comprobante.tipo_venta === tipoVenta.boleta || comprobante.tipo_venta === tipoVenta.factura;
     
     // const ventaDetalles:any = comprobante.ventaDetalles ? comprobante.ventaDetalles : {};
-    
-    // let subtotal:number = 0;
-    // let igv:number = 0;
+
     let tipoComprobante:string = "";
     let tipoDocumento:string = "";
     if (comprobante.tipo_venta === tipoVenta.boleta) {
@@ -105,7 +103,7 @@ export const ReimpComprobante = ({ comprobante, setImprimir }:impComprobante) =>
     //     }
     // }  
 
-    
+
     const totalUnidades = ():number => { 
         let totalUnd:number = 0;
         comprobante.comprobanteDetalles.forEach((e:any) => { 
