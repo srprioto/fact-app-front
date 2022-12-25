@@ -87,7 +87,11 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
     useEffect(() => {
         setVenta({
             ...venta,
-            clientes: cliente
+            clientes: {
+                ...cliente,
+                numero_documento: getCliente.documento,
+                tipoDocumento: getCliente.tipoDocumento
+            }
         })
     }, [cliente])
 
