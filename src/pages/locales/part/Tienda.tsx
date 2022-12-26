@@ -3,7 +3,7 @@ import { BiCartAlt, BiTransfer } from 'react-icons/bi';
 import { Link } from 'react-router-dom';
 
 import { Loading } from '../../../components/loads/Loading';
-import { Pagination } from '../../../components/Pagination';
+import { Pagination } from '../../../components/paginacion/Pagination';
 import { TitleBox } from '../../../components/TitleBox';
 import { ModalCantidad } from './ModalCantidad';
 import { ProductoLocal } from './ProductoLocal';

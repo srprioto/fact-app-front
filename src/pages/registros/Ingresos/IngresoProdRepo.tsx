@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Loading } from "../../../components/loads/Loading";
 import { ModalWrap } from "../../../components/modals/ModalWrap";
 import { NoRegistros } from "../../../components/NoRegistros";
-import { Pagination } from "../../../components/Pagination";
+import { Pagination } from "../../../components/paginacion/Pagination";
 import { SearchWrap } from "../../../components/search/SearchWrap";
 import { TitleBox } from "../../../components/TitleBox";
 import { paginate } from "../../../resources/fetch";

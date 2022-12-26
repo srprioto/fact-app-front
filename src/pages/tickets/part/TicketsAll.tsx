@@ -5,7 +5,7 @@ import { DropDown } from "../../../components/DropDown";
 import { Loading } from "../../../components/loads/Loading"
 import { ModalWrap } from "../../../components/modals/ModalWrap";
 import { NoRegistros } from "../../../components/NoRegistros"
-import { Pagination } from "../../../components/Pagination";
+import { Pagination } from "../../../components/paginacion/Pagination";
 import { ModalVerTicket } from "../../../components/tickets/ModalVerTicket";
 import { TitleBox } from "../../../components/TitleBox"
 import { TicketsDto } from "../../../resources/dtos/TicketsDto";

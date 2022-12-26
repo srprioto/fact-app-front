@@ -3,7 +3,7 @@ import { BiPlusCircle, BiTransfer } from "react-icons/bi";
 import { Link, useParams } from "react-router-dom";
 import { Loading } from "../../../components/loads/Loading";
 import { NoRegistros } from "../../../components/NoRegistros";
-import { Pagination } from "../../../components/Pagination";
+import { Pagination } from "../../../components/paginacion/Pagination";
 import { TitleBox } from "../../../components/TitleBox";
 import { AlertaTransferencia } from "../../../components/transferencia/recibir/AlertaTransferencia";
 import { ModalTransferencia } from "../../../components/transferencia/enviar/EnviarTransferencia";

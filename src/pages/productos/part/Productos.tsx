@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 
 import { Loading } from "../../../components/loads/Loading";
 import { ModalEliminar } from "../../../components/modals/ModalEliminar";
-import { Pagination } from "../../../components/Pagination";
+import { Pagination } from "../../../components/paginacion/Pagination";
 import { TitleBox } from "../../../components/TitleBox"
 import { Producto } from "./Producto";
 

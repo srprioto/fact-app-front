@@ -6,7 +6,7 @@ import { TitleBox } from "../../../components/TitleBox";
 import { Loading } from "../../../components/loads/Loading";
 import { ModalEliminar } from "../../../components/modals/ModalEliminar";
 import { Proveedor } from "./Proveedor";
-import { Pagination } from "../../../components/Pagination";
+import { Pagination } from "../../../components/paginacion/Pagination";
 
 import { PROVEEDORES, PROVEEDORES_SEARCH } from "../../../resources/routes";
 import { ProveedoresDto } from "../../../resources/dtos/ProveedoresDto";
