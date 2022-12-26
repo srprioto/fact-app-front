@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { BiBarChartAlt2 } from "react-icons/bi";
+import { BiBarChartAlt2, BiBox } from "react-icons/bi";
 import { TitleBox } from "../../../components/TitleBox"
 import { ReporteGeneralVentas } from "./reporteGeneral/ReporteGeneralVentas";
+import { ReportesProductos } from "./reportesProductos/ReportesProductos";
 
 export const Ventas = () => {
 
@@ -14,20 +15,22 @@ export const Ventas = () => {
                 <button 
                     onClick={() => setTabbs(1)}
                     className={`btn2 btn2-info ${tabbs === 1 && "btn2-sub-info"}`}>
-                    <BiBarChartAlt2 />
-                    Reporte general
+                    <BiBarChartAlt2 /> Reporte general
                 </button>
-                {/* <button 
+                <button 
                     onClick={() => setTabbs(2)}
                     className={`btn2 btn2-info ${tabbs === 2 && "btn2-sub-info"}`}>
-                    <BiListUl />
-                    Ganancias detalles
-                </button> */}
+                    <BiBox /> Reporte productos
+                </button>
             </div>
 
             {
                 tabbs === 1
                 && <ReporteGeneralVentas />
+            }
+            {
+                tabbs === 2
+                && <ReportesProductos />
             }
 
         </div>

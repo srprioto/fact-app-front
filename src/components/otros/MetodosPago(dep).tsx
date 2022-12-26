@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { get } from "../../resources/fetch";
 // import { capi } from "../../resources/func/mayus";
-import { METODOS_PAGO } from "../../resources/routes";
+// import { METODOS_PAGO } from "../../resources/routes";
 
 interface metodosPago { 
     label?:string;
@@ -23,7 +23,7 @@ export const MetodosPagoDep = ({ label, name, onChange, value }:metodosPago) => 
     const getMetodos = async () => { 
         setLoading(true);
         try {
-            const data = await get(METODOS_PAGO);
+            const data = await get("METODOS_PAGO");
             setData(data);
             setLoading(false);
         } catch (error) {

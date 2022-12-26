@@ -38,6 +38,8 @@ export const VENTAS_SEARCH:string  = "/ventas/search/";
 export const VENTAS_SEARCH_LOCAL:string  = "/ventas/search/local/";
 export const VENTAS_PEDIDOS:string = "/ventas/pedidos";
 
+export const VENTAS_REPORTES:string = "/ventas-reportes"
+
 export const CAJA:string = "/caja"
 export const CAJA_ABRIR:string = "/caja/abrir-caja"
 export const CAJA_VERIFICAR:string = "/caja/verificar-caja" // requiere id
@@ -48,15 +50,11 @@ export const COMPROBANTE:string = "/comprobante"
 export const COMPROBANTE_SEARCH:string  = "/comprobante/search/";
 export const COMPROBANTE_PAGINATE:string = "/comprobante/paginate";
 
-export const METODOS_PAGO:string = "/metodos-pago";
-
 export const COTIZACION:string = "/cotizaciones";
 export const COTIZACION_SEARCH:string = "/cotizaciones/search/";
 export const COTIZACION_PAGINATE:string = "/cotizaciones/paginate";
 
 export const CREDITO_DETALLES:string = "/credito-detalles";
-
-export const VENTAS_REPORTES:string = "/ventas-reportes"
 
 export const TICKETS:string = "/tickets";
 
@@ -69,3 +67,5 @@ export const INGRESOS_EGRESOS_SEARCH:string = "/ingresos-egresos/search/";
 // export const ALMACEN_SEARCH:string = "/locales-stock/search/"; // localstock
 
 // export const LOCALSTOCK = "/locales-stock";
+
+// export const METODOS_PAGO:string = "/metodos-pago";
