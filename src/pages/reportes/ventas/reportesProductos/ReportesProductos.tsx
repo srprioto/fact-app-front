@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { Select } from "../../../../components/forms/Select";
 import { Loading } from "../../../../components/loads/Loading";
 import { NoRegistros } from "../../../../components/NoRegistros";
-import { Paginacion2 } from "../../../../components/paginacion/Paginacion2";
+import { Pagination2 } from "../../../../components/paginacion/Pagination2";
+import { Search2 } from "../../../../components/search/Search2";
 import { paginacionDTO } from "../../../../resources/dtos/Pagination";
 import { post } from "../../../../resources/fetch";
 import { VENTAS_REPORTES } from "../../../../resources/routes";
@@ -11,9 +12,10 @@ export const ReportesProductos = () => {
 
     const [loading, setLoading] = useState<boolean>(false);
     const [data, setData] = useState<Array<any>>([]);
-    const [paginacion, setPaginacion] = useState<any>(paginacionDTO);
     const [ordenProductos, setOrdenProductos] = useState<string>("desc");
-    const [searchText, setSearchText] = useState<string>("");
+    const [paginacion, setPaginacion] = useState<any>(paginacionDTO);
+    const [searchText, setSearchText] = useState<any>({ value: "" });
+    const [searchOn, setSearchOn] = useState<boolean>(false);
 
 
     useEffect(() => {
@@ -21,15 +23,27 @@ export const ReportesProductos = () => {
     }, [paginacion.pagina, ordenProductos])
 
 
-    const getData = async () => {
+    // useEffect(() => {
+    //     if (!searchOn) {
+    //         getData(true);
+    //     }
+    // }, [searchOn])
+
+
+    const getData = async (busqueda?:boolean) => {
         setLoading(true);
         const postData:any = {
             pagina: paginacion.pagina,
-            ordenar: ordenProductos
+            ordenar: ordenProductos,
+            searchText: searchText.value
         };
         try {
             const resto = await post(postData, VENTAS_REPORTES + "/top_productos_vendidos");
-            setPaginacion({ ...paginacion, ...resto.meta })
+            if (busqueda) {
+                setPaginacion({ ...paginacion, ...resto.meta, pagina: 1 })
+            } else {
+                setPaginacion({ ...paginacion, ...resto.meta })
+            }
             setData(resto.data);
             setLoading(false);
         } catch (error) {
@@ -38,14 +52,24 @@ export const ReportesProductos = () => {
         }
     }
 
-    // console.log(data);    
 
     return (
         <div className="reportes_productos">
             <div className="box">
 
                 <div className="grid-2 gap">
-                    <div></div>
+                    
+                    <Search2
+                        searchText={searchText}
+                        setSearchText={setSearchText}
+                        getData={getData}
+                        searchOn={searchOn}
+                        setSearchOn={setSearchOn}
+                        paginacion={paginacion}
+                        setPaginacion={setPaginacion}
+                        placeholder="Buscar"
+                        validacion={3}
+                    />
                     {/* <SearchWrap
                         setLoadingData={setLoadingData}
                         setData={setData}
@@ -116,7 +140,7 @@ export const ReportesProductos = () => {
                     )
                 }
 
-                <Paginacion2 paginacion={paginacion} setPaginacion={setPaginacion} />
+                <Pagination2 paginacion={paginacion} setPaginacion={setPaginacion} />
 
             </div>
         </div>

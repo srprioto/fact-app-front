@@ -1,6 +1,13 @@
+import { useEffect, useState } from "react";
 import { BiCaretLeft, BiCaretRight } from "react-icons/bi";
 
-export const Paginacion2 = ({ paginacion, setPaginacion }:any) => {
+
+interface pagination2 {
+    paginacion:any;
+    setPaginacion:Function;
+}
+
+export const Pagination2 = ({ paginacion, setPaginacion }:pagination2) => {
 
     const handlerPage = (nro:number) => { 
         let pagina:number = 1;
@@ -53,12 +60,6 @@ export const Paginacion2 = ({ paginacion, setPaginacion }:any) => {
 
 // // por fuera
 // // estados
-// const paginacionDTO:any = {
-//     pagina: 1,
-//     paginasRestantes: 0,
-//     totalItems: 0,
-//     totalPaginas: 0
-// }
 // const [paginacion, setPaginacion] = useState<any>(paginacionDTO);
 
 
