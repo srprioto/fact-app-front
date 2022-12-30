@@ -1,13 +1,12 @@
-import { useEffect, useState } from "react";
 import { BiCaretLeft, BiCaretRight } from "react-icons/bi";
 
 
 interface pagination2 {
     paginacion:any;
-    setPaginacion:Function;
+    getData:Function;
 }
 
-export const Pagination2 = ({ paginacion, setPaginacion }:pagination2) => {
+export const Pagination2 = ({ paginacion, getData }:pagination2) => {
 
     const handlerPage = (nro:number) => { 
         let pagina:number = 1;
@@ -18,10 +17,7 @@ export const Pagination2 = ({ paginacion, setPaginacion }:pagination2) => {
         } else {
             pagina = (paginacion.pagina + nro);
         }
-        setPaginacion({
-            ...paginacion,
-            pagina: pagina
-        })
+        return pagina;
     }
 
 
@@ -35,7 +31,7 @@ export const Pagination2 = ({ paginacion, setPaginacion }:pagination2) => {
                     {
                         paginacion.pagina > 1
                         ? <button 
-                            onClick={() => handlerPage(-1)}
+                            onClick={() => getData(handlerPage(-1))}
                             className="btn btn-primary"
                         ><BiCaretLeft /></button> : <div></div>
                     }
@@ -43,7 +39,7 @@ export const Pagination2 = ({ paginacion, setPaginacion }:pagination2) => {
                     {
                         paginacion.paginasRestantes > 0
                         ? <button 
-                            onClick={() => handlerPage(1)}
+                            onClick={() => getData(handlerPage(1))}
                             className="btn btn-primary"
                         ><BiCaretRight /></button> : <div></div>
                     }
@@ -62,14 +58,17 @@ export const Pagination2 = ({ paginacion, setPaginacion }:pagination2) => {
 // // estados
 // const [paginacion, setPaginacion] = useState<any>(paginacionDTO);
 
-
-// // funcion get
-// const getData = async () => { 
+// // funciones
+// const getData = async (pagina:number = 1) => {
 //     setLoading(true);
-//     const postData:any = { pagina: paginacion.pagina };
+//     const postData:any = {
+//         pagina: pagina,
+//         ordenar: ordenProductos,
+//         searchText: searchText.value
+//     };
 //     try {
 //         const resto = await post(postData, VENTAS_REPORTES + "/top_productos_vendidos");
-//         setPaginacion({ ...paginacion, ...resto.meta }) // añadir obligatoriamente
+//         setPaginacion({ ...resto.meta, pagina: pagina })
 //         setData(resto.data);
 //         setLoading(false);
 //     } catch (error) {

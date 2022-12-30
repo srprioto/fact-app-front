@@ -1,49 +1,45 @@
 import { useEffect, useState } from "react";
+import { BiShowAlt } from "react-icons/bi";
+import { DropDown } from "../../../../components/DropDown";
 import { Select } from "../../../../components/forms/Select";
 import { Loading } from "../../../../components/loads/Loading";
+import { ModalWrap } from "../../../../components/modals/ModalWrap";
 import { NoRegistros } from "../../../../components/NoRegistros";
 import { Pagination2 } from "../../../../components/paginacion/Pagination2";
 import { Search2 } from "../../../../components/search/Search2";
 import { paginacionDTO } from "../../../../resources/dtos/Pagination";
 import { post } from "../../../../resources/fetch";
 import { VENTAS_REPORTES } from "../../../../resources/routes";
+import { ModalVerProducto } from "../../../productos/part/ModalVerProducto";
 
 export const ReportesProductos = () => {
 
     const [loading, setLoading] = useState<boolean>(false);
     const [data, setData] = useState<Array<any>>([]);
-    const [ordenProductos, setOrdenProductos] = useState<string>("desc");
     const [paginacion, setPaginacion] = useState<any>(paginacionDTO);
     const [searchText, setSearchText] = useState<any>({ value: "" });
     const [searchOn, setSearchOn] = useState<boolean>(false);
 
+    const [modalVerProducto, setModalVerProducto] = useState<boolean>(false);
+    const [idProducto, setIdProducto] = useState<number>(0);
+    const [ordenProductos, setOrdenProductos] = useState<string>("desc");
+
 
     useEffect(() => {
         getData();
-    }, [paginacion.pagina, ordenProductos])
+    }, [ordenProductos, searchOn])
 
 
-    // useEffect(() => {
-    //     if (!searchOn) {
-    //         getData(true);
-    //     }
-    // }, [searchOn])
-
-
-    const getData = async (busqueda?:boolean) => {
+    const getData = async (pagina:number = 1) => {
         setLoading(true);
         const postData:any = {
-            pagina: paginacion.pagina,
+            pagina: pagina,
             ordenar: ordenProductos,
             searchText: searchText.value
         };
         try {
             const resto = await post(postData, VENTAS_REPORTES + "/top_productos_vendidos");
-            if (busqueda) {
-                setPaginacion({ ...paginacion, ...resto.meta, pagina: 1 })
-            } else {
-                setPaginacion({ ...paginacion, ...resto.meta })
-            }
+            setPaginacion({ ...resto.meta, pagina: pagina })
             setData(resto.data);
             setLoading(false);
         } catch (error) {
@@ -53,6 +49,12 @@ export const ReportesProductos = () => {
     }
 
 
+    const handlerVerProducto = (id:number) => { 
+        setIdProducto(id);
+        setModalVerProducto(true);
+    }
+
+    
     return (
         <div className="reportes_productos">
             <div className="box">
@@ -62,24 +64,12 @@ export const ReportesProductos = () => {
                     <Search2
                         searchText={searchText}
                         setSearchText={setSearchText}
-                        getData={getData}
                         searchOn={searchOn}
                         setSearchOn={setSearchOn}
-                        paginacion={paginacion}
-                        setPaginacion={setPaginacion}
                         placeholder="Buscar"
                         validacion={3}
                     />
-                    {/* <SearchWrap
-                        setLoadingData={setLoadingData}
-                        setData={setData}
-                        getData={getData}
-                        searchState={searchState}
-                        setSearchState={setSearchState}
-                        url={VENTAS_SEARCH}
-                        placeholder="Codigo de venta, cliente o nro de doc."
-                        localId={idLocal}
-                    /> */}
+
                     <div className="grid-2 gap">
                         <div></div>
                         <Select
@@ -129,7 +119,13 @@ export const ReportesProductos = () => {
                                                     <td>{ e.marca }</td>
                                                     <td>{ e.talla }</td>
                                                     <td>{ e.color }</td>
-                                                    <td></td>
+                                                    <td>
+                                                        <DropDown>
+                                                            <span onClick={ () => handlerVerProducto(e.id) }>
+                                                                <BiShowAlt /> Ver Producto
+                                                            </span>
+                                                        </DropDown>
+                                                    </td>
                                                 </tr>
                                             )
                                         })
@@ -140,9 +136,18 @@ export const ReportesProductos = () => {
                     )
                 }
 
-                <Pagination2 paginacion={paginacion} setPaginacion={setPaginacion} />
+                <Pagination2 paginacion={paginacion} getData={getData} />
 
             </div>
+
+            <ModalWrap modal={modalVerProducto}>
+                <ModalVerProducto
+                    modal={modalVerProducto}
+                    setModal={setModalVerProducto}
+                    idProducto={idProducto}
+                />
+            </ModalWrap>
+
         </div>
     )
 }

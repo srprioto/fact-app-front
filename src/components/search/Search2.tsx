@@ -1,5 +1,4 @@
 import { Form, Formik } from "formik";
-import { useEffect } from "react";
 import { BiSearchAlt2, BiX } from "react-icons/bi";
 import { validSearchProd } from "../../resources/validations/Ventas";
 import { InputMk } from "../forms/InputMk";
@@ -10,13 +9,11 @@ interface srcText {
 
 interface SearchType {
     searchText:srcText;
-    searchData:Function;
+    setSearchText:Function;
     searchOn:boolean;
     setSearchOn:Function;
-    setSearchText:Function;
     placeholder:string;
-    reiniciar?:Function;
-    validacion?:number|undefined;
+    validacion:number;
 }
 
 // sirve si la paginacion usa post
@@ -24,68 +21,18 @@ interface SearchType {
 export const Search2 = ({ 
     searchText, 
     setSearchText,
-    getData,
     searchOn, 
     setSearchOn,
-    paginacion,
-    setPaginacion,
     placeholder = "",
     validacion = 4,
-    // reiniciar,
-}:any) => {
+}:SearchType) => {
 
 
     const reloadSearch = (e:any) => { 
-        setSearchText({ value: "" })
         setSearchOn(false);
-        getData();
-        // setPaginacion({
-        //     ...paginacion,
-        //     pagina: 1
-        // });
-        // e.preventDefault();
-        // searchData();
-        // reiniciar && reiniciar();
+        setSearchText({ value: "" });
     }
 
-
-    useEffect(() => {
-        if (!searchText.value) {
-            setSearchOn(false);
-            getData();
-        }
-    }, [searchText.value])
-
-
-
-
-
-    // useEffect(() => {
-    //     if (paginacion.pagina !== 1) {
-    //         setPaginacion({
-    //             ...paginacion,
-    //             pagina: 1
-    //         })
-    //     }
-    // }, [searchOn])
-
-
-    const onChangeSearch = (e:any) => { 
-        setSearchText({
-            ...searchText,
-            [e.target.name]: e.target.value
-        });
-    }
-
-
-    // const handlerSearch = (e:any) => { 
-    //     e.preventDefault();
-    //     searchData();
-    // }
-
-    
-    // console.log(paginacion);
-        
 
     return (
 
@@ -94,14 +41,14 @@ export const Search2 = ({
             enableReinitialize={true}
             validationSchema={!!validacion ? validSearchProd(validacion) : null}
             onSubmit={(data, { resetForm }) => {
+                setSearchText({ value: data.value })             
                 setSearchOn(true);
-                getData(true);
             }}
         >
             
             {({ errors }) => (
 
-                <Form className="search" onChange={onChangeSearch}>
+                <Form className="search">
 
                     <InputMk
                         type="text"
@@ -134,3 +81,26 @@ export const Search2 = ({
 // // por fuera
 // const [searchText, setSearchText] = useState<any>({ value: "" });
 // const [searchOn, setSearchOn] = useState<boolean>(false);
+
+// useEffect(() => {
+//     getData();
+// }, [searchOn])
+
+// // funciones
+// const getData = async (pagina:number = 1) => {
+//     setLoading(true);
+//     const postData:any = {
+//         pagina: pagina,
+//         ordenar: ordenProductos,
+//         searchText: searchText.value
+//     };
+//     try {
+//         const resto = await post(postData, VENTAS_REPORTES + "/top_productos_vendidos");
+//         setPaginacion({ ...resto.meta, pagina: pagina })
+//         setData(resto.data);
+//         setLoading(false);
+//     } catch (error) {
+//         setLoading(true);
+//         console.log(error);
+//     }
+// }
