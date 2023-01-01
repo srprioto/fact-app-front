@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { BiBarChartAlt2, BiListUl } from "react-icons/bi";
-import { TitleBox } from "../../../components/TitleBox"
+import { TitleBox } from "../../../components/TitleBox";
 import { get, post } from "../../../resources/fetch";
 import { fechaInicioFinMes } from "../../../resources/func/fechas";
 import { VENTAS_REPORTES, LOCALES_SOLO } from "../../../resources/routes";

@@ -30,6 +30,7 @@ export const TablaGananciasDetall = ({ data, locales, loadingLocales }:tablaGana
                         {/* <th>Ingresos del dia</th>
                         <th>Costos del dia</th> */}
                         <th>Ganancias del dia</th>
+                        <th>Ganancias por Ventas</th>
                         <th>Fecha</th>
                         <th></th>
                         {/* <th className="transparent inlineblock">...</th> */}
@@ -40,13 +41,13 @@ export const TablaGananciasDetall = ({ data, locales, loadingLocales }:tablaGana
                         data.query.map((e:any, index:number) => {
                             return (
                                 <tr className="items-caja" key={index}>
-                                    {/* <td>S/. { moneda(e.Ingresos_dia) }</td>
-                                    <td>S/. { moneda(e.Costos_dia) }</td> */}
+                                    {/* <td>S/. { moneda(e.Ingresos_dia) }</td> */}
                                     <td className={
                                         e.Ganancias_dia > 0
                                         ? "success strong"
                                         : "danger strong"
                                     }>S/. { moneda(e.Ganancias_dia) }</td>
+                                    <td className="info strong">S/. { moneda(e.Solo_ganancias_dia) }</td>
                                     {/* <td className="">{ e.Fecha }</td> */}
                                     <td>{ formatoConSlash(e.Dia) }</td>
                                     <td className="td-dd">
