@@ -23,7 +23,7 @@ export const ReportesProdWrap = () => {
 
                     <button 
                         onClick={() => setToggle(2)}
-                        className={`btn2 btn2-success ${toggle === 2 && "btn2-sub-success"}`}>
+                        className={`btn2 btn2-warning ${toggle === 2 && "btn2-sub-warning"}`}>
                         <BiTrendingDown /> Productos sin ventas
                     </button>
 
