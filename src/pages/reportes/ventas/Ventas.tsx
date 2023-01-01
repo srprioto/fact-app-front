@@ -2,7 +2,8 @@ import { useState } from "react";
 import { BiBarChartAlt2, BiBox } from "react-icons/bi";
 import { TitleBox } from "../../../components/TitleBox"
 import { ReporteGeneralVentas } from "./reporteGeneral/ReporteGeneralVentas";
-import { ReportesProductos } from "./reportesProductos/ReportesProductos";
+// import { ReportesProductos } from "./reportesProductos/ReportesProductos";
+import { ReportesProdWrap } from "./reportesProductos/ReportesProdWrap";
 
 export const Ventas = () => {
 
@@ -30,7 +31,7 @@ export const Ventas = () => {
             }
             {
                 tabbs === 2
-                && <ReportesProductos />
+                && <ReportesProdWrap />
             }
 
         </div>

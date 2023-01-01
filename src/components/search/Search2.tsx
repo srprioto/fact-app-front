@@ -1,4 +1,5 @@
 import { Form, Formik } from "formik";
+import { useState } from "react";
 import { BiSearchAlt2, BiX } from "react-icons/bi";
 import { validSearchProd } from "../../resources/validations/Ventas";
 import { InputMk } from "../forms/InputMk";
@@ -10,23 +11,19 @@ interface srcText {
 interface SearchType {
     searchText:srcText;
     setSearchText:Function;
-    searchOn:boolean;
-    setSearchOn:Function;
     placeholder:string;
     validacion:number;
 }
 
 // sirve si la paginacion usa post
-
 export const Search2 = ({ 
     searchText, 
     setSearchText,
-    searchOn, 
-    setSearchOn,
     placeholder = "",
     validacion = 4,
 }:SearchType) => {
 
+    const [searchOn, setSearchOn] = useState<boolean>(false);
 
     const reloadSearch = (e:any) => { 
         setSearchOn(false);
@@ -80,7 +77,6 @@ export const Search2 = ({
 
 // // por fuera
 // const [searchText, setSearchText] = useState<any>({ value: "" });
-// const [searchOn, setSearchOn] = useState<boolean>(false);
 
 // useEffect(() => {
 //     getData();

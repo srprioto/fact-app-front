@@ -11,23 +11,25 @@ import { paginacionDTO } from "../../../../resources/dtos/Pagination";
 import { post } from "../../../../resources/fetch";
 import { VENTAS_REPORTES } from "../../../../resources/routes";
 import { ModalVerProducto } from "../../../productos/part/ModalVerProducto";
+import { SelectLocalesRepProds } from "./SelectLocalesRepProds";
 
-export const ReportesProductos = () => {
+export const ReportesTopProductos = () => {
 
     const [loading, setLoading] = useState<boolean>(false);
     const [data, setData] = useState<Array<any>>([]);
     const [paginacion, setPaginacion] = useState<any>(paginacionDTO);
     const [searchText, setSearchText] = useState<any>({ value: "" });
-    const [searchOn, setSearchOn] = useState<boolean>(false);
 
     const [modalVerProducto, setModalVerProducto] = useState<boolean>(false);
     const [idProducto, setIdProducto] = useState<number>(0);
+
     const [ordenProductos, setOrdenProductos] = useState<string>("desc");
+    const [idLocal, setIdLocal] = useState<string>("_");
 
 
     useEffect(() => {
         getData();
-    }, [ordenProductos, searchOn])
+    }, [ordenProductos, idLocal, searchText])
 
 
     const getData = async (pagina:number = 1) => {
@@ -35,7 +37,8 @@ export const ReportesProductos = () => {
         const postData:any = {
             pagina: pagina,
             ordenar: ordenProductos,
-            searchText: searchText.value
+            searchText: searchText.value,
+            local: idLocal
         };
         try {
             const resto = await post(postData, VENTAS_REPORTES + "/top_productos_vendidos");
@@ -53,8 +56,8 @@ export const ReportesProductos = () => {
         setIdProducto(id);
         setModalVerProducto(true);
     }
+  
 
-    
     return (
         <div className="reportes_productos">
             <div className="box">
@@ -64,23 +67,22 @@ export const ReportesProductos = () => {
                     <Search2
                         searchText={searchText}
                         setSearchText={setSearchText}
-                        searchOn={searchOn}
-                        setSearchOn={setSearchOn}
                         placeholder="Buscar"
                         validacion={3}
                     />
 
                     <div className="grid-2 gap">
-                        <div></div>
+
+                        <SelectLocalesRepProds
+                            setIdLocal={setIdLocal}
+                        />
+
                         <Select
                             name={"orden_productos"}
                             onChange={(e:any) => setOrdenProductos(e.target.value)}
-                            // textDefault="Ordenar productos"
-                            // defaultValue={true}
                         >
                             <option value={"desc"}>Más vendidos</option>
                             <option value={"asc"}>Menos vendidos</option>
-                            {/* <option value={"ninguno"}>Sin ventas</option> */}
                         </Select>
 
                     </div>
