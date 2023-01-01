@@ -1,8 +1,7 @@
 import * as Yup from 'yup';
 
 export const ValidCreateCliente = Yup.object({
-
-    nombre: Yup.string().required('Requerido'),
+    nombre: Yup.string().required('Requerido').min(4, `Requiere mas de 4 caracteres`),
     documento: Yup.string().required('Requerido'),
     direccion: Yup.string().required('Requerido'),
     telefono: Yup.string().required('Requerido'),
@@ -14,7 +13,7 @@ export const ValidCreateCliente = Yup.object({
 
 export const ValidClienteDni = Yup.object({
     // numero_documento: Yup.string().required('Requerido'),
-    nombre: Yup.string().required('Requerido'),
+    nombre: Yup.string().required('Requerido').min(4, `Requiere mas de 4 caracteres`),
     telefono: Yup.string().matches(/^[0-9]+$/, "Requiere solo numeros")
     // direccion: Yup.string().required('Requerido'),
     // email: Yup.string().required('Requerido'),
@@ -22,7 +21,7 @@ export const ValidClienteDni = Yup.object({
 
 export const ValidClienteRuc = Yup.object({
     // numero_documento: Yup.string().required('Requerido'),
-    razonSocial: Yup.string().required('Requerido'),
+    razonSocial: Yup.string().required('Requerido').min(4, `Requiere mas de 4 caracteres`),
     direccion: Yup.string().required('Requerido'),
     telefono: Yup.string().matches(/^[0-9]+$/, "Requiere solo numeros")
 })
@@ -61,7 +60,7 @@ export const ValidRegistroClienteDni = Yup.object({
         .matches(/^[0-9]+$/, "Requiere solo numeros")
         .min(8, `Necesita 8 digitos exactamente`)
         .max(8, `Necesita 8 digitos exactamente`),
-    nombre: Yup.string().required('Requerido'),
+    nombre: Yup.string().required('Requerido').min(4, `Requiere mas de 4 caracteres`),
     telefono: Yup.string().required('Requerido').matches(/^[0-9]+$/, "Requiere solo numeros"),
     direccion: Yup.string().required('Requerido'),
     email: Yup.string().email('Formato de Email invaido').required('Requerido'),
@@ -107,7 +106,7 @@ export const ValidRegistroClienteRuc = Yup.object({
 // }
 
 export const ValidClienteCredito = Yup.object({
-    nombre: Yup.string().required('Requerido'),
+    nombre: Yup.string().required('Requerido').min(4, `Requiere mas de 4 caracteres`),
     numero_documento: Yup
         .string()
         .required('Requerido')

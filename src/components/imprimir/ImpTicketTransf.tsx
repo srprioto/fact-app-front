@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { BiCheckbox } from "react-icons/bi";
-import { useAuth } from "../../../auth/useAuth";
-import { ahora, fecha } from "../../../resources/func/fechas";
+import { useAuth } from "../../auth/useAuth";
+import { ahora, fecha } from "../../resources/func/fechas";
 
 interface impTicketTransf {
     setImprimir:Function;
@@ -78,6 +78,12 @@ export const ImpTicketTransf = ({ setImprimir, setModal, transferencia, listaPro
         borderBottom: "1px dotted #000"
     }
 
+    const totalprods = {
+        display: "flex",
+        justifyContent: "space-around"
+        
+    }
+
 
     return (
         <div className="none">
@@ -106,10 +112,7 @@ export const ImpTicketTransf = ({ setImprimir, setModal, transferencia, listaPro
                 <table style={{...table, ...margin15}}>
                     <thead>
                         <tr style={texto}>
-                            {/* <th>Cod</th> */}
                             <th>Prod</th>
-                            {/* <th>Marca</th>
-                            <th>Talla</th> */}
                             <th>Cant</th>
                             <th></th>
                         </tr>
@@ -120,15 +123,12 @@ export const ImpTicketTransf = ({ setImprimir, setModal, transferencia, listaPro
 
                                 const producto:string = 
                                     e.productoNombre + " - " + 
-                                    e.productoNombre + " - " + 
-                                    e.productoNombre;
+                                    e.marca + " - " + 
+                                    e.talla;
 
                                 return (
                                     <tr key={index} style={texto}>
-                                        {/* <td>{ e.codigo }</td> */}
                                         <td>{ producto }</td>
-                                        {/* <td>{ e.marca }</td>
-                                        <td>{ e.talla }</td> */}
                                         <td>{ e.cantidad }</td>
                                         <td><BiCheckbox size="25" /></td>
                                     </tr>            
@@ -138,6 +138,15 @@ export const ImpTicketTransf = ({ setImprimir, setModal, transferencia, listaPro
                         
                     </tbody>
                 </table>
+
+                <div>
+                    <div style={totalprods}>
+                        <span>Cantidad total:</span>
+                        <span>{ 1 }</span>
+                    </div>
+                </div>
+
+
                 <div>
                     <span style={grid2}>
                         <p style={parrafo}>Observación: </p>

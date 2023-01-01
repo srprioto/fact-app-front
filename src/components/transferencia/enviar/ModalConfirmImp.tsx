@@ -3,7 +3,7 @@ import { BiBookmarkAltMinus } from "react-icons/bi"
 import { Loading } from "../../loads/Loading"
 import { Modal } from "../../modals/Modal"
 import { TextoRelleno } from "../../TextoRelleno"
-import { ImpTicketTransf } from "./ImpTicketTransf"
+import { ImpTicketTransf } from "../../imprimir/ImpTicketTransf"
 
 interface modalConfirmImp {
     modal:boolean;
