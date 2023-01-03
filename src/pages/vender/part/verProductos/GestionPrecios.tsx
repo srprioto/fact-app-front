@@ -122,7 +122,7 @@ export const GestionPrecios = ({
 
                     <div
                         title="
-                            Condicional para el descuento en la subventa.
+                            Condiciona el descuento en la subventa.
                             Si la opción esta activada, el descuento se realizara a cada unidad.
                             Si la opción esta desactivada, el descuento se realizara a la totalidad de la subventa.
                         "

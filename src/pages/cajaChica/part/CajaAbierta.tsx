@@ -63,26 +63,39 @@ export const CajaAbierta = ({
         
                     <div className="grid-4">
         
-                        <div className="center">
+                        <div 
+                            title="Monto de apertura"
+                            className="center"
+                        >
                             <p>Monto de apertura: </p>
                             <h2 className="">S/. { moneda(infoCaja.monto_apertura) }</h2>
                         </div>                   
 
-                        <div className="center">
+                        <div 
+                            title="Calcular el total de ingresos y egresos de caja"
+                            className="center"
+                        >
                             <p>Movimientos de caja: </p>
                             <h2 className="warning-i">S/. { moneda(infoCaja.otros_montos) }</h2>
                         </div>
 
-                        <div className="center">
+                        <div
+                            title="Suma el total de ventas y los movimientos de caja"
+                            className="center"
+                        >
                             <p>Ingresos recaudados: </p>
                             <h2 className="info-i">S/. { moneda(infoCaja.monto_efectivo) }</h2>
                         </div>
 
-                        <div className="center">
+                        <div
+                            title="
+                                Suma el total de los ingresos recaudados 
+                                y el monto de apertura de caja                            
+                            "
+                            className="center"
+                        >
                             <p>Monto total en caja: </p>
-                            <h2 className="strong success-i">
-                                S/. { moneda(totalEfectivo) }
-                            </h2>
+                            <h2 className="strong success-i">S/. { moneda(totalEfectivo) }</h2>
                         </div>
         
                     </div>
@@ -92,21 +105,39 @@ export const CajaAbierta = ({
                         <div></div>
 
                         <div className="pago-otros-ingresos right">
-                            <span className="grid-2 gap">
+                            <span
+                                title="Pagos realizados con tarjeta"
+                                className="grid-2 gap"
+                            >
                                 <p className="m-0">Tarjeta: </p>
                                 <h4 className="info m-0 left">S/. { moneda(infoCaja.monto_tarjeta) }</h4>
                             </span>
-                            <span className="grid-2 gap">
+                            <span 
+                                title="
+                                    Pagos realizados por otros medios electrónicos
+                                    Yape, Plin, etc.                                
+                                "
+                                className="grid-2 gap"
+                            >
                                 <p className="m-0">P. Electronico: </p>
                                 <h4 className="info m-0 left">S/. { moneda(infoCaja.monto_pago_electronico) }</h4>
                             </span>
-                            <span className="grid-2 gap">
+                            <span 
+                                title="Pagos realizados por depósito bancario"
+                                className="grid-2 gap"
+                            >
                                 <p className="m-0">Deposito: </p>
                                 <h4 className="info m-0 left">S/. { moneda(infoCaja.monto_deposito) }</h4>
                             </span>
                         </div>
         
-                        <div className="center">
+                        <div 
+                            title="
+                                Calcula el total de pagos realizados 
+                                por medios distintos al efectivo
+                            "
+                            className="center"
+                        >
                             <p>Otros ingresos: </p>
                             <h2 className="strong success-i">
                                 S/. { moneda(montosOtrosMedios) }
@@ -120,8 +151,11 @@ export const CajaAbierta = ({
                         <div></div>
                         <div></div>
         
-                        <div className="center">
-                            <p>Ingresos totales: </p>
+                        <div
+                            title="Suma el total del monto total en caja y otros ingresos"
+                            className="center"
+                        >
+                            <p>Monto total: </p>
                             <h1 className="strong success-i">
                                 S/. { moneda(Number(totalEfectivo) + Number(montosOtrosMedios)) }
                             </h1>
