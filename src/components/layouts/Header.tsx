@@ -1,6 +1,5 @@
 import { WrapTickets } from "../tickets/WrapTickets";
 import { FullScreen } from "./header/FullScreen";
-import { MenuDesplegable } from "./header/MenuDesplegable";
 import { User } from "./header/User";
 
 export const Header = () => {
