@@ -109,6 +109,8 @@ export const GestionPrecios = ({
                 <div className="grid-3 gap">
                     
                     <Input
+                        title="Incrementos o descuentos de
+                        la venta del producto actual"
                         label="Incremento/Descuento"
                         type="number"
                         name="descuento"
@@ -118,7 +120,13 @@ export const GestionPrecios = ({
                         moneda
                     />
 
-                    <div>
+                    <div
+                        title="
+                            Condicional para el descuento en la subventa.
+                            Si la opción esta activada, el descuento se realizara a cada unidad.
+                            Si la opción esta desactivada, el descuento se realizara a la totalidad de la subventa.
+                        "
+                    >
                         <p className="center info">{
                             tipoDescuento
                             ? "Inc/desc por unidad"

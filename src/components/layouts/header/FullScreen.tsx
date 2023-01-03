@@ -13,7 +13,11 @@ export const FullScreen = () => {
     }
 
     return (
-        <div className="pointer" onClick={() => { fullScreenOn() }}>
+        <div 
+            title="Permite intercambiar la pantalla del navegador normal a pantalla completa"
+            className="pointer" 
+            onClick={() => { fullScreenOn() }}
+        >
             <BiFullscreen className="icon-header" />
         </div>
     )

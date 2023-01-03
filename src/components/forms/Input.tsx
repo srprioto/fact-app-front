@@ -14,6 +14,7 @@ interface input {
     moneda?:boolean;
     noMenos?:boolean;
     noMas?:boolean;
+    title?:string;
 }
 
 export const Input = ({ 
@@ -30,6 +31,7 @@ export const Input = ({
     moneda, 
     noMenos,
     noMas,
+    title
 }:input) => {
 
     // const checkValue = () => { 
@@ -48,7 +50,7 @@ export const Input = ({
     // }
 
     return (
-        <div className="wrap-form">
+        <div className="wrap-form" title={title}>
             { label && (<><label className={colorLabel} htmlFor={name}>{ label }</label><br /></>) }
             <div className="relative">
                 {

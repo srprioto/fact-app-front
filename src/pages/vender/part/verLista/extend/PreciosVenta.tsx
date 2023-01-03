@@ -11,7 +11,7 @@ export const PreciosVenta = ({ venta, alertaDescuento, handlerOnChange, tabbs }:
                 <h3 className="secundary m-0">S/. { moneda(venta.subtotal) }</h3>
             </span>
 
-            <span>
+            <span title="Incremento o descuento a la venta total">
                 {
                     alertaDescuento()
                     ? <p className="mb-10 danger center strong">¡Descuentos activos!</p>
@@ -28,7 +28,7 @@ export const PreciosVenta = ({ venta, alertaDescuento, handlerOnChange, tabbs }:
                 />
             </span>
         
-            <span className="center">
+            <span className="center" title="Monto total">
                 <p className="mb-5 info">Total</p>
                 <h1 className="success strong">S/. { moneda(venta.total) }</h1>
             </span>

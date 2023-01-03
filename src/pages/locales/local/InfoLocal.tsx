@@ -102,7 +102,9 @@ export const InfoLocal = ({ local, handlerSelectLocal }:infoLocal) => {
                                         icon={<BiCartAlt />}
                                     >
                                         <Link 
-                                            to={`/tiendas/vender/${local.id}/${local.nombre}`} className="btn btn-success"
+                                            title="Módulo de creación de la venta"
+                                            to={`/tiendas/vender/${local.id}/${local.nombre}`} 
+                                            className="btn btn-success"
                                         >
                                             <BiCartAlt /> Vender
                                         </Link>
@@ -113,15 +115,20 @@ export const InfoLocal = ({ local, handlerSelectLocal }:infoLocal) => {
                                         estado={stateCaja}
                                         icon={<BiCoin />}
                                     >
-                                        <Link 
-                                            to={`/tiendas/caja/${local.id}/${local.nombre}`} className="btn btn-warning"
+                                        <Link
+                                            title="Módulo de cobranzas"
+                                            to={`/tiendas/caja/${local.id}/${local.nombre}`} 
+                                            className="btn btn-warning"
                                         >
                                             <BiCoin />
                                             Cobrar
                                         </Link>
                                     </BtnOnOff2>
 
-                                    <div className="w150px">
+                                    <div 
+                                        title="Módulo de caja chica e información del local"
+                                        className="w150px"
+                                    >
                                         <LoadSwitchBtn2
                                             loading={LoadStateCaja}
                                             className={"btn btn-" + (stateCaja ? "info" : "danger")}
@@ -132,8 +139,9 @@ export const InfoLocal = ({ local, handlerSelectLocal }:infoLocal) => {
                                     </div>
                                     {/* stateCaja */}
 
-                                    <Link 
-                                        to={`/tiendas/local/${local.id}/${local.nombre}`} 
+                                    <Link
+                                        title="Módulo de stock del local"
+                                        to={`/tiendas/local/${local.id}/${local.nombre}`}
                                         className="btn btn-primary"
                                     >
                                         <BiListOl /> Stock

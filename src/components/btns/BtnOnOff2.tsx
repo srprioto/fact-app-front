@@ -4,10 +4,11 @@ interface btnOnOff2 {
     label?:string;
     estado:boolean;
     icon?:any;
+    titleDisable?:string;
     children:any;
 }
 
-export const BtnOnOff2 = ({ label = "Aceptar", estado, icon, children }:btnOnOff2) => {
+export const BtnOnOff2 = ({ label = "Aceptar", estado, icon, titleDisable, children }:btnOnOff2) => {
     return (
         <>
             {
@@ -15,7 +16,7 @@ export const BtnOnOff2 = ({ label = "Aceptar", estado, icon, children }:btnOnOff
                 ? (
                     children
                 ) : (
-                    <button className="btn btn-disable" type="button">
+                    <button className="btn btn-disable" type="button" title={titleDisable}>
                         { icon ? icon : <BiCheck /> } { " " + label }
                     </button>
                 )

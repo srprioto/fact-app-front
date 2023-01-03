@@ -148,7 +148,7 @@ export const VerLista = ({
                         ) 
                     }
                     {
-                        tabbs === 2 
+                        tabbs === 2
                         && (
                             <BoletaVenta 
                                 cliente={cliente} 

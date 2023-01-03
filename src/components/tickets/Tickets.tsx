@@ -57,6 +57,7 @@ export const Tickets = ({ idLocal, idUser }:tickets) => {
             }
             <div className="box-ticket">
                 <div
+                    title="Notificaciones"
                     className="pointer btn-shot-tickets"
                     onClick={() => setShowNotificaciones(!showNotificaciones)}
                 >

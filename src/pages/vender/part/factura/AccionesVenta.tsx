@@ -50,13 +50,18 @@ export const AccionesVenta = ({
                 )
             }>
                 <div className="grid-6">
-                    <button className="btn btn-primary" type="button" onClick={() => setShowWindow(1)}>
-                        {/* <BiRightArrowAlt /> */}
+                    <button 
+                        title="Ir un paso atrás" 
+                        className="btn btn-primary" 
+                        type="button" 
+                        onClick={() => setShowWindow(1)}
+                    >
                         <BiArrowBack />
                     </button>
                 </div>
                 
                 <BtnOnOff2
+                    titleDisable="Requiere la información del cliente"
                     label={labelBtn}
                     estado={verVender()}
                     icon={<BiCaretRight />}

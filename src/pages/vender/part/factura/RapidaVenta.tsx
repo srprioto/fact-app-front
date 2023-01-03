@@ -33,7 +33,7 @@ export const RapidaVenta = ({ loadVenta, setShowWindow, verificarCaja, handlerVe
                 )
             }>
                 <div className="grid-6">
-                    <button className="btn btn-primary" onClick={() => setShowWindow(1)}>
+                    <button  title="Ir un paso atrás" className="btn btn-primary" onClick={() => setShowWindow(1)}>
                         {/* <BiRightArrowAlt /> */}
                         <BiArrowBack />
                     </button>

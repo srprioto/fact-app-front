@@ -4,10 +4,11 @@ interface loadSwitchBtn2 {
     loading:boolean;
     className:string;
     handler?:any; // requiere arrow function por fuera
+    title?:string;
     children?:any
 }
 
-export const LoadSwitchBtn2 = ({ loading, className, handler, children }:loadSwitchBtn2) => {
+export const LoadSwitchBtn2 = ({ loading, className, handler, title, children }:loadSwitchBtn2) => {
     return (
         <>
             {
@@ -16,13 +17,22 @@ export const LoadSwitchBtn2 = ({ loading, className, handler, children }:loadSwi
                 : (
                     handler
                     ? (
-                        <button className={className} type="submit" onClick={() => handler()}>
+                        <button 
+                            title={title}
+                            className={className} 
+                            type="submit" 
+                            onClick={() => handler()}
+                        >
                             {
                                 children
                             }
                         </button>
                     ) : (
-                        <button className={className} type="submit">
+                        <button 
+                            title={title}
+                            className={className} 
+                            type="submit"
+                        >
                             {
                                 children
                             }

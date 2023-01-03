@@ -127,6 +127,7 @@ export const VerListaShort = ({
                         <div className="grid-31 gap10 acciones-venta">
                         
                             <LoadSwitchBtn2
+                                title="Realizar venta"
                                 loading={loadVenta}
                                 className="btn btn-success"
                                 handler={() => verificarCaja(handlerVenta)}
@@ -134,7 +135,11 @@ export const VerListaShort = ({
                                 <BiCaretRight /> Vender
                             </LoadSwitchBtn2>
                             
-                            <button className="btn btn-primary" onClick={handlerShowWindow}>
+                            <button 
+                                title="Ir al siguiente paso"
+                                className="btn btn-primary" 
+                                onClick={handlerShowWindow}
+                            >
                                 <BiRightArrowAlt />
                             </button>
                         </div>
