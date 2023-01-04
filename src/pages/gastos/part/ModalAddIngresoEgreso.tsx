@@ -31,7 +31,7 @@ export const ModalAddIngresoEgreso = ({ modal, setModal, getData, locales }:moda
         <Modal
             modal={modal}
             setModal={setModal}
-            title="Añade un nuevo ingreso o egreso"
+            titulo="Añade un nuevo ingreso o egreso"
             width={60}
         >
             <Formik

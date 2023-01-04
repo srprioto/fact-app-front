@@ -3,7 +3,7 @@ import { Modal } from "../../../../../components/modals/Modal"
 export const ModalExportarExcel = ({ modal, setModal }:any) => {
     return (
         <Modal
-            title="Descargar reporte general en Excel"
+            titulo="Descargar reporte general en Excel"
             modal={modal}
             setModal={setModal}
         >

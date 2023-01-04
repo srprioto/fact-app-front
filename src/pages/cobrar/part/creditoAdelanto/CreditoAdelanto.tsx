@@ -155,13 +155,12 @@ export const CreditoAdelanto = ({
                             errors={errors}
                         />
 
-                        <FormsClienteCred
-                            errors={errors}
-                        />
+                        <FormsClienteCred errors={errors} />
 
                         <div className="wrap-confirmar-venta mb-10 mt-25 bt bt-neutro">
                             <div className="grid-3 gap mt-25">
                                 <BtnOnOff2
+                                    titleDisable="Los adelantos para reserva de producto requieren un monto mínimo"
                                     label="Confirmar venta"
                                     estado={validarVenta()}
                                     icon={<BiCaretRight />}
@@ -173,6 +172,7 @@ export const CreditoAdelanto = ({
                                 </BtnOnOff2>
                                 <div></div>
                                 <button
+                                    title="Inhabilita la venta actual"
                                     className="btn btn-danger"
                                     type="button"
                                     onClick={() => setModalRechazVenta(!modalRechazVenta)}

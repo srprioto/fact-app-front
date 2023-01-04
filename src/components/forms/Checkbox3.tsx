@@ -4,11 +4,12 @@ interface Checkbox {
     name:string;
     checked:any;
     handlerCheck:any;
+    title?:string
 }
 
-export const Checkbox3 = ({ label, name, checked, handlerCheck, className }:Checkbox) => {
+export const Checkbox3 = ({ label, name, checked, handlerCheck, className, title }:Checkbox) => {
     return (
-        <div>
+        <div title={title} >
             {
                 label
                 && <label className={"center w100 " + className} htmlFor={name}>{ label }</label>

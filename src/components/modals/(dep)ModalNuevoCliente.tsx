@@ -36,7 +36,7 @@ export const ModalNuevoCliente = ({ modal, setModal, handlerCliente }:modalNuevo
 
     return (
         <Modal
-            title="Registrar un nuevo cliente"
+            titulo="Registrar un nuevo cliente"
             modal={modal}
             setModal={setModal}
             width={65}

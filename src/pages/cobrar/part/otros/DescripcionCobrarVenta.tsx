@@ -126,7 +126,9 @@ export const DescripcionCobrarVenta = ({
 
             {
                 tabbs === 4
-                && <span>
+                && <span
+                    title="Monto pagado del credito o adelanto"
+                >
                     <p className={
                         verificarTarjeta()
                         ? "center mb-10 warning"

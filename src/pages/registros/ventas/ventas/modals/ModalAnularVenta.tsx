@@ -63,7 +63,7 @@ export const ModalAnularVenta = ({ modal, setModal, idVenta, getData }:modalAnul
         <Modal
             modal={modal}
             setModal={setModal}
-            title="Anulacion de venta"
+            titulo="Anulacion de venta"
             width={50}
             border="border-danger"
         >

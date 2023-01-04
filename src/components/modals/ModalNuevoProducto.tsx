@@ -45,7 +45,7 @@ export const ModalNuevoProducto = ({
     
     return (
         <Modal
-            title="Registrar un nuevo producto"
+            titulo="Registrar un nuevo producto"
             modal={modal}
             setModal={setModal}
             width={80}

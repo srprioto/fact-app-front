@@ -7,7 +7,7 @@ export const ModalCodigoBarras = ({ modal, setModal, producto }:any) => {
             modal={modal}
             setModal={setModal}
             width={70}
-            title="Gestion de codigo de barras"
+            titulo="Gestion de codigo de barras"
         >
             <GestionCodigo
                 producto={producto}

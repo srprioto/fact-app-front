@@ -24,7 +24,7 @@ export const ModalVerDetalles = ({ modal, setModal, fecha, locales, loadingLocal
             modal={modal}
             setModal={setModal}
             width={75}
-            title={"Detalles de ganancias de " + formatoConSlash(fecha)}
+            titulo={"Detalles de ganancias de " + formatoConSlash(fecha)}
         >
             <div className="box box-par m-0">
                 <div className="grid-4 gap mb-30">

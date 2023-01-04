@@ -34,7 +34,7 @@ export const ModalVerProducto = ({ modal, setModal, idProducto }:any) => {
 
     return (
         <Modal
-            title={"Informacion de " + (!loading ? producto.nombre : "...")}
+            titulo={"Informacion de " + (!loading ? producto.nombre : "...")}
             modal={modal}
             setModal={setModal}
         >

@@ -84,7 +84,7 @@ export const ModalVerTransac = ({ modal, setModal, idTransaccion, getData }:moda
 
     return (
         <Modal
-            title="Resumen de transaccion"
+            titulo="Resumen de transaccion"
             modal={modal}
             setModal={setModal}
             border="border-primary"

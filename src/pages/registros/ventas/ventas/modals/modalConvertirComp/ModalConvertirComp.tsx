@@ -76,7 +76,7 @@ export const ModalConvertirComp = ({ modal, setModal, idVenta, getData, inModal 
         <Modal
             modal={modal}
             setModal={setModal}
-            title={`Convertir venta rapida en comprobante nro ${idVenta}`}
+            titulo={`Convertir venta rapida en comprobante nro ${idVenta}`}
             width={70}
         >
             <div className="box m-0 grid-1 gap">

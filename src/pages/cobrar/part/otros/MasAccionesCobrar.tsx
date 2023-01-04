@@ -28,6 +28,7 @@ export const MasAccionesCobrar = ({
             <div className="grid-3 gap">
                 <div></div>
                 <button
+                    title="Permite dividir pagos y añadir otras formas de pago"
                     onClick={() => dividirPreciosProd()}
                     className="btn-show red-text center"
                 >

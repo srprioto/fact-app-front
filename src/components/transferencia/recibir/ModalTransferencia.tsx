@@ -6,7 +6,7 @@ import { RecibirTransferencia } from "./RecibirTransferencia"
 export const ModalTransferencia = ({ modal, setModal, data, getTransacciones, actualizarDatos }:any) => {
     return (
         <Modal
-            title="Confirmar ingreso de productos" 
+            titulo="Confirmar ingreso de productos" 
             modal={modal}
             setModal={setModal}
             width={85}

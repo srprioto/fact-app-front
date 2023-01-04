@@ -62,7 +62,7 @@ export const ModalAnularComp = ({ modal, setModal, comprobante, getData }:any) =
         <Modal
             modal={modal}
             setModal={setModal}
-            title="Anulacion de comprobante"
+            titulo="Anulacion de comprobante"
             width={60}
             border="border-danger"
         >

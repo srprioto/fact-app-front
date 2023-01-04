@@ -42,6 +42,7 @@ export const RapidaCobrar = ({
                 </BtnOnOff2>
                 <div></div>
                 <button 
+                    title="Inhabilita la venta actual"
                     className="btn btn-danger"
                     onClick={() => setModalRechazVenta(!modalRechazVenta)}
                 ><BiX /> Rechazar venta</button>

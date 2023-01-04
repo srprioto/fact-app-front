@@ -80,7 +80,7 @@ export const ModalTransferencia = ({ modal, setModal, idLocal, nombreLocal, getD
 
     return (
         <Modal 
-            title="transferencia de productos" 
+            titulo="transferencia de productos" 
             modal={modal}
             setModal={setModal}
             width={80}

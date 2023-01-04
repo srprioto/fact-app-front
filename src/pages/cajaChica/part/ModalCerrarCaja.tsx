@@ -38,7 +38,7 @@ export const ModalCerrarCaja = ({ modal, setModal, caja, idCaja, user, getDataOn
 
     return (
         <Modal
-            title="Seguro que quieres cerrar caja?"
+            titulo="Seguro que quieres cerrar caja?"
             modal={modal}
             setModal={setModal}
             width={50}

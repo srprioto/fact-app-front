@@ -53,7 +53,7 @@ export const ModalCajaDetalles = ({ modal, setModal, cajaId }:any) => {
 
     return (
         <Modal
-            title="Detalles de caja"
+            titulo="Detalles de caja"
             modal={modal}
             setModal={setModal}
             width={80}

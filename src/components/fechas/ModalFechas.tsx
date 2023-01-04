@@ -57,7 +57,7 @@ export const ModalFechas = ({ modal, setModal, getData, fechas, setFechas }:moda
         <Modal
             modal={modal}
             setModal={setModal}
-            title="Mostrar registros entre fechas"
+            titulo="Mostrar registros entre fechas"
         >
             {
                 fechas.inicio !== "_" || fechas.fin !== "_"

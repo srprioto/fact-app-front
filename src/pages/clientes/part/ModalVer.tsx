@@ -15,7 +15,7 @@ export const ModalVer = ({ data, modal, setModal, loading }:modalVer) => {
     return (
         <Modal 
             border="border-primary" 
-            title="Informacion del cliente" 
+            titulo="Informacion del cliente" 
             modal={modal} 
             setModal={setModal}
             width={80}

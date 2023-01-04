@@ -77,7 +77,7 @@ export const ModalOtroMonto = ({ modal, setModal, getDataOne, idCaja, usuarioId 
     
     return (
         <Modal
-            title="Movimiento de caja"
+            titulo="Movimiento de caja"
             modal={modal}
             setModal={setModal}
             width={60}

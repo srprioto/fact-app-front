@@ -4,7 +4,7 @@ import { Loading } from "../loads/Loading";
 
 interface modal{
     modal:boolean;
-    title?:string;
+    titulo?:string;
     border?:string; // border="border-danger"
     width?:number;
     height?:string|number;
@@ -19,7 +19,7 @@ interface modal{
 }
 
 export const Modal = ({ 
-    title = "", 
+    titulo = "", 
     border = "", 
     width,
     height,
@@ -72,9 +72,9 @@ export const Modal = ({
                                             ><BiArrowBack /></span>
                                         }
                                         {
-                                            title && (
+                                            titulo && (
                                                 <h2 className="title-modal">
-                                                    { title }
+                                                    { titulo }
                                                 </h2>
                                             )
                                         }

@@ -65,7 +65,7 @@ export const ModalCantidad = ({ modal, setModal, localStock, getData, setSearchS
     }
 
     return (
-        <Modal title="Cambiar cantidad de unidades" modal={modal}>
+        <Modal titulo="Cambiar cantidad de unidades" modal={modal}>
             <div className="grid-1 gap">
                 <div className="center grid-1 gap">
 

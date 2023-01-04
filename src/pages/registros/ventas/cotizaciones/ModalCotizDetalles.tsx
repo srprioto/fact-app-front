@@ -64,7 +64,7 @@ export const ModalCotizDetalles = ({ modal, setModal, idVenta }:any) => {
 
     return (
         <Modal
-            title="Detalles de la venta"
+            titulo="Detalles de la venta"
             modal={modal}
             setModal={setModal}
             border="border-primary"

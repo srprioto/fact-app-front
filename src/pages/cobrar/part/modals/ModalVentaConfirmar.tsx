@@ -166,7 +166,7 @@ export const ModalVentaConfirmar = ({
         <Modal
             modal={modal}
             setModal={setModal}
-            title={"Confirmar venta"}
+            titulo={"Confirmar venta"}
             width={70}
         >
             <div className="grid-1">
@@ -235,7 +235,12 @@ export const ModalVentaConfirmar = ({
                         }
                         {
                             (!credito())
-                            && <div>
+                            && <div
+                                title="
+                                    Permite hacer un recalculo porcentual del precio total, afectando al resto de la venta.
+                                    Esta acción también afectará al comprobante final para la Sunat y/o en su impresión.
+                                "
+                            >
                                 <p>Modif. porcentual (%):</p>
                                 <Input
                                     type="number"

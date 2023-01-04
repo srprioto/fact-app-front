@@ -5,7 +5,7 @@ export const ModalVerIngreso = ({ modal, setModal, idIngreso }:any) => {
 
     return (
         <Modal
-            title="Detalles del ingreso de productos"
+            titulo="Detalles del ingreso de productos"
             modal={modal}
             setModal={setModal}
             border="border-primary"

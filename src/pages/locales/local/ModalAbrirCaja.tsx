@@ -78,7 +78,7 @@ export const ModalAbrirCaja = ({
 
     return (
         <Modal
-            title={"Apertura de caja en " + nombreLocal}
+            titulo={"Apertura de caja en " + nombreLocal}
             modal={modal}
             setModal={setModal}
             width={50}

@@ -32,7 +32,7 @@ export const ModalEditarIngresEgreso = ({
         <Modal
             modal={modal}
             setModal={setModal}
-            title="Editar el ingreso o egreso"
+            titulo="Editar el ingreso o egreso"
             width={60}
         >
             <Formik

@@ -13,11 +13,11 @@ export const TablaProdVenta = ({ venta }:tablaProdVenta) => {
                 <thead>
                     <tr>
                         <th>Producto</th>
-                        <th>Precio G.</th>
+                        <th title="Precio sin IGV">P. sin IGV</th>
                         <th>IGV</th>
-                        <th>Precio U.</th>
-                        <th>Cant.</th>
-                        <th>Precio V.</th>
+                        <th title="Precio por unidad">Precio U.</th>
+                        <th title="Cantidad de unidades">Cant.</th>
+                        <th title="Precio de la subventa">Precio Sv.</th>
                     </tr>
                 </thead>
                 

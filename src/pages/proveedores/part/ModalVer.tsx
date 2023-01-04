@@ -12,7 +12,7 @@ interface modalVer{
 
 export const ModalVer = ({ data, modal, setModal, loading }:modalVer) => {
     return (
-        <Modal border="border-primary" title="Informacion del proveedor" modal={modal} setModal={setModal}>
+        <Modal border="border-primary" titulo="Informacion del proveedor" modal={modal} setModal={setModal}>
 
             {
                 loading

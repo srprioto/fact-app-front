@@ -37,7 +37,7 @@ export const ModalReenviarComp = ({ modal, setModal, idComprobante, getData }:mo
         <Modal
             modal={modal}
             setModal={setModal}
-            title="Reenvio de comprobante"
+            titulo="Reenvio de comprobante"
             width={50}
         >
             <div className="grid-1 gap">

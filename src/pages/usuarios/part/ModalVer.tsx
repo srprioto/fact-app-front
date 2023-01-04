@@ -13,7 +13,7 @@ import { fecha } from "../../../resources/func/fechas";
 export const ModalVer = ({ data, modal, setModal, loading }:any) => {
 
     return (
-        <Modal border="border-primary" title="Informacion del usuario" modal={modal} setModal={setModal}>
+        <Modal border="border-primary" titulo="Informacion del usuario" modal={modal} setModal={setModal}>
             {
                 loading
                 ? <Loading />

@@ -39,6 +39,7 @@ export const ConfirmarVenta = ({
         <div className="wrap-confirmar-venta mb-10 mt-30 bt bt-neutro">
             <div className="grid-3 gap mt-25">
                 <BtnOnOff2
+                    titleDisable="Requiere la información del cliente"
                     label="Confirmar venta"
                     estado={validarVenta()}
                     icon={<BiCaretRight />}
@@ -51,6 +52,7 @@ export const ConfirmarVenta = ({
                 
                 <div></div>
                 <button
+                    title="Inhabilita la venta actual"
                     className="btn btn-danger"
                     type="button"
                     onClick={() => setModalRechazVenta(!modalRechazVenta)}

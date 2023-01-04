@@ -128,7 +128,7 @@ export const ModalVentaDetalles = ({ modal, setModal, idVenta, getData, btnClose
 
     return (
         <Modal
-            title="Detalles de la venta"
+            titulo="Detalles de la venta"
             modal={modal}
             setModal={setModal}
             border="border-primary"

@@ -69,7 +69,10 @@ export const PagosCreditoAdel = ({
 
             <div className="grid-3 gap">
                 <div></div>
-                <div className="box-descripcion center">
+                <div 
+                    title="Monto restante para que la venta se cancele"
+                    className="box-descripcion center"
+                >
                     <p className="center">Pago pendiente:</p>
                     <h4 className={
                         "center " + 
@@ -87,6 +90,11 @@ export const PagosCreditoAdel = ({
             <div className="grid-3 gap">
                 
                 <Checkbox3
+                    title="
+                        Alterna el tipo de operación.
+                        Si el producto se entrega correctamente, la operación es un crédito.
+                        Si el producto no se entrega, la operación sera un adelanto para reserva de producto.
+                    "
                     className={
                         infoCredito.estado_producto
                         ? "info"
@@ -103,6 +111,7 @@ export const PagosCreditoAdel = ({
                 />
                 
                 <Input
+                    title="Monto pagado por el cliente como parte del crédito o adelanto"
                     label="Cantidad pagada"
                     type="number"
                     name="cantidad_pagada"
@@ -120,8 +129,8 @@ export const PagosCreditoAdel = ({
                 <Input
                     label={
                         infoCredito.estado_producto
-                        ? "Nota del credito"
-                        : "Nota del adelanto"
+                        ? "Descripcion del credito"
+                        : "Descripcion del adelanto"
                     }
                     type="text"
                     name="observaciones"

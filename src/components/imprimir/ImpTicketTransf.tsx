@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import { BiCheckbox } from "react-icons/bi";
 import { useAuth } from "../../auth/useAuth";
 import { ahora, fecha } from "../../resources/func/fechas";
+import { sumaArrayObj } from "../../resources/func/sumaArrayObj";
 
 interface impTicketTransf {
     setImprimir:Function;
@@ -16,6 +17,9 @@ export const ImpTicketTransf = ({ setImprimir, setModal, transferencia, listaPro
 
     const imprimir = useRef<any>(null);
     const auth = useAuth();
+
+    const totalProd:number = sumaArrayObj(listaProductos, "cantidad");
+    
 
     useEffect(() => {
         handlerPrint();
@@ -120,7 +124,7 @@ export const ImpTicketTransf = ({ setImprimir, setModal, transferencia, listaPro
                     <tbody>
                         {
                             listaProductos.map((e:any, index:number) => {
-
+                                console.log(e);
                                 const producto:string = 
                                     e.productoNombre + " - " + 
                                     e.marca + " - " + 
@@ -142,7 +146,7 @@ export const ImpTicketTransf = ({ setImprimir, setModal, transferencia, listaPro
                 <div>
                     <div style={totalprods}>
                         <span>Cantidad total:</span>
-                        <span>{ 1 }</span>
+                        <span>{ totalProd }</span>
                     </div>
                 </div>
 

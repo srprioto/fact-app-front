@@ -108,7 +108,7 @@ export const ModalVerComprobante = ({
 
     return (
         <Modal
-            title="Detalles del comprobante"
+            titulo="Detalles del comprobante"
             modal={modal}
             setModal={setModal}
             border="border-primary"

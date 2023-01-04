@@ -86,6 +86,7 @@ export const Cobrar = ({ idLocal, nombreLocal, user }:cobrar) => {
                                 localId={idLocal}
                             />
                             <button
+                                title="Actualiza la lista de ventas"
                                 className="btn2 btn2-success pr-0"
                                 onClick={() => handlerRefresh()}
                             >

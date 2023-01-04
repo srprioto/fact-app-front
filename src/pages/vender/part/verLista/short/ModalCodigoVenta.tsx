@@ -18,7 +18,6 @@ export const ModalCodigoVenta = ({ modal, setModal, ventaRes, setShowWindow }:mo
 
     return (
         <Modal
-            // title="Pedido de venta realizado correctamente"
             modal={modal}
             // setModal={setModal}
             width={30}

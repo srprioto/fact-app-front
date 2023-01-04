@@ -105,6 +105,7 @@ export const TabsVenta = ({
             </button>
 
             <button 
+                title="Permite convertir la venta en un crédito o recibir un pago como adelanto por la reserva de productos"
                 className={
                     "btn2 btn2-warning " + 
                     (!switchChangeFact ? ( tabbComprob === 4 ? "" : "btn2-disable " ) : "") +

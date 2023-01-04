@@ -9,7 +9,7 @@ export const ModalCorreo = ({ modal, setModal, venta, registroFinal, loading }:a
     
     return (
         <Modal
-            title="Ingresa e-mail destino"
+            titulo="Ingresa e-mail destino"
             modal={modal}
             setModal={setModal}
             width={40}

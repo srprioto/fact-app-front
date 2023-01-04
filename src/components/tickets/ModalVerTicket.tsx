@@ -69,7 +69,7 @@ export const ModalVerTicket = ({ modal, setModal, ticketId, getTickets }:modalVe
         <Modal
             modal={modal}
             setModal={setModal}
-            title={loading ? "..." : ticket.titulo}
+            titulo={loading ? "..." : ticket.titulo}
             width={50}
             btnClose={getTickets}
             acciones={acciones().length > 0 ? acciones() : null}
