@@ -9,9 +9,6 @@ export const Page404 = () => {
                     <Link to="/dashboard"><h3>ADDIDSPORT</h3></Link>
                     <h1>404</h1>
                     <p>Algo salio mal!</p>
-                    {/* <button onClick={() => navigate(-1)} className="btn-show red-text center">
-                        <BiReply /> Regresar
-                    </button> */}
                     <Link to="/dashboard" className="btn-show red-text center"><BiReply /> Regresar</Link>
                 </div>
             </div>
