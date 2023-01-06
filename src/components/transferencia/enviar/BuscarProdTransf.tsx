@@ -3,6 +3,7 @@ import { LOCAL_STOCK_SEARCH } from "../../../resources/routes";
 import { Loading } from "../../loads/Loading";
 import { SearchWrap } from "../../search/SearchWrap";
 import { TextoRelleno } from "../../TextoRelleno";
+import { ToolTip } from "../../tooltip/ToolTip";
 
 export const BuscarProdTransf = ({ 
     idLocal, 
@@ -62,7 +63,7 @@ export const BuscarProdTransf = ({
                                     <tr>
                                         {/* <th>Codigo</th> */}
                                         <th>Producto</th>
-                                        <th>Cantidad</th>
+                                        <th id="txt-cant-stock">Cantidad</th>
                                     </tr>
                                 </thead>
                             
@@ -109,6 +110,12 @@ export const BuscarProdTransf = ({
                                     }
                                 </tbody>
                             </table>
+                            
+                            <ToolTip
+                                anchor="txt-cant-stock"
+                                descripcion="Cantidad total de productos en stock"
+                            /> 
+
                         </div>
                     ) : <div className="fill-txt-buscar-prod"><TextoRelleno texto="Busca un producto" /></div>
                 ) : <div className="fill-txt-buscar-prod"><Loading /></div>

@@ -8,6 +8,7 @@ import { get, getOne } from "../../../resources/fetch";
 import { VENTAS, VENTAS_PEDIDOS, VENTAS_SEARCH_LOCAL } from "../../../resources/routes";
 import { BiRefresh } from "react-icons/bi";
 import { TextoRelleno } from "../../../components/TextoRelleno";
+import { ToolTip } from "../../../components/tooltip/ToolTip";
 
 interface cobrar{
     idLocal:string;
@@ -86,12 +87,16 @@ export const Cobrar = ({ idLocal, nombreLocal, user }:cobrar) => {
                                 localId={idLocal}
                             />
                             <button
-                                title="Actualiza la lista de ventas"
+                                id="btn-actualizar-pedidos"
                                 className="btn2 btn2-success pr-0"
                                 onClick={() => handlerRefresh()}
                             >
                                 <BiRefresh />
                             </button>
+                            <ToolTip
+                                anchor="btn-actualizar-pedidos"
+                                descripcion="Actualiza la lista de ventas"
+                            /> 
                         </div>
                     </div>
                     {

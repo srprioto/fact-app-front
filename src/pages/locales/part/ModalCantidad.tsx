@@ -65,7 +65,11 @@ export const ModalCantidad = ({ modal, setModal, localStock, getData, setSearchS
     }
 
     return (
-        <Modal titulo="Cambiar cantidad de unidades" modal={modal}>
+        <Modal 
+            titulo="Cambiar cantidad de unidades" 
+            modal={modal}
+            setModal={setModal}
+        >
             <div className="grid-1 gap">
                 <div className="center grid-1 gap">
 
@@ -116,7 +120,7 @@ export const ModalCantidad = ({ modal, setModal, localStock, getData, setSearchS
 
                 </div>
 
-                <div className="grid-4 gap mt-15">
+                <div className="grid-3 gap mt-15">
                     <div />
                     {
                         loading
@@ -140,10 +144,10 @@ export const ModalCantidad = ({ modal, setModal, localStock, getData, setSearchS
                             )
                         )
                     }
-                    <button onClick={ handerModal } className="btn btn-warning" >
+                    {/* <button onClick={ handerModal } className="btn btn-warning" >
                         <BiExit />
                         Salir
-                    </button>
+                    </button> */}
                     <div />
                 </div>
             </div>

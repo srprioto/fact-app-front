@@ -2,6 +2,7 @@ import { Form, Formik } from "formik";
 import { useEffect, useState } from "react";
 import { BiCaretRight, BiX } from "react-icons/bi";
 import { BtnOnOff2 } from "../../../../components/btns/BtnOnOff2";
+import { ToolTip } from "../../../../components/tooltip/ToolTip";
 import { tipoVenta } from "../../../../resources/dtos/VentasDto";
 import { copy } from "../../../../resources/func/deepCopy";
 import { ValidClienteCredito } from "../../../../resources/validations/Clientes";
@@ -160,10 +161,13 @@ export const CreditoAdelanto = ({
                         <div className="wrap-confirmar-venta mb-10 mt-25 bt bt-neutro">
                             <div className="grid-3 gap mt-25">
                                 <BtnOnOff2
-                                    titleDisable="Los adelantos para reserva de producto requieren un monto mínimo"
                                     label="Confirmar venta"
                                     estado={validarVenta()}
                                     icon={<BiCaretRight />}
+                                    tooltipDisable={{
+                                        anchor: "btn-conf-venta-cob",
+                                        descripcion: "Los adelantos para reserva de producto requieren un monto mínimo",
+                                    }}
                                 >
                                     <button
                                         className="btn btn-success"
@@ -172,11 +176,15 @@ export const CreditoAdelanto = ({
                                 </BtnOnOff2>
                                 <div></div>
                                 <button
-                                    title="Inhabilita la venta actual"
+                                    id="btn-rechazar-venta"
                                     className="btn btn-danger"
                                     type="button"
                                     onClick={() => setModalRechazVenta(!modalRechazVenta)}
                                 ><BiX /> Rechazar venta</button>
+                                <ToolTip
+                                    anchor="btn-rechazar-venta"
+                                    descripcion="Rechaza la venta actual"
+                                /> 
                             </div>
                         </div>
 

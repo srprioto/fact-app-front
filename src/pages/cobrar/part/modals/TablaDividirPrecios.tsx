@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { BiChevronDown, BiChevronUp } from "react-icons/bi";
+import { ToolTip } from "../../../../components/tooltip/ToolTip";
 
 export const TablaDividirPrecios = ({ limpiarLista }:any) => {
 
@@ -11,6 +12,7 @@ export const TablaDividirPrecios = ({ limpiarLista }:any) => {
             <div>
                 <div className="middle">
                     <button
+                        id="btn-show-pag-div"
                         onClick={() => setShowLista(!showLista)}
                         className="btn-show red-text center"
                     >
@@ -20,6 +22,10 @@ export const TablaDividirPrecios = ({ limpiarLista }:any) => {
                             : <>Mostrar pagos divididos <BiChevronDown /></>
                         }
                     </button>
+                    <ToolTip
+                        anchor="btn-show-pag-div"
+                        descripcion="Muestra el registro de los pagos divididos de esta venta"
+                    /> 
                 </div>
                 {
                     showLista

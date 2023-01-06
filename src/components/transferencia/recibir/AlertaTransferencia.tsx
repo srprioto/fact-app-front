@@ -5,6 +5,7 @@ import { ModalTransferencia } from "./ModalTransferencia"
 
 import { get } from "../../../resources/fetch"
 import { TRANSACCIONES } from "../../../resources/routes"
+import { ToolTip } from "../../tooltip/ToolTip"
 
 interface alertaTransferencia {
     idLocal:number;
@@ -47,11 +48,19 @@ export const AlertaTransferencia = ({ idLocal, actualizarDatos }:alertaTransfere
             {
                 dataTransf.length <= 0
                 ? (
-                    <button className="btn btn-info" onClick={() => handlerModalData()}>
+                    <button 
+                        id="btn-ingreso-prod"
+                        className="btn btn-info" 
+                        onClick={() => handlerModalData()}
+                    >
                         <BiMessageRounded />
                     </button>
                 ) : (
-                    <button className="btn btn-success relative" onClick={() => handlerModalData()}>
+                    <button 
+                        id="btn-ingreso-prod"
+                        className="btn btn-success relative" 
+                        onClick={() => handlerModalData()}
+                    >
                         <BiMessageRoundedAdd />
                         <div className="cantidad-envios"><span>{ dataTransf.length <= 99 ? dataTransf.length : 99 }</span></div>
                     </button>
@@ -65,6 +74,10 @@ export const AlertaTransferencia = ({ idLocal, actualizarDatos }:alertaTransfere
                 getTransacciones={getTransaccionesLocal}
                 actualizarDatos={actualizarDatos}
             />
+            <ToolTip
+                anchor="btn-ingreso-prod"
+                descripcion="Ingreso de productos"
+            /> 
 
         </>
     )

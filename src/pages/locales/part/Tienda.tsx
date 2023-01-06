@@ -16,6 +16,7 @@ import { AlertaTransferencia } from '../../../components/transferencia/recibir/A
 import { NoRegistros } from '../../../components/NoRegistros';
 import { ModalWrap } from '../../../components/modals/ModalWrap';
 import { SearchWrap } from '../../../components/search/SearchWrap';
+import { ToolTip } from '../../../components/tooltip/ToolTip';
 
 interface tienda{
     idLocal:string;
@@ -145,6 +146,7 @@ export const Tienda = ({ idLocal, nombreLocal, user }:tienda) => {
                                 ? <div></div>
                                 : (
                                     <Link 
+                                        id="btn-ir-vender"
                                         to={`/tiendas/vender/${idLocal}/${nombreLocal}`} 
                                         className="btn btn-success"
                                     >
@@ -158,7 +160,11 @@ export const Tienda = ({ idLocal, nombreLocal, user }:tienda) => {
 
                         <div className="grid-3 gap">
                             <div></div>
-                            <button className="btn btn-info" onClick={handlerTransaccion}>
+                            <button 
+                                id="btn-transferencias"
+                                className="btn btn-info" 
+                                onClick={handlerTransaccion}
+                            >
                                 <BiTransfer />
                             </button>
                             <AlertaTransferencia idLocal={Number(idLocal)} actualizarDatos={getData} />
@@ -166,6 +172,15 @@ export const Tienda = ({ idLocal, nombreLocal, user }:tienda) => {
 
                     </div>                    
                 </div>
+
+                <ToolTip
+                    anchor="btn-ir-vender"
+                    descripcion="Módulo de creación de ventas"
+                />
+                <ToolTip
+                    anchor="btn-transferencias"
+                    descripcion="Transferencia de productos"
+                /> 
 
             </div>
 
@@ -242,13 +257,15 @@ export const Tienda = ({ idLocal, nombreLocal, user }:tienda) => {
                 setSearchState={setSearchState}
             /> */}
 
-            <ModalCantidad 
-                modal={modalCant}
-                setModal={setModalCant}
-                localStock={localStock}
-                getData={getData}
-                setSearchState={setSearchState}
-            />
+            <ModalWrap modal={modalCant} >
+                <ModalCantidad 
+                    modal={modalCant}
+                    setModal={setModalCant}
+                    localStock={localStock}
+                    getData={getData}
+                    setSearchState={setSearchState}
+                />
+            </ModalWrap>
 
             <ModalWrap modal={modalTransferencia}>
                 <ModalTransferencia

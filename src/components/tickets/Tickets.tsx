@@ -3,6 +3,7 @@ import { BiBell } from "react-icons/bi"
 import { get } from "../../resources/fetch";
 import { TICKETS } from "../../resources/routes";
 import { ModalWrap } from "../modals/ModalWrap";
+import { ToolTip } from "../tooltip/ToolTip";
 import { ModalVerTicket } from "./ModalVerTicket";
 import { Notificaciones } from "./Notificaciones";
 
@@ -57,7 +58,7 @@ export const Tickets = ({ idLocal, idUser }:tickets) => {
             }
             <div className="box-ticket">
                 <div
-                    title="Notificaciones"
+                    id="tickets"
                     className="pointer btn-shot-tickets"
                     onClick={() => setShowNotificaciones(!showNotificaciones)}
                 >
@@ -68,6 +69,10 @@ export const Tickets = ({ idLocal, idUser }:tickets) => {
                             <span>{ ticketsNoVistos }</span>
                         </div>
                     }
+                    <ToolTip
+                        anchor="tickets"
+                        descripcion="Notificaciones"
+                    /> 
                 </div>
                 {
                     showNotificaciones

@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { BiBookBookmark, BiCartAlt, BiSpreadsheet, BiTask } from "react-icons/bi"
+import { ToolTip } from "../../../../components/tooltip/ToolTip";
 import { clienteInfo } from "../../../../resources/dtos/Cliente";
 // import { clienteInfo } from "../../../../resources/dtos/Cliente";
 
@@ -105,7 +106,7 @@ export const TabsVenta = ({
             </button>
 
             <button 
-                title="Permite convertir la venta en un crédito o recibir un pago como adelanto por la reserva de productos"
+                id="btn-credit-adel"
                 className={
                     "btn2 btn2-warning " + 
                     (!switchChangeFact ? ( tabbComprob === 4 ? "" : "btn2-disable " ) : "") +
@@ -114,6 +115,10 @@ export const TabsVenta = ({
                 onClick={() => {switchChangeFact && setTabbs(4)}}
             ><BiBookBookmark /> Credito/Adelanto
             </button>
+            <ToolTip
+                anchor="btn-credit-adel"
+                descripcion="Permite convertir la venta en un crédito o recibir un<br/>pago como adelanto por la reserva de productos"
+            /> 
         </div>
     )
 }

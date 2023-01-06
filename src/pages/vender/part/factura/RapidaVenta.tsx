@@ -2,6 +2,7 @@ import { BiArrowBack, BiCaretRight } from "react-icons/bi";
 import { useAuth } from "../../../../auth/useAuth";
 import { BtnOnOff2 } from "../../../../components/btns/BtnOnOff2";
 import { LoadSwitchBtn2 } from "../../../../components/btns/LoadSwitchBtn2";
+import { ToolTip } from "../../../../components/tooltip/ToolTip";
 import { Roles } from "../../../../resources/dtos/RolesDto";
 import { tipoVenta } from "../../../../resources/dtos/VentasDto";
 
@@ -32,11 +33,15 @@ export const RapidaVenta = ({ loadVenta, setShowWindow, verificarCaja, handlerVe
                     : "acciones-venta"
                 )
             }>
-                <div className="grid-6">
-                    <button  title="Ir un paso atrás" className="btn btn-primary" onClick={() => setShowWindow(1)}>
+                <div className="grid-6" id="btn-back-page">
+                    <button className="btn btn-primary" onClick={() => setShowWindow(1)}>
                         {/* <BiRightArrowAlt /> */}
                         <BiArrowBack />
                     </button>
+                    <ToolTip
+                        anchor="btn-back-page"
+                        descripcion="Ir un paso atrás"
+                    /> 
                 </div>
                 
                 <BtnOnOff2

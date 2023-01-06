@@ -7,6 +7,7 @@ import { Input } from "../../forms/Input";
 import { InputDisable } from "../../forms/InputDisable";
 import { Select } from "../../forms/Select";
 import { ModalWrap } from "../../modals/ModalWrap";
+import { ToolTip } from "../../tooltip/ToolTip";
 import { ModalConfirmImp } from "./ModalConfirmImp";
 
 interface confirmarTransf {
@@ -112,7 +113,7 @@ export const ConfirmarTransf = ({
                             handler={() => confirmarEnvio()}
                         />
                     ) : (
-                        <button className="btn btn-disable">
+                        <button id="btn-conf-env" className="btn btn-disable">
                             <BiCheck />
                             Confirmar envio
                         </button>
@@ -129,7 +130,7 @@ export const ConfirmarTransf = ({
                             icon={<BiBookmarkAltMinus />}
                         />
                     ) : (
-                        <button className="btn btn-disable">
+                        <button id="btn-conf-imp" className="btn btn-disable">
                             <BiBookmarkAltMinus />
                             Confirmar e Imp.
                         </button>
@@ -142,6 +143,15 @@ export const ConfirmarTransf = ({
                 <div></div>
 
             </div>
+            
+            <ToolTip
+                anchor="btn-conf-env"
+                descripcion="Requiere lista de productos para transferir, local de destino y nota de envió"
+            /> 
+            <ToolTip
+                anchor="btn-conf-imp"
+                descripcion="Requiere lista de productos para transferir, local de destino y nota de envió"
+            /> 
 
             <ModalWrap modal={ModalConfImprimir}>
                 <ModalConfirmImp

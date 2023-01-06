@@ -1,4 +1,5 @@
 import { BiChevronDown, BiChevronUp } from "react-icons/bi"
+import { ToolTip } from "../../../../components/tooltip/ToolTip";
 
 export const MasAccionesCobrar = ({ 
     venta, setListaPrecios, showFormasPago, setShowFormasPago, 
@@ -28,7 +29,7 @@ export const MasAccionesCobrar = ({
             <div className="grid-3 gap">
                 <div></div>
                 <button
-                    title="Permite dividir pagos y añadir otras formas de pago"
+                    id="btn-dividir-pagos"
                     onClick={() => dividirPreciosProd()}
                     className="btn-show red-text center"
                 >
@@ -39,8 +40,12 @@ export const MasAccionesCobrar = ({
                         : <BiChevronDown />
                     }
                 </button>
-                
+                <ToolTip
+                    anchor="btn-dividir-pagos"
+                    descripcion="Permite dividir pagos y añadir otras formas de pago"
+                /> 
             </div>
+
 
             {/* <div className="grid-1 gap">
                 <button

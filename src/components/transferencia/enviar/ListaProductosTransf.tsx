@@ -2,6 +2,7 @@ import { BiX } from "react-icons/bi"
 import { noDecimal } from "../../../resources/func/noDecimal";
 import { Input } from "../../forms/Input";
 import { TextoRelleno } from "../../TextoRelleno";
+import { ToolTip } from "../../tooltip/ToolTip";
 
 export const ListaProductosTransf = ({ listaProductos, setListaProductos, repetidos, setRepetidos, data }:any) => {
 
@@ -48,7 +49,7 @@ export const ListaProductosTransf = ({ listaProductos, setListaProductos, repeti
                             <thead>
                                 <tr>
                                     <th>Producto</th>
-                                    <th>Cantidad</th>
+                                    <th id="txt-cant-envio">Cantidad</th>
                                     <th className="transparent inlineblock">...</th>
                                 </tr>
                             </thead>
@@ -86,6 +87,10 @@ export const ListaProductosTransf = ({ listaProductos, setListaProductos, repeti
                                 }
                             </tbody>
                         </table>
+                        <ToolTip
+                            anchor="txt-cant-envio"
+                            descripcion="Cantidad de productos para transferir"
+                        /> 
                     </div>
                 ) : <TextoRelleno texto="Añade un elemento" />
             }

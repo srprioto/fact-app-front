@@ -7,6 +7,7 @@ import { Input } from "../../forms/Input";
 import { LoadSwitchBtn } from "../../btns/LoadSwitchBtn";
 import { useAuth } from "../../../auth/useAuth";
 import { fecha } from "../../../resources/func/fechas";
+import { ToolTip } from "../../tooltip/ToolTip";
 // import { LoadSwitchBtn2 } from "../../btns/LoadSwitchBtn2";
 
 export const TransferenciaDetalles = ({ data, getTransacciones, setTransf }:any) => {
@@ -107,7 +108,7 @@ export const TransferenciaDetalles = ({ data, getTransacciones, setTransf }:any)
                     <thead>
                         <tr>
                             <th></th>
-                            <th>Cantidad</th>
+                            <th id="txt-cant-entrantes">Cantidad</th>
                             <th>Producto</th>
                         </tr>
                     </thead>
@@ -137,12 +138,18 @@ export const TransferenciaDetalles = ({ data, getTransacciones, setTransf }:any)
                         }
                     </tbody>
                 </table>
+
+                <ToolTip
+                    anchor="txt-cant-entrantes"
+                    descripcion="Cantidad de productos entrantes"
+                /> 
+
             </div>
 
             <div className="transf-detalles-footer w100">
 
                 <Input
-                    label="Observaciones"
+                    label="Nota de observacion"
                     type="text"
                     name="observaciones"
                     value={transferencia.observaciones}
@@ -151,8 +158,9 @@ export const TransferenciaDetalles = ({ data, getTransacciones, setTransf }:any)
 
                 <div className="grid-2 gap mb-25 mt-25">
                     
+                    
                     <LoadSwitchBtn
-                        label="Confirmar transaccion"
+                        label="Confirmar ingreso"
                         handler={() => validarEnvio(transferencia, checked)}
                         loading={loadPost}
                         className={
@@ -160,7 +168,16 @@ export const TransferenciaDetalles = ({ data, getTransacciones, setTransf }:any)
                             ? "success" 
                             : "danger"
                         }
+                        tooltip={{
+                            anchor: "btn-conf-ing-prod",
+                            descripcion: `
+                                ${handlerEstadoGeneral() === "listo" 
+                                ? "Confirmar el ingreso de productos" 
+                                : "Confirmar el ingreso de productos y emite una observación.<br/>Se recomienda añadir una nota con una descripción."
+                            }`,
+                        }}
                     />
+                    
 
                     {/* {
                         transferencia.observaciones !== ""

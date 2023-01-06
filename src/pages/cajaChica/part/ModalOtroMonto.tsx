@@ -24,6 +24,8 @@ export const ModalOtroMonto = ({ modal, setModal, getDataOne, idCaja, usuarioId 
     const [loading, setLoading] = useState<boolean>(false);
     const [cajaDetalles, setCajaDetalles] = useState<any>(cajaDet);
 
+    const i_e:boolean = cajaDetalles.tipo_movimiento === "Ingresos egresos caja";
+
 
     useEffect(() => {
         setCajaDetalles({
@@ -73,7 +75,7 @@ export const ModalOtroMonto = ({ modal, setModal, getDataOne, idCaja, usuarioId 
             return false
         }
     }
-
+    
     
     return (
         <Modal
@@ -111,7 +113,7 @@ export const ModalOtroMonto = ({ modal, setModal, getDataOne, idCaja, usuarioId 
                                 ? "Realizando ingreso"
                                 : cajaDetalles.monto_movimiento < 0
                                 ? "Realizando retiro"
-                                : "Ingreso o retiro *"                            
+                                : "Realizar ingreso o retiro *"                            
                             }
                             type="number"
                             name="monto_movimiento"
@@ -132,6 +134,17 @@ export const ModalOtroMonto = ({ modal, setModal, getDataOne, idCaja, usuarioId 
                         value={cajaDetalles.tipo_movimiento}
                         onChange={handlerOnChange}
                         defaultValue={tipoMovimiento.ingresosEgresosCaja}
+                        tooltip={{
+                            anchor: "txt-tipo-movimiento",
+                            descripcion:`
+                                Permite establecer el tipo de movimiento que se realizará.<br/>
+                                ${
+                                    i_e
+                                    ? "Gastos internos: Movimientos realizados por el personal para cubrir gastos. En esta opción solo se pueden realizar retiros."
+                                    : "Otros movimientos: Movimientos extraordinarios de ingreso y egresos."
+                                }
+                            `,
+                        }}
                     >
                         <option value={tipoMovimiento.ingresosEgresosCaja}>Gastos internos</option>
                         <option value={tipoMovimiento.otrosMovimientos}>Otros movimientos</option>
@@ -146,11 +159,15 @@ export const ModalOtroMonto = ({ modal, setModal, getDataOne, idCaja, usuarioId 
                     />
                 </div>
 
-                <div className="grid-4 gap mb-10">
+                <div className="grid-3 gap mb-10">
                     <div></div>
                     <BtnOnOff2
                         label="Confirmar"
                         estado={validarCajaDetalles()}
+                        tooltipDisable={{
+                            anchor: "btn-conf-otros-montos",
+                            descripcion: `Requiere añadir un monto de ${i_e ? "retiro" : "ingreso o retiro"} y una nota de movimiento.`,
+                        }}
                     >
                         <LoadSwitchBtn2
                             loading={loading}
@@ -160,10 +177,6 @@ export const ModalOtroMonto = ({ modal, setModal, getDataOne, idCaja, usuarioId 
                             <BiCheck /> Confirmar
                         </LoadSwitchBtn2>    
                     </BtnOnOff2>
-                    
-                    <button onClick={() => setModal(false)} className="btn btn-warning">
-                        <BiReply /> Regresar
-                    </button>
                 </div>
 
             </div>

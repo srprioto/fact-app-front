@@ -2,6 +2,7 @@
 import { useEffect } from "react";
 import { BiCaretRight, BiX } from "react-icons/bi";
 import { BtnOnOff2 } from "../../../../components/btns/BtnOnOff2";
+import { ToolTip } from "../../../../components/tooltip/ToolTip";
 // import { ConfirmarVenta } from "./ConfirmarVenta"
 import { tipoVenta } from "../../../../resources/dtos/VentasDto";
 
@@ -42,10 +43,14 @@ export const RapidaCobrar = ({
                 </BtnOnOff2>
                 <div></div>
                 <button 
-                    title="Inhabilita la venta actual"
+                    id="btn-rechaz-vent-cob"
                     className="btn btn-danger"
                     onClick={() => setModalRechazVenta(!modalRechazVenta)}
                 ><BiX /> Rechazar venta</button>
+                <ToolTip
+                    anchor="btn-rechaz-vent-cob"
+                    descripcion="Rechaza la venta actual"
+                /> 
             </div>
 
         </div>

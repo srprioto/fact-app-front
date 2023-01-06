@@ -1,5 +1,6 @@
 import { Checkbox3 } from "../../../../components/forms/Checkbox3"
 import { Input } from "../../../../components/forms/Input"
+import { ToolTip } from "../../../../components/tooltip/ToolTip";
 import { moneda } from "../../../../resources/func/moneda"
 
 interface pagosCreditoAdel {
@@ -70,7 +71,7 @@ export const PagosCreditoAdel = ({
             <div className="grid-3 gap">
                 <div></div>
                 <div 
-                    title="Monto restante para que la venta se cancele"
+                    id="txt-pago-pendi"
                     className="box-descripcion center"
                 >
                     <p className="center">Pago pendiente:</p>
@@ -84,17 +85,16 @@ export const PagosCreditoAdel = ({
                             : "success-i"
                         )
                     }>S/. { moneda(totalRestante()) }</h4>
+                    <ToolTip
+                        anchor="txt-pago-pendi"
+                        descripcion="Monto restante para que la venta se cancele"
+                    /> 
                 </div>
             </div>
 
             <div className="grid-3 gap">
                 
                 <Checkbox3
-                    title="
-                        Alterna el tipo de operación.
-                        Si el producto se entrega correctamente, la operación es un crédito.
-                        Si el producto no se entrega, la operación sera un adelanto para reserva de producto.
-                    "
                     className={
                         infoCredito.estado_producto
                         ? "info"
@@ -108,10 +108,13 @@ export const PagosCreditoAdel = ({
                     name="estado_producto"
                     checked={infoCredito.estado_producto}
                     handlerCheck={handlerStateCheck}
+                    tooltip={{
+                        anchor: "btn-conf-venta",
+                        descripcion: "Alterna el tipo de operación.<br/>Si el producto es entregado correctamente, la operación es un crédito.<br/>Si el producto no es entregado, la operación sera un adelanto para reserva de producto."
+                    }}
                 />
                 
                 <Input
-                    title="Monto pagado por el cliente como parte del crédito o adelanto"
                     label="Cantidad pagada"
                     type="number"
                     name="cantidad_pagada"
@@ -124,6 +127,10 @@ export const PagosCreditoAdel = ({
                     }
                     moneda
                     noMenos
+                    tooltip={{
+                        anchor: "btn-cant-pagad",
+                        descripcion: "Monto pagado por el cliente como parte del crédito o adelanto",
+                    }}
                 />
 
                 <Input

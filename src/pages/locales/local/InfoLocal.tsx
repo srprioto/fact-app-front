@@ -6,6 +6,7 @@ import { BtnOnOff2 } from "../../../components/btns/BtnOnOff2";
 import { LoadSwitchBtn2 } from "../../../components/btns/LoadSwitchBtn2";
 import { ModalWrap } from "../../../components/modals/ModalWrap";
 import { TextoRelleno } from "../../../components/TextoRelleno"
+import { ToolTip } from "../../../components/tooltip/ToolTip";
 import { getOne } from "../../../resources/fetch";
 import { CAJA_VERIFICAR } from "../../../resources/routes";
 import { GananciaSemanaLocal } from "../../reportes/ventas/reporteGeneral/GananciaSemanaLocal";
@@ -102,12 +103,16 @@ export const InfoLocal = ({ local, handlerSelectLocal }:infoLocal) => {
                                         icon={<BiCartAlt />}
                                     >
                                         <Link 
-                                            title="Módulo de creación de la venta"
+                                            id="btn-vender"
                                             to={`/tiendas/vender/${local.id}/${local.nombre}`} 
                                             className="btn btn-success"
                                         >
                                             <BiCartAlt /> Vender
                                         </Link>
+                                        <ToolTip
+                                            anchor="btn-vender"
+                                            descripcion="Módulo de creación de ventas"
+                                        /> 
                                     </BtnOnOff2>
 
                                     <BtnOnOff2
@@ -116,17 +121,20 @@ export const InfoLocal = ({ local, handlerSelectLocal }:infoLocal) => {
                                         icon={<BiCoin />}
                                     >
                                         <Link
-                                            title="Módulo de cobranzas"
+                                            id="btn-cobrar"
                                             to={`/tiendas/caja/${local.id}/${local.nombre}`} 
                                             className="btn btn-warning"
                                         >
-                                            <BiCoin />
-                                            Cobrar
+                                            <BiCoin />Cobrar
                                         </Link>
+                                        <ToolTip
+                                            anchor="btn-cobrar"
+                                            descripcion="Módulo de cobranzas"
+                                        /> 
                                     </BtnOnOff2>
 
                                     <div 
-                                        title="Módulo de caja chica e información del local"
+                                        id="btn-caja-chica"
                                         className="w150px"
                                     >
                                         <LoadSwitchBtn2
@@ -136,15 +144,23 @@ export const InfoLocal = ({ local, handlerSelectLocal }:infoLocal) => {
                                         >
                                             <BiDollarCircle /> Caja
                                         </LoadSwitchBtn2>
+                                        <ToolTip
+                                            anchor="btn-caja-chica"
+                                            descripcion="Módulo de caja chica e información del local"
+                                        />
                                     </div>
                                     {/* stateCaja */}
 
                                     <Link
-                                        title="Módulo de stock del local"
+                                        id="btn-stock"
                                         to={`/tiendas/local/${local.id}/${local.nombre}`}
                                         className="btn btn-primary"
                                     >
                                         <BiListOl /> Stock
+                                        <ToolTip
+                                            anchor="btn-stock"
+                                            descripcion="Módulo de stock del local"
+                                        />
                                     </Link>
 
                                 </div>

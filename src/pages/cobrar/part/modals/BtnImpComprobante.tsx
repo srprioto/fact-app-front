@@ -19,6 +19,10 @@ export const BtnImpComprobante = ({ loading, registroFinal, venta }:any) => {
                 loading={loading}
                 className="btn btn-success"
                 handler={() => handlerImprimir()}
+                tooltip={{
+                    anchor: "btn-confi-venta-solo2",
+                    descripcion: "Confirma la venta e imprimir comprobante",
+                }}
             ><BiBookmarkAltMinus /> Imprimir
             </LoadSwitchBtn2>
 

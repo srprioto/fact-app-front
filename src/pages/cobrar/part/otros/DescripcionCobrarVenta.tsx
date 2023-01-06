@@ -1,4 +1,5 @@
 import { Select2 } from "../../../../components/forms/Select2";
+import { ToolTip } from "../../../../components/tooltip/ToolTip";
 import { moneda } from "../../../../resources/func/moneda"
 
 interface descripcionCobrarVenta {
@@ -103,8 +104,8 @@ export const DescripcionCobrarVenta = ({
                     : "success"
                 }>S/. {moneda(venta.descuento_total)}</h3>
             </div>
-
-            <span className="center">
+            
+            <span className="center" id="txt-total-con-tarjeta"> {/* pago total */}
                 <p className={
                     tabbs !== 4
                     ? classVerTarjet("pClass")
@@ -114,21 +115,27 @@ export const DescripcionCobrarVenta = ({
                     tabbs !== 4
                     ? (
                         <h1 className={classVerTarjet("h1Class")}>
-                            S/. { moneda(Number(venta.total) + comisionTarjeta) }
+                            S/.{ moneda(Number(venta.total) + comisionTarjeta) }
                         </h1>
                     ) : (
                         <h3 className="center">
-                            S/. { moneda(Number(venta.total)) }
+                            S/.{ moneda(Number(venta.total)) }
                         </h3>
                     )
+                }
+                {
+                    verificarTarjeta()
+                    && <ToolTip
+                        anchor="txt-total-con-tarjeta"
+                        descripcion="Añade un 5% de comisión a todos los pagos realizados con tarjeta"
+                    /> 
                 }
             </span>
 
             {
+                // monto pagado por credito o adelanto
                 tabbs === 4
-                && <span
-                    title="Monto pagado del credito o adelanto"
-                >
+                && <span id="txt-monto-cred-adel">
                     <p className={
                         verificarTarjeta()
                         ? "center mb-10 warning"
@@ -139,8 +146,20 @@ export const DescripcionCobrarVenta = ({
                         : "Cantidad pagada"
                     }</p>
                     <h1 className="center success mb-10">
-                        S/. { moneda(Number(venta.totalPagado) + comisionTarjeta) }
+                        S/. { 
+                            Number(venta.totalPagado) !== 0
+                            ? moneda(Number(venta.totalPagado) + comisionTarjeta) 
+                            : moneda(0)
+                        }
                     </h1>
+                    <ToolTip
+                        anchor="txt-monto-cred-adel"
+                        descripcion={
+                            "Monto pagado del credito o adelanto" +
+                            (verificarTarjeta() && "<br/>Añade un 5% de comisión a todos los pagos realizados con tarjeta")
+                        }
+                    /> 
+
                 </span> 
             }
 

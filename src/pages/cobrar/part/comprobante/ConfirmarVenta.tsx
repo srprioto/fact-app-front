@@ -1,5 +1,6 @@
 import { BiCaretRight, BiX } from "react-icons/bi"
 import { BtnOnOff2 } from "../../../../components/btns/BtnOnOff2";
+import { ToolTip } from "../../../../components/tooltip/ToolTip";
 
 interface confirmarVenta {
     // setModalConfVenta?:Function;
@@ -39,10 +40,13 @@ export const ConfirmarVenta = ({
         <div className="wrap-confirmar-venta mb-10 mt-30 bt bt-neutro">
             <div className="grid-3 gap mt-25">
                 <BtnOnOff2
-                    titleDisable="Requiere la información del cliente"
                     label="Confirmar venta"
                     estado={validarVenta()}
                     icon={<BiCaretRight />}
+                    tooltipDisable={{
+                        anchor: "btn-conf-venta-cob",
+                        descripcion: "Requiere la información del cliente",
+                    }}
                 >
                     <button
                         className="btn btn-success" 
@@ -52,11 +56,15 @@ export const ConfirmarVenta = ({
                 
                 <div></div>
                 <button
-                    title="Inhabilita la venta actual"
+                    id="btn-rechaz-venta-cob"
                     className="btn btn-danger"
                     type="button"
                     onClick={() => setModalRechazVenta(!modalRechazVenta)}
                 ><BiX /> Rechazar venta</button>
+                <ToolTip
+                    anchor="btn-rechaz-venta-cob"
+                    descripcion="Rechaza la venta actual"
+                /> 
             </div>
         </div>
     )

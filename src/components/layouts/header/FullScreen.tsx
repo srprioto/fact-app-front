@@ -1,4 +1,5 @@
 import { BiFullscreen } from "react-icons/bi";
+import { ToolTip } from "../../tooltip/ToolTip";
 
 export const FullScreen = () => {
 
@@ -14,11 +15,18 @@ export const FullScreen = () => {
 
     return (
         <div 
-            title="Permite intercambiar la pantalla del navegador normal a pantalla completa"
+            id="full-screen"
             className="pointer" 
             onClick={() => { fullScreenOn() }}
         >
             <BiFullscreen className="icon-header" />
+            <ToolTip 
+                anchor="full-screen" 
+                descripcion="
+                    Permite intercambiar la pantalla del<br/>
+                    navegador normal a pantalla completa
+                "
+            />
         </div>
     )
 }

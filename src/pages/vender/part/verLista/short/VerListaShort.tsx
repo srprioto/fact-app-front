@@ -4,6 +4,7 @@ import { LoadSwitchBtn2 } from "../../../../../components/btns/LoadSwitchBtn2";
 // import { Input } from "../../../../../components/forms/Input";
 import { ModalWrap } from "../../../../../components/modals/ModalWrap";
 import { TextoRelleno } from "../../../../../components/TextoRelleno";
+import { ToolTip } from "../../../../../components/tooltip/ToolTip";
 import { useCaja } from "../../../../../hooks/useContext/caja.ts/useCaja";
 import { clienteInfo } from "../../../../../resources/dtos/Cliente";
 import { tipoVenta } from "../../../../../resources/dtos/VentasDto";
@@ -127,7 +128,6 @@ export const VerListaShort = ({
                         <div className="grid-31 gap10 acciones-venta">
                         
                             <LoadSwitchBtn2
-                                title="Realizar venta"
                                 loading={loadVenta}
                                 className="btn btn-success"
                                 handler={() => verificarCaja(handlerVenta)}
@@ -136,12 +136,17 @@ export const VerListaShort = ({
                             </LoadSwitchBtn2>
                             
                             <button 
-                                title="Ir al siguiente paso"
+                                id="btn-next-page"
                                 className="btn btn-primary" 
                                 onClick={handlerShowWindow}
                             >
                                 <BiRightArrowAlt />
                             </button>
+                            <ToolTip
+                                anchor="btn-next-page"
+                                descripcion="Ir al siguiente paso"
+                            /> 
+
                         </div>
                     </div>
                 ) : <TextoRelleno texto="Sin productos" />

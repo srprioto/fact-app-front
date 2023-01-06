@@ -22,6 +22,7 @@ import { BtnImpComprobante } from "./BtnImpComprobante";
 import { tipoVenta } from "../../../../resources/dtos/VentasDto";
 import { TablaDividirPrecios } from "./TablaDividirPrecios";
 import { BtnImpCredito } from "./BtnImpCredito";
+import { ToolTip } from "../../../../components/tooltip/ToolTip";
 // import { useAuth } from "../../../../auth/useAuth";
 // import { Roles } from "../../../../resources/dtos/RolesDto";
 
@@ -236,10 +237,7 @@ export const ModalVentaConfirmar = ({
                         {
                             (!credito())
                             && <div
-                                title="
-                                    Permite hacer un recalculo porcentual del precio total, afectando al resto de la venta.
-                                    Esta acción también afectará al comprobante final para la Sunat y/o en su impresión.
-                                "
+                                id="txt-modif-precio"
                             >
                                 <p>Modif. porcentual (%):</p>
                                 <Input
@@ -252,6 +250,10 @@ export const ModalVentaConfirmar = ({
                                         ? "danger-i" : ""
                                     }
                                 />
+                                <ToolTip
+                                    anchor="txt-modif-precio"
+                                    descripcion="Permite hacer un recalculo porcentual del precio total, sin alterar el registro de la venta,<br/>pero afectando el comprobante final de la Sunat y/o en su impresión."
+                                /> 
                             </div>
                         }
 
@@ -284,6 +286,10 @@ export const ModalVentaConfirmar = ({
                                 loading={loading}
                                 className="btn btn-warning"
                                 handler={() => registroFinal("listo")}
+                                tooltip={{
+                                    anchor: "btn-confi-venta-solo",
+                                    descripcion: "Confirma la venta sin realizar la impresión del comprobante",
+                                }}
                             ><BiCaretRight /> Solo
                             </LoadSwitchBtn2>
 
@@ -303,6 +309,14 @@ export const ModalVentaConfirmar = ({
                             </LoadSwitchBtn2>  
                         </div> */}
                     </div>
+                    <ToolTip
+                        anchor=""
+                        descripcion=""
+                    /> 
+                    <ToolTip
+                        anchor=""
+                        descripcion=""
+                    /> 
                 </div>
             </div>
 

@@ -2,6 +2,7 @@ import { BiArrowBack, BiCaretRight } from "react-icons/bi"
 import { useAuth } from "../../../../auth/useAuth";
 import { BtnOnOff2 } from "../../../../components/btns/BtnOnOff2";
 import { LoadSwitchBtn2 } from "../../../../components/btns/LoadSwitchBtn2"
+import { ToolTip } from "../../../../components/tooltip/ToolTip";
 import { Roles } from "../../../../resources/dtos/RolesDto";
 
 interface rapidaVenta {
@@ -49,22 +50,28 @@ export const AccionesVenta = ({
                     : "acciones-venta"
                 )
             }>
-                <div className="grid-6">
+                <div className="grid-6" id="btn-back-page">
                     <button 
-                        title="Ir un paso atrás" 
                         className="btn btn-primary" 
                         type="button" 
                         onClick={() => setShowWindow(1)}
                     >
                         <BiArrowBack />
                     </button>
+                    <ToolTip
+                        anchor="btn-back-page"
+                        descripcion="Ir un paso atrás"
+                    /> 
                 </div>
                 
                 <BtnOnOff2
-                    titleDisable="Requiere la información del cliente"
                     label={labelBtn}
                     estado={verVender()}
                     icon={<BiCaretRight />}
+                    tooltipDisable={{
+                        anchor: "btn-conf-venta",
+                        descripcion: "Requiere la información del cliente",
+                    }}
                 >
                     <LoadSwitchBtn2
                         loading={loadVenta}

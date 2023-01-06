@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Checkbox2 } from "../../../../components/forms/Checkbox2";
 import { Input } from "../../../../components/forms/Input";
 import { RadioButton } from "../../../../components/forms/RadioButton"
+import { ToolTip } from "../../../../components/tooltip/ToolTip";
 import { moneda } from "../../../../resources/func/moneda";
 import { redondeo } from "../../../../resources/func/redondeo";
 
@@ -109,8 +110,6 @@ export const GestionPrecios = ({
                 <div className="grid-3 gap">
                     
                     <Input
-                        title="Incrementos o descuentos de
-                        la venta del producto actual"
                         label="Incremento/Descuento"
                         type="number"
                         name="descuento"
@@ -118,15 +117,13 @@ export const GestionPrecios = ({
                         onChange={handlerOnChange}
                         color={ventaDetalle.descuento < 0 ? "danger-i" : ""}
                         moneda
+                        tooltip={{
+                            anchor: "btn-inc-desc",
+                            descripcion: "Incrementos o descuentos de<br/>la venta del producto actual",
+                        }}
                     />
 
-                    <div
-                        title="
-                            Condiciona el descuento en la subventa.
-                            Si la opción esta activada, el descuento se realizara a cada unidad.
-                            Si la opción esta desactivada, el descuento se realizara a la totalidad de la subventa.
-                        "
-                    >
+                    <div id="btn-cond-incdesc">
                         <p className="center info">{
                             tipoDescuento
                             ? "Inc/desc por unidad"
@@ -137,6 +134,14 @@ export const GestionPrecios = ({
                             checked={tipoDescuento}
                             handlerCheck={ () => setTipoDescuento(!tipoDescuento) }
                         />
+                        <ToolTip
+                            anchor="btn-cond-incdesc"
+                            descripcion="
+                                Condiciona el descuento en la subventa.<br/>
+                                Si la opción esta activada, el descuento se realizara a cada unidad.<br/>
+                                Si la opción esta desactivada, el descuento se realizara a la totalidad de la subventa.
+                            "
+                        /> 
                     </div>
 
                     <div className="center">

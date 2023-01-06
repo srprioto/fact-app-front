@@ -1,4 +1,10 @@
 import { BiQuestionMark } from "react-icons/bi";
+import { ToolTip } from "../tooltip/ToolTip";
+
+interface toolTip {
+    anchor:string;
+    descripcion:string;
+}
 
 interface input {
     label?:string;
@@ -14,7 +20,7 @@ interface input {
     moneda?:boolean;
     noMenos?:boolean;
     noMas?:boolean;
-    title?:string;
+    tooltip?:toolTip;
 }
 
 export const Input = ({ 
@@ -31,7 +37,7 @@ export const Input = ({
     moneda, 
     noMenos,
     noMas,
-    title
+    tooltip
 }:input) => {
 
     // const checkValue = () => { 
@@ -50,7 +56,7 @@ export const Input = ({
     // }
 
     return (
-        <div className="wrap-form" title={title}>
+        <div className="wrap-form" id={tooltip && tooltip.anchor}>
             { label && (<><label className={colorLabel} htmlFor={name}>{ label }</label><br /></>) }
             <div className="relative">
                 {
@@ -117,6 +123,18 @@ export const Input = ({
                     && <span className="moneda">S/.</span>
                 }
             </div>
+            {
+                !!tooltip
+                && <ToolTip
+                    anchor={tooltip.anchor}
+                    descripcion={tooltip.descripcion}
+                /> 
+            }
+
+
+
+
+            
         </div>
     )
 };
@@ -310,3 +328,10 @@ setTransferencia({
     placeholder={placeholder}
     autoComplete="off"
 /> */
+
+
+// añadir tooltip
+// tooltip={{
+//     anchor: "btn-conf-venta",
+//     descripcion: "Requiere la información del cliente",
+// }}

@@ -1,15 +1,23 @@
+import { ToolTip } from "../tooltip/ToolTip";
+
+interface toolTip {
+    anchor:string;
+    descripcion:string;
+}
+
 interface Checkbox {
     label?:string;
     className?:string;
     name:string;
     checked:any;
     handlerCheck:any;
-    title?:string
+    tooltip?:toolTip;
+    // title?:string
 }
 
-export const Checkbox3 = ({ label, name, checked, handlerCheck, className, title }:Checkbox) => {
+export const Checkbox3 = ({ label, name, checked, handlerCheck, className, tooltip }:Checkbox) => {
     return (
-        <div title={title} >
+        <div id={tooltip && tooltip.anchor} >
             {
                 label
                 && <label className={"center w100 " + className} htmlFor={name}>{ label }</label>
@@ -25,6 +33,13 @@ export const Checkbox3 = ({ label, name, checked, handlerCheck, className, title
                 />
                 
             </div>
+            {
+                !!tooltip
+                && <ToolTip
+                    anchor={tooltip.anchor}
+                    descripcion={tooltip.descripcion}
+                /> 
+            }
 
         </div>
     )
@@ -50,3 +65,9 @@ export const Checkbox3 = ({ label, name, checked, handlerCheck, className, title
 //     {/* <p>{ e.transaccionDetalles.productos.codigo }</p>
 //     <p>{ e.productos.nombre }</p> */}
 // </Checkbox>
+
+// añadir tooltip
+// tooltip={{
+//     anchor: "btn-conf-venta",
+//     descripcion: "Requiere la información del cliente",
+// }}

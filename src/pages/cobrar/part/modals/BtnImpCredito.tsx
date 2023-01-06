@@ -37,15 +37,13 @@ export const BtnImpCredito = ({ loading, registroFinal, venta, creditoDetalles }
                 loading={loading}
                 className="btn btn-success"
                 handler={() => handlerImprimir()}
+                tooltip={{
+                    anchor: "btn-confi-venta-solo1",
+                    descripcion: "Confirma la venta e imprimir comprobante",
+                }}
             ><BiBookmarkAltMinus /> Imprimir
             </LoadSwitchBtn2>
-            { 
-                imprimir 
-                && <ImpCreditoAdel 
-                    ventaUpdate={ventaUpdate} 
-                    setImprimir={setImprimir} 
-                /> 
-            }     
+            { imprimir && <ImpCreditoAdel ventaUpdate={ventaUpdate} setImprimir={setImprimir} /> }     
         </>
     )
 }
