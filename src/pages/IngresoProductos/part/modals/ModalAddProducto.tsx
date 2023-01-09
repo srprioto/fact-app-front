@@ -215,9 +215,21 @@ export const ModalAddProducto = ({
                         onChange={handlerChangeMovimientoDetalles}
                         moneda
                         noMenos
+                        tooltip={{
+                            anchor: "txt-comp-paquete",
+                            descripcion: "Costo total de productos en este paquete",
+                        }}
                     />
 
-                    <InputDisable label="Precio por unidad" value={movDetails.precio_unidad} moneda/>
+                    <InputDisable 
+                        label="Precio por unidad" 
+                        value={movDetails.precio_unidad} 
+                        moneda
+                        tooltip={{
+                            anchor: "txt-precio-unid",
+                            descripcion: "Precio por unidad del producto.<br/>Es calculado entre el precio de compra del paquete y la cantidad total de unidades.",
+                        }}
+                    />
 
                     <Input
                         label="Detalles"
@@ -243,9 +255,12 @@ export const ModalAddProducto = ({
                             }}
                             className="success"
                             icon={ <BiListPlus /> }
+                            tooltip={{
+                                anchor: "btn-add-cont",
+                                descripcion: "Requiere seleccionar un producto, establecer una cantidad de unidades y añadir el precio de compra del paquete",
+                            }}
                         />
                     }
-
                     {
                         <BtnOnOff
                             label="Añadir y cerrar"
@@ -258,6 +273,10 @@ export const ModalAddProducto = ({
                             }}
                             className="info"
                             icon={ <BiListPlus /> }
+                            tooltip={{
+                                anchor: "btn-add-salir",
+                                descripcion: "Requiere seleccionar un producto, establecer una cantidad de unidades y añadir el precio de compra del paquete",
+                            }}
                         />
                     }
                     <div></div>

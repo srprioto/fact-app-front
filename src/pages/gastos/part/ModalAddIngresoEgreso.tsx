@@ -92,6 +92,10 @@ export const ModalAddIngresoEgreso = ({ modal, setModal, getData, locales }:moda
                                     : "info"
                                 }
                                 error={errors.monto}
+                                tooltip={{
+                                    anchor: "txt-monto-movim",
+                                    descripcion: "El monto del movimiento puede ser negativo o positivo"
+                                }}
                             />
 
                             <InputMk 
@@ -107,6 +111,10 @@ export const ModalAddIngresoEgreso = ({ modal, setModal, getData, locales }:moda
                                     name="switchLocal"
                                     checked={switchLocal}
                                     handlerCheck={ () => setSwitchLocal(!switchLocal) }
+                                    tooltip={{
+                                        anchor: "btn-check-ligar",
+                                        descripcion: "Permite establecer relación entre el movimiento y un local especifico"
+                                    }}
                                 />
                             </div>
 

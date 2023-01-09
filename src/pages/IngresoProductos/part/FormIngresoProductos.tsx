@@ -18,11 +18,12 @@ import { SelectLocal } from "./SelectLocal";
 import { ModalAddProducto } from "./modals/ModalAddProducto";
 import { ModalWrap } from "../../../components/modals/ModalWrap";
 // import { TextoRelleno } from "../../../components/TextoRelleno";
-import { AddBtn } from "../../../components/btns/AddBtn";
+import { AddBtn } from "./AddBtn";
 import { BoxFixed } from "../../../components/cards/BoxFixed";
 import { Loading } from "../../../components/loads/Loading";
 import { useAuth } from "../../../auth/useAuth";
 import { ListaProductosIngreso } from "./ListaProductosIngreso";
+import { ToolTip } from "../../../components/tooltip/ToolTip";
 
 
 export const FormIngresoProductos = ({ 
@@ -262,10 +263,19 @@ export const FormIngresoProductos = ({
                                             handler={handlerEnviar} 
                                         />
                                     ) : (
-                                        <button className="btn btn-disable">
-                                            <BiCheck />
-                                            Confirmar ingreso
-                                        </button>
+                                        <>
+                                            <button 
+                                                id="btn-dis-conf-ingreso"
+                                                className="btn btn-disable"
+                                            >
+                                                <BiCheck />
+                                                Confirmar ingreso
+                                            </button>
+                                            <ToolTip
+                                                anchor="btn-dis-conf-ingreso"
+                                                descripcion="Requiere al menos un producto en la lista de reabastecimiento y un local de destino"
+                                            /> 
+                                        </>
                                     )
                                 }
                                 <button className="btn btn-primary" type="reset" onClick={handlerClear}>

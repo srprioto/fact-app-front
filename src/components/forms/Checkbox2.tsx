@@ -1,14 +1,29 @@
+import { ToolTip } from "../tooltip/ToolTip";
+
+interface toolTip {
+    anchor:string;
+    descripcion:string;
+}
+
 interface Checkbox {
     label?:string;
     name:string;
     checked:any;
     handlerCheck:any;
     classname?:string;
+    tooltip?:toolTip;
 }
 
-export const Checkbox2 = ({ label, name, checked, handlerCheck, classname }:Checkbox) => {
+export const Checkbox2 = ({ 
+    label, 
+    name, 
+    checked, 
+    handlerCheck, 
+    classname, 
+    tooltip 
+}:Checkbox) => {
     return (
-        <div className="checkbox wrap-switch">
+        <div className="checkbox wrap-switch" id={tooltip && tooltip.anchor}>
 
             <input
                 className="switch switch-input"
@@ -24,6 +39,14 @@ export const Checkbox2 = ({ label, name, checked, handlerCheck, classname }:Chec
                 && <label className={"switch-label " + classname} htmlFor={name}><span>{ label }</span></label>
             }
             
+            {
+                !!tooltip
+                && <ToolTip
+                    anchor={tooltip.anchor}
+                    descripcion={tooltip.descripcion}
+                /> 
+            }
+
         </div>
     )
 }
@@ -48,3 +71,9 @@ export const Checkbox2 = ({ label, name, checked, handlerCheck, classname }:Chec
 //     {/* <p>{ e.transaccionDetalles.productos.codigo }</p>
 //     <p>{ e.productos.nombre }</p> */}
 // </Checkbox>
+
+// añadir tooltip
+// tooltip={{
+//     anchor: "btn-conf-venta",
+//     descripcion: "Requiere la información del cliente"
+// }}

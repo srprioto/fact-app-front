@@ -1,3 +1,10 @@
+import { ToolTip } from "../tooltip/ToolTip";
+
+interface toolTip {
+    anchor:string;
+    descripcion:string;
+}
+
 interface select {
     label?:string;
     name:string;
@@ -6,6 +13,7 @@ interface select {
     value?:any; // requiere activar defaultValue
     loading?:boolean|undefined;
     textDefault?:string;
+    tooltip?:toolTip;
     children:any;
 }
 
@@ -17,10 +25,11 @@ export const Select = ({
     value,
     loading, 
     textDefault = "Selecciona una opción", 
+    tooltip,
     children 
 }:select) => {
     return (
-        <div className="wrap-form w100">
+        <div className="wrap-form w100" id={tooltip && tooltip.anchor}>
             { label && <><label htmlFor={name}>{ label }</label><br /></> }
             <select 
                 name={name}
@@ -43,6 +52,13 @@ export const Select = ({
                 }
                 { children }
             </select>
+            {
+                !!tooltip
+                && <ToolTip
+                    anchor={tooltip.anchor}
+                    descripcion={tooltip.descripcion}
+                /> 
+            }
         </div>
     )
 }
@@ -65,3 +81,10 @@ export const Select = ({
     }
     
 </Select> */
+
+
+// añadir tooltip
+// tooltip={{
+//     anchor: "btn-conf-venta",
+//     descripcion: "Requiere la información del cliente"
+// }}

@@ -15,6 +15,7 @@ import { ModalCodigoBarras } from "./ModalCodigoBarras";
 import { ModalWrap } from "../../../components/modals/ModalWrap";
 import { ModalVerProducto } from "./ModalVerProducto";
 import { SearchWrap } from "../../../components/search/SearchWrap";
+import { ToolTip } from "../../../components/tooltip/ToolTip";
 
 export const Productos = () => {
 
@@ -147,6 +148,7 @@ export const Productos = () => {
             
             <div className="box">
 
+
                 {
                     loadingData 
                     ? <Loading />
@@ -159,18 +161,39 @@ export const Productos = () => {
                                 <thead>
                                     <tr>
                                         <th>Codigo</th>
-                                        <th>Nombre del prod.</th>
+                                        <th id="txt-nomb-prod">Nombre del prod.</th>
                                         <th>Marca</th>
                                         <th>Talla</th>
                                         <th>Color</th>
-                                        <th>P/und</th>
-                                        <th>P/men</th>
-                                        <th>P/may</th>
-                                        <th>P/comp</th>
-                                        <th className="transparent inlineblock">...</th>
+                                        <th id="txt-p-unid">P. Und.</th>
+                                        <th id="txt-p-men">P. Men.</th>
+                                        <th id="txt-p-may">P. May.</th>
+                                        <th id="txt-p-com">P. Comp.</th>
+                                        <th>
+                                            <ToolTip
+                                                anchor="txt-nomb-prod"
+                                                descripcion="Nombre del producto"
+                                            />
+                                            <ToolTip
+                                                anchor="txt-p-unid"
+                                                descripcion="Precio de venta por unidad"
+                                            /> 
+                                            <ToolTip
+                                                anchor="txt-p-men"
+                                                descripcion="Precio de venta al por menor"
+                                            /> 
+                                            <ToolTip
+                                                anchor="txt-p-may"
+                                                descripcion="Precio de venta al por mayor"
+                                            /> 
+                                            <ToolTip
+                                                anchor="txt-p-com"
+                                                descripcion="Precio de compra"
+                                            /> 
+                                        </th>
                                     </tr>
-                                </thead>
-                                
+
+                                </thead>                                
                                 <tbody>
                                     {
                                         data.map((e:any) => {
@@ -191,6 +214,11 @@ export const Productos = () => {
                         )
                     )
                 }
+
+
+
+
+
 
                 <Pagination 
                     getData={getData}

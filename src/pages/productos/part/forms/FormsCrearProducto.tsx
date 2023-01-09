@@ -5,6 +5,7 @@ import { LoadSwitchBtn } from '../../../../components/btns/LoadSwitchBtn';
 import { ValidCreateProduct, ValidCreateProductCompleto } from '../../../../resources/validations/Productos';
 import { useState } from 'react';
 import { Checkbox2 } from '../../../../components/forms/Checkbox2';
+import { ToolTip } from '../../../../components/tooltip/ToolTip';
 
 
 interface formsCrearProducto {
@@ -54,7 +55,7 @@ export const FormsCrearProducto = ({
 
                     <Form className="grid-1 gap mb-25">
                         <div className="check-crear-producto">
-                            <div className="check-form">
+                            <div className="check-form" id="check-tipo-create">
                                 <label htmlFor="switchCrear">
                                     { !switchCrear ? "Producto rápido" : "Producto completo" }
                                 </label>
@@ -63,6 +64,10 @@ export const FormsCrearProducto = ({
                                     checked={switchCrear}
                                     handlerCheck={ () => setSwitchCrear(!switchCrear) }
                                 />
+                                <ToolTip
+                                    anchor="check-tipo-create"
+                                    descripcion="Alterna la creación de un producto de entre rápido o completo"
+                                /> 
                             </div>
                         </div>
                         {
@@ -158,6 +163,10 @@ export const FormsCrearProducto = ({
                                     name="clearInput"
                                     checked={clearInput}
                                     handlerCheck={ () => setClearInput(!clearInput) }
+                                    tooltip={{
+                                        anchor: "check-info-prod",
+                                        descripcion: "Alterna entre mantiene la información del producto creado o no"
+                                    }}
                                 />
                             </div>
 
@@ -167,15 +176,9 @@ export const FormsCrearProducto = ({
                                 <BiBrush />
                                 Limpiar
                             </button>
-
                         </div>
-
                     </Form>
-
-
                 )}
-
-
             </Formik>
         </div>
     )

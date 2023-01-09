@@ -1,5 +1,5 @@
 import { BiX } from "react-icons/bi"
-import { AddBtn } from "../../../components/btns/AddBtn"
+import { AddBtn } from "./AddBtn"
 import { MovimientoDetallesDto } from "../../../resources/dtos/MovimientoDetalles"
 
 export const ListaProductosIngreso = ({ movimientoDetalles, itemPop, setModalAdd }:any) => {
@@ -53,10 +53,7 @@ export const ListaProductosIngreso = ({ movimientoDetalles, itemPop, setModalAdd
                         </table>
                     </>
                 ) : (
-                    
-                    <AddBtn 
-                        handlerModal={setModalAdd}
-                    />
+                    <AddBtn handlerModal={setModalAdd}/>
                 )
             }
 

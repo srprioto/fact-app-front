@@ -130,11 +130,6 @@ export const Input = ({
                     descripcion={tooltip.descripcion}
                 /> 
             }
-
-
-
-
-            
         </div>
     )
 };
@@ -333,5 +328,5 @@ setTransferencia({
 // añadir tooltip
 // tooltip={{
 //     anchor: "btn-conf-venta",
-//     descripcion: "Requiere la información del cliente",
+//     descripcion: "Requiere la información del cliente"
 // }}

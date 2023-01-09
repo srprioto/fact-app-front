@@ -7,6 +7,7 @@ import { NoRegistros } from "../../../components/NoRegistros"
 import { Pagination } from "../../../components/paginacion/Pagination"
 import { SearchWrap } from "../../../components/search/SearchWrap"
 import { TitleBox } from "../../../components/TitleBox"
+import { ToolTip } from "../../../components/tooltip/ToolTip"
 import { get, paginate } from "../../../resources/fetch"
 import { INGRESOS_EGRESOS_PAGINATE, INGRESOS_EGRESOS_SEARCH, LOCALES_SOLO } from "../../../resources/routes"
 import { ListaIngresosEgresos } from "./ListaIngresosEgresos"
@@ -116,9 +117,16 @@ export const IngresosEgresos = () => {
                         placeholder="Descripcion de ingreso o egreso ..."
                     />
                    
-                   <button title="Añade un ingreso o egreso" className="btn btn-info" onClick={handlerAddIE}>
-                        <BiPlusCircle />
-                        Añadir I/E
+                   <button 
+                        id="btn-add-ie"
+                        className="btn btn-info" 
+                        onClick={handlerAddIE}
+                    >
+                        <BiPlusCircle /> Añadir I/E
+                        <ToolTip
+                            anchor="btn-add-ie"
+                            descripcion="Añade un ingreso o egreso"
+                        /> 
                     </button>
 
                     <Select
@@ -127,6 +135,10 @@ export const IngresosEgresos = () => {
                         onChange={handlerLocal}
                         textDefault="Selecciona un local"
                         defaultValue={false}
+                        tooltip={{
+                            anchor: "btn-select-local",
+                            descripcion: "Filtra registros seleccionando un local"
+                        }}
                     >
                         <option value={"_"}>Todas las tiendas</option>
                         <option value={"No"}>Sin tienda</option>

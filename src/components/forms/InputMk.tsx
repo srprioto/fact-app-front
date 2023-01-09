@@ -1,5 +1,11 @@
 import { Field, ErrorMessage } from 'formik';
 import { BiQuestionMark } from 'react-icons/bi';
+import { ToolTip } from '../tooltip/ToolTip';
+
+interface toolTip {
+    anchor:string;
+    descripcion:string;
+}
 
 interface inputMk{
     label?:string;
@@ -12,6 +18,7 @@ interface inputMk{
     colorLabel?:string;
     placeholder?:string;
     noError?:boolean;
+    tooltip?:toolTip;
 }
 
 interface msgError {
@@ -29,11 +36,12 @@ export const InputMk = ({
     color, 
     colorLabel, 
     placeholder, 
-    noError 
+    noError,
+    tooltip
 }:inputMk) => {
 
     return (
-        <div className="wrap-form">
+        <div className="wrap-form" id={tooltip && tooltip.anchor}>
             {/* { label && (<><label htmlFor={name}>{ label }</label><br /></>) } */}
             { label && (<><label className={colorLabel} htmlFor={name}>{ label }</label><br /></>) }
             <div className="relative">
@@ -73,6 +81,14 @@ export const InputMk = ({
                     && <span className="moneda">S/.</span>
                 }
             </div>
+
+            {
+                !!tooltip
+                && <ToolTip
+                    anchor={tooltip.anchor}
+                    descripcion={tooltip.descripcion}
+                /> 
+            }
 
         </div>
     )
