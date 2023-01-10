@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
-import { Select } from "../../../components/forms/Select"
-import { Loading } from "../../../components/loads/Loading"
-import { ModalWrap } from "../../../components/modals/ModalWrap"
-import { NoRegistros } from "../../../components/NoRegistros"
-import { Pagination } from "../../../components/paginacion/Pagination"
-// import { SearchWrap } from "../../../components/SearchWrap"
-import { paginate } from "../../../resources/fetch"
-import { CAJA } from "../../../resources/routes"
-import { ItemCaja } from "./caja/ItemCaja"
-import { ModalCajaDetalles } from "./caja/ModalCajaDetalles"
+import { Select } from "../../../components/forms/Select";
+import { Loading } from "../../../components/loads/Loading";
+import { ModalWrap } from "../../../components/modals/ModalWrap";
+import { NoRegistros } from "../../../components/NoRegistros";
+import { Pagination } from "../../../components/paginacion/Pagination";
+import { ToolTip } from "../../../components/tooltip/ToolTip";
+import { paginate } from "../../../resources/fetch";
+import { CAJA } from "../../../resources/routes";
+import { ItemCaja } from "./caja/ItemCaja";
+import { ModalCajaDetalles } from "./caja/ModalCajaDetalles";
+
 
 interface informacionIngresos {
     idLocal?:string // este es obligatorio
@@ -158,10 +159,22 @@ export const InformacionIngresos = ({ idLocal, selectLocal, loadingLocal, locale
                                         <th>Codigo caja</th>
                                         <th>Estado caja</th>
                                         {/* <th>Monto apertura</th> */}
-                                        <th>Monto recaudado</th>
-                                        <th>Monto total en caja</th>
+                                        <th id="txt-ingreso-rec">Monto recaudado</th>
+                                        <th id="txt-monto-caja">Monto total en caja</th>
                                         <th>Fecha</th>
-                                        <th className="transparent inlineblock">...</th>
+                                        <th className="transparent inlineblock">
+                                            <ToolTip
+                                                anchor="txt-ingreso-rec"
+                                                descripcion="Suma el total de ventas y los movimientos de caja"
+                                            />
+                                            <ToolTip
+                                                anchor="txt-monto-caja"
+                                                descripcion="
+                                                    Suma el total de los ingresos recaudados<br/>
+                                                    y el monto de apertura de caja
+                                                "
+                                            /> 
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody>

@@ -7,9 +7,7 @@ export const ItemCaja = ({ item, handlerVer }:any) => {
 
     const montoEfectivo:number = Number(item.monto_efectivo);
     const montoApertura:number = Number(item.monto_apertura);
-    const montoOtros:number = Number(item.otros_montos);
-
-    console.log(item);
+    // const montoOtros:number = Number(item.otros_montos);
 
     return (
         <tr className="items-caja">
