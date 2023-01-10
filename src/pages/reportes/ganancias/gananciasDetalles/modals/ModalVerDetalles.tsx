@@ -53,6 +53,10 @@ export const ModalVerDetalles = ({ modal, setModal, fecha, locales, loadingLocal
                             onChange={(e:any) => setIdLocal(e.target.value)}
                             textDefault="Selecciona un local"
                             defaultValue={false}
+                            tooltip={{
+                                anchor: "btn-select-locales-modal",
+                                descripcion: "Filtra registros por locales"
+                            }}
                         >
                             <option value={"_"}>Todas las tiendas</option>
                             {

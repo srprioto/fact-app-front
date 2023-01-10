@@ -5,6 +5,7 @@ import { ModalFechas } from "../../../../components/fechas/ModalFechas";
 import { Select } from "../../../../components/forms/Select";
 import { Loading } from "../../../../components/loads/Loading"
 import { ModalWrap } from "../../../../components/modals/ModalWrap";
+import { ToolTip } from "../../../../components/tooltip/ToolTip";
 
 interface charsGanancias {
     data:any;
@@ -35,8 +36,16 @@ export const CharsGanancias = ({
             <div className="grid-1 gap box m-0 relative chars-ganancias">
                 <div className="box-fechas-chars-ganan">
                     <div className="grid-14 gap">
-                        <button className="btn btn-info" onClick={() => setModalFechas(!modalFechas)}>
+                        <button 
+                            id="btn-filtro-fechas"
+                            className="btn btn-info" 
+                            onClick={() => setModalFechas(!modalFechas)}
+                        >
                             <BiCalendar/>
+                            <ToolTip
+                                anchor="btn-filtro-fechas"
+                                descripcion="Filtra registros por fechas"
+                            /> 
                         </button>
                         <Select
                             loading={loadingLocales}
@@ -44,6 +53,10 @@ export const CharsGanancias = ({
                             onChange={handlerLocal}
                             textDefault="Selecciona un local"
                             defaultValue={false}
+                            tooltip={{
+                                anchor: "btn-select-locales",
+                                descripcion: "Filtra registros por locales"
+                            }}
                         >
                             <option value={"_"}>Todas las tiendas</option>
                             {

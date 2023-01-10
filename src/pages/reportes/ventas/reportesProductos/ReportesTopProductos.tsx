@@ -7,6 +7,7 @@ import { ModalWrap } from "../../../../components/modals/ModalWrap";
 import { NoRegistros } from "../../../../components/NoRegistros";
 import { Pagination2 } from "../../../../components/paginacion/Pagination2";
 import { Search2 } from "../../../../components/search/Search2";
+import { ToolTip } from "../../../../components/tooltip/ToolTip";
 import { paginacionDTO } from "../../../../resources/dtos/Pagination";
 import { post } from "../../../../resources/fetch";
 import { VENTAS_REPORTES } from "../../../../resources/routes";
@@ -73,17 +74,21 @@ export const ReportesTopProductos = () => {
 
                     <div className="grid-2 gap">
 
-                        <SelectLocalesRepProds
-                            setIdLocal={setIdLocal}
-                        />
-
                         <Select
                             name={"orden_productos"}
                             onChange={(e:any) => setOrdenProductos(e.target.value)}
+                            tooltip={{
+                                anchor: "btn-ordena-tot",
+                                descripcion: "Ordena los productos en base a las ventas totales"
+                            }}
                         >
                             <option value={"desc"}>Más vendidos</option>
                             <option value={"asc"}>Menos vendidos</option>
                         </Select>
+
+                        <SelectLocalesRepProds
+                            setIdLocal={setIdLocal}
+                        />
 
                     </div>
                 </div>
@@ -101,13 +106,18 @@ export const ReportesTopProductos = () => {
                             <table className="table">
                                 <thead>
                                     <tr>
-                                        <th>T. Und. vendidas</th>
+                                        <th id="txt-tot-un-ven">T. Und. vendidas</th>
                                         <th>Codigo</th>
                                         <th>Nombre</th>
                                         <th>Marca</th>
                                         <th>Talla</th>
                                         <th>Color</th>
-                                        <th className="transparent inlineblock">...</th>
+                                        <th className="transparent inlineblock">
+                                            <ToolTip
+                                                anchor="txt-tot-un-ven"
+                                                descripcion="Total de unidades vendidas"
+                                            /> 
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody>

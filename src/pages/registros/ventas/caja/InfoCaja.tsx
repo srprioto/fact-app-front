@@ -27,37 +27,37 @@ export const InfoCaja = ({ caja }:infoCaja) => {
                 </div>                   
 
                 <div 
-                    id="txt-mov-caja"
+                    id="txt-mov-caja-mod"
                     className="center"
                 >
                     <p>Movimientos de caja: </p>
                     <h2 className="warning-i">S/. { moneda(caja.otros_montos) }</h2>
                     <ToolTip
-                        anchor="txt-mov-caja"
+                        anchor="txt-mov-caja-mod"
                         descripcion="Calcular el total de ingresos y egresos de caja"
                     /> 
                 </div>
 
                 <div
-                    id="txt-ingreso-rec"
+                    id="txt-ingreso-rec-mod"
                     className="center"
                 >
                     <p>Monto recaudados: </p>
                     <h2 className="info-i">S/. { moneda(caja.monto_efectivo) }</h2>
                     <ToolTip
-                        anchor="txt-ingreso-rec"
+                        anchor="txt-ingreso-rec-mod"
                         descripcion="Suma el total de ventas y los movimientos de caja"
                     /> 
                 </div>
 
                 <div
-                    id="txt-monto-caja"
+                    id="txt-monto-caja-mod"
                     className="center"
                 >
                     <p>Monto total en caja: </p>
                     <h2 className="strong success-i">S/. { moneda(totalEfectivo) }</h2>
                     <ToolTip
-                        anchor="txt-monto-caja"
+                        anchor="txt-monto-caja-mod"
                         descripcion="
                             Suma el total de los ingresos recaudados<br/>
                             y el monto de apertura de caja

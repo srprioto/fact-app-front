@@ -53,6 +53,10 @@ export const GananciasDetalles = ({
                         onChange={handlerLocal}
                         textDefault="Selecciona un local"
                         defaultValue={false}
+                        tooltip={{
+                            anchor: "btn-select-locales",
+                            descripcion: "Filtra registros por locales"
+                        }}
                     >
                         <option value={"_"}>Todas las tiendas</option>
                         {

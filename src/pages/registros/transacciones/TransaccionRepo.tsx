@@ -25,7 +25,6 @@ export const TransaccionRepo = () => {
     // *** search
     const [searchState, setSearchState] = useState<boolean>(false);
 
-
     useEffect(() => {
         getData();
     }, []);
@@ -85,7 +84,7 @@ export const TransaccionRepo = () => {
                             searchState={searchState}
                             setSearchState={setSearchState}
                             url={TRANSACCIONES_SEARCH}
-                            placeholder="Descripcion ..."
+                            placeholder="Descripcion de la transferencia ..."
                         />
                     </div>
                 </div>

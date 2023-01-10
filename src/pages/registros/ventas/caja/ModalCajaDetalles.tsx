@@ -69,19 +69,29 @@ export const ModalCajaDetalles = ({ modal, setModal, cajaId }:any) => {
                                         <p>Codigo caja:</p>
                                         <h4>{ zeroFill(Number(caja.id)) }</h4>
                                     </span>
-                                    <span>
+                                    <span id="txt-diferencial">
                                         <p>Monto diferencial:</p>
                                         <h4 className={
                                             (caja.cantidad_diferencia !== 0
                                             ? "danger-i"
                                             : "secundary-i")
                                         }>S/. { moneda(caja.cantidad_diferencia) }</h4>
+
                                     </span>
-                                    <span>
-                                        <p>Observaciones:</p>
-                                        <h4 className="danger-i">{ caja.nota_observacion }</h4>
-                                    </span>
+                                    {
+                                        !!caja.nota_observacion
+                                        && <span>
+                                            <p>Observaciones:</p>
+                                            <h4 className="danger-i">{ caja.nota_observacion }</h4>
+                                        </span>
+                                    }
+                                    
+
                                 </div>
+                                <ToolTip
+                                    anchor="txt-diferencial"
+                                    descripcion="Desbalance indicado al cerrar caja"
+                                />
                                 <div className="box-wrap-descripcion3">
                                     <span>
                                         <p>Estado de caja:</p>
@@ -121,8 +131,7 @@ export const ModalCajaDetalles = ({ modal, setModal, cajaId }:any) => {
                         }
                     </div>
                 )
-            }
-            
+            }            
         </Modal>
     )
 }

@@ -2,7 +2,6 @@ import { useState } from "react";
 import { BiChevronDown, BiChevronUp, BiLock, BiPlus } from "react-icons/bi"
 import { Input } from "../../../components/forms/Input";
 import { ToolTip } from "../../../components/tooltip/ToolTip";
-import { moneda } from "../../../resources/func/moneda";
 import { InfoCaja } from "../../registros/ventas/caja/InfoCaja";
 import { CajaDetalles } from "./CajaDetalles";
 
@@ -91,7 +90,7 @@ export const CajaAbierta = ({
                         <ToolTip
                             anchor="btn-no-coincide"
                             descripcion="
-                                Despliega un formulario que permite establecer un monto y observación en caso de que los montos de caja y los montos en efectivo u otros montos no empaten.<br/>
+                                Despliega un formulario que permite establecer una cantidad y observación en caso de que los montos de caja u otros montos no empaten.<br/>
                                 Esta acción no afecta el estado de caja actual.
                             "
                         /> 

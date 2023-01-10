@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Loading } from "../../../../../components/loads/Loading";
+import { ToolTip } from "../../../../../components/tooltip/ToolTip";
 import { post } from "../../../../../resources/fetch";
 import { formatoConSlashJson } from "../../../../../resources/func/fechas";
 import { moneda } from "../../../../../resources/func/moneda";
@@ -55,13 +56,17 @@ export const InfoTabbsVerDetalles = ({ tabbs, fecha, idLocal }:any) => {
                 {
                     sumatorias.ingresosEgresosGenerales !== 0
                     && (
-                        <div className="box-total-ganancias gap10 middle">
+                        <div id="txt-ie-general-modal" className="box-total-ganancias gap10 middle">
                             <h3 className="secundary">I/E generales: </h3>
                             <h3 className={(
                                 sumatorias.ingresosEgresosGenerales >= 0
                                 ? "strong success m-0"
                                 : "strong danger m-0"
                             )}>S/. { moneda(sumatorias.ingresosEgresosGenerales) }</h3>
+                            <ToolTip
+                                anchor="txt-ie-general-modal"
+                                descripcion="Ingresos y egresos generales que no están ligados a ningún local"
+                            /> 
                         </div>
                     )
                 }

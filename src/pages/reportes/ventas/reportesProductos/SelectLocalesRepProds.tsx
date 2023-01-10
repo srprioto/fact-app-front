@@ -39,6 +39,10 @@ export const SelectLocalesRepProds = ({ setIdLocal }:any) => {
             name={"id_local"}
             onChange={handlerLocal}
             textDefault="Selecciona un local"
+            tooltip={{
+                anchor: "btn-filt-locales",
+                descripcion: "Filtra registros por locales"
+            }}
         >
             <option value={"_"}>Todas las tiendas</option>
             {
