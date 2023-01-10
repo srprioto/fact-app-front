@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { BiCheck, BiExit } from "react-icons/bi";
+import { BiCheck } from "react-icons/bi";
 
 import { Modal } from "../../../components/modals/Modal";
 import { LoadingBtn } from "../../../components/btns/LoadingBtn";
@@ -58,11 +58,11 @@ export const ModalCantidad = ({ modal, setModal, localStock, getData, setSearchS
         
     }
 
-    const handerModal = () => {
-        setData({ cantidad:0 });
-        setValidarCantidad(false);
-        setModal(false); 
-    }
+    // const handerModal = () => {
+    //     setData({ cantidad:0 });
+    //     setValidarCantidad(false);
+    //     setModal(false); 
+    // }
 
     return (
         <Modal 
