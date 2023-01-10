@@ -14,7 +14,7 @@ export const TablaVentas = ({ data, handlerGetFacturaVenta }:any) => {
         <table className="table">
             <thead>
                 <tr>
-                    <th>Codigo de venta</th>
+                    <th>Numero de venta</th>
                     <th className="transparent inlineblock">...</th>
                 </tr>
             </thead>

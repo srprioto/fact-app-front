@@ -16,6 +16,7 @@ import { ModalVerComprobante } from "./comprobantes/ModalVerComprobante";
 import { TablaFiltro } from "./comprobantes/TablaFiltro";
 import { ExportarExcelComprobantes } from "./comprobantes/ExportarExcelComprobantes";
 import { ModalAnularVenta } from "./ventas/modals/ModalAnularVenta";
+import { ToolTip } from "../../../components/tooltip/ToolTip";
 
 interface infoComprobante {
     idLocal?:string; // el id local es obligatorio
@@ -176,6 +177,10 @@ export const Comprobantes = ({ idLocal, selectLocal, loadingLocal, locales, cont
                                         onChange={handlerLocal}
                                         textDefault="Selecciona un local"
                                         defaultValue={false}
+                                        tooltip={{
+                                            anchor: "btn-select-local",
+                                            descripcion: "Filtra registros por locales"
+                                        }}
                                     >
                                         <option key={"_"} value={"_"}>Todas las tiendas</option>
                                         {
@@ -214,13 +219,18 @@ export const Comprobantes = ({ idLocal, selectLocal, loadingLocal, locales, cont
                                 
                                 <thead>
                                     <tr>
-                                        <th>Codigo venta</th>
+                                        <th id="txt-cod-comp">Codigo venta</th>
                                         <th>Tipo comprobante</th>
                                         <th>Tipo documento</th>
                                         <th>Estado</th>
                                         <th>Fecha de emisión</th>
                                         <th>Local</th>
-                                        <th className="transparent inlineblock">...</th>
+                                        <th className="transparent inlineblock">
+                                            <ToolTip
+                                                anchor="txt-cod-comp"
+                                                descripcion="El código de venta está formado por, el numero de venta general, numero de venta de caja y el correlativo"
+                                            /> 
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody>

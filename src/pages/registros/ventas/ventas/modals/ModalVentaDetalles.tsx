@@ -3,6 +3,7 @@ import { BiBookmarkAltMinus, BiMoveHorizontal, BiX } from "react-icons/bi";
 import { Loading } from "../../../../../components/loads/Loading";
 import { Modal } from "../../../../../components/modals/Modal"
 import { ModalWrap } from "../../../../../components/modals/ModalWrap";
+import { ToolTip } from "../../../../../components/tooltip/ToolTip";
 import { tipoVenta } from "../../../../../resources/dtos/VentasDto";
 import { getOne } from "../../../../../resources/fetch";
 import { VENTAS } from "../../../../../resources/routes";
@@ -68,9 +69,9 @@ export const ModalVentaDetalles = ({ modal, setModal, idVenta, getData, btnClose
         if (negativa === 0) {
             return "info"
         } else if (forzar === true) {
-            return "danger"
+            return "warning danger"
         } else if (forzar === false && negativa < 0) {
-            return "warning"
+            return "danger"
         }
     }
     
@@ -152,12 +153,36 @@ export const ModalVentaDetalles = ({ modal, setModal, idVenta, getData, btnClose
                                         <th>Marca</th>
                                         <th>Talla</th>
                                         <th></th>
-                                        <th>Cant.</th>
-                                        <th>Inc/Desc</th>
-                                        <th>P. Unidad</th>
-                                        <th>P. Subventa</th>
-                                        <th>Sin stock</th>                                        
-                                        {/* <th>Estado</th> */}
+                                        <th id="txt-cant-unid">Cant.</th>
+                                        <th id="txt-inc-desc">Inc/Desc</th>
+                                        <th id="txt-p-unid">Precio U.</th>
+                                        <th id="txt-p-subventa">Precio Sv.</th>
+                                        <th id="txt-sin-stock">Sin stock</th>                                        
+                                        <th className="transparent inlineblock">
+                                            <ToolTip
+                                                anchor="txt-cant-unid"
+                                                descripcion="Cantidad de unidades por producto"
+                                            /> 
+                                            <ToolTip
+                                                anchor="txt-inc-desc"
+                                                descripcion="Incremento o descuento del precio de la subventa"
+                                            /> 
+                                            <ToolTip
+                                                anchor="txt-p-unid"
+                                                descripcion="Precio por unidad"
+                                            /> 
+                                            <ToolTip
+                                                anchor="txt-p-subventa"
+                                                descripcion="Precio de la subventa"
+                                            /> 
+                                            <ToolTip
+                                                anchor="txt-sin-stock"
+                                                descripcion="
+                                                    Ventas de productos sin stock en la tienda.<br/>
+                                                    El numero establecido indica la suma total de unidades vendidas sin stock.
+                                                "
+                                            /> 
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody>

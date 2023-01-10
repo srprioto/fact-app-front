@@ -157,9 +157,9 @@ export const InformacionIngresos = ({ idLocal, selectLocal, loadingLocal, locale
                                     <tr>
                                         <th>Codigo caja</th>
                                         <th>Estado caja</th>
-                                        <th>Monto apertura</th>
-                                        <th>Monto cierre</th>
+                                        {/* <th>Monto apertura</th> */}
                                         <th>Monto recaudado</th>
+                                        <th>Monto total en caja</th>
                                         <th>Fecha</th>
                                         <th className="transparent inlineblock">...</th>
                                     </tr>

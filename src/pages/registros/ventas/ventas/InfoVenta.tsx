@@ -1,3 +1,4 @@
+import { ToolTip } from "../../../../components/tooltip/ToolTip";
 import { tipoVenta } from "../../../../resources/dtos/VentasDto";
 import { fecha } from "../../../../resources/func/fechas"
 import { moneda } from "../../../../resources/func/moneda";
@@ -36,7 +37,7 @@ export const InfoVenta = ({ venta, classEstado }:any) => {
                 <div className="box-wrap-descripcion3">
 
                     <span>
-                        <p>Codigo venta</p>
+                        <p id="txt-cod-venta-in">Codigo venta</p>
                         <h4 className="info-i">{ codigoVenta }</h4>
                     </span>
 
@@ -46,7 +47,7 @@ export const InfoVenta = ({ venta, classEstado }:any) => {
                     </span>
 
                     <span>
-                        <p>Inc/Desc general</p>
+                        <p id="txt-inc-desc-gen">Inc/Desc general</p>
                         <h4>S/. { moneda(venta.descuento_total) }</h4>
                     </span>
 
@@ -80,6 +81,14 @@ export const InfoVenta = ({ venta, classEstado }:any) => {
                     </span>
                     
                 </div>
+                <ToolTip
+                    anchor="txt-cod-venta-in"
+                    descripcion="El código de venta está formado por, el numero de venta general, numero de venta de caja y el correlativo, en caso de ser un comprobante"
+                /> 
+                <ToolTip
+                    anchor="txt-inc-desc-gen"
+                    descripcion="Ingreso o descuento del precio en la venta general"
+                /> 
             </div>
 
             <div className="wrap-descripcion3">
@@ -105,18 +114,22 @@ export const InfoVenta = ({ venta, classEstado }:any) => {
                         <p>Encargado de la venta: </p>
                         <h4>{ venta.usuarios && venta.usuarios.nombre }</h4>
                     </span>
-
-                    <span>
-                        <p>
-                            {
-                                venta.estado_venta !== "anulado"
-                                ? "Observaciones:"
-                                : "Nota anulacion"
-                            }
-                        </p>
-                        <h4>{ venta.observaciones }</h4>
-                    </span>
-
+                    
+                    {
+                        !!venta.observaciones
+                        && (
+                            <span>
+                                <p>
+                                    {
+                                        venta.estado_venta !== "anulado"
+                                        ? "Observaciones:"
+                                        : "Nota anulacion"
+                                    }
+                                </p>
+                                <h4>{ venta.observaciones }</h4>
+                            </span>
+                        )
+                    }
                     <span>
                         <p>Fecha de venta: </p>
                         <h4>{ fecha(venta.created_at) }</h4>

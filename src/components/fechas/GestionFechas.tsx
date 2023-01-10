@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { BiCalendar } from "react-icons/bi";
 import { ModalWrap } from "../modals/ModalWrap";
+import { ToolTip } from "../tooltip/ToolTip";
 import { ModalFechas } from "./ModalFechas";
 
 interface fechasVentas{
@@ -16,8 +17,16 @@ export const GestionFechas = ({ getData, fechas, setFechas }:fechasVentas) => {
     return (
         <>
 
-            <button className="btn btn-info" onClick={() => setModalFechas(!modalFechas)}>
+            <button 
+                id="btn-filtro-fech"
+                className="btn btn-info" 
+                onClick={() => setModalFechas(!modalFechas)}
+            >
                 <BiCalendar/>
+                <ToolTip
+                    anchor="btn-filtro-fech"
+                    descripcion="Filtra registros por fechas"
+                /> 
             </button>
 
             <ModalWrap modal={modalFechas}>

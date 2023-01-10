@@ -1,3 +1,4 @@
+import { ToolTip } from "../../../../components/tooltip/ToolTip";
 import { fecha } from "../../../../resources/func/fechas"
 import { moneda } from "../../../../resources/func/moneda"
 
@@ -40,8 +41,7 @@ export const InfoComprobante = ({ comprobante }:any) => {
                 <div className="box-wrap-descripcion3">
 
                     <span>
-                        <p>Codigo venta: </p>
-                        {/* <h4 className="info-i">{ comprobante.serie + "-" + comprobante.id }</h4> */}
+                        <p id="txt-cod-comp-in">Codigo venta: </p>
                         <h4 className="info-i">{ codigoComprobante }</h4>
                     </span>
 
@@ -62,6 +62,10 @@ export const InfoComprobante = ({ comprobante }:any) => {
 
                     
                 </div>
+                <ToolTip
+                    anchor="txt-cod-comp-in"
+                    descripcion="El código de venta está formado por, el numero de venta general, numero de venta de caja y el correlativo"
+                /> 
             </div>
 
             <div className="wrap-descripcion3">

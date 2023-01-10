@@ -6,6 +6,7 @@ import { ModalWrap } from "../../../components/modals/ModalWrap";
 import { NoRegistros } from "../../../components/NoRegistros";
 import { Pagination } from "../../../components/paginacion/Pagination";
 import { SearchWrap } from "../../../components/search/SearchWrap";
+import { ToolTip } from "../../../components/tooltip/ToolTip";
 import { paginate } from "../../../resources/fetch";
 import { fechaInicioFin } from "../../../resources/func/fechas";
 import { VENTAS_PAGINATE, VENTAS_SEARCH } from "../../../resources/routes";
@@ -164,6 +165,10 @@ export const InfoGeneralVentas = ({ idLocal, selectLocal, loadingLocal, locales 
                                         onChange={(e:any) => selectLocal && selectLocal(e.target.value)}
                                         textDefault="Selecciona un local"
                                         defaultValue={false}
+                                        tooltip={{
+                                            anchor: "btn-select-local",
+                                            descripcion: "Filtra registros por locales"
+                                        }}
                                     >
                                         <option key={"_"} value={"_"}>Todas las tiendas</option>
                                         {
@@ -201,7 +206,7 @@ export const InfoGeneralVentas = ({ idLocal, selectLocal, loadingLocal, locales 
                             <table className="table">
                                 <thead>
                                     <tr>
-                                        <th>Codigo venta</th>
+                                        <th id="txt-cod-venta">Codigo venta</th>
                                         <th></th>
                                         <th>Tipo venta</th>
                                         <th>Ingreso venta</th>
@@ -209,7 +214,12 @@ export const InfoGeneralVentas = ({ idLocal, selectLocal, loadingLocal, locales 
                                         <th>Estado de venta</th>
                                         <th>Fecha venta</th>
                                         <th>Local</th>
-                                        <th className="transparent inlineblock">...</th>
+                                        <th className="transparent inlineblock">
+                                            <ToolTip
+                                                anchor="txt-cod-venta"
+                                                descripcion="El código de venta está formado por, el numero de venta general, numero de venta de caja y el correlativo, en caso de ser un comprobante"
+                                            /> 
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody>

@@ -25,7 +25,7 @@ export const ModalCodigoVenta = ({ modal, setModal, ventaRes, setShowWindow }:mo
             <div className="grid-1 gap">
                 <h2 className="mb-15 center">Pedido realizado exitosamente!</h2>
                 <div className="mb-15 center">
-                    <p className="info">Codigo de venta:</p>
+                    <p className="info">Numero de venta de caja:</p>
                     <h1 className="success strong">{ ventaRes.codigo_venta }</h1>
                 </div>
                 <div className="grid-3 gap">

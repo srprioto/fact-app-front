@@ -49,12 +49,7 @@ export const VentasRepo = () => {
             <TitleBox titulo="Registros de ventas"/>
 
             <div className="grid-4 box box-par">
-                {/* <button 
-                    onClick={() => handlerToggle(1)}
-                    className={`btn2 btn2-info ${toggleGeneral === 1 && "btn2-sub-info"}`}>
-                    <BiBarChartAlt2 />
-                    Estadisticas
-                </button> */}
+
                 <button 
                     onClick={() => handlerToggle(1)}
                     className={`btn2 btn2-info ${toggleGeneral === 1 && "btn2-sub-info"}`}>

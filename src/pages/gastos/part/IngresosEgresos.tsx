@@ -137,7 +137,7 @@ export const IngresosEgresos = () => {
                         defaultValue={false}
                         tooltip={{
                             anchor: "btn-select-local",
-                            descripcion: "Filtra registros seleccionando un local"
+                            descripcion: "Filtra registros por locales"
                         }}
                     >
                         <option value={"_"}>Todas las tiendas</option>

@@ -84,23 +84,7 @@ export const ModalAnularVenta = ({ modal, setModal, idVenta, getData }:modalAnul
                             name="notaBaja"
                             value={notaBaja}
                             onChange={onChange}
-                        />
-                        {/* {
-                            auth.rol === Roles.ADMIN
-                            && (
-                                <div>
-                                    <label htmlFor="afectarCaja" className="center w100">Afectar ingresos de caja</label>
-                                    <Checkbox2
-                                        // label="Afectar estado de caja"
-                                        name="afectarCaja"
-                                        checked={afectarCaja}
-                                        handlerCheck={ () => setAfectarCaja(!afectarCaja) }
-                                    />
-                                </div>
-                            )
-                        } */}
-                        
-                        
+                        />                        
                     </div>
                     {
                         restoAnulacion
@@ -116,7 +100,7 @@ export const ModalAnularVenta = ({ modal, setModal, idVenta, getData }:modalAnul
                     }
                 </div>
 
-                <div className="grid-4 gap">
+                <div className="grid-3 gap">
                     <div></div>
                     {
                         !restoAnulacion
@@ -125,6 +109,10 @@ export const ModalAnularVenta = ({ modal, setModal, idVenta, getData }:modalAnul
                                 estado={validMsg()}
                                 icon={<BiCheck />}
                                 label="Anular"
+                                tooltipDisable={{
+                                    anchor: "btm-confirmar anular",
+                                    descripcion: "Requiere una nota de anulacion",
+                                }}
                             >
                                 <LoadSwitchBtn2
                                     loading={loadingOne}
@@ -141,9 +129,9 @@ export const ModalAnularVenta = ({ modal, setModal, idVenta, getData }:modalAnul
                         )
                     }
                   
-                    <button className="btn btn-warning" onClick={() => {setModal(false)}}>
+                    {/* <button className="btn btn-warning" onClick={() => {setModal(false)}}>
                         <BiReply /> Regresar
-                    </button>
+                    </button> */}
                 </div>
             </div>
         </Modal>

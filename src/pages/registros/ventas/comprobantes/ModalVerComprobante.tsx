@@ -101,8 +101,6 @@ export const ModalVerComprobante = ({
         } else {
             return [];
         }
-
-        
     }
 
 
@@ -131,7 +129,7 @@ export const ModalVerComprobante = ({
                                         <th>Nombre prod.</th>
                                         <th>Cantidad</th>
                                         <th>Precio Unidad</th>
-                                        <th>Igv</th>
+                                        <th>IGV</th>
                                         <th>Subtotal</th>
                                     </tr>
                                 </thead>

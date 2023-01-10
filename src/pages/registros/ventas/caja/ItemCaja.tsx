@@ -9,41 +9,61 @@ export const ItemCaja = ({ item, handlerVer }:any) => {
     const montoApertura:number = Number(item.monto_apertura);
     const montoOtros:number = Number(item.otros_montos);
 
+    console.log(item);
+
     return (
         <tr className="items-caja">
 
+            {/* Codigo caja */}
             <td className="">{ zeroFill(Number(item.id)) }</td>
+
+            {/* Estado caja */}
             <td className={ item.estado_caja ? "success-i" : "danger-i" }>
                 { item.estado_caja ? "Abierto" : "Cerrado" }
             </td>
-            <td className="info">S/. { moneda(montoApertura) }</td>
+
+            {/* Monto apertura */}
+            {/* <td className="secundary">S/. { moneda(montoApertura) }</td> */}
+
+            {/* Monto recaudado */}
             <td className={
                 "strong " +
                 (Number(item.cantidad_diferencia) > 0
                 ? "danger"
-                : "primary")
+                : "info")
             }>
                 {
                     item.estado_caja
                     ? "---"
-                    : <> S/. { moneda(montoEfectivo + montoApertura + montoOtros) } </>
+                    : <> S/. { moneda(montoEfectivo) } </>
                 }
             </td>
+
+            {/* Monto total en caja */}
             <td className="success strong">
                 {
                     item.estado_caja
                     ? "---"
-                    : <> S/. { moneda(montoEfectivo + montoOtros) } </>
+                    : <> S/. { moneda(montoEfectivo + montoApertura) } </>
                 }
             </td>
+
+            {/* Fecha */}
             <td>{ fechaNoHora(item.created_at) }</td>
+
             <td>
                 {
                     !item.estado_caja
                     && <CajaDropDown item={item} handlerVer={handlerVer}/>
                 }
             </td>
+            
         </tr>
     )
 }
+
+
+
+
+
 

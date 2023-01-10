@@ -83,7 +83,7 @@ export const Cobrar = ({ idLocal, nombreLocal, user }:cobrar) => {
                                 searchState={searchState}
                                 setSearchState={setSearchState}
                                 url={VENTAS_SEARCH_LOCAL}
-                                placeholder="Codigo venta"
+                                placeholder="Nro de venta"
                                 localId={idLocal}
                             />
                             <button
