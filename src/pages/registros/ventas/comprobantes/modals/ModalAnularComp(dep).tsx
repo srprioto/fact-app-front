@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { BiCheck, BiReply } from "react-icons/bi";
-import { useAuth } from "../../../../auth/useAuth";
-import { BtnOnOff2 } from "../../../../components/btns/BtnOnOff2";
-import { LoadSwitchBtn2 } from "../../../../components/btns/LoadSwitchBtn2";
-import { Checkbox2 } from "../../../../components/forms/Checkbox2";
-import { Input } from "../../../../components/forms/Input";
-import { Modal } from "../../../../components/modals/Modal"
-import { post } from "../../../../resources/fetch";
-import { COMPROBANTE } from "../../../../resources/routes";
+import { useAuth } from "../../../../../auth/useAuth";
+import { BtnOnOff2 } from "../../../../../components/btns/BtnOnOff2";
+import { LoadSwitchBtn2 } from "../../../../../components/btns/LoadSwitchBtn2";
+import { Checkbox2 } from "../../../../../components/forms/Checkbox2";
+import { Input } from "../../../../../components/forms/Input";
+import { Modal } from "../../../../../components/modals/Modal"
+import { post } from "../../../../../resources/fetch";
+import { COMPROBANTE } from "../../../../../resources/routes";
 
 export const ModalAnularComp = ({ modal, setModal, comprobante, getData }:any) => {
 

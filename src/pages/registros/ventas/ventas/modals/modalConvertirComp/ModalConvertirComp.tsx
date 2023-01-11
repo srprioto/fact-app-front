@@ -11,7 +11,7 @@ import { ConvertirBoleta } from "./boleta/ConvertirBoleta";
 import { ConvertirFactura } from "./factura/ConvertirFactura";
 
 import { ModalVentaDetalles } from "../ModalVentaDetalles";
-import { ModalVerComprobante } from "../../../comprobantes/ModalVerComprobante";
+import { ModalVerComprobante } from "../../../comprobantes/modals/ModalVerComprobante";
 
 interface modalConvertirComp {
     modal:boolean;

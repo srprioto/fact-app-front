@@ -6,7 +6,7 @@ import { clienteInfo } from "../../../../../../resources/dtos/Cliente";
 import { tipoVenta } from "../../../../../../resources/dtos/VentasDto";
 import { getOne, put } from "../../../../../../resources/fetch";
 import { VENTAS } from "../../../../../../resources/routes";
-import { ModalVerComprobante } from "../../../comprobantes/ModalVerComprobante";
+import { ModalVerComprobante } from "../../../comprobantes/modals/ModalVerComprobante";
 import { InfoCliente } from "../../InfoCliente";
 import { ModalVentaDetalles } from "../ModalVentaDetalles";
 import { ConfirmCreditoAdelanto } from "./ConfirmCreditoAdelanto";

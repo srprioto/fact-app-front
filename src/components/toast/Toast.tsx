@@ -25,6 +25,10 @@ export const Toast = ({ toast, setToast, infoToast }:toast) => {
             titulo = "Error";
             icon = <BiXCircle color="#f46a6a" />
             break;
+        case "secundary":
+            titulo = "Informacion";
+            icon = <BiXCircle color="#c3cbe4" />
+            break;
     }   
 
     useEffect(() => {

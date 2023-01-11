@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { BiBookmarkAltMinus } from "react-icons/bi";
-import { Loading } from "../../../../components/loads/Loading";
-import { Modal } from "../../../../components/modals/Modal";
-import { TextoRelleno } from "../../../../components/TextoRelleno";
-import { getOne } from "../../../../resources/fetch";
-import { COMPROBANTE } from "../../../../resources/routes";
-import { ReimpComprobante } from "../../../../components/imprimir/ReimpComprobante";
+import { Loading } from "../../../../../components/loads/Loading";
+import { Modal } from "../../../../../components/modals/Modal";
+import { TextoRelleno } from "../../../../../components/TextoRelleno";
+import { getOne } from "../../../../../resources/fetch";
+import { COMPROBANTE } from "../../../../../resources/routes";
+import { ReimpComprobante } from "../../../../../components/imprimir/ReimpComprobante";
 
 
 interface modalReimpComprobante {

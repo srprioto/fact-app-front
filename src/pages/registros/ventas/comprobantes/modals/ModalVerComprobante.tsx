@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
 import { BiBookmarkAltMinus, BiRedo, BiX } from "react-icons/bi";
-import { Loading } from "../../../../components/loads/Loading";
-import { Modal } from "../../../../components/modals/Modal"
-import { ModalWrap } from "../../../../components/modals/ModalWrap";
-import { estados_comprobante } from "../../../../resources/dtos/ComprobantesDto";
-import { getOne } from "../../../../resources/fetch";
-import { moneda } from "../../../../resources/func/moneda";
-import { COMPROBANTE } from "../../../../resources/routes";
-import { InfoCliente } from "../ventas/InfoCliente";
-import { ModalAnularVenta } from "../ventas/modals/ModalAnularVenta";
-import { InfoComprobante } from "./InfoComprobante";
-import { InfoRespuestaSunat } from "./InfoRespuestaSunat";
+import { Loading } from "../../../../../components/loads/Loading";
+import { Modal } from "../../../../../components/modals/Modal"
+import { ModalWrap } from "../../../../../components/modals/ModalWrap";
+import { estados_comprobante } from "../../../../../resources/dtos/ComprobantesDto";
+import { getOne } from "../../../../../resources/fetch";
+import { moneda } from "../../../../../resources/func/moneda";
+import { COMPROBANTE } from "../../../../../resources/routes";
+import { InfoCliente } from "../../ventas/InfoCliente";
+import { ModalAnularVenta } from "../../ventas/modals/ModalAnularVenta";
+import { InfoComprobante } from "../InfoComprobante";
+import { InfoRespuestaSunat } from "../InfoRespuestaSunat";
 import { ModalReenviarComp } from "./ModalReenviarComp";
 import { ModalReimpComprob } from "./ModalReimpComprob";
 

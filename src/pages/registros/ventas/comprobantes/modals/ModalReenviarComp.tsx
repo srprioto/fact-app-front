@@ -1,9 +1,9 @@
 import { useState } from "react"
 import { BiCheck, BiReply } from "react-icons/bi"
-import { LoadSwitchBtn2 } from "../../../../components/btns/LoadSwitchBtn2"
-import { Modal } from "../../../../components/modals/Modal"
-import { post } from "../../../../resources/fetch"
-import { COMPROBANTE } from "../../../../resources/routes"
+import { LoadSwitchBtn2 } from "../../../../../components/btns/LoadSwitchBtn2"
+import { Modal } from "../../../../../components/modals/Modal"
+import { post } from "../../../../../resources/fetch"
+import { COMPROBANTE } from "../../../../../resources/routes"
 
 interface modalReenviarComp {
     modal:boolean;

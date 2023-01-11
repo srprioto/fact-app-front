@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { BiShowAlt } from "react-icons/bi";
-import { ModalVerComprobante } from "../../pages/registros/ventas/comprobantes/ModalVerComprobante";
+import { ModalVerComprobante } from "../../pages/registros/ventas/comprobantes/modals/ModalVerComprobante";
 import { TicketsDto } from "../../resources/dtos/TicketsDto";
 import { getOne } from "../../resources/fetch";
 import { fecha } from "../../resources/func/fechas";

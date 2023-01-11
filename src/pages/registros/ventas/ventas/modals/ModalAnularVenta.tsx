@@ -5,6 +5,8 @@ import { BtnOnOff2 } from "../../../../../components/btns/BtnOnOff2";
 import { LoadSwitchBtn2 } from "../../../../../components/btns/LoadSwitchBtn2";
 import { Input } from "../../../../../components/forms/Input";
 import { Modal } from "../../../../../components/modals/Modal"
+import { useToast } from "../../../../../hooks/useContext/toast/useToast";
+import { estados_comprobante } from "../../../../../resources/dtos/ComprobantesDto";
 import { put } from "../../../../../resources/fetch";
 import { VENTAS } from "../../../../../resources/routes";
 
@@ -18,10 +20,12 @@ interface modalAnularVenta {
 export const ModalAnularVenta = ({ modal, setModal, idVenta, getData }:modalAnularVenta) => {
 
     const auth = useAuth();
+    const toast = useToast();
+
 
     const [loadingOne, setLoadingOne] = useState<boolean>(false);
     const [notaBaja, setNotaBaja] = useState<string>("");
-    const [restoAnulacion, setRestoAnulacion] = useState<boolean>(false);
+    const [sinFondos, setSinFondos] = useState<boolean>(false);
     // const [afectarCaja, setAfectarCaja] = useState<boolean>(true);
 
     const onChange = (e:any) => {
@@ -30,18 +34,27 @@ export const ModalAnularVenta = ({ modal, setModal, idVenta, getData }:modalAnul
 
     const handlerAnular = async () => { 
         setLoadingOne(true);
-        let resto:boolean;
+        let resto:any;
         try {
             resto = await put(idVenta, { 
                 notaBaja: notaBaja,
                 usuarioId: auth.userInfo.sub,
                 // afectarCaja: afectarCaja
             }, VENTAS + "/anular");
-            setRestoAnulacion(resto);
+            setSinFondos(resto.sinFondos);
             setLoadingOne(false);
-            if (!resto) {
+            if (!resto.sinFondos) {
                 getData && await getData();
                 setModal(false);
+            }
+            if (resto.estado === estados_comprobante.Anulado) {
+                toast.show("success", "La venta se anuló correctamente!");
+            } else if (resto.estado === estados_comprobante.Error_anulacion) {
+                toast.show("danger", "Ocurrió un error en la anulación!");
+            } else if (resto.estado === estados_comprobante.Rechazado){
+                toast.show("warning", "La anulación fue rechazada!");
+            } else if (resto.estado === estados_comprobante.Anulacion_procesada){
+                toast.show("secundary", "La anulación está en proceso!");
             }
         } catch (error) {
             setLoadingOne(true);
@@ -87,7 +100,7 @@ export const ModalAnularVenta = ({ modal, setModal, idVenta, getData }:modalAnul
                         />                        
                     </div>
                     {
-                        restoAnulacion
+                        sinFondos
                         ? (
                             <h5 className="center m-0 danger">
                                 Caja no tiene suficientes fondos para hacer una devolucion
@@ -103,7 +116,7 @@ export const ModalAnularVenta = ({ modal, setModal, idVenta, getData }:modalAnul
                 <div className="grid-3 gap">
                     <div></div>
                     {
-                        !restoAnulacion
+                        !sinFondos
                         ? (
                             <BtnOnOff2
                                 estado={validMsg()}
