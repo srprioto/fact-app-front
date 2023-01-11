@@ -25,7 +25,14 @@ interface modalVentaDetalles {
     modalConvert?:boolean;
 }
 
-export const ModalVentaDetalles = ({ modal, setModal, idVenta, getData, btnClose, modalConvert }:modalVentaDetalles) => {
+export const ModalVentaDetalles = ({ 
+    modal, 
+    setModal, 
+    idVenta, 
+    getData, 
+    btnClose, 
+    modalConvert 
+}:modalVentaDetalles) => {
 
     const [modalAnular, setModalAnular] = useState<boolean>(false);
     const [modalReimprimir, setModalReimprimir] = useState<boolean>(false);
@@ -123,8 +130,9 @@ export const ModalVentaDetalles = ({ modal, setModal, idVenta, getData, btnClose
     }
     
     const gData = () => { 
+        // getDataOne();
         getData && getData();
-        getDataOne();
+        btnClose && btnClose();
     }
 
     return (
@@ -134,7 +142,7 @@ export const ModalVentaDetalles = ({ modal, setModal, idVenta, getData, btnClose
             setModal={setModal}
             border="border-primary"
             width={85}
-            btnClose={btnClose}
+            btnClose={gData}
             acciones={acciones().length > 0 ? acciones() : null}
         >
             {
@@ -246,7 +254,7 @@ export const ModalVentaDetalles = ({ modal, setModal, idVenta, getData, btnClose
                             modal={modalAnular}
                             setModal={setModalAnular}
                             idVenta={idVenta}
-                            getData={gData}
+                            getData={getDataOne}
                         />
                     </ModalWrap>
 
@@ -263,7 +271,7 @@ export const ModalVentaDetalles = ({ modal, setModal, idVenta, getData, btnClose
                             modal={modalConvComprobante}
                             setModal={setModalConvComprobante}
                             idVenta={idVenta}
-                            getData={gData}
+                            getData={getDataOne}
                             inModal
                         />
                     </ModalWrap>

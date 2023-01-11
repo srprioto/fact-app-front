@@ -43,11 +43,11 @@ export const ModalVerComprobante = ({
 
 
     useEffect(() => {
-        getComprobante();
+        getOneData();
     }, [])
 
 
-    const getComprobante = async () => { 
+    const getOneData = async () => { 
         setLoadingOne(true);
         try {
             const dataOne = await getOne(idComprobante, COMPROBANTE);
@@ -57,12 +57,6 @@ export const ModalVerComprobante = ({
             setLoadingOne(true);
             console.log(error);
         }
-    }
-
-
-    const updateData = () => { 
-        getComprobante();
-        getData && getData();
     }
 
 
@@ -104,6 +98,13 @@ export const ModalVerComprobante = ({
     }
 
 
+    const updateData = () => { 
+        // getOneData();
+        getData && getData();
+        btnClose && btnClose();
+    }
+
+
     return (
         <Modal
             titulo="Detalles del comprobante"
@@ -112,7 +113,7 @@ export const ModalVerComprobante = ({
             border="border-primary"
             width={70}
             acciones={acciones().length > 0 ? acciones() : null}
-            btnClose={btnClose}
+            btnClose={updateData}
         >
 
             {
@@ -184,7 +185,7 @@ export const ModalVerComprobante = ({
                     modal={modalReenviar}
                     setModal={setModalReenviar}
                     idComprobante={comprobante.id}
-                    getData={updateData}
+                    getData={getOneData}
                 />
             </ModalWrap>
 
@@ -193,7 +194,7 @@ export const ModalVerComprobante = ({
                     modal={modalAnularComp}
                     setModal={setModalAnularComp}
                     idVenta={venta.id}
-                    getData={updateData}
+                    getData={getOneData}
                 />
             </ModalWrap>
             
