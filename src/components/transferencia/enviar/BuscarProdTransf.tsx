@@ -38,6 +38,7 @@ export const BuscarProdTransf = ({
         ])
     }
 
+
     return (
         <div className="box box-par m-0 buscar-productos-transf">
             <div className="mb-20">
@@ -117,7 +118,9 @@ export const BuscarProdTransf = ({
                             /> 
 
                         </div>
-                    ) : <div className="fill-txt-buscar-prod"><TextoRelleno texto="Busca un producto" /></div>
+                    ) : searchState
+                    ? <div className="fill-txt-buscar-prod"><TextoRelleno texto="No se encontraron productos" /></div>
+                    : <div className="fill-txt-buscar-prod"><TextoRelleno texto="Busca un producto" /></div>
                 ) : <div className="fill-txt-buscar-prod"><Loading /></div>
             }
         </div>

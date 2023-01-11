@@ -72,24 +72,28 @@ export const ConfirmarTransf = ({
                     value={nombreLocal}
                 />
 
-                <Select
-                    label="Local destino *"
-                    name="localDestino"
-                    onChange={handlerChangeGenerales}
-                    loading={loadingLocales}
-                    defaultValue
-                >
-                    {
-                        locales.map((e:any, index:number) => {
-                            if (e.id !== idLocal) {
-                                return (
-                                    <option key={index} value={Number(e.id)}>{ e.nombre }</option>
-                                )    
-                            }
-                            return (null);
-                        })
-                    }
-                </Select>
+                {
+                    !loadingPost
+                    && <Select
+                        label="Local destino *"
+                        name="localDestino"
+                        onChange={handlerChangeGenerales}
+                        loading={loadingLocales}
+                        defaultValue
+                    >
+                        {
+                            locales.map((e:any, index:number) => {
+                                if (e.id !== idLocal) {
+                                    return (
+                                        <option key={index} value={Number(e.id)}>{ e.nombre }</option>
+                                    )    
+                                }
+                                return (null);
+                            })
+                        }
+                    </Select>
+                }
+                
 
                 <Input
                     label="Nota de envio *"
@@ -108,21 +112,6 @@ export const ConfirmarTransf = ({
                     (validarEnvio())
                     ? (
                         <LoadSwitchBtn
-                            label="Confirmar envio"
-                            loading={loadingPost}
-                            handler={() => confirmarEnvio()}
-                        />
-                    ) : (
-                        <button id="btn-conf-env" className="btn btn-disable">
-                            <BiCheck />
-                            Confirmar envio
-                        </button>
-                    )
-                }
-                {
-                    (validarEnvio())
-                    ? (
-                        <LoadSwitchBtn
                             label="Confirmar e Imp."
                             loading={loadingPost}
                             handler={() => setModalConfImprimir(!ModalConfImprimir)}
@@ -133,6 +122,21 @@ export const ConfirmarTransf = ({
                         <button id="btn-conf-imp" className="btn btn-disable">
                             <BiBookmarkAltMinus />
                             Confirmar e Imp.
+                        </button>
+                    )
+                }
+                {
+                    (validarEnvio())
+                    ? (
+                        <LoadSwitchBtn
+                            label="Confirmar envio"
+                            loading={loadingPost}
+                            handler={() => confirmarEnvio()}
+                        />
+                    ) : (
+                        <button id="btn-conf-env" className="btn btn-disable">
+                            <BiCheck />
+                            Confirmar envio
                         </button>
                     )
                 }
@@ -163,6 +167,7 @@ export const ConfirmarTransf = ({
                     listaProductos={listaProductos}
                     nombreLocal={nombreLocal}
                     locales={locales}
+                    reiniciar={reiniciar}
                 />
             </ModalWrap>
 

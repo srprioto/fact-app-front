@@ -12,9 +12,9 @@ export const ImpCreditoAdel = ({ ventaUpdate, setImprimir }:impCreditoAdel) => {
 
     const imprimir = useRef<any>(null);
 
-    const cliente = ventaUpdate.clientes;
-    const ventaDetalles = ventaUpdate.ventaDetalles;
-    const creditoDetalles = ventaUpdate.creditoDetalles;
+    const cliente:any = ventaUpdate.clientes;
+    const ventaDetalles:any = ventaUpdate.ventaDetalles;
+    const creditoDetalles:any = ventaUpdate.creditoDetalles;
 
     useEffect(() => {
         handlerPrint();
@@ -23,11 +23,13 @@ export const ImpCreditoAdel = ({ ventaUpdate, setImprimir }:impCreditoAdel) => {
 
     const handlerPrint = () => { 
         let ventimp:any = window.open(' ', 'popimpr');
-        ventimp.document.write( imprimir.current.innerHTML );
-        ventimp.document.close();
-        ventimp.print();
-        ventimp.close();
-        setImprimir(false);
+        if (ventimp) {
+            ventimp.document.write( imprimir.current.innerHTML );
+            ventimp.document.close();
+            ventimp.print();
+            ventimp.close();
+            setImprimir(false);    
+        }
     }
 
     const cancelado = () => { 
@@ -158,7 +160,7 @@ export const ImpCreditoAdel = ({ ventaUpdate, setImprimir }:impCreditoAdel) => {
     //     ...mb10,
     //     ...center
     // }
-
+ 
 
     return (
 
@@ -179,7 +181,7 @@ export const ImpCreditoAdel = ({ ventaUpdate, setImprimir }:impCreditoAdel) => {
                 </div>
                 <div style={borderMb} />
                 {
-                    !!cliente.numero_documento
+                    (!!cliente.numero_documento)
                     && (
                         <div style={mb10}>
                             { !!cliente.nombre && <p style={infoTxtM0}>Cliente: { cliente.nombre }</p> }

@@ -56,19 +56,7 @@ export const ImpVenta = ({ venta, setImprimir, nuevo }:impComprobante) => {
         igv = Number(venta.subtotal) - Number(subtotal);    
     }
 
-    useEffect(() => {
-        handlerPrint();
-    }, [])
 
-
-    const handlerPrint = () => { 
-        let ventimp:any = window.open(' ', 'popimpr');
-        ventimp.document.write( imprimir.current.innerHTML );
-        ventimp.document.close();
-        ventimp.print();
-        ventimp.close();
-        setImprimir(false);
-    }
 
 
     const titulo = () => {
@@ -234,6 +222,23 @@ export const ImpVenta = ({ venta, setImprimir, nuevo }:impComprobante) => {
     // const nroComprobante:string = serie + "-" + (nroCorrelat() ? nroCorrelat() + "-" : "") + venta.id + "-" + venta.codigo_venta;
     const nroComprobante:string = serie + "-" + nroCorrelat();
     const nroVenta:string = venta.id + "-" + venta.codigo_venta
+
+
+    const handlerPrint = () => { 
+        let ventimp:any = window.open(' ', 'popimpr');
+        if (ventimp) {
+            ventimp.document.write( imprimir.current.innerHTML );
+            ventimp.document.close();
+            ventimp.print();
+            ventimp.close();
+            setImprimir(false);
+        }
+    }
+
+
+    useEffect(() => {
+        handlerPrint();
+    }, [])
 
 
     return (

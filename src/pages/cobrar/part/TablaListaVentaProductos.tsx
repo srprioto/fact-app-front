@@ -1,3 +1,4 @@
+import { ToolTip } from "../../../components/tooltip/ToolTip";
 import { moneda } from "../../../resources/func/moneda";
 
 interface tablaListaVentaProductos { 
@@ -16,10 +17,34 @@ export const TablaListaVentaProductos = ({ venta }:tablaListaVentaProductos) => 
                         <th>Producto</th>
                         <th>Marca</th>
                         <th>Talla</th>
-                        <th>Cant.</th>
-                        <th>P. Unidad</th>
-                        <th>Inc/Desc</th>
-                        <th>P. Subventa</th>
+                        <th id="txt-cant-un-cob">
+                            Cant.
+                            <ToolTip
+                                anchor="txt-cant-un-cob"
+                                descripcion="Cantidad de unidades vendidas"
+                            />
+                        </th>
+                        <th id="txt-pre-unid-cob">
+                            Precio U.
+                            <ToolTip
+                                anchor="txt-pre-unid-cob"
+                                descripcion="Precio por unidad"
+                            /> 
+                        </th>
+                        <th id="txt-inc-desc-cob">
+                            Inc/Desc
+                            <ToolTip
+                                anchor="txt-inc-desc-cob"
+                                descripcion="Incremento o descuento en la subventa"
+                            />
+                        </th>
+                        <th id="txt-pres-sub-cob">
+                            Precio Sv.
+                            <ToolTip
+                                anchor="txt-pres-sub-cob"
+                                descripcion="Incremento o descuento en la subventa"
+                            /> 
+                        </th>
                     </tr>
                 </thead>
                 

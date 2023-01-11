@@ -71,22 +71,21 @@ export const ModalTransferencia = ({ modal, setModal, idLocal, nombreLocal, getD
             console.log(error);
             setLoadingPost(true);
         } finally{
-            reiniciar();
+            // reiniciar();
             await getData();
-            setModal(!modal);
+            // setModal(!modal);
         }
     }
 
 
     return (
-        <Modal 
-            titulo="transferencia de productos" 
+        <Modal
+            titulo="transferencia de productos"
             modal={modal}
             setModal={setModal}
             width={80}
             btnClose={reiniciar}
         >
-
             <div className="grid-2 gap mb-20 enviar-transferencia">
                 <BuscarProdTransf
                     idLocal={idLocal}

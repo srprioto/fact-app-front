@@ -137,7 +137,7 @@ export const GestionPrecios = ({
                         <ToolTip
                             anchor="btn-cond-incdesc"
                             descripcion="
-                                Condiciona el descuento en la subventa.<br/>
+                                Condiciona el incremento o descuento en la subventa.<br/>
                                 Si la opción esta activada, el descuento se realizara a cada unidad.<br/>
                                 Si la opción esta desactivada, el descuento se realizara a la totalidad de la subventa.
                             "

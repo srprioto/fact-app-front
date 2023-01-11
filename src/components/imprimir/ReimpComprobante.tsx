@@ -63,11 +63,13 @@ export const ReimpComprobante = ({ comprobante, setImprimir }:impComprobante) =>
 
     const handlerPrint = () => { 
         let ventimp:any = window.open(' ', 'popimpr');
-        ventimp.document.write( imprimir.current.innerHTML );
-        ventimp.document.close();
-        ventimp.print();
-        ventimp.close();
-        setImprimir(false);
+        if (ventimp) {
+            ventimp.document.write( imprimir.current.innerHTML );
+            ventimp.document.close();
+            ventimp.print();
+            ventimp.close();
+            setImprimir(false);
+        }
     }
 
 

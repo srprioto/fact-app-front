@@ -11,9 +11,18 @@ interface impTicketTransf {
     listaProductos:any;
     nombreLocal?:string;
     locales:Array<any>;
+    reiniciar:Function;
 }
 
-export const ImpTicketTransf = ({ setImprimir, setModal, transferencia, listaProductos, nombreLocal, locales }:impTicketTransf) => {
+export const ImpTicketTransf = ({ 
+    setImprimir, 
+    setModal, 
+    transferencia,
+    listaProductos, 
+    nombreLocal, 
+    locales,
+    reiniciar
+}:impTicketTransf) => {
 
     const imprimir = useRef<any>(null);
     const auth = useAuth();
@@ -28,12 +37,15 @@ export const ImpTicketTransf = ({ setImprimir, setModal, transferencia, listaPro
 
     const handlerPrint = () => { 
         let ventimp:any = window.open(' ', 'popimpr');
-        ventimp.document.write( imprimir.current.innerHTML );
-        ventimp.document.close();
-        ventimp.print();
-        ventimp.close();
-        setImprimir(false);
-        setModal(false);
+        if (ventimp) {
+            ventimp.document.write( imprimir.current.innerHTML );
+            ventimp.document.close();
+            ventimp.print();
+            ventimp.close();
+            setImprimir(false);
+            setModal(false);
+            reiniciar();
+        }
     }
 
 
@@ -46,6 +58,8 @@ export const ImpTicketTransf = ({ setImprimir, setModal, transferencia, listaPro
             }
         })
     }
+
+    const localDestino:any = findLocal(transferencia.localDestino);
 
 
     // estilos
@@ -88,7 +102,7 @@ export const ImpTicketTransf = ({ setImprimir, setModal, transferencia, listaPro
         
     }
 
-
+    
     return (
         <div className="none">
             <div ref={imprimir}>
@@ -101,7 +115,7 @@ export const ImpTicketTransf = ({ setImprimir, setModal, transferencia, listaPro
                         </span>
                         <span style={grid2}>
                             <p style={parrafo}>Destino: </p>
-                            <p style={{...parrafo, ...strong}}>{ findLocal(transferencia.localDestino).nombre }</p>
+                            <p style={{...parrafo, ...strong}}>{ localDestino.nombre }</p>
                         </span>
                         <span style={grid2}>
                             <p style={parrafo}>Enviado por: </p>
@@ -124,7 +138,6 @@ export const ImpTicketTransf = ({ setImprimir, setModal, transferencia, listaPro
                     <tbody>
                         {
                             listaProductos.map((e:any, index:number) => {
-                                console.log(e);
                                 const producto:string = 
                                     e.productoNombre + " - " + 
                                     e.marca + " - " + 

@@ -18,10 +18,12 @@ export const GestionCodigo = ({ producto, noCreado }:any) => {
 
     const handlerPrint = () => { 
         let ventimp:any = window.open(' ', 'popimpr');
-        ventimp.document.write( imprimir.current.innerHTML );
-        ventimp.document.close();
-        ventimp.print( );
-        ventimp.close();
+        if (ventimp) {
+            ventimp.document.write( imprimir.current.innerHTML );
+            ventimp.document.close();
+            ventimp.print( );
+            ventimp.close();    
+        }
     }
 
 

@@ -14,6 +14,7 @@ interface modalConfirmImp {
     listaProductos:any;
     nombreLocal?:string;
     locales:Array<any>;
+    reiniciar:Function;
 }
 
 export const ModalConfirmImp = ({ 
@@ -24,7 +25,8 @@ export const ModalConfirmImp = ({
     transferencia, 
     listaProductos,
     nombreLocal,
-    locales
+    locales,
+    reiniciar
 }:modalConfirmImp) => {
 
     const [imprimir, setImprimir] = useState<boolean>(false);
@@ -58,6 +60,7 @@ export const ModalConfirmImp = ({
                             listaProductos={listaProductos}
                             nombreLocal={nombreLocal}
                             locales={locales}
+                            reiniciar={reiniciar}
                         /> 
                     }                    
                 </>
