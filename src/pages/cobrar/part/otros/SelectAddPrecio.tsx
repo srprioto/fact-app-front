@@ -1,39 +1,60 @@
 import { BiCheck, BiX } from "react-icons/bi"
 import { Input } from "../../../../components/forms/Input"
-import { Select2 } from "../../../../components/forms/Select2"
+import { Select } from "../../../../components/forms/Select";
+import { ToolTip } from "../../../../components/tooltip/ToolTip";
+import { formasDePago } from "../../../../resources/dtos/FormasPago";
 
 interface selectAddPrecio {
     pushPrecioToPrecios:Function;
-    handlerOnChange:Function;
     nuevoPrecio:any;
     switchAdd:boolean;
     setSwitchAdd:Function;
+    handlerOnChange:Function;
+    tipoPagosRepetidos:Array<string>;
+    // setNuevoPrecio:Function;
+    // listaPrecios:any;
+    // setListaPrecios:Function;
 }
 
 export const SelectAddPrecio = ({ 
     pushPrecioToPrecios, 
-    handlerOnChange, 
     nuevoPrecio, 
     switchAdd, 
-    setSwitchAdd 
+    setSwitchAdd,
+    handlerOnChange,
+    tipoPagosRepetidos
+    // setNuevoPrecio, 
+    // listaPrecios,
+    // setListaPrecios,
 }:selectAddPrecio) => {
 
     return (
         <div className="box-dividir-precios mb-10">
             <div></div>
             <div className="grid-2 gap ">
-                <Select2
+                <Select
                     // label="Forma de pago"
                     name="forma_pago"
                     onChange={handlerOnChange}
                     value={nuevoPrecio.forma_pago}
-                    defaultValue="efectivo"
+                    textDefault="Selec. form pago"
+                    defaultValue
+                    tooltip={{
+                        anchor: "btn-selec-form-pago",
+                        descripcion: "Selecciona una forma de pago"
+                    }}
                 >
-                    <option value="efectivo">Efectivo</option>
-                    <option value="tarjeta">Tarjeta</option>
-                    <option value="pago_electronico">Pago electronico</option>
-                    <option value="deposito">Deposito</option>                           
-                </Select2>
+                    {
+                        formasDePago.map((e:any, index:number) => {
+                            if (!(tipoPagosRepetidos.includes(e.value))) {
+                                return (
+                                    <option key={index} value={ e.value }>{ e.nombre }</option>
+                                )   
+                            }
+                            return (null)
+                        })
+                    }
+                </Select>
 
                 <Input
                     // label="Precio de compra del paquete"
@@ -52,15 +73,28 @@ export const SelectAddPrecio = ({
                     onClick={() => setSwitchAdd(!switchAdd)} 
                 />
                 {
-                    nuevoPrecio.precio_parcial > 0
-                    && <BiCheck 
+                    (nuevoPrecio.precio_parcial > 0 && !!nuevoPrecio.forma_pago)
+                    ? <BiCheck 
                         className="pointer success" 
                         onClick={() => pushPrecioToPrecios()} 
+                    /> : <BiCheck 
+                        id="btn-ok-tipo-pago-disable"
+                        className="icon-disable2" 
                     />
                 }
-                
-            </div>
 
+            </div>
+            <ToolTip
+                anchor="btn-ok-tipo-pago-disable"
+                descripcion="Requiere una forma de pago y un precio"
+            /> 
         </div>
     )
 }
+
+/* 
+<option value="efectivo">Efectivo</option>
+<option value="tarjeta">Tarjeta</option>
+<option value="pago_electronico">Pago electronico</option>
+<option value="deposito">Deposito</option>
+*/

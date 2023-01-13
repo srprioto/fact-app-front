@@ -15,7 +15,6 @@ import { CodigoVenta } from "./otros/CodigoVenta";
 import { DividirPagos } from "./DividirPagos";
 import { tipoVenta } from "../../../resources/dtos/VentasDto";
 import { CreditoAdelanto } from "./creditoAdelanto/CreditoAdelanto";
-import { MasAccionesCobrar } from "./otros/MasAccionesCobrar";
 import { DescripcionCobrarVenta } from "./otros/DescripcionCobrarVenta";
 import { copy } from "../../../resources/func/deepCopy";
 
@@ -63,7 +62,7 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
     const [listaPrecios, setListaPrecios] = useState<Array<any>>([]);
     const [confirmarVenta, setConfirmarVenta] = useState<boolean>(false);
     const [showFormasPago, setShowFormasPago] = useState<boolean>(false);
-    const [switchCredito, setSwitchCredito] = useState<boolean>(false);
+    // const [switchCredito, setSwitchCredito] = useState<boolean>(false);
     const [comisionTarjeta, setComisionTarjeta] = useState<number>(0);
     const [getCliente, setGetCliente] = useState<any>({documento: "", tipoDocumento: tipoDocumUpdate()});
 
@@ -148,7 +147,7 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
             updateVenta.estado_producto = venta.estado_producto;
             updateVenta.totalPagado = venta.totalPagado;
             updateVenta.creditoDetalles = creditoDetalles;
-        } 
+        }
 
         try {
             await put(data.id, updateVenta, VENTAS);
@@ -215,15 +214,6 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
                         tabbs={tabbs}
                     />
 
-                    <MasAccionesCobrar
-                        venta={venta}
-                        setListaPrecios={setListaPrecios}
-                        showFormasPago={showFormasPago}
-                        setShowFormasPago={setShowFormasPago}
-                        switchCredito={switchCredito}
-                        setSwitchCredito={setSwitchCredito}
-                    />
-
                     <DividirPagos
                         showFormasPago={showFormasPago}
                         venta={venta}
@@ -233,6 +223,7 @@ export const DescripcionVenta = ({ data, handlerRefresh }:descripcionVenta) => {
                         // comisionTarjeta={comisionTarjeta}
                         listaPagosTarjeta={listaPagosTarjeta}
                         setComisionTarjeta={setComisionTarjeta}
+                        setShowFormasPago={setShowFormasPago}
                     />
                     
                 </div>

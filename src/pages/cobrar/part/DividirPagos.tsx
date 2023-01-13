@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { BiPlus, BiX } from "react-icons/bi";
+import { BiChevronDown, BiChevronUp, BiPlus, BiX } from "react-icons/bi";
 import { InputDisable } from "../../../components/forms/InputDisable";
-import { formasPago } from "../../../resources/dtos/FormasPago";
+import { ToolTip } from "../../../components/tooltip/ToolTip";
+import { formasDePago, formasPago } from "../../../resources/dtos/FormasPago";
 import { tipoVenta } from "../../../resources/dtos/VentasDto";
 import { moneda } from "../../../resources/func/moneda";
 import { sumaArrayObj } from "../../../resources/func/sumaArrayObj";
@@ -17,6 +18,7 @@ interface dividirPagos {
     // comisionTarjeta:number;
     listaPagosTarjeta:Function;
     setComisionTarjeta:Function;
+    setShowFormasPago:Function;
 }
 
 export const DividirPagos = ({ 
@@ -28,30 +30,24 @@ export const DividirPagos = ({
     setListaPrecios,
     // comisionTarjeta,
     listaPagosTarjeta,
-    setComisionTarjeta
+    setComisionTarjeta,
+    setShowFormasPago
 }:dividirPagos) => {
+    
+    const nuevoPrecioDto:any = { forma_pago: "", precio_parcial: 0 };
 
-    const [nuevoPrecio, setNuevoPrecio] = useState<any>({ forma_pago: "efectivo", precio_parcial: 0 });
     const [switchAdd, setSwitchAdd] = useState<boolean>(false);
+    const [nuevoPrecio, setNuevoPrecio] = useState<any>(nuevoPrecioDto);
 
-    // const estadoCredito:boolean = (
-    //     venta.tipo_venta === tipoVenta.credito || 
-    //     venta.tipo_venta === tipoVenta.adelanto
-    // ) ? true : false;
+    const [tipoPagosRepetidos, setTipoPagosRepetidos] = useState<any>([]);
+
 
     const totalParaDividir:number = (
         venta.tipo_venta === tipoVenta.credito || 
         venta.tipo_venta === tipoVenta.adelanto
     ) ? Number(venta.totalPagado) : Number(venta.total);
 
-    // const totalRestante = ():number => { // añadir comision a tarjeta
-    //     const sumaPrecios:number = sumaArrayObj(listaPrecios, "precio_parcial");
-    //     const comisTarjeta:number = Number(comisionTarjeta);
-    //     const total:number = totalParaDividir;
-    //     return (total + comisTarjeta) - sumaPrecios;
-    // }
 
-    
     const totalRestante = ():number => { 
         const sumaPrecios:number = sumaArrayObj(listaPrecios, "precio_parcial");
         const total:number = totalParaDividir;
@@ -91,20 +87,39 @@ export const DividirPagos = ({
     }
 
 
-    // const handlerOnChangeArray = (e:any, index:number) => { // edita un elemento del array
-    //     let updateListaPrecios = [...listaPrecios];
-    //     let objeto = updateListaPrecios[index];
-    //     objeto[e.target.name] = e.target.value;
-    //     updateListaPrecios[index] = objeto;
-    //     setListaPrecios([...updateListaPrecios])
-    // }
+
+
+    // la zona comentada permite añadir como forma de pago a todos los productos en lista
+    const dividirPreciosProd = () => { 
+        // if (!showFormasPago) {
+        //     let divPrecio:any = [];
+        //     venta.ventaDetalles.forEach((e:any) => { 
+        //         const updateDivPrecio:any = {
+        //             forma_pago: "efectivo",
+        //             precio_parcial: Number(e.precio_parcial)
+        //         }
+        //         divPrecio.push(updateDivPrecio);
+        //     })
+        //     setListaPrecios(divPrecio)
+        // } else {
+        //     setListaPrecios([]);
+        // }
+        setListaPrecios([]);
+        setShowFormasPago(!showFormasPago)
+    }
 
 
     const pushPrecioToPrecios = () => { // añade elemento a lista de precios
+        // añade elemento a la lista de repetidos
+        const updateTipoPagosLista:Array<string> = tipoPagosRepetidos;
+        updateTipoPagosLista.push(nuevoPrecio.forma_pago);
+        setTipoPagosRepetidos(updateTipoPagosLista);
+
+        // aqui añade a lista de precios
         const updateDividirPrecios:Array<any> = listaPrecios;
         updateDividirPrecios.push(nuevoPrecio)
         setListaPrecios([ ...updateDividirPrecios ])
-        setNuevoPrecio({ forma_pago: "efectivo", precio_parcial: 0 });
+        setNuevoPrecio(nuevoPrecioDto); // reinicio del nuevo precio
         setSwitchAdd(!switchAdd);
     }
 
@@ -113,6 +128,10 @@ export const DividirPagos = ({
         let lista:Array<any> = [...listaPrecios];
         lista.splice(i,1);
         setListaPrecios([...lista]);
+
+        let prodRepe:Array<number> = [...tipoPagosRepetidos];
+        prodRepe.splice(i,1);
+        setTipoPagosRepetidos([...prodRepe]);
     }
 
 
@@ -133,136 +152,146 @@ export const DividirPagos = ({
         const cincoPor:number = Number(valor) * 0.05;
         return [Number(valor) + Number(cincoPor), Number(cincoPor)];
     }
-    
 
-    if (showFormasPago) {
-        return (
-            <div className="formas-pago dividir-pagos">
+
+    return (
+        <>
+
+            <div className="mas-acciones-cobrar grid-1 gap">
+
                 <div className="grid-3 gap">
                     <div></div>
-                    <div className="box-descripcion center">
-                        <p className="center">Sin asignar:</p>
-                        <span className="middle">
-                            <h4 className={
-                                "center " + 
-                                (
-                                    (Number(totalRestante()) - Number(nuevoPrecio.precio_parcial)) > 0
-                                    ? "warning-i"
-                                    : (Number(totalRestante()) - Number(nuevoPrecio.precio_parcial)) < 0
-                                    ? "danger-i"
-                                    : "success-i"
-                                )
-                            }>S/. { moneda(Number(totalRestante()) - Number(nuevoPrecio.precio_parcial))}</h4>
-                        </span>
+                    <button
+                        id="btn-dividir-pagos"
+                        onClick={() => dividirPreciosProd()}
+                        className="btn-show red-text center"
+                    >
+                        Dividir pagos
+                        {
+                            showFormasPago
+                            ? <BiChevronUp />
+                            : <BiChevronDown />
+                        }
+                    </button>
+                    <ToolTip
+                        anchor="btn-dividir-pagos"
+                        descripcion="Permite dividir pagos y añadir otras formas de pago"
+                    /> 
+                </div>
+
+            </div>
+
+            {
+                showFormasPago
+                && <div className="formas-pago dividir-pagos">
+                    <div className="grid-3 gap">
+                        <div></div>
+                        <div 
+                            id="txt-cant-sin-asignar"
+                            className="box-descripcion center"
+                        >
+                            <p className="center">Sin asignar:</p>
+                            <span className="middle">
+                                <h4 className={
+                                    "center " + 
+                                    (
+                                        (Number(totalRestante()) - Number(nuevoPrecio.precio_parcial)) > 0
+                                        ? "warning-i"
+                                        : (Number(totalRestante()) - Number(nuevoPrecio.precio_parcial)) < 0
+                                        ? "danger-i"
+                                        : "success-i"
+                                    )
+                                }>S/. { moneda(Number(totalRestante()) - Number(nuevoPrecio.precio_parcial))}</h4>
+                            </span>
+                            {
+                                (Number(totalRestante()) - Number(nuevoPrecio.precio_parcial)) !== 0
+                                && <ToolTip
+                                    anchor="txt-cant-sin-asignar"
+                                    descripcion="Requiere asignar todo el monto pendiente a las formas de pago, de lo contrario no se podrá confirmar la venta"
+                                /> 
+                            }
+                            
+                        </div>
+                    </div>
+                    
+                    {
+                        listaPrecios.map((e:any, index:number) => { 
+                            return (
+                                <div className="box-dividir-precios mb-10" key={index}>
+                                    <div></div>
+                                    <div className="grid-2 gap10 ">
+
+                                        <InputDisable
+                                            value={mostrarFormaPago(e.forma_pago)}
+                                        />
+
+                                        {
+                                            e.forma_pago === "tarjeta"
+                                            ? (
+                                                <InputDisable
+                                                    value={mostrarComisionTarjeta(e.precio_parcial)[0]}
+                                                    color="warning"
+                                                    moneda
+                                                />
+                                            ) : (
+                                                <InputDisable
+                                                    value={e.precio_parcial}
+                                                    moneda
+                                                />
+                                            )
+                                        }
+                                    </div>
+                                    <div className="delete-forma-pago">
+                                        <BiX 
+                                            className="pointer danger" 
+                                            onClick={() => itemPop(index)} 
+                                        />
+                                    </div>
+                                </div>
+                            )
+                        })
+                    }
+                    <div className="mt-20 add-precio">
+                        {
+                            switchAdd
+                            ? (
+                                <SelectAddPrecio
+                                    pushPrecioToPrecios={pushPrecioToPrecios}
+                                    nuevoPrecio={nuevoPrecio}
+                                    switchAdd={switchAdd}
+                                    setSwitchAdd={setSwitchAdd}
+                                    handlerOnChange={handlerOnChange}
+                                    tipoPagosRepetidos={tipoPagosRepetidos}
+                                    // pushPrecioToPrecios={pushPrecioToPrecios}
+                                    // setNuevoPrecio={setNuevoPrecio}
+                                    // nuevoPrecio={nuevoPrecio}
+                                    // switchAdd={switchAdd}
+                                    // setSwitchAdd={setSwitchAdd}
+                                    // listaPrecios={listaPrecios}
+                                    // setListaPrecios={setListaPrecios}
+                                />
+                            ) : (
+                                formasDePago.length !== tipoPagosRepetidos.length
+                                ? <div className="center box-add-precio">
+                                    <BiPlus 
+                                        id="btn-add-tipo-pago"
+                                        className="success pointer" 
+                                        onClick={() => setSwitchAdd(!switchAdd)}
+                                    />
+                                    <ToolTip
+                                        anchor="btn-add-tipo-pago"
+                                        descripcion="
+                                            Permite añadir una nueva forma de pago.<br/>
+                                            Si todas las formas de pago fueron aplicadas, esta opción será deshabilitada.
+                                        "
+                                    /> 
+                                </div> : <></>
+                            )
+                        }
                     </div>
                 </div>
-                
-                {
-                    listaPrecios.map((e:any, index:number) => { 
-                        return (
-                            <div className="box-dividir-precios mb-10" key={index}>
-                                <div></div>
-                                <div className="grid-2 gap10 ">
-                                    {/* <MetodosPago
-                                        name="forma_pago"
-                                        onChange={(e:any) => handlerOnChangeArray(e, index)}
-                                        value={e.forma_pago}
-                                    /> */}
-                                    <InputDisable
-                                        value={mostrarFormaPago(e.forma_pago)}
-                                    />
-                                    {/* <Select2
-                                        // label="Forma de pago"
-                                        name="forma_pago"
-                                        onChange={(e:any) => handlerOnChangeArray(e, index)}
-                                        value={e.forma_pago}
-                                    >
-                                        <option value="efectivo">Efectivo</option>
-                                        <option value="tarjeta">Tarjeta</option>
-                                        <option value="pago_electronico">Pago electronico</option>
-                                        <option value="deposito">Deposito</option>
-                                    </Select2> */}
-
-                                    {
-                                        e.forma_pago === "tarjeta"
-                                        ? (
-                                            <InputDisable
-                                                value={mostrarComisionTarjeta(e.precio_parcial)[0]}
-                                                color="warning"
-                                                moneda
-                                            />
-                                        ) : (
-                                            <InputDisable
-                                                value={e.precio_parcial}
-                                                moneda
-                                            />
-                                            // <Input
-                                            //     type="number"
-                                            //     name="precio_parcial"
-                                            //     value={e.precio_parcial}
-                                            //     onChange={(e:any) => handlerOnChangeArray(e, index)}
-                                            //     moneda
-                                            //     noMenos
-                                            // />
-                                        )
-                                    }
-                                </div>
-                                <div className="delete-forma-pago">
-                                    <BiX 
-                                        className="pointer danger" 
-                                        onClick={() => itemPop(index)} 
-                                    />
-                                </div>
-                            </div>
-                        )
-                    })
-                }
-                <div className="mt-20 add-precio">
-                    {
-                        switchAdd
-                        ? (
-                            <SelectAddPrecio
-                                pushPrecioToPrecios={pushPrecioToPrecios}
-                                handlerOnChange={handlerOnChange}
-                                nuevoPrecio={nuevoPrecio}
-                                switchAdd={switchAdd}
-                                setSwitchAdd={setSwitchAdd}
-                            />
-                        ) : (
-                            <div className="center box-add-precio">
-                                <BiPlus 
-                                    className="success pointer" 
-                                    onClick={() => setSwitchAdd(!switchAdd)}
-                                />
-                            </div>
-                        )
-                    }
-                </div>
-            </div>
-        )
-    } else {
-        return ( <></> )
-    }
+            }
+        </>
+    )
 
 }
-
-// const dividirPreciosProd = () => { // ***
-//     let divPrecio:any = [];
-//     venta.ventaDetalles.forEach((e:any) => { 
-//         const updateDivPrecio:any = {
-//             forma_pago: "efectivo",
-//             precio_parcial: Number(e.precio_parcial)
-//         }
-//         divPrecio.push(updateDivPrecio);
-//     })
-//     setListaPrecios(divPrecio)
-// }
-
-
-// useEffect(() => {
-//     if (showFormasPago) {
-//         dividirPreciosProd();
-//     } else {
-//         setListaPrecios([]);
-//     }
-// }, [showFormasPago])
