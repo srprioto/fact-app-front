@@ -49,7 +49,7 @@ export const ListaProductosTransf = ({ listaProductos, setListaProductos, repeti
                             <thead>
                                 <tr>
                                     <th>Producto</th>
-                                    <th id="txt-cant-envio">Cantidad</th>
+                                    <th id="txt-cant-envio">Cant.</th>
                                     <th className="transparent inlineblock">...</th>
                                 </tr>
                             </thead>
@@ -58,7 +58,12 @@ export const ListaProductosTransf = ({ listaProductos, setListaProductos, repeti
                                     listaProductos.map((e:any, index:number) => {
                                         return (
                                             <tr key={index}>
-                                                <td>{ e.productoNombre + " - " + e.marca + " - " + e.talla }</td>
+                                                <td>{ 
+                                                    e.productoNombre + " - " + 
+                                                    e.marca + " - " + 
+                                                    e.talla + " - " + 
+                                                    e.color 
+                                                }</td>
                                                 <td>
                                                     <Input
                                                         className="input2"

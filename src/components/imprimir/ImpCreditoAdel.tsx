@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { fechaActualJs, fechaResumen } from "../../resources/func/fechas";
+import { ahora, fechaActualJs, fechaResumen } from "../../resources/func/fechas";
 import { moneda } from "../../resources/func/moneda";
 
 
@@ -160,7 +160,7 @@ export const ImpCreditoAdel = ({ ventaUpdate, setImprimir }:impCreditoAdel) => {
     //     ...mb10,
     //     ...center
     // }
- 
+    
 
     return (
 
@@ -172,7 +172,7 @@ export const ImpCreditoAdel = ({ ventaUpdate, setImprimir }:impCreditoAdel) => {
                     <span style={headerInfo}>
                     {ventaUpdate.id + "-" + ventaUpdate.codigo_venta}
                     </span>
-                    <span style={headerInfo}>{ fechaResumen(ventaUpdate.updated_at) }</span>
+                    <span style={headerInfo}>{ fechaResumen(ahora()) }</span>
                 </div>
                 
                 <div style={boxHeaderInfo}>

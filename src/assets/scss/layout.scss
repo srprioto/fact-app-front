@@ -1077,7 +1077,20 @@
     .lista-productos-transf{
         @include static-scroll(380px);
     }
+}
 
+.enviar-transferencia{
+    .lista-productos-transf{
+        .table3{
+            tr{
+                td{
+                    input.input2{
+                        width: 60px;
+                    }
+                }
+            }
+        }
+    }
 }
 
 

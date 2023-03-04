@@ -24,6 +24,7 @@ export const BuscarProdTransf = ({
             productoNombre: e.productos.nombre,
             marca: e.productos.marca,
             talla: e.productos.talla,
+            color: e.productos.color,
             cantidad: e.cantidad,
             cantOriginal: e.cantidad,
             productosId: e.productos.id
@@ -64,7 +65,10 @@ export const BuscarProdTransf = ({
                                     <tr>
                                         {/* <th>Codigo</th> */}
                                         <th>Producto</th>
-                                        <th id="txt-cant-stock">Cantidad</th>
+                                        {/* <th>Marca</th>
+                                        <th>Talla</th>
+                                        <th>Color</th> */}
+                                        <th id="txt-cant-stock">Cant.</th>
                                     </tr>
                                 </thead>
                             
@@ -83,11 +87,15 @@ export const BuscarProdTransf = ({
                                                         }}
                                                         className={e.cantidad <= 0 ? "disable" : ""}
                                                     >
-                                                        {/* <td className="secundary">{ producto.codigo }</td> */}
+                                                        {/* <td>{ producto.nombre }</td>
+                                                        <td>{ producto.marca }</td>
+                                                        <td>{ producto.talla }</td>
+                                                        <td>{ producto.color }</td> */}
                                                         <td className="secundary">{ 
                                                             producto.nombre + " - " + 
                                                             producto.marca + " - " + 
-                                                            producto.talla
+                                                            producto.talla + " - " + 
+                                                            producto.color
                                                         }</td>
                                                         {/* <td>{ producto.marca }</td>
                                                         <td className="secundary">{ producto.talla }</td> */}
