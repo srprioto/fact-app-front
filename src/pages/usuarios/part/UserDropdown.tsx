@@ -1,9 +1,9 @@
-import { BiPencil, BiShowAlt, BiTrash } from "react-icons/bi";
+import { BiListOl, BiPencil, BiShowAlt, BiTrash } from "react-icons/bi";
 import { Link } from "react-router-dom";
 
 import { DropDown } from "../../../components/DropDown"
 
-export const UserDropdown = ({ id, nombre, handlerDeleted, handlerVer }:any) => {
+export const UserDropdown = ({ id, nombre, handlerDeleted, handlerVer, handerVerVentas }:any) => {
     return (
         <DropDown>
             <span onClick={ () => handlerDeleted(id, nombre) }>
@@ -12,6 +12,9 @@ export const UserDropdown = ({ id, nombre, handlerDeleted, handlerVer }:any) => 
             <Link to={`/usuarios/${id}/edit`} >
                 <BiPencil />Editar usuario
             </Link>
+            <span onClick={ () => handerVerVentas(id, nombre) }>
+                <BiListOl />Reg. Ventas
+            </span>
             <span onClick={ () => handlerVer(id) }>
                 <BiShowAlt />Ver detalles
             </span>

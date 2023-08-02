@@ -14,6 +14,8 @@ import { USUARIOS, USUARIOS_SEARCH } from "../../../resources/routes";
 import { getOne, paginate } from "../../../resources/fetch";
 import { NoRegistros } from "../../../components/NoRegistros";
 import { SearchWrap } from "../../../components/search/SearchWrap";
+import { ModalWrap } from "../../../components/modals/ModalWrap";
+import { ModalVerVentas } from "./ModalVerVentas";
 
 export const Usuarios = () => {
 
@@ -22,6 +24,7 @@ export const Usuarios = () => {
 
     const [modalEliminar, setModalEliminar] = useState<boolean>(false);
     const [modalVer, setModalVer] = useState<boolean>(false);
+    const [modalVerVentas, setModalVerVentas] = useState<boolean>(false);
 
     const [pagination, setPagination] = useState<any>({ meta: {}, links: {} });
 
@@ -62,6 +65,11 @@ export const Usuarios = () => {
     const handlerVer = (id:number) => { 
         getOneData(id);
         setModalVer(!modalVer);
+    }
+
+    const handerVerVentas = (id:number, nombre?:string) => { 
+        setInfoUser({ id, nombre });
+        setModalVerVentas(!modalVerVentas);
     }
 
 
@@ -193,6 +201,7 @@ export const Usuarios = () => {
                                                     usuario={e}
                                                     handlerDeleted={handlerDeleted}
                                                     handlerVer={handlerVer}
+                                                    handerVerVentas={handerVerVentas}
                                                 />
                                             )
                                         })   
@@ -229,6 +238,14 @@ export const Usuarios = () => {
                 setModal={setModalVer}
                 loading={loadingOne}
             />
+
+            <ModalWrap modal={modalVerVentas}>
+                <ModalVerVentas
+                    modal={modalVerVentas}
+                    setModal={setModalVerVentas}
+                    infoUser={infoUser}
+                />
+            </ModalWrap>
 
         </div>
     )
