@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Modal } from "../../../components/modals/Modal"
-import { getOne, post } from "../../../resources/fetch";
+import { post } from "../../../resources/fetch";
 import { VENTAS } from "../../../resources/routes";
 import { Loading } from "../../../components/loads/Loading";
 import { NoRegistros } from "../../../components/NoRegistros";
