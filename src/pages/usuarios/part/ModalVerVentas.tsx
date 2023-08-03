@@ -9,6 +9,7 @@ import { ToolTip } from "../../../components/tooltip/ToolTip";
 import { Pagination2 } from "../../../components/paginacion/Pagination2";
 import { paginacionDTO } from "../../../resources/dtos/Pagination";
 
+
 export const ModalVerVentas = ({ modal, setModal, infoUser }:any) => {
 
     const [loading, setLoading] = useState<boolean>(false);
