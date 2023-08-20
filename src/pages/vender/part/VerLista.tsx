@@ -9,6 +9,7 @@ import { PreciosVenta } from "./verLista/extend/PreciosVenta";
 import { TablaLista } from "./verLista/extend/TablaLista";
 import { ModalCodigoVenta } from "./verLista/short/ModalCodigoVenta";
 import { RapidaVenta } from "./factura/RapidaVenta";
+import { sumaArrayObj } from "../../../resources/func/sumaArrayObj";
 
 
 export const VerLista = ({ 
@@ -132,7 +133,8 @@ export const VerLista = ({
                         venta={venta}
                         alertaDescuento={alertaDescuento}
                         handlerOnChange={handlerOnChange}
-                        tabbs={tabbs}
+                        totalUnid={sumaArrayObj(listaVenta, "cantidad_venta")}
+                        // tabbs={tabbs}
                     />
                     
                     { 

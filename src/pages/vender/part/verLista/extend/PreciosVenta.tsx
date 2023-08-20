@@ -3,9 +3,15 @@ import { ToolTip } from "../../../../../components/tooltip/ToolTip";
 // import { Select2 } from "../../../../../components/forms/Select2";
 import { moneda } from "../../../../../resources/func/moneda";
 
-export const PreciosVenta = ({ venta, alertaDescuento, handlerOnChange, tabbs }:any) => {
+
+export const PreciosVenta = ({ venta, alertaDescuento, handlerOnChange, totalUnid }:any) => {
     return (
-        <div className="info-venta grid-4 gap mb-25">
+        <div className="info-venta grid-5 gap mb-25">
+
+            <span className="center">
+                <p className="mb-5 info">Total Unidades</p>
+                <h3 className="secundary m-0">{ totalUnid }</h3>
+            </span>
 
             <span className="center">
                 <p className="mb-5 info">Subtotal</p>

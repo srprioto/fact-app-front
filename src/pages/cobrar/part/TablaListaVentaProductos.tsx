@@ -8,6 +8,9 @@ interface tablaListaVentaProductos {
 }
 
 export const TablaListaVentaProductos = ({ venta }:tablaListaVentaProductos) => {
+
+    console.log(venta.ventaDetalles);    
+
     return (
         <div className="lista-productos-pedido bb bb-neutro">
             <h3>Informacion de la venta</h3>
@@ -82,6 +85,8 @@ export const TablaListaVentaProductos = ({ venta }:tablaListaVentaProductos) => 
                     }
                 </tbody>
             </table>   
+
+            <h3>asdfasfd</h3>
 
         </div>
     )
