@@ -1,5 +1,6 @@
 import { ToolTip } from "../../../components/tooltip/ToolTip";
 import { moneda } from "../../../resources/func/moneda";
+import { sumaArrayObj } from "../../../resources/func/sumaArrayObj";
 
 interface tablaListaVentaProductos { 
     venta:any;
@@ -9,7 +10,8 @@ interface tablaListaVentaProductos {
 
 export const TablaListaVentaProductos = ({ venta }:tablaListaVentaProductos) => {
 
-    console.log(venta.ventaDetalles);    
+    // console.log(venta.ventaDetalles);    
+    console.log(sumaArrayObj(venta.ventaDetalles, "cantidad_venta"));    
 
     return (
         <div className="lista-productos-pedido bb bb-neutro">
@@ -86,7 +88,10 @@ export const TablaListaVentaProductos = ({ venta }:tablaListaVentaProductos) => 
                 </tbody>
             </table>   
 
-            <h3>asdfasfd</h3>
+            <div className="center mt-20">
+                <h3>Cantidad de Unidades: { sumaArrayObj(venta.ventaDetalles, "cantidad_venta") }</h3>                
+            </div>
+            
 
         </div>
     )

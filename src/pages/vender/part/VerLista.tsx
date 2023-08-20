@@ -100,6 +100,7 @@ export const VerLista = ({
                     <TablaLista
                         listaVenta={listaVenta}
                         itemPop={itemPop}
+                        totalUnid={sumaArrayObj(listaVenta, "cantidad_venta")}
                     />
 
                     <div className="tabbs-buttons tabbs grid-4 gap mb-25">
@@ -133,7 +134,6 @@ export const VerLista = ({
                         venta={venta}
                         alertaDescuento={alertaDescuento}
                         handlerOnChange={handlerOnChange}
-                        totalUnid={sumaArrayObj(listaVenta, "cantidad_venta")}
                         // tabbs={tabbs}
                     />
                     

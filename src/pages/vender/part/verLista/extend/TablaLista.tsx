@@ -1,7 +1,7 @@
 import { BiX } from "react-icons/bi";
 import { moneda } from "../../../../../resources/func/moneda";
 
-export const TablaLista = ({ listaVenta, itemPop }:any) => {
+export const TablaLista = ({ listaVenta, itemPop, totalUnid }:any) => {
 
     return (
         <div className="tabla-lista-large mb-25">
@@ -53,6 +53,11 @@ export const TablaLista = ({ listaVenta, itemPop }:any) => {
                     }
                 </tbody>
             </table>
+
+            <div className="center mt-20">
+                <h3>Cantidad de Unidades: { totalUnid }</h3>                
+            </div>
+
         </div>
     )
 }
