@@ -127,6 +127,43 @@ async function destroy(id:number|null|undefined, endpoint:string) {
 
 }
 
+
+async function downloadFile(endpoint:string, nombre_archivo:string, loading:any, modal?:any) {
+    loading.setLoading(true);
+
+    // Realiza la solicitud GET para obtener el archivo
+    fetch(endpoint)
+    .then((response) => {
+        if (!response.ok) {
+            throw new Error('Error en la solicitud');
+        }
+        return response.blob(); // Obtener el contenido del archivo como un Blob
+    })
+    .then((blob) => {
+        // Crear una URL de objeto a partir del Blob
+        const url = window.URL.createObjectURL(blob);
+
+        // Crear un enlace temporal para iniciar la descarga
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = nombre_archivo; // Nombre del archivo descargado
+        document.body.appendChild(link);
+        link.click();
+
+        // Liberar la URL del objeto cuando ya no se necesita
+        window.URL.revokeObjectURL(url);
+    })
+    .then(() => { 
+        loading.setLoading(false);
+        modal.setModal(false);
+    })
+    .catch((error) => {
+        console.error(error);
+        loading.setLoading(false);
+    });
+}
+
+
 // function url(){
 //     return API_URL;
 // }
@@ -139,6 +176,7 @@ export {
     post, 
     put, 
     destroy,
+    downloadFile,
     API_URL,
     // ur1l
 }

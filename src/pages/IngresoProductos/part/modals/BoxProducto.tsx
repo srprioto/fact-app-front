@@ -1,7 +1,7 @@
 import { BiX } from "react-icons/bi";
 import { TextoRelleno } from "../../../../components/TextoRelleno";
 
-export const BoxProducto = ({ productoSolo, loading, handlerReset }:any) => {
+export const BoxProducto = ({ productoSolo, handlerReset }:any) => {
 
     const objExist = (objeto:any) => { 
         if (!(Object.keys(objeto).length) || !objeto || objeto === undefined) {
@@ -10,7 +10,7 @@ export const BoxProducto = ({ productoSolo, loading, handlerReset }:any) => {
             return false
         }
     }
-    
+
 
     return (
         <div className="relative">
@@ -64,11 +64,16 @@ export const BoxProducto = ({ productoSolo, loading, handlerReset }:any) => {
                                     <h4>P / mayor: </h4>
                                     <p>{ productoSolo.precio_venta_3 }</p>
                                 </span>
+
+                                <span>
+                                    <h4>P / compra: </h4>
+                                    <p>{ productoSolo.precio_compra }</p>
+                                </span>
                             </div> 
                         </div>
                     </>
                 ) : (
-                    <div style={{ height: "160px" }}>
+                    <div style={{ height: "192px" }}>
                         <TextoRelleno texto="Seleciona un producto" heightAuto />
                     </div>
                 )

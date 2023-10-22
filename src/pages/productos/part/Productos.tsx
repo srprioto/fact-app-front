@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { BiPlusCircle } from "react-icons/bi"
+import { BiDownload, BiPlusCircle } from "react-icons/bi"
 import { Link } from "react-router-dom"
 
 import { Loading } from "../../../components/loads/Loading";
@@ -8,7 +8,7 @@ import { Pagination } from "../../../components/paginacion/Pagination";
 import { TitleBox } from "../../../components/TitleBox"
 import { Producto } from "./Producto";
 
-import { paginate } from "../../../resources/fetch";
+import { API_URL, paginate } from "../../../resources/fetch";
 import { PRODUCTOS, PRODUCTOS_SEARCH } from "../../../resources/routes";
 import { NoRegistros } from "../../../components/NoRegistros";
 import { ModalCodigoBarras } from "./ModalCodigoBarras";
@@ -16,6 +16,7 @@ import { ModalWrap } from "../../../components/modals/ModalWrap";
 import { ModalVerProducto } from "./ModalVerProducto";
 import { SearchWrap } from "../../../components/search/SearchWrap";
 import { ToolTip } from "../../../components/tooltip/ToolTip";
+import { ModalDescExcel } from "../../../components/modals/ModalDescExcel";
 
 export const Productos = () => {
 
@@ -23,6 +24,7 @@ export const Productos = () => {
     const [modalEliminar, setModalEliminar] = useState<boolean>(false);
     const [modalBarcode, setModalBarcode] = useState<boolean>(false);
     const [modalVer, setModalVer] = useState<boolean>(false);
+    const [modalDescargarExcel, setModalDescargarExcel] = useState<boolean>(false);
     const [pagination, setPagination] = useState<any>({ meta: {}, links: {} });
     const [data, setData] = useState<any>([]);
     const [producto, setProducto] = useState<any>({});
@@ -85,6 +87,10 @@ export const Productos = () => {
         setModalBarcode(!modalBarcode)
     }
 
+    const handlerModalDescargarExcel = () => { 
+        setModalDescargarExcel(true);
+    }
+
 
     const getData = async (urlPage?:string) => {
         setLoadingData(true);
@@ -136,7 +142,23 @@ export const Productos = () => {
                         placeholder="Nombre o codigo ..."
                     /> */}
                     
-                    <div></div>
+                    <div>
+                        <button 
+                            id="btn-desc-excel"
+                            className="btn btn-primary" 
+                            onClick={() => handlerModalDescargarExcel()}
+                            // onClick={() => {window.location.href = `https://www.youtube.com/`;}}
+                        >
+                            <BiDownload />
+                            {/* <ToolTip
+                                anchor="btn-desc-excel"
+                                descripcion="
+                                    Descarga un documento Excel con la lista de registros.<br/>
+                                    Requiere establecer un rango de fechas para la descarga, de lo contrario, solo se descargará los registros comprendidos el mes pasado.
+                                "
+                            />  */}
+                        </button>
+                    </div>
                     <Link to="/productos/crear-producto" className="btn btn-info" >
                         <BiPlusCircle />
                         Nuevo producto
@@ -255,6 +277,15 @@ export const Productos = () => {
                 setModal={setModalBarcode}
                 producto={producto}
             />
+
+            <ModalWrap modal={modalDescargarExcel}>
+                <ModalDescExcel
+                    modal={modalDescargarExcel}
+                    setModal={setModalDescargarExcel}
+                    linkDescarga={API_URL + PRODUCTOS + '/descargar/excel'}
+                    nombreArchivo="productos_excel.xlsx"
+                />
+            </ModalWrap>
 
 
         </div>
