@@ -56,7 +56,7 @@ export const ModalDescExcel = ({ modal, setModal, linkDescarga, nombreArchivo }:
 }
 
 
-{/* 
+/* 
 <ModalWrap modal={modalDescargarExcel}>
     <ModalDescExcel
         modal={modalDescargarExcel}
@@ -65,4 +65,4 @@ export const ModalDescExcel = ({ modal, setModal, linkDescarga, nombreArchivo }:
         nombreArchivo="productos_excel.xlsx"
     />
 </ModalWrap> 
-*/}
+*/
