@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { BiPlusCircle, BiTransfer } from "react-icons/bi";
+import { BiDownload, BiPlusCircle, BiTransfer } from "react-icons/bi";
 import { Link, useParams } from "react-router-dom";
 import { Loading } from "../../../components/loads/Loading";
 import { NoRegistros } from "../../../components/NoRegistros";
@@ -8,13 +8,14 @@ import { TitleBox } from "../../../components/TitleBox";
 import { AlertaTransferencia } from "../../../components/transferencia/recibir/AlertaTransferencia";
 import { ModalTransferencia } from "../../../components/transferencia/enviar/EnviarTransferencia";
 import { LocalStockModalDto } from "../../../resources/dtos/LocalStockDto";
-import { paginate } from "../../../resources/fetch";
-import { LOCAL_STOCK_SEARCH, LOCAL_STOCK_SOLO } from "../../../resources/routes";
+import { API_URL, paginate } from "../../../resources/fetch";
+import { LOCAL_STOCK, LOCAL_STOCK_SEARCH, LOCAL_STOCK_SOLO } from "../../../resources/routes";
 import { ModalCantidad } from "../../locales/part/ModalCantidad";
 import { ProductoLocal } from "../../locales/part/ProductoLocal";
 import { ModalWrap } from "../../../components/modals/ModalWrap";
 import { SearchWrap } from "../../../components/search/SearchWrap";
 import { ToolTip } from "../../../components/tooltip/ToolTip";
+import { ModalDescExcel } from "../../../components/modals/ModalDescExcel";
 
 export const StockAlmacen = () => {
 
@@ -23,6 +24,7 @@ export const StockAlmacen = () => {
     const [loadingData, setLoadingData] = useState<boolean>(false);
     const [modalCant, setModalCant] = useState<boolean>(false);
     const [modalTransferencia, setModalTransferencia] = useState<boolean>(false);
+    const [modalDescargarExcel, setModalDescargarExcel] = useState<boolean>(false);
     
     const [searchState, setSearchState] = useState<boolean>(false);
     const [data, setData] = useState<any>([]);
@@ -43,6 +45,10 @@ export const StockAlmacen = () => {
     const handlerCantidad = (id:number, cantidad:number, nombreProducto:string) => { 
         setModalCant(!modalCant)
         setLocalStock({ id, cantidad, nombreProducto });
+    }
+
+    const handlerModalDescargarExcel = () => { 
+        setModalDescargarExcel(true);
     }
 
     // const [searchTxt, setSearchTxt] = useState<string>("");
@@ -128,14 +134,23 @@ export const StockAlmacen = () => {
                     <div className="grid-2 gap">
 
                         <div className="grid-3 gap">
-                            {/* <Link 
-                                to={`/tiendas/vender/${params.id}/${params.nombre}`} 
-                                className="btn btn-success"
+
+                            <button 
+                                id="btn-desc-excel"
+                                className="btn btn-primary" 
+                                onClick={() => handlerModalDescargarExcel()}
+                                // onClick={() => {window.location.href = `https://www.youtube.com/`;}}
                             >
-                                <BiCartAlt />
-                            </Link>
-                            <div></div>
-                            <div></div> */}
+                                <BiDownload />
+                                {/* <ToolTip
+                                    anchor="btn-desc-excel"
+                                    descripcion="
+                                        Descarga un documento Excel con la lista de registros.<br/>
+                                        Requiere establecer un rango de fechas para la descarga, de lo contrario, solo se descargará los registros comprendidos el mes pasado.
+                                    "
+                                />  */}
+                            </button>
+
                         </div>
 
                         <div className="grid-3 gap">
@@ -257,6 +272,15 @@ export const StockAlmacen = () => {
                     getData={getData}
                 />
             </ModalWrap>
+
+            <ModalWrap modal={modalDescargarExcel}>
+                <ModalDescExcel
+                    modal={modalDescargarExcel}
+                    setModal={setModalDescargarExcel}
+                    linkDescarga={API_URL + LOCAL_STOCK + '/descargar/excel/' + params.id}
+                    nombreArchivo="stock productos.xlsx"
+                />
+            </ModalWrap> 
 
 
         </div>

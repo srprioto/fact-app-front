@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { BiCartAlt, BiTransfer } from 'react-icons/bi';
+import { BiCartAlt, BiDownload, BiTransfer } from 'react-icons/bi';
 import { Link } from 'react-router-dom';
 
 import { Loading } from '../../../components/loads/Loading';
@@ -9,14 +9,15 @@ import { ModalCantidad } from './ModalCantidad';
 import { ProductoLocal } from './ProductoLocal';
 
 import { LocalStockModalDto } from '../../../resources/dtos/LocalStockDto';
-import { paginate } from '../../../resources/fetch';
-import { LOCAL_STOCK_SEARCH, LOCAL_STOCK_SOLO } from '../../../resources/routes';
+import { API_URL, paginate } from '../../../resources/fetch';
+import { LOCAL_STOCK, LOCAL_STOCK_SEARCH, LOCAL_STOCK_SOLO } from '../../../resources/routes';
 import { ModalTransferencia } from '../../../components/transferencia/enviar/EnviarTransferencia';
 import { AlertaTransferencia } from '../../../components/transferencia/recibir/AlertaTransferencia';
 import { NoRegistros } from '../../../components/NoRegistros';
 import { ModalWrap } from '../../../components/modals/ModalWrap';
 import { SearchWrap } from '../../../components/search/SearchWrap';
 import { ToolTip } from '../../../components/tooltip/ToolTip';
+import { ModalDescExcel } from '../../../components/modals/ModalDescExcel';
 
 interface tienda{
     idLocal:string;
@@ -29,6 +30,7 @@ export const Tienda = ({ idLocal, nombreLocal, user }:tienda) => {
     const [loadingData, setLoadingData] = useState<boolean>(false);
     const [modalCant, setModalCant] = useState<boolean>(false);
     const [modalTransferencia, setModalTransferencia] = useState<boolean>(false);
+    const [modalDescargarExcel, setModalDescargarExcel] = useState<boolean>(false);
     
     const [searchState, setSearchState] = useState<boolean>(false);
     const [data, setData] = useState<any>([]);
@@ -49,6 +51,10 @@ export const Tienda = ({ idLocal, nombreLocal, user }:tienda) => {
     const handlerCantidad = (id:number, cantidad:number, nombreProducto:string) => { 
         setModalCant(!modalCant)
         setLocalStock({ id, cantidad, nombreProducto });
+    }
+
+    const handlerModalDescargarExcel = () => { 
+        setModalDescargarExcel(true);
     }
 
     // const searchFocus = useRef<any>(null)
@@ -141,6 +147,16 @@ export const Tienda = ({ idLocal, nombreLocal, user }:tienda) => {
                     <div className="grid-2 gap">
 
                         <div className="grid-3 gap">
+
+                            <button 
+                                id="btn-desc-excel"
+                                className="btn btn-primary" 
+                                onClick={() => handlerModalDescargarExcel()}
+                                // onClick={() => {window.location.href = `https://www.youtube.com/`;}}
+                            >
+                                <BiDownload />
+                            </button>
+
                             {
                                 user
                                 ? <div></div>
@@ -154,7 +170,7 @@ export const Tienda = ({ idLocal, nombreLocal, user }:tienda) => {
                                     </Link>
                                 )
                             }
-                            <div></div>
+                            
                             <div></div>
                         </div>
 
@@ -276,6 +292,15 @@ export const Tienda = ({ idLocal, nombreLocal, user }:tienda) => {
                     getData={getData}
                 />
             </ModalWrap>
+
+            <ModalWrap modal={modalDescargarExcel}>
+                <ModalDescExcel
+                    modal={modalDescargarExcel}
+                    setModal={setModalDescargarExcel}
+                    linkDescarga={API_URL + LOCAL_STOCK + '/descargar/excel/' + idLocal}
+                    nombreArchivo="stock productos.xlsx"
+                />
+            </ModalWrap> 
 
 
         </div>

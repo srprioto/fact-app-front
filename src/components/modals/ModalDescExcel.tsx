@@ -31,13 +31,13 @@ export const ModalDescExcel = ({ modal, setModal, linkDescarga, nombreArchivo }:
     return (
         <Modal
             modal={modal}
-            setModal={setModal}
+            setModal={!loading ? setModal : undefined}
             width={40}
         >
 
             <h3 className="mb-20 center mayus">Importante</h3>
 
-            <p className="center warning">Esta descarga puede tardar un poco, mantente a la espera y no te desconectes.</p>
+            <p className="center strong">Esta descarga puede tardar, espera un poco y no te desconectes.</p>
 
             <div className="grid-3 gap mt-25">
                 <div></div>
@@ -57,6 +57,27 @@ export const ModalDescExcel = ({ modal, setModal, linkDescarga, nombreArchivo }:
 
 
 /* 
+
+BOTON DE ACTIVACION:
+
+const [modalDescargarExcel, setModalDescargarExcel] = useState<boolean>(false);
+
+const handlerModalDescargarExcel = () => { 
+    setModalDescargarExcel(true);
+}
+
+<button 
+    id="btn-desc-excel"
+    className="btn btn-primary" 
+    onClick={() => handlerModalDescargarExcel()}
+    // onClick={() => {window.location.href = `https://www.youtube.com/`;}}
+>
+    <BiDownload />
+</button>
+
+
+MODAL:
+
 <ModalWrap modal={modalDescargarExcel}>
     <ModalDescExcel
         modal={modalDescargarExcel}
@@ -65,4 +86,6 @@ export const ModalDescExcel = ({ modal, setModal, linkDescarga, nombreArchivo }:
         nombreArchivo="productos_excel.xlsx"
     />
 </ModalWrap> 
+
+
 */
