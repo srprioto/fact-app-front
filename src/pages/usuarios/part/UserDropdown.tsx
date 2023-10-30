@@ -9,9 +9,9 @@ export const UserDropdown = ({ id, nombre, handlerDeleted, handlerVer, handerVer
             <span onClick={ () => handlerDeleted(id, nombre) }>
                 <BiTrash />Eliminar
             </span>
-            <Link to={`/usuarios/${id}/edit`} >
+            {/* <Link to={`/usuarios/${id}/edit`} >
                 <BiPencil />Editar usuario
-            </Link>
+            </Link> */}
             <span onClick={ () => handerVerVentas(id, nombre) }>
                 <BiListOl />Reg. Ventas
             </span>

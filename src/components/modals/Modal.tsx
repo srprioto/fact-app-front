@@ -123,3 +123,40 @@ export const Modal = ({
 // luego, añadimos como propiedad a overHidden del modal padre
 // añadimos setOverHidden al modal hijo como propiedad para el boton btnClose={setOverHidden(false)}
 // añadimos setOverHidden al boton que active el modal hijo setOverHidden(true)
+
+
+// acciones
+
+/* 
+const acciones = ():Array<any> => {
+    const accionesArray:Array<any> = [];
+
+    if (!loadingOne && venta.estado_venta === "listo" && !modalConvert) {
+        accionesArray.push({
+            label: "Imprimir",
+            funcion: () => setModalReimprimir(true),
+            icon: <BiBookmarkAltMinus />
+        });
+        if ( venta.tipo_venta === tipoVenta.venta_rapida ) {
+            accionesArray.push({
+                label: "Cambiar Comp.",
+                funcion: () => setModalConvComprobante(true),
+                icon: <BiMoveHorizontal />
+            });
+        }
+        accionesArray.push({
+            label: "Anular Venta",
+            funcion: () => setModalAnular(true),
+            icon: <BiX /> 
+        });
+    }
+    
+    return accionesArray;
+}
+
+<Modal
+    // ...
+    acciones={acciones().length > 0 ? acciones() : null}
+>
+
+*/

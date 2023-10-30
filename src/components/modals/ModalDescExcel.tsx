@@ -70,7 +70,6 @@ const handlerModalDescargarExcel = () => {
     id="btn-desc-excel"
     className="btn btn-primary" 
     onClick={() => handlerModalDescargarExcel()}
-    // onClick={() => {window.location.href = `https://www.youtube.com/`;}}
 >
     <BiDownload />
 </button>
