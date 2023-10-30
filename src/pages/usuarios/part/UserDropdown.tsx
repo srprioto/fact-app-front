@@ -1,5 +1,4 @@
-import { BiListOl, BiPencil, BiShowAlt, BiTrash } from "react-icons/bi";
-import { Link } from "react-router-dom";
+import { BiListOl, BiShowAlt, BiTrash } from "react-icons/bi";
 
 import { DropDown } from "../../../components/DropDown"
 
