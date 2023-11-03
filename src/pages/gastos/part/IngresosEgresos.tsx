@@ -14,7 +14,6 @@ import { ListaIngresosEgresos } from "./ListaIngresosEgresos"
 import { ModalAddIngresoEgreso } from "./ModalAddIngresoEgreso"
 import { ModalEditarIngresEgreso } from "./modals/ModalEditarIngresEgreso"
 import { ModalEliminarIngresoEgreso } from "./modals/ModalEliminarIngresoEgreso"
-import { fechaInicioFin, fechaInicioFinMes } from "../../../resources/func/fechas"
 import { GestionFechas } from "../../../components/fechas/GestionFechas"
 
 
