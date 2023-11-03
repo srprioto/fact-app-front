@@ -14,9 +14,13 @@ import { ListaIngresosEgresos } from "./ListaIngresosEgresos"
 import { ModalAddIngresoEgreso } from "./ModalAddIngresoEgreso"
 import { ModalEditarIngresEgreso } from "./modals/ModalEditarIngresEgreso"
 import { ModalEliminarIngresoEgreso } from "./modals/ModalEliminarIngresoEgreso"
+import { fechaInicioFin, fechaInicioFinMes } from "../../../resources/func/fechas"
+import { GestionFechas } from "../../../components/fechas/GestionFechas"
 
 
 export const IngresosEgresos = () => {
+
+    // const [ inicioMes, finMes ] = fechaInicioFinMes();
 
     const [loading, setLoading] = useState<boolean>(false);
     const [data, setData] = useState<Array<any>>([]);
@@ -29,6 +33,9 @@ export const IngresosEgresos = () => {
     const [idIngresoEgreso, setIdIngresoEgreso] = useState<number>(0);
     const [modalEditar, setModalEditar] = useState<boolean>(false);
     const [ingresoEgreso, setingresoEgreso] = useState<any>({});
+
+    const [fechas, setFechas] = useState<any>({ inicio: "_", fin: "_" });
+    
 
     // *** search
     const [searchState, setSearchState] = useState<boolean>(false);
@@ -64,7 +71,7 @@ export const IngresosEgresos = () => {
             if (urlPage) {
                 data = await paginate(urlPage);
             }else{
-                data = await paginate(INGRESOS_EGRESOS_PAGINATE + `/${idLocal}`);
+                data = await paginate(INGRESOS_EGRESOS_PAGINATE + `/${idLocal}/${fechas.inicio}/${fechas.fin}`);
             }
             setData(data.items);
             setPagination({
@@ -117,17 +124,33 @@ export const IngresosEgresos = () => {
                         placeholder="Descripcion de ingreso o egreso ..."
                     />
                    
-                   <button 
-                        id="btn-add-ie"
-                        className="btn btn-info" 
-                        onClick={handlerAddIE}
-                    >
-                        <BiPlusCircle /> Añadir I/E
-                        <ToolTip
-                            anchor="btn-add-ie"
-                            descripcion="Añade un ingreso o egreso"
-                        /> 
-                    </button>
+                    <div className="grid-3 gap">
+
+                        <GestionFechas 
+                            getData={getData} 
+                            fechas={fechas}
+                            setFechas={setFechas}
+                        />
+
+                        <div>
+
+                        </div>
+
+                        <button 
+                            id="btn-add-ie"
+                            className="btn btn-info" 
+                            onClick={handlerAddIE}
+                        >
+                            <BiPlusCircle />
+                            <ToolTip
+                                anchor="btn-add-ie"
+                                descripcion="Añade un ingreso o egreso"
+                            /> 
+                        </button>
+
+                    </div>
+
+                   
 
                     <Select
                         loading={loading}
