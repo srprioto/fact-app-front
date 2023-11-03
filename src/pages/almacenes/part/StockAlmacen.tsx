@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { BiDownload, BiPlusCircle, BiTransfer } from "react-icons/bi";
+import { BiChevronDown, BiChevronUp, BiDownload, BiPlusCircle, BiTransfer } from "react-icons/bi";
 import { Link, useParams } from "react-router-dom";
 import { Loading } from "../../../components/loads/Loading";
 import { NoRegistros } from "../../../components/NoRegistros";
@@ -25,6 +25,7 @@ export const StockAlmacen = () => {
     const [modalCant, setModalCant] = useState<boolean>(false);
     const [modalTransferencia, setModalTransferencia] = useState<boolean>(false);
     const [modalDescargarExcel, setModalDescargarExcel] = useState<boolean>(false);
+    const [ordenCantidad, setOrdenCantidad] = useState<string>("DESC");
     
     const [searchState, setSearchState] = useState<boolean>(false);
     const [data, setData] = useState<any>([]);
@@ -37,8 +38,7 @@ export const StockAlmacen = () => {
 
     useEffect(() => {
         getData();        
-    }, []);
-
+    }, [ordenCantidad]);
     
     const handlerTransaccion = () => setModalTransferencia(!modalTransferencia)
 
@@ -49,6 +49,14 @@ export const StockAlmacen = () => {
 
     const handlerModalDescargarExcel = () => { 
         setModalDescargarExcel(true);
+    }
+
+    const handlerOrdenCantidad = () => { 
+        if (ordenCantidad === "DESC") {
+            setOrdenCantidad("ASC");
+        } else {
+            setOrdenCantidad("DESC")
+        }
     }
 
     // const [searchTxt, setSearchTxt] = useState<string>("");
@@ -87,7 +95,7 @@ export const StockAlmacen = () => {
             if (urlPage) {
                 data = await paginate(urlPage);
             }else{
-                data = await paginate(LOCAL_STOCK_SOLO + params.id);
+                data = await paginate(LOCAL_STOCK_SOLO + params.id + `/${ordenCantidad}`);
             }
             setData(data.items);
             setPagination({
@@ -100,6 +108,7 @@ export const StockAlmacen = () => {
             console.log(error);
         }
     }
+
 
     return (
         <div className="local-stock">
@@ -190,10 +199,15 @@ export const StockAlmacen = () => {
                         ? <NoRegistros />
                         : (
                             <table className="table">
-                            
                                 <thead>
                                     <tr>
-                                        <th>Cantidad</th>
+                                        <th 
+                                            className="icon-center-table no-select pointer" 
+                                            onClick={handlerOrdenCantidad}
+                                        >
+                                            Cantidad
+                                            { ordenCantidad === "ASC" ? <BiChevronUp /> : <BiChevronDown /> }
+                                        </th>
                                         <th>Codigo</th>
                                         <th>Nombre</th>
                                         <th>Marca</th>

@@ -94,6 +94,10 @@ label{
     font-size: 1.4em;
 }
 
+.no-select {
+    user-select: none;
+}
+
 // none
 
 .none{
@@ -833,6 +837,15 @@ table.table {
             align-items: center
             
         }
+    }
+}
+
+.icon-center-table {
+    display: flex;
+    align-items: center;
+    svg{
+        font-size: 22px;
+        color: $info;
     }
 }
 

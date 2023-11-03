@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { BiCartAlt, BiDownload, BiTransfer } from 'react-icons/bi';
+import { BiCartAlt, BiChevronDown, BiChevronUp, BiDownload, BiTransfer } from 'react-icons/bi';
 import { Link } from 'react-router-dom';
 
 import { Loading } from '../../../components/loads/Loading';
@@ -31,6 +31,7 @@ export const Tienda = ({ idLocal, nombreLocal, user }:tienda) => {
     const [modalCant, setModalCant] = useState<boolean>(false);
     const [modalTransferencia, setModalTransferencia] = useState<boolean>(false);
     const [modalDescargarExcel, setModalDescargarExcel] = useState<boolean>(false);
+    const [ordenCantidad, setOrdenCantidad] = useState<string>("DESC");
     
     const [searchState, setSearchState] = useState<boolean>(false);
     const [data, setData] = useState<any>([]);
@@ -43,7 +44,7 @@ export const Tienda = ({ idLocal, nombreLocal, user }:tienda) => {
 
     useEffect(() => {
         getData();
-    }, []);
+    }, [ordenCantidad]);
 
     
     const handlerTransaccion = () => setModalTransferencia(!modalTransferencia)
@@ -55,6 +56,14 @@ export const Tienda = ({ idLocal, nombreLocal, user }:tienda) => {
 
     const handlerModalDescargarExcel = () => { 
         setModalDescargarExcel(true);
+    }
+
+    const handlerOrdenCantidad = () => { 
+        if (ordenCantidad === "DESC") {
+            setOrdenCantidad("ASC");
+        } else {
+            setOrdenCantidad("DESC")
+        }
     }
 
     // const searchFocus = useRef<any>(null)
@@ -93,7 +102,7 @@ export const Tienda = ({ idLocal, nombreLocal, user }:tienda) => {
             if (urlPage) {
                 data = await paginate(urlPage);
             }else{
-                data = await paginate(LOCAL_STOCK_SOLO + idLocal);
+                data = await paginate(LOCAL_STOCK_SOLO + idLocal + `/${ordenCantidad}`);
             }
 
             setData(data.items);
@@ -213,7 +222,13 @@ export const Tienda = ({ idLocal, nombreLocal, user }:tienda) => {
                             
                                 <thead>
                                     <tr>
-                                        <th>Cantidad</th>
+                                        <th 
+                                            className="icon-center-table no-select pointer" 
+                                            onClick={handlerOrdenCantidad}
+                                        >
+                                            Cantidad
+                                            { ordenCantidad === "ASC" ? <BiChevronUp /> : <BiChevronDown /> }
+                                        </th>
                                         <th>Codigo</th>
                                         <th>Nombre</th>
                                         <th>Marca</th>
