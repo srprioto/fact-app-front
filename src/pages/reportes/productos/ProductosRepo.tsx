@@ -1,8 +1,8 @@
 import { useState } from "react"
 import { TitleBox } from "../../../components/TitleBox"
-import { BiArchiveIn, BiListOl } from "react-icons/bi";
+import { BiListOl } from "react-icons/bi";
 import { Reabastecimiento } from "./reabastecimiento/Reabastecimiento";
-import { Stock } from "./stock/Stock";
+// import { Stock } from "./stock/Stock";
 
 export const ProductosRepo = () => {
 
