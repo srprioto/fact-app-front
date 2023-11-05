@@ -13,6 +13,7 @@ import {
     BiDollarCircle,
     BiBarChartAlt,
     BiAnalyse,
+    BiPurchaseTag,
 } from "react-icons/bi";
 import { BoxMenu } from "./menu/BoxMenu";
 import { ItemMenu } from "./menu/ItemMenu";
@@ -55,6 +56,7 @@ export const Menu = () => {
                 <BoxMenu titulo="Reportes">
                     <ItemMenu url="/reporte/ventas" label="Ventas" icon={ <BiBarChartAlt /> } />
                     <ItemMenu url="/reporte/ganancias" label="Ganancias" icon={ <BiDollarCircle /> } />
+                    <ItemMenu url="/reporte/productos" label="Productos" icon={ <BiPurchaseTag /> } />
                 </BoxMenu>
 
                 <BoxMenu titulo="Personas">

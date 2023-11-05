@@ -107,8 +107,10 @@ export const IngresoProdRepo = () => {
                                     <tr>
                                         <th>Codigo Ingreso</th>
                                         <th>Productos</th>
+                                        <th>Total</th>
                                         <th>Local destino</th>
                                         <th>Observaciones</th>
+                                        <th>Fecha</th>
                                         <th className="transparent inlineblock">...</th>
                                     </tr>
                                 </thead>

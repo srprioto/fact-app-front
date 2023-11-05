@@ -63,7 +63,8 @@ export const Select = ({
     )
 }
 
-/* <Select
+/* 
+<Select
     label="Local destino *"
     name="localDestino"
     onChange={handlerChangeGenerales}
@@ -80,7 +81,8 @@ export const Select = ({
         })
     }
     
-</Select> */
+</Select> 
+*/
 
 
 // añadir tooltip

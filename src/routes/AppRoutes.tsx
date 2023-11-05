@@ -49,6 +49,7 @@ import { IndexIngresosEgresos } from "../pages/gastos/Index";
 import { TicketsSup } from "../roles/supervisor/pages/TicketsSup";
 import { useEffect } from "react";
 import { Contable } from "../roles/contable/Contable";
+import { IndexReportProductos } from "../pages/reportes/productos/Index";
 
 
 export const AppRoutes = () => {
@@ -115,6 +116,7 @@ export const AppRoutes = () => {
                             {/* reportes */}
                             <Route path="/reporte/ventas" element={ <IndexVentas /> } />
                             <Route path="/reporte/ganancias" element={ <IndexGanancias /> } />
+                            <Route path="/reporte/productos" element={ <IndexReportProductos /> } />
 
                             {/* tickets */}
                             <Route path="/tickets" element={ <IndexTickets /> } />

@@ -66,7 +66,8 @@ export const Select2 = ({
     )
 }
 
-/* <Select
+/* 
+<Select
     label="Local destino *"
     name="localDestino"
     onChange={handlerChangeGenerales}
@@ -83,7 +84,8 @@ export const Select2 = ({
         })
     }
     
-</Select> */
+</Select> 
+*/
 
 
 // // para inputs
