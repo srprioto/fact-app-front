@@ -1,8 +1,8 @@
 import { useState } from "react"
 import { TitleBox } from "../../../components/TitleBox"
-import { BiListOl } from "react-icons/bi";
+import { BiArchiveIn, BiListOl } from "react-icons/bi";
 import { Reabastecimiento } from "./reabastecimiento/Reabastecimiento";
-// import { Stock } from "./stock/Stock";
+import { Stock } from "./stock/Stock";
 
 export const ProductosRepo = () => {
 
@@ -20,16 +20,16 @@ export const ProductosRepo = () => {
                     <BiListOl />
                     Reabastecimiento
                 </button>
-                {/* <button 
+                <button 
                     onClick={() => setTabbs(2)}
                     className={`btn2 btn2-info ${tabbs === 2 && "btn2-sub-info"}`}>
                     <BiArchiveIn />
                     Stock
-                </button> */}
+                </button>
             </div>
 
             { tabbs === 1 && <Reabastecimiento /> }
-            {/* { tabbs === 2 && <Stock /> } */}
+            { tabbs === 2 && <Stock /> }
 
         </div>
     )

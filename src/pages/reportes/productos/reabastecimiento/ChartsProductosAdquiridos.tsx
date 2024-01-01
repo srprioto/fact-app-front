@@ -11,7 +11,8 @@ import {
 
 export const ChartsProductosAdquiridos = ({ data }:any) => {
   
-    const valorMaximo = Math.max(...data.map((d:any) => d.total_adquirido));
+    const valorMaximo:number = Math.max(...data.map((d:any) => d.total_adquirido));
+    const diesCiento:number = Math.trunc(valorMaximo * 0.07);
 
     
     return (
@@ -27,7 +28,7 @@ export const ChartsProductosAdquiridos = ({ data }:any) => {
                         <CartesianGrid stroke="#f5f5f5" />
                         <XAxis 
                             type="number" 
-                            domain={[0, valorMaximo + 200]}
+                            domain={[0, valorMaximo + diesCiento]}
                         />
                         <YAxis width={300} dataKey="producto" type="category" />
                         <Tooltip />

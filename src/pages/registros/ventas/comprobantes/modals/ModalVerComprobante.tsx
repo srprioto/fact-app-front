@@ -105,6 +105,9 @@ export const ModalVerComprobante = ({
     }
 
 
+    console.log(comprobante);    
+
+
     return (
         <Modal
             titulo="Detalles del comprobante"
