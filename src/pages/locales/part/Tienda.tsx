@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { BiCartAlt, BiChevronDown, BiChevronUp, BiDownload, BiInfoCircle, BiTransfer } from 'react-icons/bi';
+import { BiCartAlt, BiChevronDown, BiChevronUp, BiDownload, BiTransfer } from 'react-icons/bi';
 import { Link } from 'react-router-dom';
 
 import { Loading } from '../../../components/loads/Loading';
@@ -18,7 +18,7 @@ import { ModalWrap } from '../../../components/modals/ModalWrap';
 import { SearchWrap } from '../../../components/search/SearchWrap';
 import { ToolTip } from '../../../components/tooltip/ToolTip';
 import { ModalDescExcel } from '../../../components/modals/ModalDescExcel';
-import { ModalInfoStock, WrapModalInfoStock } from '../../../components/modals/ModalInfoStock';
+import { WrapModalInfoStock } from '../../../components/modals/ModalInfoStock';
 
 interface tienda{
     idLocal:string;
