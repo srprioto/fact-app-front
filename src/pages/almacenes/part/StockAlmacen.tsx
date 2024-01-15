@@ -16,6 +16,7 @@ import { ModalWrap } from "../../../components/modals/ModalWrap";
 import { SearchWrap } from "../../../components/search/SearchWrap";
 import { ToolTip } from "../../../components/tooltip/ToolTip";
 import { ModalDescExcel } from "../../../components/modals/ModalDescExcel";
+import { WrapModalInfoStock } from "../../../components/modals/ModalInfoStock";
 
 export const StockAlmacen = () => {
 
@@ -162,17 +163,18 @@ export const StockAlmacen = () => {
 
                         </div>
 
-                        <div className="grid-3 gap">
+                        <div className="grid-4 gap">
                             <Link id="btn-reabastecer" to="/ingreso-productos" className="btn btn-info">
                                 <BiPlusCircle/>
                             </Link>
                             <button 
                                 id="btn-transferencias"
-                                className="btn btn-info" 
+                                className="btn btn-info"
                                 onClick={handlerTransaccion}>
                                 <BiTransfer />
                             </button>
                             <AlertaTransferencia idLocal={Number(params.id)} actualizarDatos={getData} />
+                            <WrapModalInfoStock idLocal={params.id} />
                         </div>
 
                     </div>                    

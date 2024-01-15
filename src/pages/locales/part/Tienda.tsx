@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { BiCartAlt, BiChevronDown, BiChevronUp, BiDownload, BiTransfer } from 'react-icons/bi';
+import { BiCartAlt, BiChevronDown, BiChevronUp, BiDownload, BiInfoCircle, BiTransfer } from 'react-icons/bi';
 import { Link } from 'react-router-dom';
 
 import { Loading } from '../../../components/loads/Loading';
@@ -18,6 +18,7 @@ import { ModalWrap } from '../../../components/modals/ModalWrap';
 import { SearchWrap } from '../../../components/search/SearchWrap';
 import { ToolTip } from '../../../components/tooltip/ToolTip';
 import { ModalDescExcel } from '../../../components/modals/ModalDescExcel';
+import { ModalInfoStock, WrapModalInfoStock } from '../../../components/modals/ModalInfoStock';
 
 interface tienda{
     idLocal:string;
@@ -183,16 +184,15 @@ export const Tienda = ({ idLocal, nombreLocal, user }:tienda) => {
                             <div></div>
                         </div>
 
-                        <div className="grid-3 gap">
+                        <div className="grid-4 gap">
                             <div></div>
                             <button 
                                 id="btn-transferencias"
                                 className="btn btn-info" 
                                 onClick={handlerTransaccion}
-                            >
-                                <BiTransfer />
-                            </button>
+                            ><BiTransfer /></button>
                             <AlertaTransferencia idLocal={Number(idLocal)} actualizarDatos={getData} />
+                            <WrapModalInfoStock idLocal={idLocal} />
                         </div>
 
                     </div>                    
@@ -316,7 +316,6 @@ export const Tienda = ({ idLocal, nombreLocal, user }:tienda) => {
                     nombreArchivo="stock productos.xlsx"
                 />
             </ModalWrap> 
-
 
         </div>
     )

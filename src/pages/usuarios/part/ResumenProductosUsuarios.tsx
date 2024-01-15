@@ -10,8 +10,8 @@ export const ResumenProductosUsuarios = ({ detalles, loading }:any) => {
 
     return (
 
-        loading
-        ? <Loading />
+        !loading
+        ? <div className="carg-resumen-productos-usuarios"><Loading /></div>
         : <div className="resumen-productos-usuarios grid-1 gap">
             
             <div className="grid-2 gap">
