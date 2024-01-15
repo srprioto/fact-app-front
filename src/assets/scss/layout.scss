@@ -1306,8 +1306,8 @@
 
 
 // usuarios
-.carg-resumen-productos-usuarios{
-    height: calc(100vh - 320px);
+.carg-resumen-productos-usuarios, .resumen-productos-usuarios{
+    min-height: calc(100vh - 320px);
 }
 
 

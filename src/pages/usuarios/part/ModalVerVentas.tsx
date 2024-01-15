@@ -7,6 +7,7 @@ import { GestionFechas } from "../../../components/fechas/GestionFechas";
 import { ListaProductosUsuario } from "./ListaProductosUsuario";
 import { BiListUl, BiUser } from "react-icons/bi";
 import { ResumenProductosUsuarios } from "./ResumenProductosUsuarios";
+import { Loading } from "../../../components/loads/Loading";
 
 
 export const ModalVerVentas = ({ modal, setModal, infoUser }:any) => {
@@ -77,22 +78,29 @@ export const ModalVerVentas = ({ modal, setModal, infoUser }:any) => {
             </div>
 
             {
-                tabs === 1 
-                && <ResumenProductosUsuarios 
-                    detalles={detalles}
-                    loading={loading}
-                />
+                loading
+                ? <div className="carg-resumen-productos-usuarios"><Loading /></div>
+                : <>
+                    {
+                        tabs === 1 
+                        && <ResumenProductosUsuarios 
+                            detalles={detalles}
+                            loading={loading}
+                        />
+                    }
+
+                    {
+                        tabs === 2 
+                        && <ListaProductosUsuario
+                            data={data}
+                            getData={getData}
+                            paginacion={paginacion}
+                        />
+                    }
+                </>
             }
 
-            {
-                tabs === 2 
-                && <ListaProductosUsuario
-                    data={data}
-                    getData={getData}
-                    loading={loading}
-                    paginacion={paginacion}
-                />
-            }
+            
             
 
         </Modal>

@@ -1,18 +1,14 @@
-import { Loading } from "../../../components/loads/Loading";
-
 import { ChartResumenProductosUsuario } from '../../../components/charts/ChartResumenProductosUsuario';
 import { ChartPieMontoTotalUsuario } from "../../../components/charts/ChartPieMontoTotalUsuario";
 
 
-export const ResumenProductosUsuarios = ({ detalles, loading }:any) => {
+export const ResumenProductosUsuarios = ({ detalles }:any) => {
 
     const data:any = detalles ? detalles.topProductosVendidos : [];
 
     return (
 
-        loading
-        ? <div className="carg-resumen-productos-usuarios"><Loading /></div>
-        : <div className="resumen-productos-usuarios grid-1 gap">
+        <div className="resumen-productos-usuarios grid-1 gap">
             
             <div className="grid-2 gap">
                 <div className="box box-par m-0 middle-down">
