@@ -1,4 +1,4 @@
-import { BiBarChart, BiCartAlt, BiCoin, BiListOl } from "react-icons/bi"
+import { BiBarChart, BiCartAlt, BiCoin, BiGroup, BiListOl } from "react-icons/bi"
 import { BoxMenu } from "../../../components/layouts/menu/BoxMenu"
 import { ItemMenu } from "../../../components/layouts/menu/ItemMenu"
 import { MenuTop } from "../../../components/layouts/menu/MenuTop"
@@ -30,6 +30,7 @@ export const MenuSup = () => {
                                     <ItemMenu end url="/local/cobrar" label="Cobrar" icon={ <BiCoin /> } />
                                     <ItemMenu end url="/local/vender" label="Vender" icon={ <BiCartAlt /> } />
                                     <ItemMenu end url="/local/stock" label="Stock" icon={ <BiListOl /> } />
+                                    <ItemMenu end url="/clientes" label="Clientes" icon={ <BiGroup /> } />
                                 </>
                             ) : (
                                 <div className="load-items-menu"></div>

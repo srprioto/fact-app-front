@@ -1,7 +1,7 @@
 export const MenuTop = () => {
     return (
         <div className="menu-top">
-            <h1>Addid Sport</h1>
+            <h1>Iving Store</h1>
         </div>
     )
 }

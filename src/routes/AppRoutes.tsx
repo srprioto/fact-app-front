@@ -50,6 +50,9 @@ import { TicketsSup } from "../roles/supervisor/pages/TicketsSup";
 import { useEffect } from "react";
 import { Contable } from "../roles/contable/Contable";
 import { IndexReportProductos } from "../pages/reportes/productos/Index";
+import { ClientesSup } from "../roles/supervisor/pages/clientes/ClientesSup";
+import { ClienteNuevoSub } from "../roles/supervisor/pages/clientes/ClienteNuevoSub";
+import { ClienteEditarSub } from "../roles/supervisor/pages/clientes/ClienteEditarSub";
 
 
 export const AppRoutes = () => {
@@ -136,6 +139,11 @@ export const AppRoutes = () => {
                             <Route path="/local/cobrar" element={ <CobrarSup /> } />
                             <Route path="/local/stock" element={ <StockSup /> } />
                             <Route path="/tickets" element={ <TicketsSup /> } />
+
+                            <Route path="/clientes" element={ <ClientesSup /> } />
+                            <Route path="/clientes/nuevo" element={ <ClienteNuevoSub /> } />
+                            <Route path="/clientes/:id/edit" element={ <ClienteEditarSub /> } />
+
                         </>
                     }
 
