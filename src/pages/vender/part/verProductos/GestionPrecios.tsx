@@ -79,8 +79,9 @@ export const GestionPrecios = ({
         if (!(Object.keys(producto).length <= 0)) {
             estructura_radiobutton = [
                 { label: moneda(precios[0]), value: redondeo(precios[0]) },
-                { label: moneda(precios[1]), value: redondeo(precios[1]) },
-                { label: moneda(precios[2]), value: redondeo(precios[2]) }
+                // descomentar para mostrar 3 tipos de precios
+                // { label: moneda(precios[1]), value: redondeo(precios[1]) },
+                // { label: moneda(precios[2]), value: redondeo(precios[2]) }
             ]
         }
         return estructura_radiobutton;
@@ -94,8 +95,11 @@ export const GestionPrecios = ({
                 <div>
                     <div className="grid-3 gap center">
                         <p className="info mb-5">Precio por unidad</p>
+                        {/* 
+                        // descomentar para mostrar 3 tipos de precios
                         <p className="info mb-5">Precio por menor</p>
-                        <p className="info mb-5">Precio por mayor</p>
+                        <p className="info mb-5">Precio por mayor</p> 
+                        */}
                     </div>
 
                     <RadioButton
