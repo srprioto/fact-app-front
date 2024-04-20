@@ -13,7 +13,6 @@ import { TablaProdVenta } from "./TablaProdVenta";
 
 import { copy } from "../../../../resources/func/deepCopy";
 import { redondeo } from "../../../../resources/func/redondeo";
-import { Input } from "../../../../components/forms/Input";
 import { ModalWrap } from "../../../../components/modals/ModalWrap";
 import { ModalCorreo } from "./ModalCorreo";
 import { moneda } from "../../../../resources/func/moneda";
@@ -23,6 +22,7 @@ import { tipoVenta } from "../../../../resources/dtos/VentasDto";
 import { TablaDividirPrecios } from "./TablaDividirPrecios";
 import { BtnImpCredito } from "./BtnImpCredito";
 import { ToolTip } from "../../../../components/tooltip/ToolTip";
+import { BoxModifPorcent } from "./BoxModifPorcent";
 // import { useAuth } from "../../../../auth/useAuth";
 // import { Roles } from "../../../../resources/dtos/RolesDto";
 
@@ -236,25 +236,10 @@ export const ModalVentaConfirmar = ({
                         }
                         {
                             (!credito())
-                            && <div
-                                id="txt-modif-precio"
-                            >
-                                <p>Modif. porcentual (%):</p>
-                                <Input
-                                    type="number"
-                                    name="reducirPercent"
-                                    value={reducirPercent}
-                                    onChange={onChangeRedPercent}
-                                    color={
-                                        reducirPercent < 0
-                                        ? "danger-i" : ""
-                                    }
-                                />
-                                <ToolTip
-                                    anchor="txt-modif-precio"
-                                    descripcion="Permite hacer un recalculo porcentual del precio total, sin alterar el registro de la venta,<br/>pero afectando el comprobante final de la Sunat y/o en su impresión."
-                                /> 
-                            </div>
+                            && <BoxModifPorcent
+                                reducirPercent={reducirPercent}
+                                onChangeRedPercent={onChangeRedPercent}
+                            />
                         }
 
                     </div>
