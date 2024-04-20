@@ -15,8 +15,3 @@ export const ClientesSup = () => {
         </Supervisor>
     )
 }
-
-
-
-
-

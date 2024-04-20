@@ -10,9 +10,7 @@ interface tablaListaVentaProductos {
 
 export const TablaListaVentaProductos = ({ venta }:tablaListaVentaProductos) => {
 
-    // console.log(venta.ventaDetalles);    
-    console.log(sumaArrayObj(venta.ventaDetalles, "cantidad_venta"));    
-
+    
     return (
         <div className="lista-productos-pedido bb bb-neutro">
             <h3>Informacion de la venta</h3>
